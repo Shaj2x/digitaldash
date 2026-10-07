@@ -2,7 +2,7 @@
 
 A study dashboard for students: focus timers with study music, tasks that repeat and break into steps, courses and grades, a calendar with .ics import, a week review with a year-long focus heatmap, a net worth tracker with money goals, study rooms with friends, and reminders on your phone.
 
-Live: https://my-portfolio-eight-ochre-19.vercel.app
+Live: https://usedigitaldash.vercel.app
 
 ## Run it locally
 
