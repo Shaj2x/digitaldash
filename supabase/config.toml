@@ -1,0 +1,7 @@
+project_id = "wupzagcvknanhhazzoxx"
+
+[functions.dash-ai]
+verify_jwt = true
+
+[functions.dash-push]
+verify_jwt = false

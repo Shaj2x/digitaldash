@@ -1,0 +1,10 @@
+{
+  "name": "digitaldash",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "start": "npm run build && npx serve dist"
+  }
+}

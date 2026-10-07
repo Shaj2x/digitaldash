@@ -1,0 +1,22 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "redirects": [
+    { "source": "/", "destination": "/digital-dash.html", "permanent": false },
+    { "source": "/digital-dash", "destination": "/digital-dash.html", "permanent": false },
+    { "source": "/privacy", "destination": "/digital-dash-privacy.html", "permanent": false }
+  ],
+  "headers": [
+    { "source": "/digital-dash-sw.js", "headers": [{ "key": "Cache-Control", "value": "no-cache" }] },
+    { "source": "/digital-dash-config.js", "headers": [{ "key": "Cache-Control", "value": "no-store" }] },
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" }
+      ]
+    }
+  ]
+}
