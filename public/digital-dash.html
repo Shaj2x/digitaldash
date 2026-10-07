@@ -118,6 +118,16 @@ input::placeholder{color:var(--muted)}
 .now-task .cd{flex:none;font-weight:600;font-size:13px;padding:3px 9px;border-radius:999px;background:color-mix(in srgb,var(--card-ink) 12%,transparent);font-variant-numeric:tabular-nums}
 .now-task .cd.late{background:var(--u0);color:#fff}
 .picker{margin:18px 0 10px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center}
+/* Segmented controls that can outgrow a phone screen scroll sideways on one row instead of wrapping */
+.seg-scroll{max-width:100%;min-width:0;overflow-x:auto;overflow-y:hidden;scrollbar-width:none;overscroll-behavior-x:contain;border-radius:12px}
+.seg-scroll::-webkit-scrollbar{display:none}
+.seg-scroll.fl{-webkit-mask-image:linear-gradient(90deg,transparent,#000 28px);mask-image:linear-gradient(90deg,transparent,#000 28px)}
+.seg-scroll.fr{-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 28px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 28px),transparent)}
+.seg-scroll.fl.fr{-webkit-mask-image:linear-gradient(90deg,transparent,#000 28px,#000 calc(100% - 28px),transparent);mask-image:linear-gradient(90deg,transparent,#000 28px,#000 calc(100% - 28px),transparent)}
+.seg-scroll>.seg{flex-wrap:nowrap}
+.seg-scroll>.seg>button{white-space:nowrap;flex:none}
+.now-task .nt-t{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+@media (max-width:560px){.stage{min-height:min(50vh,430px)}.now-task{max-width:100%}}
 .opts{display:flex;gap:14px;align-items:center;color:var(--muted);font-size:14px}
 .opts label{display:flex;gap:6px;align-items:center;cursor:pointer}
 .mini{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:18px}
@@ -186,7 +196,7 @@ input::placeholder{color:var(--muted)}
 .ring small{opacity:.7;font-size:13px}
 
 /* Focus timer */
-.timer{display:flex;flex-direction:column;align-items:center;gap:18px}
+.timer{display:flex;flex-direction:column;align-items:center;gap:18px;max-width:100%;min-width:0}
 .timer .t{font-family:var(--clock);font-weight:800;font-size:calc(clamp(80px,18vw,210px)*var(--cs,1)*var(--fs,1));line-height:.9;font-variant-numeric:tabular-nums}
 .timer .modes button{color:var(--card-ink);opacity:.6;transition:color var(--t-fast) ease,opacity var(--t-fast) ease}
 .timer .modes{background:rgba(255,255,255,.07)}
@@ -197,7 +207,8 @@ input::placeholder{color:var(--muted)}
 .timer .ctl .btn.ghost{background:rgba(255,255,255,.1);color:var(--card-ink)}
 .timer .note{opacity:.7;font-size:14px}
 .stage:has(.timer){padding-top:64px} /* keep the timer bar clear of the date row as timers are added */
-.timer .tm-top{display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap;max-width:100%}
+.timer .tm-top{display:flex;align-items:center;justify-content:center;gap:6px;max-width:100%;min-width:0}
+.timer .tm-top .tm-editbtn{flex:none}
 .timer .tm-editbtn{color:var(--card-ink);opacity:.75}
 .timer .tm-editbtn svg{transition:transform var(--t-ui) var(--ease-out)}
 .timer .tm-editbtn[aria-expanded="true"]{opacity:1;background:rgba(255,255,255,.1)}
@@ -627,6 +638,40 @@ html.lg .kpi,html.lg .jb-tile,html.lg .preset,html.lg .fontopt,html.lg .wk-chart
 .lg-rip i{position:absolute;width:var(--d);height:var(--d);margin:calc(var(--d)/-2) 0 0 calc(var(--d)/-2);border-radius:50%;
   background:radial-gradient(circle,rgba(255,255,255,.28),rgba(255,255,255,.1) 45%,transparent 70%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.22)}
 html.lg .lit{--hov:1}
+/* ---------- Hover animations (Themes, Hover animations) ----------
+   html[data-hv] is the resolved style; --hv-k scales strength and --hv-dur sets the speed. Lift and Glow
+   are plain CSS; Tilt, Magnetic and Liquid are drawn by the spring engine in JS. Mouse only, and
+   reduced motion keeps colour changes and the cursor light but drops movement. */
+:root{--hv-k:1;--hv-dur:200ms}
+@media (hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){
+  html[data-hv=lift] :is(.widget,.skin,.task,.kpi,.jb-tile,.preset,.fontopt,.ditem,.lives>button){transition:transform var(--hv-dur) var(--ease-out),box-shadow var(--hv-dur) ease,background-color var(--t-fast) ease,border-color var(--t-fast) ease,opacity var(--t-ui) ease,--hov 240ms ease}
+  html[data-hv=lift] :is(.widget,.skin,.task,.kpi,.jb-tile,.preset,.fontopt,.ditem,.lives>button):hover{transform:translateY(calc(var(--hv-k)*-3px))}
+  html[data-hv=lift]:not(.lg) :is(.widget,.skin,.task,.kpi,.jb-tile,.preset,.fontopt,.lives>button):hover{box-shadow:0 calc(var(--hv-k)*10px) calc(var(--hv-k)*26px) -14px rgba(0,0,0,.5)}
+  html[data-hv=lift] :is(.btn,.icon-btn,.cmdk,.jb-mix,.chips>button,.tb-right>button){transition:translate var(--hv-dur) var(--ease-out),transform var(--t-press) var(--ease-out),filter var(--t-fast) ease,background-color var(--t-fast) ease,border-color var(--t-fast) ease,color var(--t-fast) ease}
+  html[data-hv=lift] :is(.btn,.icon-btn,.cmdk,.jb-mix,.chips>button,.tb-right>button):hover{translate:0 calc(var(--hv-k)*-1.5px)}
+  html[data-hv]:not([data-hv=lift]) .skin:hover{transform:none}
+}
+html[data-hv=glow] :is(.widget,.skin,.task,.kpi,.jb-tile,.preset,.fontopt,.ditem,.lives>button,.btn,.icon-btn,.cmdk,.jb-mix,.chips>button){transition:box-shadow var(--hv-dur) ease,background-color var(--t-fast) ease,border-color var(--t-fast) ease,opacity var(--t-ui) ease,filter var(--t-fast) ease,transform var(--t-press) var(--ease-out),--hov 240ms ease}
+@media (hover:hover) and (pointer:fine){
+  html[data-hv=glow] :is(.widget,.skin,.task,.kpi,.jb-tile,.preset,.fontopt,.ditem,.lives>button):hover{box-shadow:0 0 0 1px color-mix(in srgb,var(--accent) 55%,transparent),0 0 calc(var(--hv-k)*30px) calc(var(--hv-k)*-6px) color-mix(in srgb,var(--accent) 55%,transparent)}
+  html.lg[data-hv=glow] :is(.widget,.skin,.task,.kpi,.jb-tile,.preset,.fontopt,.ditem,.lives>button):hover{box-shadow:var(--rim),0 0 0 1px color-mix(in srgb,var(--accent) 55%,transparent),0 0 calc(var(--hv-k)*30px) calc(var(--hv-k)*-6px) color-mix(in srgb,var(--accent) 55%,transparent)}
+  html[data-hv=glow] :is(.btn,.icon-btn,.cmdk,.jb-mix,.chips>button):hover{box-shadow:0 0 calc(var(--hv-k)*18px) calc(var(--hv-k)*-2px) color-mix(in srgb,var(--accent) 50%,transparent)}
+  /* Cursor light on solid surfaces (glass has its own sheen) */
+  html.hv-light:not(.lg) :is(.panel,.task,.kpi,.jb-tile,.preset,.fontopt,.wk-chart).lit{background-image:radial-gradient(circle at var(--lx,50%) var(--ly,0%),color-mix(in srgb,var(--ink) 9%,transparent),transparent var(--spot,120px))}
+}
+.hv-grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:22px;align-items:start;margin-top:10px}
+.hv-try{display:grid;gap:12px;padding:14px;border-radius:calc(var(--r) + 4px);border:1px dashed var(--line)}
+.hv-try-h{margin:0;font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.hv-cards{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.hv-cards .kpi{padding:14px}
+.hv-cards small{color:var(--muted);font-size:12px}
+.hv-cards .kpi b{font-size:17px;line-height:1.25;font-family:var(--ui);font-weight:600}
+.hv-presets button[aria-pressed=true]{background:var(--accent);color:var(--accent-ink);border-color:transparent}
+.hv-presets .hv-x{margin-left:6px;opacity:.7;font-weight:600}
+.hv-presets .hv-x:hover{opacity:1}
+.hv-save{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
+.hv-save input{flex:1 1 200px;min-width:0}
+@media (max-width:720px){.hv-grid{grid-template-columns:1fr}}
 html.lg .panel,html.lg .skin{transition:--hov 240ms ease}
 html.lg .task{transition:background-color var(--t-fast) ease,opacity var(--t-ui) ease,--hov 240ms ease}
 /* Inside glass: tints, not blur */
@@ -1244,7 +1289,7 @@ html.lg .eye{background:var(--glass-tint);box-shadow:inset 0 1px 0 color-mix(in 
         <div class="dayline"><i id="dayline"></i><span class="ticks" id="dayticks"></span></div>
       </div>
       <div class="picker">
-        <div class="seg" id="clock-seg" role="group" aria-label="Clock style"></div>
+        <div class="seg-scroll"><div class="seg" id="clock-seg" role="group" aria-label="Clock style"></div></div>
         <div class="opts">
           <label><input type="checkbox" id="opt-24"> 24-hour</label>
           <label><input type="checkbox" id="opt-secs"> Seconds</label>
@@ -1443,6 +1488,28 @@ html.lg .eye{background:var(--glass-tint);box-shadow:inset 0 1px 0 color-mix(in 
         <div class="fonts" id="clock-fonts"></div>
       </div>
 
+      <h2 class="sec">Hover animations</h2>
+      <div class="panel hv-panel" id="hv-panel">
+        <p class="hint" style="margin:0 0 12px">How cards and buttons react when your mouse moves over them. Pick a preset or tune your own, then save it.</p>
+        <div class="chips hv-presets" id="hv-presets" role="group" aria-label="Hover presets"></div>
+        <div class="hv-grid">
+          <div class="hv-ctl">
+            <div class="field"><span>Style</span><select id="hv-style" aria-label="Hover style"></select></div>
+            <div class="field"><span>Strength</span><input type="range" id="hv-k" min="25" max="200" step="5" aria-label="Hover strength"></div>
+            <div class="field"><span>Speed<small class="muted" style="display:block;font-size:12.5px">Left is snappy, right is gentle</small></span><input type="range" id="hv-speed" min="50" max="200" step="10" aria-label="Hover speed"></div>
+            <div class="field"><span>Cursor light<small class="muted" style="display:block;font-size:12.5px">A soft glow follows the pointer across cards</small></span><input type="checkbox" id="hv-light"></div>
+            <div class="field"><span>Press ripple</span><input type="checkbox" id="hv-ripple"></div>
+          </div>
+          <div class="hv-try" aria-label="Try it here">
+            <p class="hv-try-h">Try it here</p>
+            <div class="hv-cards"><div class="kpi hv-demo"><small>Card</small><b>Hover me</b></div><div class="kpi hv-demo"><small>Another</small><b>And me</b></div></div>
+            <div class="row" style="gap:8px;flex-wrap:wrap"><button type="button" class="btn small hv-demo-btn">Button</button><button type="button" class="btn ghost small hv-demo-btn">Ghost button</button></div>
+          </div>
+        </div>
+        <form class="hv-save" id="hv-save" autocomplete="off"><input type="text" id="hv-name" maxlength="24" placeholder="Name this preset, e.g. Bouncy" aria-label="Preset name"><button class="btn ghost small" type="submit">Save as preset</button></form>
+        <p class="hint" id="hv-note" style="margin:8px 0 0"></p>
+      </div>
+
       <h2 class="sec">More settings</h2>
       <div class="settings" style="margin-top:0">
         <div class="panel">
@@ -1560,10 +1627,19 @@ function initSeg(seg){
 function glide(seg,snap){
   const th=seg._thumb;if(!th||!seg.offsetParent)return;
   const b=seg.querySelector(':scope>button[aria-pressed="true"]');
-  if(document.documentElement.classList.contains("lg")){if(b)dropTo(th,boxOf(b),{snap,axis:"x"});return;} // liquid droplet
+  if(document.documentElement.classList.contains("lg")){if(b)dropTo(th,boxOf(b),{snap,axis:"x"});segReveal(seg,b);return;} // liquid droplet
   const v=b?`inset(${b.offsetTop}px ${seg.clientWidth-b.offsetLeft-b.offsetWidth}px ${seg.clientHeight-b.offsetTop-b.offsetHeight}px ${b.offsetLeft}px round 9px)`:"inset(50% 50% 50% 50% round 9px)";
   if(snap||!th._placed){th.classList.add("snap");th.style.clipPath=v;void th.offsetWidth;th.classList.remove("snap");th._placed=true;}
   else th.style.clipPath=v;
+  segReveal(seg,b);
+}
+function segEdges(sc){sc.classList.toggle("fl",sc.scrollLeft>2);sc.classList.toggle("fr",sc.scrollLeft+sc.clientWidth<sc.scrollWidth-2);} /* fade the edge that has more options past it */
+document.addEventListener("scroll",e=>{const t=e.target;if(t.classList&&t.classList.contains("seg-scroll"))segEdges(t);},true);
+addEventListener("resize",()=>$$(".seg-scroll").forEach(segEdges));
+function segReveal(seg,b){ /* scroll a one-row segmented control so the picked option is visible */
+  const sc=seg.parentElement;if(!sc||!sc.classList.contains("seg-scroll"))return;segEdges(sc);if(!b||sc.scrollWidth<=sc.clientWidth+1)return;
+  const l=b.offsetLeft+seg.offsetLeft,r=l+b.offsetWidth;
+  if(l<sc.scrollLeft+8)sc.scrollTo({left:Math.max(0,l-24),behavior:"smooth"});else if(r>sc.scrollLeft+sc.clientWidth-8)sc.scrollTo({left:r-sc.clientWidth+24,behavior:"smooth"});
 }
 new MutationObserver(ms=>{const s=new Set();ms.forEach(m=>{const p=m.target.parentElement;if(p&&p._thumb)s.add(p);});s.forEach(p=>glide(p));})
   .observe(document.body,{subtree:true,attributes:true,attributeFilter:["aria-pressed"]});
@@ -1900,6 +1976,27 @@ function applyBg(){
   D.style.background=css?`color-mix(in srgb,var(--bg) ${b.dim}%,transparent)`:"";
   h.classList.toggle("has-bg",!!css);
 }
+const HV_DEF={style:"auto",k:100,speed:100,light:true,ripple:true};
+const HV_STYLES=[["auto","Match surface"],["lift","Lift"],["glow","Glow"],["tilt","Tilt"],["magnetic","Magnetic"],["liquid","Liquid"],["off","Off"]];
+const HV_PRESETS=[
+  {name:"Default",v:{style:"auto",k:100,speed:100,light:true,ripple:true}},
+  {name:"Subtle",v:{style:"lift",k:50,speed:120,light:false,ripple:false}},
+  {name:"Playful",v:{style:"liquid",k:170,speed:80,light:true,ripple:true}},
+  {name:"Tilt",v:{style:"tilt",k:100,speed:100,light:true,ripple:false}},
+  {name:"Magnetic",v:{style:"magnetic",k:110,speed:90,light:false,ripple:true}},
+  {name:"Glow",v:{style:"glow",k:100,speed:100,light:true,ripple:false}},
+  {name:"Calm",v:{style:"lift",k:70,speed:180,light:true,ripple:false}},
+  {name:"Off",v:{style:"off",k:100,speed:100,light:false,ripple:false}}];
+const HVS={style:"lift",k:1,dur:1,light:true,js:false}; /* resolved values the hover engine reads */
+function hvGet(){const h=S.settings.hover;return (h&&typeof h==="object")?Object.assign({},HV_DEF,h):Object.assign({},HV_DEF);}
+const hvRipple=()=>hvGet().ripple;
+function applyHover(){
+  const h=hvGet(),html=document.documentElement,st=h.style==="auto"?(html.classList.contains("lg")?"liquid":"lift"):h.style;
+  if(HV_READY&&(st!==HVS.style||h.speed/100!==HVS.dur))hvReset();
+  Object.assign(HVS,{style:st,k:Math.max(.25,Math.min(2,h.k/100)),dur:Math.max(.5,Math.min(2,h.speed/100)),light:!!h.light,js:["tilt","magnetic","liquid"].includes(st)});
+  html.dataset.hv=st;html.style.setProperty("--hv-k",HVS.k);html.style.setProperty("--hv-dur",Math.round(200*HVS.dur)+"ms");
+  html.classList.toggle("hv-light",HVS.light);
+}
 function applyTheme(){
   const s=S.settings,h=document.documentElement;
   THEME_VARS.forEach(v=>h.style.removeProperty(v));
@@ -1927,6 +2024,7 @@ function applyTheme(){
   $("#radius").value=s.radius;$("#csize").value=s.clockScale;
   const wasLg=h.classList.contains("lg");h.classList.toggle("lg",s.surface==="glass");
   if(wasLg!==h.classList.contains("lg"))lgModeChanged();
+  applyHover();if(HV_READY)renderHover();
   // Native pop-ups (select menus, date and colour pickers) follow the theme's lightness
   {const bgc=getComputedStyle(h).getPropertyValue("--bg").trim(),dk=!(isHex(bgc)&&lum(bgc)>.4);h.style.colorScheme=dk?"dark":"light";
    CAL_SLOTS.forEach((c,i)=>h.style.setProperty("--cal"+i,c[dk?1:0]));
@@ -2250,7 +2348,7 @@ function buildClock(k){
     const ring=(id,label)=>`<div class="ring"><svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="50" fill="none" stroke="currentColor" stroke-opacity=".12" stroke-width="10"/><circle id="rg-${id}" cx="60" cy="60" r="50" fill="none" stroke="var(--accent)" stroke-width="10" stroke-linecap="round" stroke-dasharray="314.16" stroke-dashoffset="314.16" transform="rotate(-90 60 60)" style="stroke-dashoffset:314.16"/></svg><b id="rp-${id}">0%</b><small>${label}</small></div>`;
     w.innerHTML=`<div class="rings">${ring("h","of this hour")}${ring("d","of today")}${ring("w","of this week")}${ring("mo","of this month")}${ring("y","of this year")}</div>`;
   }else if(k==="timer"){
-    w.innerHTML=`<div class="timer"><div class="tm-top"><div class="seg modes" id="tm-modes" role="group" aria-label="Timer"></div><button class="icon-btn tm-editbtn" id="tm-editbtn" type="button" aria-expanded="false" aria-controls="tm-edit" aria-label="Timers and sounds" title="Timers and sounds"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button></div><div class="t" id="tm-t"></div><div class="ctl"><button class="btn" id="tm-go"></button><button class="btn ghost" id="tm-reset">Reset</button></div><div class="note" id="tm-note"></div><label class="tm-on"><span>Working on</span><select id="tm-tag" aria-label="What this session is for"></select></label><div class="tm-edit" id="tm-edit" hidden></div></div>`;
+    w.innerHTML=`<div class="timer"><div class="tm-top"><div class="seg-scroll"><div class="seg modes" id="tm-modes" role="group" aria-label="Timer"></div></div><button class="icon-btn tm-editbtn" id="tm-editbtn" type="button" aria-expanded="false" aria-controls="tm-edit" aria-label="Timers and sounds" title="Timers and sounds"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button></div><div class="t" id="tm-t"></div><div class="ctl"><button class="btn" id="tm-go"></button><button class="btn ghost" id="tm-reset">Reset</button></div><div class="note" id="tm-note"></div><label class="tm-on"><span>Working on</span><select id="tm-tag" aria-label="What this session is for"></select></label><div class="tm-edit" id="tm-edit" hidden></div></div>`;
     if(!T.running){const t=timerById(S.settings.timerId)||timerById(T.id)||S.timers[0];if(t)useTimer(t,true);}
     initSeg($("#tm-modes"));renderTimerModes();renderTimerTag();
     $("#tm-tag").addEventListener("change",e=>{S.settings.tmTag=e.target.value;save();});
@@ -2667,7 +2765,7 @@ function renderNowTask(pr){
   if(pr===undefined)pr=pressing(new Date());
   const el=$("#now-task"),t=pr&&pr.p>.02?pr.t:sortedTasks().find(x=>!x.done);
   const cd=pr&&t===pr.t?(pr.left<=0?`<b class="cd late">Overdue by ${fmtLeft(-pr.left)}</b>`:`<b class="cd">Due in ${fmtLeft(pr.left)}</b>`):"";
-  const html=t?`<i class="dot" style="background:var(--u${t.urg})"></i><span>${cd?"":"Up next: "}${esc(t.title)}</span>${cd}`:`<span>Nothing on your list. Add a task to see it here.</span>`;
+  const html=t?`<i class="dot" style="background:var(--u${t.urg})"></i><span class="nt-t" title="${esc(t.title)}">${cd?"":"Up next: "}${esc(t.title)}</span>${cd}`:`<span>Nothing on your list. Add a task to see it here.</span>`;
   if(el._html===html)return;const changed=el._tid!==(t&&t.id);el._html=html;el._tid=t&&t.id;el.innerHTML=html;
   if(changed&&el._init)anim(el,[{opacity:0,transform:"translateY(6px)"},{opacity:1,transform:"none"}],{duration:240,easing:EASE_OUT}); // only when the task changes, not every countdown minute
   el._init=true;
@@ -3681,6 +3779,7 @@ $$("[data-sub]").forEach(p=>{
    hover lean/bulge/ripple on panes. Every value is a damped spring (semi-implicit Euler), so motion
    always starts from where it is and can be redirected mid-flight. */
 const HTML=document.documentElement, lgOn=()=>HTML.classList.contains("lg");
+var HV_READY=false; /* set once the hover engine below has started */
 const fineHover=matchMedia("(hover: hover) and (pointer: fine)");
 const rtMQ=matchMedia("(prefers-reduced-transparency: reduce)"), hcMQ=matchMedia("(prefers-contrast: more)");
 function sp(x,k,c){return {x,v:0,t:x,k,c};}
@@ -3791,20 +3890,29 @@ const LG_LEAN=".widget,.skin,.task,.kpi,.jb-tile,.preset,.fontopt,.ditem,.lives>
 const lgP=new Map();let pLean=null,pNudge=null,pLit=null,beadBtn=null;
 const LG_RIP=LG_LEAN+","+LG_NUDGE+",.seg>button,.rail>.nav";
 document.addEventListener("pointerdown",e=>{
-  if(!lgOn()||rmq.matches||e.button)return;const t=e.target instanceof Element?e.target.closest(LG_RIP):null;if(!t||t.closest(".widgets.editing"))return;
+  if(!hvRipple()||rmq.matches||e.button)return;const t=e.target instanceof Element?e.target.closest(LG_RIP):null;if(!t||t.closest(".widgets.editing"))return;
   const r=t.getBoundingClientRect(),cs=getComputedStyle(t);if(cs.position==="static")t.style.position="relative";
   const d=Math.max(r.width,r.height)*2.2,w=document.createElement("span");w.className="lg-rip";w.setAttribute("aria-hidden","true");
   const i=document.createElement("i");i.style.cssText=`--d:${d}px;left:${e.clientX-r.left}px;top:${e.clientY-r.top}px`;w.appendChild(i);t.appendChild(w);
   const a=i.animate([{transform:"scale(.05)",opacity:.9},{transform:"scale(1)",opacity:0}],{duration:Math.min(900,420+d*.6),easing:"cubic-bezier(0.23,1,0.32,1)"});
   a.onfinish=a.oncancel=()=>w.remove();
 },{passive:true});
-function pieceOf(el){let p=lgP.get(el);if(!p){p={px:sp(0,150,11),py:sp(0,150,11),sx:sp(0,90,14),sy:sp(0,90,14),mode:null,hov:false,lit:false,w:el.offsetWidth,h:el.offsetHeight};lgP.set(el,p);}return p;}
+function pieceOf(el){let p=lgP.get(el);if(!p){const d=HVS.dur,k2=1/(d*d),k1=1/d;p={px:sp(0,150*k2,11*k1),py:sp(0,150*k2,11*k1),sx:sp(0,90*k2,14*k1),sy:sp(0,90*k2,14*k1),h:sp(0,170*k2,16*k1),mode:null,hov:false,lit:false,w:el.offsetWidth,h0:el.offsetHeight};lgP.set(el,p);}return p;}
 function pieceDraw(el,p){
   if(p.mode){
-    const reach=Math.min(1,160/Math.max(p.w,p.h,1))*.6+.4,ox=p.px.x*6*reach,oy=p.py.x*5*reach;
-    if(p.mode==="nudge")el.style.translate=`${(ox*.5).toFixed(2)}px ${(oy*.5).toFixed(2)}px`;
-    else{const pm=Math.min(1.4,Math.hypot(p.px.x,p.py.x)),pa=Math.atan2(p.py.x,p.px.x)*180/Math.PI,ps=1+.035*pm*reach;
-      el.style.transform=`translate(${ox.toFixed(2)}px,${oy.toFixed(2)}px) rotate(${pa.toFixed(2)}deg) scale(${ps.toFixed(4)},${(1/ps).toFixed(4)}) rotate(${(-pa).toFixed(2)}deg)`;}
+    const K=HVS.k,st=HVS.style,reach=Math.min(1,160/Math.max(p.w,p.h0,1))*.6+.4,f=n=>n.toFixed(2);
+    if(st==="tilt"){
+      if(p.mode==="nudge")el.style.translate=`${f(p.px.x*2.5*K)}px ${f(p.py.x*2*K)}px`;
+      else el.style.transform=`perspective(800px) rotateX(${f(-p.py.x*7*K*reach)}deg) rotateY(${f(p.px.x*7*K*reach)}deg) scale(${(1+.02*K*p.h.x).toFixed(4)})`;
+    }else if(st==="magnetic"){
+      if(p.mode==="nudge")el.style.translate=`${f(p.px.x*6*K)}px ${f(p.py.x*5*K)}px`;
+      else el.style.transform=`translate(${f(p.px.x*10*K*reach)}px,${f(p.py.x*8*K*reach)}px) scale(${(1+.015*K*p.h.x).toFixed(4)})`;
+    }else{ /* liquid */
+      const ox=p.px.x*6*reach*K,oy=p.py.x*5*reach*K;
+      if(p.mode==="nudge")el.style.translate=`${f(ox*.5)}px ${f(oy*.5)}px`;
+      else{const pm=Math.min(1.4,Math.hypot(p.px.x,p.py.x)),pa=Math.atan2(p.py.x,p.px.x)*180/Math.PI,ps=1+.035*pm*reach*K;
+        el.style.transform=`translate(${f(ox)}px,${f(oy)}px) rotate(${f(pa)}deg) scale(${ps.toFixed(4)},${(1/ps).toFixed(4)}) rotate(${f(-pa)}deg)`;}
+    }
   }
   if(p.lit){el.style.setProperty("--lx",p.sx.x.toFixed(1)+"px");el.style.setProperty("--ly",p.sy.x.toFixed(1)+"px");}
 }
@@ -3813,14 +3921,14 @@ function pieceDraw(el,p){
 const restRect=el=>{const p=lgP.get(el);if(p&&p.hov&&p.r)return p.r;const r=el.getBoundingClientRect();if(p)p.r=r;return r;};
 addEventListener("scroll",()=>lgP.forEach(p=>{p.r=null;}),{passive:true,capture:true});
 const aimAt=(el,e)=>{const r=restRect(el);return [Math.max(-1,Math.min(1,((e.clientX-r.left)/r.width)*2-1)),Math.max(-1,Math.min(1,((e.clientY-r.top)/r.height)*2-1)),r];};
-function releasePiece(el){const p=el&&lgP.get(el);if(!p)return;p.hov=false;p.px.v+=p.px.x*4;p.py.v+=p.py.x*4;p.px.t=0;p.py.t=0;}
+function releasePiece(el){const p=el&&lgP.get(el);if(!p)return;p.hov=false;if(HVS.style==="liquid"){p.px.v+=p.px.x*4;p.py.v+=p.py.x*4;}p.px.t=0;p.py.t=0;p.h.t=0;}
 function track(mode,el,e){
   const cur=mode==="lean"?pLean:pNudge;
   if(cur!==el)releasePiece(cur);
   if(el&&!(mode==="lean"&&el.closest(".widgets.editing"))){
     const p=pieceOf(el),entering=!p.hov;if(entering){p.hov=true;p.r=null;}
     const [nx,ny]=aimAt(el,e);p.mode=mode;
-    if(entering){p.w=el.offsetWidth;p.h=el.offsetHeight;p.px.v-=nx*6;p.py.v-=ny*6;} // touching the surface sends a ripple from the entry side
+    if(entering){p.w=el.offsetWidth;p.h0=el.offsetHeight;p.h.t=1;if(HVS.style==="liquid"){p.px.v-=nx*6;p.py.v-=ny*6;}} // liquid: touching the surface sends a ripple from the entry side
     p.px.t=nx;p.py.t=ny;
   }
   if(mode==="lean")pLean=el;else pNudge=el;
@@ -3852,7 +3960,7 @@ function lgFrame(now){
   });
   lgP.forEach((p,el)=>{
     if(!el.isConnected){lgP.delete(el);return;}
-    const ss=[p.px,p.py,p.sx,p.sy];ss.forEach(s=>sstep(s,dt));
+    const ss=[p.px,p.py,p.sx,p.sy,p.h];ss.forEach(s=>sstep(s,dt));
     const rest=ss.every(still);if(!rest)busy=true;
     pieceDraw(el,p);
     if(rest&&!p.hov&&!p.lit){if(p.mode==="nudge")el.style.translate="";else if(p.mode)el.style.transform="";lgP.delete(el);}
@@ -3860,20 +3968,65 @@ function lgFrame(now){
   lgRAF=busy?requestAnimationFrame(lgFrame):0;
 }
 document.addEventListener("pointermove",e=>{
-  if(e.pointerType!=="mouse"||!fineHover.matches||!lgOn())return;
+  if(e.pointerType!=="mouse"||!fineHover.matches)return;
+  const js=HVS.js,lit=HVS.light,lg=lgOn();if(!js&&!lit&&!lg&&!pLean&&!pNudge&&!pLit)return;
   const t=e.target instanceof Element?e.target:null;
-  track("lean",!reduced&&t?t.closest(LG_LEAN):null,e);
-  track("nudge",!reduced&&t?t.closest(LG_NUDGE):null,e);
-  trackLit(t?t.closest(LG_LIT):null,e);
-  beadTo(t?t.closest(".seg>button,.rail>.nav"):null);
+  track("lean",js&&!reduced&&t?t.closest(LG_LEAN):null,e);
+  track("nudge",js&&!reduced&&t?t.closest(LG_NUDGE):null,e);
+  trackLit(lit&&t?t.closest(LG_LIT):null,e);
+  beadTo(lg&&t?t.closest(".seg>button,.rail>.nav"):null);
   lgKick();
 },{passive:true});
 HTML.addEventListener("pointerleave",()=>{releasePiece(pLean);releasePiece(pNudge);if(pLit){pLit.classList.remove("lit");const p=lgP.get(pLit);if(p)p.lit=false;}beadTo(null);pLean=pNudge=pLit=null;lgKick();});
+function hvReset(){ /* drop any half-finished hover pose when the style changes */
+  lgP.forEach((p,el)=>{el.style.transform="";el.style.translate="";el.classList.remove("lit");});lgP.clear();pLean=pNudge=pLit=null;
+}
+HV_READY=true;
+
+/* ---------- hover animation settings ----------
+   S.settings.hover = {style, k, speed, light, ripple}; style "auto" means Liquid on glass and Lift on solid.
+   Built-in presets live in HV_PRESETS; your own are S.settings.hoverSaved = [{id, name, v}].
+   Hover is also part of a saved look (PRESET_KEYS). */
+$("#hv-style").innerHTML=HV_STYLES.map(([v,n])=>`<option value="${v}">${n}</option>`).join("");
+function hvSet(patch,quiet){S.settings.hover=Object.assign(hvGet(),patch);save();applyHover();renderHover();if(!quiet&&patch.style&&!reduced)hvDemoPulse();}
+function hvSame(a,b){return ["style","k","speed","light","ripple"].every(x=>a[x]===b[x]);}
+function renderHover(){
+  const h=hvGet(),saved=S.settings.hoverSaved||[];
+  $("#hv-style").value=h.style;$("#hv-k").value=h.k;$("#hv-speed").value=h.speed;$("#hv-light").checked=h.light;$("#hv-ripple").checked=h.ripple;
+  $("#hv-k").disabled=h.style==="off";$("#hv-speed").disabled=h.style==="off";
+  $("#hv-presets").innerHTML=HV_PRESETS.map((p,i)=>`<button type="button" data-hvp="${i}" aria-pressed="${hvSame(h,p.v)}">${p.name}</button>`).join("")+
+    saved.map(p=>`<button type="button" data-hvs="${p.id}" aria-pressed="${hvSame(h,p.v)}">${esc(p.name)}<span class="hv-x" data-hvdel="${p.id}" role="button" aria-label="Delete ${esc(p.name)}" title="Delete">×</span></button>`).join("");
+  const r=HVS.style;
+  $("#hv-note").textContent=!fineHover.matches?"Hover needs a mouse or trackpad. On touch screens only the press ripple shows.":reduced?"Your device asks for less motion, so cards won't move. Colour changes and the cursor light still show.":h.style==="auto"?`Match surface is using ${r==="liquid"?"Liquid":"Lift"} because your surfaces are ${lgOn()?"liquid glass":"solid"}.`:"";
+}
+function hvDemoPulse(){const c=$(".hv-demo");if(c)anim(c,[{opacity:.6},{opacity:1}],{duration:240,easing:EASE_OUT});}
+$("#hv-style").addEventListener("change",e=>hvSet({style:e.target.value}));
+$("#hv-k").addEventListener("input",e=>hvSet({k:+e.target.value},true));
+$("#hv-speed").addEventListener("input",e=>hvSet({speed:+e.target.value},true));
+$("#hv-light").addEventListener("change",e=>hvSet({light:e.target.checked},true));
+$("#hv-ripple").addEventListener("change",e=>hvSet({ripple:e.target.checked},true));
+$("#hv-presets").addEventListener("click",e=>{
+  const del=e.target.closest("[data-hvdel]");
+  if(del){e.stopPropagation();const list=S.settings.hoverSaved||[],i=list.findIndex(x=>x.id===del.dataset.hvdel);if(i<0)return;const [p]=list.splice(i,1);save();renderHover();
+    toast(`Deleted ${p.name}`,{run(){list.splice(i,0,p);save();renderHover();}});return;}
+  const b=e.target.closest("button");if(!b)return;
+  const p=b.dataset.hvp!=null?HV_PRESETS[+b.dataset.hvp]:(S.settings.hoverSaved||[]).find(x=>x.id===b.dataset.hvs);if(!p)return;
+  const before=hvGet();hvSet(Object.assign({},p.v));toast(`Hover: ${p.name}`,{run(){hvSet(before,true);}});
+});
+$("#hv-save").addEventListener("submit",e=>{e.preventDefault();
+  const name=$("#hv-name").value.trim().slice(0,24);if(!name){$("#hv-name").focus();return;}
+  const list=S.settings.hoverSaved=S.settings.hoverSaved||[],v=Object.assign({},hvGet());
+  const same=list.find(x=>x.name.toLowerCase()===name.toLowerCase());
+  if(same)same.v=v;else{if(list.length>=12){toast("You can keep 12 hover presets. Delete one first.");return;}list.push({id:uid(),name,v});}
+  $("#hv-name").value="";save();renderHover();toast(same?`Updated ${name}`:`Saved ${name}`);
+});
+rmq.addEventListener&&rmq.addEventListener("change",renderHover);
+renderHover();
 /* ---------- presets ----------
    A preset is a named copy of every look-related setting. Photos are copied under their own
    image key so replacing the live background later doesn't change a saved preset, and a custom
    colour scheme travels with the preset so it still works if the scheme is deleted. */
-const PRESET_KEYS=["skin","accent","uiFont","clockFont","radius","clockScale","surface","refract","clock","h24","secs","bg","stage"];
+const PRESET_KEYS=["skin","accent","uiFont","clockFont","radius","clockScale","surface","refract","clock","h24","secs","bg","stage","hover"];
 function copyImg(src,key){
   const data=src==="local"?bgData:resolveImg(src);if(!data||!/^(local)/.test(src))return src; // remote/blob images are already stable
   try{localStorage.setItem("digitaldash.img."+key,data);imgCache[key]=data;cloudImgPut(key,data);if(dbH&&userId)dbH.doc("data/users/"+userId+"/img-"+key).set({img:data}).catch(()=>{});return "local:"+key;}

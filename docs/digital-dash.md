@@ -120,6 +120,14 @@ Optional sign-in so data saves to the cloud and follows you across devices. Sign
 - The focus timer's "Working on" picker (`settings.tmTag`: `t:<task id>`, `c:<course>` or nothing) tags each finished focus session in `S.focusTags = [{d, sec, task, course}]`.
 - Tasks show "3 sessions · 1h 15m". The week review adds "Time by course" (sorted bars, one hue, value on every row, with untagged focus time shown separately so totals still add up) and "Most time on".
 
+## Hover animations
+
+- Themes, Hover animations. `S.settings.hover = {style, k, speed, light, ripple}`; missing values fall back to `HV_DEF`.
+- Styles: `auto` (Liquid on glass, Lift on solid), `lift`, `glow`, `tilt`, `magnetic`, `liquid`, `off`. `applyHover()` resolves the style into `html[data-hv]`, `--hv-k` (strength, 0.25 to 2) and `--hv-dur` (speed). Lift and Glow are CSS; Tilt, Magnetic and Liquid are drawn by the spring engine (`pieceDraw`), whose stiffness scales with speed.
+- Cursor light (`html.hv-light`) moves a soft spotlight with the pointer on solid surfaces; glass keeps its own sheen. Press ripple works on both surfaces.
+- Built-in presets are in `HV_PRESETS`; your own are `S.settings.hoverSaved = [{id, name, v}]` (up to 12, delete with Undo). Hover is also saved with look presets (`PRESET_KEYS`).
+- Mouse only. Reduced motion drops the movement and keeps colour changes and the light.
+
 ## Courses and grades
 
 - Tasks has a `#task-mode` switch: Tasks or Courses and grades (`setTaskMode`, `renderCoursesPane`).
