@@ -18,7 +18,7 @@ This builds `dist/` and serves it. Open `/digital-dash.html`. Without Supabase s
 - `public/digital-dash-sw.js`, `digital-dash.webmanifest` and the icons make it installable and usable offline.
 - `public/digital-dash-privacy.html` is the privacy policy.
 - `scripts/build.mjs` copies `public/` to `dist/` and writes `digital-dash-config.js` from the Supabase env vars.
-- `supabase/` holds the database setup (`migrations/`, or `setup-all.sql` in one file) and two Edge Functions: `dash-ai` (AI helper) and `dash-push` (push reminders).
+- `supabase/` holds the database setup (`migrations/`, or `setup-all.sql` in one file) and two Edge Functions: `dash-ai` (AI helper) and `dash-push` (reminders by notification, email and text).
 
 Full details, including setup for each feature, are in [docs/digital-dash.md](docs/digital-dash.md).
 

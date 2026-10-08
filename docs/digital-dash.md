@@ -168,6 +168,20 @@ How it works:
 4. Open `supabase/digital-dash-reminders-cron.sql`, put in your project ref and the same `CRON_SECRET`, and run it in the SQL editor. It enables `pg_cron` and `pg_net` and calls `dash-push` every minute.
 5. On your phone: open the site, add it to the Home Screen (needed on iPhone), open it from there, sign in, then Themes, Reminders, turn on, and press "Send a test".
 
+## Email and text reminders for tasks
+
+- The bell on a task opens **Remind me**: when (at the due time, 15 min to 1 day before, or a date and time you pick; tasks with only a date use 9:00 AM) and how (email, text message, notification). Stored as `t.remind = {lead, ch, at?}`; repeats carry relative reminders to the next one.
+- Where they go is set in Themes, Reminders, **Email and text reminders**: agree to emails at the account email, and add a mobile number, which is confirmed with a 6-digit code (`phone-start`, `phone-verify`). That lives in `dash_contacts`, which only the `dash-push` function can read; the browser only ever sees a masked number.
+- `remBuild()` writes task reminders (`kind: "task"`, up to 30 days ahead) to `dash_reminders` with a `channels` array. `dash-push`, run every minute, sends push to devices, email through Resend and texts through Twilio, with daily caps per account (`dash_msg_usage`, 20 texts and 50 emails by default).
+- Opt-outs: every email has an unsubscribe link (and a one-click `List-Unsubscribe` header); a STOP reply makes Twilio refuse further texts, and the function then turns texts off for that account.
+
+**Setup**
+1. Run `supabase/migrations/20261008120000_digital_dash_task_reminders.sql` (the GitHub integration does it on merge).
+2. Email: create a Resend account and API key. Until you verify a domain in Resend, it can only email your own address; to email other people, add your domain in Resend and set `REMIND_FROM` to an address on it.
+3. Texts: create a Twilio account, buy a number (or use a Messaging Service), and set `TWILIO_ACCOUNT_SID`, `TWILIO_AUTH_TOKEN` and `TWILIO_FROM`. A trial account can only text numbers you've verified in Twilio. Under Messaging, Geo permissions, allow only the countries you need (for example Canada and the US) to block SMS fraud. Texting US numbers needs A2P 10DLC registration, or a verified toll-free number.
+4. Secrets: `supabase secrets set RESEND_API_KEY=... REMIND_FROM="Digital Dash <reminders@yourdomain.com>" TWILIO_ACCOUNT_SID=... TWILIO_AUTH_TOKEN=... TWILIO_FROM=+1... SITE_URL=https://usedigitaldash.vercel.app`, then `supabase functions deploy dash-push`. Optional: `SMS_DAILY_LIMIT`, `EMAIL_DAILY_LIMIT`, `REMIND_SECRET`.
+5. The pg_cron job from `supabase/digital-dash-reminders-cron.sql` must be running (it already sends push reminders).
+
 ## Study rooms (Supabase Realtime)
 
 Focus with friends: see who's in a session and start a shared timer. No tables; a room is the Realtime channel `dash-room-<CODE>`.

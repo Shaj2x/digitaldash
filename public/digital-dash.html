@@ -1126,6 +1126,25 @@ html.lg .tray-chip{background:var(--glass-tint)}
 @media (max-width:560px){.crs-grid{grid-template-columns:1fr}.crs-h,.crs-row{grid-template-columns:1fr 64px 80px 30px}}
 @media (prefers-reduced-motion:reduce){.crs-bar i,.goal-bar i{transition:none}.drag-ghost{transform:none}}
 .rem-note{margin:0 0 10px;font-size:14px;line-height:1.5}
+/* Email and text reminders */
+#ct-body:not(:empty){margin-top:16px;padding-top:14px;border-top:1px solid var(--line)}
+.ct-h{margin:0 0 4px;font-size:15px}
+.ct-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:8px 0}
+.ct-row input[type=tel],.ct-row input[inputmode=numeric]{flex:1 1 160px;min-width:0}
+.ct-who{font-weight:600}
+.ct-fine{margin:8px 0 0;font-size:12.5px;color:var(--muted);line-height:1.45}
+.rchip svg{width:12px;height:12px}
+.rchip.on{color:var(--accent)}
+.task .rem-btn[aria-pressed=true]{color:var(--accent);opacity:1}
+.tr-when{display:grid;gap:8px}
+.tr-when select,.tr-when input{width:100%}
+.tr-ch{display:grid;gap:8px}
+.tr-ch label{display:flex;align-items:flex-start;gap:10px;padding:10px 12px;border:1px solid var(--line);border-radius:12px;cursor:pointer}
+.tr-ch label:has(input:disabled){cursor:default;opacity:.7}
+.tr-ch label b{display:block;font-size:14px}
+.tr-ch label small{display:block;color:var(--muted);font-size:12.5px;line-height:1.4}
+.tr-ch .btn{margin-top:6px}
+.tr-at{margin:0;font-size:13.5px;color:var(--muted)}
 .rem-on{display:flex;align-items:center;gap:8px;margin:0 0 6px;font-weight:600;font-size:14px}
 .rem-on i{width:8px;height:8px;border-radius:50%;background:var(--good,#0ca30c)}
 .rem-pair{display:flex;align-items:center;gap:8px}
@@ -1535,6 +1554,7 @@ html.lg .eye{background:var(--glass-tint);box-shadow:inset 0 1px 0 color-mix(in 
           <h3>Reminders</h3>
           <p class="hint" style="margin:0 0 10px">Notifications on your phone or computer, even when Digital Dash is closed.</p>
           <div id="rem-body"></div>
+          <div id="ct-body"></div>
         </div>
         <div class="panel">
           <h3>Your data</h3>
@@ -1558,6 +1578,12 @@ html.lg .eye{background:var(--glass-tint);box-shadow:inset 0 1px 0 color-mix(in 
   <div class="acd-in">
     <div class="acd-top"><h2 id="ai-h">AI helper</h2><button class="icon-btn" type="button" data-ai="close" aria-label="Close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
     <div class="acd-body" id="ai-body" aria-live="polite"></div>
+  </div>
+</dialog>
+<dialog class="acd acd-sm" id="trd" aria-labelledby="trd-h">
+  <div class="acd-in">
+    <div class="acd-top"><h2 id="trd-h">Remind me</h2><button class="icon-btn" type="button" data-tr="close" aria-label="Close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
+    <div class="acd-body" id="trd-body" aria-live="polite"></div>
   </div>
 </dialog>
 <dialog class="acd acd-sm" id="tour" aria-labelledby="tour-h">
@@ -1701,7 +1727,7 @@ try{const raw=localStorage.getItem(LSK);if(raw){merge(JSON.parse(raw));firstRun=
 function setSync(t){$("#sync").textContent=t;}
 function save(){
   try{localStorage.setItem(LSK,JSON.stringify(S));}catch(e){}
-  acDirty();if(typeof REM!=="undefined"&&REM.sub)remQueue();
+  acDirty();if(typeof REM!=="undefined"&&(REM.sub||S.tasks.some(t=>t.remind)))remQueue();
   clearTimeout(saveTimer);
   saveTimer=setTimeout(async()=>{
     if(!dbRef)return;
@@ -2611,6 +2637,7 @@ let taskFilter="open";
    t.steps = [{id, t, done}] is the checklist. t.course groups tasks; focus sessions are logged in
    S.focusTags [{d, sec, task, course}] from the timer's "Working on" choice. */
 const WDAYS_LONG=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+const BELL_ICON='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>';
 const REP_ICON='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 2l3 3-3 3"/><path d="M4 11V9a4 4 0 0 1 4-4h12M7 22l-3-3 3-3"/><path d="M20 13v2a4 4 0 0 1-4 4H4"/></svg>';
 const openSteps=new Set();
 function repLabel(r){
@@ -2648,6 +2675,7 @@ function spawnNext(t){
   while(due<today&&guard++<400)due=nextDate(t.rep,due); /* finished late: jump to the next one still ahead */
   const nx={id:uid(),title:t.title,urg:t.urg,due,dueTime:t.dueTime||"",done:false,created:Date.now(),rep:structuredClone(t.rep)};
   if(t.course)nx.course=t.course;if(t.steps&&t.steps.length)nx.steps=t.steps.map(st=>({id:uid(),t:st.t,done:false}));
+  if(t.remind&&t.remind.lead>=0)nx.remind={lead:t.remind.lead,ch:t.remind.ch.slice()};
   S.tasks.push(nx);t.spawned=nx.id;return nx;
 }
 function taskStudy(id){let sec=0,n=0;(S.focusTags||[]).forEach(x=>{if(x.task===id){sec+=x.sec;n++;}});return {sec,n};}
@@ -2699,10 +2727,10 @@ function renderTasks(mode){
   if(!list.length){el.innerHTML=`<div class="empty">${taskFilter==="done"?"Nothing finished yet. Check one off.":"No open tasks. Add one above."}</div>`;return;}
   el.innerHTML=list.map(t=>{const dl=dueLabel(t.due,t.dueTime);return `<div class="task${t.done?" done":""}${t.done&&graceDone.has(t.id)?" grace":""}" data-id="${t.id}" style="--uc:var(--u${t.urg})">
     <button class="check" data-act="toggle" aria-label="${t.done?"Mark as not done":"Mark as done"}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4"><path pathLength="1" d="m5 12 5 5 9-10"/></svg></button>
-    <div class="tt"><span>${esc(t.title)}</span>${t.course?`<span class="tchip">${esc(t.course)}</span>`:""}${t.rep?`<span class="tchip" title="Repeats">${REP_ICON}${esc(repLabel(t.rep))}</span>`:""}<div class="tmeta">${taskMeta(t)}</div></div>
+    <div class="tt"><span>${esc(t.title)}</span>${t.course?`<span class="tchip">${esc(t.course)}</span>`:""}${t.rep?`<span class="tchip" title="Repeats">${REP_ICON}${esc(repLabel(t.rep))}</span>`:""}${t.remind&&!t.done?`<span class="tchip rchip" title="Reminder">${BELL_ICON}${esc(trLabel(t))}</span>`:""}<div class="tmeta">${taskMeta(t)}</div></div>
     <span class="due${dl.late&&!t.done?" late":""}">${dl.t}</span>
     <select class="urg" data-act="urg" aria-label="Urgency">${URG.map((u,i)=>`<option value="${i}"${i===t.urg?" selected":""}>${u}</option>`).join("")}</select>
-    <div class="tact">${t.done?graceUndo(t):`<button class="icon-btn ai-btn" data-act="steps" aria-expanded="${openSteps.has(t.id)}" aria-label="Checklist" title="Checklist"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 6h10M10 12h10M10 18h10"/><path d="m3 6 1.5 1.5L7 5M3 12l1.5 1.5L7 11M3 18l1.5 1.5L7 17"/></svg></button><button class="icon-btn ai-btn" data-act="ai" aria-label="Break down with AI" title="Break down with AI"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5l1.8 4.7 4.7 1.8-4.7 1.8L12 16.5l-1.8-4.7L5.5 10l4.7-1.8z"/><path d="M18.5 15.5l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"/></svg></button>`}<button class="icon-btn" data-act="del" aria-label="Delete task"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
+    <div class="tact">${t.done?graceUndo(t):`<button class="icon-btn ai-btn rem-btn" data-act="remind" aria-pressed="${!!t.remind}" aria-label="${t.remind?"Change reminder":"Remind me"}" title="${t.remind?"Change reminder":"Remind me by email or text"}">${BELL_ICON}</button><button class="icon-btn ai-btn" data-act="steps" aria-expanded="${openSteps.has(t.id)}" aria-label="Checklist" title="Checklist"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 6h10M10 12h10M10 18h10"/><path d="m3 6 1.5 1.5L7 5M3 12l1.5 1.5L7 11M3 18l1.5 1.5L7 17"/></svg></button><button class="icon-btn ai-btn" data-act="ai" aria-label="Break down with AI" title="Break down with AI"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5l1.8 4.7 4.7 1.8-4.7 1.8L12 16.5l-1.8-4.7L5.5 10l4.7-1.8z"/><path d="M18.5 15.5l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"/></svg></button>`}<button class="icon-btn" data-act="del" aria-label="Delete task"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
     ${openSteps.has(t.id)?stepsHtml(t):""}${graceBar(t)}
   </div>`;}).join("");
   },mode);
@@ -2737,6 +2765,7 @@ $("#t-rep").addEventListener("change",()=>{const v=$("#t-rep").value,box=$("#t-d
 $("#t-days").addEventListener("click",e=>{const b=e.target.closest("button[data-d]");if(!b)return;const on=b.getAttribute("aria-pressed")!=="true";if(!on&&$$("#t-days [aria-pressed=true]").length===1)return;b.setAttribute("aria-pressed",on);});
 $("#task-list").addEventListener("click",e=>{const b=e.target.closest("[data-act]");if(!b||b.tagName==="SELECT")return;const id=b.closest(".task").dataset.id,t=S.tasks.find(x=>x.id===id);if(!t)return;
   if(b.dataset.act==="ai"){aiBreakdown(t);return;}
+  if(b.dataset.act==="remind"){trOpen(t);return;}
   if(b.dataset.act==="stog")return; /* handled on change; re-rendering here would swallow the tick */
   if(b.dataset.act==="steps"){openSteps.has(t.id)?openSteps.delete(t.id):openSteps.add(t.id);renderTasks("plain");if(openSteps.has(t.id)){const i=$(`.task[data-id="${t.id}"] .steps input[type=text]`);if(i&&!(t.steps||[]).length)i.focus();}return;}
   if(b.dataset.act==="sdel"){const i=(t.steps||[]).findIndex(x=>x.id===b.dataset.sid);if(i>=0){const st=t.steps.splice(i,1)[0];save();renderTasks("plain");toast("Step removed",{run(){t.steps.splice(i,0,st);save();renderTasks("plain");}});}return;}
@@ -4229,7 +4258,7 @@ function acApply(row){
   }finally{AC.applying=false;}
   acDone();
 }
-function acDone(){AC.state="synced";AC.err="";setSync("Saved to your account");acRenderBtn();acRenderDlg();remRender();if(!REM.checked)remCheck();else if(REM.sub)remQueue();}
+function acDone(){AC.state="synced";AC.err="";setSync("Saved to your account");acRenderBtn();acRenderDlg();remRender();ctLoad();if(!REM.checked)remCheck();else remQueue();}
 async function acPush(insert){
   if(!AC.user||!AC.sb)return;
   if(AC.busy){AC.pending=true;return;}
@@ -4574,7 +4603,7 @@ $("#room").addEventListener("input",e=>{if(e.target.id==="rm-code"){const v=rmCl
    minute by pg_cron, sends the due ones. Ids are deterministic so every device writes the same rows.
    Settings sync in S.settings.rem; whether this particular device receives them is the browser's
    own push subscription. iPhone and iPad only allow push for apps added to the Home Screen. */
-const REM={sub:null,checked:false,busy:false,sig:"",timer:0,tsig:"",perm:typeof Notification!=="undefined"?Notification.permission:"unsupported"};
+const REM={sub:null,checked:false,busy:false,sig:"",timer:0,tsig:"",hadTask:true,perm:typeof Notification!=="undefined"?Notification.permission:"unsupported"};
 const remS=()=>{const d={on:false,due:60,morning:"08:00",events:true,timer:true};return S.settings.rem=Object.assign(d,S.settings.rem||{});};
 const isIOS=/iP(hone|ad|od)/.test(navigator.userAgent)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1);
 const pushOK=()=>"serviceWorker" in navigator&&"PushManager" in window&&typeof Notification!=="undefined"&&window.isSecureContext;
@@ -4584,7 +4613,7 @@ async function remReg(){try{return await Promise.race([navigator.serviceWorker.r
 async function remCheck(){
   if(!pushOK()){REM.checked=true;remRender();return;}
   const reg=await remReg();REM.sub=reg?await reg.pushManager.getSubscription():null;REM.checked=true;REM.perm=Notification.permission;remRender();
-  if(REM.sub&&AC.user)remSync();
+  if(AC.user)remSync();
 }
 async function remFn(body){const {data,error}=await AC.sb.functions.invoke("dash-push",{body});if(error){let m="";try{m=(await error.context.json()).error;}catch(e){}throw new Error(m||"Reminders aren't set up on this site yet.");}return data;}
 async function remEnable(){
@@ -4608,6 +4637,10 @@ async function remDisable(quiet){
 }
 function remBuild(){
   const r=remS(),now=Date.now(),end=now+7*864e5,out=[],U="/digital-dash.html";
+  /* reminders you set on a task: up to 30 days ahead, on the channels you picked */
+  S.tasks.forEach(t=>{if(t.done||!t.remind)return;const at=trAt(t),ch=trChannels(t);if(!at||!ch.length||at<=now||at>now+30*864e5)return;
+    out.push({kind:"task",tag:`tr-${t.id}-${ch.join("")}`,at,ch,title:t.title,body:t.due?`Due ${dueLabel(t.due,t.dueTime).t}${t.course?" · "+t.course:""}`:"Your reminder",url:U+"#tasks"});});
+  if(!r.on)return out.sort((a,b)=>a.at-b.at).slice(0,150);
   if(r.due>0)S.tasks.forEach(t=>{if(t.done||!t.due||!t.dueTime)return;const at=dueAt(t).getTime()-r.due*60000;
     if(at>now&&at<end)out.push({kind:"due",tag:"due-"+t.id,at,title:t.title,body:`Due ${leadText(r.due)}, at ${fmtTime(t.dueTime)}${t.course?" · "+t.course:""}`,url:U+"#tasks"});});
   if(r.events)S.events.forEach(e=>{if(!e.time)return;const [y,m,d]=e.date.split("-").map(Number),[hh,mm]=e.time.split(":").map(Number),at=new Date(y,m-1,d,hh,mm).getTime()-15*60000;
@@ -4623,12 +4656,13 @@ function remBuild(){
   return out.sort((a,b)=>a.at-b.at).slice(0,150);
 }
 async function remSync(force){ /* write the next 7 days of reminders; only when something changed */
-  if(!AC.user||!AC.sb||!remS().on)return;
-  const uid=AC.user.id,list=remBuild(),rows=list.map(x=>({id:`${uid}:${x.tag}:${x.at}`,user_id:uid,at:new Date(x.at).toISOString(),kind:x.kind,title:x.title.slice(0,120),body:x.body.slice(0,240),tag:x.tag,url:x.url}));
+  if(!AC.user||!AC.sb||(!remS().on&&!S.tasks.some(t=>t.remind&&!t.done)&&!REM.hadTask))return;
+  const uid=AC.user.id,list=remBuild(),rows=list.map(x=>({id:`${uid}:${x.tag}:${x.at}`,user_id:uid,at:new Date(x.at).toISOString(),kind:x.kind,title:x.title.slice(0,120),body:x.body.slice(0,240),tag:x.tag,url:x.url,channels:x.ch||["push"]}));
+  REM.hadTask=list.some(x=>x.kind==="task");
   const sig=stableStr(rows);if(!force&&sig===REM.sig)return;REM.sig=sig;
   try{
     if(rows.length){const {error}=await AC.sb.from("dash_reminders").upsert(rows,{onConflict:"user_id,id",ignoreDuplicates:true});if(error)throw error;}
-    let q=AC.sb.from("dash_reminders").delete().eq("user_id",uid).is("sent_at",null).in("kind",["due","event","morning"]);
+    let q=AC.sb.from("dash_reminders").delete().eq("user_id",uid).is("sent_at",null).in("kind",["due","event","morning","task"]);
     if(rows.length)q=q.not("id","in",`(${rows.map(r=>`"${r.id}"`).join(",")})`);
     await q;
   }catch(e){REM.sig="";}
@@ -4671,6 +4705,132 @@ $("#rem-panel").addEventListener("change",e=>{
   if(a==="timer"){REM.tsig="x";remTick();}
   save();remSync();
 });
+
+/* ---------- task reminders by email, text and notification ----------
+   t.remind = {lead, ch, at?}: lead is minutes before the due time (due date at 9:00 when there's no time),
+   or -1 with at = "YYYY-MM-DDTHH:MM" for a time you pick. ch lists "email", "sms" and/or "push".
+   Where email and texts go is kept server-side (dash_contacts) and edited through dash-push, which
+   also texts the 6-digit code that proves a phone number is yours. */
+const CT={data:null,loading:false,busy:"",pending:false,err:""};
+const TR_LEADS=[[0,"At the due time"],[15,"15 min before"],[30,"30 min before"],[60,"1 hour before"],[180,"3 hours before"],[1440,"1 day before"]];
+function trAt(t){const r=t.remind;if(!r)return null;
+  if(r.lead<0){const d=r.at?new Date(r.at):null;return d&&!isNaN(d)?d.getTime():null;}
+  if(!t.due)return null;const base=t.dueTime?dueAt(t):new Date(t.due+"T09:00");return base.getTime()-r.lead*60000;}
+const trChannels=t=>((t.remind&&t.remind.ch)||[]).filter(c=>c==="email"||c==="sms"||c==="push");
+const CH_NAME={email:"Email",sms:"Text",push:"Notification"};
+function trLabel(t){const r=t.remind,ch=trChannels(t).map(c=>CH_NAME[c]).join(" + ")||"Reminder";
+  if(r.lead<0){const at=trAt(t);return at?`${ch} · ${new Date(at).toLocaleString(undefined,{weekday:"short",month:"short",day:"numeric",hour:"numeric",minute:"2-digit"})}`:ch;}
+  if(!t.dueTime)return `${ch} · ${r.lead>=1440?"day before":"due date"}, 9 AM`;
+  return `${ch} · ${r.lead?TR_LEADS.find(x=>x[0]===r.lead)?.[1]||r.lead+" min before":"at due time"}`;}
+async function ctLoad(force){
+  if(!AC.user||!AC.sb||CT.loading||(CT.data&&!force)){ctRender();return;}
+  CT.loading=true;CT.err="";ctRender();
+  try{CT.data=await remFn({action:"contact"});}catch(e){CT.err=e.message;}
+  finally{CT.loading=false;ctRender();if($("#trd").open)trRender();}
+}
+async function ctCall(body,okMsg){
+  CT.busy=body.action;ctRender();if($("#trd").open)trRender();
+  try{const d=await remFn(body);if(d&&d.email!==undefined)CT.data=d;if(body.action==="phone-start"){CT.pending=d.pending;}if(body.action==="phone-verify"||body.action==="phone-remove")CT.pending=false;if(okMsg)toast(okMsg);return d;}
+  catch(e){toast(e.message);return null;}
+  finally{CT.busy="";ctRender();if($("#trd").open)trRender();}
+}
+function ctRender(){
+  const el=$("#ct-body");if(!el)return;
+  if(AC.state==="unavailable"||!AC.user){el.innerHTML="";return;}
+  const d=CT.data,b=CT.busy;
+  if(!d){el.innerHTML=`<h4 class="ct-h">Email and text reminders</h4><p class="rem-note">${CT.loading?"Loading…":esc(CT.err||"")}</p>${CT.err?`<button type="button" class="btn ghost small" data-ct="reload">Try again</button>`:""}`;return;}
+  const pend=CT.pending||d.pending;
+  const email=!d.can.email?`<p class="rem-note">Email reminders aren't set up on this site yet.</p>`:
+    `<div class="field"><span>Email reminders<small class="muted" style="display:block;font-size:12.5px">To ${esc(d.email||"your account email")}</small></span><input type="checkbox" data-ct="email" ${d.email_on?"checked":""} ${b?"disabled":""} aria-label="Email reminders"></div>
+     ${d.email_on?`<div class="ct-row"><button type="button" class="btn ghost small" data-ct="test-email" ${b?"disabled":""}>Send a test email</button></div>`:""}`;
+  let sms;
+  if(!d.can.sms)sms=`<p class="rem-note">Text reminders aren't set up on this site yet.</p>`;
+  else if(d.phone_verified)sms=`<div class="field"><span>Text reminders<small class="muted" style="display:block;font-size:12.5px">To <span class="ct-who">${esc(d.phone)}</span></small></span><input type="checkbox" data-ct="sms" ${d.sms_on?"checked":""} ${b?"disabled":""} aria-label="Text reminders"></div>
+     <div class="ct-row">${d.sms_on?`<button type="button" class="btn ghost small" data-ct="test-sms" ${b?"disabled":""}>Send a test text</button>`:""}<button type="button" class="btn ghost small" data-ct="phone-remove" ${b?"disabled":""}>Remove number</button></div>`;
+  else if(pend)sms=`<p class="rem-note">We texted a 6-digit code to ${esc(pend)}.</p>
+     <form class="ct-row" data-ctf="verify"><input inputmode="numeric" autocomplete="one-time-code" maxlength="6" id="ct-code" placeholder="6-digit code" aria-label="Verification code" required><button class="btn small" type="submit" ${b?"disabled":""}>${b==="phone-verify"?"Checking…":"Verify"}</button><button type="button" class="btn ghost small" data-ct="change">Use another number</button></form>`;
+  else sms=`<p class="rem-note" style="margin-bottom:4px">Add your mobile number to get tasks by text. We'll text you a code to confirm it's yours.</p>
+     <form class="ct-row" data-ctf="start"><input type="tel" id="ct-phone" autocomplete="tel" placeholder="e.g. 519 555 1234" aria-label="Mobile number" required><button class="btn small" type="submit" ${b?"disabled":""}>${b==="phone-start"?"Sending…":"Send code"}</button></form>`;
+  el.innerHTML=`<h4 class="ct-h">Email and text reminders</h4><p class="hint" style="margin:0 0 8px">Pick these per task with the bell button on the Tasks page.</p>${email}${sms}
+    <p class="ct-fine">Up to ${d.limits.sms} texts and ${d.limits.email} emails a day. Message and data rates may apply. Reply STOP to any text to stop texts, and every email has a link to stop emails.</p>`;
+}
+$("#ct-body").addEventListener("click",e=>{
+  const b=e.target.closest("[data-ct]");if(!b||b.tagName==="INPUT")return;const a=b.dataset.ct;
+  if(a==="reload")ctLoad(true);
+  else if(a==="test-email")ctCall({action:"test-email"},"Test email sent. Check your inbox.");
+  else if(a==="test-sms")ctCall({action:"test-sms"},"Test text sent.");
+  else if(a==="phone-remove")ctCall({action:"phone-remove"},"Number removed");
+  else if(a==="change"){CT.pending=false;if(CT.data)CT.data.pending=null;ctRender();const i=$("#ct-phone");if(i)i.focus();}
+});
+$("#ct-body").addEventListener("change",e=>{
+  const a=e.target.dataset.ct;
+  if(a==="email")ctCall({action:"email",on:e.target.checked},e.target.checked?"Email reminders on":"Email reminders off");
+  else if(a==="sms")ctCall({action:"sms",on:e.target.checked},e.target.checked?"Text reminders on":"Text reminders off");
+});
+$("#ct-body").addEventListener("submit",async e=>{
+  const f=e.target.closest("[data-ctf]");if(!f)return;e.preventDefault();
+  if(f.dataset.ctf==="start"){const v=$("#ct-phone").value.trim();if(v&&await ctCall({action:"phone-start",phone:v},"Code sent")){const i=$("#ct-code");if(i)i.focus();}}
+  else{const v=$("#ct-code").value.trim();if(v)await ctCall({action:"phone-verify",code:v},"Number confirmed. Text reminders are on.");}
+});
+
+let trTask=null,trDraft=null;
+function trOpen(t){
+  trTask=t;const r=t.remind||{};
+  trDraft={lead:r.lead!=null?r.lead:(t.due?(t.dueTime?60:0):-1),at:r.at||"",ch:r.ch?r.ch.slice():[]};
+  if(trDraft.lead>=0&&!t.due)trDraft.lead=-1;
+  if(trDraft.lead<0&&!trDraft.at){const d=new Date(Date.now()+3600e3);d.setMinutes(0,0,0);trDraft.at=dkey(d)+"T"+pad(d.getHours())+":00";}
+  const dlg=$("#trd");if(!dlg.open){try{dlg.showModal();}catch(e){dlg.setAttribute("open","");}}
+  trRender();if(AC.user)ctLoad();
+}
+function trClose(){const d=$("#trd");if(d.open)d.close();trTask=null;}
+function trRender(){
+  const el=$("#trd-body"),t=trTask;if(!el||!t)return;const d=trDraft,c=CT.data;
+  $("#trd-h").textContent="Remind me";
+  const leads=t.due?(t.dueTime?TR_LEADS:[[0,"On the due date, 9:00 AM"],[1440,"The day before, 9:00 AM"]]):[];
+  const when=`<div class="tr-when"><label class="muted" for="tr-lead" style="font-size:13px">When</label><select id="tr-lead">${leads.map(([v,l])=>`<option value="${v}"${d.lead===v?" selected":""}>${l}</option>`).join("")}<option value="-1"${d.lead<0?" selected":""}>Pick a date and time</option></select>
+    ${d.lead<0?`<input type="datetime-local" id="tr-at" value="${esc(d.at)}" aria-label="Reminder date and time">`:""}</div>`;
+  const tmp=Object.assign({},t,{remind:{lead:d.lead,at:d.at,ch:["push"]}}),at=trAt(tmp);
+  const atTxt=at?(at<=Date.now()?"That time has passed. Pick a later one.":`Reminds you ${new Date(at).toLocaleString(undefined,{weekday:"long",month:"short",day:"numeric",hour:"numeric",minute:"2-digit"})}.`):"Pick a time.";
+  const signedIn=!!AC.user&&AC.state!=="unavailable";
+  const opt=(k,title,desc,ok,fix)=>`<label><input type="checkbox" data-trch="${k}" ${d.ch.includes(k)?"checked":""} ${ok?"":"disabled"}><span><b>${title}</b><small>${desc}</small>${fix||""}</span></label>`;
+  let chs;
+  if(!signedIn)chs=`<p class="rem-note">Sign in to get reminders by email, text or notification.</p><button type="button" class="btn" data-tr="signin">Sign in</button>`;
+  else if(!c)chs=`<p class="rem-note">${CT.loading?"Loading your reminder settings…":esc(CT.err||"Loading…")}</p>`;
+  else{
+    const eOk=c.can.email&&c.email_on,sOk=c.can.sms&&c.phone_verified&&c.sms_on,pOk=!!(REM.sub||remS().on);
+    chs=`<div class="tr-ch" role="group" aria-label="Send it by">
+      ${opt("email","Email",c.can.email?(c.email_on?`To ${esc(c.email||"your email")}`:"Turn on email reminders first"):"Not set up on this site yet",eOk,c.can.email&&!c.email_on?`<button type="button" class="btn ghost small" data-tr="email-on">Turn on email reminders</button>`:"")}
+      ${opt("sms","Text message",c.can.sms?(sOk?`To ${esc(c.phone)}`:c.phone_verified?"Texts are turned off":"Add and confirm your mobile number first"):"Not set up on this site yet",sOk,c.can.sms&&!sOk?`<button type="button" class="btn ghost small" data-tr="setup">${c.phone_verified?"Turn texts on":"Add my number"}</button>`:"")}
+      ${opt("push","Notification",pOk?"On your devices with reminders turned on":"Turn on reminders for a device first",pOk,!pOk?`<button type="button" class="btn ghost small" data-tr="setup">Set up notifications</button>`:"")}
+    </div>`;
+  }
+  el.innerHTML=`<p style="margin:0;font-weight:600">${esc(t.title)}</p>${when}<p class="tr-at" id="tr-at-txt">${esc(atTxt)}</p>${chs}
+    <div class="ac-row"><button type="button" class="btn" data-tr="save" ${signedIn&&c?"":"disabled"}>Save reminder</button>${t.remind?`<button type="button" class="btn ghost" data-tr="remove">Remove reminder</button>`:""}<button type="button" class="btn ghost" data-tr="close">Cancel</button></div>`;
+}
+$("#trd").addEventListener("change",e=>{
+  if(!trDraft)return;
+  if(e.target.id==="tr-lead"){trDraft.lead=+e.target.value;if(trDraft.lead<0&&!trDraft.at){const d=new Date(Date.now()+3600e3);d.setMinutes(0,0,0);trDraft.at=dkey(d)+"T"+pad(d.getHours())+":00";}trRender();}
+  else if(e.target.id==="tr-at"){trDraft.at=e.target.value;trRender();}
+  else if(e.target.dataset.trch){const k=e.target.dataset.trch;trDraft.ch=trDraft.ch.filter(x=>x!==k);if(e.target.checked)trDraft.ch.push(k);}
+});
+$("#trd").addEventListener("click",async e=>{
+  const b=e.target.closest("[data-tr]");if(!b)return;const a=b.dataset.tr,t=trTask;
+  if(a==="close"){trClose();return;}
+  if(a==="signin"){trClose();acOpen();return;}
+  if(a==="setup"){trClose();show("themes");setTimeout(()=>{const p=$("#rem-panel");if(p)p.scrollIntoView({behavior:reduced?"auto":"smooth",block:"center"});},80);return;}
+  if(a==="email-on"){await ctCall({action:"email",on:true},"Email reminders on");if(CT.data&&CT.data.email_on&&!trDraft.ch.includes("email"))trDraft.ch.push("email");trRender();return;}
+  if(!t)return;
+  if(a==="remove"){const old=t.remind;delete t.remind;save();renderTasks("plain");trClose();toast("Reminder removed",{run(){t.remind=old;save();renderTasks("plain");}});return;}
+  if(a==="save"){
+    const ch=["email","sms","push"].filter(k=>trDraft.ch.includes(k));
+    if(!ch.length){toast("Pick at least one way to remind you");return;}
+    const tmp={lead:trDraft.lead,ch};if(trDraft.lead<0)tmp.at=trDraft.at;
+    const at=trAt(Object.assign({},t,{remind:tmp}));if(!at||at<=Date.now()){toast("Pick a time that's still ahead");return;}
+    t.remind=tmp;save();renderTasks("plain");trClose();remSync(true);
+    toast(`Reminder set for ${new Date(at).toLocaleString(undefined,{weekday:"short",hour:"numeric",minute:"2-digit"})}`);
+  }
+});
+$("#trd").addEventListener("close",()=>{trTask=null;});
 
 /* ---------- welcome tour and example data ----------
    Shown once on a first visit (no saved data yet), and again from Themes, Your data. Example data is
