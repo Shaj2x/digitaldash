@@ -300,6 +300,11 @@ html.lg .addbar .addmore input[type=text]{background:var(--glass-tint);border-co
 .task{display:grid;grid-template-columns:auto 1fr auto auto auto;gap:12px;align-items:center;background:var(--panel);border:1px solid var(--line);border-left:5px solid var(--uc);border-radius:12px;padding:10px 12px}
 .task.done{opacity:.55}
 .task.done .tt{text-decoration:line-through}
+.task.done.grace{opacity:.78}
+.grace-undo{font:600 13px/1 var(--ui);padding:7px 13px;border-radius:999px;border:1px solid var(--line);background:var(--panel2);color:var(--ink);cursor:pointer;white-space:nowrap}
+.grace-undo:hover{border-color:color-mix(in srgb,var(--accent) 50%,var(--line))}
+.grace-bar{position:absolute;left:0;right:0;bottom:0;height:3px;background:var(--uc);transform-origin:left center;animation:grace-out var(--gd) linear forwards;pointer-events:none}
+@keyframes grace-out{from{transform:scaleX(1)}to{transform:scaleX(0)}}
 .check{width:22px;height:22px;border-radius:50%;border:2px solid var(--uc);background:none;display:grid;place-items:center;padding:0;transition:background-color var(--t-fast) ease,transform var(--t-press) var(--ease-out)}
 .check:active{transform:scale(.88)}
 .task.done .check,.check.on{background:var(--uc)}
@@ -2673,7 +2678,8 @@ function logFocus(sec){ /* called when a focus session finishes */
 }
 function sortedTasks(){
   const k=t=>(t.due||"9999")+" "+(t.dueTime||"99:99");
-  return [...S.tasks].sort((a,b)=>(a.done-b.done)||(a.urg-b.urg)||(k(a)<k(b)?-1:k(a)>k(b)?1:0)||(a.created-b.created));
+  const dn=t=>t.done&&!(graceDone&&graceDone.has(t.id)); /* a task you just ticked keeps its place until it leaves */
+  return [...S.tasks].sort((a,b)=>(dn(a)-dn(b))||(a.urg-b.urg)||(k(a)<k(b)?-1:k(a)>k(b)?1:0)||(a.created-b.created));
 }
 // When a task is due, as a Date: its time if set, otherwise the end of that day
 function dueAt(t){if(!t.due)return null;const [y,m,d]=t.due.split("-").map(Number),[hh,mm]=(t.dueTime||"23:59").split(":").map(Number);return new Date(y,m-1,d,hh,mm);}
@@ -2687,22 +2693,37 @@ function dueLabel(due,time){
 }
 function niceDate(k){const [y,m,d]=k.split("-").map(Number);return new Date(y,m-1,d).toLocaleDateString(undefined,{month:"short",day:"numeric"});}
 function renderTasks(mode){
-  const list=sortedTasks().filter(t=>taskFilter==="all"||(taskFilter==="done"?t.done:!t.done));
+  const list=sortedTasks().filter(t=>taskFilter==="all"||(taskFilter==="done"?t.done:!t.done||graceDone.has(t.id)));
   const el=$("#task-list");
   flipRender(el,()=>{
   if(!list.length){el.innerHTML=`<div class="empty">${taskFilter==="done"?"Nothing finished yet. Check one off.":"No open tasks. Add one above."}</div>`;return;}
-  el.innerHTML=list.map(t=>{const dl=dueLabel(t.due,t.dueTime);return `<div class="task${t.done?" done":""}" data-id="${t.id}" style="--uc:var(--u${t.urg})">
+  el.innerHTML=list.map(t=>{const dl=dueLabel(t.due,t.dueTime);return `<div class="task${t.done?" done":""}${t.done&&graceDone.has(t.id)?" grace":""}" data-id="${t.id}" style="--uc:var(--u${t.urg})">
     <button class="check" data-act="toggle" aria-label="${t.done?"Mark as not done":"Mark as done"}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4"><path pathLength="1" d="m5 12 5 5 9-10"/></svg></button>
     <div class="tt"><span>${esc(t.title)}</span>${t.course?`<span class="tchip">${esc(t.course)}</span>`:""}${t.rep?`<span class="tchip" title="Repeats">${REP_ICON}${esc(repLabel(t.rep))}</span>`:""}<div class="tmeta">${taskMeta(t)}</div></div>
     <span class="due${dl.late&&!t.done?" late":""}">${dl.t}</span>
     <select class="urg" data-act="urg" aria-label="Urgency">${URG.map((u,i)=>`<option value="${i}"${i===t.urg?" selected":""}>${u}</option>`).join("")}</select>
-    <div class="tact">${t.done?"":`<button class="icon-btn ai-btn" data-act="steps" aria-expanded="${openSteps.has(t.id)}" aria-label="Checklist" title="Checklist"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 6h10M10 12h10M10 18h10"/><path d="m3 6 1.5 1.5L7 5M3 12l1.5 1.5L7 11M3 18l1.5 1.5L7 17"/></svg></button><button class="icon-btn ai-btn" data-act="ai" aria-label="Break down with AI" title="Break down with AI"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5l1.8 4.7 4.7 1.8-4.7 1.8L12 16.5l-1.8-4.7L5.5 10l4.7-1.8z"/><path d="M18.5 15.5l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"/></svg></button>`}<button class="icon-btn" data-act="del" aria-label="Delete task"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
-    ${openSteps.has(t.id)?stepsHtml(t):""}
+    <div class="tact">${t.done?graceUndo(t):`<button class="icon-btn ai-btn" data-act="steps" aria-expanded="${openSteps.has(t.id)}" aria-label="Checklist" title="Checklist"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 6h10M10 12h10M10 18h10"/><path d="m3 6 1.5 1.5L7 5M3 12l1.5 1.5L7 11M3 18l1.5 1.5L7 17"/></svg></button><button class="icon-btn ai-btn" data-act="ai" aria-label="Break down with AI" title="Break down with AI"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5l1.8 4.7 4.7 1.8-4.7 1.8L12 16.5l-1.8-4.7L5.5 10l4.7-1.8z"/><path d="M18.5 15.5l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"/></svg></button>`}<button class="icon-btn" data-act="del" aria-label="Delete task"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
+    ${openSteps.has(t.id)?stepsHtml(t):""}${graceBar(t)}
   </div>`;}).join("");
   },mode);
 }
 // Let the tick draw and the strike-through land before the row moves or leaves.
 let taskHold=0;
+/* A ticked task stays where it is for DONE_GRACE ms with an Undo button and a shrinking bar,
+   then leaves the open list. Unticking or Undo in that time puts it straight back. */
+const DONE_GRACE=6000;var graceDone=new Map(); /* task id -> {start, timer} */
+function graceStart(t){graceEnd(t.id);const g={start:Date.now()};g.timer=setTimeout(()=>{graceDone.delete(t.id);renderTasks();renderTimerTag();},DONE_GRACE);graceDone.set(t.id,g);}
+function graceEnd(id){const g=graceDone.get(id);if(g){clearTimeout(g.timer);graceDone.delete(id);}}
+const graceLeft=id=>{const g=graceDone.get(id);return g?Math.max(0,DONE_GRACE-(Date.now()-g.start)):0;};
+function graceUndo(t){return graceDone.has(t.id)?`<button type="button" class="grace-undo" data-act="toggle" aria-label="Undo, mark ${esc(t.title)} as not done">Undo</button>`:"";}
+function graceBar(t){return t.done&&graceDone.has(t.id)?`<i class="grace-bar" style="--gd:${DONE_GRACE}ms;animation-delay:-${DONE_GRACE-graceLeft(t.id)}ms" aria-hidden="true"></i>`:"";}
+/* Tick or untick a task: repeats spawn (or take back) their next one. Returns the toast text. */
+function setTaskDone(t,done){
+  if(t.done===done)return "";t.done=done;t.doneAt=done?Date.now():null;
+  if(done){graceStart(t);if(t.rep){const nx=spawnNext(t),l=dueLabel(nx.due,nx.dueTime).t;return `Done. Next one: ${/^(Today|Tomorrow)/.test(l)?l.replace(/^T/,"t"):l}`;}return "Done. Next one.";}
+  graceEnd(t.id);if(t.spawned){const k=S.tasks.findIndex(x=>x.id===t.spawned&&!x.done);if(k>=0)S.tasks.splice(k,1);t.spawned=null;}return "";
+}
+function undoDone(t){if(!t.done)return;setTaskDone(t,false);save();renderTasks();renderNowTask();renderMini();renderTimerTag();updatePressure();toast("Back on your list");}
 function afterTaskChange(delay){clearTimeout(taskHold);taskHold=setTimeout(()=>{renderTasks();renderNowTask();renderMini();renderTimerTag();},delay);}
 $("#task-form").addEventListener("submit",e=>{e.preventDefault();const title=$("#t-title").value.trim();if(!title)return;
   let due=$("#t-due").value;const dueTime=$("#t-time").value;if(dueTime&&!due)due=dkey(new Date()); // a time alone means today
@@ -2719,16 +2740,16 @@ $("#task-list").addEventListener("click",e=>{const b=e.target.closest("[data-act
   if(b.dataset.act==="stog")return; /* handled on change; re-rendering here would swallow the tick */
   if(b.dataset.act==="steps"){openSteps.has(t.id)?openSteps.delete(t.id):openSteps.add(t.id);renderTasks("plain");if(openSteps.has(t.id)){const i=$(`.task[data-id="${t.id}"] .steps input[type=text]`);if(i&&!(t.steps||[]).length)i.focus();}return;}
   if(b.dataset.act==="sdel"){const i=(t.steps||[]).findIndex(x=>x.id===b.dataset.sid);if(i>=0){const st=t.steps.splice(i,1)[0];save();renderTasks("plain");toast("Step removed",{run(){t.steps.splice(i,0,st);save();renderTasks("plain");}});}return;}
-  if(b.dataset.act==="toggle"){t.done=!t.done;t.doneAt=t.done?Date.now():null;
-    if(t.done&&t.rep){const nx=spawnNext(t),l=dueLabel(nx.due,nx.dueTime).t;toast(`Done. Next one: ${/^(Today|Tomorrow)/.test(l)?l.replace(/^T/,"t"):l}`);}
-    else if(!t.done&&t.spawned){const k=S.tasks.findIndex(x=>x.id===t.spawned&&!x.done);if(k>=0)S.tasks.splice(k,1);t.spawned=null;}
-    else if(t.done)toast("Done. Next one.");b.closest(".task").classList.toggle("done",t.done);b.setAttribute("aria-label",t.done?"Mark as not done":"Mark as done");save();afterTaskChange(reduced?0:420);return;}
+  if(b.dataset.act==="toggle"){const msg=setTaskDone(t,!t.done);
+    if(msg)toast(msg,{run(){undoDone(t);}});
+    const row=b.closest(".task"),ck=row.querySelector(".check");row.classList.toggle("done",t.done);if(ck)ck.setAttribute("aria-label",t.done?"Mark as not done":"Mark as done");
+    save();renderNowTask();renderMini();updatePressure();afterTaskChange(t.done&&!reduced?420:0);if(!t.done)requestAnimationFrame(()=>{const c=$(`.task[data-id="${t.id}"] .check`);if(c)c.focus();});return;}
   if(b.dataset.act==="del"){const at=S.tasks.indexOf(t);S.tasks.splice(at,1);
     toast("Task deleted",{run(){S.tasks.splice(Math.min(at,S.tasks.length),0,t);save();renderTasks();renderNowTask();renderMini();}});}
   save();renderTasks();renderNowTask();renderMini();});
 $("#task-list").addEventListener("change",e=>{
   if(e.target.dataset.act==="stog"){const t=S.tasks.find(x=>x.id===e.target.closest(".task").dataset.id),st=t&&(t.steps||[]).find(x=>x.id===e.target.dataset.sid);if(!st)return;st.done=e.target.checked;save();
-    if(t.steps.every(x=>x.done)&&!t.done)toast("All steps done. Tick off the task?",{label:"Tick off",run(){t.done=true;t.doneAt=Date.now();if(t.rep)spawnNext(t);save();renderTasks();renderNowTask();renderMini();}});
+    if(t.steps.every(x=>x.done)&&!t.done)toast("All steps done. Tick off the task?",{label:"Tick off",run(){const msg=setTaskDone(t,true);save();renderTasks();renderNowTask();renderMini();updatePressure();setTimeout(()=>toast(msg,{run(){undoDone(t);}}),50);}});
     renderTasks("plain");return;}
   if(e.target.dataset.act!=="urg")return;const t=S.tasks.find(x=>x.id===e.target.closest(".task").dataset.id);t.urg=+e.target.value;save();renderTasks();renderNowTask();});
 $("#task-list").addEventListener("submit",e=>{
@@ -3363,7 +3384,7 @@ function cmdResults(q){
   // finish a task
   if((m=lq.match(/^(?:done|finish|finished|complete|check)\s+(.+)$/))){
     S.tasks.filter(t=>!t.done).map(t=>[t,fuzzy(m[1],t.title)]).filter(x=>x[1]>=40).sort((a,b)=>b[1]-a[1]).slice(0,4)
-      .forEach(([t])=>R.push({ic:"done",label:`Mark done: ${t.title}`,hint:"Task",run:()=>{t.done=true;t.doneAt=Date.now();save();renderTasks();updatePressure();renderMini();toast("Done. Next one.");}}));
+      .forEach(([t])=>R.push({ic:"done",label:`Mark done: ${t.title}`,hint:"Task",run:()=>{const msg=setTaskDone(t,true);save();renderTasks();renderNowTask();updatePressure();renderMini();toast(msg,{run(){undoDone(t);}});}}));
   }
   // events
   if((m=raw.match(/^(?:event|meeting|class|appt|appointment)\s+(.+)$/i))){
@@ -3685,7 +3706,7 @@ $("#widgets").addEventListener("click",e=>{
   if(e.target.closest("[data-npcopy]")){const v=npRedirect();(navigator.clipboard?navigator.clipboard.writeText(v):Promise.reject()).then(()=>toast("Copied"),()=>toast("Select the address and copy it"));return;}
   if(e.target.closest("[data-npdisc]")){npDisconnect();return;}
   const tk=e.target.closest("[data-wtask]");
-  if(tk){const t=S.tasks.find(x=>x.id===tk.dataset.wtask);if(t&&!t.done){t.done=true;t.doneAt=Date.now();tk.classList.add("on");save();toast("Done. Next one.");afterTaskChange(reduced?0:420);}return;}
+  if(tk){const t=S.tasks.find(x=>x.id===tk.dataset.wtask);if(t&&!t.done){const msg=setTaskDone(t,true);tk.classList.add("on");save();toast(msg,{run(){undoDone(t);}});afterTaskChange(reduced?0:420);}return;}
   const b=e.target.closest("[data-w]");if(!b)return;
   const id=b.closest(".widget").dataset.id,i=S.widgets.findIndex(w=>w.id===id),w=S.widgets[i];
   switch(b.dataset.w){

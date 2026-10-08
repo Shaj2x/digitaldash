@@ -112,6 +112,7 @@ Optional sign-in so data saves to the cloud and follows you across devices. Sign
 
 - `t.rep = {f, n, days}`: `f` is `d` (every n days), `wd` (weekdays), `w` (weekly on `days`, Sunday = 0, every `n` weeks) or `m` (monthly). Set from the task form (Repeat + day buttons) or the command bar: "gym every mon wed fri 6pm", "problem set every friday", "readings weekdays", "rent monthly", "water plants every other day", "review notes every 2 weeks".
 - Ticking a repeating task keeps it as done and adds the next one (`spawnNext`, `nextDate`); if it was finished late, the next one lands on the next date still ahead. Unticking removes that next one again. With no date given, the first one lands on the next matching day (`firstDue`).
+- Ticking a task off keeps it in place for 6 seconds (`DONE_GRACE`) with an Undo button and a shrinking bar before it leaves the open list; the toast has Undo too. `setTaskDone(t, done)` is the one place that ticks or unticks (it also spawns or removes the next repeat), and `undoDone(t)` puts a task back.
 - `t.steps = [{id, t, done}]` is the checklist, opened with the list button on a task. The row shows a progress bar; finishing every step offers to tick off the task. The AI helper's "Add as checklist" puts its steps here.
 
 ## Study tracking
