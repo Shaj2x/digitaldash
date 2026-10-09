@@ -1179,11 +1179,14 @@ html.lg .tray-chip{background:var(--glass-tint)}
 .room[hidden]{display:none}
 .rm-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap}
 .rm-head h3{margin:0;font-size:16px}
-.rm-head p{margin:2px 0 0;font-size:13.5px}
+#rm-body{display:grid;gap:14px}
+#rm-body:empty{display:none}
+.rm-join .ac-priv{flex-basis:100%}
+.rm-head p{margin:6px 0 0;line-height:1.5;font-size:13.5px}
 .rm-hact{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 .rm-code{font:700 14px/1 var(--ui);letter-spacing:.08em;padding:8px 10px;border-radius:8px;background:var(--panel2);font-variant-numeric:tabular-nums}
 .rm-join{display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap}
-.rm-f{display:grid;gap:4px;font-size:12.5px;color:var(--muted);flex:1 1 160px}
+.rm-f{display:grid;gap:8px;font-size:13px;color:var(--muted);flex:1 1 160px}
 .rm-f input{width:100%}
 #rm-code{text-transform:uppercase;letter-spacing:.08em;font-variant-numeric:tabular-nums}
 .rm-btns{display:flex;gap:8px;flex-wrap:wrap}
