@@ -121,6 +121,15 @@ Optional sign-in so data saves to the cloud and follows you across devices. Sign
 - The focus timer's "Working on" picker (`settings.tmTag`: `t:<task id>`, `c:<course>` or nothing) tags each finished focus session in `S.focusTags = [{d, sec, task, course}]`.
 - Tasks show "3 sessions · 1h 15m". The week review adds "Time by course" (sorted bars, one hue, value on every row, with untagged focus time shown separately so totals still add up) and "Most time on".
 
+## Phone and accessibility
+
+- **Voice:** a mic button on the task form adds a task from speech straight away (with Undo); the command bar mic types what you said so you can pick a result. Uses the browser's speech recognition (`SpeechRecognition` or `webkitSpeechRecognition`; Chrome, Edge, Safari, Samsung Internet) and stays hidden where it's missing. `parseWhen` understands spoken forms: "5 p.m.", "at 5" (1 to 7 means PM), "this Friday", "remind me to…", "due on Monday".
+- **App icon badge:** `appBadge()` sets the installed app's badge to open tasks due today or overdue (`navigator.setAppBadge`), on every save, when the app comes back to the front and every 5 minutes.
+- **Home screen shortcuts** (long-press the app icon), from the manifest: New task (`#new-task`), Start focus (`#start-focus`), Today (`#today`), Calendar. `shortcutLink()` handles them and swaps the address to a plain view so a reload doesn't repeat them.
+- **Today filter** on Tasks: open tasks due today or overdue.
+- **Accessibility:** axe-core reports no WCAG 2.2 AA or best-practice issues on any view at phone width (solid, light and glass themes) or in the command bar, reminder and account dialogs. Editable page titles stay real headings; every settings control is named by its row text (`labelFields()`); calendar days are read as "9 October, Friday, today, 2 items"; a "Skip to content" link; touch targets are at least 44 px on touch screens.
+- **Phones on their side** (short landscape): compact header, icon-only dock, and the clock also fits the height.
+
 ## Hover animations
 
 - Themes, Hover animations. `S.settings.hover = {style, k, speed, light, ripple}`; missing values fall back to `HV_DEF`.
