@@ -1106,7 +1106,12 @@ html.lg .ac-stats div,html.lg .ac-list li,html.lg .acp-opt{background:var(--glas
 .crs-add{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
 .crs-add input[type=text]{flex:1 1 200px;min-width:0}
 .plan[hidden]{display:none}
-.wp-head{display:flex;align-items:center;justify-content:space-between;gap:6px 16px;flex-wrap:wrap;margin-bottom:14px}
+.wp-head{display:flex;align-items:center;gap:8px 16px;flex-wrap:wrap;margin-bottom:14px}
+.wp-head .wp-sum{margin-left:auto}
+/* The plan gets the room it needs: a wider page, and no page subtitle while it's showing */
+#v-tasks:has(#plan-pane:not([hidden])),main:has(#v-tasks.on #plan-pane:not([hidden])) .topbar{max-width:1640px}
+#v-tasks:has(#plan-pane:not([hidden]))>.sub{display:none}
+#v-tasks:has(#plan-pane:not([hidden])) .task-mode{margin-bottom:12px}
 .wp-nav{display:flex;align-items:center;gap:6px}
 .wp-nav h2{margin:0;font-size:20px;min-width:9ch;text-align:center;white-space:nowrap}
 .wp-sum{margin:0;font-size:14px}
@@ -1119,6 +1124,41 @@ html.lg .ac-stats div,html.lg .ac-list li,html.lg .acp-opt{background:var(--glas
 .tray-chip small.late{color:color-mix(in srgb,var(--u0) 70%,var(--ink));font-weight:600}
 .wp-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px;align-items:stretch}
 .wp-day.panel{padding:10px;display:flex;flex-direction:column;gap:8px;min-height:240px;min-width:0;border-radius:14px}
+@media (min-width:980px){.wp-grid .wp-day.panel{min-height:max(300px,calc(100dvh - 430px))}}
+.wp-dl{font-size:17px;font-weight:700}
+.wp-tag{font-size:11.5px;font-weight:700;padding:2px 8px;border-radius:999px;background:var(--accent);color:var(--accent-ink);align-self:center}
+.wp-day.full .wp-dh h3{align-items:center;gap:8px}
+/* Month */
+.wp-month{display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,360px);gap:14px;align-items:start}
+.wp-mcal.panel{padding:10px}
+.wp-mgrid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px}
+.wp-mgrid .dow{font-size:12px;color:var(--muted);text-align:center;padding:2px 0 4px;font-weight:600}
+.wp-cell{position:relative;display:flex;flex-direction:column;align-items:stretch;gap:3px;min-width:0;min-height:clamp(96px,calc((100dvh - 400px)/6),150px);padding:6px;border-radius:10px;border:1px solid transparent;background:var(--panel2);color:var(--ink);text-align:left;font:inherit;cursor:pointer;overflow:hidden;transition:border-color var(--t-fast) ease,background-color var(--t-fast) ease}
+.wp-cell:hover{border-color:color-mix(in srgb,var(--accent) 35%,var(--line))}
+.wp-cell[aria-pressed="true"]{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
+.wp-cell.out{background:transparent;border-color:var(--line)}
+.wp-cell.out .wp-cn{color:var(--muted)}
+.wp-cn{font-size:13px;font-weight:700;font-variant-numeric:tabular-nums;line-height:1.2}
+.wp-cell.today .wp-cn{display:inline-grid;place-items:center;min-width:22px;height:22px;padding:0 5px;border-radius:999px;background:var(--accent);color:var(--accent-ink);align-self:flex-start;margin:-2px 0 0 -2px}
+.wp-cc{position:absolute;top:6px;right:7px;font-size:11.5px;color:var(--muted);font-variant-numeric:tabular-nums}
+.wp-chips{display:grid;gap:2px;min-width:0}
+.wp-chip{display:block;font-size:12px;line-height:1.3;padding:2px 6px;border-radius:5px;border-left:3px solid var(--uc);background:color-mix(in srgb,var(--ink) 6%,transparent);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:grab;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
+.wp-chip b{font-weight:700;font-variant-numeric:tabular-nums}
+.wp-chip.ev{cursor:pointer;background:none;color:var(--muted)}
+.wp-chip.done{text-decoration:line-through;color:var(--muted);border-left-color:color-mix(in srgb,var(--uc) 45%,transparent);cursor:pointer}
+.wp-more{font-size:11.5px;color:var(--muted);padding-left:6px}
+.wp-dots{display:none;gap:3px;flex-wrap:wrap;margin-top:auto}
+.wp-dots i{width:6px;height:6px;border-radius:50%;background:var(--c)}
+.wp-dots i.ev{border-radius:2px}
+.wp-dots i.dn{opacity:.4}
+.wp-cell.drop-on{outline:2px solid var(--accent);outline-offset:-2px;background:color-mix(in srgb,var(--accent) 14%,var(--panel2))}
+.wp-mgrid.picking .wp-cell{outline:1px dashed color-mix(in srgb,var(--accent) 55%,transparent);outline-offset:-2px}
+.wp-side{position:sticky;top:12px;min-width:0}
+.wp-side .wp-day.panel{min-height:0}
+html.lg .wp-cell{background:var(--glass-tint)}
+html.lg .wp-cell.out{background:transparent}
+@media (max-width:1099px){.wp-month{grid-template-columns:minmax(0,1fr)}.wp-side{position:static}}
+@media (max-width:700px){.wp-mcal.panel{padding:6px}.wp-mgrid{gap:3px}.wp-cell{min-height:58px;padding:5px 4px;align-items:center}.wp-cell.today .wp-cn{margin:0}.wp-chips,.wp-cc{display:none}.wp-dots{display:flex;justify-content:center}}
 .wp-day.today{border-color:color-mix(in srgb,var(--accent) 65%,var(--line));box-shadow:0 0 0 1px color-mix(in srgb,var(--accent) 45%,transparent)}
 .wp-day.past .wp-dh{opacity:.7}
 .wp-dh{display:flex;align-items:baseline;justify-content:space-between;gap:6px}
@@ -1427,7 +1467,10 @@ html.lg .eye{background:var(--glass-tint);box-shadow:inset 0 1px 0 color-mix(in 
       <p class="sub" data-sub="tasks">Sorted by urgency, then due date. The top one shows up on your clock.</p>
       <div class="seg task-mode" id="task-mode" role="group" aria-label="Tasks, week plan or courses"><button type="button" data-m="tasks" aria-pressed="true">Tasks</button><button type="button" data-m="plan" aria-pressed="false">Week plan</button><button type="button" data-m="courses" aria-pressed="false">Courses and grades</button></div>
       <div class="courses" id="courses-pane" hidden></div>
-      <div class="plan" id="plan-pane" hidden></div>
+      <div class="plan" id="plan-pane" hidden>
+        <div class="wp-head"><div class="seg wp-mode" id="wp-mode" role="group" aria-label="Plan by"><button type="button" data-pm="week" aria-pressed="true">Week</button><button type="button" data-pm="month" aria-pressed="false">Month</button></div><div class="wp-nav" id="wp-nav"></div><p class="wp-sum muted" id="wp-sum"></p></div>
+        <div id="wp-body"></div>
+      </div>
       <div id="tasks-pane">
       <form class="panel addbar" id="task-form" autocomplete="off">
         <div class="title-row"><input type="text" id="t-title" placeholder="What needs doing?" required aria-label="Task"><button type="button" class="mic" id="t-mic" hidden aria-pressed="false" aria-label="Add a task by voice" title="Say it, e.g. essay due Friday at 5"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0 0 14 0M12 17v5"/></svg></button></div>
@@ -5112,76 +5155,108 @@ function renderCoursesPane(){
 $("#task-mode").addEventListener("click",e=>{const b=e.target.closest("button[data-m]");if(!b||b.dataset.m===taskMode)return;setTaskMode(b.dataset.m);
   try{if(b.dataset.m==="plan")history.pushState(null,"","#plan");else if(location.hash==="#plan")history.replaceState(null,"","#tasks");}catch(e){}});
 /* ---------- week plan ----------
-   Lay out the week day by day. A task sits on the day you plan to work on it (t.plan, "YYYY-MM-DD"),
-   or on its due day until you plan it. Events show in each day so you can see how full it is.
+   Plan by week or by month (S.settings.planMode). A task sits on the day you plan to work on it
+   (t.plan, "YYYY-MM-DD"), or on its due day until you plan it. Events show on each day so you can see how
+   full it is. Week: a column per day. Month: a calendar grid plus the picked day's full list beside it.
    Drag a task to another day (press and hold on touch), or use its Move menu; tap a "Not planned yet"
    chip then a day. Quick add puts a task straight onto a day. */
-let wpStart=weekStart(new Date()),wpPick=null;
+let wpStart=weekStart(new Date()),wpMonth=new Date(new Date().getFullYear(),new Date().getMonth(),1),wpSel=dkey(new Date()),wpPick=null;
 const wpDay=t=>t.plan||t.due||"";
+const wpMode=()=>S.settings.planMode==="month"?"month":"week";
 const WP_MOVE='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
-function wpDayName(k,long){const [y,m,d]=k.split("-").map(Number);return new Date(y,m-1,d).toLocaleDateString(undefined,long?{weekday:"long",month:"long",day:"numeric"}:{weekday:"long"});}
-function wpRow(t,k,days){
-  const bits=[];if(t.due&&t.due!==k)bits.push((t.due<k&&!t.done?"Was due ":"Due ")+(t.due===dkey(new Date())?"today":niceDate(t.due))+(t.dueTime?" "+fmtTime(t.dueTime):""));
+const kDate=k=>{const [y,m,d]=k.split("-").map(Number);return new Date(y,m-1,d);};
+function wpDayName(k,long){return kDate(k).toLocaleDateString(undefined,long?{weekday:"long",month:"long",day:"numeric"}:{weekday:"long"});}
+function wpRow(t,k){
+  const today=dkey(new Date()),bits=[];
+  if(t.due&&t.due!==k)bits.push((t.due<k&&!t.done?"Was due ":"Due ")+(t.due===today?"today":niceDate(t.due))+(t.dueTime?" "+fmtTime(t.dueTime):""));
   else if(t.dueTime)bits.push("Due "+fmtTime(t.dueTime));
   if(t.course)bits.push(esc(t.course));
-  const opts=days.filter(d=>d!==k).map(d=>`<option value="${d}">${wpDayName(d)}</option>`).join("");
+  const ws=weekStart(kDate(k)),opts=[...Array(7)].map((_,i)=>dkey(addDays(ws,i))).filter(d=>d!==k).map(d=>`<option value="${d}">${wpDayName(d)}</option>`).join("");
   return `<div class="wp-t${t.done?" done":""}" data-id="${t.id}" style="--uc:var(--u${t.urg})">
     <button class="check${t.done?" on":""}" type="button" data-wact="toggle" aria-label="${t.done?"Mark "+esc(t.title)+" as not done":"Mark "+esc(t.title)+" as done"}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4"><path pathLength="1" d="m5 12 5 5 9-10"/></svg></button>
-    <div class="wp-tt"><span>${esc(t.title)}</span>${bits.length?`<small class="${t.due&&t.due<dkey(new Date())&&!t.done?"late":""}">${bits.join(" · ")}</small>`:""}</div>
+    <div class="wp-tt"><span>${esc(t.title)}</span>${bits.length?`<small class="${t.due&&t.due<today&&!t.done?"late":""}">${bits.join(" · ")}</small>`:""}</div>
     ${t.done?"":`<label class="wp-mv" title="Move to another day">${WP_MOVE}<select data-wact="move" aria-label="Move ${esc(t.title)} to another day"><option value="" selected disabled>Move to…</option>${opts}<option value="next">Next week</option>${t.plan?`<option value="none">Not planned yet</option>`:""}</select></label>`}
   </div>`;
 }
-function renderPlan(mode){
+/* One day's card: events, tasks, progress and quick add. Week view shows seven; month view shows the picked day. */
+function wpDayHtml(k,ts,full){
+  const today=dkey(new Date()),n=ts.length,d=ts.filter(t=>t.done).length,evs=itemsFor(k).filter(x=>x.kind==="ev"),dt=kDate(k),load=evs.length+n;
+  return `<section class="panel wp-day${k===today?" today":""}${k<today?" past":""}${full?" full":""}" data-k="${k}" aria-labelledby="wp-h-${k}">
+    <header class="wp-dh"><h3 id="wp-h-${k}">${full?`<span class="wp-dl">${esc(dt.toLocaleDateString(undefined,{weekday:"long",month:"long",day:"numeric"}))}</span>${k===today?'<span class="wp-tag">Today</span>':""}`:`<span class="wp-dn">${dt.toLocaleDateString(undefined,{weekday:"short"})}</span><span class="wp-dd">${dt.getDate()}</span><span class="sr-only"> ${dt.toLocaleDateString(undefined,{month:"long"})}${k===today?", today":""}</span>`}</h3>
+      <span class="wp-cnt">${n?`${d}/${n} done`:""}</span></header>
+    <div class="wp-bar" role="img" aria-label="${load?`${n} task${n===1?"":"s"}, ${evs.length} event${evs.length===1?"":"s"}`:"Free day"}"><i style="transform:scaleX(${n?(d/n).toFixed(3):0})"></i></div>
+    ${evs.length?`<ul class="wp-evs" aria-label="Events">${evs.map(x=>`<li style="--c:${x.c}"><span class="tm">${x.time?fmtTime(x.time):"All day"}</span><span class="wp-et">${esc(x.title)}</span></li>`).join("")}</ul>`:""}
+    <div class="wp-list">${ts.map(t=>wpRow(t,k)).join("")||(evs.length?"":`<p class="wp-none">${k<today?"Nothing planned":"Free"}</p>`)}</div>
+    <form class="wp-add" data-k="${k}" autocomplete="off"><input type="text" maxlength="140" placeholder="Add to ${full?wpDayName(k):dt.toLocaleDateString(undefined,{weekday:"short"})}" aria-label="Add a task to ${esc(wpDayName(k,true))}" enterkeyhint="done"></form>
+  </section>`;
+}
+function renderPlan(){
   const el=$("#plan-pane");if(!el||el.hidden)return;
-  const today=dkey(new Date()),days=[...Array(7)].map((_,i)=>dkey(addDays(wpStart,i))),first=days[0],last=days[6],inWk=k=>k>=first&&k<=last;
-  const all=sortedTasks(),by={};days.forEach(k=>by[k]=[]);
-  all.forEach(t=>{const k=wpDay(t);if(inWk(k))by[k].push(t);});
-  const free=all.filter(t=>!t.done&&!t.plan&&!inWk(t.due||"")).slice(0,30);
+  const body=$("#wp-body"),mode=wpMode(),today=dkey(new Date()),now=new Date();
+  $$("#wp-mode button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.pm===mode));glide($("#wp-mode"));
+  let grid,first,last,title,cur,unit;
+  if(mode==="week"){grid=[...Array(7)].map((_,i)=>dkey(addDays(wpStart,i)));first=grid[0];last=grid[6];cur=first===dkey(weekStart(now));unit="week";
+    title=cur?"This week":`${niceDate(first)} – ${niceDate(last)}`;}
+  else{const y=wpMonth.getFullYear(),m=wpMonth.getMonth(),gs=weekStart(wpMonth),end=new Date(y,m+1,0),ge=addDays(weekStart(end),6);
+    grid=[];for(let d=gs;d<=ge;d=addDays(d,1))grid.push(dkey(d));first=dkey(wpMonth);last=dkey(end);cur=y===now.getFullYear()&&m===now.getMonth();unit="month";
+    title=wpMonth.toLocaleDateString(undefined,{month:"long",year:"numeric"});
+    if(wpSel<first||wpSel>last)wpSel=cur?today:first;}
+  const inR=k=>k>=first&&k<=last,inG=k=>k>=grid[0]&&k<=grid[grid.length-1];
+  const all=sortedTasks(),by={};grid.forEach(k=>by[k]=[]);
+  all.forEach(t=>{const k=wpDay(t);if(inG(k))by[k].push(t);});
+  const free=all.filter(t=>!t.done&&!t.plan&&!inR(t.due||"")).slice(0,30);
   const behind=S.tasks.filter(t=>!t.done&&t.plan&&t.plan<today);
-  const thisWk=first===dkey(weekStart(new Date()));
-  const tot=days.reduce((a,k)=>a+by[k].length,0),dn=days.reduce((a,k)=>a+by[k].filter(t=>t.done).length,0);
-  const range=`${niceDate(first)} – ${niceDate(last)}`;
+  let tot=0,dn=0;grid.forEach(k=>{if(inR(k)){tot+=by[k].length;dn+=by[k].filter(t=>t.done).length;}});
+  $("#wp-nav").innerHTML=`<button class="icon-btn" type="button" data-wnav="-1" aria-label="Previous ${unit}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 6-6 6 6 6"/></svg></button>
+    <h2 id="wp-title" aria-live="polite">${esc(title)}</h2>
+    <button class="icon-btn" type="button" data-wnav="1" aria-label="Next ${unit}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 6 6 6-6 6"/></svg></button>
+    ${cur?"":`<button class="btn ghost small" type="button" data-wnav="0">This ${unit}</button>`}`;
+  $("#wp-sum").textContent=(mode==="week"&&cur?`${niceDate(first)} – ${niceDate(last)} · `:"")+(tot?`${dn} of ${tot} done`:"Nothing planned yet");
   const fa=document.activeElement,refocus=fa&&el.contains(fa)&&fa.closest(".wp-add")?fa.closest(".wp-add").dataset.k:null,typed={};
   el.querySelectorAll(".wp-add").forEach(f=>{const v=f.querySelector("input").value;if(v)typed[f.dataset.k]=v;}); /* a re-render (sync, another tab) mustn't eat what you're typing */
   const og=el.querySelector(".wp-grid"),keepX=og&&el._wk===first?og.scrollLeft:null;
-  el.innerHTML=`<div class="wp-head">
-      <div class="wp-nav"><button class="icon-btn" type="button" data-wnav="-1" aria-label="Previous week"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 6-6 6 6 6"/></svg></button>
-      <h2 id="wp-title">${thisWk?"This week":range}</h2>
-      <button class="icon-btn" type="button" data-wnav="1" aria-label="Next week"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 6 6 6-6 6"/></svg></button>
-      ${thisWk?"":`<button class="btn ghost small" type="button" data-wnav="0">This week</button>`}</div>
-      <p class="wp-sum muted">${thisWk?range+" · ":""}${tot?`${dn} of ${tot} done`:"Nothing planned yet"}</p>
-    </div>
-    ${thisWk&&behind.length?`<div class="wp-behind"><span>${behind.length} unfinished from earlier ${behind.length===1?"day":"days"}</span><button class="btn small" type="button" data-wnav="catchup">Move to today</button></div>`:""}
-    ${free.length?`<div class="wp-free"><h3>Not planned yet <span class="muted">${matchMedia("(hover:none)").matches?"Tap one, then a day, or press and hold to drag":"Drag onto a day, or click one then a day"}</span></h3><div class="tray-list">${free.map(t=>{const late=t.due&&t.due<today;return `<button type="button" class="tray-chip${wpPick===t.id?" picked":""}" data-tid="${t.id}" style="--c:var(--u${t.urg})" aria-pressed="${wpPick===t.id}">${esc(t.title)}${t.due?`<small class="${late?"late":""}">${late?"Overdue":niceDate(t.due)}</small>`:""}</button>`;}).join("")}</div></div>`:""}
-    <div class="wp-grid${wpPick?" picking":""}">${days.map(k=>{
-      const ts=by[k],n=ts.length,d=ts.filter(t=>t.done).length,evs=itemsFor(k).filter(x=>x.kind==="ev"),[y,m,dd]=k.split("-").map(Number),dt=new Date(y,m-1,dd);
-      const load=evs.length+n;
-      return `<section class="panel wp-day${k===today?" today":""}${k<today?" past":""}" data-k="${k}" aria-labelledby="wp-h-${k}">
-        <header class="wp-dh"><h3 id="wp-h-${k}"><span class="wp-dn">${dt.toLocaleDateString(undefined,{weekday:"short"})}</span><span class="wp-dd">${dd}</span><span class="sr-only"> ${dt.toLocaleDateString(undefined,{month:"long"})}${k===today?", today":""}</span></h3>
-          <span class="wp-cnt">${n?`${d}/${n}`:""}</span></header>
-        <div class="wp-bar" role="img" aria-label="${load?`${n} task${n===1?"":"s"}, ${evs.length} event${evs.length===1?"":"s"}`:"Free day"}"><i style="transform:scaleX(${n?(d/n).toFixed(3):0})"></i></div>
-        ${evs.length?`<ul class="wp-evs" aria-label="Events">${evs.map(x=>`<li style="--c:${x.c}"><span class="tm">${x.time?fmtTime(x.time):"All day"}</span><span class="wp-et">${esc(x.title)}</span></li>`).join("")}</ul>`:""}
-        <div class="wp-list">${ts.map(t=>wpRow(t,k,days)).join("")||(evs.length?"":`<p class="wp-none">${k<today?"Nothing planned":"Free"}</p>`)}</div>
-        <form class="wp-add" data-k="${k}" autocomplete="off"><input type="text" maxlength="140" placeholder="Add to ${dt.toLocaleDateString(undefined,{weekday:"short"})}" aria-label="Add a task to ${esc(wpDayName(k,true))}" enterkeyhint="done"></form>
-      </section>`;}).join("")}</div>`;
+  const tops=`${cur&&behind.length?`<div class="wp-behind"><span>${behind.length} unfinished from earlier ${behind.length===1?"day":"days"}</span><button class="btn small" type="button" data-wnav="catchup">Move to today</button></div>`:""}
+    ${free.length?`<div class="wp-free"><h3>Not planned yet <span class="muted">${matchMedia("(hover:none)").matches?"Tap one, then a day, or press and hold to drag":"Drag onto a day, or click one then a day"}</span></h3><div class="tray-list">${free.map(t=>{const late=t.due&&t.due<today;return `<button type="button" class="tray-chip${wpPick===t.id?" picked":""}" data-tid="${t.id}" style="--c:var(--u${t.urg})" aria-pressed="${wpPick===t.id}">${esc(t.title)}${t.due?`<small class="${late?"late":""}">${late?"Overdue":niceDate(t.due)}</small>`:""}</button>`;}).join("")}</div></div>`:""}`;
+  if(mode==="week")body.innerHTML=tops+`<div class="wp-grid${wpPick?" picking":""}">${grid.map(k=>wpDayHtml(k,by[k])).join("")}</div>`;
+  else{
+    const dow=[...Array(7)].map((_,i)=>`<div class="dow" aria-hidden="true">${addDays(weekStart(now),i).toLocaleDateString(undefined,{weekday:"short"})}</div>`).join("");
+    const cells=grid.map(k=>{const ts=by[k],evs=itemsFor(k).filter(x=>x.kind==="ev"),n=ts.length,d=ts.filter(t=>t.done).length,dt=kDate(k),out=!inR(k);
+      const items=evs.map(x=>`<span class="wp-chip ev" style="--uc:${x.c}">${x.time?`<b>${fmtTime(x.time).replace(/:00(?= )/,"").replace(" ","").toLowerCase()}</b> `:""}${esc(x.title)}</span>`).concat(ts.map(t=>`<span class="wp-chip${t.done?" done":""}" data-id="${t.id}" style="--uc:var(--u${t.urg})">${esc(t.title)}</span>`));
+      return `<button type="button" class="wp-cell${out?" out":""}${k===today?" today":""}${k<today?" past":""}" data-k="${k}" aria-pressed="${k===wpSel}"><span class="wp-cn">${dt.getDate()}</span>${n?`<span class="wp-cc">${d}/${n}</span>`:""}<span class="sr-only"> ${dt.toLocaleDateString(undefined,{weekday:"long",month:"long"})}${k===today?", today":""}: ${n?`${n} task${n===1?"":"s"}${d?`, ${d} done`:""}`:"no tasks"}${evs.length?`, ${evs.length} event${evs.length===1?"":"s"}`:""}</span>
+        <span class="wp-chips" aria-hidden="true">${items.slice(0,4).join("")}${items.length>4?`<span class="wp-more">+${items.length-4} more</span>`:""}</span>
+        <span class="wp-dots" aria-hidden="true">${evs.slice(0,2).map(x=>`<i style="--c:${x.c}" class="ev"></i>`).join("")}${ts.slice(0,4).map(t=>`<i style="--c:var(--u${t.urg})"${t.done?' class="dn"':""}></i>`).join("")}</span></button>`;}).join("");
+    const sel=grid.includes(wpSel)?wpSel:first;
+    body.innerHTML=tops+`<div class="wp-month"><div class="panel wp-mcal"><div class="wp-mgrid${wpPick?" picking":""}">${dow}${cells}</div></div><div class="wp-side">${wpDayHtml(sel,by[sel]||[],true)}</div></div>`;
+  }
   Object.entries(typed).forEach(([k,v])=>{const i=el.querySelector(`.wp-add[data-k="${k}"] input`);if(i)i.value=v;});
   if(refocus){const i=el.querySelector(`.wp-add[data-k="${refocus}"] input`);if(i){i.focus();try{i.setSelectionRange(i.value.length,i.value.length);}catch(e){}}}
   const g=el.querySelector(".wp-grid"); /* side-scrolling days (tablet): keep your place, or start at today */
-  if(g.scrollWidth>g.clientWidth+1){if(keepX!=null)g.scrollLeft=keepX;else{const td=g.querySelector(".wp-day.today");g.scrollLeft=td&&thisWk?td.offsetLeft-g.offsetLeft:0;}}
+  if(g&&g.scrollWidth>g.clientWidth+1){if(keepX!=null)g.scrollLeft=keepX;else{const td=g.querySelector(".wp-day.today");g.scrollLeft=td&&cur?td.offsetLeft-g.offsetLeft:0;}}
   el._wk=first;
+}
+function wpSetMode(m){
+  if(m===wpMode())return;S.settings.planMode=m;
+  if(m==="month"){const d=kDate(wpSel>=dkey(wpStart)&&wpSel<=dkey(addDays(wpStart,6))?wpSel:dkey(wpStart));wpMonth=new Date(d.getFullYear(),d.getMonth(),1);if(wpSel<dkey(wpMonth))wpSel=dkey(d);}
+  else{wpStart=weekStart(kDate(wpSel));}
+  save();renderPlan();
 }
 function wpAfter(){save();renderPlan();renderTasks();renderNowTask();renderMini();renderCal();renderTimerTag();updatePressure();}
 function wpPlan(t,k){
   const old=t.plan;if(k==="none")delete t.plan;else t.plan=k;
+  if(k!=="none"&&wpMode()==="month")wpSel=k;
   wpAfter();
-  toast(k==="none"?`"${t.title}" is back in Not planned yet`:`Planned "${t.title}" for ${k===dkey(new Date())?"today":wpDayName(k)+(weekStart(new Date(k+"T12:00")).getTime()===wpStart.getTime()?"":" "+niceDate(k))}`,{run(){if(old)t.plan=old;else delete t.plan;wpAfter();}});
+  const sameWk=weekStart(kDate(k==="none"?dkey(new Date()):k)).getTime()===weekStart(new Date()).getTime();
+  toast(k==="none"?`"${t.title}" is back in Not planned yet`:`Planned "${t.title}" for ${k===dkey(new Date())?"today":wpDayName(k)+(sameWk?"":" "+niceDate(k))}`,{run(){if(old)t.plan=old;else delete t.plan;wpAfter();}});
 }
+$("#wp-mode").addEventListener("click",e=>{const b=e.target.closest("button[data-pm]");if(b)wpSetMode(b.dataset.pm);});
 $("#plan-pane").addEventListener("click",e=>{
   const nav=e.target.closest("[data-wnav]");
-  if(nav){const v=nav.dataset.wnav;
-    if(v==="catchup"){const today=dkey(new Date()),moved=S.tasks.filter(t=>!t.done&&t.plan&&t.plan<today),prev=moved.map(t=>t.plan);moved.forEach(t=>t.plan=today);wpAfter();
+  if(nav){const v=nav.dataset.wnav,today=new Date();
+    if(v==="catchup"){const tk=dkey(today),moved=S.tasks.filter(t=>!t.done&&t.plan&&t.plan<tk),prev=moved.map(t=>t.plan);moved.forEach(t=>t.plan=tk);wpAfter();
       toast(`Moved ${moved.length} to today`,{run(){moved.forEach((t,i)=>t.plan=prev[i]);wpAfter();}});return;}
-    wpStart=v==="0"?weekStart(new Date()):addDays(wpStart,7*+v);renderPlan();return;}
+    if(wpMode()==="week")wpStart=v==="0"?weekStart(today):addDays(wpStart,7*+v);
+    else{wpMonth=v==="0"?new Date(today.getFullYear(),today.getMonth(),1):new Date(wpMonth.getFullYear(),wpMonth.getMonth()+ +v,1);wpSel=v==="0"?dkey(today):dkey(wpMonth);}
+    renderPlan();return;}
   const chip=e.target.closest(".tray-chip");
   if(chip){wpPick=wpPick===chip.dataset.tid?null:chip.dataset.tid;renderPlan();if(wpPick){toast("Now pick a day");const c=$(`#plan-pane .tray-chip[data-tid="${wpPick}"]`);if(c)c.focus();}return;}
   const b=e.target.closest("[data-wact=toggle]");
@@ -5190,11 +5265,19 @@ $("#plan-pane").addEventListener("click",e=>{
     save();renderNowTask();renderMini();updatePressure();renderTasks();
     const row=b.closest(".wp-t");row.classList.toggle("done",t.done);b.classList.toggle("on",t.done);
     setTimeout(()=>{renderPlan();const c=$(`#plan-pane .wp-t[data-id="${t.id}"] .check`);if(c)c.focus();},t.done&&!reduced?320:0);return;}
+  const cell=e.target.closest(".wp-cell");
+  if(cell){const k=cell.dataset.k;
+    if(wpPick){const t=S.tasks.find(x=>x.id===wpPick);wpPick=null;if(t){wpPlan(t,k);return;}}
+    if(k<dkey(wpMonth)||k>dkey(new Date(wpMonth.getFullYear(),wpMonth.getMonth()+1,0)))wpMonth=new Date(kDate(k).getFullYear(),kDate(k).getMonth(),1);
+    wpSel=k;renderPlan();
+    const c=$(`#plan-pane .wp-cell[data-k="${k}"]`);if(c)c.focus();
+    const side=$("#plan-pane .wp-side");if(side&&side.getBoundingClientRect().top>innerHeight-160)side.scrollIntoView({block:"start",behavior:reduced?"auto":"smooth"}); /* stacked (phone): bring the day's list into view */
+    return;}
   if(wpPick){const day=e.target.closest(".wp-day");if(day&&!e.target.closest("input,select,button,.wp-t")){const t=S.tasks.find(x=>x.id===wpPick);wpPick=null;if(t)wpPlan(t,day.dataset.k);else renderPlan();}}
 });
 $("#plan-pane").addEventListener("change",e=>{
   const sel=e.target.closest("[data-wact=move]");if(!sel)return;const t=S.tasks.find(x=>x.id===sel.closest(".wp-t").dataset.id);if(!t||!sel.value)return;
-  let k=sel.value;if(k==="next")k=dkey(addDays(new Date(wpDay(t)+"T12:00"),7));
+  let k=sel.value;if(k==="next")k=dkey(addDays(kDate(wpDay(t)),7));
   wpPlan(t,k);
 });
 $("#plan-pane").addEventListener("submit",e=>{
@@ -5204,7 +5287,7 @@ $("#plan-pane").addEventListener("submit",e=>{
   S.tasks.push(t);inp.value="";wpAfter();renderCourses();
   toast(`Added to ${k===dkey(new Date())?"today":wpDayName(k)}`,{run(){const i=S.tasks.indexOf(t);if(i>=0)S.tasks.splice(i,1);wpAfter();}});
 });
-dragable($("#plan-pane"),".wp-t:not(.done),.tray-chip",{target:".wp-day",drop:(src,day)=>{const t=S.tasks.find(x=>x.id===(src.dataset.id||src.dataset.tid));wpPick=null;if(!t)return;if(wpDay(t)===day.dataset.k&&t.plan){renderPlan();return;}wpPlan(t,day.dataset.k);}});
+dragable($("#plan-pane"),".wp-t:not(.done),.tray-chip,.wp-chip[data-id]:not(.done)",{target:".wp-day,.wp-cell",drop:(src,day)=>{const t=S.tasks.find(x=>x.id===(src.dataset.id||src.dataset.tid));wpPick=null;if(!t)return;if(wpDay(t)===day.dataset.k&&t.plan){renderPlan();return;}wpPlan(t,day.dataset.k);}});
 
 $("#courses-pane").addEventListener("submit",e=>{if(e.target.id!=="crs-add")return;e.preventDefault();const name=$("#crs-new").value.trim().slice(0,32);if(!name)return;
   S.courses=S.courses||[];if(S.courses.some(c=>c.name.toLowerCase()===name.toLowerCase())){toast("You already have that course");return;}
@@ -5434,7 +5517,7 @@ railInd=document.createElement("div");railInd.className="ind";railInd.setAttribu
 $(".rail").prepend(railInd);$(".rail").classList.add("has-ind");
 {const bd=document.createElement("div");bd.className="hbead";bd.setAttribute("aria-hidden","true");$(".rail").prepend(bd);$(".rail")._bead=bd;}
 if(typeof ResizeObserver!=="undefined")new ResizeObserver(()=>moveInd(true)).observe($(".rail"));
-["#clock-seg","#task-filter","#bg-type","#st-type","#surface","#task-mode"].forEach(q=>initSeg($(q)));
+["#clock-seg","#task-filter","#bg-type","#st-type","#surface","#task-mode","#wp-mode"].forEach(q=>initSeg($(q)));
 if(S.accounts.length)snapshot();
 renderAll();jbRender();renderCals();renderCourses();
 npInit();

@@ -117,14 +117,16 @@ Optional sign-in so data saves to the cloud and follows you across devices. Sign
 
 ## Week plan
 
-Tasks > Week plan (`#plan`, also a home screen shortcut and "week plan" in the command bar) lays the week out Monday to Sunday so you can split up your work and see how each day looks.
+Tasks > Week plan (`#plan`, also a home screen shortcut and "week plan" in the command bar) lets you plan by **Week** or **Month** (`S.settings.planMode`), so you can split up your work and see how each day looks.
 
 - `t.plan` is the day you plan to work on a task, separate from its due date. A task shows on its plan day, or on its due day until it has one (`wpDay`).
-- Each day lists that day's calendar events (with times) for context, its tasks (tick them off; done ones stay on the day, struck through) and a done/total bar. Quick add at the bottom of a day understands the command bar syntax ("quiz prep 4pm #MATH1600 high") and plans the task for that day.
-- Move a task by dragging it to another day (press and hold on touch), with its Move menu (another day, next week, or back to not planned), or by tapping a "Not planned yet" chip and then a day. Moves have Undo.
-- "Not planned yet" holds open tasks with no plan that aren't due this week (undated, overdue or due later). On the current week, "Move to today" brings unfinished planned tasks from earlier days forward.
+- Week: a column per day with that day's calendar events (with times), its tasks (tick them off; done ones stay on the day, struck through), a done/total bar and quick add. Columns fill the screen height on desktop, side-scroll on tablets (starting at today) and stack on phones.
+- Month: a calendar grid where each day shows its events and tasks (dots on phones). Pick a day to see its full card beside the grid (below it on smaller screens) to tick off, move or add tasks.
+- Quick add understands the command bar syntax ("quiz prep 4pm #MATH1600 high") and plans the task for that day.
+- Move a task by dragging it to another day or month cell (press and hold on touch), with its Move menu (another day that week, next week, or back to not planned), or by tapping a "Not planned yet" chip and then a day. Moves have Undo.
+- "Not planned yet" holds open tasks with no plan that aren't due in the period shown. On the current week or month, "Move to today" brings unfinished planned tasks from earlier days forward.
+- While the plan is showing, the page widens to 1640px and the Tasks subtitle hides to give the days more room.
 - The Tasks "Today" filter and the Due today widget count tasks planned for today; the calendar's "No date yet" tray leaves out planned tasks.
-- Layout: seven columns on wide screens, side-scrolling days on tablets (starting at today), and stacked days on phones.
 
 ## Study tracking
 
