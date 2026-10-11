@@ -1105,6 +1105,61 @@ html.lg .ac-stats div,html.lg .ac-list li,html.lg .acp-opt{background:var(--glas
 .crs-goal input{width:64px;padding:5px 8px}
 .crs-add{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
 .crs-add input[type=text]{flex:1 1 200px;min-width:0}
+.plan[hidden]{display:none}
+.wp-head{display:flex;align-items:center;justify-content:space-between;gap:6px 16px;flex-wrap:wrap;margin-bottom:14px}
+.wp-nav{display:flex;align-items:center;gap:6px}
+.wp-nav h2{margin:0;font-size:20px;min-width:9ch;text-align:center;white-space:nowrap}
+.wp-sum{margin:0;font-size:14px}
+.wp-behind{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;padding:10px 14px;border-radius:12px;background:color-mix(in srgb,var(--u1) 10%,var(--panel));border:1px solid color-mix(in srgb,var(--u1) 35%,var(--line));margin-bottom:14px;font-size:14px}
+.wp-free{margin-bottom:16px}
+.wp-free h3{font-size:14px;margin:0 0 8px;display:flex;gap:4px 10px;flex-wrap:wrap;align-items:baseline}
+.wp-free h3 .muted{font-weight:400;font-size:13px}
+.wp-free .tray-chip{max-width:260px}
+.tray-chip small{margin-left:6px;font-size:11.5px;color:var(--muted)}
+.tray-chip small.late{color:color-mix(in srgb,var(--u0) 70%,var(--ink));font-weight:600}
+.wp-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px;align-items:stretch}
+.wp-day.panel{padding:10px;display:flex;flex-direction:column;gap:8px;min-height:240px;min-width:0;border-radius:14px}
+.wp-day.today{border-color:color-mix(in srgb,var(--accent) 65%,var(--line));box-shadow:0 0 0 1px color-mix(in srgb,var(--accent) 45%,transparent)}
+.wp-day.past .wp-dh{opacity:.7}
+.wp-dh{display:flex;align-items:baseline;justify-content:space-between;gap:6px}
+.wp-dh h3{margin:0;display:flex;align-items:baseline;gap:6px}
+.wp-dn{text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:700;font-size:12px}
+.wp-dd{font-size:20px;font-weight:700;font-variant-numeric:tabular-nums;line-height:1}
+.wp-day.today .wp-dd{color:var(--accent)}
+.wp-cnt{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+.wp-bar{height:4px;border-radius:2px;background:color-mix(in srgb,var(--ink) 10%,transparent);overflow:hidden}
+.wp-bar i{display:block;height:100%;background:var(--accent);transform-origin:0 50%;transition:transform var(--t-ui) var(--ease-out)}
+.wp-evs{list-style:none;margin:0;padding:0;display:grid;gap:4px}
+.wp-evs li{display:grid;gap:1px;font-size:12.5px;line-height:1.35;padding:5px 8px;border-radius:8px;background:var(--panel2);border-left:3px solid var(--c);min-width:0}
+.wp-evs .tm{font-size:11.5px;color:var(--muted);font-variant-numeric:tabular-nums}
+.wp-et{overflow-wrap:anywhere}
+.wp-list{display:grid;gap:6px}
+.wp-t{position:relative;display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:7px;align-items:start;padding:7px 6px 7px 8px;border-radius:10px;background:var(--panel2);border-left:3px solid var(--uc);cursor:grab;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
+.wp-t .check{position:relative;width:20px;height:20px;margin-top:1px}
+.wp-t .check svg{width:11px;height:11px}
+.wp-tt{display:grid;gap:2px;min-width:0;font-size:13.5px;line-height:1.35;overflow-wrap:break-word;hyphens:auto}
+.wp-tt small{font-size:11.5px;color:var(--muted)}
+.wp-tt small.late{color:color-mix(in srgb,var(--u0) 70%,var(--ink));font-weight:600}
+.wp-t.done{opacity:.6;cursor:default}
+.wp-t.done .wp-tt span{text-decoration:line-through}
+.wp-mv{position:relative;display:grid;place-items:center;width:26px;height:26px;margin:-3px 0;border-radius:8px;color:var(--muted);cursor:pointer}
+.wp-mv:hover,.wp-mv:has(select:focus-visible){background:color-mix(in srgb,var(--ink) 9%,transparent);color:var(--ink)}
+.wp-mv:has(select:focus-visible){outline:2px solid var(--accent);outline-offset:1px}
+.wp-mv select{appearance:auto;position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;font-size:16px;padding:0;border:0;margin:0}
+.wp-none{margin:0;font-size:12.5px;color:var(--muted)}
+.wp-add{margin-top:auto}
+.wp-add input{width:100%;min-width:0;font-size:13px;padding:6px 8px;background:transparent;border:1px dashed var(--line);border-radius:8px}
+.wp-add input:focus{border-style:solid}
+.wp-day.drop-on{outline:2px solid var(--accent);outline-offset:-2px;background:color-mix(in srgb,var(--accent) 10%,var(--panel))}
+.wp-grid.picking .wp-day{outline:1px dashed color-mix(in srgb,var(--accent) 55%,transparent);outline-offset:-2px;cursor:pointer}
+html.lg .wp-t{background:var(--glass-tint)}
+/* With a mouse the Move button only shows on hover or focus, so titles get the whole width of narrow day columns */
+@media (hover:hover) and (pointer:fine){.wp-t{grid-template-columns:auto minmax(0,1fr)}.wp-mv{position:absolute;top:5px;right:4px;margin:0;opacity:0;background:var(--panel2);box-shadow:-8px 0 8px var(--panel2);transition:opacity var(--t-fast) ease}
+  html.lg .wp-mv{background:var(--panel);box-shadow:-8px 0 8px var(--panel)}
+  .wp-t:hover .wp-mv,.wp-mv:has(select:focus-visible){opacity:1}}
+@media (max-width:979px){.wp-grid{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:minmax(210px,40%);overflow-x:auto;scroll-snap-type:x proximity;padding-bottom:8px;overscroll-behavior-x:contain}.wp-day{scroll-snap-align:start}}
+@media (max-width:600px){.wp-grid{grid-auto-flow:row;grid-template-columns:minmax(0,1fr);grid-auto-columns:auto;overflow:visible;padding-bottom:0}.wp-day.panel{min-height:0}.wp-add input{font-size:16px;padding:9px 10px}.wp-t{padding:9px 6px 9px 10px}.wp-mv{width:36px;height:36px;margin:-8px -2px}.wp-tt{font-size:15px}}
+@media (prefers-reduced-motion:reduce){.wp-bar i{transition:none}}
 .goals h3{margin:0 0 10px}
 .goal{display:grid;gap:6px;padding:10px 0;border-bottom:1px solid var(--line)}
 .goal-top{display:flex;align-items:center;gap:10px}
@@ -1370,8 +1425,9 @@ html.lg .eye{background:var(--glass-tint);box-shadow:inset 0 1px 0 color-mix(in 
     <section class="view" id="v-tasks">
       <h1 data-sub="t-tasks">Tasks</h1>
       <p class="sub" data-sub="tasks">Sorted by urgency, then due date. The top one shows up on your clock.</p>
-      <div class="seg task-mode" id="task-mode" role="group" aria-label="Tasks or courses"><button type="button" data-m="tasks" aria-pressed="true">Tasks</button><button type="button" data-m="courses" aria-pressed="false">Courses and grades</button></div>
+      <div class="seg task-mode" id="task-mode" role="group" aria-label="Tasks, week plan or courses"><button type="button" data-m="tasks" aria-pressed="true">Tasks</button><button type="button" data-m="plan" aria-pressed="false">Week plan</button><button type="button" data-m="courses" aria-pressed="false">Courses and grades</button></div>
       <div class="courses" id="courses-pane" hidden></div>
+      <div class="plan" id="plan-pane" hidden></div>
       <div id="tasks-pane">
       <form class="panel addbar" id="task-form" autocomplete="off">
         <div class="title-row"><input type="text" id="t-title" placeholder="What needs doing?" required aria-label="Task"><button type="button" class="mic" id="t-mic" hidden aria-pressed="false" aria-label="Add a task by voice" title="Say it, e.g. essay due Friday at 5"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0 0 14 0M12 17v5"/></svg></button></div>
@@ -2374,6 +2430,7 @@ function shortcutLink(v){
   if(/^(new-task|today|start-focus)$/.test(v))try{history.replaceState(null,"",v==="start-focus"?"#focus":"#tasks");}catch(e){} /* so a reload doesn't repeat it */
   if(v==="new-task"){show("tasks");if(typeof setTaskMode==="function"&&taskMode!=="tasks")setTaskMode("tasks");setTimeout(()=>{const i=$("#t-title");if(i)i.focus();},60);return true;}
   if(v==="today"){show("tasks");if(typeof setTaskMode==="function"&&taskMode!=="tasks")setTaskMode("tasks");taskFilter="today";$$("#task-filter button").forEach(x=>x.setAttribute("aria-pressed",x.dataset.f==="today"));renderTasks("plain");return true;}
+  if(v==="plan"){show("tasks");if(typeof setTaskMode==="function"&&taskMode!=="plan")setTaskMode("plan");return true;}
   if(v==="start-focus"){show("focus");if(clockKind!=="timer")setClock("timer");setTimeout(()=>{if(!T.running){const g=$("#tm-go");if(g)g.click();}},80);return true;}
   return false;
 }
@@ -2764,11 +2821,11 @@ function dueLabel(due,time){
 function niceDate(k){const [y,m,d]=k.split("-").map(Number);return new Date(y,m-1,d).toLocaleDateString(undefined,{month:"short",day:"numeric"});}
 function renderTasks(mode){
   const today=dkey(new Date()),open=t=>!t.done||graceDone.has(t.id);
-  const list=sortedTasks().filter(t=>taskFilter==="all"||(taskFilter==="done"?t.done:taskFilter==="today"?open(t)&&t.due&&t.due<=today:open(t)));
+  const list=sortedTasks().filter(t=>taskFilter==="all"||(taskFilter==="done"?t.done:taskFilter==="today"?open(t)&&(t.due&&t.due<=today||t.plan===today):open(t)));
   const el=$("#task-list");
   flipRender(el,()=>{
-  if(!list.length){el.innerHTML=`<div class="empty">${taskFilter==="done"?"Nothing finished yet. Check one off.":taskFilter==="today"?"Nothing due today. Nice.":"No open tasks. Add one above."}</div>`;return;}
-  el.innerHTML=list.map(t=>{const dl=dueLabel(t.due,t.dueTime);return `<div class="task${t.done?" done":""}${t.done&&graceDone.has(t.id)?" grace":""}" data-id="${t.id}" style="--uc:var(--u${t.urg})">
+  if(!list.length){el.innerHTML=`<div class="empty">${taskFilter==="done"?"Nothing finished yet. Check one off.":taskFilter==="today"?"Nothing due or planned for today. Nice.":"No open tasks. Add one above."}</div>`;return;}
+  el.innerHTML=list.map(t=>{const dl=t.due?dueLabel(t.due,t.dueTime):{t:t.plan?"Planned "+(t.plan===today?"today":t.plan===dkey(addDays(new Date(),1))?"tomorrow":niceDate(t.plan)):"",late:false};return `<div class="task${t.done?" done":""}${t.done&&graceDone.has(t.id)?" grace":""}" data-id="${t.id}" style="--uc:var(--u${t.urg})">
     <button class="check" data-act="toggle" aria-label="${t.done?"Mark as not done":"Mark as done"}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4"><path pathLength="1" d="m5 12 5 5 9-10"/></svg></button>
     <div class="tt"><span>${esc(t.title)}</span>${t.course?`<span class="tchip">${esc(t.course)}</span>`:""}${t.rep?`<span class="tchip" title="Repeats">${REP_ICON}${esc(repLabel(t.rep))}</span>`:""}${t.remind&&!t.done?`<span class="tchip rchip" title="Reminder">${BELL_ICON}${esc(trLabel(t))}</span>`:""}<div class="tmeta">${taskMeta(t)}</div></div>
     <span class="due${dl.late&&!t.done?" late":""}">${dl.t}</span>
@@ -2777,6 +2834,7 @@ function renderTasks(mode){
     ${openSteps.has(t.id)?stepsHtml(t):""}${graceBar(t)}
   </div>`;}).join("");
   },mode);
+  renderPlan(); /* only draws while the week plan is showing */
 }
 // Let the tick draw and the strike-through land before the row moves or leaves.
 let taskHold=0;
@@ -3418,7 +3476,7 @@ function parseTask(q){
   if(rep&&rep.f==="w"&&!rep.days.length)rep.days=[due?new Date(due+"T12:00").getDay():new Date().getDay()];
   if(rep&&!w.dateGiven){ /* "every mon wed fri 6pm": start on the next listed day, not just today */
     const now=new Date(),late=w.time&&w.time<=pad(now.getHours())+":"+pad(now.getMinutes());due=firstDue(rep,late);}
-  return {title,urg:urg??2,due,time:w.time,rep,course:pr.course};
+  return {title,urg:urg??2,due,time:w.time,rep,course:pr.course,dateGiven:w.dateGiven};
 }
 const fuzzy=(q,t)=>{q=q.toLowerCase();t=t.toLowerCase();if(!q)return 0;if(t.includes(q))return 100-t.indexOf(q);let i=0;for(const c of t)if(c===q[i])i++;return i===q.length?40:-1;};
 const IC={task:'<path d="M9 6h11M9 12h11M9 18h11"/><path d="m3 6 1.5 1.5L7 5M3 12l1.5 1.5L7 11M3 18l1.5 1.5L7 17"/>',timer:'<circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2M9 2h6"/>',go:'<path d="M5 12h14M13 6l6 6-6 6"/>',sound:'<path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/>',theme:'<circle cx="12" cy="12" r="9"/><circle cx="8" cy="10" r="1.3" fill="currentColor"/><circle cx="12" cy="7.5" r="1.3" fill="currentColor"/><circle cx="16" cy="10" r="1.3" fill="currentColor"/>',done:'<path d="m5 12 5 5 9-10"/>',ev:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>',money:'<path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/>',misc:'<circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/>'};
@@ -3427,7 +3485,7 @@ function cmdResults(q){
   const R=[],raw=q.trim(),lq=raw.toLowerCase();
   const go=(v,label,fn)=>R.push({ic:"go",label,hint:"Go",run:fn||(()=>{if(VIEWS.includes(v)){show(v);try{history.pushState(null,"","#"+v);}catch(e){}}})});
   if(!raw){
-    go("focus","Focus");go("tasks","Tasks");go("calendar","Calendar");R.push({ic:"go",label:"Week review",hint:"Go",run:()=>{show("calendar");setCalMode("week");}});go("money","Net worth");go("themes","Themes");
+    go("focus","Focus");go("tasks","Tasks");R.push({ic:"go",label:"Week plan",hint:"Go",run:()=>shortcutLink("plan")});go("calendar","Calendar");R.push({ic:"go",label:"Week review",hint:"Go",run:()=>{show("calendar");setCalMode("week");}});go("money","Net worth");go("themes","Themes");
     R.push({ic:"sound",label:JB.playing?"Pause sounds":"Play sounds",hint:"Sounds",run:()=>JB.playing?jbPause():jbPlay()});
     R.push({ic:"misc",label:"Try: gym tomorrow 5pm high · timer 40 · play rain · theme midnight",hint:"",run:()=>{}});
     return R;
@@ -3435,6 +3493,7 @@ function cmdResults(q){
   let m;
   // navigation
   const NAV={focus:"focus",clock:"focus",tasks:"tasks",todo:"tasks",calendar:"calendar",cal:"calendar","net worth":"money",money:"money",networth:"money",themes:"themes",theme:"themes",settings:"themes"};
+  if(/^(?:go(?: to)?|open|show)?\s*(?:week(?:ly)? plan(?:ner)?|plan(?: my)? week|planner)$/.test(lq))R.push({ic:"go",label:"Week plan",hint:"Go",run:()=>shortcutLink("plan")});
   if((m=lq.match(/^(?:go(?: to)?|open|show)?\s*(focus|clock|tasks|todo|calendar|cal|net ?worth|money|themes|settings|week(?: review)?)$/))){
     const k=m[1].replace(/\s+/g," ");if(k.startsWith("week"))R.push({ic:"go",label:"Week review",hint:"Go",run:()=>{show("calendar");setCalMode("week");}});
     else{const v=NAV[k]||NAV[k.replace(" ","")];go(v,({focus:"Focus",tasks:"Tasks",calendar:"Calendar",money:"Net worth",themes:"Themes"})[v]);}
@@ -3728,7 +3787,7 @@ function wBody(w){
   const c=Object.assign({},(WT[w.type].cfg)||{},w.cfg||{}),today=dkey(new Date());
   switch(w.type){
     case"open":return `<div class="big">${S.tasks.filter(t=>!t.done).length}</div>`;
-    case"today":return `<div class="big">${S.tasks.filter(t=>!t.done&&t.due&&t.due<=today).length}</div>`;
+    case"today":return `<div class="big">${S.tasks.filter(t=>!t.done&&(t.due&&t.due<=today||t.plan===today)).length}</div>`;
     case"sessions":return `<div class="big">${S.sessions[today]||0}</div>`;
     case"networth":{if(!S.settings.hideNw)return `<div class="big">${fmt(totals().t,1)}</div>`;const g=growth();
       return `<div class="big">${curSymbol()}${MASK_SHORT}</div><small>${g&&g.pct!=null?`<b class="${g.up?"up":"down"}" style="color:var(--${g.up?"good":"bad"})">${fmtPct(g.pct)}</b> since ${niceDate(g.since)}`:"Amounts hidden"}</small>`;}
@@ -5017,7 +5076,7 @@ function gradeCalc(c){
 }
 function setTaskMode(m){
   taskMode=m;$$("#task-mode button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.m===m));glide($("#task-mode"));
-  $("#tasks-pane").hidden=m!=="tasks";$("#courses-pane").hidden=m!=="courses";if(m==="courses")renderCoursesPane();
+  $("#tasks-pane").hidden=m!=="tasks";$("#courses-pane").hidden=m!=="courses";$("#plan-pane").hidden=m!=="plan";if(m==="courses")renderCoursesPane();if(m==="plan")renderPlan();
 }
 function renderCoursesPane(){
   const el=$("#courses-pane");if(!el||el.hidden)return;S.courses=S.courses||[];
@@ -5050,7 +5109,103 @@ function renderCoursesPane(){
     <form class="panel crs-add" id="crs-add" autocomplete="off"><input type="text" id="crs-new" list="courses" placeholder="Course, e.g. ES 1050" maxlength="32" required aria-label="Course name"><label class="crs-goal">Goal <input type="number" id="crs-goal" min="1" max="100" value="85" aria-label="Goal percent">%</label><button class="btn" type="submit">Add course</button></form>`;
   if(fsel){const n=el.querySelector(fsel);if(n){n.focus();try{n.setSelectionRange(n.value.length,n.value.length);}catch(e){}}}
 }
-$("#task-mode").addEventListener("click",e=>{const b=e.target.closest("button[data-m]");if(b&&b.dataset.m!==taskMode)setTaskMode(b.dataset.m);});
+$("#task-mode").addEventListener("click",e=>{const b=e.target.closest("button[data-m]");if(!b||b.dataset.m===taskMode)return;setTaskMode(b.dataset.m);
+  try{if(b.dataset.m==="plan")history.pushState(null,"","#plan");else if(location.hash==="#plan")history.replaceState(null,"","#tasks");}catch(e){}});
+/* ---------- week plan ----------
+   Lay out the week day by day. A task sits on the day you plan to work on it (t.plan, "YYYY-MM-DD"),
+   or on its due day until you plan it. Events show in each day so you can see how full it is.
+   Drag a task to another day (press and hold on touch), or use its Move menu; tap a "Not planned yet"
+   chip then a day. Quick add puts a task straight onto a day. */
+let wpStart=weekStart(new Date()),wpPick=null;
+const wpDay=t=>t.plan||t.due||"";
+const WP_MOVE='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+function wpDayName(k,long){const [y,m,d]=k.split("-").map(Number);return new Date(y,m-1,d).toLocaleDateString(undefined,long?{weekday:"long",month:"long",day:"numeric"}:{weekday:"long"});}
+function wpRow(t,k,days){
+  const bits=[];if(t.due&&t.due!==k)bits.push((t.due<k&&!t.done?"Was due ":"Due ")+(t.due===dkey(new Date())?"today":niceDate(t.due))+(t.dueTime?" "+fmtTime(t.dueTime):""));
+  else if(t.dueTime)bits.push("Due "+fmtTime(t.dueTime));
+  if(t.course)bits.push(esc(t.course));
+  const opts=days.filter(d=>d!==k).map(d=>`<option value="${d}">${wpDayName(d)}</option>`).join("");
+  return `<div class="wp-t${t.done?" done":""}" data-id="${t.id}" style="--uc:var(--u${t.urg})">
+    <button class="check${t.done?" on":""}" type="button" data-wact="toggle" aria-label="${t.done?"Mark "+esc(t.title)+" as not done":"Mark "+esc(t.title)+" as done"}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4"><path pathLength="1" d="m5 12 5 5 9-10"/></svg></button>
+    <div class="wp-tt"><span>${esc(t.title)}</span>${bits.length?`<small class="${t.due&&t.due<dkey(new Date())&&!t.done?"late":""}">${bits.join(" · ")}</small>`:""}</div>
+    ${t.done?"":`<label class="wp-mv" title="Move to another day">${WP_MOVE}<select data-wact="move" aria-label="Move ${esc(t.title)} to another day"><option value="" selected disabled>Move to…</option>${opts}<option value="next">Next week</option>${t.plan?`<option value="none">Not planned yet</option>`:""}</select></label>`}
+  </div>`;
+}
+function renderPlan(mode){
+  const el=$("#plan-pane");if(!el||el.hidden)return;
+  const today=dkey(new Date()),days=[...Array(7)].map((_,i)=>dkey(addDays(wpStart,i))),first=days[0],last=days[6],inWk=k=>k>=first&&k<=last;
+  const all=sortedTasks(),by={};days.forEach(k=>by[k]=[]);
+  all.forEach(t=>{const k=wpDay(t);if(inWk(k))by[k].push(t);});
+  const free=all.filter(t=>!t.done&&!t.plan&&!inWk(t.due||"")).slice(0,30);
+  const behind=S.tasks.filter(t=>!t.done&&t.plan&&t.plan<today);
+  const thisWk=first===dkey(weekStart(new Date()));
+  const tot=days.reduce((a,k)=>a+by[k].length,0),dn=days.reduce((a,k)=>a+by[k].filter(t=>t.done).length,0);
+  const range=`${niceDate(first)} – ${niceDate(last)}`;
+  const fa=document.activeElement,refocus=fa&&el.contains(fa)&&fa.closest(".wp-add")?fa.closest(".wp-add").dataset.k:null,typed={};
+  el.querySelectorAll(".wp-add").forEach(f=>{const v=f.querySelector("input").value;if(v)typed[f.dataset.k]=v;}); /* a re-render (sync, another tab) mustn't eat what you're typing */
+  const og=el.querySelector(".wp-grid"),keepX=og&&el._wk===first?og.scrollLeft:null;
+  el.innerHTML=`<div class="wp-head">
+      <div class="wp-nav"><button class="icon-btn" type="button" data-wnav="-1" aria-label="Previous week"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 6-6 6 6 6"/></svg></button>
+      <h2 id="wp-title">${thisWk?"This week":range}</h2>
+      <button class="icon-btn" type="button" data-wnav="1" aria-label="Next week"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 6 6 6-6 6"/></svg></button>
+      ${thisWk?"":`<button class="btn ghost small" type="button" data-wnav="0">This week</button>`}</div>
+      <p class="wp-sum muted">${thisWk?range+" · ":""}${tot?`${dn} of ${tot} done`:"Nothing planned yet"}</p>
+    </div>
+    ${thisWk&&behind.length?`<div class="wp-behind"><span>${behind.length} unfinished from earlier ${behind.length===1?"day":"days"}</span><button class="btn small" type="button" data-wnav="catchup">Move to today</button></div>`:""}
+    ${free.length?`<div class="wp-free"><h3>Not planned yet <span class="muted">${matchMedia("(hover:none)").matches?"Tap one, then a day, or press and hold to drag":"Drag onto a day, or click one then a day"}</span></h3><div class="tray-list">${free.map(t=>{const late=t.due&&t.due<today;return `<button type="button" class="tray-chip${wpPick===t.id?" picked":""}" data-tid="${t.id}" style="--c:var(--u${t.urg})" aria-pressed="${wpPick===t.id}">${esc(t.title)}${t.due?`<small class="${late?"late":""}">${late?"Overdue":niceDate(t.due)}</small>`:""}</button>`;}).join("")}</div></div>`:""}
+    <div class="wp-grid${wpPick?" picking":""}">${days.map(k=>{
+      const ts=by[k],n=ts.length,d=ts.filter(t=>t.done).length,evs=itemsFor(k).filter(x=>x.kind==="ev"),[y,m,dd]=k.split("-").map(Number),dt=new Date(y,m-1,dd);
+      const load=evs.length+n;
+      return `<section class="panel wp-day${k===today?" today":""}${k<today?" past":""}" data-k="${k}" aria-labelledby="wp-h-${k}">
+        <header class="wp-dh"><h3 id="wp-h-${k}"><span class="wp-dn">${dt.toLocaleDateString(undefined,{weekday:"short"})}</span><span class="wp-dd">${dd}</span><span class="sr-only"> ${dt.toLocaleDateString(undefined,{month:"long"})}${k===today?", today":""}</span></h3>
+          <span class="wp-cnt">${n?`${d}/${n}`:""}</span></header>
+        <div class="wp-bar" role="img" aria-label="${load?`${n} task${n===1?"":"s"}, ${evs.length} event${evs.length===1?"":"s"}`:"Free day"}"><i style="transform:scaleX(${n?(d/n).toFixed(3):0})"></i></div>
+        ${evs.length?`<ul class="wp-evs" aria-label="Events">${evs.map(x=>`<li style="--c:${x.c}"><span class="tm">${x.time?fmtTime(x.time):"All day"}</span><span class="wp-et">${esc(x.title)}</span></li>`).join("")}</ul>`:""}
+        <div class="wp-list">${ts.map(t=>wpRow(t,k,days)).join("")||(evs.length?"":`<p class="wp-none">${k<today?"Nothing planned":"Free"}</p>`)}</div>
+        <form class="wp-add" data-k="${k}" autocomplete="off"><input type="text" maxlength="140" placeholder="Add to ${dt.toLocaleDateString(undefined,{weekday:"short"})}" aria-label="Add a task to ${esc(wpDayName(k,true))}" enterkeyhint="done"></form>
+      </section>`;}).join("")}</div>`;
+  Object.entries(typed).forEach(([k,v])=>{const i=el.querySelector(`.wp-add[data-k="${k}"] input`);if(i)i.value=v;});
+  if(refocus){const i=el.querySelector(`.wp-add[data-k="${refocus}"] input`);if(i){i.focus();try{i.setSelectionRange(i.value.length,i.value.length);}catch(e){}}}
+  const g=el.querySelector(".wp-grid"); /* side-scrolling days (tablet): keep your place, or start at today */
+  if(g.scrollWidth>g.clientWidth+1){if(keepX!=null)g.scrollLeft=keepX;else{const td=g.querySelector(".wp-day.today");g.scrollLeft=td&&thisWk?td.offsetLeft-g.offsetLeft:0;}}
+  el._wk=first;
+}
+function wpAfter(){save();renderPlan();renderTasks();renderNowTask();renderMini();renderCal();renderTimerTag();updatePressure();}
+function wpPlan(t,k){
+  const old=t.plan;if(k==="none")delete t.plan;else t.plan=k;
+  wpAfter();
+  toast(k==="none"?`"${t.title}" is back in Not planned yet`:`Planned "${t.title}" for ${k===dkey(new Date())?"today":wpDayName(k)+(weekStart(new Date(k+"T12:00")).getTime()===wpStart.getTime()?"":" "+niceDate(k))}`,{run(){if(old)t.plan=old;else delete t.plan;wpAfter();}});
+}
+$("#plan-pane").addEventListener("click",e=>{
+  const nav=e.target.closest("[data-wnav]");
+  if(nav){const v=nav.dataset.wnav;
+    if(v==="catchup"){const today=dkey(new Date()),moved=S.tasks.filter(t=>!t.done&&t.plan&&t.plan<today),prev=moved.map(t=>t.plan);moved.forEach(t=>t.plan=today);wpAfter();
+      toast(`Moved ${moved.length} to today`,{run(){moved.forEach((t,i)=>t.plan=prev[i]);wpAfter();}});return;}
+    wpStart=v==="0"?weekStart(new Date()):addDays(wpStart,7*+v);renderPlan();return;}
+  const chip=e.target.closest(".tray-chip");
+  if(chip){wpPick=wpPick===chip.dataset.tid?null:chip.dataset.tid;renderPlan();if(wpPick){toast("Now pick a day");const c=$(`#plan-pane .tray-chip[data-tid="${wpPick}"]`);if(c)c.focus();}return;}
+  const b=e.target.closest("[data-wact=toggle]");
+  if(b){const t=S.tasks.find(x=>x.id===b.closest(".wp-t").dataset.id);if(!t)return;const msg=setTaskDone(t,!t.done);graceEnd(t.id); /* the plan keeps done tasks on their day, so no countdown */
+    if(msg)toast(msg,{run(){undoDone(t);renderPlan();}});
+    save();renderNowTask();renderMini();updatePressure();renderTasks();
+    const row=b.closest(".wp-t");row.classList.toggle("done",t.done);b.classList.toggle("on",t.done);
+    setTimeout(()=>{renderPlan();const c=$(`#plan-pane .wp-t[data-id="${t.id}"] .check`);if(c)c.focus();},t.done&&!reduced?320:0);return;}
+  if(wpPick){const day=e.target.closest(".wp-day");if(day&&!e.target.closest("input,select,button,.wp-t")){const t=S.tasks.find(x=>x.id===wpPick);wpPick=null;if(t)wpPlan(t,day.dataset.k);else renderPlan();}}
+});
+$("#plan-pane").addEventListener("change",e=>{
+  const sel=e.target.closest("[data-wact=move]");if(!sel)return;const t=S.tasks.find(x=>x.id===sel.closest(".wp-t").dataset.id);if(!t||!sel.value)return;
+  let k=sel.value;if(k==="next")k=dkey(addDays(new Date(wpDay(t)+"T12:00"),7));
+  wpPlan(t,k);
+});
+$("#plan-pane").addEventListener("submit",e=>{
+  const f=e.target.closest(".wp-add");if(!f)return;e.preventDefault();const inp=f.querySelector("input"),v=inp.value.trim();if(!v)return;const k=f.dataset.k;
+  const pt=parseTask(v),t={id:uid(),title:(pt.title||v).slice(0,140),urg:pt.urg,due:pt.dateGiven?pt.due:pt.time?k:"",dueTime:pt.time||"",done:false,created:Date.now(),plan:k};
+  if(pt.course)t.course=pt.course;if(pt.rep){t.rep=pt.rep;if(!t.due)t.due=k;}
+  S.tasks.push(t);inp.value="";wpAfter();renderCourses();
+  toast(`Added to ${k===dkey(new Date())?"today":wpDayName(k)}`,{run(){const i=S.tasks.indexOf(t);if(i>=0)S.tasks.splice(i,1);wpAfter();}});
+});
+dragable($("#plan-pane"),".wp-t:not(.done),.tray-chip",{target:".wp-day",drop:(src,day)=>{const t=S.tasks.find(x=>x.id===(src.dataset.id||src.dataset.tid));wpPick=null;if(!t)return;if(wpDay(t)===day.dataset.k&&t.plan){renderPlan();return;}wpPlan(t,day.dataset.k);}});
+
 $("#courses-pane").addEventListener("submit",e=>{if(e.target.id!=="crs-add")return;e.preventDefault();const name=$("#crs-new").value.trim().slice(0,32);if(!name)return;
   S.courses=S.courses||[];if(S.courses.some(c=>c.name.toLowerCase()===name.toLowerCase())){toast("You already have that course");return;}
   S.courses.push({id:uid(),name,target:Math.min(100,Math.max(1,+$("#crs-goal").value||85)),items:[{id:uid(),name:"Assignments",w:30,score:""},{id:uid(),name:"Midterm",w:30,score:""},{id:uid(),name:"Final exam",w:40,score:""}]});
@@ -5135,7 +5290,7 @@ function moveItemTo(kind,id,k){
     const old=ev.date;ev.date=k;save();renderCal();toast(`Moved "${ev.title}" to ${niceDate(k)}`,{run(){ev.date=old;save();renderCal();}});}
 }
 function renderTray(){
-  const el=$("#cal-tray");if(!el)return;const und=sortedTasks().filter(t=>!t.done&&!t.due).slice(0,20);
+  const el=$("#cal-tray");if(!el)return;const und=sortedTasks().filter(t=>!t.done&&!t.due&&!t.plan).slice(0,20);
   el.innerHTML=und.length?`<h3>No date yet <span class="muted">Drag onto a day${matchMedia("(hover:none)").matches?" (press and hold)":""}, or tap one then a day</span></h3><div class="tray-list">${und.map(t=>`<button type="button" class="tray-chip${pickTask===t.id?" picked":""}" data-tid="${t.id}" style="--c:var(--u${t.urg})" aria-pressed="${pickTask===t.id}">${esc(t.title)}</button>`).join("")}</div>`:"";
   $("#cal-grid").classList.toggle("picking",!!pickTask);
 }

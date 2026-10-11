@@ -49,7 +49,7 @@ Everything is in one object `S`, saved as JSON:
 
 ```
 S = {
-  tasks:    [{id, title, urg, due:"YYYY-MM-DD", dueTime:"HH:MM"?, done, doneAt, created}],
+  tasks:    [{id, title, urg, due:"YYYY-MM-DD", dueTime:"HH:MM"?, plan:"YYYY-MM-DD"?, done, doneAt, created}],
   events:   [{id, date, time, title, src?}],          // src = imported calendar id
   calendars:[{id, name, url?, slot, count, at}],     // imported .ics calendars
   accounts: [{id, name, kind:"asset"|"debt", cat, value}],
@@ -114,6 +114,17 @@ Optional sign-in so data saves to the cloud and follows you across devices. Sign
 - Ticking a repeating task keeps it as done and adds the next one (`spawnNext`, `nextDate`); if it was finished late, the next one lands on the next date still ahead. Unticking removes that next one again. With no date given, the first one lands on the next matching day (`firstDue`).
 - Ticking a task off keeps it in place for 6 seconds (`DONE_GRACE`) with an Undo button and a shrinking bar before it leaves the open list; the toast has Undo too. `setTaskDone(t, done)` is the one place that ticks or unticks (it also spawns or removes the next repeat), and `undoDone(t)` puts a task back.
 - `t.steps = [{id, t, done}]` is the checklist, opened with the list button on a task. The row shows a progress bar; finishing every step offers to tick off the task. The AI helper's "Add as checklist" puts its steps here.
+
+## Week plan
+
+Tasks > Week plan (`#plan`, also a home screen shortcut and "week plan" in the command bar) lays the week out Monday to Sunday so you can split up your work and see how each day looks.
+
+- `t.plan` is the day you plan to work on a task, separate from its due date. A task shows on its plan day, or on its due day until it has one (`wpDay`).
+- Each day lists that day's calendar events (with times) for context, its tasks (tick them off; done ones stay on the day, struck through) and a done/total bar. Quick add at the bottom of a day understands the command bar syntax ("quiz prep 4pm #MATH1600 high") and plans the task for that day.
+- Move a task by dragging it to another day (press and hold on touch), with its Move menu (another day, next week, or back to not planned), or by tapping a "Not planned yet" chip and then a day. Moves have Undo.
+- "Not planned yet" holds open tasks with no plan that aren't due this week (undated, overdue or due later). On the current week, "Move to today" brings unfinished planned tasks from earlier days forward.
+- The Tasks "Today" filter and the Due today widget count tasks planned for today; the calendar's "No date yet" tray leaves out planned tasks.
+- Layout: seven columns on wide screens, side-scrolling days on tablets (starting at today), and stacked days on phones.
 
 ## Study tracking
 
