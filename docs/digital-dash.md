@@ -166,7 +166,7 @@ Tasks > Week plan (`#plan`, also a home screen shortcut and "week plan" in the c
 
 ## Money goals
 
-- Net worth has a Goals panel. A goal tracks net worth or one asset account, with an optional date; it shows progress and how much a month is needed to reach it in time. With amounts hidden it shows only percentages and months left.
+- Net (the net worth page) has a Goals panel. A goal tracks net worth or one asset account, with an optional date; it shows progress and how much a month is needed to reach it in time. With amounts hidden it shows only percentages and months left.
 
 ## Drag and drop
 

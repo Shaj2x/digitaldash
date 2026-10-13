@@ -1419,7 +1419,7 @@ html.lg .eye{background:var(--glass-tint);box-shadow:inset 0 1px 0 color-mix(in 
     <button class="nav" data-view="focus" aria-current="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span class="lbl">Focus</span></button>
     <button class="nav" data-view="tasks"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6h11M9 12h11M9 18h11"/><path d="m3 6 1.5 1.5L7 5M3 12l1.5 1.5L7 11M3 18l1.5 1.5L7 17"/></svg><span class="lbl">Tasks</span></button>
     <button class="nav" data-view="calendar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><span class="lbl">Calendar</span></button>
-    <button class="nav" data-view="money"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg><span class="lbl">Net worth</span></button>
+    <button class="nav" data-view="money"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg><span class="lbl">Net</span></button>
     <button class="nav" data-view="themes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="8" cy="10" r="1.3" fill="currentColor"/><circle cx="12" cy="7.5" r="1.3" fill="currentColor"/><circle cx="16" cy="10" r="1.3" fill="currentColor"/><path d="M12 21c-1.5 0-2-1.5-1-2.5s.5-2.5-1-2.5"/></svg><span class="lbl">Themes</span></button>
   </nav>
 
@@ -1559,7 +1559,7 @@ html.lg .eye{background:var(--glass-tint);box-shadow:inset 0 1px 0 color-mix(in 
 
     <!-- NET WORTH -->
     <section class="view" id="v-money">
-      <h1 data-sub="t-money">Net worth</h1>
+      <h1 data-sub="t-money">Net</h1>
       <p class="sub" data-sub="money">Update balances whenever they change. Your history builds a day at a time.</p>
       <div class="nwtop">
         <div class="panel">
@@ -1689,7 +1689,7 @@ html.lg .eye{background:var(--glass-tint);box-shadow:inset 0 1px 0 color-mix(in 
         <div class="panel">
           <h3>Money</h3>
           <div class="field"><span>Currency</span><select id="currency"><option>CAD</option><option>USD</option><option>EUR</option><option>GBP</option><option>INR</option><option>LKR</option><option>AUD</option></select></div>
-          <div class="field"><span>Hide amounts, show growth only<small class="muted" style="display:block;font-size:12.5px">Same as the eye button on Net worth</small></span><input type="checkbox" id="hide-nw"></div>
+          <div class="field"><span>Hide amounts, show growth only<small class="muted" style="display:block;font-size:12.5px">Same as the eye button on Net</small></span><input type="checkbox" id="hide-nw"></div>
         </div>
         <div class="panel rem" id="rem-panel">
           <h3>Reminders</h3>
@@ -3550,19 +3550,19 @@ function cmdResults(q){
   const R=[],raw=q.trim(),lq=raw.toLowerCase();
   const go=(v,label,fn)=>R.push({ic:"go",label,hint:"Go",run:fn||(()=>{if(VIEWS.includes(v)){show(v);try{history.pushState(null,"","#"+v);}catch(e){}}})});
   if(!raw){
-    go("focus","Focus");go("tasks","Tasks");R.push({ic:"go",label:"Week plan",hint:"Go",run:()=>shortcutLink("plan")});go("calendar","Calendar");R.push({ic:"go",label:"Week review",hint:"Go",run:()=>{show("calendar");setCalMode("week");}});go("money","Net worth");go("themes","Themes");
+    go("focus","Focus");go("tasks","Tasks");R.push({ic:"go",label:"Week plan",hint:"Go",run:()=>shortcutLink("plan")});go("calendar","Calendar");R.push({ic:"go",label:"Week review",hint:"Go",run:()=>{show("calendar");setCalMode("week");}});go("money","Net");go("themes","Themes");
     R.push({ic:"sound",label:JB.playing?"Pause sounds":"Play sounds",hint:"Sounds",run:()=>JB.playing?jbPause():jbPlay()});
     R.push({ic:"misc",label:"Try: gym tomorrow 5pm high · timer 40 · play rain · theme midnight",hint:"",run:()=>{}});
     return R;
   }
   let m;
   // navigation
-  const NAV={focus:"focus",clock:"focus",tasks:"tasks",todo:"tasks",calendar:"calendar",cal:"calendar","net worth":"money",money:"money",networth:"money",themes:"themes",theme:"themes",settings:"themes"};
+  const NAV={focus:"focus",clock:"focus",tasks:"tasks",todo:"tasks",calendar:"calendar",cal:"calendar",net:"money","net worth":"money",money:"money",networth:"money",themes:"themes",theme:"themes",settings:"themes"};
   if(/^(?:go(?: to)?|open|show)?\s*(?:the )?(?:archive|archived(?: tasks)?)$/.test(lq))R.push({ic:"go",label:"Archived tasks",hint:"Go",run:()=>{show("tasks");archOpen();}});
   if(/^(?:go(?: to)?|open|show)?\s*(?:week(?:ly)? plan(?:ner)?|plan(?: my)? week|planner)$/.test(lq))R.push({ic:"go",label:"Week plan",hint:"Go",run:()=>shortcutLink("plan")});
-  if((m=lq.match(/^(?:go(?: to)?|open|show)?\s*(focus|clock|tasks|todo|calendar|cal|net ?worth|money|themes|settings|week(?: review)?)$/))){
+  if((m=lq.match(/^(?:go(?: to)?|open|show)?\s*(focus|clock|tasks|todo|calendar|cal|net ?worth|net|money|themes|settings|week(?: review)?)$/))){
     const k=m[1].replace(/\s+/g," ");if(k.startsWith("week"))R.push({ic:"go",label:"Week review",hint:"Go",run:()=>{show("calendar");setCalMode("week");}});
-    else{const v=NAV[k]||NAV[k.replace(" ","")];go(v,({focus:"Focus",tasks:"Tasks",calendar:"Calendar",money:"Net worth",themes:"Themes"})[v]);}
+    else{const v=NAV[k]||NAV[k.replace(" ","")];go(v,({focus:"Focus",tasks:"Tasks",calendar:"Calendar",money:"Net",themes:"Themes"})[v]);}
   }
   if(/^(room|study room|study with|create room|join room)/.test(lq)){const c=rmClean(lq.replace(/^(join )?(study )?room/,""));R.push({ic:"go",label:c.length===6?`Join room ${rmFmt(c)}`:"Study room",hint:"Go",run:()=>{show("focus");if(c.length===6)rmJoin(c);setTimeout(()=>$("#room").scrollIntoView({behavior:reduced?"auto":"smooth",block:"center"}),60);}});}
   if(/^(grades?|courses?|marks?|gpa)$/.test(lq))R.push({ic:"go",label:"Courses and grades",hint:"Go",run:()=>{show("tasks");setTaskMode("courses");}});
@@ -3604,11 +3604,11 @@ function cmdResults(q){
   // account balance: "<account> <amount>"
   if((m=raw.match(/^(?:balance\s+)?(.+?)\s+\$?(-?[\d,]+(?:\.\d+)?)$/i))){
     const amt=parseFloat(m[2].replace(/,/g,""));
-    (S.accounts||[]).filter(a=>fuzzy(m[1],a.name)>=60).forEach(a=>R.push({ic:"money",label:`Set ${a.name} to ${S.settings.hideNw?"a new balance":fmt(amt)}`,hint:"Net worth",run:()=>{a.value=Math.abs(amt);snapshot();save();renderMoney();renderMini();toast(`${a.name} updated`);}}));
+    (S.accounts||[]).filter(a=>fuzzy(m[1],a.name)>=60).forEach(a=>R.push({ic:"money",label:`Set ${a.name} to ${S.settings.hideNw?"a new balance":fmt(amt)}`,hint:"Net",run:()=>{a.value=Math.abs(amt);snapshot();save();renderMoney();renderMini();toast(`${a.name} updated`);}}));
   }
   // toggles
   if(/^zen/.test(lq))R.push({ic:"misc",label:"Zen mode",hint:"Focus",run:()=>{show("focus");$("#zen").click();}});
-  if(/^(hide|show) (amounts|money|numbers)/.test(lq))R.push({ic:"money",label:/^hide/.test(lq)?"Hide amounts":"Show amounts",hint:"Net worth",run:()=>setPrivacy(/^hide/.test(lq))});
+  if(/^(hide|show) (amounts|money|numbers)/.test(lq))R.push({ic:"money",label:/^hide/.test(lq)?"Hide amounts":"Show amounts",hint:"Net",run:()=>setPrivacy(/^hide/.test(lq))});
   if(/^import/.test(lq))R.push({ic:"ev",label:"Import a calendar (.ics)",hint:"Calendar",run:()=>{show("calendar");setCalMode("month");$("#ics-file").click();}});
   // search existing things
   S.tasks.filter(t=>!t.done).map(t=>[t,fuzzy(raw,t.title)]).filter(x=>x[1]>=40).sort((a,b)=>b[1]-a[1]).slice(0,3)
@@ -3713,7 +3713,7 @@ function renderChart(){
   <circle class="end" cx="${X(h.length-1)}" cy="${Y(h[h.length-1].v)}" r="4.5" fill="var(--accent)"/>
   <text class="axis" x="${P}" y="${H-4}">${niceDate(h[0].d)}</text><text class="axis" x="${W-10}" y="${H-4}" text-anchor="end">${niceDate(h[h.length-1].d)}</text></svg>`;
 }
-// The line draws itself left to right when you open Net worth. Explanation of the trend, once per visit.
+// The line draws itself left to right when you open Net. Explanation of the trend, once per visit.
 function drawChart(){
   const el=$("#nw-chart"),l=el.querySelector(".line");if(!l)return;
   l.style.strokeDasharray="1";
