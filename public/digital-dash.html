@@ -1182,7 +1182,11 @@ html.lg .wp-cell.out{background:transparent}
 .wp-tt small.late{color:color-mix(in srgb,var(--u0) 70%,var(--ink));font-weight:600}
 .wp-t.done{opacity:.6;cursor:default}
 .wp-t.done .wp-tt span{text-decoration:line-through}
-.wp-mv{position:relative;display:grid;place-items:center;width:26px;height:26px;margin:-3px 0;border-radius:8px;color:var(--muted);cursor:pointer}
+.wp-acts{display:flex;gap:2px;margin:-3px 0}
+.wp-acts:empty{display:none}
+.wp-mv,.wp-ed{position:relative;display:grid;place-items:center;width:26px;height:26px;padding:0;border:0;background:none;border-radius:8px;color:var(--muted);cursor:pointer}
+.wp-ed:hover,.wp-ed:focus-visible{background:color-mix(in srgb,var(--ink) 9%,transparent);color:var(--ink)}
+.wp-ed svg{width:14px;height:14px}
 .wp-mv:hover,.wp-mv:has(select:focus-visible){background:color-mix(in srgb,var(--ink) 9%,transparent);color:var(--ink)}
 .wp-mv:has(select:focus-visible){outline:2px solid var(--accent);outline-offset:1px}
 .wp-mv select{appearance:auto;position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;font-size:16px;padding:0;border:0;margin:0}
@@ -1194,11 +1198,11 @@ html.lg .wp-cell.out{background:transparent}
 .wp-grid.picking .wp-day{outline:1px dashed color-mix(in srgb,var(--accent) 55%,transparent);outline-offset:-2px;cursor:pointer}
 html.lg .wp-t{background:var(--glass-tint)}
 /* With a mouse the Move button only shows on hover or focus, so titles get the whole width of narrow day columns */
-@media (hover:hover) and (pointer:fine){.wp-t{grid-template-columns:auto minmax(0,1fr)}.wp-mv{position:absolute;top:5px;right:4px;margin:0;opacity:0;background:var(--panel2);box-shadow:-8px 0 8px var(--panel2);transition:opacity var(--t-fast) ease}
-  html.lg .wp-mv{background:var(--panel);box-shadow:-8px 0 8px var(--panel)}
-  .wp-t:hover .wp-mv,.wp-mv:has(select:focus-visible){opacity:1}}
+@media (hover:hover) and (pointer:fine){.wp-t{grid-template-columns:auto minmax(0,1fr)}.wp-acts{position:absolute;top:5px;right:4px;margin:0;border-radius:8px;opacity:0;background:var(--panel2);box-shadow:-8px 0 8px var(--panel2);transition:opacity var(--t-fast) ease}
+  html.lg .wp-acts{background:var(--panel);box-shadow:-8px 0 8px var(--panel)}
+  .wp-t:hover .wp-acts,.wp-acts:focus-within{opacity:1}}
 @media (max-width:979px){.wp-grid{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:minmax(210px,40%);overflow-x:auto;scroll-snap-type:x proximity;padding-bottom:8px;overscroll-behavior-x:contain}.wp-day{scroll-snap-align:start}}
-@media (max-width:600px){.wp-grid{grid-auto-flow:row;grid-template-columns:minmax(0,1fr);grid-auto-columns:auto;overflow:visible;padding-bottom:0}.wp-day.panel{min-height:0}.wp-add input{font-size:16px;padding:9px 10px}.wp-t{padding:9px 6px 9px 10px}.wp-mv{width:36px;height:36px;margin:-8px -2px}.wp-tt{font-size:15px}}
+@media (max-width:600px){.wp-grid{grid-auto-flow:row;grid-template-columns:minmax(0,1fr);grid-auto-columns:auto;overflow:visible;padding-bottom:0}.wp-day.panel{min-height:0}.wp-add input{font-size:16px;padding:9px 10px}.wp-t{padding:9px 6px 9px 10px}.wp-mv,.wp-ed{width:36px;height:36px}.wp-acts{margin:-8px -2px}.wp-tt{font-size:15px}}
 @media (prefers-reduced-motion:reduce){.wp-bar i{transition:none}}
 .arch-bar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:14px;font-size:13px}
 .arch-bar .btn{display:inline-flex;align-items:center;gap:7px}
@@ -1245,6 +1249,12 @@ html.lg .ar-list li{background:var(--glass-tint)}
 .gc details summary{cursor:pointer;font-size:14px;font-weight:600}
 @media (max-width:900px){.gc{grid-template-columns:minmax(0,1fr)}}
 @media (max-width:560px){.gc-h{display:none}.gc-row{grid-template-columns:minmax(0,1fr) minmax(0,1fr) 36px;padding:8px;border-radius:10px;background:var(--panel2)}.gc-row .gc-n{grid-column:1/-1}.gc-row input,.gc-row select{font-size:16px}}
+.te-form{gap:14px}
+.te-f{display:grid;gap:6px;font-size:13px;color:var(--muted)}
+.te-f input,.te-f select{width:100%;box-sizing:border-box;color:var(--ink);font-size:15px}
+.te-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.te-note{font-size:13px}
+@media (max-width:420px){.te-2{grid-template-columns:1fr}}
 .goals h3{margin:0 0 10px}
 .goal{display:grid;gap:6px;padding:10px 0;border-bottom:1px solid var(--line)}
 .goal-top{display:flex;align-items:center;gap:10px}
@@ -1763,6 +1773,20 @@ html.lg .eye{background:var(--glass-tint);box-shadow:inset 0 1px 0 color-mix(in 
   <div class="acd-in">
     <div class="acd-top"><h2 id="trd-h">Remind me</h2><button class="icon-btn" type="button" data-tr="close" aria-label="Close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
     <div class="acd-body" id="trd-body" aria-live="polite"></div>
+  </div>
+</dialog>
+<dialog class="acd acd-sm" id="ted" aria-labelledby="ted-h">
+  <div class="acd-in">
+    <div class="acd-top"><h2 id="ted-h">Edit task</h2><button class="icon-btn" type="button" data-te="close" aria-label="Close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
+    <form class="acd-body te-form" id="te-form" autocomplete="off">
+      <label class="te-f">Task<input type="text" id="te-title" maxlength="140" required></label>
+      <div class="te-2"><label class="te-f">Urgency<select id="te-urg"><option value="0">Critical</option><option value="1">High</option><option value="2">Medium</option><option value="3">Low</option></select></label>
+        <label class="te-f">Course<input type="text" id="te-course" list="courses" maxlength="32" placeholder="None"></label></div>
+      <div class="te-2"><label class="te-f">Due date<input type="date" id="te-due"></label><label class="te-f">Due time<input type="time" id="te-time"></label></div>
+      <label class="te-f">Planned for (week plan)<input type="date" id="te-plan"></label>
+      <p class="muted te-note" id="te-note" hidden></p>
+      <div class="ac-row"><button class="btn" type="submit">Save changes</button><button class="btn ghost" type="button" data-te="close">Cancel</button></div>
+    </form>
   </div>
 </dialog>
 <dialog class="acd acd-sm" id="arch" aria-labelledby="arch-h">
@@ -2931,7 +2955,7 @@ function renderTasks(mode){
     <div class="tt"><span>${esc(t.title)}</span>${t.course?`<span class="tchip">${esc(t.course)}</span>`:""}${t.rep?`<span class="tchip" title="Repeats">${REP_ICON}${esc(repLabel(t.rep))}</span>`:""}${t.remind&&!t.done?`<span class="tchip rchip" title="Reminder">${BELL_ICON}${esc(trLabel(t))}</span>`:""}<div class="tmeta">${taskMeta(t)}</div></div>
     <span class="due${dl.late&&!t.done?" late":""}">${dl.t}</span>
     <select class="urg" data-act="urg" aria-label="Urgency">${URG.map((u,i)=>`<option value="${i}"${i===t.urg?" selected":""}>${u}</option>`).join("")}</select>
-    <div class="tact">${t.done?graceUndo(t):`<button class="icon-btn ai-btn rem-btn" data-act="remind" aria-pressed="${!!t.remind}" aria-label="${t.remind?"Change reminder":"Remind me"}" title="${t.remind?"Change reminder":"Remind me by email or text"}">${BELL_ICON}</button><button class="icon-btn ai-btn" data-act="steps" aria-expanded="${openSteps.has(t.id)}" aria-label="Checklist" title="Checklist"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 6h10M10 12h10M10 18h10"/><path d="m3 6 1.5 1.5L7 5M3 12l1.5 1.5L7 11M3 18l1.5 1.5L7 17"/></svg></button><button class="icon-btn ai-btn" data-act="ai" aria-label="Break down with AI" title="Break down with AI"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5l1.8 4.7 4.7 1.8-4.7 1.8L12 16.5l-1.8-4.7L5.5 10l4.7-1.8z"/><path d="M18.5 15.5l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"/></svg></button>`}<button class="icon-btn" data-act="del" aria-label="Delete task"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
+    <div class="tact">${t.done?graceUndo(t):`<button class="icon-btn ai-btn" data-act="edit" aria-label="Edit ${esc(t.title)}" title="Edit"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="m14 6 4 4"/></svg></button><button class="icon-btn ai-btn rem-btn" data-act="remind" aria-pressed="${!!t.remind}" aria-label="${t.remind?"Change reminder":"Remind me"}" title="${t.remind?"Change reminder":"Remind me by email or text"}">${BELL_ICON}</button><button class="icon-btn ai-btn" data-act="steps" aria-expanded="${openSteps.has(t.id)}" aria-label="Checklist" title="Checklist"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 6h10M10 12h10M10 18h10"/><path d="m3 6 1.5 1.5L7 5M3 12l1.5 1.5L7 11M3 18l1.5 1.5L7 17"/></svg></button>`}<button class="icon-btn" data-act="del" aria-label="Delete task"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
     ${openSteps.has(t.id)?stepsHtml(t):""}${graceBar(t)}
   </div>`;}).join("");
   },mode);
@@ -2967,7 +2991,7 @@ $("#t-rep").addEventListener("change",()=>{const v=$("#t-rep").value,box=$("#t-d
   if(!box.hidden&&!box.children.length){const dd=$("#t-due").value?new Date($("#t-due").value+"T12:00").getDay():new Date().getDay();box.innerHTML=[1,2,3,4,5,6,0].map(d=>`<button type="button" data-d="${d}" aria-pressed="${d===dd}" aria-label="${WDAYS_LONG[d]}">${WDAYS_LONG[d].slice(0,2)}</button>`).join("");}});
 $("#t-days").addEventListener("click",e=>{const b=e.target.closest("button[data-d]");if(!b)return;const on=b.getAttribute("aria-pressed")!=="true";if(!on&&$$("#t-days [aria-pressed=true]").length===1)return;b.setAttribute("aria-pressed",on);});
 $("#task-list").addEventListener("click",e=>{const b=e.target.closest("[data-act]");if(!b||b.tagName==="SELECT")return;const id=b.closest(".task").dataset.id,t=S.tasks.find(x=>x.id===id);if(!t)return;
-  if(b.dataset.act==="ai"){aiBreakdown(t);return;}
+  if(b.dataset.act==="edit"){teOpen(t);return;}
   if(b.dataset.act==="remind"){trOpen(t);return;}
   if(b.dataset.act==="stog")return; /* handled on change; re-rendering here would swallow the tick */
   if(b.dataset.act==="steps"){openSteps.has(t.id)?openSteps.delete(t.id):openSteps.add(t.id);renderTasks("plain");if(openSteps.has(t.id)){const i=$(`.task[data-id="${t.id}"] .steps input[type=text]`);if(i&&!(t.steps||[]).length)i.focus();}return;}
@@ -3606,7 +3630,7 @@ function cmdResults(q){
   if(/^(grades?|courses?|marks?|gpa)$/.test(lq))R.push({ic:"go",label:"Courses and grades",hint:"Go",run:()=>{show("tasks");setTaskMode("courses");}});
   if(/^(goals?|savings?)$/.test(lq))R.push({ic:"go",label:"Money goals",hint:"Go",run:()=>{show("money");setTimeout(()=>$("#goals").scrollIntoView({behavior:reduced?"auto":"smooth",block:"center"}),60);}});
   if(/^(plan( my)?( week| day)?|ai plan|schedule( my)? week)$/.test(lq))R.push({ic:"misc",label:"Plan my week with AI",hint:"AI",run:()=>aiPlan()});
-  if((m=lq.match(/^(?:break ?down|split|steps for|ai)\s+(.+)$/))){S.tasks.filter(t=>!t.done).map(t=>[t,fuzzy(m[1],t.title)]).filter(([,sc])=>sc>=40).sort((a,b)=>b[1]-a[1]).slice(0,3).forEach(([t])=>R.push({ic:"misc",label:`Break down: ${t.title}`,hint:"AI",run:()=>aiBreakdown(t)}));}
+  if(AI_BREAKDOWN&&(m=lq.match(/^(?:break ?down|split|steps for|ai)\s+(.+)$/))){S.tasks.filter(t=>!t.done).map(t=>[t,fuzzy(m[1],t.title)]).filter(([,sc])=>sc>=40).sort((a,b)=>b[1]-a[1]).slice(0,3).forEach(([t])=>R.push({ic:"misc",label:`Break down: ${t.title}`,hint:"AI",run:()=>aiBreakdown(t)}));}
   if(/^(account|sign ?in|log ?in|sign ?out|profile|sync|cloud)/.test(lq))R.push({ic:"go",label:"Account",hint:"Go",run:()=>acOpen()});
   // timers
   if((m=lq.match(/^(timer|focus|break|pomodoro|study)\s+(\d{1,3})(?::(\d\d))?\s*(m|min|mins|minutes|h|hr|hours)?$/))){
@@ -5236,7 +5260,7 @@ function wpRow(t,k){
   return `<div class="wp-t${t.done?" done":""}" data-id="${t.id}" style="--uc:var(--u${t.urg})">
     <button class="check${t.done?" on":""}" type="button" data-wact="toggle" aria-label="${t.done?"Mark "+esc(t.title)+" as not done":"Mark "+esc(t.title)+" as done"}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4"><path pathLength="1" d="m5 12 5 5 9-10"/></svg></button>
     <div class="wp-tt"><span>${esc(t.title)}</span>${bits.length?`<small class="${t.due&&t.due<today&&!t.done?"late":""}">${bits.join(" · ")}</small>`:""}</div>
-    ${t.done?"":`<label class="wp-mv" title="Move to another day">${WP_MOVE}<select data-wact="move" aria-label="Move ${esc(t.title)} to another day"><option value="" selected disabled>Move to…</option>${opts}<option value="next">Next week</option>${t.plan?`<option value="none">Not planned yet</option>`:""}</select></label>`}
+    <span class="wp-acts">${t.done?"":`<button type="button" class="wp-ed" data-wact="edit" aria-label="Edit ${esc(t.title)}" title="Edit"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="m14 6 4 4"/></svg></button><label class="wp-mv" title="Move to another day">${WP_MOVE}<select data-wact="move" aria-label="Move ${esc(t.title)} to another day"><option value="" selected disabled>Move to…</option>${opts}<option value="next">Next week</option>${t.plan?`<option value="none">Not planned yet</option>`:""}</select></label>`}</span>
   </div>`;
 }
 /* One day's card: events, tasks, progress and quick add. Week view shows seven; month view shows the picked day. */
@@ -5320,6 +5344,8 @@ $("#plan-pane").addEventListener("click",e=>{
     renderPlan();return;}
   const chip=e.target.closest(".tray-chip");
   if(chip){wpPick=wpPick===chip.dataset.tid?null:chip.dataset.tid;renderPlan();if(wpPick){toast("Now pick a day");const c=$(`#plan-pane .tray-chip[data-tid="${wpPick}"]`);if(c)c.focus();}return;}
+  const ed=e.target.closest("[data-wact=edit]");
+  if(ed){const t=S.tasks.find(x=>x.id===ed.closest(".wp-t").dataset.id);if(t)teOpen(t);return;}
   const b=e.target.closest("[data-wact=toggle]");
   if(b){const t=S.tasks.find(x=>x.id===b.closest(".wp-t").dataset.id);if(!t)return;const msg=setTaskDone(t,!t.done);graceEnd(t.id); /* the plan keeps done tasks on their day, so no countdown */
     if(msg)toast(msg,{run(){undoDone(t);renderPlan();}});
@@ -5400,6 +5426,38 @@ $("#arch").addEventListener("click",e=>{
     toast("Deleted for good",{run(){S.tasks.splice(Math.min(at,S.tasks.length),0,t);arAfter();}});
     requestAnimationFrame(()=>{const n=$("#arch .ar-list button");(n||$("#arch [data-ar=close]")).focus();});}
 });
+
+/* ---------- edit a task ----------
+   One dialog for the task list and the week/month plan: title, urgency, course, due date and time, and
+   the planned day. Only the fields shown change; everything else on the task (steps, repeat, reminder,
+   history) is kept. Saving offers Undo with the old values. */
+var teTask=null;
+function teOpen(t){
+  teTask=t;$("#te-title").value=t.title;$("#te-urg").value=String(t.urg);$("#te-course").value=t.course||"";
+  $("#te-due").value=t.due||"";$("#te-time").value=t.dueTime||"";$("#te-plan").value=t.plan||"";
+  const n=$("#te-note");n.hidden=!t.rep;n.textContent=t.rep?`Repeats ${repLabel(t.rep).toLowerCase()}. Changes apply to this one; the next one copies them when it's added.`:"";
+  const d=$("#ted");if(!d.open){try{d.showModal();}catch(e){d.setAttribute("open","");}}
+  const i=$("#te-title");i.focus();i.setSelectionRange(i.value.length,i.value.length);
+}
+function teRefresh(){save();renderTasks();renderNowTask();renderMini();renderCal();renderTimerTag();renderCourses();updatePressure();}
+$("#te-form").addEventListener("submit",e=>{
+  e.preventDefault();const t=teTask;if(!t||!S.tasks.includes(t)){$("#ted").close();return;}
+  const title=$("#te-title").value.trim();if(!title){$("#te-title").focus();return;}
+  let due=$("#te-due").value;const dueTime=$("#te-time").value;if(dueTime&&!due)due=t.due||dkey(new Date()); /* a time alone means that day (or today) */
+  const before={title:t.title,urg:t.urg,course:t.course,due:t.due,dueTime:t.dueTime,plan:t.plan};
+  t.title=title.slice(0,140);t.urg=+$("#te-urg").value;
+  const c=$("#te-course").value.trim().slice(0,32);if(c)t.course=c;else delete t.course;
+  t.due=due;t.dueTime=due?dueTime:"";
+  const pl=$("#te-plan").value;if(pl)t.plan=pl;else delete t.plan;
+  $("#ted").close();teRefresh();
+  const same=Object.keys(before).every(k=>(before[k]??"")===(t[k]??""));
+  if(!same)toast("Task updated",{run(){Object.entries(before).forEach(([k,v])=>{if(v===undefined)delete t[k];else t[k]=v;});teRefresh();}});
+});
+$("#ted").addEventListener("click",e=>{if(e.target.closest("[data-te=close]"))$("#ted").close();});
+$("#ted").addEventListener("close",()=>{const t=teTask;teTask=null;if(!t)return;requestAnimationFrame(()=>{const b=$(`.task[data-id="${t.id}"] [data-act=edit]`)||$(`#plan-pane .wp-t[data-id="${t.id}"] [data-wact=edit]`);if(b)b.focus();});});
+/* double-click a title to edit it too */
+$("#task-list").addEventListener("dblclick",e=>{const sp=e.target.closest(".tt>span:first-child");if(!sp)return;const t=S.tasks.find(x=>x.id===sp.closest(".task").dataset.id);if(t&&!t.done)teOpen(t);});
+$("#plan-pane").addEventListener("dblclick",e=>{const sp=e.target.closest(".wp-tt>span");if(!sp)return;const t=S.tasks.find(x=>x.id===sp.closest(".wp-t").dataset.id);if(t&&!t.done)teOpen(t);});
 setInterval(()=>archSweep(),3600e3);
 document.addEventListener("close",e=>{const t=$("#toast");if(e.target.tagName==="DIALOG"&&t.parentNode===e.target)document.body.appendChild(t);},true);
 
@@ -5671,6 +5729,7 @@ async function aiCall(body){
   }catch(e){AI.err=e.message||"Something went wrong. Try again.";}
   finally{AI.busy=false;aiRender();}
 }
+var AI_BREAKDOWN=false; /* the "Break down with AI" button and command come back when the AI helper is set up */
 function aiBreakdown(t){
   AI.mode="breakdown";AI.task=t;AI.res=null;AI.err="";AI.note="";aiOpenDlg();
   if(aiGate()){aiRender();return;}

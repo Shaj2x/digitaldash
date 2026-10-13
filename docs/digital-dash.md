@@ -115,6 +115,12 @@ Optional sign-in so data saves to the cloud and follows you across devices. Sign
 - Ticking a task off keeps it in place for 6 seconds (`DONE_GRACE`) with an Undo button and a shrinking bar before it leaves the open list; the toast has Undo too. `setTaskDone(t, done)` is the one place that ticks or unticks (it also spawns or removes the next repeat), and `undoDone(t)` puts a task back.
 - `t.steps = [{id, t, done}]` is the checklist, opened with the list button on a task. The row shows a progress bar; finishing every step offers to tick off the task. The AI helper's "Add as checklist" puts its steps here.
 
+## Editing tasks
+
+- The pencil button on a task (task list, week plan and the month view's day card), or double-clicking a task's title, opens the Edit task dialog (`teOpen`): title, urgency, course, due date and time, and the planned day.
+- Only those fields change; steps, repeat, reminder, study history and everything else on the task are kept. Saving offers Undo with the old values.
+- "Break down with AI" is hidden (`AI_BREAKDOWN = false`) until the AI helper is set up; the code and any steps it already added stay.
+
 ## Archive
 
 - Finished tasks leave your lists `S.settings.archiveDays` after you tick them off (1, 3, 7, 14 or 30 days, or never; default 7). `archSweep` sets `t.archived` (a timestamp) on load and every hour; it skips tasks still in their Undo grace period. Old done tasks with no `doneAt` use `created`.
