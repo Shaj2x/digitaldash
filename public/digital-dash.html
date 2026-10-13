@@ -1212,6 +1212,39 @@ html.lg .wp-t{background:var(--glass-tint)}
 .ar-foot{display:flex;gap:8px;flex-wrap:wrap;justify-content:space-between;align-items:center}
 .ar-search{width:100%}
 html.lg .ar-list li{background:var(--glass-tint)}
+.crs-mode{margin:0 0 14px}
+.gc{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(280px,1fr);gap:14px;align-items:start}
+.gc input,.gc select{box-sizing:border-box}
+.gc .panel{display:grid;gap:14px}
+.gc h2{margin:0;font-size:18px}
+.gc-opts{display:flex;gap:10px 18px;flex-wrap:wrap;align-items:center;font-size:14px}
+.gc-opts label{display:flex;align-items:center;gap:8px}
+.gc-rows{display:grid;gap:6px}
+.gc-h,.gc-row{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr) minmax(0,1fr) 32px;gap:6px;align-items:center}
+.gc-h{font-size:11.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;padding:0 2px}
+.gc-row input,.gc-row select{min-width:0;width:100%;padding:7px 9px;font-size:14px}
+.gc-in{position:relative;display:flex;align-items:center}
+.gc-in input{padding-right:26px}
+.gc-in i{position:absolute;right:9px;font-style:normal;font-size:13px;color:var(--muted);pointer-events:none}
+.gc-res{display:grid;gap:4px;padding:14px 16px;border-radius:12px;background:var(--panel2)}
+.gc-res .gc-big{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.gc-res .gc-big b{font-size:34px;line-height:1.1;font-variant-numeric:tabular-nums}
+.gc-res .gc-big span{font-size:20px;font-weight:700}
+.gc-res p{margin:0;font-size:14px;line-height:1.45}
+.gc-res .muted{font-size:13px}
+.gc-plan{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.gc-plan label,.gc-fx label{display:grid;gap:6px;font-size:13px;color:var(--muted)}
+.gc-plan input,.gc-fx input{width:100%;min-width:0;color:var(--ink)}
+.gc-fx{display:grid;gap:10px}
+.gc-scale{width:100%;border-collapse:collapse;font-size:13px;font-variant-numeric:tabular-nums}
+.gc-scale th,.gc-scale td{padding:4px 6px;text-align:left;border-bottom:1px solid var(--line)}
+.gc-scale th{font-size:11.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;font-weight:600}
+.gc-scale tr.on td{color:var(--ink);font-weight:700;background:color-mix(in srgb,var(--accent) 14%,transparent)}
+.gc-save{display:flex;gap:8px;flex-wrap:wrap}
+.gc-save input{flex:1 1 160px;min-width:0}
+.gc details summary{cursor:pointer;font-size:14px;font-weight:600}
+@media (max-width:900px){.gc{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:560px){.gc-h{display:none}.gc-row{grid-template-columns:minmax(0,1fr) minmax(0,1fr) 36px;padding:8px;border-radius:10px;background:var(--panel2)}.gc-row .gc-n{grid-column:1/-1}.gc-row input,.gc-row select{font-size:16px}}
 .goals h3{margin:0 0 10px}
 .goal{display:grid;gap:6px;padding:10px 0;border-bottom:1px solid var(--line)}
 .goal-top{display:flex;align-items:center;gap:10px}
@@ -1478,7 +1511,11 @@ html.lg .eye{background:var(--glass-tint);box-shadow:inset 0 1px 0 color-mix(in 
       <h1 data-sub="t-tasks">Tasks</h1>
       <p class="sub" data-sub="tasks">Sorted by urgency, then due date. The top one shows up on your clock.</p>
       <div class="seg task-mode" id="task-mode" role="group" aria-label="Tasks, week plan or courses"><button type="button" data-m="tasks" aria-pressed="true">Tasks</button><button type="button" data-m="plan" aria-pressed="false">Week plan</button><button type="button" data-m="courses" aria-pressed="false">Courses and grades</button></div>
-      <div class="courses" id="courses-pane" hidden></div>
+      <div class="courses" id="courses-pane" hidden>
+        <div class="seg crs-mode" id="crs-mode" role="group" aria-label="Courses or grade calculator"><button type="button" data-cm="courses" aria-pressed="true">My courses</button><button type="button" data-cm="calc" aria-pressed="false">Grade calculator</button></div>
+        <div id="crs-body"></div>
+        <div id="gc-body" hidden></div>
+      </div>
       <div class="plan" id="plan-pane" hidden>
         <div class="wp-head"><div class="seg wp-mode" id="wp-mode" role="group" aria-label="Plan by"><button type="button" data-pm="week" aria-pressed="true">Week</button><button type="button" data-pm="month" aria-pressed="false">Month</button></div><div class="wp-nav" id="wp-nav"></div><p class="wp-sum muted" id="wp-sum"></p></div>
         <div id="wp-body"></div>
@@ -3558,6 +3595,7 @@ function cmdResults(q){
   let m;
   // navigation
   const NAV={focus:"focus",clock:"focus",tasks:"tasks",todo:"tasks",calendar:"calendar",cal:"calendar",net:"money","net worth":"money",money:"money",networth:"money",themes:"themes",theme:"themes",settings:"themes"};
+  if(/^(?:go(?: to)?|open|show)?\s*(?:the )?(?:grade|gpa|final(?: exam| grade)?) ?calc(?:ulator)?$|^what do i need on (?:the|my) final$/.test(lq))R.push({ic:"go",label:"Grade calculator",hint:"Go",run:()=>{show("tasks");setTaskMode("courses");crsMode="calc";gcShow();}});
   if(/^(?:go(?: to)?|open|show)?\s*(?:the )?(?:archive|archived(?: tasks)?)$/.test(lq))R.push({ic:"go",label:"Archived tasks",hint:"Go",run:()=>{show("tasks");archOpen();}});
   if(/^(?:go(?: to)?|open|show)?\s*(?:week(?:ly)? plan(?:ner)?|plan(?: my)? week|planner)$/.test(lq))R.push({ic:"go",label:"Week plan",hint:"Go",run:()=>shortcutLink("plan")});
   if((m=lq.match(/^(?:go(?: to)?|open|show)?\s*(focus|clock|tasks|todo|calendar|cal|net ?worth|net|money|themes|settings|week(?: review)?)$/))){
@@ -5142,10 +5180,10 @@ function gradeCalc(c){
 }
 function setTaskMode(m){
   taskMode=m;$$("#task-mode button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.m===m));glide($("#task-mode"));
-  $("#tasks-pane").hidden=m!=="tasks";$("#courses-pane").hidden=m!=="courses";$("#plan-pane").hidden=m!=="plan";if(m==="courses")renderCoursesPane();if(m==="plan")renderPlan();
+  $("#tasks-pane").hidden=m!=="tasks";$("#courses-pane").hidden=m!=="courses";$("#plan-pane").hidden=m!=="plan";if(m==="courses"){renderCoursesPane();gcShow();}if(m==="plan")renderPlan();
 }
 function renderCoursesPane(){
-  const el=$("#courses-pane");if(!el||el.hidden)return;S.courses=S.courses||[];
+  if($("#courses-pane").hidden)return;const el=$("#crs-body");S.courses=S.courses||[];
   const wk=new Set([...Array(7)].map((_,i)=>dkey(addDays(weekStart(new Date()),i))));
   const x='<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6 6 18"/></svg>';
   const card=c=>{const g=gradeCalc(c),open=S.tasks.filter(t=>!t.done&&t.course===c.name).length,mins=(S.focusTags||[]).filter(f=>f.course===c.name&&wk.has(f.d)).reduce((a,f)=>a+f.sec,0)/60;
@@ -5383,6 +5421,137 @@ $("#courses-pane").addEventListener("click",e=>{
   else if(a==="cdel"){const i=S.courses.indexOf(c);S.courses.splice(i,1);save();renderCoursesPane();toast(`Removed ${c.name}`,{run(){S.courses.splice(i,0,c);save();renderCoursesPane();}});}
 });
 
+/* ---------- grade calculator ----------
+   Works like calculator.net's: rows of grade + weight, entered as percentages, letters or points.
+   Percent: average = Σ(grade × weight) / Σweight (no weights at all = plain average).
+   Points: average = Σearned / Σpossible. Letters: GPA points weighted the same way, then back to a letter.
+   Planning: with the current average covering (100 − R)% of the course, you need
+   (goal − average × (100 − R)/100) / (R/100) on the remaining R%. Points: (goal × (Σpossible + P) − Σearned) / P.
+   Final exam card: need = (want − current × (1 − w)) / w. State: S.gcalc, synced with everything else. */
+var GC_SCALES={
+  us:{name:"Standard (US)",gpa:true,rows:[["A+",97,4.0],["A",93,4.0],["A-",90,3.7],["B+",87,3.3],["B",83,3.0],["B-",80,2.7],["C+",77,2.3],["C",73,2.0],["C-",70,1.7],["D+",67,1.3],["D",63,1.0],["D-",60,0.7],["F",0,0]]},
+  on:{name:"Ontario (U of T style)",gpa:true,rows:[["A+",90,4.0],["A",85,4.0],["A-",80,3.7],["B+",77,3.3],["B",73,3.0],["B-",70,2.7],["C+",67,2.3],["C",63,2.0],["C-",60,1.7],["D+",57,1.3],["D",53,1.0],["D-",50,0.7],["F",0,0]]},
+  western:{name:"Western University",gpa:false,rows:[["A+",90],["A",80],["B",70],["C",60],["D",50],["F",0]]}
+};
+var crsMode="courses";
+function gcState(){
+  if(!S.gcalc||!Array.isArray(S.gcalc.rows))S.gcalc={type:"pct",scale:"us",rows:[{id:uid(),n:"Assignments",g:"",w:"30"},{id:uid(),n:"Midterm",g:"",w:"30"},{id:uid(),n:"",g:"",w:""}],goal:"",rem:"",fx:{cur:"",want:"",w:""}};
+  const g=S.gcalc;if(!GC_SCALES[g.scale])g.scale="us";if(!["pct","letter","pts"].includes(g.type))g.type="pct";g.fx=g.fx||{cur:"",want:"",w:""};return g;
+}
+const gcNum=v=>{v=String(v??"").trim().replace(/%$/,"").trim();if(!v)return null;const m=v.match(/^(-?\d+(?:\.\d+)?)\s*\/\s*(\d+(?:\.\d+)?)$/);if(m)return +m[2]?+m[1]/+m[2]*100:null;const n=Number(v);return Number.isFinite(n)?n:null;};
+const gcFmt=v=>v==null||!Number.isFinite(v)?"—":(Math.round(v*100)/100).toLocaleString(undefined,{maximumFractionDigits:2})+"%";
+function gcLetter(pct,sc){if(pct==null)return null;const r=GC_SCALES[sc].rows;for(const x of r)if(pct>=x[1]-1e-9)return x;return r[r.length-1];}
+function gcLetterOfGpa(gpa,sc){const r=GC_SCALES[sc].rows.filter(x=>x[2]!=null);let best=r[r.length-1];for(const x of r){if(gpa>=x[2]-1e-9){best=x;break;}}return best;}
+/* a letter's value: GPA points where the scale has them, otherwise the middle of its percentage range */
+function gcLetterVal(L,sc){const r=GC_SCALES[sc].rows,i=r.findIndex(x=>x[0]===L);if(i<0)return null;if(GC_SCALES[sc].gpa)return r[i][2];const hi=i?r[i-1][1]:100;return (r[i][1]+hi)/2;}
+function gcCalc(){
+  const g=gcState(),sc=GC_SCALES[g.scale];let out={n:0,skipped:0};
+  if(g.type==="pts"){let e=0,p=0;g.rows.forEach(r=>{const a=gcNum(r.g),b=gcNum(r.w);if(a==null&&b==null)return;if(a==null||b==null||b<=0){out.skipped++;return;}e+=a;p+=b;out.n++;});
+    out.earned=e;out.poss=p;out.pct=p?e/p*100:null;}
+  else{const vals=g.rows.map(r=>({v:g.type==="letter"?(r.g?gcLetterVal(r.g,g.scale):null):gcNum(r.g),w:gcNum(r.w)})).filter(x=>x.v!=null);
+    const anyW=vals.some(x=>x.w!=null&&x.w>0);let sw=0,sv=0;
+    vals.forEach(x=>{const w=anyW?(x.w!=null&&x.w>0?x.w:null):1;if(w==null){out.skipped++;return;}sw+=w;sv+=x.v*w;out.n++;});
+    out.sw=anyW?sw:null;out.val=sw?sv/sw:null;
+    if(g.type==="letter"){if(out.val!=null){if(sc.gpa){out.gpa=out.val;out.L=gcLetterOfGpa(out.val,g.scale);}else{out.pct=out.val;out.L=gcLetter(out.val,g.scale);}}}
+    else out.pct=out.val;}
+  if(out.pct!=null){out.L=out.L||gcLetter(out.pct,g.scale);}
+  if(out.L&&sc.gpa&&out.gpa==null)out.gpa=out.L[2];
+  // planning
+  const goalPct=gcGoalPct(g.goal,g.scale);
+  if(goalPct!=null&&out.pct!=null&&g.type!=="letter"){
+    if(g.type==="pts"){const P=gcNum(g.rem);if(P&&P>0){out.need=(goalPct/100*(out.poss+P)-out.earned)/P*100;out.R=P;out.best=(out.earned+P)/(out.poss+P)*100;}}
+    else{let R=gcNum(g.rem);if(R==null&&out.sw!=null&&out.sw<100)R=100-out.sw;if(R!=null&&R>0&&R<100){out.need=(goalPct-out.pct*(100-R)/100)/(R/100);out.R=R;out.best=out.pct*(100-R)/100+R;}}
+    out.goal=goalPct;}
+  return out;
+}
+function gcGoalPct(v,sc){v=String(v||"").trim();if(!v)return null;const L=GC_SCALES[sc].rows.find(x=>x[0].toLowerCase()===v.toLowerCase());if(L)return L[1];return gcNum(v);}
+function gcFinal(){const f=gcState().fx,c=gcNum(f.cur),w=gcNum(f.want)??gcGoalPct(f.want,gcState().scale),p=gcNum(f.w);if(c==null||w==null||p==null||p<=0||p>100)return null;return {need:(w-c*(1-p/100))/(p/100),want:w,cur:c,p,best:c*(1-p/100)+p,worst:c*(1-p/100)};}
+function gcShow(){
+  const m=crsMode;$$("#crs-mode button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.cm===m));glide($("#crs-mode"));
+  $("#crs-body").hidden=m!=="courses";$("#gc-body").hidden=m!=="calc";if(m==="calc")gcRender();
+}
+function gcRender(){
+  const el=$("#gc-body");if(!el||el.hidden)return;const g=gcState(),x='<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6 6 18"/></svg>';
+  const L=GC_SCALES[g.scale].rows.map(r=>r[0]),gradeH=g.type==="pts"?"Points earned":g.type==="letter"?"Letter":"Grade",wH=g.type==="pts"?"Points possible":"Weight";
+  const gradeIn=r=>g.type==="letter"?`<select data-gf="g" aria-label="Letter grade${r.n?" for "+esc(r.n):""}"><option value="">—</option>${L.map(l=>`<option${l===r.g?" selected":""}>${l}</option>`).join("")}</select>`
+    :`<span class="gc-in"><input type="text" data-gf="g" value="${esc(r.g)}" inputmode="decimal" placeholder="${g.type==="pts"?"e.g. 42":"e.g. 85 or 42/50"}" aria-label="${gradeH}${r.n?" for "+esc(r.n):""}">${g.type==="pct"?"<i>%</i>":""}</span>`;
+  const fx=g.fx;
+  el.innerHTML=`<div class="gc">
+    <section class="panel" aria-labelledby="gc-h">
+      <h2 id="gc-h">Grade calculator</h2>
+      <div class="gc-opts"><label>Grades in <select id="gc-type"><option value="pct"${g.type==="pct"?" selected":""}>Percentages</option><option value="letter"${g.type==="letter"?" selected":""}>Letters</option><option value="pts"${g.type==="pts"?" selected":""}>Points</option></select></label>
+        <label>Scale <select id="gc-scale">${Object.entries(GC_SCALES).map(([k,v])=>`<option value="${k}"${k===g.scale?" selected":""}>${v.name}</option>`).join("")}</select></label></div>
+      <div class="gc-rows"><div class="gc-h" aria-hidden="true"><span>Assignment or exam</span><span>${gradeH}</span><span>${wH}</span><span></span></div>
+        ${g.rows.map(r=>`<div class="gc-row" data-rid="${r.id}"><input type="text" class="gc-n" data-gf="n" value="${esc(r.n)}" maxlength="40" placeholder="Name (optional)" aria-label="Assignment or exam name">${gradeIn(r)}<span class="gc-in"><input type="text" data-gf="w" value="${esc(r.w)}" inputmode="decimal" placeholder="${g.type==="pts"?"e.g. 50":"e.g. 20"}" aria-label="${wH}${r.n?" for "+esc(r.n):""}">${g.type==="pts"?"":"<i>%</i>"}</span><button type="button" class="icon-btn" data-gc="del" aria-label="Remove row">${x}</button></div>`).join("")}
+      </div>
+      <div class="row"><button type="button" class="btn ghost small" data-gc="add">Add row</button><button type="button" class="btn ghost small" data-gc="clear">Clear</button></div>
+      <div class="gc-res" id="gc-out" aria-live="polite"></div>
+      ${g.type==="letter"?"":`<details${g.goal?" open":""}><summary>What do I need on the rest?</summary><div class="gc-plan" style="margin-top:10px">
+        <label>Final grade you want<input type="text" id="gc-goal" value="${esc(g.goal)}" placeholder="e.g. 85 or A-" inputmode="text"></label>
+        <label>${g.type==="pts"?"Points still to come":"Weight of what's left (%)"}<input type="text" id="gc-rem" value="${esc(g.rem)}" inputmode="decimal" placeholder="${g.type==="pts"?"e.g. 100":"e.g. 40"}"></label></div></details>`}
+      ${g.type==="letter"?"":`<div class="gc-save"><input type="text" id="gc-cname" list="courses" maxlength="32" placeholder="Course name, e.g. ES 1050" aria-label="Course name to save as"><button type="button" class="btn small" data-gc="save">Save as a course</button></div>`}
+    </section>
+    <div style="display:grid;gap:14px">
+      <section class="panel" aria-labelledby="gcf-h">
+        <h2 id="gcf-h">Final exam calculator</h2>
+        <div class="gc-fx"><label>Current grade (%)<input type="text" data-fx="cur" value="${esc(fx.cur)}" inputmode="decimal" placeholder="e.g. 82"></label>
+          <label>Grade you want (% or letter)<input type="text" data-fx="want" value="${esc(fx.want)}" placeholder="e.g. 85 or A"></label>
+          <label>Final exam is worth (%)<input type="text" data-fx="w" value="${esc(fx.w)}" inputmode="decimal" placeholder="e.g. 40"></label></div>
+        <div class="gc-res" id="gc-fout" aria-live="polite"></div>
+      </section>
+      <section class="panel" aria-labelledby="gcs-h"><h2 id="gcs-h">${esc(GC_SCALES[g.scale].name)} scale</h2><table class="gc-scale" id="gc-tbl"></table></section>
+    </div></div>`;
+  gcOut();
+}
+function gcOut(){
+  const g=gcState(),r=gcCalc(),sc=GC_SCALES[g.scale],o=$("#gc-out");if(!o)return;
+  let h;
+  if(!r.n)h=`<p class="muted">Enter at least one grade${g.type==="pts"?" with the points it was out of":""} to see your average.</p>`;
+  else{
+    const big=g.type==="letter"&&sc.gpa?`<b>${r.L[0]}</b><span>${r.gpa.toFixed(2)} GPA</span>`:`<b>${gcFmt(r.pct)}</b><span>${r.L?r.L[0]:""}</span>${sc.gpa&&r.L&&g.type!=="letter"?`<span class="muted" style="font-size:14px;font-weight:400">${r.L[2].toFixed(1)} GPA</span>`:""}`;
+    h=`<div class="gc-big">${big}</div><p class="muted">${g.type==="pts"?`${+r.earned.toFixed(2)} of ${+r.poss.toFixed(2)} points`:`Weighted average of ${r.n} grade${r.n===1?"":"s"}${r.sw!=null?` · weights add up to ${+r.sw.toFixed(2)}%`:" (no weights, so each counts the same)"}`}${r.skipped?` · ${r.skipped} row${r.skipped===1?"":"s"} skipped (missing ${g.type==="pts"?"points":"a weight"})`:""}</p>`;
+    if(r.need!=null){const nl=gcLetter(Math.max(0,r.need),g.scale);
+      h+=r.need<=0?`<p>You've already locked in ${gcFmt(r.goal)} even with 0% on the remaining ${g.type==="pts"?r.R+" points":r.R+"%"}.</p>`
+        :r.need>100?`<p>${gcFmt(r.goal)} is out of reach: even 100% on the rest gets you ${gcFmt(r.best)}.</p>`
+        :`<p>You need <b>${gcFmt(r.need)}</b> (${nl[0]}) on the remaining ${g.type==="pts"?r.R+" points":r.R+"%"} to finish with ${gcFmt(r.goal)}.</p>`;}
+    else if(g.goal&&g.type!=="letter")h+=`<p class="muted">${g.type==="pts"?"Add the points still to come":"Add the weight of what's left"} to see what you need.</p>`;
+  }
+  o.innerHTML=h;
+  const f=gcFinal(),fo=$("#gc-fout");
+  if(fo)fo.innerHTML=!f?`<p class="muted">Fill in all three to see what you need on the final.</p>`:f.need<=0?`<div class="gc-big"><b>0%</b></div><p>You'll have ${gcFmt(f.want)} even if you score 0 on the final (you'd end with ${gcFmt(f.worst)}).</p>`
+    :f.need>100?`<div class="gc-big"><b>${gcFmt(f.need)}</b></div><p>Out of reach: 100% on the final gets you ${gcFmt(f.best)} (${gcLetter(f.best,g.scale)[0]}).</p>`
+    :`<div class="gc-big"><b>${gcFmt(f.need)}</b><span>${gcLetter(f.need,g.scale)[0]}</span></div><p>That's what you need on a final worth ${f.p}% to finish with ${gcFmt(f.want)} (${gcLetter(f.want,g.scale)[0]}).</p>`;
+  const t=$("#gc-tbl");if(t){const cur=r.L&&r.L[0],rows=sc.rows;
+    t.innerHTML=`<thead><tr><th scope="col">Letter</th><th scope="col">Percent</th>${sc.gpa?'<th scope="col">GPA</th>':""}</tr></thead><tbody>${rows.map((x,i)=>`<tr class="${x[0]===cur?"on":""}"><td>${x[0]}</td><td>${x[1]===0?`below ${rows[i-1][1]}%`:`${x[1]}–${i?rows[i-1][1]-1:100}%`}</td>${sc.gpa?`<td>${x[2].toFixed(1)}</td>`:""}</tr>`).join("")}</tbody>`;}
+}
+$("#crs-mode").addEventListener("click",e=>{const b=e.target.closest("button[data-cm]");if(!b||b.dataset.cm===crsMode)return;crsMode=b.dataset.cm;gcShow();});
+$("#gc-body").addEventListener("input",e=>{
+  const g=gcState(),t=e.target,row=t.closest("[data-rid]");
+  if(row&&t.dataset.gf){const r=g.rows.find(x=>x.id===row.dataset.rid);if(r)r[t.dataset.gf]=t.value.slice(0,t.dataset.gf==="n"?40:20);}
+  else if(t.dataset.fx)g.fx[t.dataset.fx]=t.value.slice(0,12);
+  else if(t.id==="gc-goal")g.goal=t.value.slice(0,12);else if(t.id==="gc-rem")g.rem=t.value.slice(0,12);else return;
+  save();gcOut();
+});
+$("#gc-body").addEventListener("change",e=>{
+  const g=gcState(),t=e.target;
+  if(t.id==="gc-type"){const old=g.type;g.type=t.value;if((old==="letter")!==(g.type==="letter"))g.rows.forEach(r=>r.g="");save();gcRender();$("#gc-type").focus();}
+  else if(t.id==="gc-scale"){g.scale=t.value;if(g.type==="letter"){const L=GC_SCALES[g.scale].rows.map(x=>x[0]);g.rows.forEach(r=>{if(!L.includes(r.g))r.g="";});}save();gcRender();$("#gc-scale").focus();}
+  else if(t.tagName==="SELECT"&&t.dataset.gf==="g"){const r=g.rows.find(x=>x.id===t.closest("[data-rid]").dataset.rid);if(r)r.g=t.value;save();gcOut();}
+});
+$("#gc-body").addEventListener("click",e=>{
+  const b=e.target.closest("[data-gc]");if(!b)return;const g=gcState(),a=b.dataset.gc;
+  if(a==="add"){if(g.rows.length>=40)return;const r={id:uid(),n:"",g:"",w:""};g.rows.push(r);save();gcRender();const i=$(`#gc-body [data-rid="${r.id}"] input`);if(i)i.focus();}
+  else if(a==="del"){const i=g.rows.findIndex(x=>x.id===b.closest("[data-rid]").dataset.rid);if(i<0)return;const r=g.rows.splice(i,1)[0];if(!g.rows.length)g.rows.push({id:uid(),n:"",g:"",w:""});save();gcRender();toast("Row removed",{run(){g.rows.splice(i,0,r);save();gcRender();}});}
+  else if(a==="clear"){const prev=structuredClone(g);g.rows=[{id:uid(),n:"",g:"",w:""}];g.goal="";g.rem="";save();gcRender();toast("Calculator cleared",{run(){S.gcalc=prev;save();gcRender();}});}
+  else if(a==="save"){const name=($("#gc-cname").value||"").trim().slice(0,32);if(!name){toast("Give the course a name first");$("#gc-cname").focus();return;}
+    S.courses=S.courses||[];if(S.courses.some(c=>c.name.toLowerCase()===name.toLowerCase())){toast("You already have that course");return;}
+    let items;
+    if(g.type==="pts"){const rs=g.rows.filter(r=>gcNum(r.w)>0),tot=rs.reduce((s2,r)=>s2+gcNum(r.w),0);items=rs.map(r=>({id:uid(),name:r.n||"Part",w:Math.round(gcNum(r.w)/tot*1000)/10,score:gcNum(r.g)!=null?`${r.g}/${r.w}`:""}));}
+    else items=g.rows.filter(r=>r.n||r.g||r.w).map(r=>({id:uid(),name:r.n||"Part",w:gcNum(r.w)??0,score:r.g}));
+    if(!items.length){toast("Add a grade first");return;}
+    const goal=gcGoalPct(g.goal,g.scale),c={id:uid(),name,target:goal!=null?Math.min(100,Math.max(1,Math.round(goal))):85,items};
+    S.courses.push(c);save();renderCourses();renderCoursesPane();toast(`Saved ${name} to your courses`,{label:"Open",run(){crsMode="courses";gcShow();}});}
+});
 /* ---------- money goals ----------
    S.goals = [{id, name, target, by, track}] where track is "nw" (net worth) or an account id. */
 function goalCurrent(g){if(g.track==="nw")return totals().t;const a=S.accounts.find(x=>x.id===g.track);return a?(+a.value||0):0;}
@@ -5593,7 +5762,7 @@ railInd=document.createElement("div");railInd.className="ind";railInd.setAttribu
 $(".rail").prepend(railInd);$(".rail").classList.add("has-ind");
 {const bd=document.createElement("div");bd.className="hbead";bd.setAttribute("aria-hidden","true");$(".rail").prepend(bd);$(".rail")._bead=bd;}
 if(typeof ResizeObserver!=="undefined")new ResizeObserver(()=>moveInd(true)).observe($(".rail"));
-["#clock-seg","#task-filter","#bg-type","#st-type","#surface","#task-mode","#wp-mode"].forEach(q=>initSeg($(q)));
+["#clock-seg","#task-filter","#bg-type","#st-type","#surface","#task-mode","#wp-mode","#crs-mode"].forEach(q=>initSeg($(q)));
 if(S.accounts.length)snapshot();
 renderAll();jbRender();renderCals();renderCourses();
 npInit();

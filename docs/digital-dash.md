@@ -164,6 +164,16 @@ Tasks > Week plan (`#plan`, also a home screen shortcut and "week plan" in the c
 - Each course has a goal percent and weighted parts. Scores accept `42/50`, `84` or `84%` (`gPct`). `gradeCalc` gives the average so far, the score needed on the ungraded weight to hit the goal, the best grade still possible, and the final grade once everything is in. Weights that don't add up to 100 get a note.
 - Renaming a course renames it on tasks (`t.course`) and tagged focus sessions too. Each card shows open tasks and focus time this week for that course.
 
+## Grade calculator
+
+Courses and grades > Grade calculator (or "grade calculator" in the command bar), modelled on calculator.net's. State is `S.gcalc` and syncs.
+
+- Grades in percentages ("85", "85%" or "42/50"), letters or points. Percent and letters: weighted average Σ(grade × weight) / Σweight; with no weights at all every row counts the same; rows missing a weight when others have one are skipped (and said so). Points: Σearned / Σpossible. Letters average GPA points (or the middle of each range on scales without GPA) and map back to a letter.
+- Scales: Standard (US, A 93+, A- 90, B+ 87…), Ontario (U of T style, A+ 90, A 85, A- 80…) and Western University (A+ 90, A 80, B 70, C 60, D 50). The scale table highlights your current letter.
+- "What do I need on the rest?": goal (percent or letter, which uses that letter's cutoff) and the weight still to come (defaults to 100 − the weights entered). Need = (goal − average × (100 − R)/100) / (R/100); points mode uses (goal × (possible + P) − earned) / P.
+- Final exam calculator: need = (want − current × (1 − w)) / w, with "already locked in" and "out of reach" cases.
+- "Save as a course" turns the rows into a course on My courses (points become weights by share of the total).
+
 ## Money goals
 
 - Net (the net worth page) has a Goals panel. A goal tracks net worth or one asset account, with an optional date; it shows progress and how much a month is needed to reach it in time. With amounts hidden it shows only percentages and months left.
