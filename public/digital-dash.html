@@ -1200,6 +1200,18 @@ html.lg .wp-t{background:var(--glass-tint)}
 @media (max-width:979px){.wp-grid{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:minmax(210px,40%);overflow-x:auto;scroll-snap-type:x proximity;padding-bottom:8px;overscroll-behavior-x:contain}.wp-day{scroll-snap-align:start}}
 @media (max-width:600px){.wp-grid{grid-auto-flow:row;grid-template-columns:minmax(0,1fr);grid-auto-columns:auto;overflow:visible;padding-bottom:0}.wp-day.panel{min-height:0}.wp-add input{font-size:16px;padding:9px 10px}.wp-t{padding:9px 6px 9px 10px}.wp-mv{width:36px;height:36px;margin:-8px -2px}.wp-tt{font-size:15px}}
 @media (prefers-reduced-motion:reduce){.wp-bar i{transition:none}}
+.arch-bar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:14px;font-size:13px}
+.arch-bar .btn{display:inline-flex;align-items:center;gap:7px}
+.ar-set{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:14px}
+.ar-set select{flex:0 0 auto}
+.ar-list{list-style:none;margin:0;padding:0;display:grid;gap:6px;max-height:min(52vh,460px);overflow:auto}
+.ar-list li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 10px;align-items:center;padding:8px 8px 8px 12px;border-radius:10px;background:var(--panel2);border-left:3px solid var(--uc)}
+.ar-t{min-width:0;overflow-wrap:anywhere;font-size:14px}
+.ar-t small{display:block;font-size:12px;color:var(--muted);margin-top:1px}
+.ar-act{display:flex;gap:4px}
+.ar-foot{display:flex;gap:8px;flex-wrap:wrap;justify-content:space-between;align-items:center}
+.ar-search{width:100%}
+html.lg .ar-list li{background:var(--glass-tint)}
 .goals h3{margin:0 0 10px}
 .goal{display:grid;gap:6px;padding:10px 0;border-bottom:1px solid var(--line)}
 .goal-top{display:flex;align-items:center;gap:10px}
@@ -1497,6 +1509,7 @@ html.lg .eye{background:var(--glass-tint);box-shadow:inset 0 1px 0 color-mix(in 
         </div>
       </div>
       <div class="tasks" id="task-list"></div>
+      <div class="arch-bar"><button class="btn ghost small" type="button" id="arch-open" aria-haspopup="dialog"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="5" rx="1.5"/><path d="M5 9v9a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V9M10 13h4"/></svg><span id="arch-lbl">Archive</span></button><span class="muted" id="arch-hint"></span></div>
       </div>
     </section>
 
@@ -1715,6 +1728,12 @@ html.lg .eye{background:var(--glass-tint);box-shadow:inset 0 1px 0 color-mix(in 
     <div class="acd-body" id="trd-body" aria-live="polite"></div>
   </div>
 </dialog>
+<dialog class="acd acd-sm" id="arch" aria-labelledby="arch-h">
+  <div class="acd-in">
+    <div class="acd-top"><h2 id="arch-h">Archive</h2><button class="icon-btn" type="button" data-ar="close" aria-label="Close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
+    <div class="acd-body" id="arch-body"></div>
+  </div>
+</dialog>
 <dialog class="acd acd-sm" id="tour" aria-labelledby="tour-h">
   <div class="acd-in"><div class="acd-body" id="tour-body"></div></div>
 </dialog>
@@ -1885,7 +1904,9 @@ async function connect(){
 
 let toastT;
 function toast(m,undo){
-  const t=$("#toast");t.textContent=m;t.classList.toggle("act",!!undo);
+  const t=$("#toast"),dlg=[...document.querySelectorAll("dialog[open]")].pop(); /* inside an open dialog so its Undo can be clicked (a modal blocks the page) */
+  const home=dlg||document.body;if(t.parentNode!==home)home.appendChild(t);
+  t.textContent=m;t.classList.toggle("act",!!undo);
   if(undo){const b=document.createElement("button");b.type="button";b.className="undo";b.textContent=undo.label||"Undo";b.onclick=()=>{clearTimeout(toastT);t.classList.remove("on","act");undo.run();};t.appendChild(b);}
   t.classList.add("on");clearTimeout(toastT);
   toastT=setTimeout(()=>{t.classList.remove("on","act");if(undo&&undo.done)undo.done();},undo?5000:1800); // longer when there's something to act on
@@ -2849,7 +2870,7 @@ function logFocus(sec){ /* called when a focus session finishes */
 function sortedTasks(){
   const k=t=>(t.due||"9999")+" "+(t.dueTime||"99:99");
   const dn=t=>t.done&&!(graceDone&&graceDone.has(t.id)); /* a task you just ticked keeps its place until it leaves */
-  return [...S.tasks].sort((a,b)=>(dn(a)-dn(b))||(a.urg-b.urg)||(k(a)<k(b)?-1:k(a)>k(b)?1:0)||(a.created-b.created));
+  return S.tasks.filter(t=>!t.archived).sort((a,b)=>(dn(a)-dn(b))||(a.urg-b.urg)||(k(a)<k(b)?-1:k(a)>k(b)?1:0)||(a.created-b.created));
 }
 // When a task is due, as a Date: its time if set, otherwise the end of that day
 function dueAt(t){if(!t.due)return null;const [y,m,d]=t.due.split("-").map(Number),[hh,mm]=(t.dueTime||"23:59").split(":").map(Number);return new Date(y,m-1,d,hh,mm);}
@@ -2878,6 +2899,7 @@ function renderTasks(mode){
   </div>`;}).join("");
   },mode);
   renderPlan(); /* only draws while the week plan is showing */
+  archBar();
 }
 // Let the tick draw and the strike-through land before the row moves or leaves.
 let taskHold=0;
@@ -2971,7 +2993,7 @@ let calY,calM,selDay=dkey(new Date());
 function itemsFor(k){
   const calOf=id=>(S.calendars||[]).find(x=>x.id===id);
   const ev=S.events.filter(e=>e.date===k).sort((a,b)=>(a.time||"").localeCompare(b.time||"")).map(e=>{const c=e.src&&calOf(e.src);return {kind:"ev",id:e.id,title:e.title,time:e.time,cal:c?c.name:(e.src==="ai"?"AI plan":""),c:c?calColor(c):"var(--accent)"};});
-  const tk=S.tasks.filter(t=>t.due===k).map(t=>({kind:"task",id:t.id,title:t.title,done:t.done,time:t.dueTime,c:`var(--u${t.urg})`}));
+  const tk=S.tasks.filter(t=>t.due===k&&!t.archived).map(t=>({kind:"task",id:t.id,title:t.title,done:t.done,time:t.dueTime,c:`var(--u${t.urg})`}));
   return ev.concat(tk);
 }
 function renderCal(dir){
@@ -3536,6 +3558,7 @@ function cmdResults(q){
   let m;
   // navigation
   const NAV={focus:"focus",clock:"focus",tasks:"tasks",todo:"tasks",calendar:"calendar",cal:"calendar","net worth":"money",money:"money",networth:"money",themes:"themes",theme:"themes",settings:"themes"};
+  if(/^(?:go(?: to)?|open|show)?\s*(?:the )?(?:archive|archived(?: tasks)?)$/.test(lq))R.push({ic:"go",label:"Archived tasks",hint:"Go",run:()=>{show("tasks");archOpen();}});
   if(/^(?:go(?: to)?|open|show)?\s*(?:week(?:ly)? plan(?:ner)?|plan(?: my)? week|planner)$/.test(lq))R.push({ic:"go",label:"Week plan",hint:"Go",run:()=>shortcutLink("plan")});
   if((m=lq.match(/^(?:go(?: to)?|open|show)?\s*(focus|clock|tasks|todo|calendar|cal|net ?worth|money|themes|settings|week(?: review)?)$/))){
     const k=m[1].replace(/\s+/g," ");if(k.startsWith("week"))R.push({ic:"go",label:"Week review",hint:"Go",run:()=>{show("calendar");setCalMode("week");}});
@@ -3958,7 +3981,7 @@ function renderAll(){
   $$("#clock-seg button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.c===S.settings.clock));
   $("#def-clock").value=S.settings.clock;
   buildClock(S.settings.clock);
-  renderTasks();renderNowTask();renderMini();renderCal();renderMoney();renderSubs();renderCoursesPane();
+  archSweep(true);renderTasks();renderNowTask();renderMini();renderCal();renderMoney();renderSubs();renderCoursesPane();
   labelFields();appBadge();
 }
 
@@ -5288,6 +5311,59 @@ $("#plan-pane").addEventListener("submit",e=>{
   toast(`Added to ${k===dkey(new Date())?"today":wpDayName(k)}`,{run(){const i=S.tasks.indexOf(t);if(i>=0)S.tasks.splice(i,1);wpAfter();}});
 });
 dragable($("#plan-pane"),".wp-t:not(.done),.tray-chip,.wp-chip[data-id]:not(.done)",{target:".wp-day,.wp-cell",drop:(src,day)=>{const t=S.tasks.find(x=>x.id===(src.dataset.id||src.dataset.tid));wpPick=null;if(!t)return;if(wpDay(t)===day.dataset.k&&t.plan){renderPlan();return;}wpPlan(t,day.dataset.k);}});
+
+/* ---------- archive ----------
+   Finished tasks move out of your lists S.settings.archiveDays after you tick them (default 7, 0 = never):
+   t.archived = when. They stay in your stats and week review, and can be restored (back to Done for
+   another full period, via t.restoredAt) or deleted for good from the Archive dialog. */
+var AR_DAYS=[[1,"1 day"],[3,"3 days"],[7,"1 week"],[14,"2 weeks"],[30,"30 days"],[0,"Never"]];
+function arDays(){const d=S.settings.archiveDays;return d==null?7:+d;}
+function arList(){return S.tasks.filter(t=>t.archived).sort((a,b)=>b.archived-a.archived);}
+var arQuery="";
+function archSweep(quiet){
+  const days=arDays();if(!days)return 0;const cut=Date.now()-days*864e5;let n=0;
+  S.tasks.forEach(t=>{if(!t.done||t.archived||graceDone.has(t.id))return;if(Math.max(t.doneAt||t.created||0,t.restoredAt||0)<cut){t.archived=Date.now();n++;}});
+  const ar=S.tasks.filter(t=>t.archived);if(ar.length>1000){const drop=new Set(ar.sort((a,b)=>a.archived-b.archived).slice(0,ar.length-1000));S.tasks=S.tasks.filter(t=>!drop.has(t));} /* keep the archive (and sync) from growing forever */
+  if(n){save();if(!quiet){renderTasks();renderCal();}}
+  return n;
+}
+function archBar(){
+  const lbl=$("#arch-lbl");if(!lbl)return;const n=S.tasks.filter(t=>t.archived).length,d=arDays();
+  lbl.textContent=n?`Archive (${n})`:"Archive";
+  $("#arch-hint").textContent=d?`Finished tasks move to the archive after ${AR_DAYS.find(x=>x[0]===d)?.[1]||d+" days"}.`:"Finished tasks stay on your list.";
+}
+function archOpen(){const dlg=$("#arch");arQuery="";archRender();if(!dlg.open){try{dlg.showModal();}catch(e){dlg.setAttribute("open","");}}}
+function archRender(){
+  const el=$("#arch-body");if(!el)return;const all=arList(),q=arQuery.trim().toLowerCase(),list=q?all.filter(t=>t.title.toLowerCase().includes(q)||(t.course||"").toLowerCase().includes(q)):all;
+  const doneNow=S.tasks.filter(t=>t.done&&!t.archived).length,d=arDays(),fa=document.activeElement&&document.activeElement.id==="ar-q";
+  const when=ms=>new Date(ms).toLocaleDateString(undefined,{month:"short",day:"numeric",year:new Date(ms).getFullYear()===new Date().getFullYear()?undefined:"numeric"});
+  el.innerHTML=`<label class="ar-set">Move finished tasks here after <select id="ar-days" aria-label="Move finished tasks to the archive after">${AR_DAYS.map(([v,l])=>`<option value="${v}"${v===d?" selected":""}>${l}</option>`).join("")}</select></label>
+    ${all.length>8?`<input type="search" id="ar-q" class="ar-search" placeholder="Search the archive" aria-label="Search the archive" value="${esc(arQuery)}">`:""}
+    ${all.length?(list.length?`<ul class="ar-list" aria-label="Archived tasks">${list.map(t=>`<li data-id="${t.id}" style="--uc:var(--u${t.urg})"><span class="ar-t">${esc(t.title)}<small>Finished ${when(t.doneAt||t.created)}${t.course?" · "+esc(t.course):""}</small></span><span class="ar-act"><button type="button" class="btn ghost small" data-ar="restore" aria-label="Restore ${esc(t.title)}">Restore</button><button type="button" class="icon-btn" data-ar="del" aria-label="Delete ${esc(t.title)} for good" title="Delete for good"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6 6 18"/></svg></button></span></li>`).join("")}</ul>`:`<p class="muted">Nothing in the archive matches “${esc(arQuery)}”.</p>`):`<p class="muted">Nothing here yet. Finished tasks land here ${d?`${AR_DAYS.find(x=>x[0]===d)?.[1]||d+" days"} after you tick them off`:"when you archive them"}.</p>`}
+    <div class="ar-foot">${doneNow?`<button type="button" class="btn small" data-ar="now">Archive ${doneNow} finished now</button>`:"<span></span>"}${all.length?`<button type="button" class="btn ghost small" data-ar="clear">Delete all archived</button>`:""}</div>`;
+  if(fa){const i=$("#ar-q");if(i){i.focus();i.setSelectionRange(i.value.length,i.value.length);}}
+}
+function arAfter(){save();archRender();renderTasks();renderCal();renderMini();renderTimerTag();}
+$("#arch-open").addEventListener("click",archOpen);
+$("#arch").addEventListener("input",e=>{if(e.target.id==="ar-q"){arQuery=e.target.value;archRender();}});
+$("#arch").addEventListener("change",e=>{if(e.target.id!=="ar-days")return;S.settings.archiveDays=+e.target.value;const n=archSweep(true);arAfter();if(n)toast(`Moved ${n} finished task${n===1?"":"s"} to the archive`);});
+$("#arch").addEventListener("click",e=>{
+  const b=e.target.closest("[data-ar]");if(!b)return;const a=b.dataset.ar;
+  if(a==="close"){$("#arch").close();return;}
+  if(a==="now"){const ts=S.tasks.filter(t=>t.done&&!t.archived),at=Date.now();ts.forEach(t=>{graceEnd(t.id);t.archived=at;});arAfter();
+    toast(`Archived ${ts.length} finished task${ts.length===1?"":"s"}`,{run(){ts.forEach(t=>{delete t.archived;});arAfter();}});return;}
+  if(a==="clear"){const gone=S.tasks.filter(t=>t.archived);S.tasks=S.tasks.filter(t=>!t.archived);arAfter();
+    toast(`Deleted ${gone.length} archived task${gone.length===1?"":"s"}`,{run(){S.tasks.push(...gone);arAfter();}});return;}
+  const li=b.closest("li[data-id]"),t=li&&S.tasks.find(x=>x.id===li.dataset.id);if(!t)return;
+  if(a==="restore"){const was=t.archived;delete t.archived;t.restoredAt=Date.now();arAfter();
+    toast(`"${t.title}" is back in Done`,{run(){t.archived=was;arAfter();}});
+    requestAnimationFrame(()=>{const n=$("#arch .ar-list button");(n||$("#arch [data-ar=close]")).focus();});return;}
+  if(a==="del"){const at=S.tasks.indexOf(t);S.tasks.splice(at,1);arAfter();
+    toast("Deleted for good",{run(){S.tasks.splice(Math.min(at,S.tasks.length),0,t);arAfter();}});
+    requestAnimationFrame(()=>{const n=$("#arch .ar-list button");(n||$("#arch [data-ar=close]")).focus();});}
+});
+setInterval(()=>archSweep(),3600e3);
+document.addEventListener("close",e=>{const t=$("#toast");if(e.target.tagName==="DIALOG"&&t.parentNode===e.target)document.body.appendChild(t);},true);
 
 $("#courses-pane").addEventListener("submit",e=>{if(e.target.id!=="crs-add")return;e.preventDefault();const name=$("#crs-new").value.trim().slice(0,32);if(!name)return;
   S.courses=S.courses||[];if(S.courses.some(c=>c.name.toLowerCase()===name.toLowerCase())){toast("You already have that course");return;}

@@ -115,6 +115,13 @@ Optional sign-in so data saves to the cloud and follows you across devices. Sign
 - Ticking a task off keeps it in place for 6 seconds (`DONE_GRACE`) with an Undo button and a shrinking bar before it leaves the open list; the toast has Undo too. `setTaskDone(t, done)` is the one place that ticks or unticks (it also spawns or removes the next repeat), and `undoDone(t)` puts a task back.
 - `t.steps = [{id, t, done}]` is the checklist, opened with the list button on a task. The row shows a progress bar; finishing every step offers to tick off the task. The AI helper's "Add as checklist" puts its steps here.
 
+## Archive
+
+- Finished tasks leave your lists `S.settings.archiveDays` after you tick them off (1, 3, 7, 14 or 30 days, or never; default 7). `archSweep` sets `t.archived` (a timestamp) on load and every hour; it skips tasks still in their Undo grace period. Old done tasks with no `doneAt` use `created`.
+- Archived tasks are hidden from the task list, week plan and calendar (`sortedTasks`, `itemsFor`) but still count in stats, the week review and the Done this week widget.
+- The Archive button under the task list (or "archive" in the command bar) opens a separate dialog: change the number of days, search, Restore (back to Done for another full period via `t.restoredAt`), delete one for good, archive everything finished now, or delete the whole archive. All with Undo. The newest 1000 archived tasks are kept.
+- Toasts move into an open dialog so their Undo button can be clicked while the dialog is up.
+
 ## Week plan
 
 Tasks > Week plan (`#plan`, also a home screen shortcut and "week plan" in the command bar) lets you plan by **Week** or **Month** (`S.settings.planMode`), so you can split up your work and see how each day looks.
