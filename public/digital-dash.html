@@ -1256,6 +1256,21 @@ html.lg .ar-list li{background:var(--glass-tint)}
 .te-note{font-size:13px}
 @media (max-width:420px){.te-2{grid-template-columns:1fr}}
 /* Health: gym and meals */
+.bmi-scale{position:relative;height:10px;border-radius:5px;background:color-mix(in srgb,var(--ink) 10%,transparent);margin-top:6px}
+.bmi-ok{position:absolute;top:0;bottom:0;background:color-mix(in srgb,var(--accent) 45%,transparent)}
+.bmi-scale i{position:absolute;top:-5px;width:4px;height:20px;margin-left:-2px;border-radius:2px;background:var(--ink);box-shadow:0 0 0 2px var(--panel)}
+.bmi-ticks{position:relative;height:16px;font-size:11.5px;color:var(--muted);font-variant-numeric:tabular-nums}
+.bmi-ticks span{position:absolute;transform:translateX(-50%)}
+.bmi-ticks span:first-child{transform:none}.bmi-ticks span:last-child{transform:translateX(-100%)}
+.bd-list{margin:0;padding-left:18px;display:grid;gap:4px;font-size:14px}
+.hl-row.bd-two{gap:10px 32px}.bd-two div{display:grid;gap:2px}.bd-two b{font-size:22px;font-variant-numeric:tabular-nums}
+.bd-target{display:grid;gap:2px;padding:12px 14px;border-radius:12px;background:color-mix(in srgb,var(--accent) 12%,var(--panel2))}
+.bd-target b{font-size:24px;font-variant-numeric:tabular-nums}
+.bd-target small.hl-muted{color:var(--ink)}
+.bd-why{margin:0;font-size:14px;line-height:1.5}
+.bd-warn{font-size:11px;font-weight:700;padding:1px 6px;border-radius:999px;border:1px solid var(--u0);color:var(--ink);margin-left:4px}
+.bd-f .full select{width:100%}
+
 .hl-of{font-size:14px;font-weight:500;color:var(--muted)}
 .hl-stats .mbar-t{height:6px;margin-top:6px}
 .gx-sug{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:13.5px;padding:8px 10px;border-radius:10px;background:color-mix(in srgb,var(--accent) 12%,var(--panel))}
@@ -1762,7 +1777,7 @@ html.lg .eye{background:var(--glass-tint);box-shadow:inset 0 1px 0 color-mix(in 
     <section class="view" id="v-health">
       <h1 data-sub="t-health">Health</h1>
       <p class="sub" data-sub="health">Log your workouts, see what to lift next and track your progress. Everything saves as you go.</p>
-      <div class="seg hl-mode" id="hl-mode" role="group" aria-label="Gym"><button type="button" data-hm="log" aria-pressed="true">Workout</button><button type="button" data-hm="progress" aria-pressed="false">Progress</button></div>
+      <div class="seg hl-mode" id="hl-mode" role="group" aria-label="Gym"><button type="button" data-hm="log" aria-pressed="true">Workout</button><button type="button" data-hm="progress" aria-pressed="false">Progress</button><button type="button" data-hm="body" aria-pressed="false">Body and calories</button></div>
       <div id="gym-body"></div>
       <div id="meal-body" hidden></div>
       <datalist id="gym-ex-list"></datalist><datalist id="food-list"></datalist>
@@ -2681,6 +2696,7 @@ function shortcutLink(v){
   if(v==="today"){show("tasks");if(typeof setTaskMode==="function"&&taskMode!=="tasks")setTaskMode("tasks");taskFilter="today";$$("#task-filter button").forEach(x=>x.setAttribute("aria-pressed",x.dataset.f==="today"));renderTasks("plain");return true;}
   if(v==="gym"||v==="meals"){show("health");setHealthTab("log");return true;}
   if(v==="gym-progress"){show("health");setHealthTab("progress");return true;}
+  if(v==="bmi"||v==="calories"){show("health");setHealthTab("body");return true;}
   if(v==="plan"){show("tasks");if(typeof setTaskMode==="function"&&taskMode!=="plan")setTaskMode("plan");return true;}
   if(v==="start-focus"){show("focus");if(clockKind!=="timer")setClock("timer");setTimeout(()=>{if(!T.running){const g=$("#tm-go");if(g)g.click();}},80);return true;}
   return false;
@@ -3737,7 +3753,7 @@ function cmdResults(q){
   const R=[],raw=q.trim(),lq=raw.toLowerCase();
   const go=(v,label,fn)=>R.push({ic:"go",label,hint:"Go",run:fn||(()=>{if(VIEWS.includes(v)){show(v);try{history.pushState(null,"","#"+v);}catch(e){}}})});
   if(!raw){
-    go("focus","Focus");go("tasks","Tasks");R.push({ic:"go",label:"Week plan",hint:"Go",run:()=>shortcutLink("plan")});go("calendar","Calendar");R.push({ic:"go",label:"Week review",hint:"Go",run:()=>{show("calendar");setCalMode("week");}});go("money","Net");R.push({ic:"go",label:"Gym",hint:"Go",run:()=>shortcutLink("gym")});R.push({ic:"go",label:"Gym progress",hint:"Go",run:()=>shortcutLink("gym-progress")});go("themes","Themes");
+    go("focus","Focus");go("tasks","Tasks");R.push({ic:"go",label:"Week plan",hint:"Go",run:()=>shortcutLink("plan")});go("calendar","Calendar");R.push({ic:"go",label:"Week review",hint:"Go",run:()=>{show("calendar");setCalMode("week");}});go("money","Net");R.push({ic:"go",label:"Gym",hint:"Go",run:()=>shortcutLink("gym")});R.push({ic:"go",label:"Gym progress",hint:"Go",run:()=>shortcutLink("gym-progress")});R.push({ic:"go",label:"BMI and calories",hint:"Go",run:()=>shortcutLink("bmi")});go("themes","Themes");
     R.push({ic:"sound",label:JB.playing?"Pause sounds":"Play sounds",hint:"Sounds",run:()=>JB.playing?jbPause():jbPlay()});
     R.push({ic:"misc",label:"Try: gym tomorrow 5pm high · timer 40 · play rain · theme midnight",hint:"",run:()=>{}});
     return R;
@@ -3746,6 +3762,7 @@ function cmdResults(q){
   // navigation
   const NAV={focus:"focus",clock:"focus",tasks:"tasks",todo:"tasks",calendar:"calendar",cal:"calendar",net:"money",health:"health","net worth":"money",money:"money",networth:"money",themes:"themes",theme:"themes",settings:"themes"};
   if(/^(?:go(?: to)?|open|show|start)?\s*(?:the )?(?:gym|workout|lift(?:ing)?|gym tracker)$/.test(lq))R.push({ic:"go",label:"Gym",hint:"Go",run:()=>shortcutLink("gym")});
+  if(/^(?:go(?: to)?|open|show)?\s*(?:my )?(?:bmi|calories|calorie calc(?:ulator)?|tdee|bmr|maintenance|cut|bulk|cut or bulk|body)$/.test(lq))R.push({ic:"go",label:"BMI and calories",hint:"Go",run:()=>shortcutLink("bmi")});
   if(/^(?:go(?: to)?|open|show)?\s*(?:gym |lift |my )?(?:progress|prs?|personal records?|plates?|plate calc(?:ulator)?|bodyweight)$/.test(lq))R.push({ic:"go",label:/plate/.test(lq)?"Plate calculator":"Gym progress",hint:"Go",run:()=>shortcutLink(/plate/.test(lq)?"gym":"gym-progress")});
   if(/^(?:go(?: to)?|open|show)?\s*(?:the )?(?:grade|gpa|final(?: exam| grade)?) ?calc(?:ulator)?$|^what do i need on (?:the|my) final$/.test(lq))R.push({ic:"go",label:"Grade calculator",hint:"Go",run:()=>{show("tasks");setTaskMode("courses");crsMode="calc";gcShow();}});
   if(/^(?:go(?: to)?|open|show)?\s*(?:the )?(?:archive|archived(?: tasks)?)$/.test(lq))R.push({ic:"go",label:"Archived tasks",hint:"Go",run:()=>{show("tasks");archOpen();}});
@@ -5646,6 +5663,7 @@ function renderGym(){
       <div class="hl-row"><button type="button" class="btn" data-gy="start">Start empty workout</button>${done[0]?`<button type="button" class="btn ghost small" data-gy="repeat">Repeat ${esc(done[0].name)}</button>`:""}</div>
       ${g.templates.length?`<h3>Your routines</h3><div class="tpl-list">${g.templates.map(t=>`<span class="hl-row" style="gap:2px"><button type="button" class="btn ghost small" data-gy="tstart" data-tid="${t.id}">${esc(t.name)} · ${t.ex.length}</button><button type="button" class="icon-btn" data-gy="tdel" data-tid="${t.id}" aria-label="Delete routine ${esc(t.name)}">${x}</button></span>`).join("")}</div>`:`<p class="hl-muted">Tip: after a workout, save it as a routine (Push day, Legs…) to start it in one tap next time.</p>`}
     </section>`;
+  if(S.settings.gymTab==="body"){el.innerHTML=bodyHtml();bodyOut();restTick();return;}
   const tab=S.settings.gymTab==="progress"?"progress":"log",goal=g.goal||3,streak=gymStreak();
   const stats=`<div class="hl-stats"><div class="panel"><b>${wk.length} <span class="hl-of">of ${goal}</span></b><small>Workouts this week</small><div class="mbar-t" aria-hidden="true"><i style="transform:scaleX(${Math.min(1,wk.length/goal).toFixed(3)})"></i></div></div><div class="panel"><b>${streak}</b><small>${streak===1?"Week":"Weeks"} in a row hitting your goal</small></div><div class="panel"><b>${wn}</b><small>Sets this week</small></div><div class="panel"><b>${fmtW(wv)}</b><small>Volume this week (${u})</small></div></div>`;
   if(tab==="progress"){el.innerHTML=stats+gymProgressHtml();gymChartWire();restTick();return;}
@@ -5903,7 +5921,9 @@ $("#gym-body").addEventListener("change",e=>{const t=e.target,g=gymS();
   else if(t.id==="plate-bar"){g.bar=+t.value;save();plateOut();}});
 $("#gym-body").addEventListener("input",e=>{if(e.target.id==="plate-w"){gymS().plateW=e.target.value.replace(/[^\d.,]/g,"").slice(0,7);save();plateOut();}});
 $("#gym-body").addEventListener("submit",e=>{if(e.target.id!=="bw-form")return;e.preventDefault();const g=gymS(),v=gNum($("#bw-in").value);if(!v||v<=0||v>2000){toast("Enter your weight as a number");return;}
-  g.body=g.body||[];const k=dkey(new Date()),i=g.body.findIndex(x=>x.d===k);if(i>=0)g.body[i].w=v;else g.body.push({d:k,w:v});save();renderGym();toast(`Logged ${fmtW(v)} ${g.unit}`);});
+  g.body=g.body||[];const k=dkey(new Date()),i=g.body.findIndex(x=>x.d===k);if(i>=0)g.body[i].w=v;else g.body.push({d:k,w:v});
+  const pf=g.profile;if(pf){if(g.unit==="lb")pf.lb=String(v);else pf.kg=String(v);} /* the calorie calculator uses your latest weight */
+  save();renderGym();toast(`Logged ${fmtW(v)} ${g.unit}`);});
 $("#gym-body").addEventListener("click",e=>{
   const m=e.target.closest("[data-gm]");if(m){gymChart.metric=m.dataset.gm;$$("#gym-body [data-gm]").forEach(b=>b.setAttribute("aria-pressed",b===m));gymChartWire();return;}
   const b=e.target.closest("[data-gy]");if(!b)return;const g=gymS();
@@ -5914,10 +5934,110 @@ $("#gym-body").addEventListener("click",e=>{
 });
 var gymRO=0;addEventListener("resize",()=>{clearTimeout(gymRO);gymRO=setTimeout(()=>{if(curView==="health"&&S.settings.gymTab==="progress")gymChartWire();},150);});
 
+
+/* ---------- gym: body (BMI + calories) ----------
+   Same maths as calculator.net's BMI and Calorie calculators.
+   BMI = kg / m². Adult categories (WHO): <16 severe thinness, 16–17 moderate, 17–18.5 mild, 18.5–25 normal,
+   25–30 overweight, 30–35 obese I, 35–40 obese II, 40+ obese III. BMI Prime = BMI / 25; Ponderal index = kg / m³.
+   BMR: Mifflin-St Jeor (default) 10W + 6.25H − 5A + 5 (men) / −161 (women); Revised Harris-Benedict
+   13.397W + 4.799H − 5.677A + 88.362 (men), 9.247W + 3.098H − 4.330A + 447.593 (women); Katch-McArdle
+   370 + 21.6 × (1 − body fat) × W. Maintenance = BMR × activity (1.2 … 1.9). Lose/gain 0.5, 1, 2 lb a week
+   (0.25, 0.5, 1 kg) = ∓250, 500, 1000 kcal a day. Stored in S.gym.profile. */
+var ACTS=[[1,"Basal metabolic rate (BMR)"],[1.2,"Sedentary: little or no exercise"],[1.375,"Light: exercise 1–3 times a week"],[1.465,"Moderate: exercise 4–5 times a week"],[1.55,"Active: daily exercise or intense exercise 3–4 times a week"],[1.725,"Very active: intense exercise 6–7 times a week"],[1.9,"Extra active: very intense exercise daily, or a physical job"]];
+var BMI_CATS=[[0,16,"Severe thinness"],[16,17,"Moderate thinness"],[17,18.5,"Mild thinness"],[18.5,25,"Normal"],[25,30,"Overweight"],[30,35,"Obese class I"],[35,40,"Obese class II"],[40,99,"Obese class III"]];
+function bodyP(){const g=gymS();if(!g.profile){const lb=(g.body||[]).slice().sort((a,b)=>a.d<b.d?-1:1).pop();g.profile={units:g.unit==="kg"?"metric":"us",sex:"m",age:"",ft:"",inch:"",cm:"",lb:g.unit==="lb"&&lb?String(lb.w):"",kg:g.unit==="kg"&&lb?String(lb.w):"",act:1.465,formula:"m",bf:"",out:"kcal",plan:""};}return g.profile;}
+function bodyCalc(){
+  const p=bodyP(),age=gNum(p.age),us=p.units==="us";
+  const h=us?((gNum(p.ft)||0)*12+(gNum(p.inch)||0))*2.54:gNum(p.cm),w=us?(gNum(p.lb)!=null?gNum(p.lb)*0.45359237:null):gNum(p.kg),bf=gNum(p.bf);
+  const r={ok:!!(h>0&&w>0),h,w,age,us};if(!r.ok)return r;
+  const m=h/100;r.bmi=w/(m*m);r.cat=(BMI_CATS.find(c=>r.bmi>=c[0]&&r.bmi<c[1])||BMI_CATS[7])[2];r.prime=r.bmi/25;r.pi=w/(m*m*m);r.lo=18.5*m*m;r.hi=25*m*m;
+  r.needAge=!(age>=15&&age<=80);if(r.needAge)return r;
+  if(p.formula==="k"){if(!(bf>0&&bf<70)){r.needBf=true;return r;}r.bmr=370+21.6*(1-bf/100)*w;}
+  else if(p.formula==="r")r.bmr=p.sex==="f"?9.247*w+3.098*h-4.330*age+447.593:13.397*w+4.799*h-5.677*age+88.362;
+  else r.bmr=10*w+6.25*h-5*age+(p.sex==="f"?-161:5);
+  r.tdee=r.bmr*(+p.act||1.2);
+  // recommendation
+  const fatHi=p.sex==="f"?32:25,fatLo=p.sex==="f"?20:12;let rec,why;
+  if(bf>0&&bf<70&&r.bmi>=18.5){if(bf>fatHi){rec="cut";why=`At ${bf}% body fat you're above the usual healthy range for ${p.sex==="f"?"women (about 21–32%)":"men (about 8–25%)"}, so a steady cut makes sense.`;}
+    else if(bf<fatLo){rec="bulk";why=`At ${bf}% body fat you're lean, so a slow lean bulk lets you add muscle without much fat.`;}
+    else{rec="maintain";why=`At ${bf}% body fat you're in a healthy range, so eating at maintenance while training hard (a recomp) works well. Lean bulk if building muscle is the priority.`;}}
+  else if(r.bmi<17){rec="bulk";why="Your BMI is below the healthy range, so eating above maintenance to gain weight is the priority.";}
+  else if(r.bmi<18.5){rec="bulk";why="Your BMI is just under the healthy range (18.5–25), so a lean bulk is a good fit.";}
+  else if(r.bmi<22){rec="bulk";why="Your BMI is in the healthy range with room to grow, so a slow lean bulk suits building muscle. Maintenance is also fine.";}
+  else if(r.bmi<25){rec="maintain";why="Your BMI is in the healthy range, so eating at maintenance while training (a recomp) is a good default. Add your body fat % for a sharper call.";}
+  else if(r.bmi<30){rec="cut";why="Your BMI is in the overweight range, so a steady cut is suggested. BMI can't tell muscle from fat: if you're very muscular, add your body fat % for a better answer.";}
+  else{rec="cut";why="Your BMI is in the obese range, so a cut is suggested. Losing 1 lb (0.5 kg) a week is a sustainable pace; check with a doctor before bigger changes.";}
+  r.rec=rec;r.why=why;return r;
+}
+const kj=v=>v*4.184;
+function bodyPlans(r){const p=bodyP(),us=r.us,u=us?"lb":"kg",step=us?[0.5,1,2]:[0.25,0.5,1],cal=[250,500,1000];
+  return [["cut3","Extreme weight loss",`${step[2]} ${u}/week`,-cal[2]],["cut2","Weight loss",`${step[1]} ${u}/week`,-cal[1]],["cut1","Mild weight loss",`${step[0]} ${u}/week`,-cal[0]],["maintain","Maintain weight","",0],["bulk1","Mild weight gain",`${step[0]} ${u}/week`,cal[0]],["bulk2","Weight gain",`${step[1]} ${u}/week`,cal[1]],["bulk3","Fast weight gain",`${step[2]} ${u}/week`,cal[2]]].map(([k,l,rt,d])=>({k,l,rt,kcal:r.tdee+d,pct:(r.tdee+d)/r.tdee*100}));}
+function bodyFmt(v){const p=bodyP();return p.out==="kj"?Math.round(kj(v)).toLocaleString()+" kJ":Math.round(v).toLocaleString()+" kcal";}
+function bodyHtml(){
+  const p=bodyP(),us=p.units==="us",sel=(id,opts,v,lab)=>`<select id="${id}" aria-label="${lab}">${opts.map(([a,b])=>`<option value="${a}"${String(a)===String(v)?" selected":""}>${b}</option>`).join("")}</select>`;
+  return `<div class="hl-grid"><div class="hl-col"><section class="panel" aria-labelledby="bd-h"><h2 id="bd-h">Your details</h2>
+    <div class="gp-m" role="group" aria-label="Units"><button type="button" class="btn ghost small" data-bu="us" aria-pressed="${us}">US units</button><button type="button" class="btn ghost small" data-bu="metric" aria-pressed="${!us}">Metric units</button></div>
+    <div class="fa bd-f">
+      <label>Age<input type="text" inputmode="numeric" data-bp="age" value="${esc(p.age)}" placeholder="15–80"></label>
+      <label>Sex${sel("bd-sex",[["m","Male"],["f","Female"]],p.sex,"Sex")}</label>
+      ${us?`<label>Height (ft)<input type="text" inputmode="numeric" data-bp="ft" value="${esc(p.ft)}" placeholder="5"></label><label>Height (in)<input type="text" inputmode="decimal" data-bp="inch" value="${esc(p.inch)}" placeholder="10"></label><label>Weight (lb)<input type="text" inputmode="decimal" data-bp="lb" value="${esc(p.lb)}" placeholder="165"></label>`
+        :`<label>Height (cm)<input type="text" inputmode="decimal" data-bp="cm" value="${esc(p.cm)}" placeholder="180"></label><label>Weight (kg)<input type="text" inputmode="decimal" data-bp="kg" value="${esc(p.kg)}" placeholder="65"></label>`}
+      <label>Body fat %<input type="text" inputmode="decimal" data-bp="bf" value="${esc(p.bf)}" placeholder="Optional"></label>
+      <label class="full">Activity${sel("bd-act",ACTS,p.act,"Activity level")}</label>
+      <label class="wide">Formula${sel("bd-formula",[["m","Mifflin-St Jeor"],["r","Revised Harris-Benedict"],["k","Katch-McArdle (needs body fat %)"]],p.formula,"BMR formula")}</label>
+      <label class="wide">Show results in${sel("bd-out",[["kcal","Calories"],["kj","Kilojoules"]],p.out,"Result unit")}</label>
+    </div><p class="hl-muted">Mifflin-St Jeor is the default and works for most people. Katch-McArdle is more accurate if you know your body fat %.</p></section>
+    <div id="bd-cal"></div></div>
+    <div class="hl-col"><div id="bd-bmi"></div><div id="bd-rec"></div></div></div>`;
+}
+function bodyOut(){
+  const r=bodyCalc(),p=bodyP(),bmi=$("#bd-bmi"),cal=$("#bd-cal"),rec=$("#bd-rec");if(!bmi)return;
+  const wu=r.us?"lb":"kg",wv=kg=>r.us?kg/0.45359237:kg;
+  if(!r.ok){bmi.innerHTML=`<section class="panel"><h2>BMI</h2><p class="hl-empty">Enter your height and weight to see your BMI.</p></section>`;cal.innerHTML="";rec.innerHTML="";return;}
+  const pos=Math.max(0,Math.min(1,(r.bmi-15)/(40-15)));
+  const diff=r.bmi>25?`Lose ${fmtW(wv(r.w-r.hi))} ${wu} to reach a BMI of 25.`:r.bmi<18.5?`Gain ${fmtW(wv(r.lo-r.w))} ${wu} to reach a BMI of 18.5.`:"You're in the healthy range.";
+  bmi.innerHTML=`<section class="panel" aria-labelledby="bmi-h"><h2 id="bmi-h">BMI</h2>
+    <div class="kcal-big"><b>${(Math.round(r.bmi*10)/10).toFixed(1)}</b><span>${r.cat}</span></div>
+    <div class="bmi-scale" role="img" aria-label="BMI ${r.bmi.toFixed(1)} on a scale from 15 to 40; healthy is 18.5 to 25"><span class="bmi-ok" style="left:${(3.5/25*100).toFixed(2)}%;width:${(6.5/25*100).toFixed(2)}%"></span><i style="left:${(pos*100).toFixed(2)}%"></i></div>
+    <div class="bmi-ticks" aria-hidden="true"><span style="left:0">15</span><span style="left:14%">18.5</span><span style="left:40%">25</span><span style="left:60%">30</span><span style="left:100%">40</span></div>
+    <ul class="bd-list"><li>Healthy BMI range: 18.5 – 25 kg/m²</li><li>Healthy weight for your height: ${fmtW(wv(r.lo))} – ${fmtW(wv(r.hi))} ${wu}</li><li>${diff}</li><li>BMI Prime: ${r.prime.toFixed(2)} · Ponderal index: ${r.pi.toFixed(1)} kg/m³</li></ul>
+    <p class="hl-muted">${r.age!=null&&r.age<20?"For people under 20, doctors compare BMI against age and sex percentiles, so treat the categories above as rough. ":""}BMI doesn't separate muscle from fat, so very muscular people can read as overweight.</p></section>`;
+  if(r.needAge){cal.innerHTML=`<section class="panel"><h2>Calories</h2><p class="hl-empty">Enter your age (15 to 80) to see your calories.</p></section>`;rec.innerHTML="";return;}
+  if(r.needBf){cal.innerHTML=`<section class="panel"><h2>Calories</h2><p class="hl-empty">Katch-McArdle needs your body fat %. Add it, or switch formula.</p></section>`;rec.innerHTML="";return;}
+  const plans=bodyPlans(r),floor=p.sex==="f"?1200:1500;
+  cal.innerHTML=`<section class="panel" aria-labelledby="cal-h"><h2 id="cal-h">Calories per day</h2>
+    <div class="hl-row bd-two"><div><small class="hl-muted">Maintenance</small><b>${bodyFmt(r.tdee)}</b></div><div><small class="hl-muted">BMR (at rest)</small><b>${bodyFmt(r.bmr)}</b></div></div>
+    <table class="hl-tbl"><thead><tr><th scope="col">Goal</th><th scope="col" class="num">Per day</th><th scope="col" class="num">Of maintenance</th></tr></thead><tbody>
+    ${plans.map(x=>`<tr class="${p.plan===x.k?"today":""}"><td>${x.l}${x.rt?` <small class="hl-muted" style="display:inline">${x.rt}</small>`:""}</td><td class="num">${bodyFmt(x.kcal)}${x.kcal<floor&&x.kcal<r.tdee?' <span class="bd-warn">low</span>':""}</td><td class="num">${Math.round(x.pct)}%</td></tr>`).join("")}</tbody></table>
+    <p class="hl-muted">1 lb of fat is about 3,500 kcal, so 500 kcal a day is about 1 lb a week. Eating under ${floor.toLocaleString()} kcal a day isn't recommended without a doctor (marked "low").</p></section>`;
+  const map={cut:"cut2",maintain:"maintain",bulk:"bulk1"},pk=p.plan||map[r.rec],pl=plans.find(x=>x.k===pk)||plans[3];
+  const wKg=r.w,prot=Math.round(wKg*(pl.k.startsWith("cut")?2.2:1.8)),fat=Math.round(pl.kcal*0.25/9),carb=Math.max(0,Math.round((pl.kcal-prot*4-fat*9)/4));
+  const label={cut:"Cut",maintain:"Maintain",bulk:"Bulk"};
+  rec.innerHTML=`<section class="panel bd-rec" aria-labelledby="rec-h"><h2 id="rec-h">Cut, maintain or bulk?</h2>
+    <div class="kcal-big"><b>${label[r.rec]}</b><span>suggested</span></div><p class="bd-why">${r.why}</p>
+    <div class="gp-m" role="group" aria-label="Your plan">${plans.map(x=>`<button type="button" class="btn ghost small" data-bplan="${x.k}" aria-pressed="${x.k===pl.k}">${x.k==="maintain"?"Maintain":x.k.startsWith("cut")?"Lose "+x.rt.split(" ")[0]:"Gain "+x.rt.split(" ")[0]}</button>`).join("")}</div>
+    <div class="bd-target"><small class="hl-muted">${p.plan?"Your plan":"Suggested plan"}: ${pl.l}${pl.rt?" ("+pl.rt+")":""}</small><b>${bodyFmt(pl.kcal)} a day</b></div>
+    <table class="hl-tbl"><thead><tr><th scope="col">Macro</th><th scope="col" class="num">Per day</th><th scope="col" class="num">kcal</th></tr></thead><tbody>
+      <tr><td>Protein <small class="hl-muted" style="display:inline">${pl.k.startsWith("cut")?"2.2":"1.8"} g per kg</small></td><td class="num">${prot} g</td><td class="num">${prot*4}</td></tr>
+      <tr><td>Fat <small class="hl-muted" style="display:inline">25% of calories</small></td><td class="num">${fat} g</td><td class="num">${fat*9}</td></tr>
+      <tr><td>Carbs <small class="hl-muted" style="display:inline">the rest</small></td><td class="num">${carb} g</td><td class="num">${carb*4}</td></tr></tbody></table>
+    <p class="hl-muted">${p.plan?`<button type="button" class="btn ghost small" data-bplan="">Go back to the suggestion</button> `:""}Recheck every few weeks as your weight changes: log it on the Progress tab. This is general guidance, not medical advice.</p></section>`;
+}
+$("#gym-body").addEventListener("input",e=>{const k=e.target.dataset.bp;if(!k)return;bodyP()[k]=e.target.value.replace(/[^\d.,]/g,"").slice(0,6);save();bodyOut();});
+$("#gym-body").addEventListener("change",e=>{const p=bodyP(),id=e.target.id;
+  if(id==="bd-sex")p.sex=e.target.value;else if(id==="bd-act")p.act=+e.target.value;else if(id==="bd-formula")p.formula=e.target.value;else if(id==="bd-out")p.out=e.target.value;else return;save();bodyOut();});
+$("#gym-body").addEventListener("click",e=>{
+  const u=e.target.closest("[data-bu]");if(u){const p=bodyP();if(p.units===u.dataset.bu)return;
+    if(u.dataset.bu==="metric"){const inch=(gNum(p.ft)||0)*12+(gNum(p.inch)||0);if(inch)p.cm=String(Math.round(inch*2.54));if(gNum(p.lb))p.kg=String(Math.round(gNum(p.lb)*0.45359237*10)/10);}
+    else{if(gNum(p.cm)){const t=gNum(p.cm)/2.54;p.ft=String(Math.floor(t/12));p.inch=String(Math.round(t%12));if(p.inch==="12"){p.ft=String(+p.ft+1);p.inch="0";}}if(gNum(p.kg))p.lb=String(Math.round(gNum(p.kg)/0.45359237));}
+    p.units=u.dataset.bu;save();renderGym();const nb=$(`#gym-body [data-bu="${u.dataset.bu}"]`);if(nb)nb.focus();return;}
+  const b=e.target.closest("[data-bplan]");if(b){bodyP().plan=b.dataset.bplan;save();bodyOut();const nb=$(`#gym-body [data-bplan="${b.dataset.bplan||""}"]`)||$(`#gym-body .bd-rec [aria-pressed="true"]`);if(nb)nb.focus();}
+});
+
 /* ---------- health view ---------- */
 /* Meals and macros are hidden until they're ready; S.food and its code stay, so nobody's logged meals are lost. */
-function setHealthTab(m){S.settings.gymTab=m==="progress"?"progress":"log";save();renderHealth();}
-function renderHealth(){if(curView!=="health")return;hlTab="gym";const t=S.settings.gymTab==="progress"?"progress":"log";$$("#hl-mode button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.hm===t));glide($("#hl-mode"));$("#gym-body").hidden=false;$("#meal-body").hidden=true;renderGym();}
+function setHealthTab(m){S.settings.gymTab=["progress","body"].includes(m)?m:"log";save();renderHealth();}
+function renderHealth(){if(curView!=="health")return;hlTab="gym";const t=["progress","body"].includes(S.settings.gymTab)?S.settings.gymTab:"log";$$("#hl-mode button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.hm===t));glide($("#hl-mode"));$("#gym-body").hidden=false;$("#meal-body").hidden=true;renderGym();}
 $("#hl-mode").addEventListener("click",e=>{const b=e.target.closest("button[data-hm]");if(!b||b.getAttribute("aria-pressed")==="true")return;setHealthTab(b.dataset.hm);$("main").scrollTop=0;});
 
 setInterval(()=>archSweep(),3600e3);

@@ -126,6 +126,13 @@ Meals and macros are hidden for now (`renderHealth` never shows `#meal-body`). I
 - **Plate calculator** (`plateSplit`): plates per side for a target with a chosen bar (Olympic, women's, EZ, none), the closest loadable weight when it isn't exact, and a warm-up ladder (bar × 10, 40% × 5, 60% × 3, 80% × 2). Each exercise has a "Plates for…" shortcut.
 - **New PR**: a set beating your best estimated 1RM for that exercise (Epley, weight × (1 + reps ÷ 30)) is flagged on the exercise.
 - **Progress tab:** weekly goal (1 to 7 workouts) with a streak of weeks hitting it; a 12-week calendar; a chart per exercise of est. 1RM, top weight or volume per session (`lineChart`: 2px line, ringed 8px dots, crosshair and tooltip on hover, tap or arrow keys, table view); sets per muscle group this week (`gymMuscle` groups exercises by name, unknown ones count as Other); personal records; a bodyweight log (`S.gym.body`, one entry per day) with its own chart and change over 30 days.
+- **Body and calories tab** (`#bmi`, "bmi", "calories", "cut or bulk" in the command bar). It uses the same maths as calculator.net's BMI and Calorie calculators, stored in `S.gym.profile`:
+  - **Inputs:** US or metric units (switching converts what you typed), age, sex, height, weight, optional body fat %, the 7 activity levels (BMR, 1.2, 1.375, 1.465, 1.55, 1.725, 1.9), formula (Mifflin-St Jeor default, Revised Harris-Benedict, Katch-McArdle), and kcal or kJ.
+  - **BMI:** WHO adult categories, healthy weight for your height, the distance to the healthy range, BMI Prime and Ponderal index.
+  - **Calories:** maintenance (BMR × activity) and lose or gain 0.5, 1 or 2 lb a week (0.25, 0.5 or 1 kg) at ∓250, 500 or 1,000 kcal, with % of maintenance. Days under 1,500 kcal (men) or 1,200 (women) are flagged "low".
+  - **Cut, maintain or bulk:** `bodyCalc` decides from body fat % when you give it (men over 25% or women over 32% cut; under 12% or 20% lean bulk; otherwise maintain). Without body fat it uses BMI: under 18.5 bulk, 18.5–22 lean bulk, 22–25 maintain, 25+ cut. You can pick any plan; macros follow it: protein 2.2 g/kg on a cut and 1.8 otherwise, fat 25% of calories, carbs the rest.
+  - **Weight:** logging bodyweight on Progress updates the weight used here.
+  - Checked against the calculator.net example (25, male, 5'10", 165 lb, moderate, Mifflin): BMI 23.7, BMR 1,740, maintenance 2,549, then 2,299 / 2,049 / 1,549 to lose and 2,799 / 3,049 / 3,549 to gain.
 
 ## Editing tasks
 
