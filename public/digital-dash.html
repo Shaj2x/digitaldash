@@ -1256,6 +1256,36 @@ html.lg .ar-list li{background:var(--glass-tint)}
 .te-note{font-size:13px}
 @media (max-width:420px){.te-2{grid-template-columns:1fr}}
 /* Health: gym and meals */
+.sp-today{display:grid;gap:4px;padding:12px 14px;border-radius:12px;background:color-mix(in srgb,var(--accent) 12%,var(--panel2))}
+.sp-today b{font-size:22px}
+.sp-today small.hl-muted,.sp-today span.hl-muted{color:var(--ink)}
+.sp-today .hl-row{margin-top:6px}
+.sp-strip{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(78px,1fr));gap:6px}
+.sp-strip li{display:grid;gap:1px;padding:7px 9px;border-radius:10px;background:var(--panel2);min-width:0}
+.sp-strip li small{font-size:11.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+.sp-strip li b{font-size:13px;overflow-wrap:anywhere}
+.sp-strip li.on{box-shadow:inset 0 0 0 2px var(--accent)}
+.sp-sec{display:grid;gap:10px;padding-bottom:14px;border-bottom:1px solid var(--line)}
+.sp-sec h3{margin:0;font-size:15px}
+.sp-row{display:grid;grid-template-columns:96px minmax(0,1fr) auto;gap:8px;align-items:center;font-size:14px}
+.sp-row select{width:100%;box-sizing:border-box}
+.sp-ord{display:flex;gap:2px}
+.sp-tpl{border-radius:12px;background:var(--panel2);padding:4px 6px 4px 4px}
+.sp-th{display:flex;align-items:center;gap:6px}
+.sp-tn{flex:1;display:flex;align-items:baseline;gap:8px;text-align:left;background:none;border:0;color:var(--ink);padding:8px 10px;border-radius:8px;cursor:pointer;font:inherit}
+.sp-tn:hover{background:color-mix(in srgb,var(--ink) 6%,transparent)}
+.sp-tn::after{content:"›";margin-left:auto;color:var(--muted);transition:transform var(--t-fast) ease}
+.sp-tn[aria-expanded="true"]::after{transform:rotate(90deg)}
+.sp-te{display:grid;gap:8px;padding:6px 8px 10px}
+.sp-ex{margin:0;padding:0 0 0 22px;display:grid;gap:2px;font-size:14px}
+.sp-ex li{padding:2px 0}
+.sp-ex li>span:first-child{display:inline-block;min-width:0;overflow-wrap:anywhere}
+.sp-ex li{display:list-item}
+.sp-ex li .sp-ord{float:right}
+#spd .acd-body{max-height:min(78vh,760px)}
+html.lg .sp-tpl,html.lg .sp-strip li{background:var(--glass-tint)}
+@media (max-width:560px){.sp-row{grid-template-columns:76px minmax(0,1fr) auto}.sp-row select{font-size:16px}}
+
 .bmi-scale{position:relative;height:10px;border-radius:5px;background:color-mix(in srgb,var(--ink) 10%,transparent);margin-top:6px}
 .bmi-ok{position:absolute;top:0;bottom:0;background:color-mix(in srgb,var(--accent) 45%,transparent)}
 .bmi-scale i{position:absolute;top:-5px;width:4px;height:20px;margin-left:-2px;border-radius:2px;background:var(--ink);box-shadow:0 0 0 2px var(--panel)}
@@ -1912,6 +1942,12 @@ html.lg .eye{background:var(--glass-tint);box-shadow:inset 0 1px 0 color-mix(in 
   <div class="acd-in">
     <div class="acd-top"><h2 id="trd-h">Remind me</h2><button class="icon-btn" type="button" data-tr="close" aria-label="Close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
     <div class="acd-body" id="trd-body" aria-live="polite"></div>
+  </div>
+</dialog>
+<dialog class="acd" id="spd" aria-labelledby="spd-h">
+  <div class="acd-in">
+    <div class="acd-top"><h2 id="spd-h">Edit split</h2><button class="icon-btn" type="button" data-spa="close" aria-label="Close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
+    <div class="acd-body" id="spd-body"></div>
   </div>
 </dialog>
 <dialog class="acd acd-sm" id="ted" aria-labelledby="ted-h">
@@ -5624,8 +5660,8 @@ function gymLast(name,skipId){const k=name.toLowerCase(),ws=gymS().workouts.filt
   if(!ws.length)return null;const x=ws[0].ex.find(x2=>x2.name.toLowerCase()===k);return {date:ws[0].date,sets:x.sets.filter(s2=>gNum(s2.r)>0)};}
 function gymVol(w){let v=0,n=0;w.ex.forEach(x=>x.sets.forEach(s2=>{if(!setCounts(w,s2))return;n++;v+=(gNum(s2.w)||0)*gNum(s2.r);}));return {v,n};}
 function gymNewEx(name,w){const last=gymLast(name,w&&w.id);return {id:uid(),name,sets:(last&&last.sets.length?last.sets:[{w:"",r:""}]).map(s2=>({id:uid(),w:s2.w??"",r:s2.r??"",done:false}))};}
-function gymStart(fromTpl){const g=gymS();if(gymCur())return;const now=new Date(),w={id:uid(),date:dkey(now),name:fromTpl?fromTpl.name:(now.getHours()<12?"Morning workout":now.getHours()<17?"Afternoon workout":"Evening workout"),started:Date.now(),finished:null,ex:[]};
-  if(fromTpl)w.ex=fromTpl.ex.map(n=>gymNewEx(n,w));g.workouts.push(w);g.cur=w.id;save();renderGym();const i=$("#gym-body .gw-add input");if(i&&!w.ex.length)i.focus();}
+function gymStart(fromTpl,meta){const g=gymS();if(gymCur())return;const now=new Date(),w={id:uid(),date:dkey(now),name:fromTpl?fromTpl.name:(now.getHours()<12?"Morning workout":now.getHours()<17?"Afternoon workout":"Evening workout"),started:Date.now(),finished:null,ex:[]};
+  if(fromTpl)w.ex=fromTpl.ex.map(n=>gymNewEx(n,w));if(meta)w.split=meta;g.workouts.push(w);g.cur=w.id;save();renderGym();const i=$("#gym-body .gw-add input");if(i&&!w.ex.length)i.focus();}
 function restStart(){const g=gymS();clearInterval(restT.timer);if(!g.rest){restT.end=0;return;}restT.end=Date.now()+g.rest*1000;restT.timer=setInterval(restTick,250);restTick();}
 function restTick(){const el=$("#rest");const left=Math.max(0,restT.end-Date.now());
   if(!restT.end||left<=0){if(restT.end){restT.end=0;clearInterval(restT.timer);toast("Rest's over. Next set!");if(navigator.vibrate)try{navigator.vibrate([120,60,120]);}catch(e){}}if(el)el.hidden=true;return;}
@@ -5659,9 +5695,9 @@ function renderGym(){
       <form class="hl-row gw-add" autocomplete="off"><input type="text" list="gym-ex-list" maxlength="60" placeholder="Add exercise, e.g. Bench press" aria-label="Exercise name"><button class="btn small" type="submit">Add exercise</button></form>
       <div class="hl-row"><button type="button" class="btn" data-gy="finish">${w.finished?"Done editing":"Finish workout"}</button>${w.ex.length?`<button type="button" class="btn ghost small" data-gy="tpl">Save as routine</button>`:""}<button type="button" class="btn ghost small" data-gy="discard">${w.finished?"Delete workout":"Discard"}</button></div>
     </section>`;}
-  else cur=`<section class="panel" aria-labelledby="gs-h"><h2 id="gs-h">Start a workout</h2>
+  else cur=splitCard()+`<section class="panel" aria-labelledby="gs-h"><h2 id="gs-h">Start a workout</h2>
       <div class="hl-row"><button type="button" class="btn" data-gy="start">Start empty workout</button>${done[0]?`<button type="button" class="btn ghost small" data-gy="repeat">Repeat ${esc(done[0].name)}</button>`:""}</div>
-      ${g.templates.length?`<h3>Your routines</h3><div class="tpl-list">${g.templates.map(t=>`<span class="hl-row" style="gap:2px"><button type="button" class="btn ghost small" data-gy="tstart" data-tid="${t.id}">${esc(t.name)} · ${t.ex.length}</button><button type="button" class="icon-btn" data-gy="tdel" data-tid="${t.id}" aria-label="Delete routine ${esc(t.name)}">${x}</button></span>`).join("")}</div>`:`<p class="hl-muted">Tip: after a workout, save it as a routine (Push day, Legs…) to start it in one tap next time.</p>`}
+      ${g.templates.length?`<h3>Your routines</h3><div class="tpl-list">${g.templates.map(t=>`<button type="button" class="btn ghost small" data-gy="tstart" data-tid="${t.id}">${esc(t.name)} · ${t.ex.length}</button>`).join("")}</div><p class="hl-muted">Edit or delete routines in Edit split.</p>`:`<p class="hl-muted">Tip: after a workout, save it as a routine (Push day, Legs…) to start it in one tap next time.</p>`}
     </section>`;
   if(S.settings.gymTab==="body"){el.innerHTML=bodyHtml();bodyOut();restTick();return;}
   const tab=S.settings.gymTab==="progress"?"progress":"log",goal=g.goal||3,streak=gymStreak();
@@ -5706,7 +5742,7 @@ $("#gym-body").addEventListener("click",e=>{
     if(ex0)ex0.ex=ex;else g.templates.push({id:uid(),name,ex});save();toast(ex0?`Updated routine ${name}`:`Saved routine ${name}`);return;}
   if(a==="finish"&&f.w){const w=f.w;w.ex.forEach(x=>{x.sets=x.sets.filter(s2=>gNum(s2.r)>0||gNum(s2.w)>0);});w.ex=w.ex.filter(x=>x.sets.length);
     if(!w.ex.length){toast("Log at least one set with reps, or discard the workout");renderGym();return;}
-    const first=!w.finished;if(first)w.finished=Date.now();g.cur=null;restT.end=0;clearInterval(restT.timer);save();renderGym();
+    const first=!w.finished;if(first){w.finished=Date.now();splitAdvance(w);}g.cur=null;restT.end=0;clearInterval(restT.timer);save();renderGym();
     if(first){const v=gymVol(w);toast(`Nice work! ${v.n} sets, ${fmtW(v.v)} ${g.unit} lifted`);}else toast("Workout updated");return;}
   if(a==="discard"&&f.w){const w=f.w,i=g.workouts.indexOf(w);g.workouts.splice(i,1);g.cur=null;restT.end=0;save();renderGym();toast(w.finished?"Workout deleted":"Workout discarded",{run(){g.workouts.splice(i,0,w);g.cur=w.id;save();renderGym();}});return;}
   const li=b.closest("[data-wid]"),w2=li&&g.workouts.find(x=>x.id===li.dataset.wid);if(!w2)return;
@@ -6033,6 +6069,100 @@ $("#gym-body").addEventListener("click",e=>{
     p.units=u.dataset.bu;save();renderGym();const nb=$(`#gym-body [data-bu="${u.dataset.bu}"]`);if(nb)nb.focus();return;}
   const b=e.target.closest("[data-bplan]");if(b){bodyP().plan=b.dataset.bplan;save();bodyOut();const nb=$(`#gym-body [data-bplan="${b.dataset.bplan||""}"]`)||$(`#gym-body .bd-rec [aria-pressed="true"]`);if(nb)nb.focus();}
 });
+
+
+/* ---------- gym: training split ----------
+   S.gym.split = {name, mode:"week"|"rot", week:[7 routine ids, Monday first, "" = rest], rot:[routine ids or ""], next}
+   Routines are S.gym.templates ({id, name, ex:[exercise names]}), shared with "Save as routine".
+   Weekly: today's routine comes from the weekday. Rotation: Day 1, 2, 3… in order; finishing that day's
+   workout (or "Rest day done") moves to the next, whatever the weekday. Deleted routines read as rest. */
+var SPLIT_PRESETS={
+  ppl:{name:"Push / Pull / Legs",mode:"week",r:{Push:["Bench press","Overhead press","Incline dumbbell press","Lateral raise","Tricep pushdown"],Pull:["Pull-up","Barbell row","Lat pulldown","Face pull","Bicep curl"],Legs:["Squat","Romanian deadlift","Leg press","Leg curl","Calf raise"]},week:["Push","Pull","Legs","Push","Pull","Legs",""]},
+  ul:{name:"Upper / Lower",mode:"week",r:{Upper:["Bench press","Barbell row","Overhead press","Lat pulldown","Bicep curl","Tricep pushdown"],Lower:["Squat","Romanian deadlift","Leg press","Leg curl","Calf raise"]},week:["Upper","Lower","","Upper","Lower","",""]},
+  fb:{name:"Full body 3×",mode:"week",r:{"Full body":["Squat","Bench press","Barbell row","Overhead press","Romanian deadlift"]},week:["Full body","","Full body","","Full body","",""]},
+  bro:{name:"Bro split",mode:"week",r:{Chest:["Bench press","Incline dumbbell press","Chest fly","Dips"],Back:["Deadlift","Pull-up","Barbell row","Lat pulldown"],Shoulders:["Overhead press","Lateral raise","Face pull"],Legs:["Squat","Leg press","Leg curl","Calf raise"],Arms:["Bicep curl","Hammer curl","Tricep pushdown"]},week:["Chest","Back","Shoulders","Legs","Arms","",""]},
+  arnold:{name:"Arnold split",mode:"week",r:{"Chest and back":["Bench press","Pull-up","Incline dumbbell press","Barbell row","Chest fly"],"Shoulders and arms":["Overhead press","Lateral raise","Bicep curl","Tricep pushdown","Hammer curl"],Legs:["Squat","Romanian deadlift","Leg press","Leg curl","Calf raise"]},week:["Chest and back","Shoulders and arms","Legs","Chest and back","Shoulders and arms","Legs",""]},
+  ppl3:{name:"PPL rotation",mode:"rot",r:{Push:["Bench press","Overhead press","Incline dumbbell press","Lateral raise","Tricep pushdown"],Pull:["Pull-up","Barbell row","Lat pulldown","Face pull","Bicep curl"],Legs:["Squat","Romanian deadlift","Leg press","Leg curl","Calf raise"]},rot:["Push","Pull","Legs",""]}
+};
+var SPLIT_LABELS={ppl:"Push / Pull / Legs (6 days)",ul:"Upper / Lower (4 days)",fb:"Full body (3 days)",bro:"Bro split (5 days)",arnold:"Arnold split (6 days)",ppl3:"PPL rotation (3 on, 1 off)"};
+var DOW=["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"];
+function splitS(){const g=gymS();return g.split||null;}
+const tplById=id=>id?gymS().templates.find(t=>t.id===id)||null:null;
+function splitToday(){const sp=splitS();if(!sp)return null;
+  if(sp.mode==="rot"){if(!sp.rot.length)return null;const i=(sp.next||0)%sp.rot.length;return {idx:i,t:tplById(sp.rot[i]),label:`Day ${i+1} of ${sp.rot.length}`};}
+  const i=(new Date().getDay()+6)%7;return {idx:i,t:tplById(sp.week[i]),label:DOW[i]};}
+function splitAdvance(w){const sp=splitS();if(!sp||!w.split||w.split.mode!=="rot"||sp.mode!=="rot"||!sp.rot.length)return;sp.next=(w.split.idx+1)%sp.rot.length;}
+function splitCard(){
+  const sp=splitS(),x='';if(!sp)return `<section class="panel" aria-labelledby="sp-h"><h2 id="sp-h">Your split</h2><p class="hl-muted">Plan which workout you do on which day. Start from a common split and change anything.</p><div class="hl-row"><button type="button" class="btn" data-sp="edit">Set up your split</button></div></section>`;
+  const td=splitToday(),dayDone=td&&gymS().workouts.some(w=>w.finished&&w.date===dkey(new Date())&&w.split&&w.split.idx===td.idx&&w.split.mode===sp.mode);
+  const strip=sp.mode==="rot"?sp.rot.map((id,i)=>{const t=tplById(id);return `<li class="${i===(sp.next||0)%sp.rot.length?"on":""}"><small>Day ${i+1}</small><b>${t?esc(t.name):"Rest"}</b></li>`;}).join("")
+    :sp.week.map((id,i)=>{const t=tplById(id);return `<li class="${i===td.idx?"on":""}"><small>${DOW[i].slice(0,3)}</small><b>${t?esc(t.name):"Rest"}</b></li>`;}).join("");
+  return `<section class="panel" aria-labelledby="sp-h"><div class="gx-top"><h2 id="sp-h">${esc(sp.name||"Your split")}</h2><button type="button" class="btn ghost small" data-sp="edit">Edit split</button></div>
+    <div class="sp-today"><small class="hl-muted">${sp.mode==="rot"?"Up next":"Today"} · ${td?td.label:""}</small>${td&&td.t?`<b>${esc(td.t.name)}</b><span class="hl-muted">${esc(td.t.ex.slice(0,4).join(", "))}${td.t.ex.length>4?` +${td.t.ex.length-4} more`:""}</span>
+      <div class="hl-row">${dayDone?`<span class="hl-muted">Done today. Nice work!</span>`:`<button type="button" class="btn" data-sp="go">Start ${esc(td.t.name)}</button>`}</div>`
+      :`<b>Rest day</b><span class="hl-muted">Recover, stretch or go for a walk.</span>${sp.mode==="rot"?`<div class="hl-row"><button type="button" class="btn ghost small" data-sp="rest">Rest day done</button></div>`:""}`}</div>
+    <ol class="sp-strip" aria-label="${sp.mode==="rot"?"Rotation":"This week"}">${strip}</ol></section>`;
+}
+/* editor (dialog): split name, weekly or rotation, a routine per day, presets, and each routine's exercises */
+var spDraft=null,spOpenTpl=null;
+function splitOpen(){const g=gymS();spDraft=structuredClone({split:g.split||{name:"My split",mode:"week",week:["","","","","","",""],rot:["",""],next:0},templates:g.templates});spOpenTpl=null;splitRender();const d=$("#spd");if(!d.open){try{d.showModal();}catch(e){d.setAttribute("open","");}}}
+function splitRender(focusSel){
+  const el=$("#spd-body"),D=spDraft,sp=D.split,ts=D.templates,x='<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6 6 18"/></svg>';
+  const opt=(id)=>`<option value="">Rest</option>${ts.map(t=>`<option value="${t.id}"${t.id===id?" selected":""}>${esc(t.name)}</option>`).join("")}<option value="__new">+ New routine…</option>`;
+  const days=sp.mode==="rot"?sp.rot.map((id,i)=>`<div class="sp-row" data-di="${i}"><span>Day ${i+1}</span><select data-spd="day" aria-label="Day ${i+1}">${opt(id)}</select><span class="sp-ord"><button type="button" class="icon-btn" data-spa="up" aria-label="Move day ${i+1} up" ${i?"":"disabled"}>↑</button><button type="button" class="icon-btn" data-spa="down" aria-label="Move day ${i+1} down" ${i<sp.rot.length-1?"":"disabled"}>↓</button><button type="button" class="icon-btn" data-spa="dayrm" aria-label="Remove day ${i+1}" ${sp.rot.length>1?"":"disabled"}>${x}</button></span></div>`).join("")+`<button type="button" class="btn ghost small" data-spa="dayadd" ${sp.rot.length>=14?"disabled":""}>Add a day</button>`
+    :sp.week.map((id,i)=>`<div class="sp-row" data-di="${i}"><span>${DOW[i]}</span><select data-spd="day" aria-label="${DOW[i]}">${opt(id)}</select></div>`).join("");
+  el.innerHTML=`<div class="sp-sec"><label class="te-f">Split name<input type="text" id="spd-name" maxlength="40" value="${esc(sp.name||"")}"></label>
+      <div class="gp-m" role="group" aria-label="Schedule"><button type="button" class="btn ghost small" data-spa="mode" data-m="week" aria-pressed="${sp.mode!=="rot"}">Same days each week</button><button type="button" class="btn ghost small" data-spa="mode" data-m="rot" aria-pressed="${sp.mode==="rot"}">Rotation (Day 1, 2, 3…)</button></div>
+      <p class="hl-muted">${sp.mode==="rot"?"A rotation goes in order no matter the weekday: finish today's workout and the next day is up.":"Pick a routine or Rest for each day of the week."}</p></div>
+    <div class="sp-sec"><h3>Days</h3>${days}</div>
+    <div class="sp-sec"><h3>Routines</h3>${ts.length?ts.map(t=>{const open=spOpenTpl===t.id;return `<div class="sp-tpl" data-tid="${t.id}"><div class="sp-th"><button type="button" class="sp-tn" data-spa="tpl" aria-expanded="${open}"><b>${esc(t.name)}</b><small class="hl-muted">${t.ex.length} exercise${t.ex.length===1?"":"s"}</small></button><button type="button" class="icon-btn" data-spa="tpldel" aria-label="Delete routine ${esc(t.name)}">${x}</button></div>
+      ${open?`<div class="sp-te"><label class="te-f">Routine name<input type="text" data-spd="tname" maxlength="40" value="${esc(t.name)}"></label>
+        <ol class="sp-ex">${t.ex.map((n,i)=>`<li data-ei="${i}"><span>${esc(n)}</span><span class="sp-ord"><button type="button" class="icon-btn" data-spa="exup" aria-label="Move ${esc(n)} up" ${i?"":"disabled"}>↑</button><button type="button" class="icon-btn" data-spa="exdown" aria-label="Move ${esc(n)} down" ${i<t.ex.length-1?"":"disabled"}>↓</button><button type="button" class="icon-btn" data-spa="exrm" aria-label="Remove ${esc(n)}">${x}</button></span></li>`).join("")}</ol>
+        <div class="hl-row"><input type="text" list="gym-ex-list" maxlength="60" placeholder="Add exercise" aria-label="Add exercise to ${esc(t.name)}" data-spd="exadd" style="flex:1 1 160px;min-width:0"><button type="button" class="btn small" data-spa="exadd">Add</button></div></div>`:""}</div>`;}).join(""):`<p class="hl-muted">No routines yet. Add one, or start from a common split below.</p>`}
+      <div class="hl-row"><input type="text" id="spd-newtpl" maxlength="40" placeholder="New routine, e.g. Push" aria-label="New routine name" style="flex:1 1 160px;min-width:0"><button type="button" class="btn small" data-spa="tpladd">Add routine</button></div></div>
+    <div class="sp-sec"><h3>Start from a common split</h3><p class="hl-muted">Replaces your days and adds its routines (existing routines with the same name are reused). You can change everything after.</p>
+      <div class="tpl-list">${Object.keys(SPLIT_PRESETS).map(k=>`<button type="button" class="btn ghost small" data-spa="preset" data-k="${k}">${SPLIT_LABELS[k]}</button>`).join("")}</div></div>
+    <div class="ac-row"><button type="button" class="btn" data-spa="save">Save split</button><button type="button" class="btn ghost" data-spa="close">Cancel</button>${gymS().split?`<button type="button" class="btn ghost" data-spa="remove">Remove split</button>`:""}</div>`;
+  if(focusSel){const f=el.querySelector(focusSel);if(f){f.focus();if(f.select&&f.tagName==="INPUT"&&!f.value.length)f.select();}}
+}
+function spTpl(btn){const t=btn.closest("[data-tid]");return t&&spDraft.templates.find(x=>x.id===t.dataset.tid);}
+function spNewTpl(name){name=(name||"").trim().slice(0,40);if(!name)return null;const ex=spDraft.templates.find(t=>t.name.toLowerCase()===name.toLowerCase());if(ex)return ex;const t={id:uid(),name,ex:[]};spDraft.templates.push(t);return t;}
+$("#spd").addEventListener("change",e=>{const t=e.target,sp=spDraft&&spDraft.split;if(!sp)return;
+  if(t.dataset.spd==="day"){const i=+t.closest("[data-di]").dataset.di,arr=sp.mode==="rot"?sp.rot:sp.week;
+    if(t.value==="__new"){let n=1;while(spDraft.templates.some(x=>x.name==="Routine "+n))n++;const nt=spNewTpl("Routine "+n);arr[i]=nt.id;spOpenTpl=nt.id;splitRender(`[data-tid="${nt.id}"] [data-spd="tname"]`);const f=$(`#spd [data-tid="${nt.id}"] [data-spd="tname"]`);if(f)f.select();return;}
+    arr[i]=t.value;}
+  else if(t.dataset.spd==="tname"){const tp=spTpl(t);if(tp&&t.value.trim())tp.name=t.value.trim().slice(0,40);splitRender(`[data-tid="${tp.id}"] [data-spd="tname"]`);}
+  else if(t.id==="spd-name")sp.name=t.value.trim().slice(0,40);});
+$("#spd").addEventListener("keydown",e=>{if(e.key!=="Enter")return;const t=e.target;
+  if(t.dataset.spd==="exadd"){e.preventDefault();t.closest(".sp-te").querySelector('[data-spa="exadd"]').click();}
+  else if(t.id==="spd-newtpl"){e.preventDefault();$('#spd [data-spa="tpladd"]').click();}});
+$("#spd").addEventListener("click",e=>{
+  const b=e.target.closest("[data-spa]");if(!b||!spDraft)return;const a=b.dataset.spa,D=spDraft,sp=D.split,row=b.closest("[data-di]"),i=row?+row.dataset.di:-1;
+  const nm=$("#spd-name");if(nm)sp.name=nm.value.trim().slice(0,40);
+  if(a==="close"){$("#spd").close();return;}
+  if(a==="mode"){sp.mode=b.dataset.m;if(sp.mode==="rot"&&!sp.rot.length)sp.rot=[""];splitRender(`[data-spa="mode"][data-m="${sp.mode}"]`);return;}
+  if(a==="up"||a==="down"){const j=a==="up"?i-1:i+1;[sp.rot[i],sp.rot[j]]=[sp.rot[j],sp.rot[i]];splitRender(`[data-di="${j}"] [data-spa="${a}"]`);return;}
+  if(a==="dayrm"){sp.rot.splice(i,1);splitRender('[data-spa="dayadd"]');return;}
+  if(a==="dayadd"){sp.rot.push("");splitRender(`[data-di="${sp.rot.length-1}"] select`);return;}
+  if(a==="tpl"){const tp=spTpl(b);spOpenTpl=spOpenTpl===tp.id?null:tp.id;splitRender(`[data-tid="${tp.id}"] .sp-tn`);return;}
+  if(a==="tpldel"){const tp=spTpl(b);D.templates=D.templates.filter(x=>x!==tp);sp.week=sp.week.map(id=>id===tp.id?"":id);sp.rot=sp.rot.map(id=>id===tp.id?"":id);splitRender("#spd-newtpl");toast(`Removed ${tp.name} (saves when you press Save split)`);return;}
+  if(a==="tpladd"){const inp=$("#spd-newtpl"),nt=spNewTpl(inp.value);if(!nt){inp.focus();return;}spOpenTpl=nt.id;splitRender(`[data-tid="${nt.id}"] [data-spd="exadd"]`);return;}
+  const tp=spTpl(b),ei=b.closest("[data-ei]")?+b.closest("[data-ei]").dataset.ei:-1;
+  if(a==="exadd"&&tp){const inp=b.closest(".sp-te").querySelector('[data-spd="exadd"]'),n=inp.value.trim().slice(0,60);if(!n){inp.focus();return;}const known=[...document.querySelectorAll("#gym-ex-list option")].map(o=>o.value).find(v=>v.toLowerCase()===n.toLowerCase());tp.ex.push(known||n);splitRender(`[data-tid="${tp.id}"] [data-spd="exadd"]`);return;}
+  if((a==="exup"||a==="exdown")&&tp){const j=a==="exup"?ei-1:ei+1;[tp.ex[ei],tp.ex[j]]=[tp.ex[j],tp.ex[ei]];splitRender(`[data-tid="${tp.id}"] [data-ei="${j}"] [data-spa="${a}"]`);return;}
+  if(a==="exrm"&&tp){tp.ex.splice(ei,1);splitRender(`[data-tid="${tp.id}"] [data-spd="exadd"]`);return;}
+  if(a==="preset"){const P=SPLIT_PRESETS[b.dataset.k],ids={};Object.entries(P.r).forEach(([n,ex])=>{let t=D.templates.find(x=>x.name.toLowerCase()===n.toLowerCase());if(!t){t={id:uid(),name:n,ex:ex.slice()};D.templates.push(t);}ids[n]=t.id;});
+    sp.name=P.name;sp.mode=P.mode;if(P.week)sp.week=P.week.map(n=>n?ids[n]:"");if(P.rot){sp.rot=P.rot.map(n=>n?ids[n]:"");sp.next=0;}splitRender('[data-spa="save"]');toast(`Loaded ${P.name}. Change anything, then Save split`);return;}
+  if(a==="save"){const g=gymS(),prev={split:g.split?structuredClone(g.split):null,templates:structuredClone(g.templates)};
+    if(sp.mode==="rot")sp.next=Math.min(sp.next||0,Math.max(0,sp.rot.length-1));g.templates=D.templates;g.split=sp;save();$("#spd").close();renderGym();
+    toast("Split saved",{run(){const g2=gymS();g2.templates=prev.templates;g2.split=prev.split;save();renderGym();}});return;}
+  if(a==="remove"){const g=gymS(),prev=g.split;g.split=null;save();$("#spd").close();renderGym();toast("Split removed (your routines are kept)",{run(){gymS().split=prev;save();renderGym();}});}
+});
+$("#gym-body").addEventListener("click",e=>{const b=e.target.closest("[data-sp]");if(!b)return;const a=b.dataset.sp;
+  if(a==="edit"){splitOpen();return;}
+  const td=splitToday(),sp=splitS();if(!td||!sp)return;
+  if(a==="go"&&td.t){gymStart(td.t,{mode:sp.mode,idx:td.idx});return;}
+  if(a==="rest"&&sp.mode==="rot"){const was=sp.next||0;sp.next=(td.idx+1)%sp.rot.length;save();renderGym();toast("Rest day logged. On to the next one",{run(){sp.next=was;save();renderGym();}});}});
 
 /* ---------- health view ---------- */
 /* Meals and macros are hidden until they're ready; S.food and its code stay, so nobody's logged meals are lost. */
