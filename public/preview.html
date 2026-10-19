@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Digital Dash iPhone preview</title>
+<meta name="description" content="Preview Digital Dash on iPhone screen sizes, including a foldable iPhone concept.">
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/png" sizes="192x192" href="/digital-dash-icon-192.png">
+<style>
+:root{--bg:#0d0c14;--panel:#17151f;--panel2:#211e2c;--ink:#f1eef8;--muted:#a29db8;--line:#2d2a3c;--accent:#ffb547;--accent-ink:#1a1405;--frame:#1d1d21;--frame-edge:#3a3a40;color-scheme:dark}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#eceaf2;--panel:#fff;--panel2:#f3f1f8;--ink:#1b1830;--muted:#5d5873;--line:#dcd8e8;--accent:#a35f00;--accent-ink:#fff;--frame:#1d1d21;--frame-edge:#4a4a52;color-scheme:light}}
+:root[data-theme="light"]{--bg:#eceaf2;--panel:#fff;--panel2:#f3f1f8;--ink:#1b1830;--muted:#5d5873;--line:#dcd8e8;--accent:#a35f00;--accent-ink:#fff;color-scheme:light}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:radial-gradient(1200px 700px at 50% -10%,color-mix(in srgb,var(--accent) 12%,transparent),transparent 60%),var(--bg);color:var(--ink);font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;display:flex;flex-direction:column;min-height:100vh}
+a{color:var(--accent)}
+header{display:flex;align-items:center;gap:12px 20px;flex-wrap:wrap;padding:16px clamp(16px,3vw,32px) 8px}
+header h1{margin:0;font-size:18px;font-weight:750;letter-spacing:-.01em;display:flex;align-items:center;gap:10px}
+header h1 img{width:28px;height:28px;border-radius:8px}
+header .sp{flex:1}
+.ctl{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;padding:4px clamp(16px,3vw,32px) 10px}
+.grp{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.grp>span{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-right:2px}
+.seg{display:inline-flex;gap:2px;padding:3px;border-radius:12px;background:var(--panel2);border:1px solid var(--line);flex-wrap:wrap}
+.seg button,.btn{font:600 13px/1 system-ui,-apple-system,sans-serif;color:var(--ink);background:none;border:0;border-radius:9px;padding:9px 12px;cursor:pointer;white-space:nowrap}
+.seg button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
+.seg button:hover:not([aria-pressed="true"]){background:color-mix(in srgb,var(--ink) 8%,transparent)}
+.btn{background:var(--panel2);border:1px solid var(--line)}
+.btn:hover{border-color:color-mix(in srgb,var(--accent) 50%,var(--line))}
+button:focus-visible,select:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+select{font:600 13px system-ui,sans-serif;color:var(--ink);background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:8px 10px}
+main{flex:1;display:flex;flex-direction:column;min-height:0}
+.stage{flex:1;min-height:520px;display:flex;align-items:center;justify-content:center;gap:28px;padding:10px 16px 18px;overflow:hidden}
+.slot{display:flex;flex-direction:column;align-items:center;gap:10px;min-width:0}
+.slot .cap{font-size:13px;color:var(--muted);text-align:center;min-width:150px}
+.slot .cap b{color:var(--ink);font-weight:650}
+.fit{position:relative}
+/* device */
+.dev{position:absolute;left:0;top:0;transform-origin:0 0;transition:width .55s cubic-bezier(.2,.8,.2,1),height .55s cubic-bezier(.2,.8,.2,1)}
+.body{position:absolute;inset:0;border-radius:var(--r-out);background:linear-gradient(145deg,#4a4a52,#1f1f24 30%,#2c2c32 70%,#55555d);padding:var(--bez);box-shadow:0 40px 80px -30px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.06) inset}
+.screen{position:relative;width:100%;height:100%;border-radius:var(--r-in);overflow:hidden;background:var(--appbg,#141220);isolation:isolate}
+.screen iframe{position:absolute;left:0;right:0;border:0;width:100%;background:var(--appbg,#141220)}
+.status{position:absolute;left:0;right:0;top:0;display:flex;justify-content:space-between;align-items:center;padding:0 var(--sbx);font:600 16px/1 -apple-system,"SF Pro Text",system-ui,sans-serif;color:var(--sbink,#fff);z-index:2;pointer-events:none}
+.status .r{display:flex;gap:6px;align-items:center}
+.status svg{display:block}
+.island{position:absolute;left:50%;top:11px;transform:translateX(-50%);width:126px;height:37px;border-radius:20px;background:#000;z-index:3}
+.punch{position:absolute;left:50%;top:10px;transform:translateX(-50%);width:12px;height:12px;border-radius:50%;background:#000;z-index:3;box-shadow:0 0 0 2px rgba(0,0,0,.35)}
+.homebar{position:absolute;left:50%;bottom:8px;transform:translateX(-50%);width:140px;height:5px;border-radius:3px;background:var(--sbink,#fff);opacity:.85;z-index:2;pointer-events:none}
+.crease{position:absolute;top:0;bottom:0;left:50%;width:18px;transform:translateX(-50%);background:linear-gradient(90deg,transparent,rgba(255,255,255,.05) 35%,rgba(0,0,0,.12) 50%,rgba(255,255,255,.05) 65%,transparent);z-index:2;pointer-events:none}
+.side{position:absolute;background:#2a2a30;border-radius:2px}
+.hinge{position:absolute;top:8%;bottom:8%;left:50%;width:6px;margin-left:-3px;background:linear-gradient(90deg,#222,#555,#222);border-radius:3px;opacity:0;transition:opacity .4s}
+.unfolded .hinge{opacity:.0}
+.se .homebtn{position:absolute;left:50%;bottom:calc((var(--bez-b) - 54px)/2);transform:translateX(-50%);width:54px;height:54px;border-radius:50%;border:2px solid #444;background:#111}
+.note{margin:0 auto 14px;max-width:880px;padding:0 16px;font-size:13px;color:var(--muted);text-align:center}
+.foldbtn{display:none}
+.mobile-note{display:none;margin:24px 16px;padding:16px;border-radius:14px;background:var(--panel);border:1px solid var(--line)}
+@media (max-width:640px){.stage,.ctl{display:none}.mobile-note{display:block}}
+@media (prefers-reduced-motion:reduce){.dev{transition:none}}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+</style>
+</head>
+<body>
+<header>
+  <h1><img src="/digital-dash-icon-192.png" alt="">Digital Dash · iPhone preview</h1>
+  <span class="sp"></span>
+  <a class="btn" href="/digital-dash.html" style="text-decoration:none">Open the app</a>
+</header>
+<main>
+<div class="ctl" role="toolbar" aria-label="Preview controls">
+  <div class="grp"><span>Device</span><div class="seg" id="dev-seg" role="group" aria-label="Device">
+    <button type="button" data-d="pro">iPhone 17 Pro</button><button type="button" data-d="max">iPhone 17 Pro Max</button><button type="button" data-d="se">iPhone SE</button><button type="button" data-d="fold">iPhone Fold (concept)</button><button type="button" data-d="all">All side by side</button>
+  </div></div>
+  <div class="grp"><span>Screen</span><select id="tab" aria-label="Screen to show">
+    <option value="focus">Focus</option><option value="tasks">Tasks</option><option value="plan">Week plan</option><option value="calendar">Calendar</option><option value="money">Net</option><option value="gym">Health: Gym</option><option value="gym-progress">Health: Progress</option><option value="bmi">Health: Body and calories</option><option value="themes">Themes</option>
+  </select></div>
+  <button type="button" class="btn foldbtn" id="fold" aria-pressed="false">Unfold</button>
+  <button type="button" class="btn" id="rotate" aria-pressed="false">Rotate</button>
+  <div class="grp"><span>Size</span><div class="seg" id="zoom-seg" role="group" aria-label="Size"><button type="button" data-z="fit" aria-pressed="true">Fit</button><button type="button" data-z="1">Actual</button></div></div>
+  <button type="button" class="btn" id="reload">Reload</button>
+</div>
+
+  <div class="stage" id="stage" aria-live="polite"></div>
+  <p class="note" id="note"></p>
+  <div class="mobile-note"><p style="margin:0 0 8px"><b>You're already on a phone.</b> This preview shows the app inside iPhone frames on a bigger screen.</p><a href="/digital-dash.html">Open Digital Dash</a></div>
+</main>
+<script>
+(()=>{
+/* Screen sizes in points (CSS px) with their safe areas. iPhone sizes are Apple's published ones.
+   The foldable is a concept: Apple hasn't announced it, so its sizes come from reported specs
+   (about 5.5" outside, about 7.8" inside, opening like a book) and may differ from the real phone. */
+const D={
+  pro:{name:"iPhone 17 Pro",w:402,h:874,top:62,bot:34,r:55,bez:12,island:true,sbx:32,cap:"6.3\" · 402 × 874 pt"},
+  max:{name:"iPhone 17 Pro Max",w:440,h:956,top:62,bot:34,r:62,bez:12,island:true,sbx:34,cap:"6.9\" · 440 × 956 pt · App Store screenshot size"},
+  se:{name:"iPhone SE",w:375,h:667,top:20,bot:0,r:0,bez:14,bezT:96,bezB:96,se:true,sbx:12,cap:"4.7\" · 375 × 667 pt · smallest supported"},
+  foldC:{name:"iPhone Fold (concept), closed",w:474,h:696,top:38,bot:20,r:40,bez:11,punch:true,sbx:28,cap:"About 5.5\" cover screen · 474 × 696 pt (estimate)"},
+  foldO:{name:"iPhone Fold (concept), open",w:904,h:640,top:32,bot:20,r:34,bez:11,punch:true,crease:true,sbx:30,cap:"About 7.8\" inner screen · 904 × 640 pt (estimate)"}
+};
+const $=s=>document.querySelector(s);
+const ls={get(k,d){try{return localStorage.getItem("dd.preview."+k)||d;}catch(e){return d;}},set(k,v){try{localStorage.setItem("dd.preview."+k,v);}catch(e){}}};
+let dev=ls.get("dev","pro"),tab=ls.get("tab","focus"),zoom=ls.get("zoom","fit"),rot=false,unf=ls.get("unf","0")==="1";
+const stage=$("#stage");
+const sigSvg='<svg width="18" height="12" viewBox="0 0 18 12" fill="currentColor" aria-hidden="true"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5.5" width="3" height="6.5" rx="1"/><rect x="10" y="3" width="3" height="9" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg>';
+const wifiSvg='<svg width="16" height="12" viewBox="0 0 16 12" fill="currentColor" aria-hidden="true"><path d="M8 11.5 5.6 9a3.4 3.4 0 0 1 4.8 0zM3.5 6.9a6.4 6.4 0 0 1 9 0l-1.5 1.5a4.3 4.3 0 0 0-6 0zM1.2 4.6a9.6 9.6 0 0 1 13.6 0l-1.5 1.5a7.5 7.5 0 0 0-10.6 0z"/></svg>';
+const batSvg='<svg width="27" height="13" viewBox="0 0 27 13" fill="none" aria-hidden="true"><rect x=".5" y=".5" width="23" height="12" rx="3.5" stroke="currentColor" opacity=".45"/><rect x="2" y="2" width="18" height="9" rx="2" fill="currentColor"/><path d="M25 4.5v4c.8-.3 1.3-1.1 1.3-2s-.5-1.7-1.3-2" fill="currentColor" opacity=".5"/></svg>';
+function clock(){const d=new Date();return `${d.getHours()%12||12}:${String(d.getMinutes()).padStart(2,"0")}`;}
+function deviceEl(key,landscape){
+  const s=D[key],land=landscape&&!s.crease&&key!=="foldC";
+  const W=land?s.h:s.w,H=land?s.w:s.h,bezT=s.bezT||s.bez,bezB=s.bezB||s.bez;
+  const outW=W+s.bez*2,outH=H+bezT+bezB;
+  const top=land?0:s.top,bot=land?21:s.bot,left=land?s.top:0,right=land?s.top:0; /* landscape: the island side and its opposite are the safe areas */
+  const el=document.createElement("div");el.className="dev"+(s.se?" se":"")+(key==="foldO"?" unfolded":"");
+  el.style.cssText=`width:${outW}px;height:${outH}px;--r-out:${s.r?s.r+s.bez:28}px;--r-in:${s.r}px;--bez:${bezT}px ${s.bez}px ${bezB}px;--bez-b:${bezB}px;--sbx:${s.sbx}px`;
+  el.innerHTML=`<div class="body"><div class="screen" role="img" aria-label="${s.name} showing Digital Dash">
+      ${land?"":`<div class="status" style="height:${s.top}px;${s.island?"padding-top:4px":""}"><span>${clock()}</span><span class="r">${sigSvg}${wifiSvg}${batSvg}</span></div>`}
+      ${s.island&&!land?'<div class="island"></div>':""}${s.punch?'<div class="punch"></div>':""}${s.crease?'<div class="crease"></div>':""}
+      <iframe title="Digital Dash on ${s.name}" loading="lazy" style="top:${top}px;height:calc(100% - ${top+bot}px);${left?`left:${left}px;width:calc(100% - ${left+right}px)`:""}" src="/digital-dash.html#${tab}"></iframe>
+      ${s.bot||land?'<div class="homebar"></div>':""}
+    </div>${s.se?'<div class="homebtn" aria-hidden="true"></div>':""}</div>`;
+  el._w=outW;el._h=outH;
+  const fr=el.querySelector("iframe");fr.addEventListener("load",()=>tint(el,fr));
+  return el;
+}
+/* the status bar and home indicator take the app's own background, like they would on the phone */
+function tint(el,fr){try{const doc=fr.contentDocument;if(!doc)return;const bg=getComputedStyle(doc.documentElement).backgroundColor||getComputedStyle(doc.body).backgroundColor;
+  const m=bg.match(/\d+(\.\d+)?/g);if(!m)return;const [r,g,b]=m.map(Number),lum=(0.299*r+0.587*g+0.114*b)/255;el.style.setProperty("--appbg",bg);el.style.setProperty("--sbink",lum>.6?"#111":"#fff");}catch(e){}}
+function slot(key,landscape){
+  const s=D[key],w=document.createElement("div");w.className="slot";const d=deviceEl(key,landscape),f=document.createElement("div");f.className="fit";f.appendChild(d);
+  w.appendChild(f);const c=document.createElement("div");c.className="cap";c.innerHTML=`<b>${s.name}</b><br>${s.cap}`;w.appendChild(c);w._d=d;w._f=f;return w;
+}
+function layout(){
+  const slots=[...stage.querySelectorAll(".slot")];if(!slots.length)return;
+  const pad=24,availW=stage.clientWidth-pad*2-(slots.length-1)*28-(slots.length>1?60:0),availH=stage.clientHeight-70;
+  const totalW=slots.reduce((a,s)=>a+s._d._w,0),maxH=Math.max(...slots.map(s=>s._d._h));
+  let sc=zoom==="fit"?Math.min(1,availW/totalW,availH/maxH):1;sc=Math.max(.2,sc);
+  slots.forEach(s=>{s._d.style.transform=`scale(${sc})`;s._f.style.width=s._d._w*sc+"px";s._f.style.height=s._d._h*sc+"px";s.style.width=Math.max(150,s._d._w*sc)+"px";});
+  stage.style.overflow=zoom==="fit"?"hidden":"auto";stage.style.justifyContent=zoom==="fit"||totalW*sc<stage.clientWidth?"center":"flex-start";stage.style.alignItems=zoom==="fit"?"center":"flex-start";
+}
+function render(){
+  $$("#dev-seg button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.d===dev));
+  $$("#zoom-seg button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.z===zoom));
+  $("#tab").value=tab;const isFold=dev==="fold";$("#fold").style.display=isFold?"inline-block":"none";$("#fold").textContent=unf?"Fold":"Unfold";$("#fold").setAttribute("aria-pressed",String(unf));
+  $("#rotate").style.display=dev==="all"||isFold||dev==="se"?"none":"inline-block";$("#rotate").setAttribute("aria-pressed",String(rot));
+  stage.innerHTML="";
+  if(dev==="all")["se","pro","max","foldC","foldO"].forEach(k=>stage.appendChild(slot(k,false)));
+  else stage.appendChild(slot(isFold?(unf?"foldO":"foldC"):dev,rot));
+  $("#note").innerHTML=(isFold||dev==="all"?"The foldable iPhone is a concept: Apple hasn't announced it, so its screen sizes are estimates from reported specs and may change. ":"")+
+    "The preview runs the real app with the data saved in this browser, so changes you make here are kept. The notch and home bar areas match the iPhone's safe areas, which the app already leaves room for.";
+  requestAnimationFrame(layout);
+}
+const $$=s=>[...document.querySelectorAll(s)];
+$("#dev-seg").addEventListener("click",e=>{const b=e.target.closest("button[data-d]");if(!b)return;dev=b.dataset.d;rot=false;ls.set("dev",dev);render();});
+$("#zoom-seg").addEventListener("click",e=>{const b=e.target.closest("button[data-z]");if(!b)return;zoom=b.dataset.z;ls.set("zoom",zoom);render();});
+$("#tab").addEventListener("change",e=>{tab=e.target.value;ls.set("tab",tab);
+  $$("#stage iframe").forEach(f=>{try{f.contentWindow.location.hash=tab;}catch(err){f.src="/digital-dash.html#"+tab;}});});
+$("#rotate").addEventListener("click",()=>{rot=!rot;render();});
+$("#fold").addEventListener("click",()=>{unf=!unf;ls.set("unf",unf?"1":"0");render();});
+$("#reload").addEventListener("click",()=>render());
+addEventListener("resize",()=>{clearTimeout(layout.t);layout.t=setTimeout(layout,100);});
+setInterval(()=>{$$(".status>span:first-child").forEach(s=>s.textContent=clock());$$("#stage .dev").forEach(d=>{const f=d.querySelector("iframe");if(f)tint(d,f);});},15000);
+render();
+})();
+</script>
+</body>
+</html>

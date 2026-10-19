@@ -4,6 +4,15 @@ A personal productivity dashboard: live clocks to stay motivated while working, 
 
 Everything lives in a single self-contained file, `public/digital-dash.html` (served at `/digital-dash.html`), with inline CSS and JS. The only build step copies `public/` to `dist/` and writes the Supabase settings file.
 
+## iPhone preview
+
+`/preview` (`public/preview.html`) shows the live app inside iPhone frames:
+- **Devices:** iPhone 17 Pro (402 × 874 pt), 17 Pro Max (440 × 956 pt, the App Store 6.9" screenshot size), iPhone SE (375 × 667 pt), a foldable iPhone concept, and all of them side by side.
+- **Foldable concept:** closed is about 474 × 696 pt, open about 904 × 640 pt with a crease. Apple hasn't announced it, so these sizes are estimates from reported specs; update them when the real ones are out.
+- **Controls:** pick the screen (Focus, Tasks, Week plan, Calendar, Net and the Health tabs), rotate, fit or actual size, and fold or unfold.
+- **Safe areas:** the status bar and home indicator areas are left out of the app's frame, like iOS safe areas, and take the app's background colour.
+- **Data:** it runs the real app on the same site, so it uses the data saved in that browser.
+
 ## Running it
 
 Open `public/digital-dash.html` in a browser, or build and serve it:

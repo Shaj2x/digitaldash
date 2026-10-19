@@ -6,7 +6,8 @@
   "redirects": [
     { "source": "/", "destination": "/digital-dash.html", "permanent": false },
     { "source": "/digital-dash", "destination": "/digital-dash.html", "permanent": false },
-    { "source": "/privacy", "destination": "/digital-dash-privacy.html", "permanent": false }
+    { "source": "/privacy", "destination": "/digital-dash-privacy.html", "permanent": false },
+    { "source": "/preview", "destination": "/preview.html", "permanent": false }
   ],
   "headers": [
     { "source": "/digital-dash-sw.js", "headers": [{ "key": "Cache-Control", "value": "no-cache" }] },
