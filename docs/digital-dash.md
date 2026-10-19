@@ -115,6 +115,13 @@ Optional sign-in so data saves to the cloud and follows you across devices. Sign
 - Ticking a task off keeps it in place for 6 seconds (`DONE_GRACE`) with an Undo button and a shrinking bar before it leaves the open list; the toast has Undo too. `setTaskDone(t, done)` is the one place that ticks or unticks (it also spawns or removes the next repeat), and `undoDone(t)` puts a task back.
 - `t.steps = [{id, t, done}]` is the checklist, opened with the list button on a task. The row shows a progress bar; finishing every step offers to tick off the task. The AI helper's "Add as checklist" puts its steps here.
 
+## Health: gym and meals
+
+Health (`#health`, `#gym`, `#meals`; "gym", "workout", "meals", "macros" in the command bar) is its own dock section with two tabs. Data lives in new keys only, created on first use (`gymS()`, `foodS()`), so existing data is never touched.
+
+- **Gym** (`S.gym`): start an empty workout, repeat the last one, or start a saved routine (`templates`). Adding an exercise fills its sets from last time and shows "Last time" and your best set. Sets have weight, reps and a tick; ticking starts the rest timer (off, 1 to 4 min) with +30s and Skip. Finish drops empty sets and logs the workout; history entries can be reopened to edit or deleted (Undo). A set counts when it has reps and is ticked, or once the workout is finished. Personal records use the Epley estimate (weight × (1 + reps ÷ 30)); a set beating your previous best for that exercise is flagged "New PR". Weekly workouts, sets and volume up top. Units lb or kg (relabels, doesn't convert).
+- **Meals and macros** (`S.food`): per-day log (`log["YYYY-MM-DD"]`) of foods in Breakfast, Lunch, Dinner and Snacks with servings, calories, protein, carbs and fat (per serving). Blank calories = 4 × protein + 4 × carbs + 9 × fat. Progress bars against daily goals, edit and remove with Undo, copy the previous day's meal, browse past days, a last-7-days table with averages. Every food added is remembered (newest 300) and fills its numbers in next time.
+
 ## Editing tasks
 
 - The pencil button on a task (task list, week plan and the month view's day card), or double-clicking a task's title, opens the Edit task dialog (`teOpen`): title, urgency, course, due date and time, and the planned day.
