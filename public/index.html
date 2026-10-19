@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Digital Dash · Your day, planned and done</title>
+<meta name="description" content="A free dashboard for students: focus clocks and timers, tasks and reminders, a week and month planner, grades, a gym tracker and more. Works offline and syncs across devices.">
+<meta name="theme-color" content="#141220">
+<meta property="og:title" content="Digital Dash">
+<meta property="og:description" content="Focus timers, tasks, a week planner, grades and a gym tracker in one free app.">
+<meta property="og:image" content="/digital-dash-icon-512.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/digital-dash-icon-192.png">
+<link rel="apple-touch-icon" href="/digital-dash-apple-180.png">
+<link rel="manifest" href="/digital-dash.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#141220;--panel:#1c1a2b;--panel2:#252236;--ink:#f1eef8;--muted:#a7a2bd;--line:#2f2b45;--accent:#ffb547;--accent-ink:#1a1405;--glow:rgba(255,181,71,.16);color-scheme:dark}
+@media (prefers-color-scheme:light){:root{--bg:#f7f5fb;--panel:#fff;--panel2:#f0edf7;--ink:#1b1830;--muted:#58536d;--line:#e2deec;--accent:#9a5a00;--accent-ink:#fff;--glow:rgba(255,181,71,.22);color-scheme:light}}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 "Bricolage Grotesque",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+a{color:inherit}
+.wrap{max-width:1120px;margin:0 auto;padding:0 clamp(16px,4vw,32px)}
+.skip{position:absolute;left:-9999px;top:8px;background:var(--accent);color:var(--accent-ink);padding:8px 12px;border-radius:8px;z-index:10}
+.skip:focus{left:12px}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
+/* nav */
+.nav{position:sticky;top:0;z-index:5;backdrop-filter:blur(16px) saturate(160%);-webkit-backdrop-filter:blur(16px) saturate(160%);background:color-mix(in srgb,var(--bg) 78%,transparent);border-bottom:1px solid color-mix(in srgb,var(--line) 70%,transparent);padding-top:env(safe-area-inset-top,0px)}
+.nav .wrap{display:flex;align-items:center;gap:20px;height:64px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:-.01em;text-decoration:none;font-size:18px}
+.brand img{width:32px;height:32px;border-radius:9px}
+.nav nav{margin-left:auto}
+.nav ul{display:flex;gap:4px;list-style:none;margin:0;padding:0}
+.nav ul a{display:block;padding:8px 12px;border-radius:9px;text-decoration:none;color:var(--muted);font-weight:600;font-size:15px}
+.nav ul a:hover{color:var(--ink);background:var(--panel2)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 20px;border-radius:12px;font-family:inherit;font-weight:700;font-size:15px;line-height:1;text-decoration:none;border:1px solid var(--line);background:var(--panel);color:var(--ink);cursor:pointer;transition:transform .15s ease,border-color .15s ease}
+.btn:hover{border-color:color-mix(in srgb,var(--accent) 50%,var(--line))}
+.btn:active{transform:scale(.97)}
+.btn.pri{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.btn.big{min-height:52px;padding:0 26px;font-size:16px;border-radius:14px}
+@media (max-width:760px){.nav nav{display:none}.nav .btn{margin-left:auto}}
+/* welcome back */
+.back{display:none;margin:16px auto 0;max-width:1120px;padding:0 clamp(16px,4vw,32px)}
+.back div{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:12px 16px;border-radius:14px;background:color-mix(in srgb,var(--accent) 12%,var(--panel));border:1px solid color-mix(in srgb,var(--accent) 35%,var(--line))}
+.back p{margin:0;flex:1 1 220px;font-weight:600}
+.back.on{display:block}
+/* hero */
+.hero{position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:-20% -10% auto;height:620px;background:radial-gradient(closest-side,var(--glow),transparent);pointer-events:none}
+.hero .wrap{position:relative;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:40px;align-items:center;padding-top:clamp(36px,7vw,84px);padding-bottom:clamp(36px,6vw,72px)}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.eyebrow i{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 25%,transparent)}
+h1{font-size:clamp(40px,6.4vw,72px);line-height:1.02;letter-spacing:-.035em;margin:14px 0 18px;font-weight:800}
+h1 em{font-style:normal;color:var(--accent)}
+.lead{font-size:clamp(17px,2vw,20px);color:var(--muted);max-width:34em;margin:0 0 28px}
+.ctas{display:flex;gap:12px;flex-wrap:wrap}
+.trust{display:flex;gap:8px 20px;flex-wrap:wrap;margin-top:26px;font-size:14px;color:var(--muted)}
+.trust span{display:inline-flex;align-items:center;gap:7px}
+.trust svg{color:var(--accent)}
+/* phone */
+.phone{justify-self:center;position:relative;width:min(320px,80vw);aspect-ratio:402/874;border-radius:52px;padding:11px;background:linear-gradient(145deg,#4a4a52,#1f1f24 30%,#2c2c32 70%,#55555d);box-shadow:0 50px 100px -40px rgba(0,0,0,.65),0 0 0 1px rgba(255,255,255,.06) inset;transform:rotate(-2deg)}
+.phone .scr{position:relative;width:100%;height:100%;border-radius:42px;overflow:hidden;background:#141220}
+.phone .isl{position:absolute;left:50%;top:9px;transform:translateX(-50%);width:31%;height:27px;border-radius:16px;background:#000;z-index:2}
+.phone .sb{position:absolute;inset:0 0 auto;height:46px;z-index:1;background:#141220}
+.phone iframe{position:absolute;border:0;left:0;top:46px;width:402px;height:calc((100% - 70px) * 402 / (320 - 22));transform-origin:0 0}
+.phone .hb{position:absolute;left:50%;bottom:7px;transform:translateX(-50%);width:34%;height:4px;border-radius:2px;background:#fff;opacity:.85;z-index:2}
+.phone noscript,.phone .fallback{position:absolute;inset:46px 0 24px;display:grid;place-items:center;color:#a7a2bd;font-size:14px;padding:20px;text-align:center}
+@media (max-width:860px){.hero .wrap{grid-template-columns:1fr}.phone{transform:none;width:min(300px,78vw)}}
+/* sections */
+section{padding:clamp(48px,8vw,96px) 0}
+.sec-h{max-width:640px;margin-bottom:36px}
+.sec-h h2{font-size:clamp(30px,4.2vw,44px);line-height:1.08;letter-spacing:-.025em;margin:8px 0 12px;font-weight:800}
+.sec-h p{margin:0;color:var(--muted);font-size:18px}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+@media (max-width:900px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:580px){.grid{grid-template-columns:1fr}}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:22px;display:grid;gap:8px;align-content:start;transition:border-color .2s ease,transform .2s ease}
+.card:hover{border-color:color-mix(in srgb,var(--accent) 40%,var(--line));transform:translateY(-2px)}
+.card .ic{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;background:color-mix(in srgb,var(--accent) 16%,var(--panel2));color:var(--accent)}
+.card h3{margin:6px 0 0;font-size:19px;letter-spacing:-.01em}
+.card p{margin:0;color:var(--muted);font-size:15px}
+.card ul{margin:2px 0 0;padding-left:18px;color:var(--muted);font-size:14.5px}
+.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;counter-reset:s}
+@media (max-width:760px){.steps{grid-template-columns:1fr}}
+.step{position:relative;padding:22px 22px 22px 70px;border-radius:20px;background:var(--panel);border:1px solid var(--line)}
+.step::before{counter-increment:s;content:counter(s);position:absolute;left:20px;top:20px;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-weight:800;background:var(--accent);color:var(--accent-ink)}
+.step h3{margin:0 0 4px;font-size:18px}
+.step p{margin:0;color:var(--muted);font-size:15px}
+.band{background:var(--panel);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.priv{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+@media (max-width:760px){.priv{grid-template-columns:1fr}}
+.priv h3{margin:0 0 6px;font-size:18px}
+.priv p{margin:0;color:var(--muted);font-size:15px}
+details{border-bottom:1px solid var(--line);padding:16px 0}
+details summary{cursor:pointer;font-weight:700;font-size:17px;list-style:none;display:flex;justify-content:space-between;gap:12px}
+details summary::-webkit-details-marker{display:none}
+details summary::after{content:"+";color:var(--muted);font-weight:400;font-size:22px;line-height:1}
+details[open] summary::after{content:"−"}
+details p{margin:8px 0 0;color:var(--muted);max-width:60em}
+.cta-end{text-align:center;padding:clamp(56px,9vw,104px) 0}
+.cta-end h2{font-size:clamp(32px,5vw,52px);letter-spacing:-.03em;line-height:1.05;margin:0 0 14px;font-weight:800}
+.cta-end p{color:var(--muted);margin:0 0 26px;font-size:18px}
+.cta-end .ctas{justify-content:center}
+footer{border-top:1px solid var(--line);padding:28px 0 calc(28px + env(safe-area-inset-bottom,0px));color:var(--muted);font-size:14px}
+footer .wrap{display:flex;gap:10px 24px;flex-wrap:wrap;align-items:center}
+footer nav{display:flex;gap:18px;margin-left:auto;flex-wrap:wrap}
+footer a{text-decoration:none}
+footer a:hover{color:var(--ink)}
+.howto{display:none;margin-top:14px;padding:14px 16px;border-radius:14px;background:var(--panel);border:1px solid var(--line);font-size:15px;color:var(--muted);max-width:34em}
+.howto.on{display:block}
+.howto b{color:var(--ink)}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="Digital Dash home"><img src="/digital-dash-icon-192.png" alt="">Digital Dash</a>
+    <nav aria-label="Sections"><ul><li><a href="#features">Features</a></li><li><a href="#how">How it works</a></li><li><a href="#privacy">Privacy</a></li><li><a href="#faq">FAQ</a></li></ul></nav>
+    <a class="btn pri" href="/digital-dash.html">Open app</a>
+  </div>
+</header>
+<div class="back" id="back" role="region" aria-label="Welcome back"><div><p>Welcome back. Your dashboard is saved on this device.</p><a class="btn pri" href="/digital-dash.html">Continue to your dashboard</a></div></div>
+<main id="main">
+  <div class="hero">
+    <div class="wrap">
+      <div>
+        <span class="eyebrow"><i aria-hidden="true"></i>Free · works offline · no ads</span>
+        <h1>Your whole day, <em>planned and done.</em></h1>
+        <p class="lead">Digital Dash puts your focus timer, to-do list, week planner, grades and gym log in one place, so you spend less time switching apps and more time getting things done.</p>
+        <div class="ctas"><a class="btn pri big" href="/digital-dash.html">Open Digital Dash</a><button class="btn big" type="button" id="install">Put it on your phone</button></div>
+        <div class="howto" id="howto" aria-live="polite"></div>
+        <div class="trust">
+          <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg>No account needed</span>
+          <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg>Sync with Google or email if you want it</span>
+          <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg>Phone, tablet and computer</span>
+        </div>
+      </div>
+      <div class="phone" aria-label="Digital Dash running on an iPhone" role="img">
+        <div class="scr"><div class="sb" aria-hidden="true"></div><div class="isl" aria-hidden="true"></div>
+          <iframe id="demo" title="Live Digital Dash preview" tabindex="-1" aria-hidden="true" loading="lazy" src="/digital-dash.html?demo=1#focus"></iframe>
+          <div class="hb" aria-hidden="true"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section id="features" aria-labelledby="f-h">
+    <div class="wrap">
+      <div class="sec-h"><span class="eyebrow"><i aria-hidden="true"></i>Everything in one app</span><h2 id="f-h">Built for busy students</h2><p>Start with what you need today. Everything else is one tap away.</p></div>
+      <div class="grid">
+        <article class="card"><span class="ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2M9 2h6"/></svg></span><h3>Focus timers and clocks</h3><p>Big beautiful clocks, Pomodoro and custom timers, study music and background sounds, and study rooms with friends.</p></article>
+        <article class="card"><span class="ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6h11M9 12h11M9 18h11"/><path d="m3 6 1.5 1.5L7 5M3 12l1.5 1.5L7 11M3 18l1.5 1.5L7 17"/></svg></span><h3>Tasks that keep up</h3><p>Urgency, due dates, repeats and checklists. Add by voice, get reminders by notification, email or text, and undo anything.</p></article>
+        <article class="card"><span class="ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></span><h3>Week and month planner</h3><p>Lay out each day, drag work between days, and see classes from your school calendar right beside your tasks.</p></article>
+        <article class="card"><span class="ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/></svg></span><h3>Grades and grade calculator</h3><p>Track every course, see what you need on the final, and switch between US and Ontario grading scales.</p></article>
+        <article class="card"><span class="ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6.5 6.5v11M17.5 6.5v11M3.5 9v6M20.5 9v6M6.5 12h11"/></svg></span><h3>Gym tracker</h3><p>Your split on the calendar, what to lift next, new PR alerts, a plate calculator, progress charts, and BMI and calorie targets.</p></article>
+        <article class="card"><span class="ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="8" cy="10" r="1.3" fill="currentColor"/><circle cx="12" cy="7.5" r="1.3" fill="currentColor"/><circle cx="16" cy="10" r="1.3" fill="currentColor"/><path d="M12 21c-1.5 0-2-1.5-1-2.5s.5-2.5-1-2.5"/></svg></span><h3>Make it yours</h3><p>Themes, liquid glass, your own colours, fonts and backgrounds, widgets, plus a net worth tracker with savings goals.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="how" class="band" aria-labelledby="h-h">
+    <div class="wrap">
+      <div class="sec-h"><span class="eyebrow"><i aria-hidden="true"></i>How it works</span><h2 id="h-h">Up and running in a minute</h2><p>No download, no sign-up wall. It opens in your browser and works like an app.</p></div>
+      <div class="steps">
+        <div class="step"><h3>Open it</h3><p>Tap Open Digital Dash. A quick tour shows you around, with sample data you can clear in one tap.</p></div>
+        <div class="step"><h3>Add your week</h3><p>Drop in tasks, classes and workouts. Plan each day and let the clock show what's up next.</p></div>
+        <div class="step"><h3>Take it everywhere</h3><p>Add it to your home screen, and sign in if you want your dashboard on every device.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="privacy" aria-labelledby="p-h">
+    <div class="wrap">
+      <div class="sec-h"><span class="eyebrow"><i aria-hidden="true"></i>Privacy</span><h2 id="p-h">Your data stays yours</h2></div>
+      <div class="priv">
+        <div><h3>On your device first</h3><p>Without an account, everything stays in your browser. Nothing is sent anywhere.</p></div>
+        <div><h3>Private when it syncs</h3><p>Sign in and your dashboard is stored so only your account can read it. Delete it any time.</p></div>
+        <div><h3>No ads, no selling</h3><p>Your tasks, grades and workouts are never sold or used for ads. <a href="/digital-dash-privacy.html">Read the privacy policy</a>.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" class="band" aria-labelledby="q-h">
+    <div class="wrap">
+      <div class="sec-h"><span class="eyebrow"><i aria-hidden="true"></i>Questions</span><h2 id="q-h">Good to know</h2></div>
+      <details><summary>Is it really free?</summary><p>Yes. Everything you see is free to use.</p></details>
+      <details><summary>Do I need an account?</summary><p>No. Open it and start. An account is only for syncing between your phone and computer, and for reminders by email or text.</p></details>
+      <details><summary>Does it work offline?</summary><p>Yes. Once it's opened, it keeps working without internet and syncs when you're back online.</p></details>
+      <details><summary>Is there an iPhone app?</summary><p>You can add it to your home screen today and it opens like an app. An App Store version is on the way.</p></details>
+      <details><summary>Can I bring my school timetable?</summary><p>Yes. Import a calendar file or link from Google Calendar, Outlook, Apple Calendar or your school, and weekly classes repeat automatically.</p></details>
+    </div>
+  </section>
+
+  <div class="cta-end wrap"><h2>Ready to get ahead?</h2><p>Open it now. It takes seconds.</p><div class="ctas"><a class="btn pri big" href="/digital-dash.html">Open Digital Dash</a></div></div>
+</main>
+<footer><div class="wrap"><span>© <span id="yr"></span> Digital Dash</span><nav aria-label="Footer"><a href="/digital-dash.html">Open app</a><a href="/digital-dash-privacy.html">Privacy</a><a href="https://github.com/Shaj2x/digitaldash">GitHub</a></nav></div></footer>
+<script>
+(()=>{
+  document.getElementById("yr").textContent=new Date().getFullYear();
+  /* returning visitors: their dashboard is saved under this key */
+  try{if(localStorage.getItem("grindboard.v1"))document.getElementById("back").classList.add("on");}catch(e){}
+  /* fit the 402-pt-wide app into the phone frame */
+  const fr=document.getElementById("demo"),scr=fr.parentNode;
+  function fit(){const w=scr.clientWidth,h=scr.clientHeight,s=w/402;fr.style.transform=`scale(${s})`;fr.style.height=((h-46-24)/s)+"px";}
+  addEventListener("resize",fit);fit();
+  /* keep the demo hands-off: no focus, no clicks */
+  fr.addEventListener("load",()=>{try{fr.contentDocument.documentElement.style.pointerEvents="none";}catch(e){}});
+  /* install help */
+  let deferred=null;addEventListener("beforeinstallprompt",e=>{e.preventDefault();deferred=e;});
+  const ios=/iPhone|iPad|iPod/.test(navigator.userAgent)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1),box=document.getElementById("howto");
+  document.getElementById("install").addEventListener("click",async()=>{
+    if(deferred){deferred.prompt();await deferred.userChoice;deferred=null;return;}
+    box.innerHTML=ios?"<b>On iPhone:</b> open Digital Dash in Safari, tap the Share button, then <b>Add to Home Screen</b>.":"<b>On Android or Chrome:</b> open Digital Dash, tap the menu, then <b>Install app</b> or <b>Add to Home screen</b>. <b>On iPhone:</b> Safari → Share → Add to Home Screen.";
+    box.classList.add("on");
+  });
+})();
+</script>
+</body>
+</html>

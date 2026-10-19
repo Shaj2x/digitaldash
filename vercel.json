@@ -4,7 +4,7 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "redirects": [
-    { "source": "/", "destination": "/digital-dash.html", "permanent": false },
+    { "source": "/app", "destination": "/digital-dash.html", "permanent": false },
     { "source": "/digital-dash", "destination": "/digital-dash.html", "permanent": false },
     { "source": "/privacy", "destination": "/digital-dash-privacy.html", "permanent": false },
     { "source": "/preview", "destination": "/preview.html", "permanent": false }

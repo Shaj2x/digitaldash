@@ -1986,6 +1986,11 @@ html.lg .eye{background:var(--glass-tint);box-shadow:inset 0 1px 0 color-mix(in 
 </dialog>
 
 <script>
+/* Demo mode (?demo=1, used by the home page's live phone): starts with sample data and never reads or
+   writes this browser's saved dashboard, sign-in or sync. Storage calls are no-ops in this page only. */
+if(/[?&]demo=1(&|$)/.test(location.search)){try{Storage.prototype.getItem=function(){return null;};Storage.prototype.setItem=function(){};Storage.prototype.removeItem=function(){};}catch(e){}window.DASH_DEMO=true;}
+</script>
+<script>
 (function(){
 "use strict";
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
@@ -3716,7 +3721,7 @@ function installHint(){
     :"Open this page in Chrome, Edge or Safari to install it as an app that works offline.";
 }
 try{
-  if("serviceWorker" in navigator&&/^https?:$/.test(location.protocol)&&location.href.indexOf("about:")!==0&&window.isSecureContext)
+  if(!window.DASH_DEMO&&"serviceWorker" in navigator&&/^https?:$/.test(location.protocol)&&location.href.indexOf("about:")!==0&&window.isSecureContext)
     navigator.serviceWorker.register("/digital-dash-sw.js",{scope:"/digital-dash"}).catch(()=>{});
 }catch(e){}
 window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();installEvt=e;$("#install-app").hidden=standalone();installHint();});
@@ -6560,6 +6565,7 @@ if(S.settings.bg.type!=="none"&&!S.settings.bg.pal)computePal();
 loop();
 connect();
 acInit();
+if(window.DASH_DEMO){S.settings.welcomed=true;loadDemo();$("#toast").classList.remove("on","act");}
 $("#demo-rm").hidden=!S.tasks.some(t=>t.demo);
 if(firstRun&&!S.settings.welcomed&&!acAuthHash&&!/[?&]room=/.test(location.href)&&!(lsGet(RMK)||{}).code)setTimeout(()=>{if(!$("#acct-pick").open&&!$("#acct").open)tourOpen();},600); /* not over a sign-in or room link */
 })();
