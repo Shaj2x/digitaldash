@@ -3233,7 +3233,20 @@ function itemsFor(k){
   const calOf=id=>(S.calendars||[]).find(x=>x.id===id);
   const ev=S.events.filter(e=>e.date===k).sort((a,b)=>(a.time||"").localeCompare(b.time||"")).map(e=>{const c=e.src&&calOf(e.src);return {kind:"ev",id:e.id,title:e.title,time:e.time,cal:c?c.name:(e.src==="ai"?"AI plan":""),c:c?calColor(c):"var(--accent)"};});
   const tk=S.tasks.filter(t=>t.due===k&&!t.archived).map(t=>({kind:"task",id:t.id,title:t.title,done:t.done,time:t.dueTime,c:`var(--u${t.urg})`}));
-  return ev.concat(tk);
+  return ev.concat(gymCalItems(k),tk);
+}
+/* Workouts on the calendar: finished ones on their day, and the split's planned routine from today on.
+   Worked out from S.gym each time (never stored as events), so editing the split updates the calendar.
+   Weekly splits repeat by weekday; a rotation counts on from today's "up next" day. Off in Gym settings. */
+function gymCalItems(k){
+  const g=S.gym;if(!g||g.cal===false)return [];const out=[],today=dkey(new Date());
+  (g.workouts||[]).forEach(w=>{if(w.finished&&w.date===k)out.push({kind:"gym",id:w.id,title:w.name,time:"",c:"var(--accent)",tag:"Done",cal:"Gym"});});
+  const sp=g.split;if(!sp||k<today)return out;let id=null,tag="Planned";
+  if(sp.mode==="rot"){const n=sp.rot.length;if(!n)return out;const doneToday=(g.workouts||[]).some(w=>w.finished&&w.date===today&&w.split&&w.split.mode==="rot");
+    const diff=Math.round((kDate(k)-kDate(today))/864e5)-(doneToday?1:0);if(diff<0)return out;const i=((sp.next||0)+diff)%n;id=sp.rot[i];tag=`Day ${i+1}`;}
+  else{id=sp.week[(kDate(k).getDay()+6)%7];if(k===today&&out.length)return out;}
+  const t=id&&(g.templates||[]).find(x=>x.id===id);if(t)out.push({kind:"gym",id:"plan-"+k,title:t.name,time:"",c:"var(--accent)",tag,cal:"Gym"});
+  return out;
 }
 function renderCal(dir){
   const first=new Date(calY,calM,1), today=dkey(new Date());
@@ -3244,7 +3257,7 @@ function renderCal(dir){
   for(let i=0;i<42;i++){
     const d=new Date(start.getFullYear(),start.getMonth(),start.getDate()+i),k=dkey(d),it=itemsFor(k);
     if(i===35&&d.getMonth()!==calM)break;
-    html+=`<button class="day${d.getMonth()!==calM?" out":""}${k===today?" today":""}" data-k="${k}" aria-pressed="${k===selDay}"><span class="n">${d.getDate()}</span><span class="sr-only"> ${d.toLocaleDateString(undefined,{month:"long",weekday:"long"})}${k===today?", today":""}, ${it.length?it.length+" item"+(it.length===1?"":"s"):"nothing planned"}</span>${it.slice(0,3).map(x=>`<span class="chip" style="--c:${x.c}">${esc(x.title)}</span>`).join("")}${it.length>3?`<span class="more">+${it.length-3} more</span>`:""}<span class="dots">${it.slice(0,4).map(x=>`<i style="--c:${x.c}"></i>`).join("")}</span></button>`;
+    html+=`<button class="day${d.getMonth()!==calM?" out":""}${k===today?" today":""}" data-k="${k}" aria-pressed="${k===selDay}"><span class="n">${d.getDate()}</span><span class="sr-only"> ${d.toLocaleDateString(undefined,{month:"long",weekday:"long"})}${k===today?", today":""}, ${it.length?it.length+" item"+(it.length===1?"":"s"):"nothing planned"}</span>${it.slice(0,3).map(x=>`<span class="chip" style="--c:${x.c}">${x.kind==="gym"?"Gym: ":""}${esc(x.title)}</span>`).join("")}${it.length>3?`<span class="more">+${it.length-3} more</span>`:""}<span class="dots">${it.slice(0,4).map(x=>`<i style="--c:${x.c}"></i>`).join("")}</span></button>`;
   }
   const g=$("#cal-grid");g.innerHTML=html;renderTray();
   if(dir){g.classList.remove("slide-l","slide-r");void g.offsetWidth;g.classList.add(dir<0?"slide-l":"slide-r");}
@@ -3255,7 +3268,7 @@ function renderDay(mode){
   $("#day-title").textContent=new Date(y,m-1,d).toLocaleDateString(undefined,{weekday:"long",month:"long",day:"numeric"});
   const it=itemsFor(selDay),dl=$("#day-list");
   if(dl._day!==selDay){mode="plain";dl._day=selDay;}
-  flipRender(dl,()=>{dl.innerHTML=it.length?it.map(x=>`<div class="ditem" style="--c:${x.c}" data-kind="${x.kind}" data-id="${x.id}"><span class="tm">${x.kind==="ev"?(x.time?fmtTime(x.time):"All day"):(x.time?"Due "+fmtTime(x.time):"Task")}</span><span style="${x.done?"text-decoration:line-through;opacity:.6":""}">${esc(x.title)}${x.cal?`<small class="calname">${esc(x.cal)}</small>`:""}</span>${x.kind==="ev"?`<button class="icon-btn x" aria-label="Delete event"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6 6 18"/></svg></button>`:""}</div>`).join(""):`<div class="empty">Free day. Add something below.</div>`;},mode);
+  flipRender(dl,()=>{dl.innerHTML=it.length?it.map(x=>`<div class="ditem" style="--c:${x.c}" data-kind="${x.kind}" data-id="${x.id}"><span class="tm">${x.kind==="gym"?x.tag:x.kind==="ev"?(x.time?fmtTime(x.time):"All day"):(x.time?"Due "+fmtTime(x.time):"Task")}</span><span style="${x.done?"text-decoration:line-through;opacity:.6":""}">${esc(x.title)}${x.cal?`<small class="calname">${esc(x.cal)}</small>`:""}</span>${x.kind==="ev"?`<button class="icon-btn x" aria-label="Delete event"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6 6 18"/></svg></button>`:""}</div>`).join(""):`<div class="empty">Free day. Add something below.</div>`;},mode);
 }
 function fmtTime(t){const [h,m]=t.split(":").map(Number);return S.settings.h24?t:`${h%12||12}:${pad(m)} ${h<12?"AM":"PM"}`;}
 const monthDir=(y,m)=>Math.sign((y*12+m)-(calY*12+calM));
@@ -3268,7 +3281,7 @@ $("#cal-prev").addEventListener("click",()=>{calM--;if(calM<0){calM=11;calY--;}r
 $("#cal-next").addEventListener("click",()=>{calM++;if(calM>11){calM=0;calY++;}renderCal(1);});
 $("#cal-today").addEventListener("click",()=>{const d=new Date(),dir=monthDir(d.getFullYear(),d.getMonth());calY=d.getFullYear();calM=d.getMonth();selDay=dkey(d);renderCal(dir);});
 $("#ev-form").addEventListener("submit",e=>{e.preventDefault();const title=$("#ev-title").value.trim();if(!title)return;S.events.push({id:uid(),date:selDay,time:$("#ev-time").value,title});$("#ev-title").value="";$("#ev-time").value="";save();renderCal();});
-$("#day-list").addEventListener("click",e=>{const b=e.target.closest(".x");if(!b)return;const id=b.closest(".ditem").dataset.id,at=S.events.findIndex(x=>x.id===id);if(at<0)return;const ev=S.events.splice(at,1)[0];save();renderCal();
+$("#day-list").addEventListener("click",e=>{const gi=e.target.closest('.ditem[data-kind="gym"]');if(gi&&Date.now()-DR.justDropped>300){shortcutLink("gym");try{history.pushState(null,"","#gym");}catch(err){}return;}const b=e.target.closest(".x");if(!b)return;const id=b.closest(".ditem").dataset.id,at=S.events.findIndex(x=>x.id===id);if(at<0)return;const ev=S.events.splice(at,1)[0];save();renderCal();
   toast("Event deleted",{run(){S.events.splice(Math.min(at,S.events.length),0,ev);save();renderCal();}});});
 
 
@@ -4113,7 +4126,7 @@ function wBody(w){
     case"world":{let t="--:--";try{t=new Date().toLocaleTimeString(undefined,{timeZone:c.tz,hour:"numeric",minute:"2-digit",hour12:!S.settings.h24});}catch(e){}return `<div class="big">${t}</div><small>${esc(c.label)}</small>`;}
     case"progress":{const f=fractions(new Date());return [["Day",f.d],["Week",f.w],["Month",f.mo],["Year",f.y]].map(([n,v])=>`<div class="pbar"><span>${n}</span><i><b style="transform:scaleX(${v.toFixed(4)})"></b></i><span>${Math.floor(v*100)}%</span></div>`).join("");}
     case"toptasks":{const ts=sortedTasks().filter(t=>!t.done).slice(0,3);if(!ts.length)return `<small>All clear. Add a task to see it here.</small>`;return `<ul class="wl">${ts.map(t=>`<li style="--uc:var(--u${t.urg})"><button class="check" data-wtask="${t.id}" aria-label="Mark ${esc(t.title)} as done"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4"><path pathLength="1" d="m5 12 5 5 9-10"/></svg></button><span>${esc(t.title)}</span></li>`).join("")}</ul>`;}
-    case"upcoming":{const out=[];for(let i=0;i<45&&out.length<5;i++){const k=dkey(new Date(Date.now()+i*864e5));itemsFor(k).filter(x=>!x.done).forEach(x=>out.push(Object.assign({k},x)));}
+    case"upcoming":{const out=[];for(let i=0;i<45&&out.length<5;i++){const k=dkey(new Date(Date.now()+i*864e5));itemsFor(k).filter(x=>!x.done&&!(x.kind==="gym"&&(i>0||x.tag==="Done"))).forEach(x=>out.push(Object.assign({k},x)));}
       if(!out.length)return `<small>Nothing scheduled in the next few weeks.</small>`;
       return `<ul class="wl">${out.slice(0,5).map(x=>`<li><i class="pip" style="--c:${x.c}"></i><span class="d">${x.k===today?"Today":niceDate(x.k)}</span><span>${esc(x.title)}</span></li>`).join("")}</ul>`;}
   }
@@ -5446,12 +5459,12 @@ function wpRow(t,k){
 }
 /* One day's card: events, tasks, progress and quick add. Week view shows seven; month view shows the picked day. */
 function wpDayHtml(k,ts,full){
-  const today=dkey(new Date()),n=ts.length,d=ts.filter(t=>t.done).length,evs=itemsFor(k).filter(x=>x.kind==="ev"),dt=kDate(k),load=evs.length+n;
+  const today=dkey(new Date()),n=ts.length,d=ts.filter(t=>t.done).length,evs=itemsFor(k).filter(x=>x.kind!=="task"),dt=kDate(k),load=evs.length+n;
   return `<section class="panel wp-day${k===today?" today":""}${k<today?" past":""}${full?" full":""}" data-k="${k}" aria-labelledby="wp-h-${k}">
     <header class="wp-dh"><h3 id="wp-h-${k}">${full?`<span class="wp-dl">${esc(dt.toLocaleDateString(undefined,{weekday:"long",month:"long",day:"numeric"}))}</span>${k===today?'<span class="wp-tag">Today</span>':""}`:`<span class="wp-dn">${dt.toLocaleDateString(undefined,{weekday:"short"})}</span><span class="wp-dd">${dt.getDate()}</span><span class="sr-only"> ${dt.toLocaleDateString(undefined,{month:"long"})}${k===today?", today":""}</span>`}</h3>
       <span class="wp-cnt">${n?`${d}/${n} done`:""}</span></header>
     <div class="wp-bar" role="img" aria-label="${load?`${n} task${n===1?"":"s"}, ${evs.length} event${evs.length===1?"":"s"}`:"Free day"}"><i style="transform:scaleX(${n?(d/n).toFixed(3):0})"></i></div>
-    ${evs.length?`<ul class="wp-evs" aria-label="Events">${evs.map(x=>`<li style="--c:${x.c}"><span class="tm">${x.time?fmtTime(x.time):"All day"}</span><span class="wp-et">${esc(x.title)}</span></li>`).join("")}</ul>`:""}
+    ${evs.length?`<ul class="wp-evs" aria-label="Events">${evs.map(x=>`<li style="--c:${x.c}"><span class="tm">${x.kind==="gym"?(x.tag==="Done"?"Workout done":"Workout"):x.time?fmtTime(x.time):"All day"}</span><span class="wp-et">${esc(x.title)}</span></li>`).join("")}</ul>`:""}
     <div class="wp-list">${ts.map(t=>wpRow(t,k)).join("")||(evs.length?"":`<p class="wp-none">${k<today?"Nothing planned":"Free"}</p>`)}</div>
     <form class="wp-add" data-k="${k}" autocomplete="off"><input type="text" maxlength="140" placeholder="Add to ${full?wpDayName(k):dt.toLocaleDateString(undefined,{weekday:"short"})}" aria-label="Add a task to ${esc(wpDayName(k,true))}" enterkeyhint="done"></form>
   </section>`;
@@ -5486,7 +5499,7 @@ function renderPlan(){
   if(mode==="week")body.innerHTML=tops+`<div class="wp-grid${wpPick?" picking":""}">${grid.map(k=>wpDayHtml(k,by[k])).join("")}</div>`;
   else{
     const dow=[...Array(7)].map((_,i)=>`<div class="dow" aria-hidden="true">${addDays(weekStart(now),i).toLocaleDateString(undefined,{weekday:"short"})}</div>`).join("");
-    const cells=grid.map(k=>{const ts=by[k],evs=itemsFor(k).filter(x=>x.kind==="ev"),n=ts.length,d=ts.filter(t=>t.done).length,dt=kDate(k),out=!inR(k);
+    const cells=grid.map(k=>{const ts=by[k],evs=itemsFor(k).filter(x=>x.kind!=="task"),n=ts.length,d=ts.filter(t=>t.done).length,dt=kDate(k),out=!inR(k);
       const items=evs.map(x=>`<span class="wp-chip ev" style="--uc:${x.c}">${x.time?`<b>${fmtTime(x.time).replace(/:00(?= )/,"").replace(" ","").toLowerCase()}</b> `:""}${esc(x.title)}</span>`).concat(ts.map(t=>`<span class="wp-chip${t.done?" done":""}" data-id="${t.id}" style="--uc:var(--u${t.urg})">${esc(t.title)}</span>`));
       return `<button type="button" class="wp-cell${out?" out":""}${k===today?" today":""}${k<today?" past":""}" data-k="${k}" aria-pressed="${k===wpSel}"><span class="wp-cn">${dt.getDate()}</span>${n?`<span class="wp-cc">${d}/${n}</span>`:""}<span class="sr-only"> ${dt.toLocaleDateString(undefined,{weekday:"long",month:"long"})}${k===today?", today":""}: ${n?`${n} task${n===1?"":"s"}${d?`, ${d} done`:""}`:"no tasks"}${evs.length?`, ${evs.length} event${evs.length===1?"":"s"}`:""}</span>
         <span class="wp-chips" aria-hidden="true">${items.slice(0,4).join("")}${items.length>4?`<span class="wp-more">+${items.length-4} more</span>`:""}</span>
@@ -5710,6 +5723,7 @@ function renderGym(){
       <section class="panel" aria-labelledby="gset-h"><h2 id="gset-h">Settings</h2>
         <label class="hl-row">Weights in <select id="gym-unit"><option value="lb"${u==="lb"?" selected":""}>lb</option><option value="kg"${u==="kg"?" selected":""}>kg</option></select></label>
         <label class="hl-row">Workouts per week goal <select id="gym-goal">${[1,2,3,4,5,6,7].map(n=>`<option${n===goal?" selected":""}>${n}</option>`).join("")}</select></label>
+        <label class="hl-row"><input type="checkbox" id="gym-cal"${g.cal===false?"":" checked"}> Show workouts on the calendar</label>
         <label class="hl-row">Rest timer after each set <select id="gym-rest">${[[0,"Off"],[60,"1 min"],[90,"1 min 30 s"],[120,"2 min"],[180,"3 min"],[240,"4 min"]].map(([v,l])=>`<option value="${v}"${v===g.rest?" selected":""}>${l}</option>`).join("")}</select></label>
         <p class="hl-muted">Changing units relabels your numbers; it doesn't convert old ones.</p></section>
     </div></div>`;
@@ -5721,6 +5735,7 @@ $("#gym-body").addEventListener("input",e=>{const t=e.target;
   if(t.dataset.gs){const f=gymFind(t);if(f.s){f.s[t.dataset.gs]=t.value.replace(/[^\d.,]/g,"").slice(0,7);save();}}});
 $("#gym-body").addEventListener("change",e=>{const t=e.target,g=gymS();
   if(t.id==="gym-unit"){g.unit=t.value;save();renderGym();$("#gym-unit").focus();}
+  else if(t.id==="gym-cal"){g.cal=t.checked;save();renderCal();renderPlan();renderMini();toast(t.checked?"Workouts show on your calendar":"Workouts hidden from your calendar");}
   else if(t.id==="gym-rest"){g.rest=+t.value;save();if(!g.rest){restT.end=0;restTick();}}});
 $("#gym-body").addEventListener("submit",e=>{const f=e.target.closest(".gw-add");if(!f)return;e.preventDefault();const w=gymCur(),i=f.querySelector("input"),n=i.value.trim().slice(0,60);if(!w||!n)return;
   const known=[...document.querySelectorAll("#gym-ex-list option")].map(o=>o.value).find(v=>v.toLowerCase()===n.toLowerCase());
@@ -6394,7 +6409,7 @@ function renderTray(){
 }
 $("#cal-tray").addEventListener("click",e=>{const b=e.target.closest(".tray-chip");if(!b)return;pickTask=pickTask===b.dataset.tid?null:b.dataset.tid;renderTray();if(pickTask)toast("Now pick a day");});
 dragable($("#cal-tray"),".tray-chip",{target:".day",drop:(src,day)=>{pickTask=null;moveItemTo("task",src.dataset.tid,day.dataset.k);}});
-dragable($("#day-list"),".ditem",{target:".day",when:src=>!(src.dataset.kind==="ev"&&(S.events.find(x=>x.id===src.dataset.id)||{}).src&&(S.events.find(x=>x.id===src.dataset.id)||{}).src!=="ai"),drop:(src,day)=>moveItemTo(src.dataset.kind,src.dataset.id,day.dataset.k)});
+dragable($("#day-list"),".ditem",{target:".day",when:src=>src.dataset.kind!=="gym"&&!(src.dataset.kind==="ev"&&(S.events.find(x=>x.id===src.dataset.id)||{}).src&&(S.events.find(x=>x.id===src.dataset.id)||{}).src!=="ai"),drop:(src,day)=>moveItemTo(src.dataset.kind,src.dataset.id,day.dataset.k)});
 dragable($("#widgets"),".widget",{target:".widget",when:()=>wEdit,drop:(src,over)=>{
   const a=S.widgets.findIndex(w=>w.id===src.dataset.id),b=S.widgets.findIndex(w=>w.id===over.dataset.id);if(a<0||b<0)return;
   const [w]=S.widgets.splice(a,1);S.widgets.splice(b,0,w);save();renderWidgets(true);}});

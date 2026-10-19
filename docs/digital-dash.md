@@ -131,6 +131,12 @@ Meals and macros are hidden for now (`renderHealth` never shows `#meal-body`). I
   - Each routine (`S.gym.templates`, shared with "Save as routine") can be renamed, have exercises added, removed and reordered, or be deleted; days using a deleted routine become rest.
   - **Presets:** Push/Pull/Legs, Upper/Lower, Full body 3×, Bro split, Arnold split and a PPL rotation. A routine with the same name is reused, so your own exercises are kept.
   - Changes only apply when you press Save split, and that has Undo. Removing the split keeps your routines. Workouts started from the split remember the day (`w.split`).
+- **Workouts on the calendar** (`gymCalItems`, added in `itemsFor`):
+  - Finished workouts show on their day.
+  - The split's planned routine shows from today on: weekly splits by weekday, rotations counting forward from today's "up next" day, starting tomorrow once today's is done.
+  - They appear in the Month view (as "Gym: Push"), the day panel (tapping one opens Gym), the Week and Month plan, and the Upcoming widget (today only).
+  - They're worked out each time and never saved as events, so changing the split updates the calendar straight away. They can't be dragged.
+  - "Show workouts on the calendar" in Gym settings (`S.gym.cal`) turns them off.
 - **Body and calories tab** (`#bmi`, "bmi", "calories", "cut or bulk" in the command bar). It uses the same maths as calculator.net's BMI and Calorie calculators, stored in `S.gym.profile`:
   - **Inputs:** US or metric units (switching converts what you typed), age, sex, height, weight, optional body fat %, the 7 activity levels (BMR, 1.2, 1.375, 1.465, 1.55, 1.725, 1.9), formula (Mifflin-St Jeor default, Revised Harris-Benedict, Katch-McArdle), and kcal or kJ.
   - **BMI:** WHO adult categories, healthy weight for your height, the distance to the healthy range, BMI Prime and Ponderal index.
