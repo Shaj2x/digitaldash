@@ -260,6 +260,30 @@ html.vt *{transition:none!important}
   .js .track::before{transform:none}
 }
 
+/* ---------- cursor (mouse only, not with reduced motion): an ink dot, and a worn stamp-ink ring that wraps
+   whatever you can press, turns into a text bar over words, and stamps the DD mark where you click ---------- */
+html.cur,html.cur *{cursor:none!important}
+.phone iframe{pointer-events:none}
+#cur{position:fixed;inset:0;pointer-events:none;z-index:310;transition:opacity .2s ease}
+#cur.out{opacity:0}
+/* stays live above the theme ripple instead of freezing in its snapshot */
+#cur{view-transition-name:cur}::view-transition-group(cur),::view-transition-new(cur){animation:none}::view-transition-old(cur){display:none}
+#cur .cd,#cur .cr{position:fixed;left:0;top:0;will-change:translate}
+#cur .cd{width:8px;height:8px;margin:-4px 0 0 -4px;border-radius:4px;background:var(--ink);transition:scale .2s var(--ease-out),opacity .15s ease}
+#cur .cr{display:grid;place-items:center;border:2px solid var(--ink);background:transparent;transition:opacity .2s ease,background-color .2s ease,scale .12s var(--ease-out);
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='30'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.8' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -2.2 1.7'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='30'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.8' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -2.2 1.7'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+#cur .cl{font:800 11px/1 var(--display);letter-spacing:.16em;text-transform:uppercase;color:var(--ink);opacity:0;transition:opacity .15s ease}
+#cur.hov .cd{opacity:0}
+#cur.hov .cr{background:color-mix(in srgb,var(--ink) 9%,transparent)}
+#cur.lab .cl{opacity:1}
+#cur.txt .cd{scale:.375 3.4}
+#cur.txt .cr,#cur.spot .cr{opacity:0}
+#cur.down .cr{scale:.92}
+#cur.down .cd{scale:.7}
+#cur .stp{position:fixed;left:0;top:0;width:40px;height:34px;background:var(--ink);opacity:0;
+  -webkit-mask:url(/brand/dd-mark-256.png) center/contain no-repeat,url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='30'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.8' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -2.2 1.7'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");-webkit-mask-composite:source-in;
+  mask:url(/brand/dd-mark-256.png) center/contain no-repeat,url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='30'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.8' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -2.2 1.7'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");mask-composite:intersect}
+
 /* ---------- first visit: the DD mark slams together, then splits open into the site (about 2 s) ---------- */
 #intro{position:fixed;inset:0;z-index:300;display:none;overflow:hidden;cursor:pointer}
 #intro.on{display:block}
@@ -382,7 +406,7 @@ html.vt *{transition:none!important}
 
   <div class="cta-end wrap rv"><span class="mk" aria-hidden="true"></span><h2>Make it yours.</h2><p>Open it now. It takes seconds.</p><div class="ctas"><a class="btn pri big" href="/digital-dash.html">Open Digital Dash</a></div></div>
 </main>
-<footer><div class="wrap"><span class="mk" aria-hidden="true"></span><span>© <span id="yr"></span> Digital Dash</span><nav aria-label="Footer"><a href="/digital-dash.html">Open app</a><a href="/digital-dash-privacy.html">Privacy</a><a href="https://github.com/Shaj2x/digitaldash">GitHub</a></nav></div></footer>
+<footer><div class="wrap"><span class="mk" aria-hidden="true"></span><span>© <span id="yr"></span> Digital Dash</span><nav aria-label="Footer"><a href="/digital-dash.html">Open app</a><a href="/digital-dash-privacy.html">Privacy</a></nav></div></footer>
 <script>
 (()=>{
   const $=s=>document.querySelector(s);
@@ -473,7 +497,8 @@ html.vt *{transition:none!important}
   }else document.querySelectorAll(".rv,#track,#rcpt").forEach(el=>el.classList.add("in"));
 
   /* springs (Apple-style: response in seconds, damping 1 = no overshoot), one rAF loop that sleeps at rest */
-  function spring(v,resp,zeta){const w=2*Math.PI/resp;return{v,t:v,vel:0,step(dt){this.vel+=(w*w*(this.t-this.v)-2*(zeta||1)*w*this.vel)*dt;this.v+=this.vel*dt;return Math.abs(this.t-this.v)<.02&&Math.abs(this.vel)<.02;}};}
+  function spring(v,resp,zeta){const w=2*Math.PI/resp;return{v,t:v,vel:0,step(dt){const n=Math.ceil(dt*240),h=dt/n;/* small sub-steps keep stiff springs stable */
+    for(let i=0;i<n;i++){this.vel+=(w*w*(this.t-this.v)-2*(zeta||1)*w*this.vel)*h;this.v+=this.vel*h;}return Math.abs(this.t-this.v)<.02&&Math.abs(this.vel)<.02;}};}
   const loops=new Set();let raf=0,last=0;
   function tick(now){const dt=Math.min((now-last)/1000,1/30);last=now;loops.forEach(f=>{if(f(dt))loops.delete(f);});raf=loops.size?requestAnimationFrame(tick):0;}
   function wake(f){loops.add(f);if(!raf){last=performance.now();raf=requestAnimationFrame(tick);}}
@@ -511,6 +536,46 @@ html.vt *{transition:none!important}
         const k=d<R?(1-d/R)*.35:0;mx.t=Math.max(-10,Math.min(10,dx*k));my.t=Math.max(-8,Math.min(8,dy*k));wake(magF);},{passive:true});});
   }
 
+
+  /* ---------- cursor ---------- */
+  if(fine&&!reduce&&!matchMedia("(forced-colors: active)").matches){
+    const html=document.documentElement,cur=document.createElement("div");cur.id="cur";cur.className="out";cur.setAttribute("aria-hidden","true");
+    cur.innerHTML='<i class="cr"><b class="cl"></b></i><i class="cd"></i>';document.body.appendChild(cur);html.classList.add("cur");
+    const cr=cur.querySelector(".cr"),cd=cur.querySelector(".cd"),cl=cur.querySelector(".cl");
+    const X=spring(0,.16),Y=spring(0,.16),W=spring(36,.28),H=spring(36,.28),RR=spring(18,.28);
+    let px=-100,py=-100,snap=null,seen=false;
+    const ringF=dt=>{const a=X.step(dt),b=Y.step(dt),c=W.step(dt),d=H.step(dt),e=RR.step(dt);
+      if(snap){const r=snap.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2;X.t=cx+(px-cx)*.08;Y.t=cy+(py-cy)*.12;W.t=r.width+12;H.t=r.height+12;}
+      cr.style.width=W.v.toFixed(1)+"px";cr.style.height=H.v.toFixed(1)+"px";cr.style.borderRadius=Math.max(0,RR.v).toFixed(1)+"px";
+      cr.style.translate=`${(X.v-W.v/2).toFixed(1)}px ${(Y.v-H.v/2).toFixed(1)}px`;return a&&b&&c&&d&&e&&!snap;};
+    const LABEL=el=>el.matches(".demo")?"Tap":el.matches("summary")?(el.parentElement.open?"Close":"Open"):el.id==="ph"?"Live":"";
+    function look(el){
+      const hit=el&&el.closest("a,button,summary,.demo.tap,#ph"),txt=!hit&&el&&el.closest("p,h1,h2,h3,dt,dd,small,.trust span,.eyebrow,.stats span"),spot=el&&el.closest("#fillt");
+      snap=null;let lab="";
+      if(hit){const r=hit.getBoundingClientRect();lab=LABEL(hit);
+        if(!lab&&r.width<=440&&r.height<=90){snap=hit;const br=parseFloat(getComputedStyle(hit).borderTopLeftRadius)||8;RR.t=Math.min(br+6,(r.height+12)/2);}
+        else{const z=hit.id==="ph"?84:58;W.t=H.t=z;RR.t=z/2;}}
+      else{W.t=H.t=36;RR.t=18;}
+      if(!snap){X.t=px;Y.t=py;}
+      cl.textContent=lab;cur.classList.toggle("hov",!!hit);cur.classList.toggle("lab",!!lab);cur.classList.toggle("txt",!!txt&&!spot);cur.classList.toggle("spot",!!spot);
+      wake(ringF);}
+    addEventListener("pointermove",e=>{if(e.pointerType!=="mouse")return;px=e.clientX;py=e.clientY;
+      if(!seen){seen=true;X.v=X.t=px;Y.v=Y.t=py;}cur.classList.remove("out");
+      cd.style.translate=`${px}px ${py}px`;look(e.target);},{passive:true});
+    addEventListener("scroll",()=>{if(seen)look(document.elementFromPoint(px,py));},{passive:true});
+    html.addEventListener("pointerleave",()=>cur.classList.add("out"));
+    addEventListener("blur",()=>cur.classList.add("out"));
+    addEventListener("pointerdown",e=>{if(e.pointerType!=="mouse")return;cur.classList.add("down");
+      /* clicking empty page stamps the DD mark in ink, which fades like it soaked in */
+      if(e.target.closest("a,button,summary,.demo.tap,#ph,#intro"))return;
+      const st=document.createElement("i");st.className="stp";cur.insertBefore(st,cur.firstChild);
+      const rot=(Math.random()*24-12).toFixed(1),at=`translate(${px-20}px,${py-17}px) rotate(${rot}deg)`;
+      st.animate([{opacity:0,transform:at+" scale(1.4)"},{opacity:.55,transform:at+" scale(1)",offset:.12},{opacity:.4,transform:at+" scale(1)",offset:.5},{opacity:0,transform:at+" scale(1)"}],
+        {duration:1400,easing:"cubic-bezier(0.23, 1, 0.32, 1)"}).finished.then(()=>st.remove(),()=>st.remove());
+      const old=cur.querySelectorAll(".stp");if(old.length>8)old[old.length-1].remove();});
+    addEventListener("pointerup",()=>cur.classList.remove("down"));
+    document.addEventListener("toggle",()=>{if(seen)look(document.elementFromPoint(px,py));},true);
+  }
   /* new looks wipe across the page in a circle from whatever was pressed */
   function morph(from,fn){const html=document.documentElement;
     if(reduce||!document.startViewTransition){fn();return;}
