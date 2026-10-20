@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" data-skin="dash">
+<html lang="en" data-skin="brand">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Digital Dash</title>
 <meta name="description" content="Clocks, focus timers, tasks, calendar and net worth in one customizable dashboard.">
-<meta name="theme-color" content="#141220">
+<meta name="theme-color" content="#1B1B1B">
 <link rel="manifest" href="/digital-dash.webmanifest">
 <link rel="icon" type="image/png" sizes="192x192" href="/digital-dash-icon-192.png">
 <link rel="apple-touch-icon" href="/digital-dash-apple-180.png">
@@ -45,6 +45,7 @@
   --accent:#7C9CFF; --accent-ink:#0D1117; --card:#232C35; --card-ink:#F3F5F7;
 }
 /* Skins override the auto palette */
+html:root[data-skin="brand"]{--bg:#1B1B1B;--panel:#232323;--panel2:#2D2D2C;--ink:#EFEEE8;--muted:#A6A59E;--line:#3A3A38;--accent:#EFEEE8;--accent-ink:#1B1B1B;--card:#121212;--card-ink:#EFEEE8}
 html:root[data-skin="dash"]{--bg:#141220;--panel:#1C1A2B;--panel2:#252236;--ink:#F1EEF8;--muted:#9C97B3;--line:#2F2B45;--accent:#FFB547;--accent-ink:#1A1405;--card:#0D0B16;--card-ink:#FFE9C2}
 html:root[data-skin="ledger"]{--bg:#12241F;--panel:#18302A;--panel2:#1F3A33;--ink:#EDE9DC;--muted:#9DB0A6;--line:#2C4A41;--accent:#D2A94B;--accent-ink:#14241F;--card:#0C1915;--card-ink:#F1D98F}
 html:root[data-skin="midnight"]{--bg:#0B1226;--panel:#111A33;--panel2:#18233F;--ink:#E4ECFF;--muted:#8A98BD;--line:#243054;--accent:#6FD3FF;--accent-ink:#081020;--card:#060B18;--card-ink:#BDEBFF}
@@ -385,6 +386,7 @@ textarea{width:100%;min-height:90px;font-size:12px}
 .brand{display:flex;align-items:center;gap:10px;font-size:22px;line-height:.92;letter-spacing:.01em;text-transform:uppercase;padding:0 8px 26px}
 .brand .mark{width:38px;height:38px;flex:none;display:grid;place-items:center;border-radius:11px;background:var(--panel2);color:var(--ink)}
 .brand .mark svg{width:26px;height:26px}
+.brand .mark .mk{display:block;width:28px;height:24px;background:currentColor;-webkit-mask:url(/brand/dd-mark-256.png) center/contain no-repeat;mask:url(/brand/dd-mark-256.png) center/contain no-repeat}
 .rail{background:color-mix(in srgb,var(--panel) 70%,var(--bg))}
 .nav{position:relative;z-index:1;transition:color var(--t-fast) ease,transform var(--t-press) var(--ease-out)}
 .nav:active{transform:scale(.97)}
@@ -806,6 +808,7 @@ main{height:100%;padding-bottom:calc(104px + env(safe-area-inset-bottom,0px))}
 .topbar .brand{padding:0;font-size:calc(17px*var(--hs,1))}
 .topbar .brand .mark{width:34px;height:34px;border-radius:10px}
 .topbar .brand .mark svg{width:22px;height:22px}
+.topbar .brand .mark .mk{width:24px;height:21px}
 .tb-right{display:flex;align-items:center;gap:10px;min-width:0}
 .sync{padding:0;font-size:12px;white-space:nowrap}
 .cmdk{display:inline-flex;align-items:center;gap:10px;min-height:40px;padding:0 8px 0 12px;border:1px solid var(--line);border-radius:12px;background:var(--panel);color:var(--muted);font-size:14px;transition:border-color var(--t-fast) ease,color var(--t-fast) ease,transform var(--t-press) var(--ease-out)}
@@ -1060,6 +1063,15 @@ html.lg .cal-list li{background:var(--glass-tint)}
 .tour-ic svg{width:28px;height:28px}
 #tour h2{margin:4px 0 0;font-size:20px}
 .tour-b{font-size:15px;line-height:1.55;margin:0}
+.tour-logo{width:min(300px,82%);aspect-ratio:1338/456;background:var(--ink);-webkit-mask:url(/brand/dd-lockup-640.png) center/contain no-repeat;mask:url(/brand/dd-lockup-640.png) center/contain no-repeat;margin:4px 0 6px}
+.tour-pick{display:grid;gap:8px}
+.tour-sub{font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.tour-sk{display:flex;flex-wrap:wrap;gap:6px}
+.tour-skn{display:inline-flex;align-items:center;gap:7px;padding:7px 11px 7px 8px;border-radius:999px;border:1px solid var(--line);background:var(--panel2);color:var(--ink);font:600 13px/1 var(--ui);cursor:pointer;min-height:36px}
+.tour-skn i{position:relative;width:20px;height:20px;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(127,127,127,.4);overflow:hidden;flex:none}
+.tour-skn i b{position:absolute;right:-2px;bottom:-2px;width:11px;height:11px;border-radius:50%}
+.tour-skn[aria-pressed="true"]{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}
+.tour-more{margin:0;padding-left:20px;display:grid;gap:4px;font-size:14.5px}
 .tour-dots{display:flex;gap:6px}
 .tour-dots i{width:7px;height:7px;border-radius:4px;background:color-mix(in srgb,var(--ink) 20%,transparent);transition:width var(--t-ui) var(--ease-out),background-color var(--t-ui) ease}
 .tour-dots i.on{width:20px;background:var(--accent)}
@@ -1627,7 +1639,7 @@ html.lg .eye{background:var(--glass-tint);box-shadow:inset 0 1px 0 color-mix(in 
 
   <main id="main-content" tabindex="-1">
     <header class="topbar">
-      <div class="brand"><span class="mark" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M5 22a11 11 0 1 1 22 0" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><path d="M16 22 22.5 12.5" stroke="var(--accent)" stroke-width="3" stroke-linecap="round"/><circle cx="16" cy="22" r="2.6" fill="var(--accent)"/></svg></span><span>Digital<br>Dash</span></div>
+      <div class="brand"><span class="mark" aria-hidden="true"><i class="mk"></i></span><span>Digital<br>Dash</span></div>
       <div class="tb-right">
         <span class="sync" id="sync">Loading…</span>
         <button class="jb-mini" id="jb-mini" type="button" hidden aria-label="Pause sounds" title="Pause sounds"><span class="eq" aria-hidden="true"><i></i><i></i><i></i></span><span class="jb-mini-lbl"></span></button>
@@ -2084,6 +2096,7 @@ function tweenNum(el,from,to,format){
 const URG=["Critical","High","Medium","Low"];
 const CATS={asset:["Cash","Savings","Investments","Crypto","Property","Vehicle","Business","Other"],debt:["Credit card","Student loan","Car loan","Mortgage","Line of credit","Other"]};
 const SKINS=[
+ {id:"brand",name:"Digital",bg:"#1B1B1B",fg:"#EFEEE8"},
  {id:"dash",name:"Dash",bg:"#141220",fg:"#FFB547"},
  {id:"ledger",name:"Ledger",bg:"#12241F",fg:"#D2A94B"},
  {id:"midnight",name:"Midnight",bg:"#0B1226",fg:"#6FD3FF"},
@@ -2096,7 +2109,7 @@ const SKINS=[
 const CLOCKS=[["flip","Flip"],["digital","Digital"],["analog","Analog"],["words","Words"],["rings","Progress"],["timer","Focus timer"]];
 
 const DEFAULT={tasks:[],events:[],accounts:[],history:[],sessions:{},
-  settings:{v2:true,skin:"dash",accent:"",font:"sans",clock:"flip",h24:false,secs:true,currency:"CAD",hideNw:false,subs:{},uiFont:"bricolage",clockFont:"shoulders",radius:14,clockScale:100,surface:"solid",refract:true,bg:{type:"none",color:"#2a2440",grad:0,image:"",dim:35,blur:0,match:true,pal:null,live:"aurora",speed:100,grain:false},stage:{type:"theme",color:"#101020",grad:0,image:"",dim:30,ink:""}},
+  settings:{v2:true,skin:"brand",accent:"",font:"sans",clock:"flip",h24:false,secs:true,currency:"CAD",hideNw:false,subs:{},uiFont:"bricolage",clockFont:"shoulders",radius:14,clockScale:100,surface:"solid",refract:true,bg:{type:"none",color:"#2a2440",grad:0,image:"",dim:35,blur:0,match:true,pal:null,live:"aurora",speed:100,grain:false},stage:{type:"theme",color:"#101020",grad:0,image:"",dim:30,ink:""}},
   schemes:[],
   presets:[],
   calendars:[],
@@ -2425,7 +2438,7 @@ function applyTheme(){
   THEME_VARS.forEach(v=>h.style.removeProperty(v));
   if(String(s.skin).startsWith("custom:")){
     const sc=S.schemes.find(x=>"custom:"+x.id===s.skin);
-    if(sc){h.dataset.skin="custom";setScheme(sc.c);}else{s.skin="dash";h.dataset.skin="dash";}
+    if(sc){h.dataset.skin="custom";setScheme(sc.c);}else{s.skin="brand";h.dataset.skin="brand";}
   }else h.dataset.skin=s.skin;
   if(previewScheme)setScheme(previewScheme);
   else{if(matchActive())setScheme(deriveScheme(s.bg.pal));}
@@ -4893,7 +4906,7 @@ $("#acct").addEventListener("click",e=>{
     else{const i=S.presets.indexOf(p);S.presets.splice(i,1);save();renderPresets();acRenderDlg();toast(`Deleted "${p.name}"`,{run(){S.presets.splice(Math.min(i,S.presets.length),0,p);save();renderPresets();acRenderDlg();},done(){[p.s.bg.image,p.s.stage.image].forEach(src=>{if(/^local:p/.test(src||"")&&S.settings.bg.image!==src&&S.settings.stage.image!==src&&!S.presets.includes(p))removeImage(src);});}});}}
   else if(a==="sc-use"||a==="sc-del"){const sc=S.schemes.find(x=>x.id===b.closest("[data-acs]").dataset.acs);if(!sc)return;
     if(a==="sc-use"){S.settings.skin="custom:"+sc.id;S.settings.accent="";vt(()=>{applyTheme();buildSchemeEditor(currentColors());});save();toast(`Using "${sc.name}"`);}
-    else{const i=S.schemes.indexOf(sc),wasSkin=S.settings.skin;S.schemes.splice(i,1);if(wasSkin==="custom:"+sc.id){S.settings.skin="dash";applyTheme();}save();buildSkins();acRenderDlg();toast(`Deleted "${sc.name}"`,{run(){S.schemes.splice(Math.min(i,S.schemes.length),0,sc);S.settings.skin=wasSkin;applyTheme();save();buildSkins();acRenderDlg();}});}}
+    else{const i=S.schemes.indexOf(sc),wasSkin=S.settings.skin;S.schemes.splice(i,1);if(wasSkin==="custom:"+sc.id){S.settings.skin="brand";applyTheme();}save();buildSkins();acRenderDlg();toast(`Deleted "${sc.name}"`,{run(){S.schemes.splice(Math.min(i,S.schemes.length),0,sc);S.settings.skin=wasSkin;applyTheme();save();buildSkins();acRenderDlg();}});}}
   else if(a==="tm-del"){removeTimer(b.closest("[data-act]").dataset.act);acRenderDlg();}
 });
 
@@ -5325,17 +5338,23 @@ setInterval(appBadge,5*60e3);document.addEventListener("visibilitychange",()=>{i
    Shown once on a first visit (no saved data yet), and again from Themes, Your data. Example data is
    tagged demo:true so it can be removed in one go without touching anything you added yourself. */
 const TOUR=[
-  {t:"Welcome to Digital Dash",b:"A calm home for studying: a clock that keeps you moving, a task list that plans itself, and a week review that shows your progress.",ic:'<circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2.5M9 2h6"/>'},
+  {logo:true,t:"Welcome to Digital Dash",b:"Your focus timer, tasks, week planner, grades and gym log in one place, made to look exactly the way you want."},
+  {pick:true,t:"Make it yours",b:"Almost everything here can be customized. Pick a look and a clock to start. Change it any time in Themes.",ic:'<circle cx="12" cy="12" r="9"/><circle cx="8" cy="10" r="1.3" fill="currentColor"/><circle cx="12" cy="7.5" r="1.3" fill="currentColor"/><circle cx="16" cy="10" r="1.3" fill="currentColor"/><path d="M12 21c-1.5 0-2-1.5-1-2.5s.5-2.5-1-2.5"/>'},
   {t:"Focus",b:"Pick a timer, choose what you're working on, and add study music or rain. Finished sessions are logged by course. Study rooms let friends focus with you.",ic:'<path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>'},
-  {t:"Tasks that plan themselves",b:"Type naturally, like “gym every mon wed fri 6pm” or “lab report friday high”. Add checklists, or let the AI break a task into steps and plan your week.",ic:'<path d="M10 6h10M10 12h10M10 18h10"/><path d="m3 6 1.5 1.5L7 5M3 12l1.5 1.5L7 11M3 18l1.5 1.5L7 17"/>'},
-  {t:"Press Ctrl K or ⌘K anywhere",b:"The command bar adds tasks, starts timers, plays sounds and jumps between pages. Make it yours in Themes: colours, fonts, liquid glass and live backgrounds.",ic:'<circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>'}
+  {t:"Tasks that plan themselves",b:"Type naturally, like “gym every mon wed fri 6pm” or “lab report friday high”. Add checklists, repeats and reminders, then lay out your week day by day.",ic:'<path d="M10 6h10M10 12h10M10 18h10"/><path d="m3 6 1.5 1.5L7 5M3 12l1.5 1.5L7 11M3 18l1.5 1.5L7 17"/>'},
+  {t:"Press Ctrl K or ⌘K anywhere",b:"The command bar adds tasks, starts timers, plays sounds and jumps between pages.",ic:'<circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>'},
+  {more:true,t:"There's much more to make your own",b:"Head to Themes whenever you like:",ic:'<path d="M12 3l2.2 5.2L20 9l-4.3 3.9L17 19l-5-3-5 3 1.3-6.1L4 9l5.8-.8z"/>'}
 ];
 let tourStep=0;
 function tourOpen(){tourStep=0;tourRender();const d=$("#tour");try{d.showModal();}catch(e){d.setAttribute("open","");}}
 function tourRender(){
   const st=TOUR[tourStep],last=tourStep===TOUR.length-1,hasDemo=S.tasks.some(t=>t.demo);
-  $("#tour-body").innerHTML=`<div class="tour-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${st.ic}</svg></div>
+  const cur=S.settings.skin,ck=S.settings.clock;
+  $("#tour-body").innerHTML=`${st.logo?'<div class="tour-logo" role="img" aria-label="Digital Dash"></div>':`<div class="tour-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${st.ic}</svg></div>`}
     <h2 id="tour-h">${st.t}</h2><p class="tour-b">${st.b}</p>
+    ${st.pick?`<div class="tour-pick"><span class="tour-sub">Look</span><div class="tour-sk" role="group" aria-label="Look">${SKINS.filter(k=>k.id!=="auto").map(k=>`<button type="button" class="tour-skn" data-tour="skin" data-k="${k.id}" aria-pressed="${cur===k.id}"><i style="background:${k.bg}"><b style="background:${k.fg}"></b></i>${k.name}</button>`).join("")}</div>
+      <span class="tour-sub">Clock</span><div class="tour-sk" role="group" aria-label="Clock">${CLOCKS.filter(c=>c[0]!=="timer").map(([k,l])=>`<button type="button" class="tour-skn" data-tour="clock" data-k="${k}" aria-pressed="${ck===k}">${l}</button>`).join("")}</div></div>`:""}
+    ${st.more?`<ul class="tour-more"><li>${SKINS.length-1} themes, or build your own colour scheme</li><li>12 clock fonts and 12 text fonts</li><li>Photo, gradient and live animated backgrounds</li><li>Liquid glass, hover animations and corner roundness</li><li>Widgets you pick and arrange</li><li>Save it all as a preset and switch in one tap</li></ul>`:""}
     <div class="tour-dots" aria-hidden="true">${TOUR.map((_,i)=>`<i class="${i===tourStep?"on":""}"></i>`).join("")}</div>
     <p class="sr-only">Step ${tourStep+1} of ${TOUR.length}</p>
     <div class="tour-act">${last?`${hasDemo?"":`<button type="button" class="btn ghost" data-tour="demo">Load example data</button>`}<button type="button" class="btn" data-tour="done">Start using it</button>`
@@ -5382,6 +5401,8 @@ $("#tour").addEventListener("click",e=>{
   if(a==="next"){tourStep++;tourRender();}
   else if(a==="skip"||a==="done")tourClose();
   else if(a==="demo"){loadDemo();tourClose();}
+  else if(a==="skin"){S.settings.skin=b.dataset.k;S.settings.accent="";if(typeof matchActive==="function"&&matchActive())S.settings.bg.match=false;vt(()=>{applyTheme();if(typeof buildSchemeEditor==="function")buildSchemeEditor(currentColors());});save();tourRender();const n=$(`#tour [data-tour="skin"][data-k="${b.dataset.k}"]`);if(n)n.focus();}
+  else if(a==="clock"){setClock(b.dataset.k);save();tourRender();const n=$(`#tour [data-tour="clock"][data-k="${b.dataset.k}"]`);if(n)n.focus();}
 });
 $("#tour").addEventListener("cancel",()=>{S.settings.welcomed=true;save();});
 $("#tour").addEventListener("keydown",e=>{if(e.key==="ArrowRight"&&tourStep<TOUR.length-1){tourStep++;tourRender();}else if(e.key==="ArrowLeft"&&tourStep>0){tourStep--;tourRender();}});
@@ -6566,6 +6587,14 @@ loop();
 connect();
 acInit();
 if(window.DASH_DEMO){S.settings.welcomed=true;loadDemo();$("#toast").classList.remove("on","act");}
+/* demo mode only: lets the home page's "Make it yours" controls restyle this embedded copy live */
+if(window.DASH_DEMO)window.dashDemo={
+  skin(k){S.settings.skin=k;S.settings.accent="";applyTheme();},
+  clock(k){setClock(k);},
+  font(k){const f=CLF.find(x=>x[0]===k);if(!f)return;loadFonts([f[4]]);S.settings.clockFont=k;applyTheme();buildClock(clockKind);},
+  bg(t){S.settings.bg.type=t;if(t==="live"&&!S.settings.bg.live)S.settings.bg.live="aurora";applyTheme();},
+  glass(on){S.settings.surface=on?"glass":"solid";applyTheme();}
+};
 $("#demo-rm").hidden=!S.tasks.some(t=>t.demo);
 if(firstRun&&!S.settings.welcomed&&!acAuthHash&&!/[?&]room=/.test(location.href)&&!(lsGet(RMK)||{}).code)setTimeout(()=>{if(!$("#acct-pick").open&&!$("#acct").open)tourOpen();},600); /* not over a sign-in or room link */
 })();

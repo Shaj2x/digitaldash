@@ -10,8 +10,8 @@
     "window-controls-overlay",
     "standalone"
   ],
-  "background_color": "#141220",
-  "theme_color": "#141220",
+  "background_color": "#1B1B1B",
+  "theme_color": "#1B1B1B",
   "icons": [
     {
       "src": "/digital-dash-icon-192.png",

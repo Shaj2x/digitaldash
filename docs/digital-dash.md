@@ -4,6 +4,14 @@ A personal productivity dashboard: live clocks to stay motivated while working, 
 
 Everything lives in a single self-contained file, `public/digital-dash.html` (served at `/digital-dash.html`), with inline CSS and JS. The only build step copies `public/` to `dist/` and writes the Supabase settings file.
 
+## Brand
+
+- Logos live in `public/brand/`: `dd-lockup.png` (mark and wordmark in a box) and `dd-mark.png` (the DD diamond). They're transparent off-white, so in the app and on the home page they're used as CSS masks (`dd-mark-256.png`, `dd-lockup-640.png`) and take the current text colour in any theme. `-dark` copies are for light backgrounds elsewhere. Also there: `og.png` (link previews) and `favicon-32.png`.
+- App icons (`digital-dash-icon-192/512`, `maskable-512`, `apple-180`) are the mark on #1B1B1B.
+- The **Digital** theme (`brand` skin: #1B1B1B charcoal, #EFEEE8 off-white) matches the logo. It's the default for new users only; anyone who already has a saved theme keeps it.
+- The welcome tour opens with the lockup, then "Make it yours": pick a look and a clock on the spot. Its last step lists everything else you can customize.
+- The home page (`/`) uses the same palette, the logo, Big Shoulders Display headings and a faint print grain. Its "Make it yours" section restyles a live demo copy of the app through `window.dashDemo`, which only exists with `?demo=1`.
+
 ## iPhone preview
 
 `/preview` (`public/preview.html`) shows the live app inside iPhone frames:
