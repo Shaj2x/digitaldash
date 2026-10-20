@@ -268,18 +268,20 @@ html.cur,html.cur *{cursor:none!important}
 #cur.out{opacity:0}
 /* stays live above the theme ripple instead of freezing in its snapshot */
 #cur{view-transition-name:cur}::view-transition-group(cur),::view-transition-new(cur){animation:none}::view-transition-old(cur){display:none}
-#cur .cd,#cur .cr{position:fixed;left:0;top:0;will-change:translate}
-#cur .cd{width:8px;height:8px;margin:-4px 0 0 -4px;border-radius:4px;background:var(--ink);transition:scale .2s var(--ease-out),opacity .15s ease}
-#cur .cr{display:grid;place-items:center;border:2px solid var(--ink);background:transparent;transition:opacity .2s ease,background-color .2s ease,scale .12s var(--ease-out);
+#cur .cd,#cur .cr,#cur .cm{position:fixed;left:0;top:0;will-change:translate}
+/* at rest: the DD mark itself, leaning a little with the way you move */
+#cur .cm{width:22px;height:19px;margin:-9.5px 0 0 -11px;background:var(--ink);-webkit-mask:url(/brand/dd-mark-256.png) center/contain no-repeat;mask:url(/brand/dd-mark-256.png) center/contain no-repeat;
+  filter:drop-shadow(0 0 1px color-mix(in srgb,var(--bg) 70%,transparent));transition:opacity .15s ease,scale .2s var(--ease-out)}
+#cur .cd{width:8px;height:8px;margin:-4px 0 0 -4px;border-radius:4px;background:var(--ink);opacity:0;transition:scale .2s var(--ease-out),opacity .15s ease}
+#cur .cr{display:grid;place-items:center;border:2px solid var(--ink);background:transparent;opacity:0;scale:.6;transition:opacity .2s ease,background-color .2s ease,scale .25s var(--ease-out);
   -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='30'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.8' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -2.2 1.7'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='30'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.8' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -2.2 1.7'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 #cur .cl{font:800 11px/1 var(--display);letter-spacing:.16em;text-transform:uppercase;color:var(--ink);opacity:0;transition:opacity .15s ease}
-#cur.hov .cd{opacity:0}
-#cur.hov .cr{background:color-mix(in srgb,var(--ink) 9%,transparent)}
+#cur.hov .cm,#cur.txt .cm{opacity:0;scale:.6}
+#cur.hov .cr{opacity:1;scale:1;background:color-mix(in srgb,var(--ink) 9%,transparent)}
 #cur.lab .cl{opacity:1}
-#cur.txt .cd{scale:.375 3.4}
-#cur.txt .cr,#cur.spot .cr{opacity:0}
-#cur.down .cr{scale:.92}
-#cur.down .cd{scale:.7}
+#cur.txt .cd{opacity:1;scale:.375 3.4}
+#cur.down.hov .cr{scale:.92}
+#cur.down .cm{scale:.8}
 #cur .stp{position:fixed;left:0;top:0;width:40px;height:34px;background:var(--ink);opacity:0;
   -webkit-mask:url(/brand/dd-mark-256.png) center/contain no-repeat,url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='30'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.8' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -2.2 1.7'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");-webkit-mask-composite:source-in;
   mask:url(/brand/dd-mark-256.png) center/contain no-repeat,url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='30'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.8' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -2.2 1.7'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");mask-composite:intersect}
@@ -540,8 +542,9 @@ html.cur,html.cur *{cursor:none!important}
   /* ---------- cursor ---------- */
   if(fine&&!reduce&&!matchMedia("(forced-colors: active)").matches){
     const html=document.documentElement,cur=document.createElement("div");cur.id="cur";cur.className="out";cur.setAttribute("aria-hidden","true");
-    cur.innerHTML='<i class="cr"><b class="cl"></b></i><i class="cd"></i>';document.body.appendChild(cur);html.classList.add("cur");
-    const cr=cur.querySelector(".cr"),cd=cur.querySelector(".cd"),cl=cur.querySelector(".cl");
+    cur.innerHTML='<i class="cr"><b class="cl"></b></i><i class="cd"></i><i class="cm"></i>';document.body.appendChild(cur);html.classList.add("cur");
+    const cr=cur.querySelector(".cr"),cd=cur.querySelector(".cd"),cl=cur.querySelector(".cl"),cm=cur.querySelector(".cm"),TL=spring(0,.35);
+    const tiltF=dt=>{const a=TL.step(dt);TL.t*=.85;cm.style.rotate=TL.v.toFixed(2)+"deg";return a&&Math.abs(TL.t)<.05;};
     const X=spring(0,.16),Y=spring(0,.16),W=spring(36,.28),H=spring(36,.28),RR=spring(18,.28);
     let px=-100,py=-100,snap=null,seen=false;
     const ringF=dt=>{const a=X.step(dt),b=Y.step(dt),c=W.step(dt),d=H.step(dt),e=RR.step(dt);
@@ -561,7 +564,7 @@ html.cur,html.cur *{cursor:none!important}
       wake(ringF);}
     addEventListener("pointermove",e=>{if(e.pointerType!=="mouse")return;px=e.clientX;py=e.clientY;
       if(!seen){seen=true;X.v=X.t=px;Y.v=Y.t=py;}cur.classList.remove("out");
-      cd.style.translate=`${px}px ${py}px`;look(e.target);},{passive:true});
+      cd.style.translate=cm.style.translate=`${px}px ${py}px`;TL.t=Math.max(-14,Math.min(14,TL.t+e.movementX*.6));wake(tiltF);look(e.target);},{passive:true});
     addEventListener("scroll",()=>{if(seen)look(document.elementFromPoint(px,py));},{passive:true});
     html.addEventListener("pointerleave",()=>cur.classList.add("out"));
     addEventListener("blur",()=>cur.classList.add("out"));
