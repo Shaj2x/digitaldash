@@ -88,6 +88,36 @@ section{padding:clamp(56px,9vw,104px) 0}
 .sec-h h2{font-size:clamp(40px,6vw,68px);margin:12px 0 14px}
 .sec-h p{margin:0;color:var(--muted);font-size:18px}
 .band{background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+/* features: a printed ledger, each line with a small live demo */
+.ledger{list-style:none;margin:0;padding:0;border-top:3px solid var(--ink)}
+.lr{display:grid;grid-template-columns:92px minmax(0,.9fr) minmax(0,1.1fr) 280px;gap:12px 32px;align-items:center;padding:30px 0;border-bottom:1.5px solid var(--ink);position:relative}
+.ln{font:900 64px/.8 var(--display);color:transparent;-webkit-text-stroke:1.5px var(--ink);transition:color .25s ease}
+.lr:hover .ln{color:var(--ink)}
+.lr h3{margin:0;min-width:0;font:900 clamp(34px,4vw,56px)/.9 var(--display);text-transform:uppercase;letter-spacing:.01em;overflow-wrap:break-word}
+.lr p{margin:0;color:var(--muted);font-size:16px;max-width:30em}
+.demo{position:relative;justify-self:end;width:100%;max-width:280px;min-height:118px;padding:14px 16px;border:1.5px solid var(--ink);border-radius:4px;background:var(--panel);display:grid;align-content:center;gap:6px;font-variant-numeric:tabular-nums;box-shadow:5px 5px 0 var(--ink);transition:transform .2s ease,box-shadow .2s ease}
+.lr:hover .demo{transform:translate(-2px,-2px);box-shadow:7px 7px 0 var(--ink)}
+.demo small{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;font-weight:700}
+.demo b{font:900 40px/1 var(--display)}
+.d-timer i{display:block;height:5px;background:color-mix(in srgb,var(--ink) 14%,transparent);border-radius:3px;overflow:hidden}
+.d-timer em{display:block;height:100%;width:0;background:var(--ink)}
+.d-tasks{gap:7px}
+.d-tasks span{display:flex;align-items:center;gap:9px;font-size:14px;font-weight:600}
+.d-tasks i{width:16px;height:16px;border-radius:50%;border:2px solid var(--ink);flex:none;transition:background-color .2s}
+.d-tasks em{margin-left:auto;font-style:normal;font-size:12px;color:var(--muted)}
+.d-tasks span.dn{color:var(--muted);text-decoration:line-through}
+.d-tasks span.dn i{background:var(--ink)}
+.d-week{grid-template-columns:repeat(7,1fr);align-items:end;gap:6px;min-height:118px}
+.d-week span{display:grid;justify-items:center;gap:6px;font-size:12px;font-weight:700;color:var(--muted)}
+.d-week i{display:block;width:100%;height:calc(var(--n) * 14px + 4px);border-radius:3px;background:repeating-linear-gradient(180deg,var(--ink) 0 10px,transparent 10px 14px)}
+.d-week .td{color:var(--ink)}
+.d-week .td i{outline:2px solid var(--ink);outline-offset:2px}
+.d-grade span,.d-money span{font-size:13px;color:var(--muted)}
+.d-gym .stamp{position:absolute;right:12px;top:12px;transform:rotate(8deg);font:900 15px/1 var(--display);letter-spacing:.1em;text-transform:uppercase;padding:5px 8px;border:2.5px solid var(--ink);border-radius:4px;opacity:.85;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='30'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.8' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -2.2 1.7'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='30'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.8' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -2.2 1.7'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.d-money b{transition:filter .3s ease,opacity .3s ease}
+.d-money b.hid{filter:blur(9px);opacity:.6}
+@media (max-width:980px){.lr{grid-template-columns:64px minmax(0,1fr);grid-template-areas:"n h" "n p" "d d"}.ln{grid-area:n;font-size:48px;align-self:start}.lr h3{grid-area:h}.lr p{grid-area:p}.demo{grid-area:d;justify-self:start;max-width:none;margin-top:8px}}
+html.glass .demo{background:color-mix(in srgb,var(--panel) 55%,transparent);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px)}
 /* make it yours */
 .ctrl{display:grid;gap:18px}
 .ctrl h3{margin:0 0 8px;font:800 15px/1 var(--display);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
@@ -165,11 +195,11 @@ footer a:hover{color:var(--ink)}
   <div class="wrap top">
     <div class="hero">
       <span class="lockup" role="img" aria-label="Digital Dash"></span>
-      <span class="eyebrow">Free · Extremely customizable · No ads</span>
+      <span class="eyebrow">Free · Extremely customizable · Works offline</span>
       <h1>Plan it. Focus.<br><span class="o">Make it yours.</span></h1>
       <p class="lead">Your focus timer, to-do list, week planner, grades and gym log in one app, styled exactly the way you want, down to the font on your clock.</p>
       <div class="ctas"><a class="btn pri big" href="/digital-dash.html">Open Digital Dash</a><a class="btn big" href="#yours">Try a new look</a></div>
-      <div class="trust"><span>No account needed</span><span>Works offline</span><span>Phone, tablet and computer</span></div>
+      <div class="trust"><span>No account needed</span><span>Syncs if you sign in</span><span>Phone, tablet and computer</span></div>
     </div>
     <div class="phone-col">
       <div class="phone" id="ph" role="img" aria-label="Digital Dash running on an iPhone, styled with the choices below">
@@ -193,15 +223,21 @@ footer a:hover{color:var(--ink)}
 
   <section id="features" aria-labelledby="f-h">
     <div class="wrap">
-      <div class="sec-h"><span class="eyebrow">Everything in one app</span><h2 id="f-h">Built for busy students</h2><p>Start with what you need today. Everything else is one tap away.</p></div>
-      <div class="grid">
-        <article class="card"><span class="ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2M9 2h6"/></svg></span><h3>Focus</h3><p>Big clocks, Pomodoro and custom timers, study music and background sounds, and study rooms with friends.</p></article>
-        <article class="card"><span class="ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6h11M9 12h11M9 18h11"/><path d="m3 6 1.5 1.5L7 5M3 12l1.5 1.5L7 11M3 18l1.5 1.5L7 17"/></svg></span><h3>Tasks</h3><p>Urgency, due dates, repeats and checklists. Add by voice, get reminders, and undo anything.</p></article>
-        <article class="card"><span class="ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></span><h3>Week and month planner</h3><p>Lay out each day, drag work between days, and see classes and workouts on your calendar.</p></article>
-        <article class="card"><span class="ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/></svg></span><h3>Grades</h3><p>Track every course, see what you need on the final, and use US or Ontario grading scales.</p></article>
-        <article class="card"><span class="ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6.5 6.5v11M17.5 6.5v11M3.5 9v6M20.5 9v6M6.5 12h11"/></svg></span><h3>Gym</h3><p>Your split, what to lift next, new PR alerts, a plate calculator, progress charts, and BMI and calorie targets.</p></article>
-        <article class="card"><span class="ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg></span><h3>Net worth</h3><p>Balances, a growth chart and savings goals, with a privacy eye to hide every amount.</p></article>
-      </div>
+      <div class="sec-h"><span class="eyebrow">Everything in one app</span><h2 id="f-h">Six tools. <br>One dashboard.</h2><p>Start with what you need today. Everything else is one tap away.</p></div>
+      <ol class="ledger">
+        <li class="lr"><span class="ln" aria-hidden="true">01</span><h3>Focus</h3><p>Big clocks, Pomodoro and custom timers, study music and rain sounds, and study rooms where friends focus with you.</p>
+          <div class="demo d-timer" aria-hidden="true"><small>Focus · ES 1050</small><b id="d-time">24:59</b><i><em id="d-bar"></em></i></div></li>
+        <li class="lr"><span class="ln" aria-hidden="true">02</span><h3>Tasks</h3><p>Type it like you'd say it: “lab report friday high”. Repeats, checklists, voice add, reminders, and Undo on everything.</p>
+          <div class="demo d-tasks" aria-hidden="true"><span><i></i>Lab report draft<em>Fri</em></span><span><i></i>Read chapter 4<em>Today</em></span><span><i></i>Email TA<em>Today</em></span></div></li>
+        <li class="lr"><span class="ln" aria-hidden="true">03</span><h3>Planner</h3><p>Lay out the week day by day, drag work between days, and see classes and workouts right beside your tasks.</p>
+          <div class="demo d-week" aria-hidden="true"><span><i style="--n:2"></i>M</span><span><i style="--n:3"></i>T</span><span class="td"><i style="--n:4"></i>W</span><span><i style="--n:1"></i>T</span><span><i style="--n:3"></i>F</span><span><i style="--n:2"></i>S</span><span><i style="--n:0"></i>S</span></div></li>
+        <li class="lr"><span class="ln" aria-hidden="true">04</span><h3>Grades</h3><p>Track every course and know exactly what you need on the final, on US or Ontario grading scales.</p>
+          <div class="demo d-grade" aria-hidden="true"><small>Final is worth 40%</small><b>89.5%</b><span>needed on the final to finish with 85%</span></div></li>
+        <li class="lr"><span class="ln" aria-hidden="true">05</span><h3>Gym</h3><p>Your split on the calendar, what to lift next, a plate calculator, progress charts, and BMI and calorie targets.</p>
+          <div class="demo d-gym" aria-hidden="true"><small>Bench press · last 135 × 8, 8</small><b>Try 140 × 8</b><span class="stamp">New PR</span></div></li>
+        <li class="lr"><span class="ln" aria-hidden="true">06</span><h3>Money</h3><p>Balances, a growth chart and savings goals, with a privacy eye that hides every amount in one tap.</p>
+          <div class="demo d-money" aria-hidden="true"><small>Net worth</small><b id="d-nw">$12,480</b><span id="d-eye">Tap the eye to hide</span></div></li>
+      </ol>
     </div>
   </section>
 
@@ -222,7 +258,7 @@ footer a:hover{color:var(--ink)}
       <div class="priv">
         <div><h3>On your device first</h3><p>Without an account, everything stays in your browser. Nothing is sent anywhere.</p></div>
         <div><h3>Private when it syncs</h3><p>Sign in and your dashboard is stored so only your account can read it. Delete it any time.</p></div>
-        <div><h3>No ads, no selling</h3><p>Your tasks, grades and workouts are never sold or used for ads. <a href="/digital-dash-privacy.html">Read the privacy policy</a>.</p></div>
+        <div><h3>Never sold</h3><p>Your tasks, grades and workouts are never sold. <a href="/digital-dash-privacy.html">Read the privacy policy</a>.</p></div>
       </div>
     </div>
   </section>
@@ -293,6 +329,12 @@ footer a:hover{color:var(--ink)}
     $("#apply-t").innerHTML='Done. Your dashboard will use this look when you open it. <a href="/digital-dash.html">Open it now</a>';$("#apply-go").hidden=true;});
   fr.addEventListener("load",()=>{try{fr.contentDocument.documentElement.style.pointerEvents="none";}catch(e){}applyPhone();});
   draw();applyPage();
+  /* ledger demos: a ticking focus timer, tasks ticking off, the money privacy eye (still under reduced motion) */
+  if(!matchMedia("(prefers-reduced-motion: reduce)").matches){
+    let t=1499;const dt=$("#d-time"),db=$("#d-bar");setInterval(()=>{t=t<=0?1499:t-1;dt.textContent=`${Math.floor(t/60)}:${String(t%60).padStart(2,"0")}`;db.style.width=((1500-t)/1500*100).toFixed(1)+"%";},1000);
+    const rows=[...document.querySelectorAll(".d-tasks span")];let ti=0;setInterval(()=>{if(ti<rows.length)rows[ti++].classList.add("dn");else{rows.forEach(r=>r.classList.remove("dn"));ti=0;}},1400);
+    const nw=$("#d-nw"),eye=$("#d-eye");let hid=false;setInterval(()=>{hid=!hid;nw.classList.toggle("hid",hid);eye.textContent=hid?"Hidden. Tap to show":"Tap the eye to hide";},2200);
+  }
   /* install help */
   let deferred=null;addEventListener("beforeinstallprompt",e=>{e.preventDefault();deferred=e;});
   const ios=/iPhone|iPad|iPod/.test(navigator.userAgent)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1);
