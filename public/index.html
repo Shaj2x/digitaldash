@@ -55,14 +55,13 @@ a{color:inherit}
 .back p{margin:0;flex:1 1 220px;font-weight:600}
 .back.on{display:block}
 /* top: one phone, kept in view beside the intro and the "Make it yours" controls */
-.top{display:grid;padding-bottom:0!important;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"hero phone" "yours phone" "fhead phone";column-gap:56px;padding-top:clamp(36px,7vw,80px);padding-bottom:clamp(40px,7vw,88px)}
+.top{display:grid;padding-bottom:0!important;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"hero phone" "yours phone";column-gap:56px;padding-top:clamp(36px,7vw,80px);padding-bottom:clamp(40px,7vw,88px)}
 .hero{grid-area:hero;padding-bottom:clamp(48px,8vw,96px)}
 .yours{grid-area:yours;border-top:1px solid var(--line);padding-top:clamp(40px,7vw,72px)}
 .phone-col{grid-area:phone}
-.fhead{grid-area:fhead;padding-top:clamp(64px,9vw,104px)}
-.fhead .sec-h{margin-bottom:0}
+.yours{padding-bottom:72px}
 .phone-col .phone{position:sticky;top:96px}
-@media (max-width:900px){.top{grid-template-columns:1fr;grid-template-areas:"hero" "phone" "yours" "fhead"}.hero{padding-bottom:36px}.phone-col{margin-bottom:40px}.phone-col .phone{position:static;margin:0 auto}}
+@media (max-width:900px){.top{grid-template-columns:1fr;grid-template-areas:"hero" "phone" "yours"}.hero{padding-bottom:36px}.phone-col{margin-bottom:40px}.phone-col .phone{position:static;margin:0 auto}}
 .hero .lockup{width:min(420px,100%);margin-bottom:28px}
 .eyebrow{display:inline-flex;align-items:center;gap:10px;font:800 14px/1 var(--display);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
 .eyebrow::before{content:"";width:22px;height:2px;background:currentColor}
@@ -120,6 +119,38 @@ section{padding:clamp(56px,9vw,104px) 0}
 .d-money b.hid{filter:blur(9px);opacity:.6}
 @media (max-width:980px){.lr{grid-template-columns:64px minmax(0,1fr);grid-template-areas:"n h" "n p" "d d"}.ln{grid-area:n;font-size:48px;align-self:start}.lr h3{grid-area:h}.lr p{grid-area:p}.demo{grid-area:d;justify-self:start;max-width:none;margin-top:8px}}
 html.glass .demo{background:color-mix(in srgb,var(--panel) 55%,transparent);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px)}
+/* how it works: three stops on a stopwatch track */
+.track{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr)) auto;gap:0;position:relative}
+.track::before{content:"";position:absolute;left:0;right:0;top:41px;border-top:3px dashed var(--ink);opacity:.55}
+.tk{position:relative;padding:0 28px 0 0}
+.tt{display:inline-block;font:800 13px/1 var(--display);letter-spacing:.12em;color:var(--muted);margin-bottom:12px}
+.tn{position:relative;display:grid;place-items:center;width:58px;height:58px;margin-bottom:18px;border-radius:50%;background:var(--bg2);border:3px solid var(--ink);font:900 24px/1 var(--display)}
+.tk h3{margin:0 0 6px;font:900 clamp(26px,3vw,36px)/.95 var(--display);text-transform:uppercase}
+.tk p{margin:0;color:var(--muted);font-size:15px;max-width:22em}
+.tk.end{padding:0}
+.flag{display:grid;place-items:center;height:58px;padding:0 16px;border-radius:999px;background:var(--ink);color:var(--bg);font:900 18px/1 var(--display);letter-spacing:.08em;text-transform:uppercase}
+@media (max-width:820px){.track{grid-template-columns:1fr;gap:28px;padding-left:76px}.track::before{left:28px;right:auto;top:0;bottom:0;border-top:0;border-left:3px dashed var(--ink)}.tk{padding:0}.tn{position:absolute;left:-76px;top:0;margin:0}.tt{margin-bottom:6px}.tk.end{display:flex;align-items:center;gap:12px}.tk.end .flag{position:absolute;left:-76px;height:58px;padding:0 10px;font-size:14px}}
+/* privacy: a printed receipt */
+.pv{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,440px);gap:48px;align-items:center}
+@media (max-width:860px){.pv{grid-template-columns:1fr}}
+.receipt{position:relative;padding:28px 28px 34px;background:var(--panel);color:var(--ink);font-variant-numeric:tabular-nums;box-shadow:0 30px 60px -30px rgba(0,0,0,.5);transform:rotate(-1.2deg);
+  -webkit-mask:radial-gradient(circle 7px at 50% 100%,transparent 6.5px,#000 7px) 0 100%/16px 14px repeat-x,linear-gradient(#000,#000) 0 0/100% calc(100% - 7px) no-repeat;
+  mask:radial-gradient(circle 7px at 50% 100%,transparent 6.5px,#000 7px) 0 100%/16px 14px repeat-x,linear-gradient(#000,#000) 0 0/100% calc(100% - 7px) no-repeat}
+.rc-h{display:grid;justify-items:center;gap:4px;padding-bottom:16px;margin-bottom:14px;border-bottom:2px dashed var(--line);text-align:center}
+.rc-h .mk{width:34px;height:29px}
+.rc-h b{font:900 24px/1 var(--display);letter-spacing:.12em;text-transform:uppercase}
+.rc-h small{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.receipt dl{margin:0;display:grid;gap:10px}
+.receipt dl div{display:flex;align-items:baseline;gap:8px;font-size:15px}
+.receipt dt{flex:none}
+.receipt dl div::after{content:"";order:1;flex:1;border-bottom:2px dotted color-mix(in srgb,var(--ink) 35%,transparent);transform:translateY(-4px)}
+.receipt dd{order:2;margin:0;font-weight:700;text-align:right}
+.rc-t{display:flex;justify-content:flex-end;gap:12px;align-items:baseline;margin-top:16px;padding-top:14px;border-top:2px dashed var(--line)}
+.rc-t span{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.rc-t b{font:900 30px/1 var(--display);text-transform:uppercase}
+.rc-stamp{position:absolute;left:26px;bottom:30px;transform:rotate(-14deg)!important;font-size:22px!important;padding:6px 10px!important;border-width:3px!important;opacity:.7}
+.stamp{display:inline-block;font:900 15px/1 var(--display);letter-spacing:.1em;text-transform:uppercase;padding:5px 8px;border:2.5px solid var(--ink);border-radius:4px;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='30'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.8' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -2.2 1.7'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='30'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.8' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -2.2 1.7'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+html.glass .receipt{background:color-mix(in srgb,var(--panel) 60%,transparent);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px)}
 /* make it yours */
 .ctrl{display:grid;gap:18px}
 .ctrl h3{margin:0 0 8px;font:800 15px/1 var(--display);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
@@ -210,7 +241,7 @@ footer a:hover{color:var(--ink)}
           <div class="hbar" aria-hidden="true"></div><div class="hb" aria-hidden="true"></div></div>
       </div>
     </div>
-    <section id="yours" class="yours" aria-labelledby="y-h" style="padding-bottom:0">
+    <section id="yours" class="yours" aria-labelledby="y-h">
       <div class="sec-h" style="margin-bottom:28px"><span class="eyebrow">Make it yours</span><h2 id="y-h">Your dashboard. <br>Your rules.</h2><p>Try it right here. Every choice restyles this whole page and the live app on the phone, and opening the app keeps your look.</p></div>
       <div class="ctrl" role="group" aria-label="Customize">
         <div><h3 id="c-look">Look</h3><div class="chips" role="group" aria-labelledby="c-look" id="c-skin"></div></div>
@@ -221,13 +252,11 @@ footer a:hover{color:var(--ink)}
         <div class="stats" aria-label="What you can change"><div><b>8</b><span>themes, plus your own</span></div><div><b>24</b><span>clock and text fonts</span></div><div><b>6</b><span>clock styles</span></div><div><b>∞</b><span>presets to save</span></div></div>
       </div>
     </section>
-    <div class="fhead">
-      <div class="sec-h"><span class="eyebrow">Everything in one app</span><h2 id="f-h">Six tools. <br>One dashboard.</h2><p>Start with what you need today. Everything else is one tap away.</p></div>
-    </div>
   </div>
 
-  <section id="features" aria-labelledby="f-h" style="padding-top:36px">
+  <section id="features" aria-labelledby="f-h">
     <div class="wrap">
+      <div class="sec-h"><span class="eyebrow">Everything in one app</span><h2 id="f-h">Six tools. <br>One dashboard.</h2><p>Start with what you need today. Everything else is one tap away.</p></div>
       <ol class="ledger">
         <li class="lr"><span class="ln" aria-hidden="true">01</span><h3>Focus</h3><p>Big clocks, Pomodoro and custom timers, study music and rain sounds, and study rooms where friends focus with you.</p>
           <div class="demo d-timer" aria-hidden="true"><small>Focus · ES 1050</small><b id="d-time">24:59</b><i><em id="d-bar"></em></i></div></li>
@@ -239,7 +268,7 @@ footer a:hover{color:var(--ink)}
           <div class="demo d-grade" aria-hidden="true"><small>Final is worth 40%</small><b>89.5%</b><span>needed on the final to finish with 85%</span></div></li>
         <li class="lr"><span class="ln" aria-hidden="true">05</span><h3>Gym</h3><p>Your split on the calendar, what to lift next, a plate calculator, progress charts, and BMI and calorie targets.</p>
           <div class="demo d-gym" aria-hidden="true"><small>Bench press · last 135 × 8, 8</small><b>Try 140 × 8</b><span class="stamp">New PR</span></div></li>
-        <li class="lr"><span class="ln" aria-hidden="true">06</span><h3>Money</h3><p>Balances, a growth chart and savings goals, with a privacy eye that hides every amount in one tap.</p>
+        <li class="lr"><span class="ln" aria-hidden="true">06</span><h3>Funds</h3><p>Balances, a growth chart and savings goals, with a privacy eye that hides every amount in one tap.</p>
           <div class="demo d-money" aria-hidden="true"><small>Net worth</small><b id="d-nw">$12,480</b><span id="d-eye">Tap the eye to hide</span></div></li>
       </ol>
     </div>
@@ -247,22 +276,30 @@ footer a:hover{color:var(--ink)}
 
   <section id="how" class="band" aria-labelledby="h-h">
     <div class="wrap">
-      <div class="sec-h"><span class="eyebrow">How it works</span><h2 id="h-h">Up and running in a minute</h2><p>No download, no sign-up wall. It opens in your browser and works like an app.</p></div>
-      <div class="steps">
-        <div class="step"><h3>Open it</h3><p>Tap Open Digital Dash. A short welcome lets you pick your look and clock straight away.</p></div>
-        <div class="step"><h3>Add your week</h3><p>Drop in tasks, classes and workouts. Plan each day and let the clock show what's up next.</p></div>
-        <div class="step"><h3>Take it everywhere</h3><p>Add it to your home screen, and sign in if you want your dashboard on every device. <button class="btn" type="button" id="install" style="margin-top:12px;min-height:40px">How to add it</button></p><div class="howto" id="howto" aria-live="polite"></div></div>
-      </div>
+      <div class="sec-h"><span class="eyebrow">How it works</span><h2 id="h-h">Up and running in under a minute</h2><p>No download, no sign-up wall. It opens in your browser and works like an app.</p></div>
+      <ol class="track">
+        <li class="tk"><span class="tt" aria-hidden="true">0:00</span><span class="tn" aria-hidden="true">01</span><h3>Open it</h3><p>Tap Open Digital Dash. A short welcome lets you pick your look and clock straight away.</p></li>
+        <li class="tk"><span class="tt" aria-hidden="true">0:10</span><span class="tn" aria-hidden="true">02</span><h3>Add your week</h3><p>Drop in tasks, classes and workouts. Plan each day and let the clock show what's up next.</p></li>
+        <li class="tk"><span class="tt" aria-hidden="true">0:40</span><span class="tn" aria-hidden="true">03</span><h3>Take it everywhere</h3><p>Add it to your home screen, and sign in if you want your dashboard on every device.</p><button class="btn" type="button" id="install" style="margin-top:14px;min-height:40px">How to add it</button><div class="howto" id="howto" aria-live="polite"></div></li>
+        <li class="tk end" aria-hidden="true"><span class="tt">0:60</span><span class="flag">Done</span></li>
+      </ol>
     </div>
   </section>
 
   <section id="privacy" aria-labelledby="p-h">
-    <div class="wrap">
-      <div class="sec-h"><span class="eyebrow">Privacy</span><h2 id="p-h">Your data stays yours</h2></div>
-      <div class="priv">
-        <div><h3>On your device first</h3><p>Without an account, everything stays in your browser. Nothing is sent anywhere.</p></div>
-        <div><h3>Private when it syncs</h3><p>Sign in and your dashboard is stored so only your account can read it. Delete it any time.</p></div>
-        <div><h3>Never sold</h3><p>Your tasks, grades and workouts are never sold. <a href="/digital-dash-privacy.html">Read the privacy policy</a>.</p></div>
+    <div class="wrap pv">
+      <div class="sec-h"><span class="eyebrow">Privacy</span><h2 id="p-h">Your data stays yours</h2><p>Here's exactly what happens to it.</p><p style="margin-top:14px"><a href="/digital-dash-privacy.html">Read the full privacy policy</a></p></div>
+      <div class="receipt" role="group" aria-label="What happens to your data">
+        <div class="rc-h"><span class="mk" aria-hidden="true"></span><b>Digital Dash</b><small>Data receipt</small></div>
+        <dl>
+          <div><dt>Without an account</dt><dd>stays on your device</dd></div>
+          <div><dt>When you sign in</dt><dd>only you can read it</dd></div>
+          <div><dt>Photos you add</dt><dd>private to you</dd></div>
+          <div><dt>Download a copy</dt><dd>any time</dd></div>
+          <div><dt>Delete everything</dt><dd>one tap</dd></div>
+        </dl>
+        <div class="rc-t"><b>Never sold</b></div>
+        <span class="stamp rc-stamp" aria-hidden="true">Private</span>
       </div>
     </div>
   </section>
