@@ -20,14 +20,18 @@ a{color:inherit}
 .nav ul a:hover,.nav ul a[aria-current=page]{color:var(--ink);background:var(--panel2)}
 .nav .lang{display:block}
 .nav .lang select{min-height:36px;width:auto;padding:4px 8px;font-size:14px;border-radius:10px;background:var(--panel)}
-@media (max-width:900px){.nav .lang{margin-left:auto}.nav .lang+.btn{margin-left:0}}
-@media (max-width:900px){.nav ul{display:none}.nav .btn{margin-left:auto}}
+
+.nav .wrap{max-width:1520px}
+.nav .more{display:none;margin-left:auto;padding:8px 10px;border-radius:9px;text-decoration:none;color:var(--muted);font-weight:600;font-size:14px;white-space:nowrap}
+.nav .more:hover{color:var(--ink);background:var(--panel2)}
+@media (max-width:1499px){.nav ul{display:none}.nav .more{display:block}}
+@media (max-width:560px){.nav .more{display:none}.nav .lang{margin-left:auto}.brand .bt{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;white-space:nowrap;min-height:44px;padding:0 18px;border-radius:12px;font:700 15px/1 inherit;font-family:inherit;text-decoration:none;border:1.5px solid var(--line);background:var(--panel);color:var(--ink);cursor:pointer;transition:transform .14s var(--ease-out),border-color .15s ease,background-color .15s ease}
 @media (hover:hover) and (pointer:fine){.btn:hover{border-color:var(--ink)}}
 .btn:active{transform:scale(.97)}
 .btn.pri{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
 .btn.small{min-height:36px;padding:0 12px;font-size:14px;border-radius:10px}
-h1,h2{font-family:var(--display);text-transform:uppercase;font-weight:900;letter-spacing:.01em;line-height:.95}
+h1,h2{overflow-wrap:anywhere;hyphens:auto;font-family:var(--display);text-transform:uppercase;font-weight:900;letter-spacing:.01em;line-height:.95}
 .hero{padding:clamp(32px,6vw,64px) 0 clamp(20px,3vw,32px)}
 .eyebrow{display:inline-flex;align-items:center;gap:10px;font:800 13px/1 var(--display);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
 .eyebrow::before{content:"";width:22px;height:2px;background:currentColor}

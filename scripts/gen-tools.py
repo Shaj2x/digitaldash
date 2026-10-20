@@ -37,7 +37,8 @@ def head(slug,title,desc,ld):
 <body>
 <a class="skip" href="#main">Skip to content</a>
 <header class="nav"><div class="wrap">
-  <a class="brand" href="/" aria-label="Digital Dash home"><span class="mk" aria-hidden="true"></span>Digital Dash</a>
+  <a class="brand" href="/" aria-label="Digital Dash home"><span class="mk" aria-hidden="true"></span><span class="bt">Digital Dash</span></a>
+  <a class="more" href="/tools">Free tools</a>
   <nav aria-label="Free tools"><ul>{"".join(f'<li><a href="/{s}"{" aria-current=page" if s==slug else ""}>{n}</a></li>' for s,n,_ in TOOLS)}</ul></nav>
   <label class="lang"><span class="sr">Language</span><select data-lang></select></label>
   <a class="btn pri small" href="/digital-dash.html">Open app</a>
