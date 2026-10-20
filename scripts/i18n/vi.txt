@@ -1,0 +1,1042 @@
+1|Tập trung
+2|Việc cần làm
+3|Lịch
+4|Tài chính
+5|Sức khỏe
+6|Giao diện
+7|Đã lưu trên thiết bị này
+8|Cài ứng dụng
+9|Tìm kiếm hoặc làm bất cứ điều gì
+10|Chào buổi sáng
+11|Lật
+12|Kim
+13|Chữ
+14|Tiến độ
+15|Hẹn giờ tập trung
+16|Giây
+17|Phòng học
+18|Tập trung cùng bạn bè. Xem ai đang làm việc và cùng bắt đầu hẹn giờ.
+19|Bạn bè
+20|Thêm bạn bè và xem ai tập trung nhiều nhất tuần này.
+21|Âm thanh
+22|Phối nhạc học bài và âm thanh nền. Được tạo trực tiếp trong trình duyệt nên không bao giờ lặp lại và không cần tải gì.
+23|Phát
+24|Âm lượng
+25|Mưa lo-fi
+26|Piano đêm
+27|Quán cà phê mưa
+28|Tập trung sâu
+29|Bờ biển
+30|Nhà gỗ
+31|Nhạc học bài
+32|Nhịp lo-fi
+33|Piano nhẹ
+34|Không gian trôi
+35|Không khí
+36|Mưa
+37|Đại dương
+38|Gió
+39|Lò sưởi
+40|Quán cà phê
+41|Tiếng ồn nâu
+42|Tiếng ồn hồng
+43|Tiếng ồn trắng
+44|Âm tập trung
+45|Dùng tai nghe
+46|Phát khi hẹn giờ tập trung và tạm dừng khi nghỉ
+47|Thêm tiện ích
+48|Tùy chỉnh tiện ích
+49|Việc đang mở
+50|Hạn hôm nay
+51|Phiên tập trung hôm nay
+52|Tài sản ròng
+53|Sắp xếp theo mức khẩn cấp, rồi theo hạn. Việc đầu tiên hiện trên đồng hồ của bạn.
+54|Kế hoạch tuần
+55|Môn học và điểm
+56|Môn học của tôi
+57|Máy tính điểm
+58|Tuần
+59|Tháng
+60|Khẩn cấp
+61|Cao
+62|Trung bình
+63|Thấp
+64|Thêm việc
+65|Môn học
+66|Lặp lại
+67|Không lặp lại
+68|Mỗi ngày
+69|Mỗi ngày trong tuần
+70|Mỗi tuần
+71|Mỗi tháng
+72|Đang mở
+73|Hôm nay
+74|Xong
+75|Tất cả
+76|Lên kế hoạch tuần
+77|Mỗi thứ Sáu
+78|Phòng gym
+79|Mỗi thứ Hai, Tư, Sáu
+80|Lưu trữ
+81|Sự kiện bạn thêm và mọi việc có hạn.
+82|Tổng kết tuần
+83|T2
+84|T3
+85|T4
+86|T5
+87|T6
+88|T7
+89|CN
+101|Thêm sự kiện
+102|Lịch
+103|Nhập tệp .ics
+104|Từ một liên kết
+105|Liên kết lịch (.ics hoặc webcal://)
+106|Nhập
+107|Xuất từ Google Calendar, Outlook, Lịch Apple hoặc thời khóa biểu của trường. Lớp hằng tuần tự lặp lại.
+108|Cập nhật số dư khi chúng thay đổi. Lịch sử của bạn được xây dựng từng ngày.
+109|Tổng tài sản ròng
+110|Tài sản
+111|Nợ
+112|Tiền mặt
+113|Đầu tư
+114|Khoản vay
+115|Mục tiêu
+116|Thêm mục tiêu
+117|Tài sản
+118|Nợ
+119|Tiết kiệm
+120|Tiền mã hóa
+121|Bất động sản
+122|Phương tiện
+123|Kinh doanh
+124|Khác
+125|Thêm tài khoản
+126|Ghi lại buổi tập, xem nên nâng gì tiếp theo và theo dõi tiến bộ. Mọi thứ được lưu ngay.
+127|Buổi tập
+128|Cơ thể và calo
+129|Màu sắc, hình nền, phông chữ và hơn thế. Thay đổi áp dụng mọi nơi ngay lập tức.
+130|Mẫu giao diện
+131|Lưu toàn bộ giao diện với một cái tên: màu, phông chữ, hình nền, đồng hồ và kính. Áp dụng bất cứ lúc nào.
+132|Chưa có mẫu nào. Chỉnh mọi thứ theo ý bạn, đặt tên bên dưới và lưu lại.
+133|Lưu giao diện hiện tại
+134|Chia sẻ giao diện này
+135|Bảng màu
+136|Theo thiết bị
+137|Tạo bảng màu của riêng bạn
+138|Chọn màu và xem ứng dụng đổi trực tiếp. Lưu lại để giữ trong danh sách.
+139|Nền
+140|Bảng
+141|Chữ
+142|Màu nhấn
+143|Khu vực đồng hồ
+144|Chữ số đồng hồ
+145|Lưu bảng màu
+146|Bắt đầu từ hiện tại
+147|Hủy
+148|Không
+149|Màu
+150|Chuyển sắc
+151|Động
+152|Ảnh
+153|Khớp màu với hình nền
+154|Bảng, chữ, màu nhấn và đồng hồ thích ứng với hình nền của bạn
+155|Màu nền
+156|Cực quang
+157|Hoàng hôn
+158|Đầm phá
+159|Bầu trời sao
+160|Sóng
+161|Đom đóm
+162|Tốc độ chuyển động
+163|Hình nền động tạm dừng khi tab bị ẩn. Khi bật giảm chuyển động, chúng đứng yên.
+164|Tải ảnh lên
+165|Xóa ảnh
+166|JPG hoặc PNG. Chỉ bạn thấy được.
+167|Để vừa khít, hãy dùng ảnh có kích thước
+168|Làm tối
+169|Làm mờ
+170|Hạt phim
+171|Kết cấu mịn giúp làm dịu dải màu trong chuyển sắc
+172|Nền đồng hồ
+173|Chủ đề
+174|Kính
+175|Màu nền đồng hồ
+176|Ảnh lấp đầy khu vực đồng hồ và được cắt cho vừa.
+177|Kính cho hình nền trang hiện ra phía sau đồng hồ. Dùng thanh Làm tối để chỉnh độ trong.
+178|Màu chữ số
+179|Đặt lại
+180|Màu này quá gần với nền đồng hồ nên đã được làm sáng hoặc tối hơn để dễ đọc.
+181|Phông chữ
+182|Phông chữ văn bản
+183|Hệ thống
+184|Phông đồng hồ và tiêu đề
+185|Hiệu ứng khi rê chuột
+186|Cách thẻ và nút phản ứng khi chuột lướt qua. Chọn một mẫu hoặc tự chỉnh, rồi lưu lại.
+187|Mặc định
+188|Tinh tế
+189|Vui nhộn
+190|Nghiêng
+191|Nam châm
+192|Phát sáng
+193|Êm dịu
+194|Tắt
+195|Kiểu
+196|Theo bề mặt
+197|Nâng lên
+198|Lỏng
+199|Độ mạnh
+200|Tốc độ
+201|Trái là nhanh, phải là nhẹ nhàng
+202|Đèn con trỏ
+203|Một vệt sáng nhẹ theo con trỏ trên các thẻ
+204|Gợn sóng khi nhấn
+205|Thử ở đây
+206|Lưu thành mẫu
+207|"Theo bề mặt" đang dùng Nâng lên vì bề mặt của bạn là đặc.
+208|Cài đặt khác
+209|Diện mạo
+210|Màu nhấn
+211|Độ bo góc
+212|Cỡ đồng hồ
+213|Khúc xạ thật
+214|Kính bẻ cong hình nền ở mép. Chỉ Chrome và Edge. Tắt đi nếu cuộn trang bị nặng.
+215|Bề mặt
+216|Đặc
+217|Kính lỏng
+218|Đồng hồ mặc định
+219|Quỹ
+220|Tiền tệ
+221|Ẩn số tiền, chỉ hiện mức tăng
+222|Giống nút con mắt ở Tài chính
+223|Lời nhắc
+224|Thông báo trên điện thoại hoặc máy tính, kể cả khi Digital Dash đã đóng.
+225|Lời nhắc cần dịch vụ tài khoản, chưa được kết nối trên trang này.
+226|Dữ liệu của bạn
+227|Đăng nhập để lưu mọi thứ vào tài khoản và dùng trên mọi thiết bị.
+228|Tài khoản
+229|Hiện bản sao lưu
+230|Khôi phục từ bản sao lưu
+231|Xóa tất cả
+232|Xóa dữ liệu mẫu
+233|Xem hướng dẫn
+234|Mở trang này trong Chrome, Edge hoặc Safari để cài như một ứng dụng chạy ngoại tuyến.
+235|Đã thêm dữ liệu mẫu. Xóa bất cứ lúc nào trong Giao diện, Dữ liệu của bạn.
+236|Chuyển đến nội dung
+237|Trợ lý AI
+238|Nhắc tôi
+239|Sửa lịch tập
+240|Sửa việc
+241|Việc
+242|Mức khẩn cấp
+243|Ngày hạn
+244|Giờ hạn
+245|Dự định vào (kế hoạch tuần)
+246|Lưu thay đổi
+247|Chia sẻ bản tổng kết
+248|Tuần này
+249|Tuần trước
+250|Học kỳ
+251|Hiển thị trên thẻ
+252|Chia sẻ
+253|Lưu ảnh
+254|Đúng kích thước story Instagram và TikTok, theo giao diện của bạn. Không có gì được tải lên: ảnh được tạo trên thiết bị của bạn.
+255|Mục
+256|Tạm dừng âm thanh
+257|Tài khoản: chưa đăng nhập
+258|Đăng nhập
+259|Tìm kiếm hoặc chạy lệnh
+260|Chạm để sửa. Xóa trống để đặt lại.
+261|Phụ đề, có thể sửa
+262|Đổi nền đồng hồ
+263|Bật/tắt chế độ zen
+264|Chế độ zen (Esc để thoát)
+265|Kiểu đồng hồ
+266|Âm lượng tổng
+267|Bản phối nhanh
+268|Âm lượng nhịp lo-fi
+269|Âm lượng piano nhẹ
+270|Âm lượng không gian trôi
+271|Âm lượng kalimba
+272|Âm lượng mưa
+273|Âm lượng đại dương
+274|Âm lượng gió
+275|Âm lượng lò sưởi
+276|Âm lượng quán cà phê
+277|Âm lượng tiếng ồn nâu
+278|Âm lượng tiếng ồn hồng
+279|Âm lượng tiếng ồn trắng
+280|Âm lượng âm tập trung
+281|Việc cần làm, kế hoạch tuần hoặc môn học
+282|Môn học hoặc máy tính điểm
+283|Lên kế hoạch theo
+284|Cần làm gì?
+285|Thêm việc bằng giọng nói
+286|Giờ hạn (không bắt buộc)
+287|Lặp lại vào
+288|Lọc
+289|Đánh dấu đã xong
+290|Sửa
+291|Nhắc tôi qua email hoặc tin nhắn
+292|Danh sách bước
+293|Xóa việc
+294|Lặp lại
+296|Chế độ xem lịch
+297|Tháng trước
+298|Tháng sau
+299|Thêm một sự kiện
+300|Tên sự kiện
+301|Giờ
+302|Ẩn số tiền
+303|Tài sản ròng theo thời gian
+304|Tên mục tiêu
+305|Mục tiêu
+306|Số tiền mục tiêu
+307|Tính vào mục tiêu
+308|Đạt trước ngày (không bắt buộc)
+309|Tên tài khoản
+310|Số dư
+311|Loại
+312|Danh mục
+313|Đặt tên giao diện, ví dụ Đêm muộn
+314|Tên mẫu
+315|Tên bảng màu
+316|Loại nền
+317|Nền động
+318|Loại nền đồng hồ
+319|Mẫu hiệu ứng
+320|Kiểu hiệu ứng
+321|Độ mạnh hiệu ứng
+322|Tốc độ hiệu ứng
+323|Đặt tên mẫu, ví dụ Nảy
+324|Kiểu bề mặt
+325|Bản sao lưu JSON của bạn hiện ở đây. Dán một bản vào và nhấn Khôi phục để tải.
+326|Dữ liệu sao lưu
+327|Đóng
+328|Ảnh tổng kết
+329|Khoảng thời gian tổng kết
+330|Thanh lệnh
+331|Thêm việc, bắt đầu hẹn giờ, phát âm thanh, đi đến bất kỳ đâu…
+332|Nói thay vì gõ
+333|Kết quả
+334|Buổi tập tuần này
+335|Số tuần liên tiếp đạt mục tiêu
+336|Hiệp tập tuần này
+337|Khối lượng tuần này (lb)
+338|Lịch tập của bạn
+339|Lên kế hoạch buổi tập cho từng ngày. Bắt đầu từ lịch tập phổ biến và thay đổi bất cứ thứ gì.
+340|Thiết lập lịch tập
+341|Bắt đầu buổi tập
+342|Bắt đầu buổi tập trống
+343|Mẹo: sau buổi tập, hãy lưu thành bài (Ngày đẩy, Chân…) để lần sau bắt đầu chỉ với một chạm.
+344|Lịch sử
+345|Các buổi tập đã xong hiện ở đây.
+346|Máy tính đĩa tạ
+347|Không dùng đòn (máy)
+348|Nhập mức tạ bạn muốn trên đòn.
+349|Cài đặt
+350|Đơn vị tạ
+351|Mục tiêu buổi tập mỗi tuần
+352|Hiện buổi tập trên lịch
+353|Hẹn giờ nghỉ sau mỗi hiệp
+354|Đổi đơn vị chỉ đổi nhãn số; không chuyển đổi số cũ.
+355|Đòn tạ
+358|Chuyển đến…
+359|Thứ Hai
+360|Thứ Tư
+361|Thứ Năm
+362|Thứ Sáu
+363|Thứ Bảy
+364|Chủ Nhật
+365|Tuần sau
+366|Thứ Ba
+367|Tuần trước
+370|Chuyển sang ngày khác
+373|Sự kiện
+379|Chia sẻ tổng kết
+380|Thời gian tập trung
+381|Phiên tập trung
+382|Việc đã xong
+383|Chuỗi tập trung
+384|Số ngày liên tiếp có phiên
+385|Phút tập trung
+386|Thời gian theo môn
+387|Dành nhiều thời gian nhất cho
+388|Một năm tập trung
+389|Ít hơn
+390|Nhiều hơn
+391|Ngày
+392|Phiên
+393|Đã xong
+394|Bị trễ
+395|Không có gì bị trễ. Tuyệt.
+396|Sắp tới tuần sau
+397|Chưa có hạn nào vào tuần sau.
+398|Phút tập trung mỗi ngày
+399|Việc đã xong mỗi ngày
+400|Tiến bộ theo bài tập
+401|Hoàn thành một buổi tập để bắt đầu theo dõi tiến bộ.
+402|Kỷ lục cá nhân
+403|Mức nâng tốt nhất của bạn hiện ở đây sau buổi tập đầu tiên.
+404|Độ đều đặn
+405|Hiệp theo nhóm cơ tuần này
+406|Ghi hiệp tập tuần này để xem bạn đã tập nhóm cơ nào.
+407|Cân nặng
+408|Ghi
+409|Ghi cân nặng vài ngày để thấy xu hướng.
+410|Cân nặng hôm nay
+411|Cân nặng hôm nay tính bằng lb
+412|Thông tin của bạn
+413|Đơn vị Mỹ
+414|Đơn vị mét
+415|Tuổi
+416|Giới tính
+417|Nam
+418|Nữ
+419|Chiều cao (ft)
+420|Chiều cao (in)
+421|Cân nặng (lb)
+422|% mỡ cơ thể
+423|Mức vận động
+424|Tỷ lệ trao đổi chất cơ bản (BMR)
+425|Ít vận động: ít hoặc không tập
+426|Cực kỳ năng động: tập rất nặng mỗi ngày hoặc làm việc chân tay
+427|Công thức
+428|Katch-McArdle (cần % mỡ cơ thể)
+429|Hiển thị kết quả bằng
+430|Calo
+431|Kilojoule
+432|Mifflin-St Jeor là mặc định và phù hợp với hầu hết mọi người. Katch-McArdle chính xác hơn nếu bạn biết % mỡ cơ thể.
+433|Nhập chiều cao và cân nặng để xem BMI của bạn.
+434|Đơn vị
+435|Không bắt buộc
+436|Mức vận động
+437|Công thức BMR
+438|Đơn vị kết quả
+439|đến nay
+440|Bạn cần
+441|Phần
+442|Trọng số
+443|Điểm
+444|Thêm phần
+445|Mục tiêu
+446|Xóa
+447|Thêm môn học
+448|Điểm theo
+449|Phần trăm
+450|Chữ cái
+451|Điểm số
+452|Thang
+453|Chuẩn (Mỹ)
+454|Ontario (kiểu U of T)
+455|Western University
+456|Bài tập hoặc bài thi
+457|Điểm
+458|Thêm hàng
+459|Xóa trắng
+460|Nhập ít nhất một điểm để xem điểm trung bình.
+461|Phần còn lại tôi cần bao nhiêu?
+462|Điểm tổng kết mong muốn
+463|Trọng số phần còn lại (%)
+464|Lưu thành môn học
+465|Máy tính điểm thi cuối kỳ
+466|Điểm hiện tại (%)
+467|Điểm mong muốn (% hoặc chữ)
+468|Bài thi cuối kỳ chiếm (%)
+469|Điền cả ba ô để xem bạn cần bao nhiêu ở bài thi cuối kỳ.
+470|Thang chuẩn (Mỹ)
+471|Chữ
+472|Phần trăm
+473|Tên môn học
+474|Tên phần
+475|Trọng số theo phần trăm
+478|Phần trăm mục tiêu
+479|Tên (không bắt buộc)
+480|Tên bài tập hoặc bài thi
+486|Tên môn để lưu
+487|Theo cách của bạn
+488|Tính năng
+489|Quyền riêng tư
+490|Hỏi đáp
+491|Công cụ miễn phí
+492|Mở ứng dụng
+493|Chào mừng trở lại. Bảng điều khiển của bạn được lưu trên thiết bị này.
+494|Tiếp tục vào bảng điều khiển
+495|Miễn phí · Tùy biến cực nhiều · Chạy ngoại tuyến
+496|Lên kế hoạch. Tập trung.
+497|Theo cách của bạn.
+498|Hẹn giờ tập trung, danh sách việc, kế hoạch tuần, điểm số và nhật ký gym trong một ứng dụng, với phong cách đúng như bạn muốn, đến cả phông chữ của đồng hồ.
+499|Mở Digital Dash
+500|Thử giao diện mới
+501|Không cần tài khoản
+502|Đồng bộ nếu bạn đăng nhập
+503|Điện thoại, máy tính bảng và máy tính
+504|Bảng điều khiển của bạn.
+505|Luật của bạn.
+506|Thử ngay tại đây. Mỗi lựa chọn đổi phong cách cả trang này và ứng dụng trên điện thoại, và ứng dụng giữ giao diện của bạn khi mở.
+507|Đồng hồ
+508|Phông tiêu đề
+509|Nền và kính
+510|Trơn
+511|Cực quang động
+512|Thích giao diện này? Dùng luôn trong bảng điều khiển của bạn.
+513|Dùng giao diện này trong bảng điều khiển của tôi
+514|chủ đề, cộng thêm của bạn
+515|phông đồng hồ và văn bản
+516|kiểu đồng hồ
+517|mẫu để lưu
+518|Tất cả trong một ứng dụng
+519|Sáu công cụ.
+520|Một bảng điều khiển.
+521|Bắt đầu với những gì bạn cần hôm nay. Mọi thứ khác chỉ cách một chạm.
+522|Đồng hồ lớn, Pomodoro và hẹn giờ riêng, nhạc học bài và tiếng mưa, cùng phòng học nơi bạn bè tập trung cùng bạn.
+523|Gõ như bạn nói: "báo cáo thí nghiệm thứ sáu cao". Lặp lại, danh sách bước, nhập bằng giọng nói, lời nhắc và Hoàn tác cho mọi thứ.
+524|Bản nháp báo cáo thí nghiệm
+525|Lập kế hoạch
+526|Sắp xếp tuần theo từng ngày, kéo việc giữa các ngày và xem lớp học, buổi tập ngay cạnh việc cần làm.
+527|Điểm số
+528|Theo dõi mọi môn và biết chính xác bạn cần bao nhiêu ở bài thi cuối kỳ, theo thang điểm Mỹ hoặc Ontario.
+529|Lịch tập trên lịch, nên nâng gì tiếp theo, máy tính đĩa tạ, biểu đồ tiến bộ cùng mục tiêu BMI và calo.
+530|Kỷ lục mới
+531|Số dư, biểu đồ tăng trưởng và mục tiêu tiết kiệm, cùng con mắt riêng tư ẩn mọi số tiền chỉ với một chạm.
+532|Chạm vào con mắt để ẩn
+533|Cách hoạt động
+534|Sẵn sàng trong chưa đầy một phút
+535|Không cần tải, không bắt buộc đăng ký. Mở trong trình duyệt và hoạt động như một ứng dụng.
+536|Mở nó
+537|Chạm Mở Digital Dash. Màn chào ngắn cho bạn chọn giao diện và đồng hồ ngay.
+538|Thêm tuần của bạn
+539|Thêm việc, lớp học và buổi tập. Lên kế hoạch từng ngày và để đồng hồ cho thấy việc tiếp theo.
+540|Mang theo mọi nơi
+541|Thêm vào màn hình chính và đăng nhập nếu muốn bảng điều khiển trên mọi thiết bị.
+542|Cách thêm
+543|Dữ liệu của bạn là của bạn
+544|Đây chính xác là những gì xảy ra với nó.
+545|Đọc toàn bộ chính sách quyền riêng tư
+546|Biên lai dữ liệu
+547|Không có tài khoản
+548|ở lại trên thiết bị
+549|Khi đăng nhập
+550|chỉ bạn đọc được
+551|Ảnh bạn thêm
+552|riêng tư với bạn
+553|Tải về một bản sao
+554|bất cứ lúc nào
+555|Xóa mọi thứ
+556|một chạm
+557|Không bao giờ bán
+558|Riêng tư
+559|Câu hỏi
+560|Điều nên biết
+561|Có thật sự miễn phí?
+562|Có. Mọi thứ bạn thấy đều miễn phí.
+563|Tôi có thể tùy chỉnh đến mức nào?
+564|Tôi có cần tài khoản không?
+565|Không. Cứ mở và bắt đầu. Tài khoản chỉ để đồng bộ giữa điện thoại và máy tính, và cho lời nhắc qua email hoặc tin nhắn.
+566|Có chạy ngoại tuyến không?
+567|Có. Sau khi mở, nó vẫn chạy khi không có internet và đồng bộ khi bạn có mạng trở lại.
+568|Có ứng dụng iPhone không?
+569|Bạn có thể thêm vào màn hình chính ngay hôm nay và nó mở như một ứng dụng. Phiên bản App Store đang được chuẩn bị.
+570|Mở ngay. Chỉ mất vài giây.
+571|Hẹn giờ Pomodoro
+572|Trang chủ Digital Dash
+573|Chào mừng trở lại
+574|Digital Dash trên iPhone, theo phong cách bạn chọn bên dưới
+575|Xem trước trực tiếp Digital Dash
+576|Tùy chỉnh
+577|Dùng giao diện này
+578|Những gì bạn có thể thay đổi
+579|Điều gì xảy ra với dữ liệu của bạn
+580|Chân trang
+581|Máy tính điểm cuối kỳ
+582|Máy tính BMI
+583|Máy tính calo
+584|Miễn phí, không cần đăng ký
+585|Công cụ miễn phí cho học sinh, sinh viên
+586|Máy tính nhanh và hẹn giờ tập trung, có sẵn trong Digital Dash và dùng riêng cũng miễn phí.
+587|Điểm trung bình có trọng số, điểm chữ và GPA
+588|Bạn cần bao nhiêu ở bài thi cuối kỳ
+589|BMI, phân loại và cân nặng khỏe mạnh
+590|Calo duy trì, và nên giảm mỡ hay tăng cơ
+591|Trang chủ
+592|Công cụ
+593|Công cụ miễn phí
+594|Thêm từng bài tập, bài kiểm tra hoặc bài thi cùng trọng số. Điểm trung bình, điểm chữ và GPA cập nhật khi bạn gõ, và bạn thấy chính xác mình cần bao nhiêu cho phần còn lại.
+595|Điểm của bạn
+596|Tên
+597|Điểm (%)
+598|Trọng số (%)
+599|Thang điểm
+600|Tôi cần bao nhiêu?
+601|Mục tiêu của môn
+602|Trọng số còn lại (%)
+603|Kết quả
+604|Nhập một điểm để xem điểm trung bình.
+605|Lưu vào Digital Dash
+606|Giữ môn học này cùng việc cần làm và kế hoạch, cập nhật khi có điểm mới.
+607|Cách máy tính điểm hoạt động
+608|Điểm phần trăm
+609|được tính trung bình theo trọng số. Mỗi điểm nhân với trọng số của nó, cộng các kết quả lại, rồi chia cho tổng trọng số bạn đã nhập. Nếu để trống mọi trọng số, mỗi điểm được tính như nhau.
+610|trung bình = (điểm₁ × trọng số₁ + điểm₂ × trọng số₂ + …) ÷ (trọng số₁ + trọng số₂ + …)
+611|được tính trung bình theo điểm GPA (hoặc giữa mỗi khoảng ở thang không có GPA) rồi đổi lại thành chữ.
+612|Bạn cần bao nhiêu cho phần còn lại
+613|Nếu điểm trung bình hiện tại chiếm một phần môn học và còn R%, điểm bạn cần cho phần còn lại là:
+614|Làm sao tính điểm có trọng số?
+615|Không sao. Điểm trung bình dựa trên các trọng số đã nhập, phần còn lại được coi là sắp tới khi bạn lập kế hoạch.
+616|Tôi nên dùng thang điểm nào?
+617|Dữ liệu của tôi có được lưu không?
+618|Điểm của bạn chỉ nằm trong tab này. Dùng Lưu thành môn học để giữ chúng trong Digital Dash, chạy ngoại tuyến và đồng bộ nếu bạn đăng nhập.
+619|Thêm công cụ miễn phí
+620|Tất cả công cụ miễn phí
+621|Loại điểm
+622|tự động
+623|Tôi cần bao nhiêu ở bài thi cuối kỳ?
+624|Nhập điểm hiện tại, điểm bạn muốn và bài thi cuối kỳ chiếm bao nhiêu. Bạn sẽ thấy điểm cần đạt và điểm tổng kết với từng kết quả.
+625|Môn học của bạn
+626|Điểm mong muốn
+627|Bài cuối kỳ chiếm (%)
+628|Điểm chữ theo
+629|Điền cả ba để xem bạn cần bao nhiêu.
+630|Giữ trong máy tính điểm cạnh các môn và lịch thi của bạn.
+631|Lưu vào máy tính điểm của tôi
+632|Cách tính
+633|Điểm hiện tại bao gồm mọi thứ trừ bài cuối kỳ. Nếu bài cuối kỳ chiếm w% môn học thì:
+634|Làm sao tính điểm cần đạt ở bài cuối kỳ?
+635|Khi đó không thể đạt mục tiêu chỉ với bài cuối kỳ. Máy tính cho thấy điểm tốt nhất bạn vẫn có thể đạt, để bạn đặt mục tiêu thực tế.
+636|Tôi có thể dùng điểm chữ làm mục tiêu không?
+637|Được. Gõ một chữ như A- và mức điểm tối thiểu của chữ đó trên thang bạn chọn sẽ được dùng (Chuẩn Mỹ, Ontario hoặc Western).
+638|Điểm hiện tại có cần chính xác không?
+639|Dùng điểm mà trường bạn hiển thị đến nay. Nếu còn phần chưa chấm, kết quả sẽ thay đổi khi có điểm.
+640|Làm việc theo từng khối tập trung với các quãng nghỉ ngắn. Nhấn Bắt đầu, đặt điện thoại xuống và để tiếng chuông báo khi nào nghỉ.
+641|Hẹn giờ
+642|Bắt đầu
+643|Bỏ qua
+644|Chuông khi hết giờ
+645|Chưa có phiên nào. Nhấn Bắt đầu.
+646|Dùng các hẹn giờ này cùng nhạc học bài, nhật ký phiên, phòng học với bạn bè và tổng kết tuần.
+647|Thêm các hẹn giờ này vào bảng điều khiển
+648|Kỹ thuật Pomodoro là gì?
+649|Đó là cách học hoặc làm việc đơn giản: tập trung vào một việc trong
+650|, nghỉ
+651|, và sau bốn phiên thì nghỉ dài hơn
+652|. Các khối ngắn, cố định giúp dễ bắt đầu và khó bị xao nhãng.
+653|Mẹo để hiệu quả
+654|Chọn một việc trước khi nhấn Bắt đầu, và ghi lại điều gây xao nhãng thay vì làm theo.
+655|Đứng dậy trong giờ nghỉ. Đừng dành nó cho điện thoại.
+656|Một Pomodoro dài bao lâu?
+657|Hẹn giờ có chạy tiếp khi tôi đổi tab không?
+658|Có. Nó đếm theo đồng hồ thật nên vẫn chính xác khi chạy nền, và chuông reo khi hết giờ.
+659|Tôi có thể đổi thời lượng không?
+660|Có miễn phí không?
+661|Có. Hẹn giờ này và toàn bộ ứng dụng Digital Dash đều miễn phí.
+662|Độ dài phiên
+663|Nhập chiều cao và cân nặng để xem chỉ số khối cơ thể, ý nghĩa của nó và khoảng cân nặng khỏe mạnh với chiều cao của bạn.
+664|Hệ mét
+665|Chiều cao (cm)
+666|Cân nặng (kg)
+667|Tuổi (không bắt buộc)
+668|BMI của bạn
+669|Nhập chiều cao và cân nặng.
+670|Theo dõi cân nặng cạnh các buổi tập và nhận mục tiêu calo để giảm mỡ hoặc tăng cơ.
+671|Lưu vào bảng điều khiển
+672|Cách tính BMI
+673|BMI Prime
+674|Chỉ số Ponderal
+675|chia cân nặng cho chiều cao lập phương, phù hợp hơn một chút với người rất cao hoặc thấp.
+676|Những gì BMI không cho biết
+677|BMI bao nhiêu là khỏe mạnh?
+678|Làm sao tính BMI theo pound và inch?
+679|BMI có chính xác với người nhiều cơ không?
+680|Không lắm. BMI chỉ dùng chiều cao và cân nặng nên cơ được tính như mỡ. % mỡ cơ thể là thước đo tốt hơn nếu bạn tập tạ.
+681|BMI có dùng cho thiếu niên không?
+682|Tìm hiểu bạn đốt bao nhiêu calo mỗi ngày, nên ăn bao nhiêu để giảm hoặc tăng cân, và lúc này nên giảm mỡ, duy trì hay tăng cơ.
+683|% mỡ cơ thể (không bắt buộc)
+684|Calo mỗi ngày
+685|Giữ mục tiêu cạnh nhật ký gym với lịch tập, biểu đồ tiến bộ và máy tính đĩa tạ.
+686|Cách tính lượng calo của bạn
+687|Đầu tiên là
+688|BMR
+689|, năng lượng bạn đốt khi nghỉ. Phương trình Mifflin-St Jeor mặc định là:
+690|Lượng
+691|calo duy trì
+692|Giảm mỡ, duy trì hay tăng cơ?
+693|Tôi nên ăn bao nhiêu calo để giảm cân?
+694|Calo duy trì là gì?
+695|Lượng calo bạn đốt mỗi ngày, còn gọi là TDEE. Đó là BMR (calo khi nghỉ) nhân với mức vận động. Ăn đúng chừng đó giữ cân nặng ổn định.
+696|Tôi nên giảm mỡ hay tăng cơ?
+697|Nếu mỡ cơ thể hoặc BMI cao, hãy giảm mỡ trước. Nếu bạn gầy, tăng cơ chậm thêm cơ với ít mỡ. Ở giữa, ăn mức duy trì khi tập (tái cấu trúc) rất hiệu quả.
+698|Công thức nào chính xác nhất?
+699|Mifflin-St Jeor chính xác với hầu hết mọi người. Nếu biết % mỡ cơ thể, Katch-McArdle tính đến cơ và thường sát hơn.
+700|Danh sách trống. Thêm một việc để thấy nó ở đây.
+701|Không có việc nào đang mở. Thêm một việc ở trên.
+703|Ngày rảnh. Thêm gì đó bên dưới.
+704|Thêm tài khoản đầu tiên bên dưới.
+705|Biểu đồ tài sản ròng hiện sau hai ngày cập nhật.
+706|Thêm tài khoản thanh toán, tiết kiệm hoặc đầu tư.
+707|Không có khoản nợ nào. Cứ giữ vậy nhé.
+708|Đặt mục tiêu, như quỹ khẩn cấp hay một chuyến đi, và xem nó đầy dần khi số dư tăng.
+709|Chào mừng đến với Digital Dash
+710|Hẹn giờ tập trung, việc cần làm, kế hoạch tuần, điểm số và nhật ký gym ở một nơi, trông đúng như bạn muốn.
+711|Tiếp
+712|Gần như mọi thứ ở đây đều tùy chỉnh được. Chọn giao diện và đồng hồ để bắt đầu. Đổi bất cứ lúc nào trong Giao diện.
+713|Chọn hẹn giờ, việc bạn đang làm, và thêm nhạc học bài hoặc tiếng mưa. Phiên đã xong được ghi theo môn. Phòng học cho bạn bè tập trung cùng bạn.
+714|Việc cần làm tự lên kế hoạch
+715|Nhấn Ctrl K hoặc ⌘K ở bất cứ đâu
+716|Thanh lệnh thêm việc, bắt đầu hẹn giờ, phát âm thanh và chuyển trang.
+717|Còn nhiều điều để biến nó thành của bạn
+718|Vào Giao diện bất cứ khi nào bạn muốn:
+719|Hình nền ảnh, chuyển sắc và động
+720|Kính lỏng, hiệu ứng rê chuột và bo góc
+721|Tiện ích bạn chọn và sắp xếp
+722|Lưu tất cả thành mẫu và chuyển đổi với một chạm
+723|Tải dữ liệu mẫu
+724|Bắt đầu dùng
+725|Đồng hồ kim
+728|của giờ này
+729|của hôm nay
+730|của tuần này
+731|của tháng này
+732|của năm nay
+733|Hoàn thành một hẹn giờ tập trung để ghi phiên
+734|Đang làm
+735|Không có gì cụ thể
+736|Hẹn giờ và âm thanh
+737|Phiên này để làm gì
+738|Chuyển sang trái
+739|Chuyển sang phải
+740|Đổi độ rộng
+741|Còn bao nhiêu việc
+742|Việc hạn hôm nay hoặc quá hạn
+743|Khối hẹn giờ đã xong hôm nay
+744|Tổng hiện tại của bạn
+745|Ưu tiên hàng đầu
+746|Sắp tới
+747|Sự kiện và hạn sắp tới
+748|Đếm ngược
+749|Số ngày đến điều quan trọng
+750|Động lực
+751|Một câu giúp bạn tiếp tục
+752|Giấy ghi chú
+753|Ghi bất cứ điều gì
+754|Giờ thế giới
+755|Giờ ở thành phố khác
+756|Tiến độ thời gian
+757|Ngày, tuần, tháng, năm
+758|Hình ảnh
+759|Ảnh hoặc hình của riêng bạn
+760|Đã xong tuần này
+761|Việc bạn đã xong từ thứ Hai
+762|Tuần đến nay
+763|Thời gian tập trung, phiên và việc đã xong
+764|Đang phát
+765|Bài hát bạn đang phát trên Spotify
+766|Chuyển việc đã xong vào đây sau
+767|Không bao giờ
+768|Chuyển việc đã xong vào lưu trữ sau
+769|Ngày tốt nhất
+770|Môn hàng đầu
+771|Chuỗi
+772|Buổi tập
+773|Buổi tập hiện tại
+774|Nghỉ
+775|Thêm bài tập đầu tiên bên dưới.
+776|Thêm bài tập
+777|Kết thúc buổi tập
+778|Bỏ
+779|Tên buổi tập
+780|Thêm bài tập, ví dụ Đẩy ngực
+781|Tên bài tập
+782|Tài khoản không khả dụng ở đây
+783|Trang này chưa kết nối dịch vụ tài khoản (không tìm thấy cài đặt Supabase).
+784|Mọi thứ vẫn được lưu trên thiết bị này.
+785|Đi
+786|Tiến bộ gym
+787|BMI và calo
+788|Phát âm thanh
+789|Mở việc
+795|24 giờ
+796|Mỗi 2 tuần
+797|(tỷ lệ 1,42:1) hoặc lớn hơn cùng tỷ lệ. Mỗi màn hình có hình dạng khác nhau nên trên điện thoại ảnh sẽ bị cắt.
+798|(tỷ lệ 1,93:1) hoặc lớn hơn cùng tỷ lệ.
+799|(tỷ lệ 1,73:1) hoặc lớn hơn cùng tỷ lệ.
+800|Nói ra, ví dụ bài luận hạn thứ Sáu lúc 5 giờ
+801|Đòn Olympic (45 lb)
+802|Đòn nữ (35 lb)
+803|Đòn EZ / nhẹ (25 lb)
+804|1 phút
+805|1 phút 30 giây
+806|2 phút
+807|3 phút
+808|4 phút
+809|Nhẹ: tập 1–3 lần mỗi tuần
+810|Vừa: tập 4–5 lần mỗi tuần
+811|Năng động: tập hằng ngày hoặc tập nặng 3–4 lần mỗi tuần
+812|Rất năng động: tập nặng 6–7 lần mỗi tuần
+813|ví dụ 85 hoặc 42/50
+814|ví dụ 85 hoặc A-
+815|ví dụ 85 hoặc A
+816|Phiên tập trung 25 phút có nghỉ
+817|cộng điểm bạn đạt được rồi chia cho tổng điểm có thể; ví dụ 42/50 và 18/20 thành 60/70, tức 85,7%.
+818|Mặc định, R là phần trọng số bạn chưa nhập: nếu các hàng cộng lại 60%, máy tính coi như còn 40%.
+819|Nếu trọng số không cộng đủ 100 thì sao?
+820|Nếu tôi cần hơn 100% thì sao?
+821|25 phút
+822|nghỉ 5 phút
+823|nghỉ 15 đến 30 phút
+824|Nếu 25 phút quá ngắn cho việc cần tập trung sâu, hãy thử 50 / 10 hoặc 90 / 20.
+825|18,5 đến 25 bình thường
+826|Nhập tuổi (15 đến 80), chiều cao và cân nặng.
+827|Gõ tự nhiên, như "gym mỗi T2 T4 T6 6pm" hoặc "báo cáo thí nghiệm thứ sáu cao". Thêm danh sách bước, lặp lại và lời nhắc, rồi đánh dấu để thấy ngày của bạn đầy dần.
+828|8 chủ đề, hoặc tự tạo bảng màu
+829|12 phông đồng hồ và 12 phông văn bản
+830|1 ngày
+831|3 ngày
+832|1 tuần
+833|2 tuần
+834|30 ngày
+835|Thử: gym tomorrow 5pm high · timer 40 · play rain · theme midnight
+836|Tuần 1
+837|Bài cuối kỳ chiếm 40%
+838|cần ở bài cuối kỳ để kết thúc với 85%
+839|Thử 140 × 8
+840|Nhân mỗi điểm với trọng số, cộng kết quả, rồi chia cho tổng trọng số đã nhập. Ví dụ 80% ở bài tập chiếm 30% và 90% ở bài giữa kỳ chiếm 30% cho (80×30 + 90×30) ÷ 60 = 85%.
+841|Chuẩn (Mỹ) dùng A 93+, A- 90, v.v. Ontario (kiểu U of T) dùng A+ 90, A 85, A- 80. Western University dùng A+ 90, A 80, B 70, C 60, D 50. Chọn thang của trường bạn.
+842|cần ở bài cuối kỳ = (điểm mong muốn − điểm hiện tại × (1 − w)) ÷ w
+843|Ví dụ, với 82% hiện tại, mục tiêu 85% và bài cuối kỳ chiếm 40%: (85 − 82 × 0,6) ÷ 0,4 =
+844|Nếu kết quả là 0 hoặc nhỏ hơn, bạn đã chắc chắn đạt mục tiêu. Nếu trên 100%, mục tiêu ngoài tầm với, và bảng cho thấy kết quả tốt nhất bạn có thể đạt.
+845|Lấy điểm mong muốn, trừ điểm hiện tại nhân phần môn học đã xong, rồi chia cho trọng số bài cuối kỳ. Với 82% hiện tại, mục tiêu 85% và bài cuối kỳ 40%: (85 − 82 × 0,6) ÷ 0,4 = 89,5%.
+846|Pomodoro kinh điển là 25 phút tập trung, tiếp theo là 5 phút nghỉ. Sau bốn lần, nghỉ dài hơn 15 đến 30 phút.
+847|Có. Chọn 25 / 5, 50 / 10 hoặc 90 / 20 tại đây. Trong Digital Dash bạn có thể tạo hẹn giờ riêng từ 10 giây đến 10 giờ.
+848|BMI = cân nặng (kg) ÷ chiều cao (m)² · theo đơn vị Mỹ: 703 × cân nặng (lb) ÷ chiều cao (in)²
+849|Với người lớn, Tổ chức Y tế Thế giới phân nhóm BMI: dưới 18,5 thiếu cân (16 đến 17 gầy vừa, dưới 16 gầy nặng),
+850|, 25 đến 30 thừa cân, và 30 trở lên béo phì (độ I, II và III bắt đầu từ 30, 35 và 40).
+851|là BMI của bạn chia cho 25, mức trên của khoảng bình thường, nên 1,00 là giới hạn. Còn
+852|BMI không phân biệt cơ và mỡ, nên vận động viên có thể bị xếp thừa cân. Với người dưới 20 tuổi, bác sĩ so BMI với bách phân vị theo tuổi và giới tính. Hãy dùng nó như hướng dẫn sơ bộ, không phải chẩn đoán.
+853|Với người lớn, BMI từ 18,5 đến 25 là bình thường. Dưới 18,5 là thiếu cân, 25 đến 30 thừa cân, và 30 trở lên béo phì.
+854|Nhân cân nặng tính bằng pound với 703, rồi chia cho bình phương chiều cao tính bằng inch. 165 lb ở 5'10" (70 in) là 703 × 165 ÷ 4.900 = 23,7.
+855|Dưới 20 tuổi, BMI được so với bách phân vị theo tuổi và giới tính, nên các nhóm của người lớn chỉ để tham khảo.
+856|(TDEE) là BMR nhân hệ số vận động từ 1,2 (ít vận động) đến 1,9 (rất năng động). Khoảng 3.500 kcal là một pound mỡ, nên ăn dưới mức duy trì 500 kcal sẽ giảm khoảng 1 lb mỗi tuần.
+857|Với % mỡ cơ thể, nam trên 25% hoặc nữ trên 32% được gợi ý giảm mỡ, còn nam dưới 12% hoặc nữ dưới 20% được gợi ý tăng cơ sạch. Không có nó thì dùng BMI: dưới 22 tăng cơ sạch, 22 đến 25 duy trì, từ 25 giảm mỡ. Macro theo kế hoạch: đạm 2,2 g mỗi kg khi giảm mỡ và 1,8 ở trường hợp khác, chất béo 25% calo, tinh bột phần còn lại.
+858|Đây là hướng dẫn chung, không phải lời khuyên y tế. Không nên ăn dưới 1.500 kcal (nam) hoặc 1.200 kcal (nữ) mỗi ngày khi không có bác sĩ.
+859|Ăn khoảng 500 kcal mỗi ngày dưới mức calo duy trì để giảm khoảng 1 lb (0,5 kg) mỗi tuần. Bảng cho các lựa chọn nhẹ, bình thường và nhanh.
+860|Chưa có gì. Việc đã xong sẽ đến đây 1 tuần sau khi bạn đánh dấu.
+861|Giống tuần trước
+862|Giống thời điểm này tuần trước
+863|Ngôn ngữ
+864|Đã sao chép liên kết. Gửi cho bất kỳ ai.
+865|Thử giao diện này?
+866|Giữ của tôi
+867|Một giao diện được chia sẻ
+868|Đã trở lại giao diện của bạn
+869|Bật bạn bè
+870|Tên của bạn
+871|Bạn bè sẽ thấy
+872|Thêm bạn bằng mã
+873|Thêm
+874|Chấp nhận
+875|Từ chối
+876|Cài đặt và bạn bè
+877|Hiện thời gian tập trung của tôi cho bạn bè
+878|Lưu tên
+879|Sao chép lời mời
+880|Chưa có bạn bè. Gửi liên kết mời hoặc thêm mã của họ bên dưới.
+881|Bạn bè chỉ thấy tên và thời gian tập trung hằng tuần của bạn. Bạn chọn ai để thêm và có thể tắt chia sẻ.
+882|Chia sẻ mã của bạn để thêm người bạn đầu tiên.
+883|Chọn tên bạn của bạn sẽ thấy, rồi hai bạn được kết nối.
+884|Bạn bè và bảng xếp hạng tuần cần tài khoản để bạn bè tìm thấy bạn.
+885|Có người mời bạn kết bạn. Đăng nhập để chấp nhận.
+886|Bảng xếp hạng thời gian tập trung
+887|Tuần của bảng xếp hạng
+888|Đã sao chép liên kết mời
+889|Đã gửi lời mời. Hai bạn sẽ thấy nhau khi họ chấp nhận
+890|Hai bạn đã là bạn bè
+891|Đã từ chối lời mời
+892|Đã hủy lời mời
+893|Đã xóa bạn
+894|Tuần của tôi
+895|Học kỳ mùa thu của tôi
+896|Học kỳ mùa đông của tôi
+897|Học kỳ mùa hè của tôi
+898|ĐÃ TẬP TRUNG
+899|VIỆC ĐÃ XONG
+900|NGÀY TỐT NHẤT
+901|MÔN HÀNG ĐẦU
+902|CHUỖI DÀI NHẤT
+903|BUỔI TẬP
+904|Tạo bằng Digital Dash
+905|Chuỗi dài nhất
+906|liên tiếp
+907|tập trung
+908|Chưa có nhiều. Hoàn thành một phiên tập trung hoặc một việc và nó sẽ hiện trên thẻ của bạn.
+909|Đã lưu ảnh
+910|Đã lưu ảnh. Đăng từ ảnh hoặc thư mục tải về
+911|Tạm dừng
+912|Tiếp tục
+913|Nghỉ
+914|Nghỉ dài
+915|Đứng dậy, vươn vai, uống nước
+916|Chưa đăng nhập
+917|Đã đăng xuất. Không có gì được sao chép.
+918|Cần có tên
+919|Sửa {0}
+920|Xóa {0}
+921|Xóa hẳn {0}
+922|Đánh dấu {0} đã xong
+923|Đánh dấu {0} chưa xong
+924|Chuyển {0} sang ngày khác
+925|Thêm vào {0}
+926|Thêm việc vào {0}
+927|Âm lượng {0}
+928|Số dư {0}
+929|Điểm {0}
+930|Trọng số {0}
+931|Áp dụng {0}
+932|Chia sẻ {0}
+933|{0}: ngày nghỉ
+934|{n} việc
+935|{n} việc
+936|{n} việc, {m} sự kiện
+937|{n} việc, {m} sự kiện
+938|{n} việc, {m} sự kiện
+939|{n} việc, {m} sự kiện
+940|{n} phiên
+941|{n} phiên
+942|{n} phiên tập trung
+943|{n} phiên tập trung
+944|{n} ngày
+945|{n} ngày
+946|{n}/{m} đã xong
+947|Đã xong {n}/{m} bước
+948|Bước {n}/{m}
+949|trên {n}
+950|Ít hơn {0} so với thời điểm này tuần trước
+951|Nhiều hơn {0} so với thời điểm này tuần trước
+952|Ít hơn {0} so với tuần trước
+953|Nhiều hơn {0} so với tuần trước
+954|{n} buổi tập trong {m} tuần qua
+955|{n} buổi tập trong {m} tuần qua · mục tiêu {k} buổi mỗi tuần (đổi trong Buổi tập → Cài đặt).
+956|Lưu trữ {n} việc đã xong ngay
+957|Chưa có gì. Việc đã xong sẽ đến đây {0} sau khi bạn đánh dấu.
+958|Việc đã xong chuyển vào lưu trữ sau {0}.
+959|{n} phút đến nay
+960|Bắt đầu hẹn giờ tập trung {n} phút
+961|Bắt đầu {0}
+962|Thêm việc: {0}
+963|{n} việc khẩn cấp nhất của bạn
+964|Đã có {0} điểm của môn
+965|ở {0} còn lại để đạt {1}.
+966|dưới {0}
+967|Thời gian tập trung mỗi ngày trong năm qua. {n} ngày có tập trung, chuỗi dài nhất {m} ngày.
+968|{n} ngày có tập trung · chuỗi dài nhất {m} ngày · tổng {0}
+969|Đã qua {0} của hôm nay. Còn {1} để tận dụng.
+970|Tiếp theo: {0}
+971|Hạn {0}
+972|{0}, chưa có kế hoạch
+973|{0}, {n} mục
+974|{0}, {n} mục
+975|{0}, hôm nay, {n} mục
+976|{0}, hôm nay, {n} mục
+977|{0} · đã xong {n}/{m}
+978|{n} việc đang mở · {0} tuần này
+979|{n} việc đang mở · {0} tuần này
+980|Phiên {n}/{m} trước khi nghỉ dài
+981|Tập trung {n}
+982|Sâu {n}
+983|Nghỉ {n}
+984|{n} bạn · {0}
+985|{n} bạn · {0}
+986|{0} (bạn)
+987|{0} muốn kết bạn
+988|Đang chờ {0}
+989|Hủy lời mời tới {0}
+990|Hạng {n}
+991|{n} phiên · {0}
+992|Ngày mai {0}
+993|Hôm nay {0}
+994|Mỗi {n} tuần
+995|Đã thêm {0} vào môn học của bạn
+996|Đã lưu {0}
+997|Đã xóa {0}
+998|Đã cập nhật {0}
+999|qua {n} phiên tập trung
+1000|qua {n} phiên tập trung
+1001|{0} tập trung
+1002|Phiên {n}
+1003|{n} phiên tập trung · {0}
+1004|{0}: {1}
+1005|Gần như mọi thứ: 8 chủ đề hoặc bảng màu riêng, 12 phông đồng hồ và 12 phông văn bản, 6 kiểu đồng hồ, hình nền ảnh, chuyển sắc và động, kính lỏng, hiệu ứng rê chuột, bo góc, các tiện ích trên trang chủ và cả tiêu đề trang. Lưu giao diện thành mẫu và đổi chỉ với một chạm.
+1006|Giảm cân cực nhanh
+1007|Giảm cân
+1008|Giảm cân nhẹ
+1009|Giữ cân
+1010|Tăng cân nhẹ
+1011|Tăng cân
+1012|Tăng cân nhanh
+1013|Gầy nặng
+1014|Gầy vừa
+1015|Gầy nhẹ
+1016|Bình thường
+1017|Thừa cân
+1018|Béo phì độ I
+1019|Béo phì độ II
+1020|Béo phì độ III
+1021|BMI của bạn dưới khoảng khỏe mạnh, nên ưu tiên ăn trên mức duy trì để tăng cân.
+1022|BMI của bạn hơi dưới khoảng khỏe mạnh (18,5–25), nên tăng cơ sạch là phù hợp.
+1023|BMI của bạn trong khoảng khỏe mạnh và còn dư địa, nên tăng cơ chậm hợp để xây cơ. Duy trì cũng được.
+1024|BMI của bạn trong khoảng khỏe mạnh, nên ăn mức duy trì khi tập (tái cấu trúc) là lựa chọn tốt. Thêm % mỡ cơ thể để có lời khuyên chính xác hơn.
+1025|BMI của bạn ở mức thừa cân, nên gợi ý giảm mỡ đều đặn. BMI không phân biệt cơ và mỡ: nếu bạn rất nhiều cơ, hãy thêm % mỡ cơ thể để có câu trả lời tốt hơn.
+1026|BMI của bạn ở mức béo phì, nên gợi ý giảm mỡ. Giảm 1 lb (0,5 kg) mỗi tuần là tốc độ bền vững; hãy hỏi bác sĩ trước khi thay đổi lớn hơn.
+1027|kcal để duy trì
+1028|BMR (khi nghỉ)
+1029|Mỗi ngày
+1030|So với duy trì
+1031|gợi ý
+1032|Giảm mỡ
+1033|Duy trì
+1034|Tăng cơ
+1035|Đạm
+1036|Chất béo
+1037|Tinh bột
+1038|Gam
+1039|kcal
+1040|Cân nặng khỏe mạnh với chiều cao của bạn
+1041|Bạn đang trong khoảng khỏe mạnh.
+1042|BMI không phân biệt cơ và mỡ.
+1043|Xem calo của bạn, và nên giảm mỡ hay tăng cơ →
+1044|Phần đã chấm
+1045|Trọng số đã nhập
+1046|Nếu bạn đạt
+1047|Bạn kết thúc với
+1048|Bạn đã chắc chắn đạt, kể cả khi phần còn lại bằng không.
+1049|Bạn đã chắc chắn đạt. Kể cả 0 điểm ở bài cuối kỳ cũng đủ.
+1050|Duy trì
+1051|Kế hoạch gợi ý
+1052|Kế hoạch của bạn
+1053|Macro
+1054|phần còn lại
+1055|25% calo
+1056|Quay lại gợi ý
+1057|Khoảng BMI khỏe mạnh: 18,5 – 25 kg/m²
+1058|BMI không phân biệt cơ và mỡ, nên người nhiều cơ có thể bị xếp thừa cân.
+1059|Giảm {0}
+1060|Tăng {0}
+1061|Với {0}% mỡ, bạn đang gầy, nên tăng cơ chậm giúp thêm cơ mà ít mỡ.
+1062|Với {0}% mỡ, bạn trong khoảng khỏe mạnh, nên ăn mức duy trì khi tập nặng (tái cấu trúc) rất hiệu quả. Tăng cơ sạch nếu ưu tiên xây cơ.
+1063|Để kết thúc với {0}
+1064|cần ở {0} còn lại
+1065|ở bài cuối kỳ để đạt {0}
+1066|{n}% ở bài cuối kỳ
+1067|Giảm {0} sẽ đưa bạn về BMI 25.
+1068|Tăng {0} sẽ đưa bạn lên BMI 18,5.
+1069|Con số đó trên 100%, nên ngoài tầm với. Tốt nhất bạn có thể đạt là {0}.
+1070|Làm vậy bạn vẫn đúng hướng. 100% cho phần còn lại sẽ cho bạn {0}.
+1071|Con số đó hơn 100%, nên ngoài tầm với. Bài cuối kỳ hoàn hảo sẽ cho bạn {0}.
+1072|Bài cuối kỳ hoàn hảo sẽ cho bạn {0}; 0 điểm sẽ để bạn ở {1}.
+1073|{n} phiên tập trung · {m} phút
+1074|{n} phiên tập trung · {m} phút
+1075|Thang {0}
+1076|{0} mỗi ngày
+1077|Macro mỗi ngày cho {0} kcal
+1078|Macro ({0} kcal)
+1079|Đã bỏ qua {n} hàng vì thiếu trọng số.
+1080|Đã bỏ qua {n} hàng vì thiếu trọng số.
