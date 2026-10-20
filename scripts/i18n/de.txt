@@ -1048,3 +1048,10 @@
 1086|Jedes Tool kann direkt in Digital Dash speichern, neben deinen Aufgaben, deinem Wochenplan und deinem Trainingslog.
 1087|Funktioniert offline
 1088|10 Sprachen
+1089|In Aktion sehen
+1090|Eine Minute.
+1091|Alle Funktionen.
+1092|Ein echter Rundgang durch die App, aufgenommen bei der Nutzung. Keine Mock-ups.
+1093|Ton an
+1094|Ton aus
+1095|Demovideo von Digital Dash

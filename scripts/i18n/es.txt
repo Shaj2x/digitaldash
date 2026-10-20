@@ -1048,3 +1048,10 @@
 1086|Cada herramienta puede guardarse directamente en Digital Dash, junto a tus tareas, tu plan semanal y tu registro del gimnasio.
 1087|Funciona sin conexión
 1088|10 idiomas
+1089|Míralo en acción
+1090|Un minuto.
+1091|Todas las funciones.
+1092|Un recorrido real por la app, grabado mientras se usa. Sin maquetas.
+1093|Activar sonido
+1094|Silenciar
+1095|Vídeo de demostración de Digital Dash

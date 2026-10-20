@@ -409,6 +409,12 @@ The goal is that nothing teleports and nothing waits on you. Rules the code foll
 - Sources: `scripts/i18n/en.json` (strings, patterns, extra) and one `scripts/i18n/<lang>.txt` per language (`number|translation`). Run `python3 scripts/build-i18n.py`; it checks placeholders and lists missing numbers. Add new English at the end of "extra" so numbers don't shift. Anything without a translation stays English. User content (task titles and so on) is never in the dictionary; mark anything else that must not change `translate="no"`.
 - The Words clock stays English (its sentences are built word by word).
 
+## Demo video
+
+- Home page > See it in action (`#demo`). `public/media/digital-dash-demo.mp4` (16:9, 1080p) and `digital-dash-demo-vertical.mp4` (9:16, used on portrait phones), each with a poster JPG. The 16:9 file is the `<source>`; the script swaps in the vertical one before loading.
+- It loads only when the section is near (`preload="none"`, then metadata), plays muted and looped while at least half is on screen, and pauses when scrolled away. With reduced motion or Data Saver it never autoplays: the centre Play button starts it. Sound on/off and Play/Pause sit under the video. The service worker's scope is `/digital-dash`, so it never caches these files.
+- The film is real use of the app recorded with a Playwright screencast and edited in an HTML timeline; the soundtrack is generated with Web Audio to the same timeline.
+
 ## Ideas for next steps
 
 - Move to a real stack (for example Vite + React or Next.js) and split sections into modules.

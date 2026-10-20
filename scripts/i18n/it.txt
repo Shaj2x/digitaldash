@@ -1048,3 +1048,10 @@
 1086|Ogni strumento può salvare direttamente in Digital Dash, accanto alle tue attività, al piano settimanale e al diario della palestra.
 1087|Funziona offline
 1088|10 lingue
+1089|Guardalo in azione
+1090|Un minuto.
+1091|Tutte le funzioni.
+1092|Un vero giro nell'app, registrato mentre la si usa. Niente mock-up.
+1093|Attiva audio
+1094|Disattiva audio
+1095|Video dimostrativo di Digital Dash

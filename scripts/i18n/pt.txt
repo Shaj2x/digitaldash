@@ -1048,3 +1048,10 @@
 1086|Cada ferramenta salva direto no Digital Dash, ao lado das suas tarefas, do plano da semana e do registro de academia.
 1087|Funciona offline
 1088|10 idiomas
+1089|Veja em ação
+1090|Um minuto.
+1091|Todos os recursos.
+1092|Um passeio real pelo app, gravado enquanto é usado. Nada de maquetes.
+1093|Ativar som
+1094|Desativar som
+1095|Vídeo de demonstração do Digital Dash

@@ -312,6 +312,19 @@ html.cur,html.cur *{cursor:none!important}
 @keyframes slamL{to{transform:none}}@keyframes slamR{to{transform:none}}
 @keyframes splitL{from{transform:none}to{transform:translateX(-52vw)}}@keyframes splitR{from{transform:none}to{transform:translateX(52vw)}}
 @keyframes shake{0%,100%{transform:translate(-50%,-50%)}25%{transform:translate(calc(-50% - 6px),calc(-50% + 2px)) rotate(-1deg)}50%{transform:translate(calc(-50% + 5px),calc(-50% - 2px))}75%{transform:translate(calc(-50% - 3px),calc(-50% + 1px))}}
+/* demo video: plays muted when in view; wide on desktop, tall on phones */
+.vid{position:relative;margin:0;border:1.5px solid var(--ink);border-radius:18px;overflow:hidden;background:#0E0E0E;box-shadow:8px 8px 0 var(--ink);aspect-ratio:16/9}
+.vid.tall{aspect-ratio:9/16;width:min(100%,calc(80svh * 9 / 16));margin-inline:auto}
+.vid video{display:block;width:100%;height:100%;object-fit:cover;background:#0E0E0E;cursor:pointer}
+.vid-ui{display:flex;justify-content:space-between;gap:10px;margin-top:22px}
+.vid.tall+.vid-ui{width:min(100%,calc(80svh * 9 / 16));margin-inline:auto}
+.vid-b svg{width:18px;height:18px;flex:none}
+#vid-snd .w{display:none}#vid-snd[aria-pressed="true"] .w{display:inline}#vid-snd[aria-pressed="true"] .x{display:none}
+#vid-play{padding:0;width:44px}
+.vid-big{position:absolute;left:50%;top:50%;width:84px;height:84px;margin:-42px 0 0 -42px;border-radius:50%;border:1.5px solid #EFEEE8;background:rgba(14,14,14,.6);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);color:#EFEEE8;display:grid;place-items:center;cursor:pointer;transition:opacity .2s ease,transform .2s var(--ease-out,ease)}
+.vid-big svg{width:30px;height:30px;margin-left:4px}
+.vid.playing .vid-big{opacity:0;transform:scale(.9);pointer-events:none}
+@media (prefers-reduced-motion:reduce){.vid-big{transition:none}}
 </style>
 </head>
 <body>
@@ -357,6 +370,17 @@ html.cur,html.cur *{cursor:none!important}
       </div>
     </section>
   </div>
+
+  <section id="demo" class="band" aria-labelledby="v-h">
+    <div class="wrap">
+      <div class="sec-h rv"><span class="eyebrow">See it in action</span><h2 id="v-h">One minute. <br>Every feature.</h2><p>A real run through the app, recorded as it's used. No mock-ups.</p></div>
+      <figure class="vid rv" id="vid-box">
+        <video id="vid" muted playsinline loop preload="none" poster="/media/demo-poster.jpg" aria-label="Digital Dash demo video" data-tall="/media/digital-dash-demo-vertical.mp4" data-tall-poster="/media/demo-poster-vertical.jpg"><source src="/media/digital-dash-demo.mp4" type="video/mp4"></video>
+        <button type="button" class="vid-big" id="vid-big" aria-label="Play"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg></button>
+      </figure>
+      <div class="vid-ui" id="vid-ui"><button type="button" class="btn vid-b" id="vid-play" aria-label="Play"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg></button><button type="button" class="btn vid-b" id="vid-snd" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z"/><path class="w" d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/><path class="x" d="m16 9 6 6m0-6-6 6"/></svg><span>Sound on</span></button></div>
+    </div>
+  </section>
 
   <section id="features" aria-labelledby="f-h">
     <div class="wrap">
@@ -622,6 +646,31 @@ html.cur,html.cur *{cursor:none!important}
   const ios=/iPhone|iPad|iPod/.test(navigator.userAgent)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1);
   $("#install").addEventListener("click",async()=>{if(deferred){deferred.prompt();await deferred.userChoice;deferred=null;return;}
     $("#howto").innerHTML=ios?"<b>On iPhone:</b> open Digital Dash in Safari, tap Share, then <b>Add to Home Screen</b>.":"<b>On Android or Chrome:</b> open Digital Dash, tap the menu, then <b>Install app</b>. <b>On iPhone:</b> Safari → Share → Add to Home Screen.";$("#howto").classList.add("on");});
+})();
+</script>
+<script>
+/* demo video: picks the tall cut on portrait phones, loads only when close, plays muted while on screen
+   (not with reduced motion or Data Saver: then it waits for Play), and the sound button unmutes it */
+(()=>{const v=document.getElementById("vid");if(!v)return;
+  const box=document.getElementById("vid-box"),big=document.getElementById("vid-big"),pl=document.getElementById("vid-play"),snd=document.getElementById("vid-snd");
+  const PLAY='<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg>',PAUSE='<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg>';
+  if(matchMedia("(max-width: 640px) and (orientation: portrait)").matches){box.classList.add("tall");v.poster=v.dataset.tallPoster;v.querySelector("source").src=v.dataset.tall;v.load();}
+  const auto=!matchMedia("(prefers-reduced-motion: reduce)").matches&&!(navigator.connection&&navigator.connection.saveData);
+  let user=false,seen=false;
+  const sync=()=>{const on=!v.paused;box.classList.toggle("playing",on);pl.innerHTML=on?PAUSE:PLAY;pl.setAttribute("aria-label",on?"Pause":"Play");};
+  const go=()=>{v.preload="auto";const p=v.play();if(p&&p.catch)p.catch(()=>{});};
+  v.addEventListener("play",sync);v.addEventListener("pause",sync);
+  const toggle=()=>{user=true;if(v.paused)go();else v.pause();};
+  big.addEventListener("click",toggle);pl.addEventListener("click",toggle);v.addEventListener("click",toggle);
+  snd.addEventListener("click",()=>{v.muted=!v.muted;snd.setAttribute("aria-pressed",String(!v.muted));snd.querySelector("span").textContent=v.muted?"Sound on":"Sound off";if(!v.muted&&v.paused){user=true;go();}});
+  if("IntersectionObserver" in window){
+    new IntersectionObserver(es=>es.forEach(e=>{
+      if(e.isIntersecting&&!seen){seen=true;v.preload="metadata";}
+      if(e.intersectionRatio>=.5){if(auto&&!user&&v.paused)go();}
+      else if(!v.paused&&(v.muted||!e.isIntersecting))v.pause();
+    }),{threshold:[0,.5],rootMargin:"200px 0px"}).observe(box);
+  }
+  sync();
 })();
 </script>
 </body>

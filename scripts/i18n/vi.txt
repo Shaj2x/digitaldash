@@ -1048,3 +1048,10 @@
 1086|Mọi công cụ đều có thể lưu thẳng vào Digital Dash, cạnh việc cần làm, kế hoạch tuần và nhật ký gym của bạn.
 1087|Chạy ngoại tuyến
 1088|10 ngôn ngữ
+1089|Xem cách hoạt động
+1090|Một phút.
+1091|Mọi tính năng.
+1092|Một lượt dùng thật của ứng dụng, được quay trong lúc sử dụng. Không phải bản dựng.
+1093|Bật âm thanh
+1094|Tắt âm thanh
+1095|Video giới thiệu Digital Dash
