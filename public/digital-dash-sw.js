@@ -3,7 +3,7 @@
    copy when not); Google Fonts are cache-first since they never change. Scope: /digital-dash* only,
    so any other pages on the same site are untouched.
    It also shows push reminders (sent by the dash-push Supabase function) and opens the app when one is tapped. */
-const CACHE = "digital-dash-v2";
+const CACHE = "digital-dash-v3";
 const FONTS = "digital-dash-fonts";
 const CORE = [
   "/digital-dash.html",
@@ -11,7 +11,8 @@ const CORE = [
   "/digital-dash-icon-192.png",
   "/digital-dash-icon-512.png",
   "/digital-dash-maskable-512.png",
-  "/digital-dash-apple-180.png"
+  "/digital-dash-apple-180.png",
+  "/i18n/i18n.js"
 ];
 
 self.addEventListener("install", (e) => {
@@ -31,7 +32,7 @@ self.addEventListener("fetch", (e) => {
   if (req.method !== "GET") return;
   const url = new URL(req.url);
 
-  if (url.origin === self.location.origin && url.pathname.startsWith("/digital-dash")) {
+  if (url.origin === self.location.origin && (url.pathname.startsWith("/digital-dash") || url.pathname.startsWith("/i18n/"))) {
     e.respondWith(
       fetch(req)
         .then((res) => {

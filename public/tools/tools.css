@@ -18,7 +18,9 @@ a{color:inherit}
 .nav ul{display:flex;gap:2px;list-style:none;margin:0 0 0 auto;padding:0}
 .nav ul a{display:block;padding:8px 10px;border-radius:9px;text-decoration:none;color:var(--muted);font-weight:600;font-size:14px;white-space:nowrap}
 .nav ul a:hover,.nav ul a[aria-current=page]{color:var(--ink);background:var(--panel2)}
-.nav .lang{margin-left:4px}
+.nav .lang{display:block}
+.nav .lang select{min-height:36px;width:auto;padding:4px 8px;font-size:14px;border-radius:10px;background:var(--panel)}
+@media (max-width:900px){.nav .lang{margin-left:auto}.nav .lang+.btn{margin-left:0}}
 @media (max-width:900px){.nav ul{display:none}.nav .btn{margin-left:auto}}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;white-space:nowrap;min-height:44px;padding:0 18px;border-radius:12px;font:700 15px/1 inherit;font-family:inherit;text-decoration:none;border:1.5px solid var(--line);background:var(--panel);color:var(--ink);cursor:pointer;transition:transform .14s var(--ease-out),border-color .15s ease,background-color .15s ease}
 @media (hover:hover) and (pointer:fine){.btn:hover{border-color:var(--ink)}}

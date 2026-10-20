@@ -27,6 +27,7 @@ def head(slug,title,desc,ld):
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/png" sizes="32x32" href="/brand/favicon-32.png">
 <link rel="apple-touch-icon" href="/digital-dash-apple-180.png">
+<script src="/i18n/i18n.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@800;900&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700&display=swap" rel="stylesheet">
@@ -38,6 +39,7 @@ def head(slug,title,desc,ld):
 <header class="nav"><div class="wrap">
   <a class="brand" href="/" aria-label="Digital Dash home"><span class="mk" aria-hidden="true"></span>Digital Dash</a>
   <nav aria-label="Free tools"><ul>{"".join(f'<li><a href="/{s}"{" aria-current=page" if s==slug else ""}>{n}</a></li>' for s,n,_ in TOOLS)}</ul></nav>
+  <label class="lang"><span class="sr">Language</span><select data-lang></select></label>
   <a class="btn pri small" href="/digital-dash.html">Open app</a>
 </div></header>
 <main id="main">

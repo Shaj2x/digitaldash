@@ -7,6 +7,7 @@
 <meta name="description" content="Clocks, focus timers, tasks, calendar and net worth in one customizable dashboard.">
 <meta name="theme-color" content="#1B1B1B">
 <link rel="manifest" href="/digital-dash.webmanifest">
+<script src="/i18n/i18n.js"></script>
 <link rel="icon" type="image/png" sizes="192x192" href="/digital-dash-icon-192.png">
 <link rel="apple-touch-icon" href="/digital-dash-apple-180.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -1949,6 +1950,7 @@ html.lg .eye{background:var(--glass-tint);box-shadow:inset 0 1px 0 color-mix(in 
       <div class="settings" style="margin-top:0">
         <div class="panel">
           <h3>Look</h3>
+          <div class="field"><span>Language</span><select id="lang-sel" aria-label="Language"></select></div>
           <div class="field"><span>Accent colour</span><span class="row"><input type="color" id="accent"><button class="btn ghost small" id="accent-reset">Reset</button></span></div>
           <div class="field"><span>Corner roundness</span><input type="range" id="radius" min="0" max="28"></div>
           <div class="field"><span>Clock size</span><input type="range" id="csize" min="60" max="140"></div>
@@ -3479,11 +3481,11 @@ $("#week").addEventListener("click",e=>{if(e.target.closest("[data-recap]")){rec
 const RC={per:"week",hide:new Set((()=>{try{return JSON.parse(localStorage.getItem("digitaldash.rchide")||"[]");}catch(e){return [];}})())};
 const rcA=(h,a)=>{h=String(h).replace("#","");if(h.length===3)h=h.split("").map(ch=>ch+ch).join("");const n=parseInt(h.slice(0,6),16);return `rgba(${n>>16&255},${n>>8&255},${n&255},${a})`;};
 function rcRange(per){const now=new Date(),d0=new Date(now.getFullYear(),now.getMonth(),now.getDate());
-  if(per==="week")return {a:weekStart(d0),b:addDays(weekStart(d0),7),title:"My week",bucket:"day"};
-  if(per==="last"){const a=addDays(weekStart(d0),-7);return {a,b:addDays(a,7),title:"My week",bucket:"day"};}
-  if(per==="month"){const a=new Date(now.getFullYear(),now.getMonth(),1);return {a,b:new Date(now.getFullYear(),now.getMonth()+1,1),title:"My "+a.toLocaleDateString(undefined,{month:"long"}),bucket:"day"};}
+  if(per==="week")return {a:weekStart(d0),b:addDays(weekStart(d0),7),title:T_("My week"),bucket:"day"};
+  if(per==="last"){const a=addDays(weekStart(d0),-7);return {a,b:addDays(a,7),title:T_("My week"),bucket:"day"};}
+  if(per==="month"){const a=new Date(now.getFullYear(),now.getMonth(),1);return {a,b:new Date(now.getFullYear(),now.getMonth()+1,1),title:(window.DDI18N&&DDI18N.lang!=="en"?a.toLocaleDateString(undefined,{month:"long"}).replace(/^./,c=>c.toUpperCase()):"My "+a.toLocaleDateString(undefined,{month:"long"})),bucket:"day"};}
   const m=now.getMonth(),sm=m>=8?8:m>=4?4:0,a=new Date(now.getFullYear(),sm,1);
-  return {a,b:new Date(now.getFullYear(),sm+4,1),title:["My winter term","My summer term","My fall term"][sm/4],bucket:"week"};}
+  return {a,b:new Date(now.getFullYear(),sm+4,1),title:T_(["My winter term","My summer term","My fall term"][sm/4]),bucket:"week"};}
 function rcStats(per){
   const R=rcRange(per),today=new Date(),end=R.b>today?addDays(new Date(today.getFullYear(),today.getMonth(),today.getDate()),1):R.b,days=[];
   for(let d=new Date(R.a);d<end;d=addDays(d,1))days.push(d);
@@ -3502,14 +3504,17 @@ function rcStats(per){
   const last=addDays(R.b,-1),range=`${R.a.toLocaleDateString(undefined,{month:"short",day:"numeric"})} – ${last.toLocaleDateString(undefined,R.a.getMonth()===last.getMonth()?{day:"numeric"}:{month:"short",day:"numeric"})}, ${last.getFullYear()}`;
   return {R,range,focusMin,sessions,done,bestDay:bi>=0?days[bi]:null,bestMin:bm,streak:best,top:top?{name:top[0],min:top[1]/60}:null,workouts:wk,bars};
 }
+/* language picker (Themes > More settings > Look); public/i18n/i18n.js does the translating */
+{const ls=$("#lang-sel"),I=window.DDI18N;if(ls&&I){ls.innerHTML=I.langs.map(([k,n])=>`<option value="${k}"${k===I.lang?" selected":""} translate="no">${n}</option>`).join("");ls.addEventListener("change",()=>I.set(ls.value));}else if(ls)ls.closest(".field").hidden=true;}
+const T_=s=>window.DDI18N?window.DDI18N.t(s):s;
 const RC_ITEMS=[["tasks","Tasks finished"],["best","Best day"],["course","Top course"],["streak","Streak"],["gym","Workouts"]];
 function rcTiles(st){
   const t=[];
-  if(!RC.hide.has("tasks"))t.push(["Tasks finished",String(st.done)]);
-  if(!RC.hide.has("best")&&st.bestDay)t.push(["Best day",st.bestDay.toLocaleDateString(undefined,{weekday:st.R.bucket==="day"&&st.R.b-st.R.a<=7*864e5+36e5?"long":"short",...(st.R.b-st.R.a>7*864e5+36e5?{month:"short",day:"numeric"}:{})}),fmtMins(st.bestMin)+" focused"]);
-  if(!RC.hide.has("course")&&st.top)t.push(["Top course",st.top.name,fmtMins(st.top.min)]);
-  if(!RC.hide.has("streak"))t.push(["Longest streak",`${st.streak} day${st.streak===1?"":"s"}`,"in a row"]);
-  if(!RC.hide.has("gym")&&st.workouts)t.push(["Workouts",String(st.workouts)]);
+  if(!RC.hide.has("tasks"))t.push([T_("Tasks finished"),String(st.done)]);
+  if(!RC.hide.has("best")&&st.bestDay)t.push([T_("Best day"),st.bestDay.toLocaleDateString(undefined,{weekday:st.R.bucket==="day"&&st.R.b-st.R.a<=7*864e5+36e5?"long":"short",...(st.R.b-st.R.a>7*864e5+36e5?{month:"short",day:"numeric"}:{})}),T_(fmtMins(st.bestMin)+" focused")]);
+  if(!RC.hide.has("course")&&st.top)t.push([T_("Top course"),st.top.name,fmtMins(st.top.min)]);
+  if(!RC.hide.has("streak"))t.push([T_("Longest streak"),T_(`${st.streak} day${st.streak===1?"":"s"}`),T_("in a row")]);
+  if(!RC.hide.has("gym")&&st.workouts)t.push([T_("Workouts"),String(st.workouts)]);
   return t.slice(0,4);
 }
 let rcMark=null;
@@ -3533,9 +3538,9 @@ async function rcDraw(){
   x.fillStyle=muted;x.font=`500 40px ${body}`;x.fillText(st.range,82,392);
   /* focus card */
   rr(60,450,W-120,760,48);x.fillStyle=c.panel;x.fill();
-  x.fillStyle=c.accent;x.font=`700 34px ${body}`;x.letterSpacing="4px";x.fillText("FOCUSED",120,540);x.letterSpacing="0px";
+  x.fillStyle=c.accent;x.font=`700 34px ${body}`;x.letterSpacing="4px";x.fillText(T_("FOCUSED").toUpperCase(),120,540);x.letterSpacing="0px";
   x.fillStyle=c.ink;const fm=fmtMins(st.focusMin);fit(fm,`900 $px ${disp}`,230,W-240);x.fillText(fm,116,750);
-  x.fillStyle=muted;x.font=`500 38px ${body}`;x.fillText(`across ${st.sessions} focus session${st.sessions===1?"":"s"}`,120,820);
+  x.fillStyle=muted;x.font=`500 38px ${body}`;x.fillText(T_(`across ${st.sessions} focus session${st.sessions===1?"":"s"}`),120,820);
   const bx=120,by=880,bw=W-240,bh=260,n=st.bars.length,gap=n>12?6:18,w1=(bw-gap*(n-1))/n,mx=Math.max(1,...st.bars.map(b=>b.v));
   st.bars.forEach((b,i)=>{const h=b.v?Math.max(10,(bh-50)*b.v/mx):6,X=bx+i*(w1+gap),Y=by+bh-50-h;rr(X,Y,w1,h,Math.min(14,w1/2));x.fillStyle=b.v?c.accent:rcA(c.ink,.13);x.fill();
     if(b.l){x.fillStyle=b.now?c.ink:muted;x.font=`${b.now?800:600} 28px ${body}`;x.textAlign="center";x.fillText(b.l,X+w1/2,by+bh-6);x.textAlign="left";}});
@@ -3545,7 +3550,7 @@ async function rcDraw(){
     x.fillStyle=c.ink;fit(t[1],`900 $px ${disp}`,96,tw-88);x.fillText(t[1],X+42,Y+154);
     if(t[2]){x.fillStyle=muted;x.font=`500 30px ${body}`;x.fillText(t[2],X+44,Y+198);}});
   /* footer */
-  x.fillStyle=muted;x.font=`600 32px ${body}`;x.textAlign="center";x.fillText("Made with Digital Dash",W/2,H-120);
+  x.fillStyle=muted;x.font=`600 32px ${body}`;x.textAlign="center";x.fillText(T_("Made with Digital Dash"),W/2,H-120);
   x.fillStyle=c.ink;x.font=`800 36px ${disp}`;x.letterSpacing="3px";x.fillText(location.host.toUpperCase(),W/2,H-70);x.letterSpacing="0px";x.textAlign="left";
   /* a faint print grain, like the logo */
   const gr=x.getImageData(0,0,W,H),px=gr.data;for(let i=0;i<px.length;i+=4){const v=(Math.random()-.5)*14;px[i]+=v;px[i+1]+=v;px[i+2]+=v;}x.putImageData(gr,0,0);
@@ -4447,6 +4452,7 @@ $$("[data-sub]").forEach(p=>{
   });
   p.addEventListener("paste",e=>{e.preventDefault();const t=(e.clipboardData||window.clipboardData).getData("text").replace(/\s+/g," ");document.execCommand("insertText",false,t);});
   p.addEventListener("blur",()=>{
+    if(p.textContent===before){renderSubs();return;} /* nothing typed: keep it as it was (also keeps a translated default from being saved) */
     const v=p.textContent.replace(/\s+/g," ").trim().slice(0,200);
     S.settings.subs=S.settings.subs||{};
     const def=(k==="focus"||k==="t-focus")?"":SUB_DEF[k];
