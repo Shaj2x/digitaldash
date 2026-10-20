@@ -1040,3 +1040,11 @@
 1078|Makro ({0} kcal)
 1079|{n} Zeile wurde übersprungen, weil die Gewichtung fehlt.
 1080|{n} Zeilen wurden übersprungen, weil die Gewichtung fehlt.
+1081|Kostenlos · Ohne Anmeldung · Funktioniert offline
+1082|Aufgaben
+1083|Zwischenprüfung
+1084|Jetzt 82 % · Prüfung zählt 40 %
+1085|Alles an einem Ort
+1086|Jedes Tool kann direkt in Digital Dash speichern, neben deinen Aufgaben, deinem Wochenplan und deinem Trainingslog.
+1087|Funktioniert offline
+1088|10 Sprachen

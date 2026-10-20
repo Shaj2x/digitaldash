@@ -38,8 +38,7 @@ def head(slug,title,desc,ld):
 <a class="skip" href="#main">Skip to content</a>
 <header class="nav"><div class="wrap">
   <a class="brand" href="/" aria-label="Digital Dash home"><span class="mk" aria-hidden="true"></span><span class="bt">Digital Dash</span></a>
-  <a class="more" href="/tools">Free tools</a>
-  <nav aria-label="Free tools"><ul>{"".join(f'<li><a href="/{s}"{" aria-current=page" if s==slug else ""}>{n}</a></li>' for s,n,_ in TOOLS)}</ul></nav>
+  <a class="more" href="/tools"{" aria-current=page" if not slug else ""}>Free tools</a>
   <label class="lang"><span class="sr">Language</span><select data-lang></select></label>
   <a class="btn pri small" href="/digital-dash.html">Open app</a>
 </div></header>
@@ -47,7 +46,7 @@ def head(slug,title,desc,ld):
 '''
 def foot(slug):
     rel="".join(f'<a href="/{s}"><b>{n}</b><span>{d}</span></a>' for s,n,d in TOOLS if s!=slug)
-    return f'''<section class="wrap prose" aria-labelledby="more-h" style="max-width:none"><h2 id="more-h">More free tools</h2><div class="related">{rel}</div></section>
+    return f'''<section class="wrap more-tools" aria-labelledby="more-h"><h2 id="more-h">More free tools</h2><div class="related">{rel}</div></section>
 </main>
 <footer><div class="wrap"><span class="mk" aria-hidden="true"></span><span>© <span id="yr"></span> Digital Dash</span><nav aria-label="Footer"><a href="/tools">All free tools</a><a href="/">Home</a><a href="/digital-dash.html">Open app</a><a href="/digital-dash-privacy.html">Privacy</a></nav></div></footer>
 <script src="/tools/tools.js"></script>
@@ -275,11 +274,32 @@ out();''')
 # ---------------- hub ----------------
 hub=head("", "Free Student Tools: Grade, Final, Pomodoro, BMI and Calorie Calculators · Digital Dash",
  "Free tools for students: a weighted grade calculator, a final exam calculator, a Pomodoro timer, and BMI and calorie calculators. No sign-up.",
- {"@context":"https://schema.org","@type":"CollectionPage","name":"Free student tools","url":f"{SITE}/tools"})+'''<div class="wrap hero"><span class="eyebrow">Free, no sign-up</span><h1>Free student tools</h1><p>Quick calculators and a focus timer, built into Digital Dash and free to use on their own.</p></div>
-<section class="wrap prose" style="max-width:none;padding-top:0" aria-label="Tools"><div class="related">'''+"".join(f'<a href="/{s}"><b>{n}</b><span>{d}</span></a>' for s,n,d in TOOLS)+'''</div></section>
+ {"@context":"https://schema.org","@type":"CollectionPage","name":"Free student tools","url":f"{SITE}/tools"})+'''<div class="wrap hero hub-hero"><span class="eyebrow">Free · No sign-up · Works offline</span><h1>Free student tools</h1><p>Quick calculators and a focus timer, built into Digital Dash and free to use on their own.</p></div>
+<section class="wrap" aria-label="Tools"><ol class="tl">
+<li class="tr rv"><a href="/grade-calculator"><span class="tn" aria-hidden="true">01</span><span class="tx"><b>Grade calculator</b><span>Weighted average, letter grade and GPA</span></span>
+ <span class="tdemo" aria-hidden="true"><span class="g-rows"><i>Assignments</i><em>80% × 30</em><i>Midterm</i><em>90% × 30</em></span><span class="g-out"><strong>85%</strong><small>B · GPA 3.0</small></span></span><svg class="go" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></li>
+<li class="tr rv"><a href="/final-grade-calculator"><span class="tn" aria-hidden="true">02</span><span class="tx"><b>Final grade calculator</b><span>What you need on the final</span></span>
+ <span class="tdemo" aria-hidden="true"><small>82% now · final worth 40%</small><strong>89.5%</strong><small>needed on the final to finish with 85%</small></span><svg class="go" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></li>
+<li class="tr rv"><a href="/pomodoro-timer"><span class="tn" aria-hidden="true">03</span><span class="tx"><b>Pomodoro timer</b><span>25-minute focus sessions with breaks</span></span>
+ <span class="tdemo" aria-hidden="true"><small>Focus</small><strong id="h-pomo">24:59</strong><span class="pbar"><i id="h-pbar"></i></span></span><svg class="go" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></li>
+<li class="tr rv"><a href="/bmi-calculator"><span class="tn" aria-hidden="true">04</span><span class="tx"><b>BMI calculator</b><span>BMI, category and healthy weight</span></span>
+ <span class="tdemo" aria-hidden="true"><span class="b-top"><strong>23.7</strong><small>Normal</small></span><span class="bar mini"><i style="left:34.8%"></i></span></span><svg class="go" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></li>
+<li class="tr rv"><a href="/calorie-calculator"><span class="tn" aria-hidden="true">05</span><span class="tx"><b>Calorie calculator</b><span>Maintenance calories, and whether to cut or bulk</span></span>
+ <span class="tdemo" aria-hidden="true"><span class="c-bars"><span><i style="--h:.80"></i><small>Cut</small></span><span class="on"><i style="--h:1"></i><small>Maintain</small></span><span><i style="--h:1.1"></i><small>Bulk</small></span></span><span class="c-out"><strong>2,549</strong><small>kcal to maintain</small></span></span><svg class="go" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></li>
+</ol></section>
+<section class="wrap hub-cta rv" aria-labelledby="cta-h"><div><div><h2 id="cta-h">Keep it all in one place</h2><p>Every tool can save straight into Digital Dash, next to your tasks, week planner and gym log.</p>
+ <ul><li>Works offline</li><li>Syncs if you sign in</li><li>10 languages</li></ul></div><a class="btn pri lg" href="/digital-dash.html">Open Digital Dash</a></div></section>
 </main>
 <footer><div class="wrap"><span class="mk" aria-hidden="true"></span><span>© <span id="yr"></span> Digital Dash</span><nav aria-label="Footer"><a href="/">Home</a><a href="/digital-dash.html">Open app</a><a href="/digital-dash-privacy.html">Privacy</a></nav></div></footer>
 <script src="/tools/tools.js"></script>
+<script>
+/* hub: rows rise in as they scroll into view; the timer preview counts down (still with reduced motion) */
+(()=>{const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches,els=[...document.querySelectorAll(".rv")];
+ if("IntersectionObserver" in window&&!reduce){document.documentElement.classList.add("rvjs");const io=new IntersectionObserver(es=>{es.filter(e=>e.isIntersecting).forEach((e,k)=>{e.target.style.transitionDelay=k*70+"ms";e.target.classList.add("in");io.unobserve(e.target);});},{rootMargin:"0px 0px -8% 0px"});els.forEach(el=>io.observe(el));
+  addEventListener("scroll",()=>els.forEach(el=>{if(!el.classList.contains("in")&&el.getBoundingClientRect().top<innerHeight){el.classList.add("in");io.unobserve(el);}}),{passive:true});}
+ if(reduce)return;let t=1499;const tm=document.getElementById("h-pomo"),pb=document.getElementById("h-pbar");
+ setInterval(()=>{t=t<=0?1499:t-1;tm.textContent=`${Math.floor(t/60)}:${String(t%60).padStart(2,"0")}`;pb.style.transform=`scaleX(${((1500-t)/1500).toFixed(4)})`;},1000);})();
+</script>
 </body>
 </html>
 '''

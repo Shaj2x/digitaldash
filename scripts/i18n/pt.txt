@@ -1040,3 +1040,11 @@
 1078|Macro ({0} kcal)
 1079|{n} linha foi ignorada porque falta o peso.
 1080|{n} linhas foram ignoradas porque falta o peso.
+1081|Grátis · Sem cadastro · Funciona offline
+1082|Trabalhos
+1083|Prova parcial
+1084|82% agora · a final vale 40%
+1085|Tudo em um só lugar
+1086|Cada ferramenta salva direto no Digital Dash, ao lado das suas tarefas, do plano da semana e do registro de academia.
+1087|Funciona offline
+1088|10 idiomas

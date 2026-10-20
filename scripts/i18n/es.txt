@@ -1040,3 +1040,11 @@
 1078|Macro ({0} kcal)
 1079|Se omitió {n} fila porque falta el peso.
 1080|Se omitieron {n} filas porque falta el peso.
+1081|Gratis · Sin registro · Funciona sin conexión
+1082|Trabajos
+1083|Parcial
+1084|82 % ahora · el final vale 40 %
+1085|Todo en un solo lugar
+1086|Cada herramienta puede guardarse directamente en Digital Dash, junto a tus tareas, tu plan semanal y tu registro del gimnasio.
+1087|Funciona sin conexión
+1088|10 idiomas

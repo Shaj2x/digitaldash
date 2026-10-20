@@ -21,10 +21,9 @@ a{color:inherit}
 .nav .lang{display:block}
 .nav .lang select{min-height:36px;width:auto;padding:4px 8px;font-size:14px;border-radius:10px;background:var(--panel)}
 
-.nav .wrap{max-width:1520px}
-.nav .more{display:none;margin-left:auto;padding:8px 10px;border-radius:9px;text-decoration:none;color:var(--muted);font-weight:600;font-size:14px;white-space:nowrap}
+.nav .more{margin-left:auto;padding:8px 10px;border-radius:9px;text-decoration:none;color:var(--muted);font-weight:600;font-size:14px;white-space:nowrap}
 .nav .more:hover{color:var(--ink);background:var(--panel2)}
-@media (max-width:1499px){.nav ul{display:none}.nav .more{display:block}}
+.nav .more{display:block}
 @media (max-width:560px){.nav .more{display:none}.nav .lang{margin-left:auto}.brand .bt{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;white-space:nowrap;min-height:44px;padding:0 18px;border-radius:12px;font:700 15px/1 inherit;font-family:inherit;text-decoration:none;border:1.5px solid var(--line);background:var(--panel);color:var(--ink);cursor:pointer;transition:transform .14s var(--ease-out),border-color .15s ease,background-color .15s ease}
 @media (hover:hover) and (pointer:fine){.btn:hover{border-color:var(--ink)}}
@@ -32,7 +31,7 @@ a{color:inherit}
 .btn.pri{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
 .btn.small{min-height:36px;padding:0 12px;font-size:14px;border-radius:10px}
 h1,h2{overflow-wrap:anywhere;hyphens:auto;font-family:var(--display);text-transform:uppercase;font-weight:900;letter-spacing:.01em;line-height:.95}
-.hero{padding:clamp(32px,6vw,64px) 0 clamp(20px,3vw,32px)}
+.hero{padding-top:clamp(32px,6vw,64px);padding-bottom:clamp(20px,3vw,32px)}
 .eyebrow{display:inline-flex;align-items:center;gap:10px;font:800 13px/1 var(--display);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
 .eyebrow::before{content:"";width:22px;height:2px;background:currentColor}
 .hero h1{font-size:clamp(44px,7vw,84px);margin:12px 0 14px}
@@ -105,3 +104,47 @@ footer nav{display:flex;gap:16px;margin-left:auto;flex-wrap:wrap}
 footer a{text-decoration:none}
 footer a:hover{color:var(--ink)}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+/* related strip on tool pages: stays in the content column */
+.more-tools{padding-bottom:clamp(40px,6vw,64px)}
+.more-tools h2{font-size:clamp(30px,4vw,44px);margin:0 0 14px}
+.nav .more[aria-current=page]{color:var(--ink);background:var(--panel2)}
+/* hub (/tools): a printed ledger, one row per tool with a small live preview */
+.hub-hero{padding-bottom:clamp(28px,4vw,44px)}
+.tl{list-style:none;margin:0;padding:0;border-top:3px solid var(--ink)}
+.tr a{display:grid;grid-template-columns:72px minmax(0,1fr) 290px 40px;gap:12px 28px;align-items:center;padding:26px 0;border-bottom:1.5px solid var(--ink);text-decoration:none;color:inherit}
+.tn{font:900 52px/.8 var(--display);color:transparent;-webkit-text-stroke:1.5px var(--ink);transition:color .25s ease}
+.tx{display:grid;gap:6px;min-width:0}
+.tx b{font:900 clamp(30px,3.6vw,48px)/.92 var(--display);text-transform:uppercase;overflow-wrap:anywhere}
+.tx span{color:var(--muted);font-size:16px}
+.tdemo{display:grid;gap:6px;align-content:center;min-height:112px;padding:14px 16px;border:1.5px solid var(--ink);border-radius:4px;background:var(--panel);box-shadow:5px 5px 0 var(--ink);font-variant-numeric:tabular-nums;transition:transform .2s var(--ease-out),box-shadow .2s var(--ease-out)}
+.tdemo strong{font:900 40px/1 var(--display)}
+.tdemo small{font-size:12.5px;color:var(--muted)}
+.tdemo .g-rows{display:grid;grid-template-columns:1fr auto;gap:2px 12px;font-size:13px}
+.tdemo .g-rows i{font-style:normal;color:var(--muted)}.tdemo .g-rows em{font-style:normal;text-align:right;font-weight:700}
+.tdemo .g-out{display:flex;align-items:baseline;gap:10px;border-top:1.5px dashed var(--line);padding-top:6px}
+.tdemo .pbar{display:block;height:5px;border-radius:3px;background:color-mix(in srgb,var(--ink) 14%,transparent);overflow:hidden}
+.tdemo .pbar i{display:block;height:100%;background:var(--ink);transform:scaleX(0);transform-origin:0 50%;transition:transform 1s linear}
+.tdemo .b-top{display:flex;align-items:baseline;gap:10px}
+.bar.mini{margin:8px 0 2px;height:8px}.bar.mini i{top:-4px;height:16px}
+.tdemo .c-bars{display:flex;gap:10px;align-items:flex-end;height:54px}
+.tdemo .c-bars span{display:grid;justify-items:center;gap:3px;flex:1}
+.tdemo .c-bars i{display:block;width:100%;height:calc(var(--h) * 34px);border-radius:3px;background:repeating-linear-gradient(180deg,var(--ink) 0 8px,transparent 8px 11px);opacity:.45}
+.tdemo .c-bars .on i{opacity:1}
+.tdemo .c-out{display:flex;align-items:baseline;gap:8px}
+.tdemo .c-out strong{font-size:32px}
+.go{justify-self:end;transition:transform .2s var(--ease-out)}
+@media (hover:hover) and (pointer:fine){.tr a:hover .tn{color:var(--ink)}.tr a:hover .tdemo{transform:translate(-2px,-2px);box-shadow:7px 7px 0 var(--ink)}.tr a:hover .go{transform:translateX(4px)}}
+.tr a:active .tdemo{transform:translate(3px,3px);box-shadow:2px 2px 0 var(--ink);transition-duration:.1s}
+.tr a:focus-visible{outline-offset:-2px}
+@media (max-width:860px){.tr a{grid-template-columns:52px minmax(0,1fr) 28px;grid-template-areas:"n x g" "d d d"}.tn{grid-area:n;font-size:40px;align-self:start}.tx{grid-area:x}.go{grid-area:g;align-self:start}.tdemo{grid-area:d;margin-top:6px}}
+.hub-cta{margin:clamp(40px,6vw,72px) auto}
+.hub-cta>div{display:flex;align-items:center;justify-content:space-between;gap:24px 40px;flex-wrap:wrap;padding:clamp(28px,4vw,40px) 0;border-top:3px solid var(--ink);border-bottom:1.5px solid var(--ink)}
+.hub-cta>div>div{flex:1 1 420px}
+.hub-cta h2{font-size:clamp(34px,4.4vw,54px);margin:0 0 10px}
+.hub-cta p{margin:0;color:var(--muted);font-size:17px;max-width:34em}
+.hub-cta ul{display:flex;flex-wrap:wrap;gap:6px 18px;list-style:none;margin:14px 0 0;padding:0;font-size:14px;font-weight:700}
+.hub-cta ul li::before{content:"✓ ";color:var(--muted)}
+.btn.lg{min-height:54px;padding:0 26px;font-size:16px;border-radius:14px}
+/* rows rise in as they scroll into view */
+.rvjs .rv{opacity:0;transform:translateY(16px);transition:opacity .6s var(--ease-out),transform .6s var(--ease-out)}
+.rvjs .rv.in{opacity:1;transform:none}

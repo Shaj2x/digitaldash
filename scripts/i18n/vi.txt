@@ -1040,3 +1040,11 @@
 1078|Macro ({0} kcal)
 1079|Đã bỏ qua {n} hàng vì thiếu trọng số.
 1080|Đã bỏ qua {n} hàng vì thiếu trọng số.
+1081|Miễn phí · Không cần đăng ký · Chạy ngoại tuyến
+1082|Bài tập
+1083|Giữa kỳ
+1084|Hiện 82% · cuối kỳ chiếm 40%
+1085|Mọi thứ ở một nơi
+1086|Mọi công cụ đều có thể lưu thẳng vào Digital Dash, cạnh việc cần làm, kế hoạch tuần và nhật ký gym của bạn.
+1087|Chạy ngoại tuyến
+1088|10 ngôn ngữ

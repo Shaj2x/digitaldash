@@ -1040,3 +1040,11 @@
 1078|Macro ({0} kcal)
 1079|{n} ligne ignorée car le poids manque.
 1080|{n} lignes ignorées car le poids manque.
+1081|Gratuit · Sans inscription · Fonctionne hors ligne
+1082|Devoirs
+1083|Partiel
+1084|82 % maintenant · l'examen vaut 40 %
+1085|Tout au même endroit
+1086|Chaque outil peut s'enregistrer directement dans Digital Dash, à côté de vos tâches, de votre planning et de votre carnet de gym.
+1087|Fonctionne hors ligne
+1088|10 langues

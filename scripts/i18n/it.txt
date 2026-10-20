@@ -1040,3 +1040,11 @@
 1078|Macro ({0} kcal)
 1079|{n} riga saltata perché manca il peso.
 1080|{n} righe saltate perché manca il peso.
+1081|Gratis · Senza registrazione · Funziona offline
+1082|Compiti
+1083|Parziale
+1084|82% ora · l'esame vale il 40%
+1085|Tutto in un unico posto
+1086|Ogni strumento può salvare direttamente in Digital Dash, accanto alle tue attività, al piano settimanale e al diario della palestra.
+1087|Funziona offline
+1088|10 lingue
