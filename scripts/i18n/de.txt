@@ -1,0 +1,1042 @@
+1|Fokus
+2|Aufgaben
+3|Kalender
+4|Finanzen
+5|Gesundheit
+6|Designs
+7|Auf diesem Gerät gespeichert
+8|App installieren
+9|Suchen oder etwas erledigen
+10|Guten Morgen
+11|Klapp
+12|Analog
+13|Worte
+14|Fortschritt
+15|Fokus-Timer
+16|Sekunden
+17|Lernraum
+18|Konzentriere dich zusammen mit Freunden. Sieh, wer gerade arbeitet, und startet Timer gemeinsam.
+19|Freunde
+20|Füge Freunde hinzu und sieh, wer sich diese Woche am meisten konzentriert hat.
+21|Klänge
+22|Mische Lernmusik und Hintergrundgeräusche. Live im Browser erzeugt, also wiederholt sich nichts und nichts wird heruntergeladen.
+23|Abspielen
+24|Lautstärke
+25|Lo-Fi-Regen
+26|Nachtklavier
+27|Regnerisches Café
+28|Tiefer Fokus
+29|Küste
+30|Hütte
+31|Lernmusik
+32|Lo-Fi-Beats
+33|Sanftes Klavier
+34|Ambient-Drift
+35|Atmosphäre
+36|Regen
+37|Meer
+38|Wind
+39|Kaminfeuer
+40|Café
+41|Braunes Rauschen
+42|Rosa Rauschen
+43|Weißes Rauschen
+44|Fokuston
+45|Kopfhörer verwenden
+46|Während Fokus-Timern abspielen und in Pausen anhalten
+47|Widget hinzufügen
+48|Widgets anpassen
+49|Offene Aufgaben
+50|Heute fällig
+51|Fokus-Sitzungen heute
+52|Nettovermögen
+53|Sortiert nach Dringlichkeit, dann nach Fälligkeit. Die oberste erscheint auf deiner Uhr.
+54|Wochenplan
+55|Kurse und Noten
+56|Meine Kurse
+57|Notenrechner
+58|Woche
+59|Monat
+60|Kritisch
+61|Hoch
+62|Mittel
+63|Niedrig
+64|Aufgabe hinzufügen
+65|Kurs
+66|Wiederholen
+67|Wiederholt sich nicht
+68|Jeden Tag
+69|Jeden Werktag
+70|Jede Woche
+71|Jeden Monat
+72|Offen
+73|Heute
+74|Erledigt
+75|Alle
+76|Meine Woche planen
+77|Jeden Fr
+78|Gym
+79|Jeden Mo, Mi, Fr
+80|Archiv
+81|Termine, die du hinzufügst, und alle Aufgaben mit Fälligkeitsdatum.
+82|Wochenrückblick
+83|Mo
+84|Di
+85|Mi
+86|Do
+87|Fr
+88|Sa
+89|So
+101|Termin hinzufügen
+102|Kalender
+103|.ics-Datei importieren
+104|Über einen Link
+105|Kalenderlink (.ics oder webcal://)
+106|Importieren
+107|Exportiere aus Google Kalender, Outlook, Apple Kalender oder dem Stundenplan deiner Schule. Wöchentliche Kurse wiederholen sich automatisch.
+108|Aktualisiere Kontostände, wenn sie sich ändern. Dein Verlauf wächst Tag für Tag.
+109|Gesamtes Nettovermögen
+110|Vermögen
+111|Schulden
+112|Bargeld
+113|Investments
+114|Kredit
+115|Ziele
+116|Ziel hinzufügen
+117|Vermögenswert
+118|Schuld
+119|Ersparnisse
+120|Krypto
+121|Immobilie
+122|Fahrzeug
+123|Unternehmen
+124|Sonstiges
+125|Konto hinzufügen
+126|Protokolliere Trainings, sieh, was du als Nächstes hebst, und verfolge deinen Fortschritt. Alles wird sofort gespeichert.
+127|Training
+128|Körper und Kalorien
+129|Farben, Hintergründe, Schriften und mehr. Änderungen gelten sofort überall.
+130|Vorlagen
+131|Speichere den ganzen Look unter einem Namen: Farben, Schriften, Hintergrund, Uhr und Glas. Jederzeit anwendbar.
+132|Noch keine Vorlagen. Richte alles nach deinem Geschmack ein, benenne den Look unten und speichere ihn.
+133|Aktuellen Look speichern
+134|Diesen Look teilen
+135|Farbschema
+136|Wie das Gerät
+137|Eigenes Farbschema erstellen
+138|Wähle Farben und sieh live, wie sich die App ändert. Speichere es, um es in deiner Liste zu behalten.
+139|Hintergrund
+140|Flächen
+141|Text
+142|Akzent
+143|Uhrbereich
+144|Uhrziffern
+145|Schema speichern
+146|Vom aktuellen ausgehen
+147|Abbrechen
+148|Keiner
+149|Farbe
+150|Verlauf
+151|Live
+152|Foto
+153|Farben an Hintergrund anpassen
+154|Flächen, Text, Akzent und Uhr passen sich deinem Hintergrund an
+155|Hintergrundfarbe
+156|Polarlicht
+157|Sonnenuntergang
+158|Lagune
+159|Sternenhimmel
+160|Wellen
+161|Glühwürmchen
+162|Bewegungstempo
+163|Live-Hintergründe pausieren, wenn der Tab verborgen ist. Mit reduzierter Bewegung bleiben sie stehen.
+164|Foto hochladen
+165|Foto entfernen
+166|JPG oder PNG. Nur du kannst es sehen.
+167|Für eine perfekte Passform nutze ein Bild mit
+168|Abdunkeln
+169|Unschärfe
+170|Filmkorn
+171|Eine feine Textur, die Streifen in Verläufen mildert
+172|Uhr-Hintergrund
+173|Design
+174|Glas
+175|Hintergrundfarbe der Uhr
+176|Es füllt den Uhrbereich und wird passend zugeschnitten.
+177|Glas lässt deinen Seitenhintergrund hinter der Uhr durchscheinen. Mit Abdunkeln steuerst du die Transparenz.
+178|Farbe der Uhrziffern
+179|Zurücksetzen
+180|Diese Farbe lag zu nah am Uhr-Hintergrund und wurde deshalb aufgehellt oder abgedunkelt, damit sie lesbar bleibt.
+181|Schriften
+182|Textschrift
+183|System
+184|Schrift für Uhr und Überschriften
+185|Hover-Animationen
+186|Wie Karten und Schaltflächen reagieren, wenn die Maus darüber fährt. Wähle eine Vorlage oder stelle deine eigene ein und speichere sie.
+187|Standard
+188|Dezent
+189|Verspielt
+190|Neigen
+191|Magnetisch
+192|Leuchten
+193|Ruhig
+194|Aus
+195|Stil
+196|Wie die Oberfläche
+197|Anheben
+198|Flüssig
+199|Stärke
+200|Tempo
+201|Links ist flott, rechts sanft
+202|Cursorlicht
+203|Ein sanftes Leuchten folgt dem Zeiger über die Karten
+204|Klickwelle
+205|Hier ausprobieren
+206|Als Vorlage speichern
+207|„Wie die Oberfläche“ nutzt Anheben, weil deine Oberflächen massiv sind.
+208|Weitere Einstellungen
+209|Aussehen
+210|Akzentfarbe
+211|Eckenrundung
+212|Uhrgröße
+213|Echte Lichtbrechung
+214|Glas bricht den Hintergrund an seinen Rändern. Nur Chrome und Edge. Ausschalten, wenn das Scrollen träge wirkt.
+215|Oberflächen
+216|Massiv
+217|Flüssiges Glas
+218|Standarduhr
+219|Finanzen
+220|Währung
+221|Beträge ausblenden, nur Wachstum zeigen
+222|Wie die Augen-Schaltfläche unter Finanzen
+223|Erinnerungen
+224|Benachrichtigungen auf Handy oder Computer, auch wenn Digital Dash geschlossen ist.
+225|Erinnerungen brauchen den Kontodienst, der auf dieser Website noch nicht verbunden ist.
+226|Deine Daten
+227|Melde dich an, um alles in deinem Konto zu speichern und auf jedem Gerät zu nutzen.
+228|Konto
+229|Sicherung anzeigen
+230|Aus Sicherung wiederherstellen
+231|Alles löschen
+232|Beispieldaten entfernen
+233|Rundgang anzeigen
+234|Öffne diese Seite in Chrome, Edge oder Safari, um sie als offline nutzbare App zu installieren.
+235|Beispieldaten hinzugefügt. Entferne sie jederzeit unter Designs, Deine Daten.
+236|Zum Inhalt springen
+237|KI-Helfer
+238|Erinnere mich
+239|Split bearbeiten
+240|Aufgabe bearbeiten
+241|Aufgabe
+242|Dringlichkeit
+243|Fälligkeitsdatum
+244|Fälligkeitszeit
+245|Geplant für (Wochenplan)
+246|Änderungen speichern
+247|Rückblick teilen
+248|Diese Woche
+249|Letzte Woche
+250|Trimester
+251|Auf der Karte zeigen
+252|Teilen
+253|Bild speichern
+254|Im Format für Instagram- und TikTok-Stories, in deinem Design. Nichts wird hochgeladen: Das Bild entsteht auf deinem Gerät.
+255|Bereiche
+256|Klänge pausieren
+257|Konto: nicht angemeldet
+258|Anmelden
+259|Suchen oder Befehl ausführen
+260|Tippen zum Bearbeiten. Leeren zum Zurücksetzen.
+261|Untertitel, bearbeitbar
+262|Uhr-Hintergrund ändern
+263|Zen-Modus umschalten
+264|Zen-Modus (Esc zum Beenden)
+265|Uhrstil
+266|Gesamtlautstärke
+267|Schnelle Mixe
+268|Lautstärke Lo-Fi-Beats
+269|Lautstärke sanftes Klavier
+270|Lautstärke Ambient-Drift
+271|Lautstärke Kalimba
+272|Lautstärke Regen
+273|Lautstärke Meer
+274|Lautstärke Wind
+275|Lautstärke Kaminfeuer
+276|Lautstärke Café
+277|Lautstärke braunes Rauschen
+278|Lautstärke rosa Rauschen
+279|Lautstärke weißes Rauschen
+280|Lautstärke Fokuston
+281|Aufgaben, Wochenplan oder Kurse
+282|Kurse oder Notenrechner
+283|Planen nach
+284|Was muss erledigt werden?
+285|Aufgabe per Sprache hinzufügen
+286|Fälligkeitszeit (optional)
+287|Wiederholen am
+288|Filter
+289|Als erledigt markieren
+290|Bearbeiten
+291|Per E-Mail oder SMS erinnern
+292|Checkliste
+293|Aufgabe löschen
+294|Wiederholt sich
+296|Kalenderansicht
+297|Vorheriger Monat
+298|Nächster Monat
+299|Termin hinzufügen
+300|Titel des Termins
+301|Uhrzeit
+302|Beträge ausblenden
+303|Nettovermögen im Zeitverlauf
+304|Name des Ziels
+305|Ziel
+306|Zielbetrag
+307|Zählt zum Ziel
+308|Erreichen bis (optional)
+309|Kontoname
+310|Kontostand
+311|Art
+312|Kategorie
+313|Benenne diesen Look, z. B. Spät nachts
+314|Name der Vorlage
+315|Name des Schemas
+316|Hintergrundart
+317|Live-Hintergrund
+318|Art des Uhr-Hintergrunds
+319|Hover-Vorlagen
+320|Hover-Stil
+321|Hover-Stärke
+322|Hover-Tempo
+323|Benenne diese Vorlage, z. B. Federnd
+324|Oberflächenstil
+325|Deine Sicherung als JSON erscheint hier. Füge eine ein und tippe auf Wiederherstellen, um sie zu laden.
+326|Sicherungsdaten
+327|Schließen
+328|Rückblick-Bild
+329|Rückblick-Zeitraum
+330|Befehlsleiste
+331|Aufgabe hinzufügen, Timer starten, Klang abspielen, überall hinspringen…
+332|Sprechen statt tippen
+333|Ergebnisse
+334|Trainings diese Woche
+335|Wochen in Folge mit erreichtem Ziel
+336|Sätze diese Woche
+337|Volumen diese Woche (lb)
+338|Dein Split
+339|Plane, welches Training an welchem Tag dran ist. Starte mit einem gängigen Split und ändere, was du willst.
+340|Split einrichten
+341|Training starten
+342|Leeres Training starten
+343|Tipp: Speichere ein Training danach als Routine (Push-Tag, Beine…), um es nächstes Mal mit einem Tipp zu starten.
+344|Verlauf
+345|Abgeschlossene Trainings erscheinen hier.
+346|Scheibenrechner
+347|Keine Stange (Maschine)
+348|Gib das Gewicht ein, das auf die Stange soll.
+349|Einstellungen
+350|Gewichte in
+351|Trainingsziel pro Woche
+352|Trainings im Kalender anzeigen
+353|Pausentimer nach jedem Satz
+354|Ein Einheitenwechsel ändert nur die Beschriftung; alte Werte werden nicht umgerechnet.
+355|Stange
+358|Verschieben nach…
+359|Montag
+360|Mittwoch
+361|Donnerstag
+362|Freitag
+363|Samstag
+364|Sonntag
+365|Nächste Woche
+366|Dienstag
+367|Vorherige Woche
+370|Auf einen anderen Tag verschieben
+373|Termine
+379|Rückblick teilen
+380|Fokuszeit
+381|Fokus-Sitzungen
+382|Erledigte Aufgaben
+383|Fokus-Serie
+384|Tage in Folge mit einer Sitzung
+385|Fokusminuten
+386|Zeit pro Kurs
+387|Meiste Zeit für
+388|Ein Jahr Fokus
+389|Weniger
+390|Mehr
+391|Tag
+392|Sitzungen
+393|Erledigt
+394|Verpasst
+395|Nichts verpasst. Stark.
+396|Nächste Woche fällig
+397|Für nächste Woche ist noch nichts fällig.
+398|Fokusminuten pro Tag
+399|Erledigte Aufgaben pro Tag
+400|Fortschritt pro Übung
+401|Schließe ein Training ab, um deinen Fortschritt zu verfolgen.
+402|Persönliche Rekorde
+403|Deine besten Lifts erscheinen hier nach deinem ersten Training.
+404|Beständigkeit
+405|Sätze pro Muskel diese Woche
+406|Protokolliere diese Woche Sätze, um zu sehen, welche Muskeln du trainiert hast.
+407|Körpergewicht
+408|Eintragen
+409|Trage dein Gewicht an ein paar Tagen ein, um den Trend zu sehen.
+410|Heutiges Gewicht
+411|Heutiges Körpergewicht in lb
+412|Deine Angaben
+413|US-Einheiten
+414|Metrische Einheiten
+415|Alter
+416|Geschlecht
+417|Männlich
+418|Weiblich
+419|Größe (ft)
+420|Größe (in)
+421|Gewicht (lb)
+422|Körperfett %
+423|Aktivität
+424|Grundumsatz (BMR)
+425|Sitzend: wenig oder kein Sport
+426|Extrem aktiv: täglich sehr intensiver Sport oder körperliche Arbeit
+427|Formel
+428|Katch-McArdle (braucht Körperfett %)
+429|Ergebnisse anzeigen in
+430|Kalorien
+431|Kilojoule
+432|Mifflin-St Jeor ist der Standard und passt für die meisten. Katch-McArdle ist genauer, wenn du deinen Körperfettanteil kennst.
+433|Gib Größe und Gewicht ein, um deinen BMI zu sehen.
+434|Einheiten
+435|Optional
+436|Aktivitätslevel
+437|BMR-Formel
+438|Ergebniseinheit
+439|bisher
+440|Du brauchst
+441|Teil
+442|Gewichtung
+443|Punktzahl
+444|Teil hinzufügen
+445|Ziel
+446|Entfernen
+447|Kurs hinzufügen
+448|Noten in
+449|Prozent
+450|Buchstaben
+451|Punkte
+452|Skala
+453|Standard (USA)
+454|Ontario (U-of-T-Stil)
+455|Western University
+456|Aufgabe oder Prüfung
+457|Note
+458|Zeile hinzufügen
+459|Leeren
+460|Gib mindestens eine Note ein, um deinen Durchschnitt zu sehen.
+461|Was brauche ich im Rest?
+462|Gewünschte Endnote
+463|Gewichtung des Rests (%)
+464|Als Kurs speichern
+465|Abschlussprüfungsrechner
+466|Aktuelle Note (%)
+467|Gewünschte Note (% oder Buchstabe)
+468|Abschlussprüfung zählt (%)
+469|Fülle alle drei Felder aus, um zu sehen, was du in der Prüfung brauchst.
+470|Standardskala (USA)
+471|Buchstabe
+472|Prozent
+473|Kursname
+474|Name des Teils
+475|Gewichtung in Prozent
+478|Zielprozent
+479|Name (optional)
+480|Name der Aufgabe oder Prüfung
+486|Kursname zum Speichern
+487|Mach es zu deinem
+488|Funktionen
+489|Datenschutz
+490|FAQ
+491|Kostenlose Tools
+492|App öffnen
+493|Willkommen zurück. Dein Dashboard ist auf diesem Gerät gespeichert.
+494|Weiter zu deinem Dashboard
+495|Kostenlos · Extrem anpassbar · Funktioniert offline
+496|Planen. Fokussieren.
+497|Mach es zu deinem.
+498|Fokus-Timer, To-do-Liste, Wochenplaner, Noten und Trainingslog in einer App, gestaltet genau so, wie du willst, bis hin zur Schrift deiner Uhr.
+499|Digital Dash öffnen
+500|Neuen Look ausprobieren
+501|Kein Konto nötig
+502|Synchronisiert, wenn du dich anmeldest
+503|Handy, Tablet und Computer
+504|Dein Dashboard.
+505|Deine Regeln.
+506|Probier es direkt hier aus. Jede Wahl gestaltet diese ganze Seite und die Live-App auf dem Handy um, und die App behält deinen Look beim Öffnen.
+507|Uhr
+508|Anzeigeschrift
+509|Hintergrund und Glas
+510|Schlicht
+511|Live-Polarlicht
+512|Gefällt dir der Look? Nutze ihn auch in deinem Dashboard.
+513|Diesen Look in meinem Dashboard nutzen
+514|Designs, plus deine eigenen
+515|Uhr- und Textschriften
+516|Uhrstile
+517|Vorlagen zum Speichern
+518|Alles in einer App
+519|Sechs Tools.
+520|Ein Dashboard.
+521|Fang mit dem an, was du heute brauchst. Alles andere ist einen Tipp entfernt.
+522|Große Uhren, Pomodoro und eigene Timer, Lernmusik und Regen, und Lernräume, in denen Freunde mit dir fokussieren.
+523|Schreib es, wie du es sagen würdest: „Laborbericht Freitag hoch“. Wiederholungen, Checklisten, Spracheingabe, Erinnerungen und Rückgängig überall.
+524|Entwurf Laborbericht
+525|Planer
+526|Plane die Woche Tag für Tag, ziehe Arbeit zwischen Tagen und sieh Kurse und Trainings direkt neben deinen Aufgaben.
+527|Noten
+528|Verfolge jeden Kurs und wisse genau, was du in der Abschlussprüfung brauchst, mit US- oder Ontario-Notenskala.
+529|Dein Split im Kalender, was du als Nächstes hebst, ein Scheibenrechner, Fortschrittsdiagramme sowie BMI- und Kalorienziele.
+530|Neuer Rekord
+531|Kontostände, ein Wachstumsdiagramm und Sparziele, mit einem Datenschutz-Auge, das jeden Betrag mit einem Tipp verbirgt.
+532|Tippe aufs Auge zum Verbergen
+533|So funktioniert's
+534|In unter einer Minute startklar
+535|Kein Download, keine Registrierungspflicht. Es öffnet sich im Browser und funktioniert wie eine App.
+536|Öffnen
+537|Tippe auf Digital Dash öffnen. Eine kurze Begrüßung lässt dich sofort Look und Uhr wählen.
+538|Deine Woche eintragen
+539|Trage Aufgaben, Kurse und Trainings ein. Plane jeden Tag und lass die Uhr zeigen, was als Nächstes kommt.
+540|Überallhin mitnehmen
+541|Füge es zum Startbildschirm hinzu und melde dich an, wenn du dein Dashboard auf jedem Gerät willst.
+542|So fügst du es hinzu
+543|Deine Daten bleiben deine
+544|Hier steht genau, was mit ihnen passiert.
+545|Ganze Datenschutzerklärung lesen
+546|Datenbeleg
+547|Ohne Konto
+548|bleibt auf deinem Gerät
+549|Wenn du dich anmeldest
+550|nur du kannst sie lesen
+551|Fotos, die du hinzufügst
+552|privat für dich
+553|Kopie herunterladen
+554|jederzeit
+555|Alles löschen
+556|ein Tipp
+557|Nie verkauft
+558|Privat
+559|Fragen
+560|Gut zu wissen
+561|Ist es wirklich kostenlos?
+562|Ja. Alles, was du siehst, ist kostenlos.
+563|Wie viel kann ich anpassen?
+564|Brauche ich ein Konto?
+565|Nein. Öffnen und loslegen. Ein Konto brauchst du nur zum Synchronisieren zwischen Handy und Computer und für Erinnerungen per E-Mail oder SMS.
+566|Funktioniert es offline?
+567|Ja. Einmal geöffnet, läuft es ohne Internet weiter und synchronisiert, sobald du wieder online bist.
+568|Gibt es eine iPhone-App?
+569|Du kannst es schon heute zum Startbildschirm hinzufügen, dann öffnet es sich wie eine App. Eine App-Store-Version ist unterwegs.
+570|Jetzt öffnen. Dauert nur Sekunden.
+571|Pomodoro-Timer
+572|Digital Dash Startseite
+573|Willkommen zurück
+574|Digital Dash auf einem iPhone, gestaltet mit den Optionen unten
+575|Live-Vorschau von Digital Dash
+576|Anpassen
+577|Diesen Look nutzen
+578|Was du ändern kannst
+579|Was mit deinen Daten passiert
+580|Fußzeile
+581|Endnotenrechner
+582|BMI-Rechner
+583|Kalorienrechner
+584|Kostenlos, ohne Anmeldung
+585|Kostenlose Tools für Studierende
+586|Schnelle Rechner und ein Fokus-Timer, eingebaut in Digital Dash und auch einzeln kostenlos.
+587|Gewichteter Durchschnitt, Buchstabennote und GPA
+588|Was du in der Abschlussprüfung brauchst
+589|BMI, Kategorie und gesundes Gewicht
+590|Erhaltungskalorien und ob Diät oder Aufbau passt
+591|Start
+592|Tools
+593|Kostenloses Tool
+594|Füge jede Aufgabe, jeden Test und jede Prüfung mit ihrer Gewichtung hinzu. Durchschnitt, Buchstabennote und GPA aktualisieren sich beim Tippen, und du siehst genau, was du im Rest des Kurses brauchst.
+595|Deine Noten
+596|Name
+597|Note (%)
+598|Gewichtung (%)
+599|Notenskala
+600|Was brauche ich?
+601|Ziel für den Kurs
+602|Noch ausstehende Gewichtung (%)
+603|Ergebnis
+604|Gib eine Note ein, um deinen Durchschnitt zu sehen.
+605|In Digital Dash speichern
+606|Behalte diesen Kurs bei deinen Aufgaben und deinem Planer und aktualisiere ihn, wenn Noten kommen.
+607|So funktioniert der Notenrechner
+608|Prozentnoten
+609|werden nach Gewichtung gemittelt. Jede Note wird mit ihrer Gewichtung multipliziert, die Ergebnisse werden addiert und die Summe durch die Summe der eingegebenen Gewichtungen geteilt. Lässt du alle Gewichtungen leer, zählt jede Note gleich.
+610|Durchschnitt = (Note₁ × Gewicht₁ + Note₂ × Gewicht₂ + …) ÷ (Gewicht₁ + Gewicht₂ + …)
+611|werden mit GPA-Punkten gemittelt (oder der Mitte jedes Bereichs bei Skalen ohne GPA) und wieder in einen Buchstaben umgewandelt.
+612|Was du im Rest brauchst
+613|Wenn dein aktueller Durchschnitt einen Teil des Kurses abdeckt und noch R % ausstehen, brauchst du im Rest diese Note:
+614|Wie berechne ich meine gewichtete Note?
+615|Kein Problem. Dein Durchschnitt basiert auf den bisher eingegebenen Gewichtungen, der Rest gilt beim Planen als noch ausstehend.
+616|Welche Notenskala soll ich nutzen?
+617|Werden meine Daten gespeichert?
+618|Deine Noten bleiben in diesem Browser-Tab. Mit Als Kurs speichern behältst du sie in Digital Dash, das offline funktioniert und sich nach Anmeldung synchronisiert.
+619|Weitere kostenlose Tools
+620|Alle kostenlosen Tools
+621|Notenart
+622|auto
+623|Was brauche ich in meiner Abschlussprüfung?
+624|Gib deine aktuelle Note, deine Wunschnote und die Gewichtung der Prüfung ein. Du siehst die nötige Punktzahl und deine Endnote für jedes Ergebnis.
+625|Dein Kurs
+626|Wunschnote
+627|Prüfung zählt (%)
+628|Buchstabennoten nach
+629|Fülle alle drei aus, um zu sehen, was du brauchst.
+630|Behalte es im Notenrechner neben deinen Kursen und Prüfungsterminen.
+631|In meinem Notenrechner speichern
+632|So wird es berechnet
+633|Deine aktuelle Note deckt alles außer der Prüfung ab. Zählt die Prüfung w % des Kurses, dann gilt:
+634|Wie berechne ich, was ich in der Prüfung brauche?
+635|Dann ist das Ziel allein mit der Prüfung nicht erreichbar. Der Rechner zeigt die beste noch mögliche Endnote, damit du ein realistisches Ziel setzen kannst.
+636|Kann ich eine Buchstabennote als Ziel nutzen?
+637|Ja. Tippe einen Buchstaben wie A- ein, und es wird die Grenze dieses Buchstabens auf der gewählten Skala genutzt (Standard USA, Ontario oder Western).
+638|Muss meine aktuelle Note genau sein?
+639|Nimm die Note, die deine Schule bisher anzeigt. Sind noch Teile unbewertet, ändert sich das Ergebnis, sobald sie bewertet sind.
+640|Arbeite in fokussierten Blöcken mit kurzen Pausen. Drück auf Start, leg das Handy weg und lass dich vom Signal an die Pause erinnern.
+641|Timer
+642|Start
+643|Überspringen
+644|Signal, wenn die Zeit um ist
+645|Noch keine Sitzungen. Drück auf Start.
+646|Hol dir diese Timer mit Lernmusik, Sitzungsprotokoll, Lernräumen mit Freunden und einem Wochenrückblick.
+647|Diese Timer zu meinem Dashboard hinzufügen
+648|Was ist die Pomodoro-Technik?
+649|Eine einfache Art zu lernen oder zu arbeiten: Konzentriere dich auf eine Sache für
+650|, mach eine
+651|, und nach vier Sitzungen eine längere
+652|. Kurze, feste Blöcke machen den Start leichter und das Abschweifen schwerer.
+653|Tipps, damit es klappt
+654|Wähle vor dem Start eine Aufgabe und notiere Ablenkungen, statt ihnen nachzugeben.
+655|Steh in den Pausen auf. Verbring sie nicht am Handy.
+656|Wie lang ist ein Pomodoro?
+657|Läuft der Timer weiter, wenn ich den Tab wechsle?
+658|Ja. Er zählt nach der echten Uhr, bleibt also auch im Hintergrund genau, und das Signal ertönt, wenn die Zeit um ist.
+659|Kann ich die Länge ändern?
+660|Ist es kostenlos?
+661|Ja. Dieser Timer und die ganze Digital-Dash-App sind kostenlos.
+662|Sitzungslänge
+663|Gib Größe und Gewicht ein, um deinen Body-Mass-Index, seine Bedeutung und den gesunden Gewichtsbereich für deine Größe zu sehen.
+664|Metrisch
+665|Größe (cm)
+666|Gewicht (kg)
+667|Alter (optional)
+668|Dein BMI
+669|Gib Größe und Gewicht ein.
+670|Verfolge dein Körpergewicht neben deinen Trainings und erhalte Kalorienziele für Diät oder Aufbau.
+671|In meinem Dashboard speichern
+672|So wird der BMI berechnet
+673|BMI Prime
+674|Ponderal-Index
+675|teilt das Gewicht durch die Größe hoch drei, was für sehr große oder kleine Menschen etwas besser passt.
+676|Was der BMI nicht verrät
+677|Was ist ein gesunder BMI?
+678|Wie berechne ich den BMI in Pfund und Zoll?
+679|Ist der BMI bei muskulösen Menschen genau?
+680|Nicht wirklich. Der BMI nutzt nur Größe und Gewicht, Muskeln zählen also wie Fett. Der Körperfettanteil ist das bessere Maß, wenn du trainierst.
+681|Funktioniert der BMI für Teenager?
+682|Finde heraus, wie viele Kalorien du am Tag verbrennst, wie viel du zum Ab- oder Zunehmen essen solltest und ob gerade Diät, Halten oder Aufbau zu dir passt.
+683|Körperfett % (optional)
+684|Kalorien pro Tag
+685|Behalte deine Ziele neben einem Trainingslog mit deinem Split, Fortschrittsdiagrammen und einem Scheibenrechner.
+686|So werden deine Kalorien berechnet
+687|Zuerst dein
+688|Grundumsatz
+689|, die Energie, die du in Ruhe verbrauchst. Die Standardformel nach Mifflin-St Jeor lautet:
+690|Deine
+691|Erhaltungskalorien
+692|Diät, halten oder aufbauen?
+693|Wie viele Kalorien sollte ich zum Abnehmen essen?
+694|Was sind Erhaltungskalorien?
+695|Die Kalorien, die du an einem Tag verbrennst, auch TDEE genannt. Es ist dein Grundumsatz (Kalorien in Ruhe) mal deine Aktivität. So viel zu essen hält dein Gewicht stabil.
+696|Soll ich Diät machen oder aufbauen?
+697|Ist dein Körperfett oder BMI hoch, mach zuerst eine Diät. Bist du schlank, baut ein langsamer Aufbau Muskeln mit wenig Fett auf. Dazwischen funktioniert Essen auf Erhaltungsniveau beim Training (Rekomposition) gut.
+698|Welche Formel ist am genauesten?
+699|Mifflin-St Jeor ist für die meisten genau. Kennst du deinen Körperfettanteil, berücksichtigt Katch-McArdle die Muskeln und liegt oft näher dran.
+700|Nichts auf deiner Liste. Füge eine Aufgabe hinzu, um sie hier zu sehen.
+701|Keine offenen Aufgaben. Füge oben eine hinzu.
+703|Freier Tag. Füge unten etwas hinzu.
+704|Füge unten dein erstes Konto hinzu.
+705|Dein Vermögensdiagramm erscheint nach zwei Tagen mit Aktualisierungen.
+706|Füge ein Girokonto, Ersparnisse oder Investments hinzu.
+707|Keine Schulden. Bleib dabei.
+708|Setz dir ein Ziel, etwa einen Notgroschen oder eine Reise, und sieh zu, wie es sich mit deinen Kontoständen füllt.
+709|Willkommen bei Digital Dash
+710|Fokus-Timer, Aufgaben, Wochenplaner, Noten und Trainingslog an einem Ort, genau so gestaltet, wie du willst.
+711|Weiter
+712|Fast alles hier lässt sich anpassen. Wähle zum Start einen Look und eine Uhr. Ändere sie jederzeit unter Designs.
+713|Wähle einen Timer, woran du arbeitest, und füge Lernmusik oder Regen hinzu. Abgeschlossene Sitzungen werden pro Kurs erfasst. In Lernräumen fokussieren Freunde mit dir.
+714|Aufgaben, die sich selbst planen
+715|Drück überall Strg K oder ⌘K
+716|Die Befehlsleiste fügt Aufgaben hinzu, startet Timer, spielt Klänge und springt zwischen Seiten.
+717|Es gibt noch viel mehr anzupassen
+718|Schau unter Designs, wann immer du willst:
+719|Foto-, Verlaufs- und animierte Live-Hintergründe
+720|Flüssiges Glas, Hover-Animationen und Eckenrundung
+721|Widgets, die du auswählst und anordnest
+722|Speichere alles als Vorlage und wechsle mit einem Tipp
+723|Beispieldaten laden
+724|Loslegen
+725|Analoguhr
+728|dieser Stunde
+729|von heute
+730|dieser Woche
+731|dieses Monats
+732|dieses Jahres
+733|Schließe einen Fokus-Timer ab, um eine Sitzung zu erfassen
+734|Woran ich arbeite
+735|Nichts Bestimmtes
+736|Timer und Klänge
+737|Wofür diese Sitzung ist
+738|Nach links
+739|Nach rechts
+740|Breite umschalten
+741|Wie viele Aufgaben übrig sind
+742|Heute fällige oder überfällige Aufgaben
+743|Heute abgeschlossene Timer-Blöcke
+744|Dein aktueller Gesamtwert
+745|Top-Prioritäten
+746|Demnächst
+747|Nächste Termine und Fälligkeiten
+748|Countdown
+749|Tage bis zu etwas Großem
+750|Motivation
+751|Ein Satz, der dich antreibt
+752|Notizzettel
+753|Notiere irgendwas
+754|Weltuhr
+755|Die Zeit in einer anderen Stadt
+756|Zeitfortschritt
+757|Tag, Woche, Monat, Jahr
+758|Bild
+759|Dein eigenes Foto oder deine Grafik
+760|Diese Woche erledigt
+761|Seit Montag erledigte Aufgaben
+762|Die Woche bisher
+763|Fokuszeit, Sitzungen und erledigte Aufgaben
+764|Läuft gerade
+765|Der Song, der auf Spotify läuft
+766|Erledigte Aufgaben hierher verschieben nach
+767|Nie
+768|Erledigte Aufgaben ins Archiv verschieben nach
+769|Bester Tag
+770|Top-Kurs
+771|Serie
+772|Trainings
+773|Aktuelles Training
+774|Pause
+775|Füge unten deine erste Übung hinzu.
+776|Übung hinzufügen
+777|Training beenden
+778|Verwerfen
+779|Name des Trainings
+780|Übung hinzufügen, z. B. Bankdrücken
+781|Name der Übung
+782|Konten sind hier nicht verfügbar
+783|Diese Website ist noch nicht mit dem Kontodienst verbunden (keine Supabase-Einstellungen gefunden).
+784|Alles bleibt auf diesem Gerät gespeichert.
+785|Los
+786|Gym-Fortschritt
+787|BMI und Kalorien
+788|Klänge abspielen
+789|Aufgabe öffnen
+795|24 Stunden
+796|Alle 2 Wochen
+797|(Seitenverhältnis 1,42:1) oder größer mit gleicher Form. Jeder Bildschirm hat eine andere Form, auf Handys wird also zugeschnitten.
+798|(Seitenverhältnis 1,93:1) oder größer mit gleicher Form.
+799|(Seitenverhältnis 1,73:1) oder größer mit gleicher Form.
+800|Sag es, z. B. Aufsatz fällig Freitag um 17 Uhr
+801|Olympische Stange (45 lb)
+802|Frauenstange (35 lb)
+803|SZ- / leichte Stange (25 lb)
+804|1 Min.
+805|1 Min. 30 s
+806|2 Min.
+807|3 Min.
+808|4 Min.
+809|Leicht: Sport 1–3 Mal pro Woche
+810|Mäßig: Sport 4–5 Mal pro Woche
+811|Aktiv: täglich Sport oder intensiv 3–4 Mal pro Woche
+812|Sehr aktiv: intensiver Sport 6–7 Mal pro Woche
+813|z. B. 85 oder 42/50
+814|z. B. 85 oder A-
+815|z. B. 85 oder A
+816|25-minütige Fokus-Sitzungen mit Pausen
+817|zählen zusammen, was du erreicht hast, und teilen durch das Mögliche, z. B. ergeben 42/50 und 18/20 zusammen 60/70, also 85,7 %.
+818|Standardmäßig ist R die Gewichtung, die du noch nicht eingegeben hast: Ergeben deine Zeilen 60 %, nimmt der Rechner 40 % als ausstehend an.
+819|Was, wenn meine Gewichtungen nicht 100 ergeben?
+820|Was, wenn ich mehr als 100 % brauche?
+821|25 Minuten
+822|5-minütige Pause
+823|Pause von 15 bis 30 Minuten
+824|Wenn dir 25 Minuten für konzentriertes Arbeiten zu kurz sind, probier 50 / 10 oder 90 / 20.
+825|18,5 bis 25 normal
+826|Gib Alter (15 bis 80), Größe und Gewicht ein.
+827|Schreib ganz natürlich, etwa „Gym jeden Mo Mi Fr 18 Uhr“ oder „Laborbericht Freitag hoch“. Füge Checklisten, Wiederholungen und Erinnerungen hinzu und hake Dinge ab, um deinen Tag sich füllen zu sehen.
+828|8 Designs oder dein eigenes Farbschema
+829|12 Uhr- und 12 Textschriften
+830|1 Tag
+831|3 Tage
+832|1 Woche
+833|2 Wochen
+834|30 Tage
+835|Probier: gym tomorrow 5pm high · timer 40 · play rain · theme midnight
+836|Woche 1
+837|Die Prüfung zählt 40 %
+838|nötig in der Prüfung für eine Endnote von 85 %
+839|Versuch 140 × 8
+840|Multipliziere jede Note mit ihrer Gewichtung, addiere die Ergebnisse und teile durch die eingegebene Gesamtgewichtung. Zum Beispiel ergeben 80 % in einer Aufgabe mit 30 % und 90 % in einer Zwischenprüfung mit 30 % (80×30 + 90×30) ÷ 60 = 85 %.
+841|Standard (USA) nutzt A 93+, A- 90 usw. Ontario (U-of-T-Stil) nutzt A+ 90, A 85, A- 80. Western University nutzt A+ 90, A 80, B 70, C 60, D 50. Nimm die deiner Schule.
+842|nötig in der Prüfung = (Wunschnote − aktuelle Note × (1 − w)) ÷ w
+843|Zum Beispiel bei aktuell 82 %, einem Ziel von 85 % und einer Prüfung mit 40 %: (85 − 82 × 0,6) ÷ 0,4 =
+844|Ist das Ergebnis 0 oder weniger, hast du dein Ziel schon sicher. Liegt es über 100 %, ist das Ziel unerreichbar, und die Tabelle zeigt das Beste, was du noch schaffen kannst.
+845|Nimm deine Wunschnote, zieh deine aktuelle Note mal den schon erledigten Kursanteil ab und teile durch die Gewichtung der Prüfung. Bei 82 % jetzt, 85 % Ziel und 40 % Prüfung: (85 − 82 × 0,6) ÷ 0,4 = 89,5 %.
+846|Der klassische Pomodoro sind 25 Minuten Fokus, gefolgt von 5 Minuten Pause. Nach vier davon machst du eine längere Pause von 15 bis 30 Minuten.
+847|Ja. Wähle hier 25 / 5, 50 / 10 oder 90 / 20. In Digital Dash kannst du eigene Timer von 10 Sekunden bis 10 Stunden erstellen.
+848|BMI = Gewicht (kg) ÷ Größe (m)² · in US-Einheiten: 703 × Gewicht (lb) ÷ Größe (in)²
+849|Für Erwachsene teilt die Weltgesundheitsorganisation den BMI so ein: unter 18,5 Untergewicht (16 bis 17 mäßiges, unter 16 starkes Untergewicht),
+850|, 25 bis 30 Übergewicht und 30 oder mehr Adipositas (Grad I, II und III beginnen bei 30, 35 und 40).
+851|ist dein BMI geteilt durch 25, die Obergrenze des Normalbereichs, 1,00 ist also die Grenze. Der
+852|Der BMI unterscheidet nicht zwischen Muskeln und Fett, Sportler können also übergewichtig erscheinen. Unter 20 Jahren vergleichen Ärzte den BMI mit Alters- und Geschlechtsperzentilen. Nutze ihn als grobe Orientierung, nicht als Diagnose.
+853|Bei Erwachsenen liegt ein BMI von 18,5 bis 25 im Normalbereich. Unter 18,5 ist Untergewicht, 25 bis 30 Übergewicht und 30 oder mehr Adipositas.
+854|Multipliziere dein Gewicht in Pfund mit 703 und teile durch deine Größe in Zoll zum Quadrat. 165 lb bei 5'10" (70 in) ergibt 703 × 165 ÷ 4.900 = 23,7.
+855|Unter 20 wird der BMI mit Alters- und Geschlechtsperzentilen verglichen, die Kategorien für Erwachsene sind also nur eine grobe Orientierung.
+856|(TDEE) sind der Grundumsatz mal ein Aktivitätsfaktor von 1,2 (sitzend) bis 1,9 (sehr aktiv). Etwa 3.500 kcal entsprechen einem Pfund Fett, wer also 500 kcal unter dem Erhalt isst, verliert rund 1 lb pro Woche.
+857|Mit deinem Körperfettanteil werden Männer über 25 % oder Frauen über 32 % zur Diät, Männer unter 12 % oder Frauen unter 20 % zu einem sauberen Aufbau geleitet. Ohne ihn zählt der BMI: unter 22 sauberer Aufbau, 22 bis 25 halten, ab 25 Diät. Die Makros folgen dem Plan: Protein 2,2 g pro kg in der Diät und sonst 1,8, Fett 25 % der Kalorien, Kohlenhydrate der Rest.
+858|Das ist ein allgemeiner Hinweis, kein ärztlicher Rat. Weniger als 1.500 kcal (Männer) oder 1.200 kcal (Frauen) am Tag zu essen, wird ohne Arzt nicht empfohlen.
+859|Iss etwa 500 kcal pro Tag unter deinen Erhaltungskalorien, um rund 1 lb (0,5 kg) pro Woche zu verlieren. Die Tabelle zeigt sanfte, normale und schnelle Optionen.
+860|Noch nichts hier. Erledigte Aufgaben landen 1 Woche nach dem Abhaken hier.
+861|Wie letzte Woche
+862|Wie zum selben Zeitpunkt letzte Woche
+863|Sprache
+864|Link kopiert. Schick ihn, wem du willst.
+865|Diesen Look ausprobieren?
+866|Meinen behalten
+867|Ein geteilter Look
+868|Zurück zu deinem Look
+869|Freunde aktivieren
+870|Dein Name
+871|Was Freunde sehen
+872|Freund per Code hinzufügen
+873|Hinzufügen
+874|Annehmen
+875|Ablehnen
+876|Einstellungen und Freunde
+877|Meine Fokuszeit Freunden zeigen
+878|Name speichern
+879|Einladung kopieren
+880|Noch keine Freunde. Schick jemandem deinen Einladungslink oder füge unten seinen Code hinzu.
+881|Freunde sehen nur deinen Namen und deine wöchentliche Fokuszeit. Du entscheidest, wen du hinzufügst, und kannst das Teilen ausschalten.
+882|Teile deinen Code, um deinen ersten Freund hinzuzufügen.
+883|Wähle den Namen, den dein Freund sieht, dann seid ihr verbunden.
+884|Freunde und die Wochenrangliste brauchen ein Konto, damit deine Freunde dich finden können.
+885|Jemand hat dich als Freund eingeladen. Melde dich an, um anzunehmen.
+886|Rangliste der Fokuszeit
+887|Woche der Rangliste
+888|Einladungslink kopiert
+889|Anfrage gesendet. Ihr seht euch, sobald sie angenommen wird
+890|Ihr seid jetzt Freunde
+891|Anfrage abgelehnt
+892|Anfrage zurückgezogen
+893|Freund entfernt
+894|Meine Woche
+895|Mein Herbsttrimester
+896|Mein Wintertrimester
+897|Mein Sommertrimester
+898|FOKUSSIERT
+899|ERLEDIGTE AUFGABEN
+900|BESTER TAG
+901|TOP-KURS
+902|LÄNGSTE SERIE
+903|TRAININGS
+904|Erstellt mit Digital Dash
+905|Längste Serie
+906|in Folge
+907|fokussiert
+908|Noch nicht viel hier. Schließe eine Fokus-Sitzung ab oder hake eine Aufgabe ab, dann erscheint sie auf deiner Karte.
+909|Bild gespeichert
+910|Bild gespeichert. Poste es aus deinen Fotos oder Downloads
+911|Pause
+912|Fortsetzen
+913|Pause
+914|Lange Pause
+915|Steh auf, streck dich, trink Wasser
+916|Nicht angemeldet
+917|Abgemeldet. Nichts wurde kopiert.
+918|Name erforderlich
+919|{0} bearbeiten
+920|{0} entfernen
+921|{0} löschen
+922|{0} als erledigt markieren
+923|{0} als nicht erledigt markieren
+924|{0} auf einen anderen Tag verschieben
+925|Zu {0} hinzufügen
+926|Aufgabe zu {0} hinzufügen
+927|Lautstärke {0}
+928|Kontostand von {0}
+929|Note für {0}
+930|Gewichtung für {0}
+931|{0} anwenden
+932|{0} teilen
+933|{0}: Ruhetag
+934|{n} Aufgabe
+935|{n} Aufgaben
+936|{n} Aufgabe, {m} Termin
+937|{n} Aufgabe, {m} Termine
+938|{n} Aufgaben, {m} Termin
+939|{n} Aufgaben, {m} Termine
+940|{n} Sitzung
+941|{n} Sitzungen
+942|{n} Fokus-Sitzung
+943|{n} Fokus-Sitzungen
+944|{n} Tag
+945|{n} Tage
+946|{n}/{m} erledigt
+947|{n} von {m} Schritten erledigt
+948|Schritt {n} von {m}
+949|von {n}
+950|{0} weniger als zum selben Zeitpunkt letzte Woche
+951|{0} mehr als zum selben Zeitpunkt letzte Woche
+952|{0} weniger als letzte Woche
+953|{0} mehr als letzte Woche
+954|{n} Trainings in den letzten {m} Wochen
+955|{n} Trainings in den letzten {m} Wochen · Ziel {k} pro Woche (änderbar unter Training → Einstellungen).
+956|{n} erledigte jetzt archivieren
+957|Noch nichts hier. Erledigte Aufgaben landen {0} nach dem Abhaken hier.
+958|Erledigte Aufgaben kommen nach {0} ins Archiv.
+959|{n} Min. bisher
+960|{n}-Min.-Fokus-Timer starten
+961|{0} starten
+962|Aufgabe hinzufügen: {0}
+963|Deine {n} dringendsten Aufgaben
+964|{0} der Note stehen fest
+965|in den restlichen {0}, um {1} zu erreichen.
+966|unter {0}
+967|Fokus pro Tag im letzten Jahr. {n} Tage mit Fokus, längste Serie {m} Tage.
+968|{n} Tage mit Fokus · längste Serie {m} Tage · {0} insgesamt
+969|{0} des Tages sind vorbei. Noch {1}, um ihn zu nutzen.
+970|Als Nächstes: {0}
+971|Fällig {0}
+972|{0}, nichts geplant
+973|{0}, {n} Eintrag
+974|{0}, {n} Einträge
+975|{0}, heute, {n} Eintrag
+976|{0}, heute, {n} Einträge
+977|{0} · {n} von {m} erledigt
+978|{n} offene Aufgabe · {0} diese Woche
+979|{n} offene Aufgaben · {0} diese Woche
+980|Sitzung {n} von {m} vor einer langen Pause
+981|Fokus {n}
+982|Tief {n}
+983|Pause {n}
+984|{n} Freund · {0}
+985|{n} Freunde · {0}
+986|{0} (du)
+987|{0} möchte mit dir befreundet sein
+988|Warte auf {0}
+989|Anfrage an {0} zurückziehen
+990|Platz {n}
+991|{n} Sitzungen · {0}
+992|Morgen {0}
+993|Heute {0}
+994|Alle {n} Wochen
+995|{0} zu deinen Kursen hinzugefügt
+996|{0} gespeichert
+997|{0} entfernt
+998|{0} aktualisiert
+999|in {n} Fokus-Sitzungen
+1000|in {n} Fokus-Sitzung
+1001|{0} fokussiert
+1002|Sitzung {n}
+1003|{n} Fokus-Sitzungen · {0}
+1004|{0}: {1}
+1005|Fast alles: 8 Designs oder dein eigenes Farbschema, 12 Uhr- und 12 Textschriften, 6 Uhrstile, Foto-, Verlaufs- und animierte Hintergründe, flüssiges Glas, Hover-Animationen, Eckenrundung, die Widgets auf deiner Startseite und sogar die Seitentitel. Speichere Looks als Vorlagen und wechsle mit einem Tipp.
+1006|Extremer Gewichtsverlust
+1007|Gewichtsverlust
+1008|Leichter Gewichtsverlust
+1009|Gewicht halten
+1010|Leichte Zunahme
+1011|Zunahme
+1012|Schnelle Zunahme
+1013|Starkes Untergewicht
+1014|Mäßiges Untergewicht
+1015|Leichtes Untergewicht
+1016|Normal
+1017|Übergewicht
+1018|Adipositas Grad I
+1019|Adipositas Grad II
+1020|Adipositas Grad III
+1021|Dein BMI liegt unter dem gesunden Bereich, daher hat Essen über dem Erhalt zum Zunehmen Vorrang.
+1022|Dein BMI liegt knapp unter dem gesunden Bereich (18,5–25), ein sauberer Aufbau passt also gut.
+1023|Dein BMI liegt im gesunden Bereich mit Luft nach oben, ein langsamer Aufbau eignet sich für Muskelaufbau. Halten ist auch in Ordnung.
+1024|Dein BMI liegt im gesunden Bereich, also ist Essen auf Erhaltungsniveau beim Training (Rekomposition) eine gute Wahl. Gib deinen Körperfettanteil für eine genauere Aussage an.
+1025|Dein BMI liegt im Übergewichtsbereich, daher wird eine stetige Diät empfohlen. Der BMI unterscheidet nicht zwischen Muskeln und Fett: Bist du sehr muskulös, gib deinen Körperfettanteil an.
+1026|Dein BMI liegt im Adipositasbereich, daher wird eine Diät empfohlen. 1 lb (0,5 kg) pro Woche abzunehmen ist ein nachhaltiges Tempo; sprich vor größeren Änderungen mit einem Arzt.
+1027|kcal zum Halten
+1028|Grundumsatz (in Ruhe)
+1029|Pro Tag
+1030|Vom Erhalt
+1031|empfohlen
+1032|Diät
+1033|Halten
+1034|Aufbau
+1035|Protein
+1036|Fett
+1037|Kohlenhydrate
+1038|Gramm
+1039|kcal
+1040|Gesundes Gewicht für deine Größe
+1041|Du bist im gesunden Bereich.
+1042|Der BMI unterscheidet nicht zwischen Muskeln und Fett.
+1043|Sieh deine Kalorien und ob Diät oder Aufbau passt →
+1044|Bewertete Teile
+1045|Eingegebene Gewichtung
+1046|Wenn du erreichst
+1047|Endnote
+1048|Schon sicher, selbst mit null im Rest.
+1049|Schon sicher. Selbst eine Null in der Prüfung reicht.
+1050|Erhalt
+1051|Empfohlener Plan
+1052|Dein Plan
+1053|Makro
+1054|der Rest
+1055|25 % der Kalorien
+1056|Zurück zur Empfehlung
+1057|Gesunder BMI-Bereich: 18,5 – 25 kg/m²
+1058|Der BMI unterscheidet nicht zwischen Muskeln und Fett, sehr muskulöse Menschen können also übergewichtig erscheinen.
+1059|{0} abnehmen
+1060|{0} zunehmen
+1061|Mit {0} % Körperfett bist du schlank, ein langsamer Aufbau bringt also Muskeln ohne viel Fett.
+1062|Mit {0} % Körperfett bist du im gesunden Bereich, also funktioniert Essen auf Erhaltungsniveau bei hartem Training (Rekomposition) gut. Mach einen sauberen Aufbau, wenn Muskelaufbau Vorrang hat.
+1063|Für eine Endnote von {0}
+1064|nötig in den restlichen {0}
+1065|in der Prüfung für {0}
+1066|{n} % in der Prüfung
+1067|Mit {0} weniger hättest du einen BMI von 25.
+1068|Mit {0} mehr hättest du einen BMI von 18,5.
+1069|Das ist über 100 %, also unerreichbar. Das Beste, was du schaffen kannst, ist {0}.
+1070|So bleibst du auf Kurs. 100 % im Rest würden dir {0} bringen.
+1071|Das ist mehr als 100 %, also unerreichbar. Eine perfekte Prüfung brächte dir {0}.
+1072|Eine perfekte Prüfung brächte dir {0}; eine Null ließe dich bei {1}.
+1073|{n} Fokus-Sitzung · {m} Min.
+1074|{n} Fokus-Sitzungen · {m} Min.
+1075|Skala {0}
+1076|{0} am Tag
+1077|Tägliche Makros für {0} kcal
+1078|Makro ({0} kcal)
+1079|{n} Zeile wurde übersprungen, weil die Gewichtung fehlt.
+1080|{n} Zeilen wurden übersprungen, weil die Gewichtung fehlt.
