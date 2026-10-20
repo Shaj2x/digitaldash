@@ -1055,3 +1055,4 @@
 1093|Bật âm thanh
 1094|Tắt âm thanh
 1095|Video giới thiệu Digital Dash
+1096|Chưa đến hai phút.

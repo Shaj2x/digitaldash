@@ -1055,3 +1055,4 @@
 1093|Ativar som
 1094|Desativar som
 1095|Vídeo de demonstração do Digital Dash
+1096|Em menos de dois minutos.

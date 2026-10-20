@@ -1055,3 +1055,4 @@
 1093|Attiva audio
 1094|Disattiva audio
 1095|Video dimostrativo di Digital Dash
+1096|In meno di due minuti.

@@ -1055,3 +1055,4 @@
 1093|Activer le son
 1094|Couper le son
 1095|Vidéo de démonstration de Digital Dash
+1096|En moins de deux minutes.
