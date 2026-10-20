@@ -10,7 +10,8 @@ Everything lives in a single self-contained file, `public/digital-dash.html` (se
 - App icons (`digital-dash-icon-192/512`, `maskable-512`, `apple-180`) are the mark on #1B1B1B.
 - The **Digital** theme (`brand` skin: #1B1B1B charcoal, #EFEEE8 off-white) matches the logo. It's the default for new users only; anyone who already has a saved theme keeps it.
 - The welcome tour opens with the lockup, then "Make it yours": pick a look and a clock on the spot. Its last step lists everything else you can customize.
-- The home page (`/`) uses the same palette, the logo, Big Shoulders Display headings and a faint print grain. Its "Make it yours" section restyles a live demo copy of the app through `window.dashDemo`, which only exists with `?demo=1`.
+- The home page (`/`) has one live demo phone, kept in view (sticky) beside the intro and the "Make it yours" controls. Each choice restyles the **whole page** (the theme's exact colours, the display font for headings, a live aurora background, liquid glass) and the phone, through `window.dashDemo`, which only exists with `?demo=1`.
+- The pick is saved as `dd.pick`. A new visitor's first app open starts with it, and the welcome tour shows it selected. A returning visitor's page starts in their own dashboard's look; changing it there doesn't touch their saved theme until they press "Use this look in my dashboard" (`apply:true`), which the app applies once on next open and syncs.
 
 ## iPhone preview
 

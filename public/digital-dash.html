@@ -6569,6 +6569,17 @@ $("#ai").addEventListener("click",e=>{
 $("#ai").addEventListener("change",e=>{if(e.target.type==="checkbox")aiCount();});
 $("#ai-plan").addEventListener("click",aiPlan);
 
+/* A look picked on the home page (localStorage "dd.pick"): new users start with it; returning users
+   only get it when they pressed "Use this look in my dashboard" there (apply:true). Applied once. */
+let pickApplied=false;
+try{const pk=window.DASH_DEMO?null:JSON.parse(localStorage.getItem("dd.pick")||"null");
+  if(pk&&(firstRun||pk.apply)){const st=S.settings;
+    if(SKINS.some(k=>k.id===pk.skin&&k.id!=="auto")){st.skin=pk.skin;st.accent="";if(st.bg)st.bg.match=false;}
+    if(CLOCKS.some(c=>c[0]===pk.clock))st.clock=pk.clock;
+    if(CLF.some(f=>f[0]===pk.font))st.clockFont=pk.font;
+    if(pk.bg==="live"){st.bg.type="live";if(!st.bg.live)st.bg.live="aurora";}else if(pk.bg==="none"&&pk.apply)st.bg.type="none";
+    if(typeof pk.glass==="boolean")st.surface=pk.glass?"glass":"solid";
+    pickApplied=true;localStorage.removeItem("dd.pick");}}catch(e){}
 buildThemes();fillCats();
 railInd=document.createElement("div");railInd.className="ind";railInd.setAttribute("aria-hidden","true");
 $(".rail").prepend(railInd);$(".rail").classList.add("has-ind");
@@ -6586,6 +6597,7 @@ if(S.settings.bg.type!=="none"&&!S.settings.bg.pal)computePal();
 loop();
 connect();
 acInit();
+if(pickApplied){save();if(!firstRun)setTimeout(()=>toast("Your dashboard now uses the look you picked"),700);}
 if(window.DASH_DEMO){S.settings.welcomed=true;loadDemo();$("#toast").classList.remove("on","act");}
 /* demo mode only: lets the home page's "Make it yours" controls restyle this embedded copy live */
 if(window.DASH_DEMO)window.dashDemo={
