@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pomodoro Timer: Free Online Focus Timer · Digital Dash</title>
+<meta name="description" content="A free online Pomodoro timer. 25 minutes of focus, 5-minute breaks and a longer break every four sessions, with a gentle chime. Works on your phone and computer.">
+<link rel="canonical" href="https://usedigitaldash.vercel.app/pomodoro-timer">
+<meta name="theme-color" content="#1B1B1B">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Pomodoro Timer: Free Online Focus Timer · Digital Dash">
+<meta property="og:description" content="A free online Pomodoro timer. 25 minutes of focus, 5-minute breaks and a longer break every four sessions, with a gentle chime. Works on your phone and computer.">
+<meta property="og:url" content="https://usedigitaldash.vercel.app/pomodoro-timer">
+<meta property="og:image" content="https://usedigitaldash.vercel.app/brand/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" sizes="32x32" href="/brand/favicon-32.png">
+<link rel="apple-touch-icon" href="/digital-dash-apple-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@800;900&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/tools/tools.css">
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebApplication", "name": "Pomodoro timer", "url": "https://usedigitaldash.vercel.app/pomodoro-timer", "description": "A free online Pomodoro timer. 25 minutes of focus, 5-minute breaks and a longer break every four sessions, with a gentle chime. Works on your phone and computer.", "applicationCategory": "EducationalApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How long is a Pomodoro?", "acceptedAnswer": {"@type": "Answer", "text": "The classic Pomodoro is 25 minutes of focus followed by a 5-minute break. After four, take a longer break of 15 to 30 minutes."}}, {"@type": "Question", "name": "Does the timer keep running if I switch tabs?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. It counts from the real clock, so it stays accurate in a background tab, and the chime plays when the time is up."}}, {"@type": "Question", "name": "Can I change the length?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Choose 25 / 5, 50 / 10 or 90 / 20 here. In Digital Dash you can make your own timers from 10 seconds to 10 hours."}}, {"@type": "Question", "name": "Is it free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. This timer and the full Digital Dash app are free to use."}}]}]</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="nav"><div class="wrap">
+  <a class="brand" href="/" aria-label="Digital Dash home"><span class="mk" aria-hidden="true"></span>Digital Dash</a>
+  <nav aria-label="Free tools"><ul><li><a href="/grade-calculator">Grade calculator</a></li><li><a href="/final-grade-calculator">Final grade calculator</a></li><li><a href="/pomodoro-timer" aria-current=page>Pomodoro timer</a></li><li><a href="/bmi-calculator">BMI calculator</a></li><li><a href="/calorie-calculator">Calorie calculator</a></li></ul></nav>
+  <a class="btn pri small" href="/digital-dash.html">Open app</a>
+</div></header>
+<main id="main">
+<div class="wrap hero"><span class="eyebrow">Free tool</span><h1>Pomodoro timer</h1><p>Work in focused blocks with short breaks between them. Press Start, put your phone down, and let the chime tell you when to rest.</p></div>
+<div class="wrap tool"><section class="card" aria-labelledby="t-h" style="text-align:center"><h2 id="t-h" class="sr">Timer</h2>
+  <div class="seg" id="len" role="group" aria-label="Session length" style="justify-content:center"><button type="button" data-v="25,5" aria-pressed="true">25 / 5</button><button type="button" data-v="50,10" aria-pressed="false">50 / 10</button><button type="button" data-v="90,20" aria-pressed="false">90 / 20</button></div>
+  <p id="phase" style="margin:6px 0 0;font:800 16px/1 var(--display);letter-spacing:.14em;text-transform:uppercase">Focus</p>
+  <div id="time" role="timer" aria-live="off" style="font:900 clamp(88px,18vw,168px)/1 var(--display);font-variant-numeric:tabular-nums;margin:6px 0 10px">25:00</div>
+  <div style="height:6px;border-radius:3px;background:color-mix(in srgb,var(--ink) 14%,transparent);overflow:hidden;margin:0 auto 18px;max-width:420px"><i id="bar" style="display:block;height:100%;width:0;background:var(--ink);transition:width 1s linear"></i></div>
+  <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap"><button type="button" class="btn pri" id="go" style="min-width:140px">Start</button><button type="button" class="btn" id="skip">Skip</button><button type="button" class="btn" id="reset">Reset</button></div>
+  <p class="note" id="count" aria-live="polite">Session 1 of 4 before a long break</p>
+  <label style="display:inline-flex;grid-auto-flow:column;align-items:center;gap:8px;margin-top:10px;font-weight:600"><input type="checkbox" id="snd" checked style="width:20px;min-height:20px"> Chime when time's up</label>
+ </section>
+ <section class="card out" aria-labelledby="out-h"><h2 id="out-h">Today</h2><div id="today" aria-live="polite"><p class="muted">No sessions yet. Press Start.</p></div>
+  <div class="save" role="region" aria-label="Save this in Digital Dash"><b>Save this in Digital Dash</b><p>Get these timers with study music, a session log, study rooms with friends and a weekly recap.</p><div class="go"><button type="button" class="btn pri" id="save">Add these timers to my dashboard</button></div></div></section></div>
+<article class="wrap prose"><h2>What is the Pomodoro technique?</h2>
+ <p>It's a simple way to study or work: focus on one thing for <strong>25 minutes</strong>, take a <strong>5-minute break</strong>, and after four sessions take a longer <strong>15 to 30 minute break</strong>. Short, fixed blocks make it easier to start and harder to drift.</p>
+ <h2>Tips that make it work</h2>
+ <ul><li>Pick one task before you press Start, and write down distractions instead of acting on them.</li><li>Get up during breaks. Don't spend them on your phone.</li><li>If 25 minutes feels too short for deep work, try 50 / 10 or 90 / 20.</li></ul><h2>Questions</h2><details><summary>How long is a Pomodoro?</summary><p>The classic Pomodoro is 25 minutes of focus followed by a 5-minute break. After four, take a longer break of 15 to 30 minutes.</p></details><details><summary>Does the timer keep running if I switch tabs?</summary><p>Yes. It counts from the real clock, so it stays accurate in a background tab, and the chime plays when the time is up.</p></details><details><summary>Can I change the length?</summary><p>Yes. Choose 25 / 5, 50 / 10 or 90 / 20 here. In Digital Dash you can make your own timers from 10 seconds to 10 hours.</p></details><details><summary>Is it free?</summary><p>Yes. This timer and the full Digital Dash app are free to use.</p></details></article>
+<section class="wrap prose" aria-labelledby="more-h" style="max-width:none"><h2 id="more-h">More free tools</h2><div class="related"><a href="/grade-calculator"><b>Grade calculator</b><span>Weighted average, letter grade and GPA</span></a><a href="/final-grade-calculator"><b>Final grade calculator</b><span>What you need on the final</span></a><a href="/bmi-calculator"><b>BMI calculator</b><span>BMI, category and healthy weight</span></a><a href="/calorie-calculator"><b>Calorie calculator</b><span>Maintenance calories, and whether to cut or bulk</span></a></div></section>
+</main>
+<footer><div class="wrap"><span class="mk" aria-hidden="true"></span><span>© <span id="yr"></span> Digital Dash</span><nav aria-label="Footer"><a href="/tools">All free tools</a><a href="/">Home</a><a href="/digital-dash.html">Open app</a><a href="/digital-dash-privacy.html">Privacy</a></nav></div></footer>
+<script src="/tools/tools.js"></script>
+<script>
+const {$,seg,saveToApp}=DD;
+let F=25,B=5,phase="focus",left=F*60,end=0,run=false,done=0,n=1,tick=0,ctx=null;const LONG=()=>Math.max(15,B*3);
+const fmt=s=>`${Math.floor(s/60)}:${String(Math.floor(s%60)).padStart(2,"0")}`;
+const total=()=>phase==="focus"?F*60:phase==="long"?LONG()*60:B*60;
+function draw(){$("#time").textContent=fmt(left);$("#phase").textContent=phase==="focus"?"Focus":phase==="long"?"Long break":"Break";$("#bar").style.width=((1-left/total())*100).toFixed(1)+"%";
+  $("#go").textContent=run?"Pause":left<total()?"Resume":"Start";document.title=(run?fmt(left)+" · ":"")+"Pomodoro Timer · Digital Dash";
+  $("#count").textContent=phase==="focus"?`Session ${n} of 4 before a long break`:"Get up, stretch, drink some water";}
+function chime(){if(!$("#snd").checked)return;try{ctx=ctx||new (window.AudioContext||window.webkitAudioContext)();[0,.18,.36].forEach((t,i)=>{const o=ctx.createOscillator(),g=ctx.createGain();o.type="sine";o.frequency.value=[784,988,1175][i];g.gain.setValueAtTime(0,ctx.currentTime+t);g.gain.linearRampToValueAtTime(.25,ctx.currentTime+t+.02);g.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+t+.9);o.connect(g).connect(ctx.destination);o.start(ctx.currentTime+t);o.stop(ctx.currentTime+t+1);});}catch(e){}}
+function next(){if(phase==="focus"){done++;$("#today").innerHTML=`<div class="big"><b>${done}</b><span>focus session${done>1?"s":""} · ${done*F} min</span></div>`;phase=n%4===0?"long":"break";if(n%4===0)n=0;n++;}else phase="focus";left=total();}
+function loop(){if(!run)return;left=Math.max(0,(end-Date.now())/1000);if(left<=0){run=false;chime();next();draw();return;}draw();tick=setTimeout(loop,250);}
+$("#go").addEventListener("click",()=>{if(ctx&&ctx.state==="suspended")ctx.resume();if(!ctx)try{ctx=new (window.AudioContext||window.webkitAudioContext)();}catch(e){}
+  run=!run;if(run){end=Date.now()+left*1000;loop();}else{clearTimeout(tick);draw();}});
+$("#skip").addEventListener("click",()=>{run=false;clearTimeout(tick);next();draw();});
+$("#reset").addEventListener("click",()=>{run=false;clearTimeout(tick);phase="focus";left=F*60;draw();});
+seg($("#len"),v=>{[F,B]=v.split(",").map(Number);run=false;clearTimeout(tick);phase="focus";left=F*60;draw();});
+$("#save").addEventListener("click",()=>saveToApp("timer",{focus:F,brk:B},"focus"));
+draw();
+</script>
+</body>
+</html>

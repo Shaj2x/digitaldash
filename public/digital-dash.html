@@ -1019,6 +1019,11 @@ html.lg .cal-list li{background:var(--glass-tint)}
 @keyframes ac-pulse{50%{opacity:.35}}
 .acd{padding:0;border:0;background:none;width:min(560px,calc(100vw - 24px));max-height:min(86vh,760px);margin:8vh auto auto;overflow:visible;color:var(--ink)}
 .acd-sm{width:min(460px,calc(100vw - 24px))}
+#look .acd-body{padding-top:22px}
+.look-sw{display:flex;gap:8px;align-items:center;padding:14px;border-radius:var(--r);border:1px solid var(--line)}
+.look-sw b{font-size:17px}.look-sw small{display:block;color:var(--muted);font-size:13px;margin-top:2px}
+.look-act{display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap}
+#look-share{display:inline-flex;align-items:center;gap:7px}
 .acd::backdrop{background:color-mix(in srgb,#000 50%,transparent);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
 .acd-in{display:flex;flex-direction:column;max-height:inherit;border-radius:calc(var(--r) + 6px);background:var(--panel);border:1px solid var(--line);box-shadow:0 30px 70px -20px rgba(0,0,0,.6);overflow:hidden}
 .acd[open] .acd-in{animation:ac-in var(--t-move,280ms) var(--ease-out)}
@@ -1832,7 +1837,7 @@ html.lg .eye{background:var(--glass-tint);box-shadow:inset 0 1px 0 color-mix(in 
       <h2 class="sec">Presets</h2>
       <p class="hint" style="margin:0 0 12px">Save the whole look under a name: colour scheme, fonts, background, clock and glass. Apply it any time.</p>
       <div class="presets" id="presets"></div>
-      <form class="panel pr-form" id="pr-form" autocomplete="off"><input type="text" id="pr-name" placeholder="Name this look, e.g. Late night" aria-label="Preset name" maxlength="40"><button class="btn" type="submit">Save current look</button></form>
+      <form class="panel pr-form" id="pr-form" autocomplete="off"><input type="text" id="pr-name" placeholder="Name this look, e.g. Late night" aria-label="Preset name" maxlength="40"><button class="btn" type="submit">Save current look</button><button class="btn ghost" type="button" id="look-share"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7M16 6l-4-4-4 4M12 2v13"/></svg>Share this look</button></form>
 
       <h2 class="sec">Colour scheme</h2>
       <p class="hint" id="match-note" hidden style="margin:0 0 12px"></p>
@@ -1984,6 +1989,9 @@ html.lg .eye{background:var(--glass-tint);box-shadow:inset 0 1px 0 color-mix(in 
 </dialog>
 <dialog class="acd acd-sm" id="tour" aria-labelledby="tour-h">
   <div class="acd-in"><div class="acd-body" id="tour-body"></div></div>
+</dialog>
+<dialog class="acd acd-sm" id="look" aria-labelledby="look-h">
+  <div class="acd-in"><div class="acd-body" id="look-body"></div></div>
 </dialog>
 <dialog class="acd acd-sm" id="acct-pick" aria-labelledby="acp-h">
   <div class="acd-in"><div class="acd-body" id="acp-body"></div></div>
@@ -2586,10 +2594,12 @@ function buildThemes(){
   $("#refract").addEventListener("change",e=>{S.settings.refract=e.target.checked;save();lgRefractAll();});
   // presets
   $("#pr-form").addEventListener("submit",e=>{e.preventDefault();savePreset($("#pr-name").value);$("#pr-name").value="";});
+  $("#look-share").addEventListener("click",()=>{const sk=S.settings.skin,sc=String(sk).startsWith("custom:")?S.schemes.find(x=>"custom:"+x.id===sk):null;lookShare(S.settings,$("#pr-name").value.trim(),sc);});
   $("#presets").addEventListener("click",e=>{
     const b=e.target.closest("[data-pr]");if(!b||b.dataset.pr==="name")return;
     const p=S.presets.find(x=>x.id===b.closest(".preset").dataset.id);if(!p)return;
     if(b.dataset.pr==="apply")applyPreset(p);
+    else if(b.dataset.pr==="share")lookShare(p.s,p.name,p.scheme);
     else if(b.dataset.pr==="update"){Object.assign(p,presetSnapshot(p.id));save();renderPresets();toast(`Updated "${p.name}"`);}
     else if(b.dataset.pr==="del"&&confirm(`Delete the preset "${p.name}"?`)){S.presets=S.presets.filter(x=>x!==p);[p.s.bg.image,p.s.stage.image].forEach(src=>{if(/^local:p/.test(src||"")&&S.settings.bg.image!==src&&S.settings.stage.image!==src)removeImage(src);});save();renderPresets();toast("Preset deleted");}
   });
@@ -2751,6 +2761,7 @@ function shortcutLink(v){
   if(v==="gym"||v==="meals"){show("health");setHealthTab("log");return true;}
   if(v==="gym-progress"){show("health");setHealthTab("progress");return true;}
   if(v==="bmi"||v==="calories"){show("health");setHealthTab("body");return true;}
+  if(v==="grades"){show("tasks");if(typeof setTaskMode==="function")setTaskMode("courses");crsMode="calc";gcShow();return true;}
   if(v==="plan"){show("tasks");if(typeof setTaskMode==="function"&&taskMode!=="plan")setTaskMode("plan");return true;}
   if(v==="start-focus"){show("focus");if(clockKind!=="timer")setClock("timer");setTimeout(()=>{if(!T.running){const g=$("#tm-go");if(g)g.click();}},80);return true;}
   return false;
@@ -4565,7 +4576,8 @@ function savePreset(name){
 }
 function applyPreset(p){
   if(p.scheme&&!S.schemes.some(x=>x.id===p.scheme.id))S.schemes.push(structuredClone(p.scheme));
-  vt(()=>{PRESET_KEYS.forEach(k=>{if(k in p.s)S.settings[k]=structuredClone(p.s[k]);});previewScheme=null;editingScheme=null;buildSkins();renderAll();buildSchemeEditor(currentColors());});
+  PRESET_KEYS.forEach(k=>{if(k in p.s)S.settings[k]=structuredClone(p.s[k]);}); /* set now so save() below stores it; vt() may run its callback later */
+  vt(()=>{previewScheme=null;editingScheme=null;buildSkins();renderAll();buildSchemeEditor(currentColors());});
   save();toast(`Applied "${p.name}"`);
 }
 // Compare looks without the fields that differ only because a photo was copied
@@ -4586,10 +4598,121 @@ function renderPresets(){
         <span class="badge">In use</span>
         <button class="pv" data-pr="apply" aria-label="Apply ${esc(p.name)}" style="background:${bg}"><span class="pclock" data-f="${cf[0]}" style="font-family:'${cf[2]}',${cf[3]};background:${sw.card};color:${sw.cardInk}">12:45</span><i style="background:${sw.accent}"></i></button>
         <div class="pmeta"><input type="text" class="pname" data-pr="name" value="${esc(p.name)}" maxlength="40" aria-label="Preset name" style="font-family:${uf[0]==="system"?"system-ui":`'${uf[2]}',${uf[3]}`}"><small>${esc(skin)} · ${esc(uf[1])} / ${esc(cf[1])}${s.surface==="glass"?" · Liquid glass":""}</small></div>
-        <div class="pact"><button class="btn small" data-pr="apply">Apply</button><button class="btn ghost small" data-pr="update" title="Replace this preset with the current look">Update</button><button class="icon-btn" data-pr="del" aria-label="Delete ${esc(p.name)}"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
+        <div class="pact"><button class="btn small" data-pr="apply">Apply</button><button class="btn ghost small" data-pr="update" title="Replace this preset with the current look">Update</button><button class="icon-btn" data-pr="share" aria-label="Share ${esc(p.name)}" title="Share as a link"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7M16 6l-4-4-4 4M12 2v13"/></svg></button><button class="icon-btn" data-pr="del" aria-label="Delete ${esc(p.name)}"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
       </div>`;}).join("");
   });
   markPresets();fitFontPreviews();
+}
+
+/* ---------- look links ----------
+   "Share this look" packs the look (PRESET_KEYS, without photos) into digital-dash.html?look=…
+   Opening one never changes anything without asking (a brand-new visitor just starts with it).
+   Everything read from a link is checked against the shape of the default settings, so a link
+   can only set known options to plain values. The shared look is kept as a preset, and Undo
+   puts the previous look back. */
+const b64u={enc:x=>btoa(unescape(encodeURIComponent(x))).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/,""),
+  dec:x=>decodeURIComponent(escape(atob(x.replace(/-/g,"+").replace(/_/g,"/"))))};
+function lookCode(src,name,scheme){
+  const s={};PRESET_KEYS.forEach(k=>{if(k in src)s[k]=structuredClone(src[k]);});
+  [["bg","none"],["stage","theme"]].forEach(([k,off])=>{const v=s[k];if(!v)return;delete v.pal;delete v.iw;delete v.ih;v.image="";if(v.type==="image")v.type=off;});
+  const o={v:1,n:String(name||"").slice(0,40),s};if(scheme)o.c={name:scheme.name,c:scheme.c};
+  return b64u.enc(JSON.stringify(o));
+}
+async function lookShare(src,name,scheme){
+  const url=location.origin+location.pathname+"?look="+lookCode(src,name,scheme),photo=src.bg&&src.bg.type==="image"||src.stage&&src.stage.type==="image";
+  const note=photo?" Photos aren't included in links.":"";
+  if(navigator.share&&matchMedia("(pointer: coarse)").matches){try{await navigator.share({title:name?`${name}, a Digital Dash look`:"My Digital Dash look",url});return;}catch(e){if(e&&e.name==="AbortError")return;}}
+  try{await navigator.clipboard.writeText(url);toast("Link copied. Anyone who opens it can try this look."+note);}
+  catch(e){prompt("Copy this link to share the look:",url);}
+}
+const LOOK_OK=/^[\w#:.,% -]{0,60}$/;
+function lookClean(v,t){ // keep only fields the template has, with the same type and a plain value
+  if(t&&typeof t==="object"){if(!v||typeof v!=="object"||Array.isArray(v))return;const o={};for(const k in t)if(k in v){const x=lookClean(v[k],t[k]);if(x!==undefined)o[k]=x;}return o;}
+  if(typeof t==="number")return typeof v==="number"&&isFinite(v)?v:undefined;
+  if(typeof t==="boolean")return typeof v==="boolean"?v:undefined;
+  if(typeof t==="string")return typeof v==="string"&&LOOK_OK.test(v)?v:undefined;
+}
+function lookRead(){
+  const q=new URLSearchParams(location.search),code=q.get("look");if(!code)return null;
+  q.delete("look");try{history.replaceState(null,"",location.pathname+(q.toString()?"?"+q:"")+location.hash);}catch(e){}
+  try{
+    const o=JSON.parse(b64u.dec(code.slice(0,6000))),tpl=Object.assign({},DEFAULT.settings,{hover:HV_DEF});
+    const s=lookClean(o.s||{},Object.fromEntries(PRESET_KEYS.map(k=>[k,tpl[k]])))||{};
+    ["bg","stage"].forEach(k=>{if(s[k]){s[k].image="";if(s[k].type==="image")s[k].type=k==="bg"?"none":"theme";}});
+    if(s.uiFont&&!UIF.some(f=>f[0]===s.uiFont))delete s.uiFont;
+    if(s.clockFont&&!CLF.some(f=>f[0]===s.clockFont))delete s.clockFont;
+    if(s.clock&&!CLOCKS.some(c=>c[0]===s.clock))delete s.clock;
+    if("radius" in s)s.radius=Math.max(0,Math.min(28,Math.round(s.radius)));
+    if("clockScale" in s)s.clockScale=Math.max(50,Math.min(200,Math.round(s.clockScale)));
+    if(s.accent&&!isHex(s.accent))delete s.accent;
+    let scheme=null;
+    if(String(s.skin).startsWith("custom:")){const c=o.c&&o.c.c,keys=["bg","panel","ink","accent","card","cardInk"];
+      if(c&&keys.every(k=>isHex(c[k]))){scheme={id:uid(),name:String((o.c.name||"Shared colours")).replace(/[<>&"]/g,"").slice(0,40)||"Shared colours",c:Object.fromEntries(keys.map(k=>[k,c[k]]))};s.skin="custom:"+scheme.id;}
+      else delete s.skin;}
+    else if(s.skin&&!SKINS.some(k=>k.id===s.skin))delete s.skin;
+    if(!Object.keys(s).length)throw 0;
+    return {name:String(o.n||"").replace(/[<>&"]/g,"").slice(0,40),s,scheme};
+  }catch(e){setTimeout(()=>toast("That look link didn't work. It may have been cut off when it was copied."),800);return null;}
+}
+function lookDesc(L){const s=L.s,sk=L.scheme?L.scheme.name:(SKINS.find(k=>k.id===s.skin)||{}).name,cf=(CLF.find(f=>f[0]===s.clockFont)||[])[1],ck=(CLOCKS.find(c=>c[0]===s.clock)||[])[1];
+  return [sk&&sk+" theme",ck&&ck.toLowerCase()+" clock",cf&&cf+" clock font",s.surface==="glass"&&"liquid glass"].filter(Boolean).join(", ");}
+function lookApply(L,quiet){
+  const prev={};PRESET_KEYS.forEach(k=>{prev[k]=structuredClone(S.settings[k]);});const prevSchemes=S.schemes.length;
+  if(L.scheme)S.schemes.push(L.scheme);
+  for(const k in L.s){S.settings[k]=k==="bg"||k==="stage"?Object.assign({},S.settings[k],L.s[k]):k==="hover"?Object.assign(hvGet(),L.s[k]):L.s[k];}
+  if(L.s.skin&&!L.s.accent)S.settings.accent="";
+  vt(()=>{previewScheme=null;editingScheme=null;buildSkins();renderAll();buildSchemeEditor(currentColors());});
+  const id=uid(),name=L.name||"Shared look";S.presets.push(Object.assign({id,name,created:Date.now(),shared:true},presetSnapshot(id)));
+  save();renderPresets();
+  toast(quiet?`You're starting with ${L.name?`"${L.name}"`:"a shared look"}. Change it any time in Themes`:`Now using ${L.name?`"${L.name}"`:"the shared look"}. It's saved in Themes, Presets`,
+    {run(){PRESET_KEYS.forEach(k=>{S.settings[k]=prev[k];});S.schemes.length=prevSchemes;S.presets=S.presets.filter(x=>x.id!==id);
+      vt(()=>{buildSkins();renderAll();buildSchemeEditor(currentColors());});save();renderPresets();toast("Back to your look");}});
+}
+function lookAsk(L){
+  const d=$("#look"),desc=lookDesc(L);
+  $("#look-body").innerHTML=`<h2 id="look-h">Try this look?</h2>
+    <div class="look-sw"><div><b>${esc(L.name||"A shared look")}</b>${desc?`<small>${esc(desc)}</small>`:""}</div></div>
+    <p class="muted">Someone shared a Digital Dash look with you. It only changes how things look. Your tasks and everything else stay exactly as they are, and you can undo it.</p>
+    <div class="look-act"><button type="button" class="btn ghost" data-lk="no">Keep mine</button><button type="button" class="btn" data-lk="yes">Use this look</button></div>`;
+  d.onclick=e=>{const b=e.target.closest("[data-lk]");if(!b)return;d.close();if(b.dataset.lk==="yes")lookApply(L);};
+  try{d.showModal();}catch(e){d.setAttribute("open","");}
+}
+
+/* ---------- from the free tool pages ----------
+   /grade-calculator, /final-grade-calculator, /pomodoro-timer, /bmi-calculator and /calorie-calculator
+   leave what to save in localStorage "dd.import" and open the app. It's added once, with Undo,
+   and never replaces anything without that Undo. */
+function ddImport(){
+  let im=null;try{im=JSON.parse(localStorage.getItem("dd.import")||"null");localStorage.removeItem("dd.import");}catch(e){}
+  if(!im||!im.data||Date.now()-(im.t||0)>36e5)return false;const d=im.data,str=(v,n)=>String(v??"").slice(0,n||20);
+  if(im.kind==="grades"){
+    const g={type:["pct","letter","pts"].includes(d.type)?d.type:"pct",scale:GC_SCALES[d.scale]?d.scale:"us",rows:(Array.isArray(d.rows)?d.rows:[]).slice(0,40)};
+    let name=str(d.course,32).trim()||"New course";S.courses=S.courses||[];const base=name;for(let i=2;S.courses.some(c=>c.name.toLowerCase()===name.toLowerCase());i++)name=`${base} (${i})`;
+    let items;
+    if(g.type==="pts"){const rs=g.rows.filter(x=>gcNum(x.w)>0),tot=rs.reduce((a,x)=>a+gcNum(x.w),0);items=rs.map(x=>({id:uid(),name:str(x.n,40)||"Part",w:Math.round(gcNum(x.w)/tot*1000)/10,score:gcNum(x.g)!=null?`${str(x.g)}/${str(x.w)}`:""}));}
+    else items=g.rows.filter(x=>x.n||x.g||x.w).map(x=>({id:uid(),name:str(x.n,40)||"Part",w:Math.max(0,Math.min(100,gcNum(x.w)??0)),score:str(x.g)}));
+    if(!items.length)return false;
+    const goal=gcGoalPct(str(d.goal),g.scale),c={id:uid(),name,target:goal!=null?Math.min(100,Math.max(1,Math.round(goal))):85,items};
+    S.courses.push(c);save();renderCourses();show("tasks");if(typeof setTaskMode==="function")setTaskMode("courses");crsMode="courses";gcShow();
+    toast(`Added ${name} to your courses`,{run(){S.courses=S.courses.filter(x=>x!==c);save();renderCourses();gcShow();}});return true;}
+  if(im.kind==="final"){
+    const g=gcState(),prev={fx:structuredClone(g.fx),scale:g.scale};g.fx={cur:str(d.cur),want:str(d.want),w:str(d.w)};if(GC_SCALES[d.scale])g.scale=d.scale;
+    save();show("tasks");if(typeof setTaskMode==="function")setTaskMode("courses");crsMode="calc";gcShow();
+    toast("Your final exam numbers are in the grade calculator",{run(){g.fx=prev.fx;g.scale=prev.scale;save();gcShow();}});return true;}
+  if(im.kind==="body"){
+    const p=bodyP(),prev=structuredClone(p),n=v=>String(v??"").replace(/[^\d.,]/g,"").slice(0,6);
+    ["age","ft","inch","cm","lb","kg","bf"].forEach(k=>{p[k]=n(d[k]);});
+    if(d.units==="us"||d.units==="metric")p.units=d.units;if(d.sex==="m"||d.sex==="f")p.sex=d.sex;
+    if(ACTS.some(a=>a[0]===+d.act))p.act=+d.act;if(["m","r","k"].includes(d.formula))p.formula=d.formula;
+    if(typeof d.plan==="string"&&/^(cut[123]|maintain|bulk[123]|)$/.test(d.plan))p.plan=d.plan;
+    save();shortcutLink("bmi");
+    toast("Your details are in Health, Body and calories",{run(){gymS().profile=prev;save();renderGym();}});return true;}
+  if(im.kind==="timer"){
+    const want=[["focus",Math.round(+d.focus||25)*60,"Focus"],["break",Math.round(+d.brk||5)*60,"Break"]].filter(x=>x[1]>=60&&x[1]<=36000),added=[];let first=null;
+    want.forEach(([kind,sec,name])=>{let t=S.timers.find(x=>x.kind===kind&&x.sec===sec);if(!t&&S.timers.length<10){t={id:uid(),name,sec,kind};S.timers.push(t);added.push(t);}if(kind==="focus")first=t||first;});
+    save();renderTimerModes();show("focus");if(clockKind!=="timer")setClock("timer");if(first)useTimer(first);
+    toast(added.length?`Added ${added.map(timerLabel).join(" and ")} to your timers`:"Your timers are ready",added.length?{run(){S.timers=S.timers.filter(x=>!added.includes(x));save();renderTimerModes();if(!S.timers.some(x=>x.id===T.id))useTimer(S.timers[0]);}}:undefined);return true;}
+  return false;
 }
 // Glass on/off: hand the highlights back to their CSS versions (or take them over), refilter panes
 function lgModeChanged(){
@@ -6598,6 +6721,8 @@ loop();
 connect();
 acInit();
 if(pickApplied){save();if(!firstRun)setTimeout(()=>toast("Your dashboard now uses the look you picked"),700);}
+{const L=window.DASH_DEMO?null:lookRead();if(L){if(firstRun)lookApply(L,true);else setTimeout(()=>lookAsk(L),400);}}
+const imported=!window.DASH_DEMO&&ddImport();
 if(window.DASH_DEMO){S.settings.welcomed=true;loadDemo();$("#toast").classList.remove("on","act");}
 /* demo mode only: lets the home page's "Make it yours" controls restyle this embedded copy live */
 if(window.DASH_DEMO)window.dashDemo={
@@ -6608,7 +6733,7 @@ if(window.DASH_DEMO)window.dashDemo={
   glass(on){S.settings.surface=on?"glass":"solid";applyTheme();}
 };
 $("#demo-rm").hidden=!S.tasks.some(t=>t.demo);
-if(firstRun&&!S.settings.welcomed&&!acAuthHash&&!/[?&]room=/.test(location.href)&&!(lsGet(RMK)||{}).code)setTimeout(()=>{if(!$("#acct-pick").open&&!$("#acct").open)tourOpen();},600); /* not over a sign-in or room link */
+if(firstRun&&!S.settings.welcomed&&!imported&&!acAuthHash&&!/[?&]room=/.test(location.href)&&!(lsGet(RMK)||{}).code)setTimeout(()=>{if(!$("#acct-pick").open&&!$("#acct").open&&!$("#look").open)tourOpen();},600); /* not over a sign-in or room link */
 })();
 </script>
 </body>

@@ -169,6 +169,8 @@ html.glass .card,html.glass .step,html.glass .back div,html.glass .chip,html.gla
 html.glass details{padding-left:16px;padding-right:16px;border-radius:14px;margin-bottom:8px;border:1px solid color-mix(in srgb,var(--ink) 14%,transparent)}
 .apply{display:none;margin-top:18px;padding:14px 16px;border-radius:14px;border:1.5px solid var(--ink);background:var(--panel);gap:10px 14px;align-items:center;flex-wrap:wrap}
 .apply.on{display:flex}
+.share-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.share-row span{font-size:14px;color:var(--muted)}
 .apply p{margin:0;flex:1 1 220px;font-size:15px}
 body{transition:background-color .35s ease,color .35s ease}
 .stats{display:flex;flex-wrap:wrap;gap:10px 28px;margin-top:6px}
@@ -313,7 +315,7 @@ html.cur,html.cur *{cursor:none!important}
 <header class="nav">
   <div class="wrap">
     <a class="brand" href="/" aria-label="Digital Dash home"><span class="mk" aria-hidden="true"></span>Digital Dash</a>
-    <nav aria-label="Sections"><ul><li><a href="#yours">Make it yours</a></li><li><a href="#features">Features</a></li><li><a href="#privacy">Privacy</a></li><li><a href="#faq">FAQ</a></li></ul></nav>
+    <nav aria-label="Sections"><ul><li><a href="#yours">Make it yours</a></li><li><a href="#features">Features</a></li><li><a href="#privacy">Privacy</a></li><li><a href="#faq">FAQ</a></li><li><a href="/tools">Free tools</a></li></ul></nav>
     <a class="btn pri" href="/digital-dash.html">Open app</a>
   </div>
 </header>
@@ -343,6 +345,7 @@ html.cur,html.cur *{cursor:none!important}
         <div><h3 id="c-clk">Clock</h3><div class="chips" role="group" aria-labelledby="c-clk" id="c-clock"></div></div>
         <div><h3 id="c-fnt">Display font</h3><div class="chips" role="group" aria-labelledby="c-fnt" id="c-font"></div></div>
         <div><h3 id="c-bgh">Background and glass</h3><div class="chips" role="group" aria-labelledby="c-bgh" id="c-bg"></div></div>
+        <div class="share-row"><button type="button" class="btn" id="share-look"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7M16 6l-4-4-4 4M12 2v13"/></svg>Share this look</button><span id="share-t" aria-live="polite"></span></div>
         <div class="apply" id="apply" role="region" aria-label="Use this look"><p id="apply-t">Like this look? Use it in your dashboard too.</p><button type="button" class="btn pri" id="apply-go">Use this look in my dashboard</button></div>
         <div class="stats" id="stats" aria-label="What you can change"><div><b data-n="8">8</b><span>themes, plus your own</span></div><div><b data-n="24">24</b><span>clock and text fonts</span></div><div><b data-n="6">6</b><span>clock styles</span></div><div><b>∞</b><span>presets to save</span></div></div>
       </div>
@@ -412,7 +415,7 @@ html.cur,html.cur *{cursor:none!important}
 
   <div class="cta-end wrap rv"><span class="mk" aria-hidden="true"></span><h2>Make it yours.</h2><p>Open it now. It takes seconds.</p><div class="ctas"><a class="btn pri big" href="/digital-dash.html">Open Digital Dash</a></div></div>
 </main>
-<footer><div class="wrap"><span class="mk" aria-hidden="true"></span><span>© <span id="yr"></span> Digital Dash</span><nav aria-label="Footer"><a href="/digital-dash.html">Open app</a><a href="/digital-dash-privacy.html">Privacy</a></nav></div></footer>
+<footer><div class="wrap"><span class="mk" aria-hidden="true"></span><span>© <span id="yr"></span> Digital Dash</span><nav aria-label="Footer"><a href="/digital-dash.html">Open app</a><a href="/tools">Free tools</a><a href="/grade-calculator">Grade calculator</a><a href="/pomodoro-timer">Pomodoro timer</a><a href="/digital-dash-privacy.html">Privacy</a></nav></div></footer>
 <script>
 (()=>{
   const $=s=>document.querySelector(s);
@@ -465,6 +468,14 @@ html.cur,html.cur *{cursor:none!important}
     morph(b,()=>{act[sel](k);remember();applyPage();draw();const nb=$(`${sel} [data-k="${k}"]`);if(nb)nb.focus();});applyPhone();}));
   $("#apply-go").addEventListener("click",()=>{let pk={};try{pk=JSON.parse(ls.get("dd.pick")||"{}");}catch(e){}pk.apply=true;ls.set("dd.pick",JSON.stringify(pk));
     $("#apply-t").innerHTML='Done. Your dashboard will use this look when you open it. <a href="/digital-dash.html">Open it now</a>';$("#apply-go").hidden=true;});
+  /* "Share this look": a link that opens the app with this look (the app asks first if they already have a dashboard) */
+  const b64u=x=>btoa(unescape(encodeURIComponent(x))).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/,"");
+  $("#share-look").addEventListener("click",async()=>{
+    const look={v:1,n:"",s:{skin:st.skin,accent:"",clock:st.clock,clockFont:st.font,surface:st.glass?"glass":"solid",bg:st.bg==="live"?{type:"live",live:"aurora"}:{type:"none"}}};
+    const url=location.origin+"/digital-dash.html?look="+b64u(JSON.stringify(look)),t=$("#share-t");
+    if(navigator.share&&matchMedia("(pointer: coarse)").matches){try{await navigator.share({title:"My Digital Dash look",url});return;}catch(e){if(e&&e.name==="AbortError")return;}}
+    try{await navigator.clipboard.writeText(url);t.textContent="Link copied. Send it to anyone.";}catch(e){t.innerHTML=`<a href="${url}">Here's your link</a>`;}
+    setTimeout(()=>{t.textContent="";},5000);});
   fr.addEventListener("load",()=>{try{fr.contentDocument.documentElement.style.pointerEvents="none";}catch(e){}applyPhone();});
   draw();applyPage();
   /* ledger demos run on their own and can be played with: tap the timer to pause, a task to tick it, the balance to hide it.

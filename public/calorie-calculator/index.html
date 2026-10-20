@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Calorie Calculator: Maintenance Calories, Cut or Bulk · Digital Dash</title>
+<meta name="description" content="Free calorie calculator. Find your maintenance calories (TDEE) and BMR, see how much to eat to lose or gain weight, and get a cut, maintain or bulk suggestion with macros.">
+<link rel="canonical" href="https://usedigitaldash.vercel.app/calorie-calculator">
+<meta name="theme-color" content="#1B1B1B">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Calorie Calculator: Maintenance Calories, Cut or Bulk · Digital Dash">
+<meta property="og:description" content="Free calorie calculator. Find your maintenance calories (TDEE) and BMR, see how much to eat to lose or gain weight, and get a cut, maintain or bulk suggestion with macros.">
+<meta property="og:url" content="https://usedigitaldash.vercel.app/calorie-calculator">
+<meta property="og:image" content="https://usedigitaldash.vercel.app/brand/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" sizes="32x32" href="/brand/favicon-32.png">
+<link rel="apple-touch-icon" href="/digital-dash-apple-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@800;900&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/tools/tools.css">
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebApplication", "name": "Calorie calculator", "url": "https://usedigitaldash.vercel.app/calorie-calculator", "description": "Free calorie calculator. Find your maintenance calories (TDEE) and BMR, see how much to eat to lose or gain weight, and get a cut, maintain or bulk suggestion with macros.", "applicationCategory": "HealthApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How many calories should I eat to lose weight?", "acceptedAnswer": {"@type": "Answer", "text": "Eat about 500 kcal a day under your maintenance calories to lose about 1 lb (0.5 kg) a week. The table shows mild, normal and fast options."}}, {"@type": "Question", "name": "What are maintenance calories?", "acceptedAnswer": {"@type": "Answer", "text": "The calories you burn in a day, also called TDEE. It's your BMR (calories at rest) times how active you are. Eating this much keeps your weight steady."}}, {"@type": "Question", "name": "Should I cut or bulk?", "acceptedAnswer": {"@type": "Answer", "text": "If your body fat or BMI is high, cut first. If you're lean, a slow lean bulk adds muscle with little fat. In between, eating at maintenance while you train (a recomp) works well."}}, {"@type": "Question", "name": "Which formula is most accurate?", "acceptedAnswer": {"@type": "Answer", "text": "Mifflin-St Jeor is accurate for most people. If you know your body fat percentage, Katch-McArdle accounts for muscle and is often closer."}}]}]</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="nav"><div class="wrap">
+  <a class="brand" href="/" aria-label="Digital Dash home"><span class="mk" aria-hidden="true"></span>Digital Dash</a>
+  <nav aria-label="Free tools"><ul><li><a href="/grade-calculator">Grade calculator</a></li><li><a href="/final-grade-calculator">Final grade calculator</a></li><li><a href="/pomodoro-timer">Pomodoro timer</a></li><li><a href="/bmi-calculator">BMI calculator</a></li><li><a href="/calorie-calculator" aria-current=page>Calorie calculator</a></li></ul></nav>
+  <a class="btn pri small" href="/digital-dash.html">Open app</a>
+</div></header>
+<main id="main">
+<div class="wrap hero"><span class="eyebrow">Free tool</span><h1>Calorie calculator</h1><p>Find out how many calories you burn in a day, how much to eat to lose or gain weight, and whether cutting, maintaining or bulking suits you right now.</p></div>
+<div class="wrap tool"><section class="card" aria-labelledby="in-h"><h2 id="in-h">Your details</h2><div class="seg" id="units" role="group" aria-label="Units"><button type="button" data-v="us" aria-pressed="true">US units</button><button type="button" data-v="metric" aria-pressed="false">Metric</button></div>
+  <div class="fields" id="f-us"><label>Height (ft)<input data-p="ft" placeholder="5" inputmode="numeric"></label><label>Height (in)<input data-p="inch" placeholder="10" inputmode="decimal"></label><label>Weight (lb)<input data-p="lb" placeholder="165" inputmode="decimal"></label></div>
+  <div class="fields" id="f-metric" hidden><label>Height (cm)<input data-p="cm" placeholder="178" inputmode="decimal"></label><label>Weight (kg)<input data-p="kg" placeholder="75" inputmode="decimal"></label></div>
+  <div class="fields" style="margin-top:12px"><label>Age<input data-p="age" placeholder="15–80" inputmode="numeric"></label><label>Sex<select id="sex"><option value="m">Male</option><option value="f">Female</option></select></label><label>Body fat % (optional)<input data-p="bf" placeholder="e.g. 18" inputmode="decimal"></label></div>
+  <div class="fields" style="margin-top:12px"><label>Activity<select id="act"></select></label></div>
+  <div class="fields" style="margin-top:12px"><label>Formula<select id="formula"><option value="m">Mifflin-St Jeor</option><option value="r">Revised Harris-Benedict</option><option value="k">Katch-McArdle (needs body fat %)</option></select></label></div>
+ </section>
+ <section class="card out" aria-labelledby="out-h" aria-live="polite"><h2 id="out-h">Calories per day</h2><div id="out"><p class="muted">Enter your age, height and weight.</p></div>
+  <div class="save" role="region" aria-label="Save this in Digital Dash"><b>Save this in Digital Dash</b><p>Keep your targets next to a gym log with your split, progress charts and a plate calculator.</p><div class="go"><button type="button" class="btn pri" id="save">Save to my dashboard</button></div></div></section></div>
+<article class="wrap prose"><h2>How your calories are worked out</h2>
+ <p>First your <strong>BMR</strong>, the energy you burn at rest. The default Mifflin-St Jeor equation is:</p>
+ <div class="formula">men: 10 × weight (kg) + 6.25 × height (cm) − 5 × age + 5<br>women: 10 × weight (kg) + 6.25 × height (cm) − 5 × age − 161</div>
+ <p>Your <strong>maintenance calories</strong> (TDEE) are BMR times an activity factor from 1.2 (sedentary) to 1.9 (very active). About 3,500 kcal is a pound of fat, so eating 500 kcal under maintenance loses roughly 1 lb a week.</p>
+ <h2>Cut, maintain or bulk?</h2>
+ <p>With your body fat %, men over 25% or women over 32% are pointed to a cut, and men under 12% or women under 20% to a lean bulk. Without it, BMI is used: under 22 lean bulk, 22 to 25 maintain, 25 and over cut. Macros follow the plan: protein 2.2 g per kg on a cut and 1.8 otherwise, fat 25% of calories, carbs the rest.</p>
+ <p>This is general guidance, not medical advice. Eating under 1,500 kcal (men) or 1,200 kcal (women) a day isn't recommended without a doctor.</p><h2>Questions</h2><details><summary>How many calories should I eat to lose weight?</summary><p>Eat about 500 kcal a day under your maintenance calories to lose about 1 lb (0.5 kg) a week. The table shows mild, normal and fast options.</p></details><details><summary>What are maintenance calories?</summary><p>The calories you burn in a day, also called TDEE. It's your BMR (calories at rest) times how active you are. Eating this much keeps your weight steady.</p></details><details><summary>Should I cut or bulk?</summary><p>If your body fat or BMI is high, cut first. If you're lean, a slow lean bulk adds muscle with little fat. In between, eating at maintenance while you train (a recomp) works well.</p></details><details><summary>Which formula is most accurate?</summary><p>Mifflin-St Jeor is accurate for most people. If you know your body fat percentage, Katch-McArdle accounts for muscle and is often closer.</p></details></article>
+<section class="wrap prose" aria-labelledby="more-h" style="max-width:none"><h2 id="more-h">More free tools</h2><div class="related"><a href="/grade-calculator"><b>Grade calculator</b><span>Weighted average, letter grade and GPA</span></a><a href="/final-grade-calculator"><b>Final grade calculator</b><span>What you need on the final</span></a><a href="/pomodoro-timer"><b>Pomodoro timer</b><span>25-minute focus sessions with breaks</span></a><a href="/bmi-calculator"><b>BMI calculator</b><span>BMI, category and healthy weight</span></a></div></section>
+</main>
+<footer><div class="wrap"><span class="mk" aria-hidden="true"></span><span>© <span id="yr"></span> Digital Dash</span><nav aria-label="Footer"><a href="/tools">All free tools</a><a href="/">Home</a><a href="/digital-dash.html">Open app</a><a href="/digital-dash-privacy.html">Privacy</a></nav></div></footer>
+<script src="/tools/tools.js"></script>
+<script>
+const {$,seg,body,plans,ACTS,saveToApp,esc}=DD;
+const P={units:"us",sex:"m",age:"",ft:"",inch:"",cm:"",lb:"",kg:"",act:1.465,formula:"m",bf:""};
+document.querySelectorAll("[data-p]").forEach(i=>i.addEventListener("input",()=>{P[i.dataset.p]=i.value;out();}));
+const fill=()=>document.querySelectorAll("[data-p]").forEach(i=>{i.value=P[i.dataset.p]??"";});
+seg($("#units"),v=>{if(v===P.units)return;const n=DD.num;
+  if(v==="metric"){const inch=(n(P.ft)||0)*12+(n(P.inch)||0);if(inch)P.cm=String(Math.round(inch*2.54));if(n(P.lb))P.kg=String(Math.round(n(P.lb)*0.45359237*10)/10);}
+  else{if(n(P.cm)){const t=n(P.cm)/2.54;P.ft=String(Math.floor(t/12));P.inch=String(Math.round(t%12));if(P.inch==="12"){P.ft=String(+P.ft+1);P.inch="0";}}if(n(P.kg))P.lb=String(Math.round(n(P.kg)/0.45359237));}
+  P.units=v;$("#f-us").hidden=v!=="us";$("#f-metric").hidden=v==="us";fill();out();});
+const fmtW=v=>Math.round(v*10)/10;
+$("#act").innerHTML=ACTS.map(([v,l])=>`<option value="${v}"${v===1.465?" selected":""}>${esc(l)}</option>`).join("");
+$("#sex").addEventListener("change",e=>{P.sex=e.target.value;out();});$("#act").addEventListener("change",e=>{P.act=+e.target.value;out();});$("#formula").addEventListener("change",e=>{P.formula=e.target.value;out();});
+let plan="";
+function out(){const r=body(P),o=$("#out");
+  if(!r.ok||r.needAge){o.innerHTML=`<p class="muted">Enter your age (15 to 80), height and weight.</p>`;return;}
+  if(r.needBf){o.innerHTML=`<p class="muted">Katch-McArdle needs your body fat %. Add it, or pick another formula.</p>`;return;}
+  const ps=plans(r),floor=P.sex==="f"?1200:1500,k=v=>Math.round(v).toLocaleString(),map={cut:"cut2",maintain:"maintain",bulk:"bulk1"},pl=ps.find(x=>x.k===(plan||map[r.rec]))||ps[3];
+  const prot=Math.round(r.w*(pl.k.startsWith("cut")?2.2:1.8)),fat=Math.round(pl.kcal*0.25/9),carb=Math.max(0,Math.round((pl.kcal-prot*4-fat*9)/4)),lab={cut:"Cut",maintain:"Maintain",bulk:"Bulk"};
+  o.innerHTML=`<div class="big"><b>${k(r.tdee)}</b><span>kcal to maintain</span></div><ul class="list"><li><span>BMR (at rest)</span><b>${k(r.bmr)} kcal</b></li><li><span>BMI</span><b>${r.bmi.toFixed(1)} · ${r.cat}</b></li></ul>
+   <table style="margin-top:12px"><thead><tr><th>Goal</th><th class="n">Per day</th><th class="n">Of maint.</th></tr></thead><tbody>${ps.map(x=>`<tr class="${x.k===pl.k?"hi":""}"><td>${x.l}${x.rt?` <span class="muted">${x.rt}</span>`:""}</td><td class="n">${k(x.kcal)}${x.kcal<floor&&x.kcal<r.tdee?" · low":""}</td><td class="n">${Math.round(x.pct)}%</td></tr>`).join("")}</tbody></table>
+   <h2 style="margin:22px 0 6px;font-size:24px">Cut, maintain or bulk?</h2><div class="big"><b style="font-size:48px">${lab[r.rec]}</b><span>suggested</span></div><p class="note">${r.why}</p>
+   <div class="seg" id="plan" role="group" aria-label="Your plan" style="margin-top:12px">${ps.map(x=>`<button type="button" data-v="${x.k}" aria-pressed="${x.k===pl.k}">${x.k==="maintain"?"Maintain":(x.k.startsWith("cut")?"Lose ":"Gain ")+x.rt.split(" ")[0]}</button>`).join("")}</div>
+   <table><caption class="sr">Daily macros for ${k(pl.kcal)} kcal</caption><thead><tr><th>Macro (${k(pl.kcal)} kcal)</th><th class="n">Grams</th><th class="n">kcal</th></tr></thead><tbody><tr><td>Protein</td><td class="n">${prot} g</td><td class="n">${prot*4}</td></tr><tr><td>Fat</td><td class="n">${fat} g</td><td class="n">${fat*9}</td></tr><tr><td>Carbs</td><td class="n">${carb} g</td><td class="n">${carb*4}</td></tr></tbody></table>`;
+  seg($("#plan"),v=>{plan=v;out();const b=$(`#plan [data-v="${v}"]`);if(b)b.focus();});}
+$("#save").addEventListener("click",()=>{const r=body(P);if(!r.ok||r.needAge){$("[data-p=age]").focus();return;}saveToApp("body",Object.assign({},P,{plan}),"bmi");});
+out();
+</script>
+</body>
+</html>

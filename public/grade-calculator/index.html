@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Grade Calculator: Weighted Average, Letter Grade and GPA · Digital Dash</title>
+<meta name="description" content="Free weighted grade calculator. Enter your grades and weights to get your average, letter grade and GPA, and see what you need on the rest of the course. US, Ontario and Western scales.">
+<link rel="canonical" href="https://usedigitaldash.vercel.app/grade-calculator">
+<meta name="theme-color" content="#1B1B1B">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Grade Calculator: Weighted Average, Letter Grade and GPA · Digital Dash">
+<meta property="og:description" content="Free weighted grade calculator. Enter your grades and weights to get your average, letter grade and GPA, and see what you need on the rest of the course. US, Ontario and Western scales.">
+<meta property="og:url" content="https://usedigitaldash.vercel.app/grade-calculator">
+<meta property="og:image" content="https://usedigitaldash.vercel.app/brand/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" sizes="32x32" href="/brand/favicon-32.png">
+<link rel="apple-touch-icon" href="/digital-dash-apple-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@800;900&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/tools/tools.css">
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebApplication", "name": "Grade calculator", "url": "https://usedigitaldash.vercel.app/grade-calculator", "description": "Free weighted grade calculator. Enter your grades and weights to get your average, letter grade and GPA, and see what you need on the rest of the course. US, Ontario and Western scales.", "applicationCategory": "EducationalApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How do I calculate my weighted grade?", "acceptedAnswer": {"@type": "Answer", "text": "Multiply each grade by its weight, add the results, then divide by the total weight you've entered. For example 80% on an assignment worth 30% and 90% on a midterm worth 30% gives (80×30 + 90×30) ÷ 60 = 85%."}}, {"@type": "Question", "name": "What if my weights don't add up to 100?", "acceptedAnswer": {"@type": "Answer", "text": "That's fine. Your average is based on the weights entered so far, and the rest is treated as still to come when you plan what you need."}}, {"@type": "Question", "name": "Which grading scale should I use?", "acceptedAnswer": {"@type": "Answer", "text": "Standard (US) uses A 93+, A- 90 and so on. Ontario (U of T style) uses A+ 90, A 85, A- 80. Western University uses A+ 90, A 80, B 70, C 60, D 50. Pick the one your school uses."}}, {"@type": "Question", "name": "Is my data saved?", "acceptedAnswer": {"@type": "Answer", "text": "Your grades stay in this browser tab. Use Save as a course to keep them in Digital Dash, which works offline and can sync if you sign in."}}]}]</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="nav"><div class="wrap">
+  <a class="brand" href="/" aria-label="Digital Dash home"><span class="mk" aria-hidden="true"></span>Digital Dash</a>
+  <nav aria-label="Free tools"><ul><li><a href="/grade-calculator" aria-current=page>Grade calculator</a></li><li><a href="/final-grade-calculator">Final grade calculator</a></li><li><a href="/pomodoro-timer">Pomodoro timer</a></li><li><a href="/bmi-calculator">BMI calculator</a></li><li><a href="/calorie-calculator">Calorie calculator</a></li></ul></nav>
+  <a class="btn pri small" href="/digital-dash.html">Open app</a>
+</div></header>
+<main id="main">
+<div class="wrap hero"><span class="eyebrow">Free tool</span><h1>Grade calculator</h1><p>Add each assignment, test or exam with its weight. Your average, letter grade and GPA update as you type, and you can see exactly what you need on the rest of the course.</p></div>
+<div class="wrap tool"><section class="card" aria-labelledby="in-h"><h2 id="in-h">Your grades</h2>
+  <div class="seg" id="type" role="group" aria-label="Grade type"><button type="button" data-v="pct" aria-pressed="true">Percent</button><button type="button" data-v="letter" aria-pressed="false">Letters</button><button type="button" data-v="pts" aria-pressed="false">Points</button></div>
+  <div class="rows" id="rows"></div>
+  <p><button type="button" class="btn small" id="add">+ Add a row</button></p>
+  <div class="fields"><label>Grading scale<select id="scale"><option value="us">Standard (US)</option><option value="on">Ontario (U of T style)</option><option value="western">Western University</option></select></label></div>
+  <h2 style="margin-top:22px" id="plan-h">What do I need?</h2>
+  <div class="fields" role="group" aria-labelledby="plan-h"><label>Goal for the course<input id="goal" placeholder="e.g. 85 or A-" inputmode="text"></label><label id="rem-l">Weight still to come (%)<input id="rem" placeholder="auto" inputmode="decimal"></label></div>
+ </section>
+ <section class="card out" aria-labelledby="out-h" aria-live="polite"><h2 id="out-h">Result</h2><div id="out"><p class="muted">Enter a grade to see your average.</p></div>
+  <div class="save" role="region" aria-label="Save this in Digital Dash"><b>Save this in Digital Dash</b><p>Keep this course with your tasks and planner, and update it as marks come in.</p><div class="go"><label class="sr" for="cname">Course name</label><input id="cname" maxlength="32" placeholder="Course name, e.g. ES 1050"><button type="button" class="btn pri" id="save">Save as a course</button></div></div></section></div>
+<article class="wrap prose"><h2>How the grade calculator works</h2>
+ <p><strong>Percent grades</strong> are averaged by weight. Each grade is multiplied by its weight, the results are added up, and the total is divided by the sum of the weights you've entered. If you leave every weight blank, each grade counts the same.</p>
+ <div class="formula">average = (grade₁ × weight₁ + grade₂ × weight₂ + …) ÷ (weight₁ + weight₂ + …)</div>
+ <p><strong>Points</strong> add up what you earned and divide by what was possible, for example 42/50 and 18/20 make 60/70, or 85.7%. <strong>Letters</strong> are averaged using GPA points (or the middle of each range on scales without GPA) and turned back into a letter.</p>
+ <h2>What you need on the rest</h2>
+ <p>If your current average covers part of the course and R% is still to come, the grade you need on the remaining work is:</p>
+ <div class="formula">needed = (goal − average × (100 − R) ÷ 100) ÷ (R ÷ 100)</div>
+ <p>By default R is whatever weight you haven't entered yet, so if your rows add up to 60%, the calculator assumes 40% is left.</p><h2>Questions</h2><details><summary>How do I calculate my weighted grade?</summary><p>Multiply each grade by its weight, add the results, then divide by the total weight you've entered. For example 80% on an assignment worth 30% and 90% on a midterm worth 30% gives (80×30 + 90×30) ÷ 60 = 85%.</p></details><details><summary>What if my weights don't add up to 100?</summary><p>That's fine. Your average is based on the weights entered so far, and the rest is treated as still to come when you plan what you need.</p></details><details><summary>Which grading scale should I use?</summary><p>Standard (US) uses A 93+, A- 90 and so on. Ontario (U of T style) uses A+ 90, A 85, A- 80. Western University uses A+ 90, A 80, B 70, C 60, D 50. Pick the one your school uses.</p></details><details><summary>Is my data saved?</summary><p>Your grades stay in this browser tab. Use Save as a course to keep them in Digital Dash, which works offline and can sync if you sign in.</p></details></article>
+<section class="wrap prose" aria-labelledby="more-h" style="max-width:none"><h2 id="more-h">More free tools</h2><div class="related"><a href="/final-grade-calculator"><b>Final grade calculator</b><span>What you need on the final</span></a><a href="/pomodoro-timer"><b>Pomodoro timer</b><span>25-minute focus sessions with breaks</span></a><a href="/bmi-calculator"><b>BMI calculator</b><span>BMI, category and healthy weight</span></a><a href="/calorie-calculator"><b>Calorie calculator</b><span>Maintenance calories, and whether to cut or bulk</span></a></div></section>
+</main>
+<footer><div class="wrap"><span class="mk" aria-hidden="true"></span><span>© <span id="yr"></span> Digital Dash</span><nav aria-label="Footer"><a href="/tools">All free tools</a><a href="/">Home</a><a href="/digital-dash.html">Open app</a><a href="/digital-dash-privacy.html">Privacy</a></nav></div></footer>
+<script src="/tools/tools.js"></script>
+<script>
+const {num,pct,SCALES,letter,grades,$,esc,seg,saveToApp}=DD;
+let g={type:"pct",scale:"us",rows:[{n:"Assignments",g:"",w:"30"},{n:"Midterm",g:"",w:"30"},{n:"",g:"",w:""}],goal:"",rem:""};
+const HEAD={pct:["Grade (%)","Weight (%)"],letter:["Letter","Weight (%)"],pts:["Points earned","Points possible"]};
+function rows(){$("#rows").innerHTML=g.rows.map((r,i)=>`<div class="row" data-i="${i}"><label>Name<input data-f="n" value="${esc(r.n)}" placeholder="e.g. Quiz ${i+1}"></label><label>${HEAD[g.type][0]}<input data-f="g" value="${esc(r.g)}" placeholder="${g.type==="letter"?"B+":g.type==="pts"?"42":"85"}" inputmode="${g.type==="letter"?"text":"decimal"}"></label><label>${HEAD[g.type][1]}<input data-f="w" value="${esc(r.w)}" placeholder="${g.type==="pts"?"50":"20"}" inputmode="decimal"></label><button type="button" class="x" data-del="${i}" aria-label="Remove row ${i+1}">×</button></div>`).join("");
+  $("#rem-l").firstChild.textContent=g.type==="pts"?"Points still to come":"Weight still to come (%)";$("#goal").disabled=$("#rem").disabled=g.type==="letter";}
+function out(){const o=grades(g),sc=SCALES[g.scale];let h="";
+  if(o.pct==null&&o.gpa==null){h=`<p class="muted">Enter a grade to see your average.</p>`;}
+  else{h=`<div class="big"><b>${o.pct!=null?pct(o.pct):o.L[0]}</b>${o.L?`<span>${o.pct!=null?o.L[0]:""}${sc.gpa&&o.gpa!=null?` · GPA ${o.gpa.toFixed(2)}`:""}</span>`:""}</div>
+    <ul class="list"><li><span>Graded parts</span><b>${o.n}</b></li>${o.sw!=null?`<li><span>Weight entered</span><b>${pct(o.sw)}</b></li>`:""}${g.type==="pts"?`<li><span>Points</span><b>${o.earned} / ${o.poss}</b></li>`:""}</ul>
+    ${o.skipped?`<p class="note">${o.skipped} row${o.skipped>1?"s were":" was"} skipped because ${g.type==="pts"?"points possible is missing":"the weight is missing"}.</p>`:""}`;
+    if(o.need!=null){const n=o.need;h+=`<h2 style="margin:20px 0 6px;font-size:22px">To finish with ${pct(o.goal)}</h2><div class="big"><b>${n<=0?"0%":pct(n)}</b><span>needed on the remaining ${g.type==="pts"?o.R+" points":pct(o.R)}</span></div>
+      <p class="note">${n<=0?"You've already locked it in, even with zero on the rest.":n>100?`That's over 100%, so it's out of reach. The best you can finish with is ${pct(o.best)}.`:`Doing that keeps you on track. Getting 100% on the rest would give you ${pct(o.best)}.`}</p>`;}
+    h+=`<details><summary>${esc(sc.name)} scale</summary><table><thead><tr><th>Letter</th><th class="n">From</th>${sc.gpa?'<th class="n">GPA</th>':""}</tr></thead><tbody>${sc.rows.map(x=>`<tr class="${o.L&&o.L[0]===x[0]?"hi":""}"><td>${x[0]}</td><td class="n">${x[1]}%</td>${sc.gpa?`<td class="n">${x[2].toFixed(1)}</td>`:""}</tr>`).join("")}</tbody></table></details>`;}
+  $("#out").innerHTML=h;}
+$("#rows").addEventListener("input",e=>{const f=e.target.dataset.f;if(!f)return;g.rows[+e.target.closest(".row").dataset.i][f]=e.target.value;out();});
+$("#rows").addEventListener("click",e=>{const b=e.target.closest("[data-del]");if(!b)return;g.rows.splice(+b.dataset.del,1);if(!g.rows.length)g.rows.push({n:"",g:"",w:""});rows();out();});
+$("#add").addEventListener("click",()=>{g.rows.push({n:"",g:"",w:""});rows();out();$("#rows .row:last-child input").focus();});
+seg($("#type"),v=>{g.type=v;rows();out();});
+$("#scale").addEventListener("change",e=>{g.scale=e.target.value;out();});
+$("#goal").addEventListener("input",e=>{g.goal=e.target.value;out();});$("#rem").addEventListener("input",e=>{g.rem=e.target.value;out();});
+$("#save").addEventListener("click",()=>{const name=$("#cname").value.trim();if(!name){$("#cname").focus();$("#cname").placeholder="Give the course a name first";return;}
+  if(!g.rows.some(r=>r.g||r.w)){$("#rows input[data-f=g]").focus();return;}saveToApp("grades",Object.assign({course:name},g),"grades");});
+rows();out();
+</script>
+</body>
+</html>
