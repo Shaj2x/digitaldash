@@ -1516,6 +1516,25 @@ html.lg .tray-chip{background:var(--glass-tint)}
 .rem-pair input[type=time]{width:auto}
 .room{position:relative;margin-top:18px;display:grid;gap:14px;overflow:hidden}
 .room[hidden]{display:none}
+#fr-body{display:grid;gap:14px}
+.fr-board{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.fr-row{display:grid;grid-template-columns:26px 34px minmax(0,1fr) auto;align-items:center;gap:10px;padding:8px 10px;border-radius:12px;background:var(--panel2)}
+.fr-row.me{box-shadow:inset 0 0 0 1.5px color-mix(in srgb,var(--accent) 60%,transparent)}
+.fr-rank{font:700 15px/1 var(--ui);color:var(--muted);text-align:center;font-variant-numeric:tabular-nums}
+.fr-row:first-child .fr-rank{color:var(--accent)}
+.fr-nm{min-width:0;display:grid;gap:5px}
+.fr-nm b{font-size:14.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.fr-bar{height:6px;border-radius:3px;background:color-mix(in srgb,var(--ink) 10%,transparent);overflow:hidden}
+.fr-bar i{display:block;height:100%;background:var(--accent);transform-origin:0 50%;transition:transform var(--t-move,280ms) var(--ease-out)}
+.fr-val{text-align:right;font-variant-numeric:tabular-nums;font-weight:700;font-size:14px}
+.fr-val small{display:block;font-weight:500;color:var(--muted);font-size:12px}
+.fr-req{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:10px;border-radius:12px;border:1px dashed var(--line)}
+.fr-req span{flex:1 1 160px}
+.fr-man{display:grid;gap:6px}
+.fr-man summary{cursor:pointer;font-size:13.5px;color:var(--muted)}
+.fr-man ul{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:6px}
+.fr-man li{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:14px}
+.fr-tools{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap}
 .rm-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap}
 .rm-head h3{margin:0;font-size:16px}
 #rm-body{display:grid;gap:14px}
@@ -1691,6 +1710,10 @@ html.lg .eye{background:var(--glass-tint);box-shadow:inset 0 1px 0 color-mix(in 
       <section class="panel room" id="room" aria-labelledby="rm-h" hidden>
         <div class="rm-head"><div><h3 id="rm-h">Study room</h3><p class="muted" id="rm-sub">Focus alongside friends. See who's working and start timers together.</p></div><div class="rm-hact" id="rm-hact"></div></div>
         <div id="rm-body"></div>
+      </section>
+      <section class="panel room fr" id="friends" aria-labelledby="fr-h" hidden>
+        <div class="rm-head"><div><h3 id="fr-h">Friends</h3><p class="muted" id="fr-sub">Add friends and see who focused most this week.</p></div><div class="rm-hact" id="fr-hact"></div></div>
+        <div id="fr-body"></div>
       </section>
       <section class="panel jukebox" id="jukebox" aria-labelledby="jb-h">
         <div class="jb-head">
@@ -3160,6 +3183,7 @@ function renderTimerTag(){
   sel.value=[...sel.options].some(o=>o.value===cur)?cur:"";
 }
 function logFocus(sec){ /* called when a focus session finishes */
+  if(typeof frReport==="function")frReport();
   const v=S.settings.tmTag||"",t=v.startsWith("t:")?S.tasks.find(x=>x.id===v.slice(2)):null,course=t?t.course||"":v.startsWith("c:")?v.slice(2):"";
   S.focusTags=S.focusTags||[];S.focusTags.push({d:dkey(new Date()),sec,task:t?t.id:"",course});
   if(S.focusTags.length>3000)S.focusTags.splice(0,S.focusTags.length-3000);
@@ -4931,7 +4955,7 @@ async function acInit(){
     if((u&&u.id)!==was)setTimeout(()=>u?acSignedIn():acSignedOut(),0);else acRenderBtn();
   });
   addEventListener("online",()=>{if(AC.user&&acMeta().dirty)acPush();});
-  rmInit();
+  rmInit();frRender();
   document.addEventListener("visibilitychange",()=>{if(!document.hidden)acPull();});
   setInterval(()=>{if(!document.hidden)acPull();},60000);
   acRenderBtn();
@@ -4943,7 +4967,7 @@ function acDirty(){
 }
 async function acSignedIn(){
   if(RM.ch&&RM.me&&RM.me.id!==AC.user.id)rmJoin(RM.code); /* rejoin the room under the account's name */
-  const uid=AC.user.id;AC.state="saving";AC.err="";acRenderBtn();setSync("Syncing…");acRenderDlg();if(!RM.ch)rmRender();
+  const uid=AC.user.id;AC.state="saving";AC.err="";acRenderBtn();setSync("Syncing…");acRenderDlg();if(!RM.ch)rmRender();frLoad();
   const {data:row,error}=await AC.sb.from("dash_state").select("data,rev,device,updated_at").eq("user_id",uid).maybeSingle();
   if(error){AC.state="error";AC.err=/relation|does not exist|schema cache|not find/i.test(error.message)?"Cloud saving isn't set up on this site yet. The Supabase database setup (dash_state) needs to be run once.":error.message;setSync("Saved on this device");acRenderBtn();acRenderDlg();return;}
   const m=acMeta(),same=m.uid===uid;
@@ -4964,7 +4988,7 @@ async function acSignedIn(){
 }
 function acSignedOut(){
   clearTimeout(AC.timer);clearTimeout(AC.retry);AC.rev=0;AC.state=AC.sb?"out":AC.state;AC.err="";AC.confirmDel=false;AC.imgGet.clear();
-  setSync("Saved on this device");acRenderBtn();acRenderDlg();if(!RM.ch)rmRender();remRender();
+  setSync("Saved on this device");acRenderBtn();acRenderDlg();if(!RM.ch)rmRender();remRender();FR.prof=null;FR.list=[];FR.board=[];FR.state="idle";frRender();
 }
 function acApply(row){
   AC.applying=true;
@@ -5288,6 +5312,98 @@ function rmTick(){
   if(RM.group&&RM.group.ends<=Date.now()){RM.group=null;rmPush();}
   if(document.visibilityState==="visible"&&$("#v-focus").classList.contains("on"))rmRender();
 }
+
+/* ---------- friends and the weekly focus leaderboard ----------
+   Needs supabase/migrations/20261020120000_digital_dash_friends.sql. Everything goes through RPCs that
+   only show you yourself and people you've accepted (or who sent you a request): dash_profile_save,
+   dash_friend_add (by 8-character code), dash_friend_respond, dash_friend_remove, dash_friends_list,
+   dash_focus_report (this week's totals, sent after each focus session) and dash_leaderboard.
+   Invite links are digital-dash.html?friend=CODE. */
+var FR={prof:null,list:[],board:[],wk:0,state:"idle",err:"",missing:false,code:"",rep:0};
+{const q=new URLSearchParams(location.search),c=q.get("friend");if(c){FR.code=c.replace(/[^A-Za-z0-9]/g,"").toUpperCase().slice(0,8);q.delete("friend");try{history.replaceState(null,"",location.pathname+(q.toString()?"?"+q:"")+location.hash);}catch(e){}}}
+const frFmt=c=>c?c.slice(0,4)+"-"+c.slice(4):"";
+const frWeek=off=>dkey(addDays(weekStart(new Date()),-7*(off||0)));
+async function frRpc(fn,args){const {data,error}=await AC.sb.rpc(fn,args||{});if(error){if(/PGRST202|42883|does not exist|Could not find the function/i.test((error.code||"")+" "+error.message))FR.missing=true;throw error;}return data;}
+async function frLoad(){
+  if(!AC.sb||!AC.user){frRender();return;}
+  FR.state="loading";frRender();
+  try{
+    const {data:pr,error}=await AC.sb.from("dash_profiles").select("name,code,share_focus").eq("user_id",AC.user.id).maybeSingle();
+    if(error){if(/42P01|PGRST205|does not exist|schema cache/i.test((error.code||"")+" "+error.message))FR.missing=true;throw error;}
+    FR.prof=pr||null;
+    if(FR.prof){frReport(true);const [list,board]=await Promise.all([frRpc("dash_friends_list"),frRpc("dash_leaderboard",{p_week:frWeek(FR.wk)})]);FR.list=list||[];FR.board=board||[];
+      if(FR.code){const c=FR.code;FR.code="";await frAdd(c,true);return;}}
+    FR.state="ok";FR.err="";
+  }catch(e){FR.state="error";FR.err=FR.missing?"":"Couldn't load friends. Check your connection.";}
+  frRender();
+}
+/* send this week's (and last week's) totals; quiet unless signed in with a profile */
+function frReport(now){
+  if(!AC.user||!FR.prof||FR.missing)return;clearTimeout(FR.rep);
+  FR.rep=setTimeout(async()=>{try{for(const off of [0,1]){const st=weekStats(addDays(weekStart(new Date()),-7*off));
+    await frRpc("dash_focus_report",{p_week:frWeek(off),p_minutes:Math.round(st.focusMin),p_sessions:st.sessions});}
+    if(!$("#friends").hidden&&FR.prof){FR.board=await frRpc("dash_leaderboard",{p_week:frWeek(FR.wk)})||[];frRender();}}catch(e){}},now?0:1500);
+}
+async function frAdd(code,fromLink){
+  const c=String(code||"").replace(/[^A-Za-z0-9]/g,"").toUpperCase();if(c.length!==8){toast("Friend codes have 8 letters and numbers, like ABCD-2345");return;}
+  try{const r=await frRpc("dash_friend_add",{p_code:c});
+    const msg={sent:"Request sent. You'll both see each other once they accept",accepted:"You're now friends",already:"You're already friends",pending:"Your request is still waiting",self:"That's your own code",not_found:"No one has that code. Check it and try again",too_many:"You have a lot of requests waiting. Cancel some first",no_profile:"Set your name first"}[r]||"Done";
+    toast(msg);if(fromLink&&r!=="self")show("focus");
+    [FR.list,FR.board]=await Promise.all([frRpc("dash_friends_list"),frRpc("dash_leaderboard",{p_week:frWeek(FR.wk)})]);FR.state="ok";
+  }catch(e){toast(FR.missing?"Friends isn't switched on for this site yet":"Couldn't send that. Check your connection.");}
+  frRender();
+}
+function frRender(){
+  const sec=$("#friends");if(!sec)return;
+  const avail=AC.state!=="loading"&&AC.state!=="unavailable"&&AC.sb;sec.hidden=!avail||FR.missing;if(sec.hidden)return;
+  const body=$("#fr-body"),hact=$("#fr-hact"),sub=$("#fr-sub");
+  if(!AC.user){sub.textContent=FR.code?"Someone invited you to be friends. Sign in to accept.":"Add friends and see who focused most this week.";hact.innerHTML="";
+    body.innerHTML=`<div class="fr-tools"><p class="muted" style="margin:0">Friends and the weekly leaderboard need an account, so your friends can find you.</p><button type="button" class="btn" data-fr="signin">Sign in</button></div>`;return;}
+  if(FR.state==="loading"&&!FR.prof){body.innerHTML=`<p class="muted" style="margin:0">Loading…</p>`;hact.innerHTML="";return;}
+  if(FR.state==="error"&&!FR.prof){body.innerHTML=`<div class="fr-tools"><p class="muted" style="margin:0">${esc(FR.err)}</p><button type="button" class="btn ghost small" data-fr="retry">Try again</button></div>`;return;}
+  if(!FR.prof){const m=AC.user.user_metadata||{},guess=(m.full_name||m.name||"").split(" ")[0]||"";
+    sub.textContent=FR.code?"Pick the name your friend will see, then you're connected.":"Add friends and see who focused most this week.";hact.innerHTML="";
+    body.innerHTML=`<form class="rm-join" id="fr-start" autocomplete="off"><label class="rm-f"><span>Your name</span><input type="text" id="fr-name" maxlength="40" value="${esc(guess)}" placeholder="What friends see" required></label><div class="rm-btns"><button class="btn" type="submit">Turn on friends</button></div></form>
+      <p class="ac-priv">Friends only see your name and your weekly focus time. You choose who to add, and you can turn sharing off.</p>`;return;}
+  const P=FR.prof,inc=FR.list.filter(x=>x.state==="incoming"),out=FR.list.filter(x=>x.state==="outgoing"),fr=FR.list.filter(x=>x.state==="friend");
+  sub.textContent=fr.length?`${fr.length} friend${fr.length===1?"":"s"} · ${FR.wk?"last week":"this week"}`:"Share your code to add your first friend.";
+  hact.innerHTML=`<span class="rm-code" title="Your friend code">${frFmt(P.code)}</span><button type="button" class="btn ghost small" data-fr="invite">Copy invite</button>`;
+  const max=Math.max(1,...FR.board.map(x=>x.minutes));
+  body.innerHTML=`
+    ${inc.map(x=>`<div class="fr-req"><span><b>${esc(x.name)}</b> wants to be friends</span><button type="button" class="btn small" data-fr="accept" data-id="${x.user_id}">Accept</button><button type="button" class="btn ghost small" data-fr="decline" data-id="${x.user_id}">Decline</button></div>`).join("")}
+    <div class="fr-tools"><div class="seg" id="fr-wk" role="group" aria-label="Leaderboard week"><button type="button" data-w="0" aria-pressed="${!FR.wk}">This week</button><button type="button" data-w="1" aria-pressed="${!!FR.wk}">Last week</button></div></div>
+    ${FR.board.length>1||fr.length?`<ol class="fr-board" aria-label="Focus time leaderboard">${FR.board.map((x,i)=>`<li class="fr-row${x.is_me?" me":""}"><span class="fr-rank" aria-label="Rank ${i+1}">${i+1}</span><span class="rm-av" style="--h:${rmHue(x.user_id)}" aria-hidden="true">${esc((x.name||"?").charAt(0).toUpperCase())}</span><span class="fr-nm"><b>${esc(x.name)}${x.is_me?" (you)":""}</b><span class="fr-bar" aria-hidden="true"><i style="transform:scaleX(${(x.minutes/max).toFixed(4)})"></i></span></span><span class="fr-val">${fmtMins(x.minutes)}<small>${x.sessions} session${x.sessions===1?"":"s"}</small></span></li>`).join("")}</ol>`
+      :`<p class="muted" style="margin:0">No friends yet. Send someone your invite link, or add their code below.</p>`}
+    <form class="rm-join" id="fr-add" autocomplete="off"><label class="rm-f"><span>Add a friend by code</span><input type="text" id="fr-code" maxlength="9" placeholder="ABCD-2345" autocapitalize="characters" spellcheck="false"></label><div class="rm-btns"><button class="btn ghost" type="submit">Add</button></div></form>
+    ${out.length?`<p class="muted" style="margin:0;font-size:13.5px">Waiting on ${out.map(x=>`${esc(x.name)} <button type="button" class="btn ghost small" data-fr="cancel" data-id="${x.user_id}" aria-label="Cancel request to ${esc(x.name)}">Cancel</button>`).join(" ")}</p>`:""}
+    <details class="fr-man"><summary>Settings and friends</summary>
+      <label class="tm-ck" style="margin-top:8px"><input type="checkbox" id="fr-share"${P.share_focus?" checked":""}> Show my focus time to friends</label>
+      <form class="rm-join" id="fr-rename" autocomplete="off" style="margin-top:8px"><label class="rm-f"><span>Your name</span><input type="text" id="fr-name2" maxlength="40" value="${esc(P.name)}"></label><div class="rm-btns"><button class="btn ghost small" type="submit">Save name</button></div></form>
+      ${fr.length?`<ul>${fr.map(x=>`<li><span>${esc(x.name)}</span><button type="button" class="btn ghost small" data-fr="remove" data-id="${x.user_id}" data-n="${esc(x.name)}">Remove</button></li>`).join("")}</ul>`:""}
+    </details>`;
+  initSeg($("#fr-wk"));
+}
+$("#friends").addEventListener("submit",async e=>{e.preventDefault();const f=e.target;
+  if(f.id==="fr-add"){const c=$("#fr-code").value;$("#fr-code").value="";frAdd(c);return;}
+  const nm=(f.id==="fr-start"?$("#fr-name"):$("#fr-name2")).value.trim();if(!nm){toast("Add a name first");return;}
+  try{FR.prof=(await frRpc("dash_profile_save",{p_name:nm}))||FR.prof;toast(f.id==="fr-start"?"Friends is on. Share your code to add people":"Name saved");frLoad();}catch(err){toast("Couldn't save that. Check your connection.");}});
+$("#friends").addEventListener("change",async e=>{if(e.target.id!=="fr-share")return;const on=e.target.checked;
+  try{FR.prof=(await frRpc("dash_profile_save",{p_name:FR.prof.name,p_share:on}))||FR.prof;toast(on?"Friends can see your focus time":"Your focus time is hidden from friends");FR.board=await frRpc("dash_leaderboard",{p_week:frWeek(FR.wk)})||[];frRender();}
+  catch(err){e.target.checked=!on;toast("Couldn't change that. Check your connection.");}});
+$("#friends").addEventListener("click",async e=>{
+  const w=e.target.closest("#fr-wk button[data-w]");if(w){FR.wk=+w.dataset.w;try{FR.board=await frRpc("dash_leaderboard",{p_week:frWeek(FR.wk)})||[];}catch(err){}frRender();const nb=$(`#fr-wk [data-w="${FR.wk}"]`);if(nb)nb.focus();return;}
+  const b=e.target.closest("[data-fr]");if(!b)return;const a=b.dataset.fr,id=b.dataset.id;
+  if(a==="signin"){acOpen();return;}if(a==="retry"){frLoad();return;}
+  if(a==="invite"){const url=location.origin+location.pathname+"?friend="+FR.prof.code;
+    if(navigator.share&&matchMedia("(pointer: coarse)").matches){try{await navigator.share({title:"Be my friend on Digital Dash",text:"Let's see who focuses more this week",url});return;}catch(err){if(err&&err.name==="AbortError")return;}}
+    try{await navigator.clipboard.writeText(url);toast("Invite link copied");}catch(err){prompt("Copy your invite link:",url);}return;}
+  try{
+    if(a==="accept"||a==="decline"){await frRpc("dash_friend_respond",{p_other:id,p_accept:a==="accept"});toast(a==="accept"?"You're now friends":"Request declined");}
+    else if(a==="cancel"){await frRpc("dash_friend_remove",{p_other:id});toast("Request cancelled");}
+    else if(a==="remove"){if(!confirm(`Remove ${b.dataset.n} from your friends?`))return;await frRpc("dash_friend_remove",{p_other:id});toast("Friend removed");}
+    [FR.list,FR.board]=await Promise.all([frRpc("dash_friends_list"),frRpc("dash_leaderboard",{p_week:frWeek(FR.wk)})]);frRender();
+  }catch(err){toast("Couldn't do that. Check your connection.");}
+});
 function rmInit(){
   const st=lsGet(RMK)||{};RM.share=!!st.share;RM.follow=st.follow!==false;
   const q=new URLSearchParams(location.search),inv=rmClean(q.get("room"));
