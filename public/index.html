@@ -213,73 +213,25 @@ footer nav{display:flex;gap:18px;margin-left:auto;flex-wrap:wrap}
 footer a{text-decoration:none}
 footer a:hover{color:var(--ink)}
 
-/* ---------- opening intro: about 6 seconds, once per visitor, skippable ---------- */
-#intro{position:fixed;inset:0;z-index:300;display:none;color:#EFEEE8;font-family:var(--display);overflow:hidden;cursor:pointer}
+/* ---------- first visit: the DD mark slams together, then splits open into the site (about 2 s) ---------- */
+#intro{position:fixed;inset:0;z-index:300;display:none;overflow:hidden;cursor:pointer}
 #intro.on{display:block}
-#intro .ip{position:absolute;top:0;bottom:0;width:50.5%;background:#1B1B1B;animation:ipOut .7s cubic-bezier(.7,0,.2,1) 5.4s forwards}
+#intro .ip{position:absolute;top:0;bottom:0;width:50.5%;background:#1B1B1B;animation:ipOut .75s cubic-bezier(.75,0,.2,1) 1.25s forwards}
 #intro .ip.l{left:0;--x:-102%}#intro .ip.r{right:0;--x:102%}
 @keyframes ipOut{to{transform:translateX(var(--x))}}
-#intro .grain{position:absolute;inset:0;opacity:.12;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");animation:fade .3s ease 5.3s forwards}
-#intro .sc{position:absolute;inset:0;display:grid;place-items:center;opacity:0}
+#intro .grain{position:absolute;inset:0;opacity:.12;mix-blend-mode:overlay;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");animation:fade .4s ease 1.3s forwards}
 @keyframes fade{to{opacity:0}}
-/* scene 1: the two halves of the mark slam together, then the wordmark stamps in */
-#intro .s1{animation:sIn .01s linear 0s forwards,sOut .25s ease 1.95s forwards}
-@keyframes sIn{to{opacity:1}}@keyframes sOut{to{opacity:0;visibility:hidden}}
-#intro .mark2{position:relative;width:min(34vw,220px);aspect-ratio:1084/921;margin-bottom:6vh}
+#intro .mark2{position:absolute;left:50%;top:50%;width:min(36vw,230px);aspect-ratio:1084/921;transform:translate(-50%,-50%);animation:shake .25s ease .7s}
 #intro .mark2 i{position:absolute;inset:0;background:#EFEEE8;-webkit-mask:url(/brand/dd-mark-256.png) center/contain no-repeat;mask:url(/brand/dd-mark-256.png) center/contain no-repeat}
-#intro .mark2 .hl{clip-path:inset(0 50% 0 0);transform:translateX(-60vw);animation:slamL .55s cubic-bezier(.6,0,.1,1) .15s forwards}
-#intro .mark2 .hr{clip-path:inset(0 0 0 50%);transform:translateX(60vw);animation:slamR .55s cubic-bezier(.6,0,.1,1) .15s forwards}
+#intro .mark2 .hl{clip-path:inset(0 50% 0 0);transform:translateX(-60vw);animation:slamL .55s cubic-bezier(.6,0,.1,1) .15s forwards,splitL .75s cubic-bezier(.75,0,.2,1) 1.25s forwards}
+#intro .mark2 .hr{clip-path:inset(0 0 0 50%);transform:translateX(60vw);animation:slamR .55s cubic-bezier(.6,0,.1,1) .15s forwards,splitR .75s cubic-bezier(.75,0,.2,1) 1.25s forwards}
 @keyframes slamL{to{transform:none}}@keyframes slamR{to{transform:none}}
-#intro .s1 .mark2{animation:shake .25s ease .7s}
-@keyframes shake{25%{transform:translate(-6px,2px) rotate(-1deg)}50%{transform:translate(5px,-2px)}75%{transform:translate(-3px,1px)}}
-#intro .word{position:absolute;top:calc(50% + min(14vw,92px));left:50%;transform:translateX(-50%) scale(1.6);opacity:0;font-weight:900;font-size:clamp(28px,6vw,56px);letter-spacing:.22em;text-transform:uppercase;white-space:nowrap;animation:stampIn .3s cubic-bezier(.2,.9,.3,1.2) 1.0s forwards}
-@keyframes stampIn{to{opacity:1;transform:translateX(-50%) scale(1)}}
-/* scene 2: the promise, with the screen wiping through the themes */
-#intro .s2{animation:sIn .01s linear 2.05s forwards,sOut .2s ease 3.85s forwards}
-#intro .wipe{position:absolute;inset:0;transform:translateY(100%)}
-#intro .w1{background:#141220;animation:wipe .5s cubic-bezier(.7,0,.2,1) 2.05s forwards}
-#intro .w2{background:#0B1226;animation:wipe .5s cubic-bezier(.7,0,.2,1) 2.65s forwards}
-#intro .w3{background:#F6EEF1;animation:wipe .5s cubic-bezier(.7,0,.2,1) 3.25s forwards}
-@keyframes wipe{to{transform:none}}
-#intro .ph{position:absolute;font-weight:900;text-transform:uppercase;font-size:clamp(56px,14vw,190px);line-height:.85;letter-spacing:.01em;text-align:center;opacity:0}
-#intro .p1{color:#FFB547;animation:pop .6s ease 2.15s forwards}
-#intro .p2{color:#6FD3FF;animation:pop .6s ease 2.75s forwards}
-#intro .p3{color:#C2416F;animation:pop3 .7s ease 3.35s forwards}
-@keyframes pop{0%{opacity:0;transform:scale(1.25) skewX(-6deg)}20%{opacity:1;transform:none}80%{opacity:1}100%{opacity:0;transform:scale(.96)}}
-@keyframes pop3{0%{opacity:0;transform:scale(1.25) skewX(-6deg)}25%{opacity:1;transform:none}100%{opacity:1}}
-/* scene 3: a montage of the app */
-#intro .s3{background:#1B1B1B;animation:sIn .01s linear 3.95s forwards,fade .3s ease 5.3s forwards}
-#intro .tiles{display:grid;grid-template-columns:repeat(3,minmax(0,200px));gap:14px;font-family:"Bricolage Grotesque",system-ui,sans-serif}
-#intro .tl{border:2px solid #EFEEE8;border-radius:6px;padding:14px;min-height:108px;display:grid;align-content:center;gap:6px;box-shadow:5px 5px 0 #EFEEE8;opacity:0;transform:translateY(30px) rotate(-3deg);animation:tile .35s cubic-bezier(.2,.9,.3,1.3) forwards}
-#intro .tl:nth-child(1){animation-delay:4.0s}#intro .tl:nth-child(2){animation-delay:4.1s}#intro .tl:nth-child(3){animation-delay:4.2s}#intro .tl:nth-child(4){animation-delay:4.3s}#intro .tl:nth-child(5){animation-delay:4.4s}#intro .tl:nth-child(6){animation-delay:4.5s}
-@keyframes tile{to{opacity:1;transform:none}}
-#intro .tl small{font-size:11px;letter-spacing:.12em;text-transform:uppercase;opacity:.7;font-weight:700}
-#intro .tl b{font:900 30px/1 var(--display)}
-#intro .tl .sw3{display:flex;gap:6px}#intro .tl .sw3 i{width:22px;height:22px;border-radius:50%;border:2px solid #EFEEE8}
-#intro .tl .bars{display:flex;align-items:end;gap:4px;height:40px}#intro .tl .bars i{flex:1;background:#EFEEE8;border-radius:2px;transform-origin:bottom;transform:scaleY(0);animation:bar .4s ease forwards}
-@keyframes bar{to{transform:none}}
-#intro .tl .stp{justify-self:start;transform:rotate(-8deg);border:2.5px solid #EFEEE8;padding:3px 7px;font:900 16px/1 var(--display);letter-spacing:.1em}
-#intro .skip2{position:absolute;right:20px;bottom:calc(20px + env(safe-area-inset-bottom,0px));z-index:5;font:700 14px/1 "Bricolage Grotesque",system-ui,sans-serif;color:#EFEEE8;background:rgba(0,0,0,.6);border:1.5px solid rgba(239,238,232,.6);border-radius:999px;padding:10px 16px;cursor:pointer;animation:fade .3s ease 5.3s forwards}
-#intro .bar2{position:absolute;left:0;bottom:0;height:3px;background:#EFEEE8;width:0;z-index:5;animation:prog 5.4s linear forwards,fade .2s ease 5.3s forwards}
-@keyframes prog{to{width:100%}}
-@media (max-width:640px){#intro .tiles{grid-template-columns:repeat(2,minmax(0,160px))}#intro .tl:nth-child(n+5){display:none}}
+@keyframes splitL{from{transform:none}to{transform:translateX(-52vw)}}@keyframes splitR{from{transform:none}to{transform:translateX(52vw)}}
+@keyframes shake{0%,100%{transform:translate(-50%,-50%)}25%{transform:translate(calc(-50% - 6px),calc(-50% + 2px)) rotate(-1deg)}50%{transform:translate(calc(-50% + 5px),calc(-50% - 2px))}75%{transform:translate(calc(-50% - 3px),calc(-50% + 1px))}}
 </style>
 </head>
 <body>
-<div id="intro" aria-hidden="true">
-  <div class="ip l"></div><div class="ip r"></div><div class="grain"></div>
-  <div class="sc s1"><div class="mark2"><i class="hl"></i><i class="hr"></i></div><div class="word">Digital Dash</div></div>
-  <div class="sc s2"><div class="wipe w1"></div><div class="wipe w2"></div><div class="wipe w3"></div><div class="ph p1">Plan it.</div><div class="ph p2">Focus.</div><div class="ph p3">Make it<br>yours.</div></div>
-  <div class="sc s3"><div class="tiles">
-    <div class="tl"><small>Focus</small><b id="i-time">25:00</b></div>
-    <div class="tl"><small>Tasks</small><b>3 done</b></div>
-    <div class="tl"><small>This week</small><div class="bars"><i style="height:40%;animation-delay:4.35s"></i><i style="height:70%;animation-delay:4.4s"></i><i style="height:100%;animation-delay:4.45s"></i><i style="height:30%;animation-delay:4.5s"></i><i style="height:60%;animation-delay:4.55s"></i></div></div>
-    <div class="tl"><small>Grades</small><b>89.5%</b></div>
-    <div class="tl"><small>Gym</small><span class="stp">New PR</span></div>
-    <div class="tl"><small>Themes</small><div class="sw3"><i style="background:#1B1B1B"></i><i style="background:#FFB547"></i><i style="background:#6FD3FF"></i><i style="background:#C2416F"></i></div></div>
-  </div></div>
-  <button type="button" class="skip2" id="intro-skip" tabindex="-1">Skip intro</button><div class="bar2"></div>
-</div>
+<div id="intro" aria-hidden="true"><div class="ip l"></div><div class="ip r"></div><div class="grain"></div><div class="mark2"><i class="hl"></i><i class="hr"></i></div></div>
 <a class="skip" href="#main">Skip to content</a>
 <header class="nav">
   <div class="wrap">
@@ -382,7 +334,7 @@ footer a:hover{color:var(--ink)}
 
   <div class="cta-end wrap"><span class="mk" aria-hidden="true"></span><h2>Make it yours.</h2><p>Open it now. It takes seconds.</p><div class="ctas"><a class="btn pri big" href="/digital-dash.html">Open Digital Dash</a></div></div>
 </main>
-<footer><div class="wrap"><span class="mk" aria-hidden="true"></span><span>© <span id="yr"></span> Digital Dash</span><nav aria-label="Footer"><a href="#" id="intro-again">Watch the intro</a><a href="/digital-dash.html">Open app</a><a href="/digital-dash-privacy.html">Privacy</a><a href="https://github.com/Shaj2x/digitaldash">GitHub</a></nav></div></footer>
+<footer><div class="wrap"><span class="mk" aria-hidden="true"></span><span>© <span id="yr"></span> Digital Dash</span><nav aria-label="Footer"><a href="/digital-dash.html">Open app</a><a href="/digital-dash-privacy.html">Privacy</a><a href="https://github.com/Shaj2x/digitaldash">GitHub</a></nav></div></footer>
 <script>
 (()=>{
   const $=s=>document.querySelector(s);
@@ -441,18 +393,12 @@ footer a:hover{color:var(--ink)}
     const rows=[...document.querySelectorAll(".d-tasks span")];let ti=0;setInterval(()=>{if(ti<rows.length)rows[ti++].classList.add("dn");else{rows.forEach(r=>r.classList.remove("dn"));ti=0;}},1400);
     const nw=$("#d-nw"),eye=$("#d-eye");let hid=false;setInterval(()=>{hid=!hid;nw.classList.toggle("hid",hid);eye.textContent=hid?"Hidden. Tap to show":"Tap the eye to hide";},2200);
   }
-  /* opening intro: first visit only, never for reduced motion; skip with the button, a tap or Esc */
-  const intro=$("#intro");let introT=0,introTick=0;
-  function introEnd(){const intro=$("#intro");if(!intro.classList.contains("on"))return;intro.classList.remove("on");clearTimeout(introT);clearInterval(introTick);document.documentElement.style.overflow="";ls.set("dd.intro","1");}
-  function introStart(){const el=$("#intro");el.classList.remove("on");void el.offsetWidth;el.querySelectorAll("*").forEach(n=>{n.style.animation="none";void n.offsetWidth;n.style.animation="";});
-    el.classList.add("on");document.documentElement.style.overflow="hidden";let t=25*60;const it=$("#i-time");clearInterval(introTick);
-    setTimeout(()=>{introTick=setInterval(()=>{t-=37;it.textContent=`${Math.floor(t/60)}:${String(t%60).padStart(2,"0")}`;},60);},4000);
-    clearTimeout(introT);introT=setTimeout(introEnd,6150);}
-  intro.addEventListener("click",introEnd);addEventListener("keydown",e=>{if(e.key==="Escape")introEnd();});
-  const rm=matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if(!rm&&!ls.get("dd.intro"))introStart();
-  if(rm)$("#intro-again").hidden=true;
-  $("#intro-again").addEventListener("click",e=>{e.preventDefault();scrollTo(0,0);introStart();});
+  /* first-ever visit: the DD mark splits open into the site. Tap or Esc ends it early; never with reduced motion */
+  const intro=$("#intro");let introT=0;
+  function introEnd(){if(!intro.classList.contains("on"))return;intro.classList.remove("on");clearTimeout(introT);document.documentElement.style.overflow="";}
+  if(!matchMedia("(prefers-reduced-motion: reduce)").matches&&!ls.get("dd.intro")&&!returning){
+    ls.set("dd.intro","1");intro.classList.add("on");document.documentElement.style.overflow="hidden";introT=setTimeout(introEnd,2050);
+    intro.addEventListener("click",introEnd);addEventListener("keydown",e=>{if(e.key==="Escape")introEnd();});}
   /* install help */
   let deferred=null;addEventListener("beforeinstallprompt",e=>{e.preventDefault();deferred=e;});
   const ios=/iPhone|iPad|iPod/.test(navigator.userAgent)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1);
