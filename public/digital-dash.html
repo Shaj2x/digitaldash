@@ -1020,6 +1020,20 @@ html.lg .cal-list li{background:var(--glass-tint)}
 .acd{padding:0;border:0;background:none;width:min(560px,calc(100vw - 24px));max-height:min(86vh,760px);margin:8vh auto auto;overflow:visible;color:var(--ink)}
 .acd-sm{width:min(460px,calc(100vw - 24px))}
 #look .acd-body{padding-top:22px}
+.rc-d{width:min(820px,calc(100vw - 24px))}
+.rc-body{grid-template-columns:minmax(0,300px) minmax(0,1fr);align-items:start;gap:22px}
+.rc-prev{border-radius:calc(var(--r) + 4px);overflow:hidden;box-shadow:0 20px 50px -24px rgba(0,0,0,.6);border:1px solid var(--line);line-height:0}
+.rc-prev canvas{width:100%;height:auto;display:block}
+.rc-ctl{display:grid;gap:14px;align-content:start}
+.rc-per{flex-wrap:wrap}
+.rc-show{border:0;padding:0;margin:0;display:grid;gap:8px}
+.rc-show legend{font-weight:600;font-size:14px;margin-bottom:8px;padding:0}
+#rc-opts{display:flex;flex-wrap:wrap;gap:8px}
+#rc-opts label{display:inline-flex;align-items:center;gap:7px;min-height:36px;padding:0 12px;border:1px solid var(--line);border-radius:999px;font-size:14px;cursor:pointer}
+#rc-opts input{accent-color:var(--accent);width:16px;height:16px;margin:0}
+.rc-act{display:flex;gap:10px;flex-wrap:wrap}
+.wk-recap{display:inline-flex;align-items:center;gap:7px;margin-left:auto}
+@media (max-width:640px){.rc-body{grid-template-columns:1fr}.rc-prev{max-width:240px;margin:0 auto}}
 .look-sw{display:flex;gap:8px;align-items:center;padding:14px;border-radius:var(--r);border:1px solid var(--line)}
 .look-sw b{font-size:17px}.look-sw small{display:block;color:var(--muted);font-size:13px;margin-top:2px}
 .look-act{display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap}
@@ -1989,6 +2003,22 @@ html.lg .eye{background:var(--glass-tint);box-shadow:inset 0 1px 0 color-mix(in 
 </dialog>
 <dialog class="acd acd-sm" id="tour" aria-labelledby="tour-h">
   <div class="acd-in"><div class="acd-body" id="tour-body"></div></div>
+</dialog>
+<dialog class="acd rc-d" id="recap" aria-labelledby="recap-h">
+  <div class="acd-in">
+    <div class="acd-top"><h2 id="recap-h">Share a recap</h2><button class="icon-btn" type="button" data-rc="close" aria-label="Close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
+    <div class="acd-body rc-body">
+      <div class="rc-prev"><canvas id="rc-cv" width="1080" height="1920" role="img" aria-label="Recap image"></canvas></div>
+      <div class="rc-ctl">
+        <div class="seg rc-per" id="rc-per" role="group" aria-label="Recap period"><button type="button" data-p="week" aria-pressed="true">This week</button><button type="button" data-p="last" aria-pressed="false">Last week</button><button type="button" data-p="month" aria-pressed="false">Month</button><button type="button" data-p="term" aria-pressed="false">Term</button></div>
+        <fieldset class="rc-show"><legend>Show on the card</legend><div id="rc-opts"></div></fieldset>
+        <p class="sr-only" id="rc-alt" aria-live="polite"></p>
+        <p class="hint" id="rc-note"></p>
+        <div class="rc-act"><button type="button" class="btn" data-rc="share">Share</button><button type="button" class="btn ghost" data-rc="save">Save image</button></div>
+        <p class="hint">Sized for Instagram and TikTok stories, in your theme. Nothing is uploaded: the image is made on your device.</p>
+      </div>
+    </div>
+  </div>
 </dialog>
 <dialog class="acd acd-sm" id="look" aria-labelledby="look-h">
   <div class="acd-in"><div class="acd-body" id="look-body"></div></div>
@@ -3385,6 +3415,7 @@ function renderWeek(){
       <button class="icon-btn" data-wk="-1" aria-label="Previous week"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 6-6 6 6 6"/></svg></button>
       <h2>${isThis?"This week":"Week of "+wkStart.toLocaleDateString(undefined,{month:"short",day:"numeric"})}<small>${range}</small></h2>
       <button class="btn ghost small" data-wk="0"${isThis?" hidden":""}>This week</button>
+      <button class="btn small wk-recap" type="button" data-recap aria-haspopup="dialog"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7M16 6l-4-4-4 4M12 2v13"/></svg>Share recap</button>
       <button class="icon-btn" data-wk="1" aria-label="Next week"${isThis?" disabled":""}><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 6 6 6-6 6"/></svg></button>
     </div>
     <div class="wk-kpis">
@@ -3414,7 +3445,104 @@ function setCalMode(m,quiet){
   if(!quiet){const h=m==="week"?"#week":"#calendar";if(location.hash!==h){try{history.pushState(null,"",h);}catch(e){}}}
 }
 $("#cal-mode").addEventListener("click",e=>{const b=e.target.closest("button[data-m]");if(b&&b.dataset.m!==calMode)setCalMode(b.dataset.m);});
-$("#week").addEventListener("click",e=>{const b=e.target.closest("[data-wk]");if(!b)return;const n=+b.dataset.wk;wkStart=n?addDays(wkStart,7*n):weekStart(new Date());renderWeek();});
+$("#week").addEventListener("click",e=>{if(e.target.closest("[data-recap]")){recapOpen(dkey(wkStart)===dkey(weekStart(new Date()))?"week":"last");return;}const b=e.target.closest("[data-wk]");if(!b)return;const n=+b.dataset.wk;wkStart=n?addDays(wkStart,7*n):weekStart(new Date());renderWeek();});
+
+/* ---------- recap card ----------
+   A 1080×1920 story image of a week, month or term, drawn on a canvas in the user's own theme colours
+   and fonts: focus time with a per-day (or per-week) bar chart, then tasks finished, best day, top
+   course, streak and workouts, each of which can be left off. Made on the device; Share uses the Web
+   Share API with the PNG when the browser can, otherwise it downloads. */
+const RC={per:"week",hide:new Set((()=>{try{return JSON.parse(localStorage.getItem("digitaldash.rchide")||"[]");}catch(e){return [];}})())};
+const rcA=(h,a)=>{h=String(h).replace("#","");if(h.length===3)h=h.split("").map(ch=>ch+ch).join("");const n=parseInt(h.slice(0,6),16);return `rgba(${n>>16&255},${n>>8&255},${n&255},${a})`;};
+function rcRange(per){const now=new Date(),d0=new Date(now.getFullYear(),now.getMonth(),now.getDate());
+  if(per==="week")return {a:weekStart(d0),b:addDays(weekStart(d0),7),title:"My week",bucket:"day"};
+  if(per==="last"){const a=addDays(weekStart(d0),-7);return {a,b:addDays(a,7),title:"My week",bucket:"day"};}
+  if(per==="month"){const a=new Date(now.getFullYear(),now.getMonth(),1);return {a,b:new Date(now.getFullYear(),now.getMonth()+1,1),title:"My "+a.toLocaleDateString(undefined,{month:"long"}),bucket:"day"};}
+  const m=now.getMonth(),sm=m>=8?8:m>=4?4:0,a=new Date(now.getFullYear(),sm,1);
+  return {a,b:new Date(now.getFullYear(),sm+4,1),title:["My winter term","My summer term","My fall term"][sm/4],bucket:"week"};}
+function rcStats(per){
+  const R=rcRange(per),today=new Date(),end=R.b>today?addDays(new Date(today.getFullYear(),today.getMonth(),today.getDate()),1):R.b,days=[];
+  for(let d=new Date(R.a);d<end;d=addDays(d,1))days.push(d);
+  const keys=days.map(dkey),set=new Set(keys),mins=keys.map(dayFocusMin),s0=R.a.getTime(),e0=end.getTime();
+  const focusMin=mins.reduce((a,b)=>a+b,0),sessions=keys.reduce((n,k)=>n+(S.sessions[k]||0),0),done=S.tasks.filter(t=>t.done&&t.doneAt>=s0&&t.doneAt<e0).length;
+  let bi=-1,bm=0;mins.forEach((m,i)=>{if(m>bm){bm=m;bi=i;}});
+  let run=0,best=0;keys.forEach(k=>{if((S.sessions[k]||0)>0){run++;best=Math.max(best,run);}else run=0;});
+  const by=new Map();(S.focusTags||[]).forEach(x=>{if(!set.has(x.d))return;const t=x.task&&S.tasks.find(y=>y.id===x.task),c=x.course||(t&&t.course);if(c)by.set(c,(by.get(c)||0)+x.sec);});
+  const top=[...by.entries()].sort((a,b)=>b[1]-a[1])[0];
+  const wk=S.gym&&Array.isArray(S.gym.workouts)?S.gym.workouts.filter(w=>w.finished&&set.has(w.date)).length:0;
+  /* chart: one bar per day, or per week for a term (always the whole period, future bars empty) */
+  let bars=[];
+  if(R.bucket==="day"){const wk=R.b-R.a<=7*864e5+36e5;for(let d=new Date(R.a);d<R.b;d=addDays(d,1)){const k=dkey(d);
+    bars.push({v:d<end?dayFocusMin(k):0,l:wk?d.toLocaleDateString(undefined,{weekday:"narrow"}):[1,8,15,22,29].includes(d.getDate())?String(d.getDate()):"",now:k===dkey(today)});}}
+  else{for(let d=new Date(R.a);d<R.b;d=addDays(d,7)){let v=0;for(let i=0;i<7;i++){const x=addDays(d,i);if(x<end&&x<R.b)v+=dayFocusMin(dkey(x));}bars.push({v,l:d.getDate()<=7?d.toLocaleDateString(undefined,{month:"short"}):"",now:today>=d&&today<addDays(d,7)});}}
+  const last=addDays(R.b,-1),range=`${R.a.toLocaleDateString(undefined,{month:"short",day:"numeric"})} – ${last.toLocaleDateString(undefined,R.a.getMonth()===last.getMonth()?{day:"numeric"}:{month:"short",day:"numeric"})}, ${last.getFullYear()}`;
+  return {R,range,focusMin,sessions,done,bestDay:bi>=0?days[bi]:null,bestMin:bm,streak:best,top:top?{name:top[0],min:top[1]/60}:null,workouts:wk,bars};
+}
+const RC_ITEMS=[["tasks","Tasks finished"],["best","Best day"],["course","Top course"],["streak","Streak"],["gym","Workouts"]];
+function rcTiles(st){
+  const t=[];
+  if(!RC.hide.has("tasks"))t.push(["Tasks finished",String(st.done)]);
+  if(!RC.hide.has("best")&&st.bestDay)t.push(["Best day",st.bestDay.toLocaleDateString(undefined,{weekday:st.R.bucket==="day"&&st.R.b-st.R.a<=7*864e5+36e5?"long":"short",...(st.R.b-st.R.a>7*864e5+36e5?{month:"short",day:"numeric"}:{})}),fmtMins(st.bestMin)+" focused"]);
+  if(!RC.hide.has("course")&&st.top)t.push(["Top course",st.top.name,fmtMins(st.top.min)]);
+  if(!RC.hide.has("streak"))t.push(["Longest streak",`${st.streak} day${st.streak===1?"":"s"}`,"in a row"]);
+  if(!RC.hide.has("gym")&&st.workouts)t.push(["Workouts",String(st.workouts)]);
+  return t.slice(0,4);
+}
+let rcMark=null;
+function rcMarkImg(){if(rcMark)return Promise.resolve(rcMark);return new Promise(res=>{const i=new Image();i.onload=()=>{rcMark=i;res(i);};i.onerror=()=>res(null);i.src="/brand/dd-mark-256.png";});}
+async function rcDraw(){
+  const cv=$("#rc-cv"),x=cv.getContext("2d"),W=1080,H=1920,c=currentColors(),st=rcStats(RC.per),tiles=rcTiles(st);
+  const cs=getComputedStyle(document.documentElement),muted=cs.getPropertyValue("--muted").trim()||c.ink;
+  const uf=UIF.find(f=>f[0]===S.settings.uiFont)||UIF[0],cf=CLF.find(f=>f[0]===S.settings.clockFont)||CLF[0];
+  const disp=`'${cf[2]}',${cf[3]}`,body=uf[0]==="system"?"system-ui,sans-serif":`'${uf[2]}',${uf[3]}`;
+  loadFonts([cf[4],uf[4]]);try{await Promise.all([document.fonts.load(`700 120px '${cf[2]}'`),document.fonts.load(`700 40px '${uf[2]}'`)]);}catch(e){}
+  const mark=await rcMarkImg();
+  const fit=(t,font,size,max)=>{let s2=size;do{x.font=font.replace("$",s2);if(x.measureText(t).width<=max)break;s2-=4;}while(s2>20);return s2;};
+  const rr=(X,Y,w,h,r)=>{x.beginPath();x.roundRect?x.roundRect(X,Y,w,h,r):x.rect(X,Y,w,h);};
+  x.clearRect(0,0,W,H);x.fillStyle=c.bg;x.fillRect(0,0,W,H);
+  const g=x.createRadialGradient(W*.85,H*.08,0,W*.85,H*.08,W*.9);g.addColorStop(0,rcA(c.accent,.25));g.addColorStop(1,rcA(c.accent,0));x.fillStyle=g;x.fillRect(0,0,W,H);
+  /* header: the mark and name */
+  if(mark){const o=document.createElement("canvas");o.width=128;o.height=109;const ox=o.getContext("2d");ox.drawImage(mark,0,0,128,109);ox.globalCompositeOperation="source-in";ox.fillStyle=c.ink;ox.fillRect(0,0,128,109);x.drawImage(o,80,96,84,72);}
+  x.fillStyle=c.ink;x.textBaseline="alphabetic";x.font=`800 40px ${disp}`;x.letterSpacing="6px";x.fillText("DIGITAL DASH",184,146);x.letterSpacing="0px";
+  /* title */
+  const title=st.R.title.toUpperCase();fit(title,`900 $px ${disp}`,150,W-160);x.fillText(title,80,330);
+  x.fillStyle=muted;x.font=`500 40px ${body}`;x.fillText(st.range,82,392);
+  /* focus card */
+  rr(60,450,W-120,760,48);x.fillStyle=c.panel;x.fill();
+  x.fillStyle=c.accent;x.font=`700 34px ${body}`;x.letterSpacing="4px";x.fillText("FOCUSED",120,540);x.letterSpacing="0px";
+  x.fillStyle=c.ink;const fm=fmtMins(st.focusMin);fit(fm,`900 $px ${disp}`,230,W-240);x.fillText(fm,116,750);
+  x.fillStyle=muted;x.font=`500 38px ${body}`;x.fillText(`across ${st.sessions} focus session${st.sessions===1?"":"s"}`,120,820);
+  const bx=120,by=880,bw=W-240,bh=260,n=st.bars.length,gap=n>12?6:18,w1=(bw-gap*(n-1))/n,mx=Math.max(1,...st.bars.map(b=>b.v));
+  st.bars.forEach((b,i)=>{const h=b.v?Math.max(10,(bh-50)*b.v/mx):6,X=bx+i*(w1+gap),Y=by+bh-50-h;rr(X,Y,w1,h,Math.min(14,w1/2));x.fillStyle=b.v?c.accent:rcA(c.ink,.13);x.fill();
+    if(b.l){x.fillStyle=b.now?c.ink:muted;x.font=`${b.now?800:600} 28px ${body}`;x.textAlign="center";x.fillText(b.l,X+w1/2,by+bh-6);x.textAlign="left";}});
+  /* tiles */
+  const tw=(W-120-24)/2,th=224;tiles.forEach((t,i)=>{const X=60+(i%2)*(tw+24),Y=1236+Math.floor(i/2)*(th+24);rr(X,Y,tw,th,40);x.fillStyle=c.panel;x.fill();
+    x.fillStyle=muted;x.font=`700 28px ${body}`;x.letterSpacing="3px";x.fillText(t[0].toUpperCase(),X+44,Y+64);x.letterSpacing="0px";
+    x.fillStyle=c.ink;fit(t[1],`900 $px ${disp}`,96,tw-88);x.fillText(t[1],X+42,Y+154);
+    if(t[2]){x.fillStyle=muted;x.font=`500 30px ${body}`;x.fillText(t[2],X+44,Y+198);}});
+  /* footer */
+  x.fillStyle=muted;x.font=`600 32px ${body}`;x.textAlign="center";x.fillText("Made with Digital Dash",W/2,H-120);
+  x.fillStyle=c.ink;x.font=`800 36px ${disp}`;x.letterSpacing="3px";x.fillText(location.host.toUpperCase(),W/2,H-70);x.letterSpacing="0px";x.textAlign="left";
+  /* a faint print grain, like the logo */
+  const gr=x.getImageData(0,0,W,H),px=gr.data;for(let i=0;i<px.length;i+=4){const v=(Math.random()-.5)*14;px[i]+=v;px[i+1]+=v;px[i+2]+=v;}x.putImageData(gr,0,0);
+  const alt=`${st.R.title}, ${st.range}: ${fm} focused across ${st.sessions} sessions. `+tiles.map(t=>`${t[0]}: ${t[1]}${t[2]?" ("+t[2]+")":""}`).join(". ");
+  cv.setAttribute("aria-label",alt);$("#rc-alt").textContent=alt;
+  $("#rc-note").textContent=st.focusMin<1&&!st.done?"Not much here yet. Finish a focus session or tick off a task and it shows up on your card.":"";
+}
+function recapOpen(per){
+  RC.per=per||"week";$$("#rc-per button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.p===RC.per));
+  $("#rc-opts").innerHTML=RC_ITEMS.map(([k,l])=>`<label><input type="checkbox" data-rco="${k}"${RC.hide.has(k)?"":" checked"}>${l}</label>`).join("");
+  const d=$("#recap");try{d.showModal();}catch(e){d.setAttribute("open","");}rcDraw();
+}
+$("#rc-per").addEventListener("click",e=>{const b=e.target.closest("button[data-p]");if(!b)return;RC.per=b.dataset.p;$$("#rc-per button").forEach(x=>x.setAttribute("aria-pressed",x===b));rcDraw();});
+$("#rc-opts").addEventListener("change",e=>{const k=e.target.dataset.rco;if(!k)return;e.target.checked?RC.hide.delete(k):RC.hide.add(k);try{localStorage.setItem("digitaldash.rchide",JSON.stringify([...RC.hide]));}catch(err){}rcDraw();});
+$("#recap").addEventListener("click",async e=>{const b=e.target.closest("[data-rc]");if(!b)return;const a=b.dataset.rc;
+  if(a==="close"){$("#recap").close();return;}
+  const blob=await new Promise(res=>$("#rc-cv").toBlob(res,"image/png"));if(!blob){toast("Couldn't make the image");return;}
+  const file=new File([blob],`digital-dash-${RC.per==="term"?"term":RC.per==="month"?"month":"week"}.png`,{type:"image/png"});
+  if(a==="share"&&navigator.canShare&&navigator.canShare({files:[file]})){try{await navigator.share({files:[file],title:"My Digital Dash recap",text:"My recap from Digital Dash"});return;}catch(err){if(err&&err.name==="AbortError")return;}}
+  const u=URL.createObjectURL(blob),l=document.createElement("a");l.href=u;l.download=file.name;document.body.appendChild(l);l.click();l.remove();setTimeout(()=>URL.revokeObjectURL(u),4000);
+  toast(a==="share"?"Saved the image. Post it from your photos or downloads":"Saved the image");});
 // Tooltip for bars: follows hover and keyboard focus
 const wkTip=document.createElement("div");wkTip.className="wk-tip";wkTip.setAttribute("role","status");document.body.appendChild(wkTip);
 const tipTarget=e=>e.target.closest&&e.target.closest(".bar,.hm-c");
@@ -3843,6 +3971,7 @@ function cmdResults(q){
   if(/^(?:go(?: to)?|open|show)?\s*(?:my )?(?:bmi|calories|calorie calc(?:ulator)?|tdee|bmr|maintenance|cut|bulk|cut or bulk|body)$/.test(lq))R.push({ic:"go",label:"BMI and calories",hint:"Go",run:()=>shortcutLink("bmi")});
   if(/^(?:go(?: to)?|open|show)?\s*(?:gym |lift |my )?(?:progress|prs?|personal records?|plates?|plate calc(?:ulator)?|bodyweight)$/.test(lq))R.push({ic:"go",label:/plate/.test(lq)?"Plate calculator":"Gym progress",hint:"Go",run:()=>shortcutLink(/plate/.test(lq)?"gym":"gym-progress")});
   if(/^(?:go(?: to)?|open|show)?\s*(?:the )?(?:grade|gpa|final(?: exam| grade)?) ?calc(?:ulator)?$|^what do i need on (?:the|my) final$/.test(lq))R.push({ic:"go",label:"Grade calculator",hint:"Go",run:()=>{show("tasks");setTaskMode("courses");crsMode="calc";gcShow();}});
+  if(/^(?:share |make |my )?(?:recap|wrapped|share my (?:week|month|term)|(?:week|month|term)(?:ly)? recap)$/.test(lq))R.push({ic:"go",label:"Share a recap",hint:"Open",run:()=>recapOpen(/month/.test(lq)?"month":/term/.test(lq)?"term":"week")});
   if(/^(?:go(?: to)?|open|show)?\s*(?:the )?(?:archive|archived(?: tasks)?)$/.test(lq))R.push({ic:"go",label:"Archived tasks",hint:"Go",run:()=>{show("tasks");archOpen();}});
   if(/^(?:go(?: to)?|open|show)?\s*(?:week(?:ly)? plan(?:ner)?|plan(?: my)? week|planner)$/.test(lq))R.push({ic:"go",label:"Week plan",hint:"Go",run:()=>shortcutLink("plan")});
   if((m=lq.match(/^(?:go(?: to)?|open|show)?\s*(focus|clock|tasks|todo|calendar|cal|net ?worth|net|money|health|themes|settings|week(?: review)?)$/))){
