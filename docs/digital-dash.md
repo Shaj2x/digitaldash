@@ -411,7 +411,7 @@ The goal is that nothing teleports and nothing waits on you. Rules the code foll
 
 ## Demo video
 
-- Home page > See it in action (`#demo`). `public/media/digital-dash-demo.mp4` (16:9, 1080p, about 1:43) and `digital-dash-demo-vertical.mp4` (9:16, used on portrait phones), each with a poster JPG. The 16:9 file is the `<source>`; the script swaps in the vertical one before loading.
+- Home page > See it in action (`#demo`). `public/media/digital-dash-demo.mp4` (16:9, 1080p, about 1:07) and `digital-dash-demo-vertical.mp4` (9:16, used on portrait phones), each with a poster JPG. The 16:9 file is the `<source>`; the script swaps in the vertical one before loading.
 - It loads only when the section is near (`preload="none"`, then metadata), plays muted and looped while at least half is on screen, and pauses when scrolled away. With reduced motion or Data Saver it never autoplays: the centre Play button starts it. Sound on/off and Play/Pause sit under the video. The service worker's scope is `/digital-dash`, so it never caches these files.
 - The film is real use of the app recorded with a Playwright screencast and edited in an HTML timeline; the soundtrack is generated with Web Audio to the same timeline.
 
