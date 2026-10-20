@@ -55,12 +55,14 @@ a{color:inherit}
 .back p{margin:0;flex:1 1 220px;font-weight:600}
 .back.on{display:block}
 /* top: one phone, kept in view beside the intro and the "Make it yours" controls */
-.top{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"hero phone" "yours phone";column-gap:56px;padding-top:clamp(36px,7vw,80px);padding-bottom:clamp(40px,7vw,88px)}
+.top{display:grid;padding-bottom:0!important;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"hero phone" "yours phone" "fhead phone";column-gap:56px;padding-top:clamp(36px,7vw,80px);padding-bottom:clamp(40px,7vw,88px)}
 .hero{grid-area:hero;padding-bottom:clamp(48px,8vw,96px)}
 .yours{grid-area:yours;border-top:1px solid var(--line);padding-top:clamp(40px,7vw,72px)}
 .phone-col{grid-area:phone}
+.fhead{grid-area:fhead;padding-top:clamp(64px,9vw,104px)}
+.fhead .sec-h{margin-bottom:0}
 .phone-col .phone{position:sticky;top:96px}
-@media (max-width:900px){.top{grid-template-columns:1fr;grid-template-areas:"hero" "phone" "yours"}.hero{padding-bottom:36px}.phone-col{margin-bottom:40px}.phone-col .phone{position:static;margin:0 auto}}
+@media (max-width:900px){.top{grid-template-columns:1fr;grid-template-areas:"hero" "phone" "yours" "fhead"}.hero{padding-bottom:36px}.phone-col{margin-bottom:40px}.phone-col .phone{position:static;margin:0 auto}}
 .hero .lockup{width:min(420px,100%);margin-bottom:28px}
 .eyebrow{display:inline-flex;align-items:center;gap:10px;font:800 14px/1 var(--display);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
 .eyebrow::before{content:"";width:22px;height:2px;background:currentColor}
@@ -219,11 +221,13 @@ footer a:hover{color:var(--ink)}
         <div class="stats" aria-label="What you can change"><div><b>8</b><span>themes, plus your own</span></div><div><b>24</b><span>clock and text fonts</span></div><div><b>6</b><span>clock styles</span></div><div><b>∞</b><span>presets to save</span></div></div>
       </div>
     </section>
+    <div class="fhead">
+      <div class="sec-h"><span class="eyebrow">Everything in one app</span><h2 id="f-h">Six tools. <br>One dashboard.</h2><p>Start with what you need today. Everything else is one tap away.</p></div>
+    </div>
   </div>
 
-  <section id="features" aria-labelledby="f-h">
+  <section id="features" aria-labelledby="f-h" style="padding-top:36px">
     <div class="wrap">
-      <div class="sec-h"><span class="eyebrow">Everything in one app</span><h2 id="f-h">Six tools. <br>One dashboard.</h2><p>Start with what you need today. Everything else is one tap away.</p></div>
       <ol class="ledger">
         <li class="lr"><span class="ln" aria-hidden="true">01</span><h3>Focus</h3><p>Big clocks, Pomodoro and custom timers, study music and rain sounds, and study rooms where friends focus with you.</p>
           <div class="demo d-timer" aria-hidden="true"><small>Focus · ES 1050</small><b id="d-time">24:59</b><i><em id="d-bar"></em></i></div></li>
