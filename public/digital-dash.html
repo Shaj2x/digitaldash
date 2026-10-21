@@ -1026,6 +1026,8 @@ html.lg .cal-list li{background:var(--glass-tint)}
 .rc-left{display:grid;gap:10px;position:sticky;top:0}
 .rc-stage{position:relative;overflow:hidden;border-radius:22px;border:1px solid var(--line);box-shadow:0 30px 60px -28px rgba(0,0,0,.7);touch-action:pan-y;cursor:grab;transition:transform .5s cubic-bezier(.23,1,.32,1),aspect-ratio .35s cubic-bezier(.23,1,.32,1);transform-style:preserve-3d;background:var(--panel2);outline-offset:4px}
 .rc-stage:active{cursor:grabbing}
+.rc-stage.drag{transition:aspect-ratio .35s cubic-bezier(.23,1,.32,1)}
+.rc-track canvas{backface-visibility:hidden}
 .rc-stage::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .3s ease;background:radial-gradient(60% 45% at var(--gx,50%) var(--gy,30%),rgba(255,255,255,.22),transparent 70%);mix-blend-mode:soft-light}
 .rc-stage.lit::after{opacity:1}
 .rc-track{display:flex;height:100%;will-change:transform}
@@ -3774,7 +3776,7 @@ function rcSavePref(){try{localStorage.setItem("digitaldash.rcpref",JSON.stringi
 /* swipeable carousel of designs, with a light tilt under the mouse */
 function rcGo(i,instant){
   const n=RC_DESIGNS.length;i=(i+n)%n;RC.design=RC_DESIGNS[i][0];rcSavePref();
-  const tr=$("#rc-track");tr.style.transition=instant||reduced?"none":"transform .46s cubic-bezier(.23,1,.32,1)";tr.style.transform=`translateX(${-i*100}%)`;
+  const tr=$("#rc-track");tr.style.transition=instant||reduced?"none":"transform .46s cubic-bezier(.23,1,.32,1)";tr.style.transform=`translate3d(${-i*100}%,0,0)`;
   $$("#rc-designs button").forEach((b,j)=>{b.setAttribute("aria-pressed",j===i);b.tabIndex=j===i?0:-1;});
   $$("#rc-track canvas").forEach((c,j)=>c.setAttribute("aria-hidden",j!==i));
   $("#rc-photo").hidden=RC.design!=="photo";$("#rc-dname").textContent=RC_DESIGNS[i][1];
@@ -3800,14 +3802,16 @@ $("#rc-file").addEventListener("change",async e=>{const f=e.target.files&&e.targ
   try{RC.photo=await createImageBitmap(f);}catch(err){toast("Couldn't open that photo");return;}rcDraw();});
 $("#rc-photo-rm").addEventListener("click",()=>{RC.photo=null;rcDraw();});
 { /* drag or swipe the preview to change design; it follows the finger and settles on the nearest */
-  const stage=$("#rc-stage"),tr=$("#rc-track");let sx=0,sy=0,dx=0,drag=false,t0=0,lock=null;
+  const stage=$("#rc-stage"),tr=$("#rc-track");let sx=0,sy=0,dx=0,drag=false,t0=0,lock=null,raf=0;
+  /* one transform write per frame, on the compositor (translate3d) */
+  const paint=()=>{raf=0;const i=rcIdx(),edge=(i===0&&dx>0)||(i===RC_DESIGNS.length-1&&dx<0);tr.style.transform=`translate3d(calc(${-i*100}% + ${edge?dx*.35:dx}px),0,0)`;};
   stage.addEventListener("pointerdown",e=>{if(e.button!==0)return;drag=true;sx=e.clientX;sy=e.clientY;dx=0;t0=performance.now();lock=null;tr.style.transition="none";});
   stage.addEventListener("pointermove",e=>{
     if(drag){const ddx=e.clientX-sx,ddy=e.clientY-sy;if(!lock&&Math.hypot(ddx,ddy)>8){lock=Math.abs(ddx)>Math.abs(ddy)?"x":"y";if(lock==="x")stage.setPointerCapture(e.pointerId);}
-      if(lock==="x"){dx=ddx;const w=stage.clientWidth,i=rcIdx(),edge=(i===0&&dx>0)||(i===RC_DESIGNS.length-1&&dx<0);tr.style.transform=`translateX(calc(${-i*100}% + ${edge?dx*.35:dx}px))`;}}
+      if(lock==="x"){if(!stage.classList.contains("drag")){stage.classList.add("drag");stage.style.transform="";stage.classList.remove("lit");}dx=ddx;if(!raf)raf=requestAnimationFrame(paint);}}
     else if(!reduced&&e.pointerType==="mouse"){const r=stage.getBoundingClientRect(),px=(e.clientX-r.left)/r.width-.5,py=(e.clientY-r.top)/r.height-.5;
       stage.style.transform=`perspective(900px) rotateY(${px*9}deg) rotateX(${-py*9}deg)`;stage.style.setProperty("--gx",(px+.5)*100+"%");stage.style.setProperty("--gy",(py+.5)*100+"%");stage.classList.add("lit");}});
-  const end=()=>{if(!drag)return;drag=false;if(lock!=="x"){rcGo(rcIdx());return;}const v=dx/Math.max(1,performance.now()-t0),w=stage.clientWidth;
+  const end=()=>{if(!drag)return;drag=false;cancelAnimationFrame(raf);raf=0;stage.classList.remove("drag");if(lock!=="x"){rcGo(rcIdx());return;}const v=dx/Math.max(1,performance.now()-t0),w=stage.clientWidth;
     rcGo(rcIdx()+((dx<-w*.22||v<-.45)?1:(dx>w*.22||v>.45)?-1:0));};
   stage.addEventListener("pointerup",end);stage.addEventListener("pointercancel",end);
   stage.addEventListener("pointerleave",()=>{stage.style.transform="";stage.classList.remove("lit");});
