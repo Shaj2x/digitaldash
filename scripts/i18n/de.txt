@@ -1095,3 +1095,41 @@
 1133|Bilder kopieren geht hier nicht. Nutze Bild speichern
 1134|Sticker gespeichert. Leg ihn in deiner Story über ein Foto
 1135|Das Foto ließ sich nicht öffnen
+1136|Profil
+1137|Anzeigename
+1138|Benutzername
+1139|Foto hinzufügen
+1140|Foto ändern
+1141|Profil speichern
+1142|Freunde können dich über deinen Benutzernamen hinzufügen
+1143|Wähle einen Benutzernamen, damit Freunde dich hinzufügen können
+1144|Jeder Benutzername gehört nur einer Person. Dein Foto sehen nur deine Freunde und Personen, denen du eine Anfrage sendest.
+1145|Benutzernamen und Profilfotos sind auf dieser Seite noch nicht aktiviert.
+1146|Mindestens 3 Zeichen verwenden
+1147|Das ist dein Benutzername
+1148|Wird geprüft…
+1149|@{0} ist verfügbar
+1150|@{0} ist vergeben
+1151|Dieser Benutzername ist vergeben. Versuch einen anderen
+1152|Dieser Benutzername ist nicht verfügbar
+1153|Benutzernamen haben 3 bis 20 Buchstaben, Zahlen oder _
+1154|Dieses Foto konnte nicht verwendet werden. Versuch ein anderes
+1155|Profilfoto aktualisiert
+1156|Profilfoto entfernt
+1157|Profil gespeichert
+1158|Wähle ein Foto
+1159|Konnte nicht entfernt werden. Prüfe deine Verbindung.
+1160|Gib den Benutzernamen oder Freundescode ein
+1161|Das bist du
+1162|Niemand hat diesen Benutzernamen oder Code. Prüfe ihn und versuch es erneut
+1163|Freunde ist an. Teile deinen Benutzernamen, um Leute hinzuzufügen
+1164|Wähle einen Benutzernamen, damit Freunde dich per Namen finden.
+1165|Benutzernamen wählen
+1166|Noch keine Freunde. Schick deinen Einladungslink oder füge unten ihren Benutzernamen hinzu.
+1167|Freund per Benutzername oder Code hinzufügen
+1168|@benutzername oder ABCD-2345
+1169|Profil bearbeiten
+1170|Freundescode
+1171|Dein Benutzername
+1172|Freunde sehen nur deinen Namen, Benutzernamen, dein Foto und deine wöchentliche Fokuszeit. Du entscheidest, wen du hinzufügst, und kannst das Teilen ausschalten.
+1173|möchte mit dir befreundet sein

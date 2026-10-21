@@ -1095,3 +1095,41 @@
 1133|Qui non si possono copiare immagini. Usa Salva immagine
 1134|Sticker salvato. Mettilo su una foto nella tua storia
 1135|Impossibile aprire quella foto
+1136|Profilo
+1137|Nome visualizzato
+1138|Nome utente
+1139|Aggiungi foto
+1140|Cambia foto
+1141|Salva profilo
+1142|Gli amici possono aggiungerti con il tuo nome utente
+1143|Scegli un nome utente così gli amici possono aggiungerti
+1144|Ogni nome utente appartiene a una sola persona. La tua foto la vedono solo i tuoi amici e le persone a cui invii una richiesta.
+1145|Nomi utente e foto profilo non sono ancora attivi su questo sito.
+1146|Usa almeno 3 caratteri
+1147|Questo è il tuo nome utente
+1148|Verifica…
+1149|@{0} è disponibile
+1150|@{0} è già in uso
+1151|Quel nome utente è già in uso. Provane un altro
+1152|Quel nome utente non è disponibile
+1153|I nomi utente hanno da 3 a 20 lettere, numeri o _
+1154|Impossibile usare quella foto. Provane un'altra
+1155|Foto profilo aggiornata
+1156|Foto profilo rimossa
+1157|Profilo salvato
+1158|Scegli una foto
+1159|Impossibile rimuoverla. Controlla la connessione.
+1160|Scrivi il suo nome utente o codice amico
+1161|Sei tu
+1162|Nessuno ha quel nome utente o codice. Controlla e riprova
+1163|Amici è attivo. Condividi il tuo nome utente per aggiungere persone
+1164|Scegli un nome utente così gli amici ti trovano per nome.
+1165|Scegli un nome utente
+1166|Ancora nessun amico. Invia il tuo link di invito o aggiungi il loro nome utente qui sotto.
+1167|Aggiungi un amico per nome utente o codice
+1168|@nomeutente o ABCD-2345
+1169|Modifica profilo
+1170|Codice amico
+1171|Il tuo nome utente
+1172|Gli amici vedono solo il tuo nome, nome utente, foto e il tempo di concentrazione settimanale. Scegli tu chi aggiungere e puoi disattivare la condivisione.
+1173|vuole essere tuo amico

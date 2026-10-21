@@ -1095,3 +1095,41 @@
 1133|La copie d'images n'est pas possible ici. Utilisez Enregistrer l'image
 1134|Sticker enregistré. Ajoutez-le sur une photo dans votre story
 1135|Impossible d'ouvrir cette photo
+1136|Profil
+1137|Nom affiché
+1138|Nom d'utilisateur
+1139|Ajouter une photo
+1140|Changer la photo
+1141|Enregistrer le profil
+1142|Tes amis peuvent t'ajouter avec ton nom d'utilisateur
+1143|Choisis un nom d'utilisateur pour que tes amis puissent t'ajouter
+1144|Chaque nom d'utilisateur appartient à une seule personne. Ta photo n'est visible que par tes amis et les personnes à qui tu envoies une demande.
+1145|Les noms d'utilisateur et les photos de profil ne sont pas encore activés sur ce site.
+1146|Utilise au moins 3 caractères
+1147|C'est ton nom d'utilisateur
+1148|Vérification…
+1149|@{0} est disponible
+1150|@{0} est déjà pris
+1151|Ce nom d'utilisateur est déjà pris. Essaie un autre
+1152|Ce nom d'utilisateur n'est pas disponible
+1153|Les noms d'utilisateur font de 3 à 20 lettres, chiffres ou _
+1154|Impossible d'utiliser cette photo. Essaie une autre
+1155|Photo de profil mise à jour
+1156|Photo de profil supprimée
+1157|Profil enregistré
+1158|Choisis une photo
+1159|Impossible de la supprimer. Vérifie ta connexion.
+1160|Saisis son nom d'utilisateur ou son code ami
+1161|C'est toi
+1162|Personne n'a ce nom d'utilisateur ou ce code. Vérifie et réessaie
+1163|Amis est activé. Partage ton nom d'utilisateur pour ajouter des gens
+1164|Choisis un nom d'utilisateur pour que tes amis te trouvent par ton nom.
+1165|Choisir un nom d'utilisateur
+1166|Pas encore d'amis. Envoie ton lien d'invitation ou ajoute leur nom d'utilisateur ci-dessous.
+1167|Ajouter un ami par nom d'utilisateur ou code
+1168|@utilisateur ou ABCD-2345
+1169|Modifier le profil
+1170|Code ami
+1171|Ton nom d'utilisateur
+1172|Tes amis ne voient que ton nom, ton nom d'utilisateur, ta photo et ton temps de concentration de la semaine. Tu choisis qui ajouter et tu peux arrêter le partage.
+1173|veut être ton ami

@@ -1095,3 +1095,41 @@
 1133|Não dá para copiar imagens aqui. Use Salvar imagem
 1134|Figurinha salva. Coloque sobre uma foto no seu story
 1135|Não foi possível abrir essa foto
+1136|Perfil
+1137|Nome de exibição
+1138|Nome de usuário
+1139|Adicionar foto
+1140|Trocar foto
+1141|Salvar perfil
+1142|Seus amigos podem te adicionar pelo seu nome de usuário
+1143|Escolha um nome de usuário para seus amigos te adicionarem
+1144|Cada nome de usuário pertence a uma só pessoa. Sua foto só aparece para seus amigos e para quem você envia um pedido.
+1145|Nomes de usuário e fotos de perfil ainda não estão ativados neste site.
+1146|Use pelo menos 3 caracteres
+1147|Este é o seu nome de usuário
+1148|Verificando…
+1149|@{0} está disponível
+1150|@{0} já está em uso
+1151|Esse nome de usuário já está em uso. Tente outro
+1152|Esse nome de usuário não está disponível
+1153|Nomes de usuário têm de 3 a 20 letras, números ou _
+1154|Não foi possível usar essa foto. Tente outra
+1155|Foto de perfil atualizada
+1156|Foto de perfil removida
+1157|Perfil salvo
+1158|Escolha uma foto
+1159|Não foi possível remover. Verifique sua conexão.
+1160|Digite o nome de usuário ou código de amigo
+1161|Esse é você
+1162|Ninguém tem esse nome de usuário ou código. Confira e tente de novo
+1163|Amigos ativado. Compartilhe seu nome de usuário para adicionar pessoas
+1164|Escolha um nome de usuário para seus amigos te acharem pelo nome.
+1165|Escolher nome de usuário
+1166|Nenhum amigo ainda. Envie seu link de convite ou adicione o nome de usuário deles abaixo.
+1167|Adicionar amigo por nome de usuário ou código
+1168|@usuario ou ABCD-2345
+1169|Editar perfil
+1170|Código de amigo
+1171|Seu nome de usuário
+1172|Seus amigos só veem seu nome, nome de usuário, foto e seu tempo de foco semanal. Você escolhe quem adicionar e pode parar de compartilhar.
+1173|quer ser seu amigo

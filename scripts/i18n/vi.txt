@@ -1095,3 +1095,41 @@
 1133|Không thể sao chép ảnh ở đây. Hãy dùng Lưu ảnh
 1134|Đã lưu nhãn dán. Thêm nó lên ảnh trong tin của bạn
 1135|Không mở được ảnh đó
+1136|Hồ sơ
+1137|Tên hiển thị
+1138|Tên người dùng
+1139|Thêm ảnh
+1140|Đổi ảnh
+1141|Lưu hồ sơ
+1142|Bạn bè có thể thêm bạn bằng tên người dùng
+1143|Chọn tên người dùng để bạn bè có thể thêm bạn
+1144|Mỗi tên người dùng chỉ thuộc về một người. Ảnh của bạn chỉ hiện với bạn bè và những người bạn gửi lời mời.
+1145|Tên người dùng và ảnh hồ sơ chưa được bật trên trang này.
+1146|Dùng ít nhất 3 ký tự
+1147|Đây là tên người dùng của bạn
+1148|Đang kiểm tra…
+1149|@{0} còn trống
+1150|@{0} đã có người dùng
+1151|Tên người dùng này đã có người dùng. Hãy thử tên khác
+1152|Tên người dùng này không dùng được
+1153|Tên người dùng gồm 3 đến 20 chữ cái, số hoặc _
+1154|Không dùng được ảnh đó. Hãy thử ảnh khác
+1155|Đã cập nhật ảnh hồ sơ
+1156|Đã xóa ảnh hồ sơ
+1157|Đã lưu hồ sơ
+1158|Chọn một ảnh
+1159|Không xóa được. Kiểm tra kết nối của bạn.
+1160|Nhập tên người dùng hoặc mã bạn bè
+1161|Đó là bạn
+1162|Không ai có tên người dùng hoặc mã đó. Kiểm tra rồi thử lại
+1163|Đã bật Bạn bè. Chia sẻ tên người dùng để thêm mọi người
+1164|Chọn tên người dùng để bạn bè tìm bạn theo tên.
+1165|Chọn tên người dùng
+1166|Chưa có bạn bè. Gửi liên kết mời hoặc thêm tên người dùng của họ bên dưới.
+1167|Thêm bạn bằng tên người dùng hoặc mã
+1168|@tennguoidung hoặc ABCD-2345
+1169|Sửa hồ sơ
+1170|Mã bạn bè
+1171|Tên người dùng của bạn
+1172|Bạn bè chỉ thấy tên, tên người dùng, ảnh và thời gian tập trung hằng tuần của bạn. Bạn chọn thêm ai và có thể tắt chia sẻ.
+1173|muốn kết bạn

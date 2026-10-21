@@ -1581,6 +1581,26 @@ html.lg .tray-chip{background:var(--glass-tint)}
 .rm-p{display:flex;align-items:center;gap:10px;padding:10px;border-radius:12px;background:var(--panel2);border:1px solid transparent;min-width:0;transition:border-color var(--t-ui) ease}
 .rm-p.focus{border-color:color-mix(in srgb,var(--accent) 50%,transparent)}
 .rm-av{flex:none;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font:700 14px/1 var(--ui);color:#fff;background:hsl(var(--h) 55% 45%)}
+.rm-av{overflow:hidden}
+.rm-av img{width:100%;height:100%;object-fit:cover;display:block}
+.rm-av.big{width:72px;height:72px;font-size:28px}
+.rm-av.sm{width:26px;height:26px;font-size:12px}
+.ac-pf-row{display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap;margin-top:6px}
+.ac-pf-pic{display:grid;justify-items:center;gap:8px;flex:none;width:112px}
+.ac-pf-pic .linkish{font-size:13px}
+.ac-pf-f{flex:1 1 220px;display:grid;gap:10px;min-width:0}
+.ac-pf-f .rm-btns{justify-content:flex-start}
+.ac-un{display:flex;align-items:center;border-radius:10px}
+.ac-un b{padding:0 2px 0 10px;color:var(--muted);font:600 15px/1 var(--ui)}
+.ac-un input{flex:1;min-width:0}
+.ac-un-st{margin:-4px 0 0;font-size:13px;color:var(--muted);min-height:1.3em}
+.ac-un-st[data-s="ok"]{color:var(--good,#2e9d63)}
+.ac-un-st[data-s="bad"]{color:var(--bad,#d0453b)}
+.ac-pf .ac-priv{margin-top:10px}
+.fr-un{color:var(--muted);font-size:13px;font-weight:500}
+.fr-at{letter-spacing:0;text-transform:none}
+.fr-nudge{border-style:solid;border-color:color-mix(in srgb,var(--accent) 45%,transparent)}
+.fr-man li .fr-li{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .rm-who{flex:1;min-width:0;display:grid;gap:1px}
 .rm-who b{font-size:14px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .rm-who small{font-weight:400;color:var(--muted)}
@@ -5358,7 +5378,7 @@ const AC_PERSON='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stro
 function acRenderBtn(){
   const b=$("#acct-open");if(!b)return;const u=AC.user,av=$("#acct-av"),dot=$("#acct-dot");
   const name=u?(u.user_metadata&&(u.user_metadata.full_name||u.user_metadata.name))||u.email||"":"";
-  const pic=u&&u.user_metadata&&u.user_metadata.avatar_url;
+  const pic=u&&(frPic()||u.user_metadata&&u.user_metadata.avatar_url);
   av.innerHTML=u?(pic?`<img src="${esc(pic)}" alt="" referrerpolicy="no-referrer">`:esc((name||"?").trim().charAt(0).toUpperCase())):AC_PERSON;
   b.classList.toggle("in",!!u);
   dot.hidden=!u;dot.dataset.s=AC.state;
@@ -5393,17 +5413,26 @@ function acRenderDlg(){
     return;
   }
   const name=(u.user_metadata&&(u.user_metadata.full_name||u.user_metadata.name))||"",st={synced:`All changes saved ${agoText(AC.last)}${AC.lastDevice?" · "+esc(AC.lastDevice):""}`,saving:"Saving…",offline:"Offline. Changes are saved on this device and will sync when you're back online.",error:esc(AC.err||"Not syncing right now")}[AC.state]||"";
+  const keep=body.querySelector("#ac-pfw"),foc=document.activeElement,fid=keep&&keep.contains(foc)?foc.id:"",sel=fid&&foc.selectionStart!=null?[foc.selectionStart,foc.selectionEnd]:null;
   body.innerHTML=`<div class="ac-hero"><span class="av big">${$("#acct-av").innerHTML}</span><div><b>${esc(name||u.email||"Signed in")}</b>${name?`<span class="muted">${esc(u.email||"")}</span>`:""}<p class="ac-st" data-s="${AC.state}"><i></i>${st}</p></div></div>
+    ${acProfHTML()}
     ${AC.state==="error"?"":acItems()}
     <div class="ac-actions"><button type="button" class="btn ghost small" data-ac="backup">Download backup</button><button type="button" class="btn ghost small" data-ac="signout">Sign out</button><label class="ac-clear"><input type="checkbox" id="ac-clear"> Also remove my data from this device</label></div>
     <p class="ac-priv">Only you can read your saved data. The AI helper sends task titles, due dates and upcoming event titles to Anthropic's AI only when you use it. Reminders go through your browser's push service. <a href="/digital-dash-privacy.html" target="_blank" rel="noopener">Privacy policy</a></p>
     <div class="ac-danger">${AC.confirmDel?`<p><b>Delete your account?</b> This removes your saved data and photos from the cloud for good. What's on this device stays until you erase it.</p><div class="ac-row"><button type="button" class="btn danger" id="ac-del-go" data-ac="del-go">Delete my account</button><button type="button" class="btn ghost small" data-ac="del-no">Cancel</button></div>`:`<button type="button" class="linkish" data-ac="del">Delete account</button>`}</div>`;
+  const ph=body.querySelector("#ac-pfw");
+  if(keep&&ph&&keep.dataset.sig===ph.dataset.sig){ph.replaceWith(keep);const f=fid&&document.getElementById(fid);if(f){f.focus();if(sel)try{f.setSelectionRange(sel[0],sel[1]);}catch(e){}}}
 }
 function acOpen(){const d=$("#acct");if(d.open)return;AC.confirmDel=false;if(!AC.user&&AC.state!=="unavailable")AC.sent=AC.sent||"";try{d.showModal();}catch(e){d.setAttribute("open","");}acRenderDlg();const f=d.querySelector("#ac-em")||d.querySelector("#acd-x");if(f)f.focus();}
 $("#acct-open").addEventListener("click",acOpen);$("#acct-open2").addEventListener("click",acOpen);
 $("#acd-x").addEventListener("click",()=>$("#acct").close());
 $("#acct").addEventListener("click",e=>{if(e.target===e.currentTarget)e.currentTarget.close();});
-$("#acct").addEventListener("submit",e=>{if(e.target.id==="ac-email"){e.preventDefault();acEmail($("#ac-em").value);}});
+$("#acct").addEventListener("submit",e=>{if(e.target.id==="ac-email"){e.preventDefault();acEmail($("#ac-em").value);}else if(e.target.id==="ac-pf"){e.preventDefault();acProfSave();}});
+$("#acct").addEventListener("input",e=>{if(e.target.id==="ac-un")acUnCheck(e.target);});
+$("#acct").addEventListener("change",async e=>{if(e.target.id!=="ac-pf-file")return;const f=e.target.files&&e.target.files[0];e.target.value="";
+  const d=await frPhoto(f);if(!d)return;
+  try{const s=await frSet(Object.assign({p_avatar:d},FR.prof?{}:{p_name:acProfName()}));toast(s==="ok"?"Profile photo updated":FR_MSG[s]||"Couldn't save that");if(s==="ok")frLoad();}
+  catch(err){toast("Couldn't save that. Check your connection.");}});
 $("#acct").addEventListener("click",e=>{
   const b=e.target.closest("[data-ac]");if(!b)return;const a=b.dataset.ac;
   if(a==="google")acGoogle();
@@ -5413,6 +5442,9 @@ $("#acct").addEventListener("click",e=>{
   else if(a==="del"){AC.confirmDel=true;acRenderDlg();}
   else if(a==="del-no"){AC.confirmDel=false;acRenderDlg();}
   else if(a==="del-go")acDelete();
+  else if(a==="pf-pic")$("#ac-pf-file").click();
+  else if(a==="pf-rm"){const old=FR.prof&&FR.prof.avatar;frSet({p_clear_avatar:true}).then(s=>{if(s!=="ok"){toast("Couldn't remove that. Check your connection.");return;}frLoad();
+    toast("Profile photo removed",{run(){frSet({p_avatar:old}).then(()=>frLoad()).catch(()=>{});}});}).catch(()=>toast("Couldn't remove that. Check your connection."));}
   else if(a==="pr-apply"||a==="pr-del"){const p=S.presets.find(x=>x.id===b.closest("[data-acp]").dataset.acp);if(!p)return;
     if(a==="pr-apply")applyPreset(p);
     else{const i=S.presets.indexOf(p);S.presets.splice(i,1);save();renderPresets();acRenderDlg();toast(`Deleted "${p.name}"`,{run(){S.presets.splice(Math.min(i,S.presets.length),0,p);save();renderPresets();acRenderDlg();},done(){[p.s.bg.image,p.s.stage.image].forEach(src=>{if(/^local:p/.test(src||"")&&S.settings.bg.image!==src&&S.settings.stage.image!==src&&!S.presets.includes(p))removeImage(src);});}});}}
@@ -5555,7 +5587,70 @@ function rmTick(){
    dash_friend_add (by 8-character code), dash_friend_respond, dash_friend_remove, dash_friends_list,
    dash_focus_report (this week's totals, sent after each focus session) and dash_leaderboard.
    Invite links are digital-dash.html?friend=CODE. */
-var FR={prof:null,list:[],board:[],wk:0,state:"idle",err:"",missing:false,code:"",rep:0};
+var FR={prof:null,list:[],board:[],wk:0,state:"idle",err:"",missing:false,old:false,code:"",rep:0,chk:0};
+/* usernames and photos need supabase/migrations/20261021120000_digital_dash_usernames.sql (FR.old without it):
+   dash_profile_set saves name, username and photo in one call, dash_username_check says whether a name is free,
+   and dash_friend_add takes a username or a code. A photo is a 128px square data URL. */
+function frPic(){const a=typeof FR!=="undefined"&&FR&&FR.prof&&FR.prof.avatar;return a&&/^data:image\/(webp|jpeg|png);base64,[A-Za-z0-9+/]+={0,2}$/.test(a)?a:"";}
+const frAv=(x,cls)=>{const a=x.avatar&&/^data:image\/(webp|jpeg|png);base64,[A-Za-z0-9+/]+={0,2}$/.test(x.avatar)?x.avatar:"";
+  return `<span class="rm-av${cls?" "+cls:""}" style="--h:${rmHue(x.user_id||"")}" aria-hidden="true">${a?`<img src="${a}" alt="">`:esc((x.name||"?").trim().charAt(0).toUpperCase()||"?")}</span>`;};
+const frUn=v=>String(v||"").toLowerCase().replace(/[^a-z0-9_]/g,"").slice(0,20);
+const FR_MSG={taken:"That username is taken. Try another",reserved:"That username isn't available",invalid:"Usernames are 3 to 20 letters, numbers or _",name_required:"Add a name first",bad_image:"Couldn't use that photo. Try another"};
+async function frSet(args){const r=await frRpc("dash_profile_set",args);if(r&&r.status==="ok"&&r.profile){FR.prof=r.profile;acRenderBtn();}return r?r.status:"error";}
+/* square-crop a picked photo to 128px; webp where the browser can make it, else jpeg */
+async function frPhoto(file){
+  if(!file)return null;if(!/^image\//.test(file.type)){toast("Pick a photo");return null;}
+  const url=URL.createObjectURL(file);
+  try{const img=await new Promise((ok,no)=>{const i=new Image();i.onload=()=>ok(i);i.onerror=no;i.src=url;});
+    const c=document.createElement("canvas");c.width=c.height=128;const x=c.getContext("2d"),w=img.naturalWidth,h=img.naturalHeight,m=Math.min(w,h);
+    x.fillStyle="#fff";x.fillRect(0,0,128,128);x.imageSmoothingQuality="high";x.drawImage(img,(w-m)/2,(h-m)/2,m,m,0,0,128,128);
+    let d=c.toDataURL("image/webp",.82);if(!/^data:image\/webp/.test(d))d=c.toDataURL("image/jpeg",.85);
+    return d.length<=40000?d:c.toDataURL("image/jpeg",.6);
+  }catch(e){toast("Couldn't open that photo");return null;}finally{URL.revokeObjectURL(url);}
+}
+const acProfName=()=>{const i=$("#ac-pn"),m=AC.user&&AC.user.user_metadata||{};return (i&&i.value.trim())||(FR.prof&&FR.prof.name)||(m.full_name||m.name||"").split(" ")[0]||(AC.user&&AC.user.email||"").split("@")[0]||"";};
+function acProfHTML(){
+  if(!AC.user||!AC.sb||FR.missing)return "";
+  const P=FR.prof||{},sig=esc(JSON.stringify([AC.user.id,P.name,P.username,(P.avatar||"").length,FR.old,FR.state==="loading"&&!FR.prof]));
+  const wrap=b=>`<section class="ac-sec ac-pf" id="ac-pfw" data-sig="${sig}"><h3>Profile</h3>${b}</section>`;
+  if(FR.state==="loading"&&!FR.prof)return wrap(`<p class="muted ac-empty">Loading…</p>`);
+  if(FR.old)return wrap(`<p class="muted ac-empty">Usernames and profile photos aren't switched on for this site yet.</p>`);
+  const nm=acProfName();
+  return wrap(`<div class="ac-pf-row">
+      <div class="ac-pf-pic">${frAv({user_id:AC.user.id,name:nm||"?",avatar:P.avatar},"big")}
+        <button type="button" class="btn ghost small" data-ac="pf-pic">${P.avatar?"Change photo":"Add photo"}</button>
+        ${P.avatar?`<button type="button" class="linkish" data-ac="pf-rm">Remove photo</button>`:""}</div>
+      <form class="ac-pf-f" id="ac-pf" autocomplete="off" novalidate>
+        <label class="rm-f"><span>Display name</span><input type="text" id="ac-pn" maxlength="40" value="${esc(nm)}" placeholder="What friends see"></label>
+        <label class="rm-f"><span>Username</span><span class="ac-un"><b aria-hidden="true">@</b><input type="text" id="ac-un" maxlength="20" value="${esc(P.username||"")}" placeholder="your_name" autocapitalize="none" autocorrect="off" spellcheck="false" aria-describedby="ac-un-st"></span></label>
+        <p class="ac-un-st" id="ac-un-st" aria-live="polite">${P.username?"Friends can add you by your username":"Pick a username so friends can add you"}</p>
+        <div class="rm-btns"><button class="btn small" type="submit">Save profile</button></div>
+      </form></div>
+    <input type="file" id="ac-pf-file" accept="image/png,image/jpeg,image/webp,image/gif" hidden>
+    <p class="ac-priv">Each username belongs to one person. Your photo is shown only to your friends and to people you send a request to.</p>`);
+}
+function acUnCheck(i){
+  const at=i.selectionStart,v=frUn(i.value);if(i.value!==v){const d=i.value.length-v.length;i.value=v;try{i.setSelectionRange(Math.max(0,at-d),Math.max(0,at-d));}catch(e){}}
+  clearTimeout(FR.chk);const st=$("#ac-un-st");if(!st)return;const say=(t,k)=>{st.textContent=t;st.dataset.s=k||"";};
+  if(!v)return say("Pick a username so friends can add you");
+  if(v.length<3)return say("Use at least 3 characters","bad");
+  if(FR.prof&&v===FR.prof.username)return say("This is your username","ok");
+  say("Checking…");
+  FR.chk=setTimeout(async()=>{try{const r=await frRpc("dash_username_check",{p_username:v});if(frUn(i.value)!==v)return;
+    if(r==="free")say(`@${v} is available`,"ok");else if(r==="mine")say("This is your username","ok");
+    else if(r==="taken")say(`@${v} is taken`,"bad");else say(FR_MSG[r]||"","bad");}catch(e){say("");}},350);
+}
+async function acProfSave(){
+  const n=$("#ac-pn").value.trim(),u=frUn($("#ac-un").value);
+  if(!n){toast("Add a name first");$("#ac-pn").focus();return;}
+  if(u&&u.length<3){toast(FR_MSG.invalid);$("#ac-un").focus();return;}
+  if(!u&&FR.prof&&FR.prof.username){toast(FR_MSG.invalid);$("#ac-un").focus();return;}
+  const args={p_name:n};if(u&&!(FR.prof&&u===FR.prof.username))args.p_username=u;
+  try{const s=await frSet(args);
+    if(s==="ok"){toast("Profile saved");frLoad();}
+    else{toast(FR_MSG[s]||"Couldn't save that");if(s==="taken"||s==="reserved"||s==="invalid"){const st=$("#ac-un-st");if(st){st.textContent=FR_MSG[s];st.dataset.s="bad";}$("#ac-un").focus();}}}
+  catch(e){toast("Couldn't save that. Check your connection.");}
+}
 {const q=new URLSearchParams(location.search),c=q.get("friend");if(c){FR.code=c.replace(/[^A-Za-z0-9]/g,"").toUpperCase().slice(0,8);q.delete("friend");try{history.replaceState(null,"",location.pathname+(q.toString()?"?"+q:"")+location.hash);}catch(e){}}}
 const frFmt=c=>c?c.slice(0,4)+"-"+c.slice(4):"";
 const frWeek=off=>dkey(addDays(weekStart(new Date()),-7*(off||0)));
@@ -5564,14 +5659,16 @@ async function frLoad(){
   if(!AC.sb||!AC.user){frRender();return;}
   FR.state="loading";frRender();
   try{
-    const {data:pr,error}=await AC.sb.from("dash_profiles").select("name,code,share_focus").eq("user_id",AC.user.id).maybeSingle();
+    let {data:pr,error}=await AC.sb.from("dash_profiles").select("name,code,share_focus,username,avatar").eq("user_id",AC.user.id).maybeSingle();
+    if(error&&/42703|column .* does not exist/i.test((error.code||"")+" "+error.message)){FR.old=true;({data:pr,error}=await AC.sb.from("dash_profiles").select("name,code,share_focus").eq("user_id",AC.user.id).maybeSingle());}
+    else if(!error)FR.old=false;
     if(error){if(/42P01|PGRST205|does not exist|schema cache/i.test((error.code||"")+" "+error.message))FR.missing=true;throw error;}
     FR.prof=pr||null;
     if(FR.prof){frReport(true);const [list,board]=await Promise.all([frRpc("dash_friends_list"),frRpc("dash_leaderboard",{p_week:frWeek(FR.wk)})]);FR.list=list||[];FR.board=board||[];
       if(FR.code){const c=FR.code;FR.code="";await frAdd(c,true);return;}}
     FR.state="ok";FR.err="";
   }catch(e){FR.state="error";FR.err=FR.missing?"":"Couldn't load friends. Check your connection.";}
-  frRender();
+  frRender();acRenderBtn();acRenderDlg();
 }
 /* send this week's (and last week's) totals; quiet unless signed in with a profile */
 function frReport(now){
@@ -5581,9 +5678,11 @@ function frReport(now){
     if(!$("#friends").hidden&&FR.prof){FR.board=await frRpc("dash_leaderboard",{p_week:frWeek(FR.wk)})||[];frRender();}}catch(e){}},now?0:1500);
 }
 async function frAdd(code,fromLink){
-  const c=String(code||"").replace(/[^A-Za-z0-9]/g,"").toUpperCase();if(c.length!==8){toast("Friend codes have 8 letters and numbers, like ABCD-2345");return;}
-  try{const r=await frRpc("dash_friend_add",{p_code:c});
-    const msg={sent:"Request sent. You'll both see each other once they accept",accepted:"You're now friends",already:"You're already friends",pending:"Your request is still waiting",self:"That's your own code",not_found:"No one has that code. Check it and try again",too_many:"You have a lot of requests waiting. Cancel some first",no_profile:"Set your name first"}[r]||"Done";
+  let c=String(code||"").trim();
+  if(FR.old||fromLink){c=c.replace(/[^A-Za-z0-9]/g,"").toUpperCase();if(c.length!==8){toast("Friend codes have 8 letters and numbers, like ABCD-2345");return;}}
+  else if(c.replace(/[^A-Za-z0-9_]/g,"").length<3){toast("Type their username or friend code");return;}
+  try{const r=await frRpc("dash_friend_add",{p_code:c.slice(0,24)});
+    const msg={sent:"Request sent. You'll both see each other once they accept",accepted:"You're now friends",already:"You're already friends",pending:"Your request is still waiting",self:FR.old?"That's your own code":"That's you",not_found:FR.old?"No one has that code. Check it and try again":"No one has that username or code. Check it and try again",too_many:"You have a lot of requests waiting. Cancel some first",no_profile:"Set your name first"}[r]||"Done";
     toast(msg);if(fromLink&&r!=="self")show("focus");
     [FR.list,FR.board]=await Promise.all([frRpc("dash_friends_list"),frRpc("dash_leaderboard",{p_week:frWeek(FR.wk)})]);FR.state="ok";
   }catch(e){toast(FR.missing?"Friends isn't switched on for this site yet":"Couldn't send that. Check your connection.");}
@@ -5599,37 +5698,43 @@ function frRender(){
   if(FR.state==="error"&&!FR.prof){body.innerHTML=`<div class="fr-tools"><p class="muted" style="margin:0">${esc(FR.err)}</p><button type="button" class="btn ghost small" data-fr="retry">Try again</button></div>`;return;}
   if(!FR.prof){const m=AC.user.user_metadata||{},guess=(m.full_name||m.name||"").split(" ")[0]||"";
     sub.textContent=FR.code?"Pick the name your friend will see, then you're connected.":"Add friends and see who focused most this week.";hact.innerHTML="";
-    body.innerHTML=`<form class="rm-join" id="fr-start" autocomplete="off"><label class="rm-f"><span>Your name</span><input type="text" id="fr-name" maxlength="40" value="${esc(guess)}" placeholder="What friends see" required></label><div class="rm-btns"><button class="btn" type="submit">Turn on friends</button></div></form>
-      <p class="ac-priv">Friends only see your name and your weekly focus time. You choose who to add, and you can turn sharing off.</p>`;return;}
+    body.innerHTML=`<form class="rm-join" id="fr-start" autocomplete="off"><label class="rm-f"><span>Your name</span><input type="text" id="fr-name" maxlength="40" value="${esc(guess)}" placeholder="What friends see" required></label>${FR.old?"":`<label class="rm-f"><span>Username</span><span class="ac-un"><b aria-hidden="true">@</b><input type="text" id="fr-un" maxlength="20" placeholder="your_name" autocapitalize="none" autocorrect="off" spellcheck="false"></span></label>`}<div class="rm-btns"><button class="btn" type="submit">Turn on friends</button></div></form>
+      <p class="ac-priv">Friends only see your name${FR.old?"":", username, photo"} and your weekly focus time. You choose who to add, and you can turn sharing off.</p>`;return;}
   const P=FR.prof,inc=FR.list.filter(x=>x.state==="incoming"),out=FR.list.filter(x=>x.state==="outgoing"),fr=FR.list.filter(x=>x.state==="friend");
   sub.textContent=fr.length?`${fr.length} friend${fr.length===1?"":"s"} · ${FR.wk?"last week":"this week"}`:"Share your code to add your first friend.";
-  hact.innerHTML=`<span class="rm-code" title="Your friend code">${frFmt(P.code)}</span><button type="button" class="btn ghost small" data-fr="invite">Copy invite</button>`;
+  hact.innerHTML=`${P.username?`<span class="rm-code fr-at" title="Your username">@${esc(P.username)}</span>`:`<span class="rm-code" title="Your friend code">${frFmt(P.code)}</span>`}<button type="button" class="btn ghost small" data-fr="invite">Copy invite</button>`;
   const max=Math.max(1,...FR.board.map(x=>x.minutes));
   body.innerHTML=`
-    ${inc.map(x=>`<div class="fr-req"><span><b>${esc(x.name)}</b> wants to be friends</span><button type="button" class="btn small" data-fr="accept" data-id="${x.user_id}">Accept</button><button type="button" class="btn ghost small" data-fr="decline" data-id="${x.user_id}">Decline</button></div>`).join("")}
+    ${!FR.old&&!P.username?`<div class="fr-req fr-nudge"><span>Pick a username so friends can add you by name.</span><button type="button" class="btn small" data-fr="profile">Choose a username</button></div>`:""}
+    ${inc.map(x=>`<div class="fr-req">${frAv(x)}<span><b>${esc(x.name)}</b>${x.username?` <span class="fr-un">@${esc(x.username)}</span>`:""} wants to be friends</span><button type="button" class="btn small" data-fr="accept" data-id="${x.user_id}">Accept</button><button type="button" class="btn ghost small" data-fr="decline" data-id="${x.user_id}">Decline</button></div>`).join("")}
     <div class="fr-tools"><div class="seg" id="fr-wk" role="group" aria-label="Leaderboard week"><button type="button" data-w="0" aria-pressed="${!FR.wk}">This week</button><button type="button" data-w="1" aria-pressed="${!!FR.wk}">Last week</button></div></div>
-    ${FR.board.length>1||fr.length?`<ol class="fr-board" aria-label="Focus time leaderboard">${FR.board.map((x,i)=>`<li class="fr-row${x.is_me?" me":""}"><span class="fr-rank" aria-label="Rank ${i+1}">${i+1}</span><span class="rm-av" style="--h:${rmHue(x.user_id)}" aria-hidden="true">${esc((x.name||"?").charAt(0).toUpperCase())}</span><span class="fr-nm"><b>${esc(x.name)}${x.is_me?" (you)":""}</b><span class="fr-bar" aria-hidden="true"><i style="transform:scaleX(${(x.minutes/max).toFixed(4)})"></i></span></span><span class="fr-val">${fmtMins(x.minutes)}<small>${x.sessions} session${x.sessions===1?"":"s"}</small></span></li>`).join("")}</ol>`
-      :`<p class="muted" style="margin:0">No friends yet. Send someone your invite link, or add their code below.</p>`}
-    <form class="rm-join" id="fr-add" autocomplete="off"><label class="rm-f"><span>Add a friend by code</span><input type="text" id="fr-code" maxlength="9" placeholder="ABCD-2345" autocapitalize="characters" spellcheck="false"></label><div class="rm-btns"><button class="btn ghost" type="submit">Add</button></div></form>
+    ${FR.board.length>1||fr.length?`<ol class="fr-board" aria-label="Focus time leaderboard">${FR.board.map((x,i)=>`<li class="fr-row${x.is_me?" me":""}"><span class="fr-rank" aria-label="Rank ${i+1}">${i+1}</span>${frAv(x)}<span class="fr-nm"><b>${esc(x.name)}${x.is_me?" (you)":""}</b><span class="fr-bar" aria-hidden="true"><i style="transform:scaleX(${(x.minutes/max).toFixed(4)})"></i></span></span><span class="fr-val">${fmtMins(x.minutes)}<small>${x.sessions} session${x.sessions===1?"":"s"}</small></span></li>`).join("")}</ol>`
+      :`<p class="muted" style="margin:0">${FR.old?"No friends yet. Send someone your invite link, or add their code below.":"No friends yet. Send someone your invite link, or add their username below."}</p>`}
+    <form class="rm-join" id="fr-add" autocomplete="off">${FR.old?`<label class="rm-f"><span>Add a friend by code</span><input type="text" id="fr-code" maxlength="9" placeholder="ABCD-2345" autocapitalize="characters" spellcheck="false"></label>`:`<label class="rm-f"><span>Add a friend by username or code</span><input type="text" id="fr-code" maxlength="24" placeholder="@username or ABCD-2345" autocapitalize="none" autocorrect="off" spellcheck="false"></label>`}<div class="rm-btns"><button class="btn ghost" type="submit">Add</button></div></form>
     ${out.length?`<p class="muted" style="margin:0;font-size:13.5px">Waiting on ${out.map(x=>`${esc(x.name)} <button type="button" class="btn ghost small" data-fr="cancel" data-id="${x.user_id}" aria-label="Cancel request to ${esc(x.name)}">Cancel</button>`).join(" ")}</p>`:""}
     <details class="fr-man"><summary>Settings and friends</summary>
       <label class="tm-ck" style="margin-top:8px"><input type="checkbox" id="fr-share"${P.share_focus?" checked":""}> Show my focus time to friends</label>
-      <form class="rm-join" id="fr-rename" autocomplete="off" style="margin-top:8px"><label class="rm-f"><span>Your name</span><input type="text" id="fr-name2" maxlength="40" value="${esc(P.name)}"></label><div class="rm-btns"><button class="btn ghost small" type="submit">Save name</button></div></form>
-      ${fr.length?`<ul>${fr.map(x=>`<li><span>${esc(x.name)}</span><button type="button" class="btn ghost small" data-fr="remove" data-id="${x.user_id}" data-n="${esc(x.name)}">Remove</button></li>`).join("")}</ul>`:""}
+      ${FR.old?`<form class="rm-join" id="fr-rename" autocomplete="off" style="margin-top:8px"><label class="rm-f"><span>Your name</span><input type="text" id="fr-name2" maxlength="40" value="${esc(P.name)}"></label><div class="rm-btns"><button class="btn ghost small" type="submit">Save name</button></div></form>`
+        :`<div class="fr-tools" style="margin-top:8px"><span class="muted" style="font-size:13.5px">Friend code <b class="rm-code">${frFmt(P.code)}</b></span><button type="button" class="btn ghost small" data-fr="profile">Edit profile</button></div>`}
+      ${fr.length?`<ul>${fr.map(x=>`<li>${frAv(x,"sm")}<span class="fr-li">${esc(x.name)}${x.username?` <span class="fr-un">@${esc(x.username)}</span>`:""}</span><button type="button" class="btn ghost small" data-fr="remove" data-id="${x.user_id}" data-n="${esc(x.name)}">Remove</button></li>`).join("")}</ul>`:""}
     </details>`;
   initSeg($("#fr-wk"));
 }
 $("#friends").addEventListener("submit",async e=>{e.preventDefault();const f=e.target;
   if(f.id==="fr-add"){const c=$("#fr-code").value;$("#fr-code").value="";frAdd(c);return;}
   const nm=(f.id==="fr-start"?$("#fr-name"):$("#fr-name2")).value.trim();if(!nm){toast("Add a name first");return;}
+  if(f.id==="fr-start"&&!FR.old){const u=frUn($("#fr-un").value);if(u&&u.length<3){toast(FR_MSG.invalid);return;}
+    try{const s=await frSet(Object.assign({p_name:nm},u?{p_username:u}:{}));if(s!=="ok"){toast(FR_MSG[s]||"Couldn't save that");if(s!=="name_required")$("#fr-un").focus();return;}
+      toast(u?"Friends is on. Share your username to add people":"Friends is on. Share your code to add people");frLoad();}catch(err){toast("Couldn't save that. Check your connection.");}return;}
   try{FR.prof=(await frRpc("dash_profile_save",{p_name:nm}))||FR.prof;toast(f.id==="fr-start"?"Friends is on. Share your code to add people":"Name saved");frLoad();}catch(err){toast("Couldn't save that. Check your connection.");}});
 $("#friends").addEventListener("change",async e=>{if(e.target.id!=="fr-share")return;const on=e.target.checked;
-  try{FR.prof=(await frRpc("dash_profile_save",{p_name:FR.prof.name,p_share:on}))||FR.prof;toast(on?"Friends can see your focus time":"Your focus time is hidden from friends");FR.board=await frRpc("dash_leaderboard",{p_week:frWeek(FR.wk)})||[];frRender();}
+  try{if(FR.old)FR.prof=(await frRpc("dash_profile_save",{p_name:FR.prof.name,p_share:on}))||FR.prof;else if(await frSet({p_share:on})!=="ok")throw 0;toast(on?"Friends can see your focus time":"Your focus time is hidden from friends");FR.board=await frRpc("dash_leaderboard",{p_week:frWeek(FR.wk)})||[];frRender();}
   catch(err){e.target.checked=!on;toast("Couldn't change that. Check your connection.");}});
 $("#friends").addEventListener("click",async e=>{
   const w=e.target.closest("#fr-wk button[data-w]");if(w){FR.wk=+w.dataset.w;try{FR.board=await frRpc("dash_leaderboard",{p_week:frWeek(FR.wk)})||[];}catch(err){}frRender();const nb=$(`#fr-wk [data-w="${FR.wk}"]`);if(nb)nb.focus();return;}
   const b=e.target.closest("[data-fr]");if(!b)return;const a=b.dataset.fr,id=b.dataset.id;
   if(a==="signin"){acOpen();return;}if(a==="retry"){frLoad();return;}
+  if(a==="profile"){acOpen();const i=$("#ac-un");if(i){i.focus();i.scrollIntoView({block:"center"});}return;}
   if(a==="invite"){const url=location.origin+location.pathname+"?friend="+FR.prof.code;
     if(navigator.share&&matchMedia("(pointer: coarse)").matches){try{await navigator.share({title:"Be my friend on Digital Dash",text:"Let's see who focuses more this week",url});return;}catch(err){if(err&&err.name==="AbortError")return;}}
     try{await navigator.clipboard.writeText(url);toast("Invite link copied");}catch(err){prompt("Copy your invite link:",url);}return;}
