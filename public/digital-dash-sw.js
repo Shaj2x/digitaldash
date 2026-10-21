@@ -32,7 +32,7 @@ self.addEventListener("fetch", (e) => {
   if (req.method !== "GET") return;
   const url = new URL(req.url);
 
-  if (url.origin === self.location.origin && (url.pathname.startsWith("/digital-dash") || url.pathname.startsWith("/i18n/"))) {
+  if (url.origin === self.location.origin && (url.pathname.startsWith("/digital-dash") || url.pathname.startsWith("/i18n/") || url.pathname.startsWith("/fonts/"))) {
     e.respondWith(
       fetch(req)
         .then((res) => {

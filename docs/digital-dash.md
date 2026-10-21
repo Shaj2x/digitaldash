@@ -397,6 +397,7 @@ The goal is that nothing teleports and nothing waits on you. Rules the code foll
 - Designs (`RC_DESIGNS`, drawn by `rcPaint`): Poster (the focus total as flip-clock cards, a bar chart and stat tiles), Rings (a clock-face dial where each day is a wedge), Receipt (a paper receipt with a "Paid in focus" stamp), Calendar (a heatmap of the days) and Photo (your own photo, or a soft gradient, with Strava-style stats on top). Swipe or drag the preview, or use the arrow keys; with a mouse it tilts and catches the light.
 - Sizes: Story 1080×1920, Post 1080×1350, Square 1080×1080. Colours: the current theme, Light, Dark, or Bold (the accent as the background). Design, size and colours are remembered (`digitaldash.rcpref`); items left off the card in `digitaldash.rchide`. A chosen photo is only held in memory for that visit.
 - Periods: this week, last week, this month, this term (Jan–Apr, May–Aug, Sep–Dec).
+- The card has its own type so it looks the same everywhere: Big Shoulders Display (headlines, numbers), Bricolage Grotesque (labels) and JetBrains Mono (receipt), served from `public/fonts/` (all SIL Open Font License) and loaded with `FontFace` when the studio opens; the service worker keeps them for offline use.
 - Export: Share (Web Share API with the PNG; downloads where files can't be shared), Save image (full-size PNG), Sticker (the stats on a transparent 1080×760 PNG to put over a photo) and Copy (Clipboard API). Previews are drawn at 720 wide; exports are redrawn at full size.
 
 ## Friends and weekly leaderboard
