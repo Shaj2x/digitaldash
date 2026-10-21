@@ -1056,3 +1056,42 @@
 1094|Disattiva audio
 1095|Video dimostrativo di Digital Dash
 1096|In meno di due minuti.
+1097|Design
+1098|Periodo
+1099|Dimensione
+1100|Colori
+1101|Storia
+1102|Post
+1103|Quadrato
+1104|Il mio tema
+1105|Chiaro
+1106|Scuro
+1107|Intenso
+1108|Scegli una foto
+1109|La tua foto resta su questo dispositivo.
+1110|Scorri o trascina per cambiare design
+1111|Storie, chat
+1112|PNG, dimensione piena
+1113|Sticker
+1114|Sfondo trasparente
+1115|Copia
+1116|Incollala ovunque
+1117|Creata sul tuo dispositivo con il tuo tema. Non viene caricato nulla.
+1118|Design del riepilogo. Usa le frecce sinistra e destra per cambiare design
+1119|Condividi o salva
+1120|Poster
+1121|Anelli
+1122|Scontrino
+1123|ORE
+1124|MIN
+1125|SCONTRINO DI CONCENTRAZIONE
+1126|Attività fatte
+1127|CONCENTRAZIONE TOTALE
+1128|GRAZIE. TORNA A CONCENTRARTI.
+1129|PAGATO IN
+1130|FOCUS
+1131|SESSIONI
+1132|Immagine copiata. Incollala ovunque
+1133|Qui non si possono copiare immagini. Usa Salva immagine
+1134|Sticker salvato. Mettilo su una foto nella tua storia
+1135|Impossibile aprire quella foto

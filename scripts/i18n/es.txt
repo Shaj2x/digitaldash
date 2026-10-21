@@ -1056,3 +1056,42 @@
 1094|Silenciar
 1095|Vídeo de demostración de Digital Dash
 1096|En menos de dos minutos.
+1097|Diseño
+1098|Periodo
+1099|Tamaño
+1100|Colores
+1101|Historia
+1102|Publicación
+1103|Cuadrado
+1104|Mi tema
+1105|Claro
+1106|Oscuro
+1107|Intenso
+1108|Elegir una foto
+1109|Tu foto se queda en este dispositivo.
+1110|Desliza o arrastra para cambiar el diseño
+1111|Historias, chats
+1112|PNG, tamaño completo
+1113|Sticker
+1114|Fondo transparente
+1115|Copiar
+1116|Pégalo donde quieras
+1117|Hecho en tu dispositivo con tu tema. No se sube nada.
+1118|Diseños del resumen. Usa las flechas izquierda y derecha para cambiar de diseño
+1119|Compartir o guardar
+1120|Póster
+1121|Anillos
+1122|Recibo
+1123|H
+1124|MIN
+1125|RECIBO DE ENFOQUE
+1126|Tareas hechas
+1127|ENFOQUE TOTAL
+1128|GRACIAS. VUELVE A ENFOCARTE PRONTO.
+1129|PAGADO EN
+1130|ENFOQUE
+1131|SESIONES
+1132|Imagen copiada. Pégala donde quieras
+1133|Aquí no se pueden copiar imágenes. Usa Guardar imagen
+1134|Sticker guardado. Ponlo sobre una foto en tu historia
+1135|No se pudo abrir esa foto

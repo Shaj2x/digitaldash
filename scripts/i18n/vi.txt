@@ -1056,3 +1056,42 @@
 1094|Tắt âm thanh
 1095|Video giới thiệu Digital Dash
 1096|Chưa đến hai phút.
+1097|Thiết kế
+1098|Khoảng thời gian
+1099|Kích thước
+1100|Màu sắc
+1101|Tin
+1102|Bài đăng
+1103|Vuông
+1104|Giao diện của tôi
+1105|Sáng
+1106|Tối
+1107|Nổi bật
+1108|Chọn ảnh
+1109|Ảnh của bạn chỉ ở trên thiết bị này.
+1110|Vuốt hoặc kéo để đổi thiết kế
+1111|Tin, trò chuyện
+1112|PNG, kích thước đầy đủ
+1113|Nhãn dán
+1114|Nền trong suốt
+1115|Sao chép
+1116|Dán ở bất cứ đâu
+1117|Được tạo trên thiết bị của bạn theo giao diện của bạn. Không tải gì lên.
+1118|Các thiết kế tổng kết. Dùng phím mũi tên trái và phải để đổi thiết kế
+1119|Chia sẻ hoặc lưu
+1120|Áp phích
+1121|Vòng tròn
+1122|Hóa đơn
+1123|GIỜ
+1124|PHÚT
+1125|HÓA ĐƠN TẬP TRUNG
+1126|Việc đã xong
+1127|TỔNG TẬP TRUNG
+1128|CẢM ƠN. HẸN GẶP LẠI.
+1129|TRẢ BẰNG
+1130|TẬP TRUNG
+1131|PHIÊN
+1132|Đã sao chép ảnh. Dán ở bất cứ đâu
+1133|Không thể sao chép ảnh ở đây. Hãy dùng Lưu ảnh
+1134|Đã lưu nhãn dán. Thêm nó lên ảnh trong tin của bạn
+1135|Không mở được ảnh đó

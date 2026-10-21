@@ -1056,3 +1056,42 @@
 1094|Ton aus
 1095|Demovideo von Digital Dash
 1096|In unter zwei Minuten.
+1097|Design
+1098|Zeitraum
+1099|Größe
+1100|Farben
+1101|Story
+1102|Beitrag
+1103|Quadrat
+1104|Mein Design
+1105|Hell
+1106|Dunkel
+1107|Kräftig
+1108|Foto auswählen
+1109|Dein Foto bleibt auf diesem Gerät.
+1110|Wischen oder ziehen, um das Design zu wechseln
+1111|Storys, Chats
+1112|PNG, volle Größe
+1113|Sticker
+1114|Transparenter Hintergrund
+1115|Kopieren
+1116|Überall einfügen
+1117|Auf deinem Gerät in deinem Design erstellt. Nichts wird hochgeladen.
+1118|Rückblick-Designs. Mit den Pfeiltasten links und rechts wechselst du das Design
+1119|Teilen oder speichern
+1120|Poster
+1121|Ringe
+1122|Beleg
+1123|STD
+1124|MIN
+1125|FOKUS-BELEG
+1126|Erledigte Aufgaben
+1127|FOKUS GESAMT
+1128|DANKE. BIS ZUM NÄCHSTEN FOKUS.
+1129|BEZAHLT IN
+1130|FOKUS
+1131|SITZUNGEN
+1132|Bild kopiert. Füge es überall ein
+1133|Bilder kopieren geht hier nicht. Nutze Bild speichern
+1134|Sticker gespeichert. Leg ihn in deiner Story über ein Foto
+1135|Das Foto ließ sich nicht öffnen

@@ -393,8 +393,11 @@ The goal is that nothing teleports and nothing waits on you. Rules the code foll
 
 ## Recap card
 
-- Calendar > Week review > Share recap, or "recap" / "wrapped" in the command bar. A 1080×1920 canvas in the theme's colours and fonts: focus time with per-day (or per-week for a term) bars, then up to four of tasks finished, best day, top course, longest streak and workouts; any can be left off (`digitaldash.rchide`).
-- Periods: this week, last week, this month, this term (Jan–Apr, May–Aug, Sep–Dec). Share uses the Web Share API with the PNG where the browser supports files; otherwise it downloads.
+- Calendar > Week review > Share recap, or "recap" / "wrapped" in the command bar. A small studio: pick a design, period, size and colours, then share or save.
+- Designs (`RC_DESIGNS`, drawn by `rcPaint`): Poster (the focus total as flip-clock cards, a bar chart and stat tiles), Rings (a clock-face dial where each day is a wedge), Receipt (a paper receipt with a "Paid in focus" stamp), Calendar (a heatmap of the days) and Photo (your own photo, or a soft gradient, with Strava-style stats on top). Swipe or drag the preview, or use the arrow keys; with a mouse it tilts and catches the light.
+- Sizes: Story 1080×1920, Post 1080×1350, Square 1080×1080. Colours: the current theme, Light, Dark, or Bold (the accent as the background). Design, size and colours are remembered (`digitaldash.rcpref`); items left off the card in `digitaldash.rchide`. A chosen photo is only held in memory for that visit.
+- Periods: this week, last week, this month, this term (Jan–Apr, May–Aug, Sep–Dec).
+- Export: Share (Web Share API with the PNG; downloads where files can't be shared), Save image (full-size PNG), Sticker (the stats on a transparent 1080×760 PNG to put over a photo) and Copy (Clipboard API). Previews are drawn at 720 wide; exports are redrawn at full size.
 
 ## Friends and weekly leaderboard
 

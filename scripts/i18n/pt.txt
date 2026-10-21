@@ -1056,3 +1056,42 @@
 1094|Desativar som
 1095|Vídeo de demonstração do Digital Dash
 1096|Em menos de dois minutos.
+1097|Design
+1098|Período
+1099|Tamanho
+1100|Cores
+1101|Story
+1102|Post
+1103|Quadrado
+1104|Meu tema
+1105|Claro
+1106|Escuro
+1107|Intenso
+1108|Escolher uma foto
+1109|Sua foto fica neste dispositivo.
+1110|Deslize ou arraste para mudar o design
+1111|Stories, conversas
+1112|PNG, tamanho original
+1113|Figurinha
+1114|Fundo transparente
+1115|Copiar
+1116|Cole onde quiser
+1117|Feito no seu dispositivo, no seu tema. Nada é enviado.
+1118|Designs do resumo. Use as setas esquerda e direita para mudar o design
+1119|Compartilhar ou salvar
+1120|Pôster
+1121|Anéis
+1122|Recibo
+1123|H
+1124|MIN
+1125|RECIBO DE FOCO
+1126|Tarefas feitas
+1127|FOCO TOTAL
+1128|OBRIGADO. VOLTE A FOCAR.
+1129|PAGO EM
+1130|FOCO
+1131|SESSÕES
+1132|Imagem copiada. Cole onde quiser
+1133|Não dá para copiar imagens aqui. Use Salvar imagem
+1134|Figurinha salva. Coloque sobre uma foto no seu story
+1135|Não foi possível abrir essa foto

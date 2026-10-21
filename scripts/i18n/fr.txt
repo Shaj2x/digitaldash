@@ -1056,3 +1056,42 @@
 1094|Couper le son
 1095|Vidéo de démonstration de Digital Dash
 1096|En moins de deux minutes.
+1097|Design
+1098|Période
+1099|Taille
+1100|Couleurs
+1101|Story
+1102|Post
+1103|Carré
+1104|Mon thème
+1105|Clair
+1106|Sombre
+1107|Vif
+1108|Choisir une photo
+1109|Votre photo reste sur cet appareil.
+1110|Balayez ou faites glisser pour changer de design
+1111|Stories, discussions
+1112|PNG, taille réelle
+1113|Sticker
+1114|Fond transparent
+1115|Copier
+1116|Collez-la où vous voulez
+1117|Créée sur votre appareil, dans votre thème. Rien n'est envoyé.
+1118|Designs du récap. Utilisez les flèches gauche et droite pour changer de design
+1119|Partager ou enregistrer
+1120|Affiche
+1121|Anneaux
+1122|Ticket
+1123|H
+1124|MIN
+1125|TICKET DE CONCENTRATION
+1126|Tâches faites
+1127|CONCENTRATION TOTALE
+1128|MERCI. REVENEZ VOUS CONCENTRER.
+1129|PAYÉ EN
+1130|FOCUS
+1131|SESSIONS
+1132|Image copiée. Collez-la où vous voulez
+1133|La copie d'images n'est pas possible ici. Utilisez Enregistrer l'image
+1134|Sticker enregistré. Ajoutez-le sur une photo dans votre story
+1135|Impossible d'ouvrir cette photo
