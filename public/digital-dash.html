@@ -5610,9 +5610,10 @@ async function frPhoto(file){
 }
 const acProfName=()=>{const i=$("#ac-pn"),m=AC.user&&AC.user.user_metadata||{};return (i&&i.value.trim())||(FR.prof&&FR.prof.name)||(m.full_name||m.name||"").split(" ")[0]||(AC.user&&AC.user.email||"").split("@")[0]||"";};
 function acProfHTML(){
-  if(!AC.user||!AC.sb||FR.missing)return "";
-  const P=FR.prof||{},sig=esc(JSON.stringify([AC.user.id,P.name,P.username,(P.avatar||"").length,FR.old,FR.state==="loading"&&!FR.prof]));
+  if(!AC.user||!AC.sb)return "";
+  const P=FR.prof||{},sig=esc(JSON.stringify([AC.user.id,P.name,P.username,(P.avatar||"").length,FR.old,FR.missing,FR.state==="loading"&&!FR.prof]));
   const wrap=b=>`<section class="ac-sec ac-pf" id="ac-pfw" data-sig="${sig}"><h3>Profile</h3>${b}</section>`;
+  if(FR.missing)return wrap(`<p class="muted ac-empty">Usernames and profile photos aren't switched on for this site yet.</p>`);
   if(FR.state==="loading"&&!FR.prof)return wrap(`<p class="muted ac-empty">Loading…</p>`);
   if(FR.old)return wrap(`<p class="muted ac-empty">Usernames and profile photos aren't switched on for this site yet.</p>`);
   const nm=acProfName();
