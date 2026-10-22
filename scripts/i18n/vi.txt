@@ -1141,3 +1141,39 @@
 1179|Và nhiều hơn
 1180|Vị trí video
 1181|Chương video
+1182|Có gì mới
+1183|Tên người dùng và ảnh hồ sơ
+1184|Thêm bạn bằng @tênngườidùng
+1185|Studio thẻ tổng kết
+1186|5 mẫu để chia sẻ tuần của bạn
+1187|11 ngôn ngữ
+1188|Chọn ở phía trên
+1189|Mở trên điện thoại
+1190|Quét bằng camera rồi thêm vào màn hình chính.
+1191|Demo
+1192|Xem
+1193|thực tế.
+1194|Vì sao mình làm ra nó
+1195|Lời nhắn từ người làm
+1196|Mình làm ứng dụng này vì muốn có một nơi gọn gàng để lưu mọi thông tin quan trọng, giúp mình tập trung cao độ và không bị xao nhãng. Nó hoàn hảo cho việc đó, và mình mong nó cũng giúp được bạn.
+1197|Người làm Digital Dash
+1198|Sắp ra mắt
+1199|Trên iPhone
+1200|và Android.
+1201|Digital Dash sắp có trên App Store và Google Play. Để lại email, chúng mình sẽ báo bạn ngay ngày ra mắt.
+1202|Bạn dùng điện thoại nào?
+1203|Cả hai
+1204|Email
+1205|Báo cho tôi
+1206|Chỉ một email khi ứng dụng ra mắt. Không gì khác, và không bao giờ chia sẻ.
+1207|Chính sách quyền riêng tư
+1208|Sắp có trên
+1209|Sắp có trên
+1210|Nhập email hợp lệ
+1211|Chưa mở đăng ký. Vui lòng thử lại sau.
+1212|Đang đăng ký…
+1213|Bạn đã có trong danh sách. Chúng mình sẽ email khi ứng dụng ra mắt.
+1214|Chưa đăng ký được lúc này. Vui lòng thử lại sau.
+1215|Chưa đăng ký được lúc này. Kiểm tra kết nối của bạn.
+1216|Bạn có thể thêm nó vào màn hình chính ngay hôm nay và mở như một ứng dụng. Phiên bản App Store và Google Play đang đến:
+1217|nhận thông báo khi ra mắt

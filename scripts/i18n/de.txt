@@ -1141,3 +1141,39 @@
 1179|Und mehr
 1180|Videoposition
 1181|Videokapitel
+1182|Neu
+1183|Benutzernamen und Profilfotos
+1184|Freunde per @Benutzername hinzufügen
+1185|Recap-Karten-Studio
+1186|5 Designs, um deine Woche zu teilen
+1187|11 Sprachen
+1188|Oben auswählen
+1189|Auf dem Handy öffnen
+1190|Mit der Kamera scannen und zum Home-Bildschirm hinzufügen.
+1191|Demo
+1192|Sieh es
+1193|in Aktion.
+1194|Warum ich es gebaut habe
+1195|Eine Notiz vom Macher
+1196|Ich habe diese App gebaut, weil ich einen geordneten Ort für all meine wichtigen Infos wollte, der mir hilft, mich voll zu konzentrieren und nicht den Fokus zu verlieren. Dafür ist sie perfekt, und ich hoffe, sie hilft auch dir.
+1197|Macher von Digital Dash
+1198|Bald verfügbar
+1199|Auf iPhone
+1200|und Android.
+1201|Digital Dash kommt in den App Store und zu Google Play. Hinterlass deine E-Mail und wir sagen dir am Starttag Bescheid.
+1202|Welches Handy nutzt du?
+1203|Beide
+1204|E-Mail
+1205|Benachrichtigen
+1206|Eine E-Mail zum Start der Apps. Sonst nichts, und wir geben sie nie weiter.
+1207|Datenschutzerklärung
+1208|Bald im
+1209|Bald bei
+1210|Gib eine gültige E-Mail-Adresse ein
+1211|Anmeldungen sind noch nicht offen. Versuch es bald wieder.
+1212|Wird eingetragen…
+1213|Du bist auf der Liste. Wir schreiben dir, wenn die Apps da sind.
+1214|Eintragen hat gerade nicht geklappt. Versuch es bald wieder.
+1215|Eintragen hat gerade nicht geklappt. Prüfe deine Verbindung.
+1216|Du kannst sie schon heute zum Home-Bildschirm hinzufügen, dann öffnet sie sich wie eine App. Versionen für App Store und Google Play sind unterwegs:
+1217|zum Start benachrichtigt werden

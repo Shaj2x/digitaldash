@@ -426,3 +426,11 @@ The goal is that nothing teleports and nothing waits on you. Rules the code foll
 - Move to a real stack (for example Vite + React or Next.js) and split sections into modules.
 - Import bank balances automatically, calendar sync with Google Calendar.
 - Two-way Google Calendar sync (needs OAuth and a backend; today's import is read-only).
+
+## Home page: note, what's new, QR and app waitlist
+
+- **What's new** strip under the nav (`.news` in `public/index.html`): three short links to the latest features. Update the three `<li>`s when something ships.
+- **QR code** next to Open app, desktop only (fine pointer, wider than 820px): a static inline SVG pointing at `/digital-dash.html`, in a popover that closes on Escape or a click outside.
+- **Note from the maker** (`#note`) before the FAQ, signed with a first name only.
+- **App store waitlist** (`#apps`): email plus iPhone, Android or both. It posts to the `dash_waitlist_join` RPC with the site's public Supabase key from `/digital-dash-config.js`. Duplicate emails also return "ok", so the form can't reveal who signed up, and a hidden honeypot field drops simple bots.
+- **One-time setup:** run `supabase/migrations/20261022120000_digital_dash_waitlist.sql` in the Supabase SQL editor (safe to run twice). The list is readable only in the Supabase dashboard (Table Editor > `dash_waitlist`); row level security blocks it from the API.

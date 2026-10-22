@@ -1141,3 +1141,39 @@
 1179|Y más
 1180|Posición del vídeo
 1181|Capítulos del vídeo
+1182|Novedades
+1183|Nombres de usuario y fotos de perfil
+1184|Añade amigos por @usuario
+1185|Estudio de tarjetas resumen
+1186|5 diseños para compartir tu semana
+1187|11 idiomas
+1188|Elige el tuyo arriba
+1189|Ábrelo en tu móvil
+1190|Escanéalo con la cámara y añádelo a tu pantalla de inicio.
+1191|Demo
+1192|Míralo
+1193|en acción.
+1194|Por qué lo hice
+1195|Una nota del creador
+1196|Creé esta app porque quería un solo lugar organizado donde guardar todos mis datos importantes y que me ayudara a concentrarme sin perder el foco. Es perfecta para eso, y espero que también te ayude a ti.
+1197|Creador de Digital Dash
+1198|Muy pronto
+1199|En iPhone
+1200|y Android.
+1201|Digital Dash llegará a la App Store y a Google Play. Déjanos tu email y te avisaremos el día que salga.
+1202|¿Qué móvil usas?
+1203|Ambos
+1204|Email
+1205|Avísame
+1206|Un solo email cuando salgan las apps. Nada más, y nunca lo compartimos.
+1207|Política de privacidad
+1208|Muy pronto en la
+1209|Muy pronto en
+1210|Escribe un email válido
+1211|Las inscripciones aún no están abiertas. Inténtalo pronto.
+1212|Apuntándote…
+1213|Ya estás en la lista. Te escribiremos cuando salgan las apps.
+1214|No pudimos apuntarte ahora. Inténtalo pronto.
+1215|No pudimos apuntarte ahora. Revisa tu conexión.
+1216|Ya puedes añadirla a tu pantalla de inicio y se abre como una app. Las versiones para App Store y Google Play están en camino:
+1217|avísame cuando salgan

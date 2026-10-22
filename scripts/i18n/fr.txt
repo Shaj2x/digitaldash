@@ -1141,3 +1141,39 @@
 1179|Et plus
 1180|Position de la vidéo
 1181|Chapitres de la vidéo
+1182|Nouveautés
+1183|Noms d'utilisateur et photos de profil
+1184|Ajoute des amis par @pseudo
+1185|Studio de récap
+1186|5 designs pour partager ta semaine
+1187|11 langues
+1188|Choisis la tienne en haut
+1189|Ouvrir sur ton téléphone
+1190|Scanne avec ton appareil photo, puis ajoute-le à ton écran d'accueil.
+1191|Démo
+1192|Vois-le
+1193|en action.
+1194|Pourquoi je l'ai créée
+1195|Un mot du créateur
+1196|J'ai créé cette app parce que je voulais un seul endroit organisé pour garder toutes mes infos importantes, et qui m'aide à me concentrer sans perdre le fil. Elle est parfaite pour ça, et j'espère qu'elle pourra t'aider aussi.
+1197|Créateur de Digital Dash
+1198|Bientôt
+1199|Sur iPhone
+1200|et Android.
+1201|Digital Dash arrive sur l'App Store et Google Play. Laisse ton email et on te prévient le jour de la sortie.
+1202|Quel téléphone utilises-tu ?
+1203|Les deux
+1204|Email
+1205|Me prévenir
+1206|Un seul email à la sortie des apps. Rien d'autre, et on ne le partage jamais.
+1207|Politique de confidentialité
+1208|Bientôt sur l'
+1209|Bientôt sur
+1210|Saisis une adresse email valide
+1211|Les inscriptions ne sont pas encore ouvertes. Réessaie bientôt.
+1212|Inscription…
+1213|Tu es sur la liste. On t'écrira à la sortie des apps.
+1214|Impossible de t'inscrire pour le moment. Réessaie bientôt.
+1215|Impossible de t'inscrire pour le moment. Vérifie ta connexion.
+1216|Tu peux déjà l'ajouter à ton écran d'accueil, elle s'ouvre comme une app. Les versions App Store et Google Play arrivent :
+1217|être prévenu à la sortie
