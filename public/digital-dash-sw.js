@@ -3,10 +3,10 @@
    copy when not); Google Fonts are cache-first since they never change. Scope: /digital-dash* only,
    so any other pages on the same site are untouched.
    It also shows push reminders (sent by the dash-push Supabase function) and opens the app when one is tapped. */
-const CACHE = "digital-dash-v3";
+const CACHE = "digital-dash-v4";
 const FONTS = "digital-dash-fonts";
 const CORE = [
-  "/digital-dash.html",
+  "/digital-dash",
   "/digital-dash.webmanifest",
   "/digital-dash-icon-192.png",
   "/digital-dash-icon-512.png",
@@ -39,7 +39,7 @@ self.addEventListener("fetch", (e) => {
           if (res.ok) { const copy = res.clone(); caches.open(CACHE).then((c) => c.put(req, copy)); }
           return res;
         })
-        .catch(() => caches.match(req, { ignoreSearch: true }).then((m) => m || caches.match("/digital-dash.html")))
+        .catch(() => caches.match(req, { ignoreSearch: true }).then((m) => m || caches.match("/digital-dash")))
     );
     return;
   }
@@ -63,13 +63,13 @@ self.addEventListener("push", (e) => {
     icon: "/digital-dash-icon-192.png",
     badge: "/digital-dash-icon-192.png",
     timestamp: d.at || Date.now(),
-    data: { url: d.url || "/digital-dash.html" }
+    data: { url: d.url || "/digital-dash" }
   }));
 });
 
 self.addEventListener("notificationclick", (e) => {
   e.notification.close();
-  const url = new URL((e.notification.data && e.notification.data.url) || "/digital-dash.html", self.location.origin).href;
+  const url = new URL((e.notification.data && e.notification.data.url) || "/digital-dash", self.location.origin).href;
   e.waitUntil(self.clients.matchAll({ type: "window", includeUncontrolled: true }).then((list) => {
     for (const c of list) {
       if (new URL(c.url).pathname.startsWith("/digital-dash")) {

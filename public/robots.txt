@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /preview
 
-Sitemap: https://usedigitaldash.vercel.app/sitemap.xml
+Sitemap: https://digitaldashdaily.com/sitemap.xml

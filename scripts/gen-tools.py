@@ -2,7 +2,7 @@
 Shared look and maths: public/tools/tools.css and tools.js. Edit here, then re-run."""
 import json, os
 ROOT=os.path.join(os.path.dirname(os.path.abspath(__file__)),"..","public")  # run: python3 scripts/gen-tools.py
-SITE="https://usedigitaldash.vercel.app"
+SITE="https://digitaldashdaily.com"
 TOOLS=[("grade-calculator","Grade calculator","Weighted average, letter grade and GPA"),
        ("final-grade-calculator","Final grade calculator","What you need on the final"),
        ("pomodoro-timer","Pomodoro timer","25-minute focus sessions with breaks"),
@@ -40,7 +40,7 @@ def head(slug,title,desc,ld):
   <a class="brand" href="/" aria-label="Digital Dash home"><span class="mk" aria-hidden="true"></span><span class="bt">Digital Dash</span></a>
   <a class="more" href="/tools"{" aria-current=page" if not slug else ""}>Free tools</a>
   <label class="lang"><span class="sr">Language</span><select data-lang></select></label>
-  <a class="btn pri small" href="/digital-dash.html">Open app</a>
+  <a class="btn pri small" href="/digital-dash">Open app</a>
 </div></header>
 <main id="main">
 '''
@@ -48,7 +48,7 @@ def foot(slug):
     rel="".join(f'<a href="/{s}"><b>{n}</b><span>{d}</span></a>' for s,n,d in TOOLS if s!=slug)
     return f'''<section class="wrap more-tools" aria-labelledby="more-h"><h2 id="more-h">More free tools</h2><div class="related">{rel}</div></section>
 </main>
-<footer><div class="wrap"><span class="mk" aria-hidden="true"></span><span>© <span id="yr"></span> Digital Dash</span><nav aria-label="Footer"><a href="/tools">All free tools</a><a href="/">Home</a><a href="/digital-dash.html">Open app</a><a href="/digital-dash-privacy.html">Privacy</a></nav></div></footer>
+<footer><div class="wrap"><span class="mk" aria-hidden="true"></span><span>© <span id="yr"></span> Digital Dash</span><nav aria-label="Footer"><a href="/tools">All free tools</a><a href="/">Home</a><a href="/digital-dash">Open app</a><a href="/digital-dash-privacy">Privacy</a></nav></div></footer>
 <script src="/tools/tools.js"></script>
 '''
 def ld(slug,name,desc,faq):
@@ -288,9 +288,9 @@ hub=head("", "Free Student Tools: Grade, Final, Pomodoro, BMI and Calorie Calcul
  <span class="tdemo" aria-hidden="true"><span class="c-bars"><span><i style="--h:.80"></i><small>Cut</small></span><span class="on"><i style="--h:1"></i><small>Maintain</small></span><span><i style="--h:1.1"></i><small>Bulk</small></span></span><span class="c-out"><strong>2,549</strong><small>kcal to maintain</small></span></span><svg class="go" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></li>
 </ol></section>
 <section class="wrap hub-cta rv" aria-labelledby="cta-h"><div><div><h2 id="cta-h">Keep it all in one place</h2><p>Every tool can save straight into Digital Dash, next to your tasks, week planner and gym log.</p>
- <ul><li>Works offline</li><li>Syncs if you sign in</li><li>10 languages</li></ul></div><a class="btn pri lg" href="/digital-dash.html">Open Digital Dash</a></div></section>
+ <ul><li>Works offline</li><li>Syncs if you sign in</li><li>10 languages</li></ul></div><a class="btn pri lg" href="/digital-dash">Open Digital Dash</a></div></section>
 </main>
-<footer><div class="wrap"><span class="mk" aria-hidden="true"></span><span>© <span id="yr"></span> Digital Dash</span><nav aria-label="Footer"><a href="/">Home</a><a href="/digital-dash.html">Open app</a><a href="/digital-dash-privacy.html">Privacy</a></nav></div></footer>
+<footer><div class="wrap"><span class="mk" aria-hidden="true"></span><span>© <span id="yr"></span> Digital Dash</span><nav aria-label="Footer"><a href="/">Home</a><a href="/digital-dash">Open app</a><a href="/digital-dash-privacy">Privacy</a></nav></div></footer>
 <script src="/tools/tools.js"></script>
 <script>
 /* hub: rows rise in as they scroll into view; the timer preview counts down (still with reduced motion) */

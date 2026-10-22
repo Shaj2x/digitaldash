@@ -2,8 +2,8 @@
   "name": "Digital Dash",
   "short_name": "Dash",
   "description": "A study dashboard: focus timers, tasks, courses and grades, calendar and reminders.",
-  "id": "/digital-dash.html",
-  "start_url": "/digital-dash.html",
+  "id": "/digital-dash",
+  "start_url": "/digital-dash",
   "scope": "/digital-dash",
   "display": "standalone",
   "display_override": [
@@ -35,7 +35,7 @@
       "name": "New task",
       "short_name": "New task",
       "description": "Add a task",
-      "url": "/digital-dash.html#new-task",
+      "url": "/digital-dash#new-task",
       "icons": [
         {
           "src": "/digital-dash-icon-192.png",
@@ -48,7 +48,7 @@
       "name": "Start focus",
       "short_name": "Focus",
       "description": "Start a focus timer",
-      "url": "/digital-dash.html#start-focus",
+      "url": "/digital-dash#start-focus",
       "icons": [
         {
           "src": "/digital-dash-icon-192.png",
@@ -61,7 +61,7 @@
       "name": "Today",
       "short_name": "Today",
       "description": "What's due today",
-      "url": "/digital-dash.html#today",
+      "url": "/digital-dash#today",
       "icons": [
         {
           "src": "/digital-dash-icon-192.png",
@@ -74,7 +74,7 @@
       "name": "Week plan",
       "short_name": "Week",
       "description": "Plan your week day by day",
-      "url": "/digital-dash.html#plan",
+      "url": "/digital-dash#plan",
       "icons": [
         {
           "src": "/digital-dash-icon-192.png",
@@ -86,7 +86,7 @@
     {
       "name": "Calendar",
       "short_name": "Calendar",
-      "url": "/digital-dash.html#calendar",
+      "url": "/digital-dash#calendar",
       "icons": [
         {
           "src": "/digital-dash-icon-192.png",

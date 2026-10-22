@@ -434,3 +434,10 @@ The goal is that nothing teleports and nothing waits on you. Rules the code foll
 - **Note from the maker** (`#note`) before the FAQ, signed with a first name only.
 - **App store waitlist** (`#apps`): email plus iPhone, Android or both. It posts to the `dash_waitlist_join` RPC with the site's public Supabase key from `/digital-dash-config.js`. Duplicate emails also return "ok", so the form can't reveal who signed up, and a hidden honeypot field drops simple bots.
 - **One-time setup:** run `supabase/migrations/20261022120000_digital_dash_waitlist.sql` in the Supabase SQL editor (safe to run twice). The list is readable only in the Supabase dashboard (Table Editor > `dash_waitlist`); row level security blocks it from the API.
+
+## Addresses
+
+- Main domain: `https://digitaldashdaily.com` (Vercel, DNS at Spaceship). `usedigitaldash.vercel.app` keeps working.
+- `vercel.json` has `cleanUrls`, so pages are served without `.html`: the app is `/digital-dash` and `/app` forwards to it. Old `.html` links forward automatically (308), keeping the query and `#tab`.
+- The service worker scope stays `/digital-dash`, so offline support and push reminders carry on unchanged. Its cache is `digital-dash-v4`, which precaches `/digital-dash`.
+- Spotify sign-in uses the page address as its redirect, so a Spotify app set up for the old address needs `https://digitaldashdaily.com/digital-dash` added as a redirect URI.

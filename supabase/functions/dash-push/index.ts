@@ -30,8 +30,8 @@ const pushReady = (() => {
   if (!env("VAPID_PUBLIC_KEY") || !env("VAPID_PRIVATE_KEY")) return false;
   try { webpush.setVapidDetails(env("VAPID_SUBJECT") || "mailto:hello@example.com", env("VAPID_PUBLIC_KEY"), env("VAPID_PRIVATE_KEY")); return true; } catch { return false; }
 })();
-const SITE = (env("SITE_URL") || "https://usedigitaldash.vercel.app").replace(/\/+$/, "");
-const APP = SITE + "/digital-dash.html";
+const SITE = (env("SITE_URL") || "https://digitaldashdaily.com").replace(/\/+$/, "");
+const APP = SITE + "/digital-dash";
 const SMS_DAILY = Number(env("SMS_DAILY_LIMIT")) || 20;
 const EMAIL_DAILY = Number(env("EMAIL_DAILY_LIMIT")) || 50;
 const emailReady = () => !!env("RESEND_API_KEY");
@@ -265,7 +265,7 @@ Deno.serve(async (req) => {
   const uid = user.id;
 
   if (body.action === "test") {
-    const note = { title: "Reminders are on", body: "This is how Digital Dash will nudge you.", tag: "test", url: "/digital-dash.html", at: Date.now() };
+    const note = { title: "Reminders are on", body: "This is how Digital Dash will nudge you.", tag: "test", url: "/digital-dash", at: Date.now() };
     const result = await sendToUsers(admin, [uid], new Map([[uid, [note]]]));
     if (!result.sent) return json({ error: "No device got it. Turn reminders off and on again on this device." }, 404);
     return json(result);

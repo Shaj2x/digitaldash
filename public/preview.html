@@ -64,7 +64,7 @@ main{flex:1;display:flex;flex-direction:column;min-height:0}
 <header>
   <h1><img src="/digital-dash-icon-192.png" alt="">Digital Dash · iPhone preview</h1>
   <span class="sp"></span>
-  <a class="btn" href="/digital-dash.html" style="text-decoration:none">Open the app</a>
+  <a class="btn" href="/digital-dash" style="text-decoration:none">Open the app</a>
 </header>
 <main>
 <div class="ctl" role="toolbar" aria-label="Preview controls">
@@ -82,7 +82,7 @@ main{flex:1;display:flex;flex-direction:column;min-height:0}
 
   <div class="stage" id="stage" aria-live="polite"></div>
   <p class="note" id="note"></p>
-  <div class="mobile-note"><p style="margin:0 0 8px"><b>You're already on a phone.</b> This preview shows the app inside iPhone frames on a bigger screen.</p><a href="/digital-dash.html">Open Digital Dash</a></div>
+  <div class="mobile-note"><p style="margin:0 0 8px"><b>You're already on a phone.</b> This preview shows the app inside iPhone frames on a bigger screen.</p><a href="/digital-dash">Open Digital Dash</a></div>
 </main>
 <script>
 (()=>{
@@ -114,7 +114,7 @@ function deviceEl(key,landscape){
   el.innerHTML=`<div class="body"><div class="screen" role="img" aria-label="${s.name} showing Digital Dash">
       ${land?"":`<div class="status" style="height:${s.top}px;${s.island?"padding-top:4px":""}"><span>${clock()}</span><span class="r">${sigSvg}${wifiSvg}${batSvg}</span></div>`}
       ${s.island&&!land?'<div class="island"></div>':""}${s.punch?'<div class="punch"></div>':""}${s.crease?'<div class="crease"></div>':""}
-      <iframe title="Digital Dash on ${s.name}" loading="lazy" style="top:${top}px;height:calc(100% - ${top+bot}px);${left?`left:${left}px;width:calc(100% - ${left+right}px)`:""}" src="/digital-dash.html#${tab}"></iframe>
+      <iframe title="Digital Dash on ${s.name}" loading="lazy" style="top:${top}px;height:calc(100% - ${top+bot}px);${left?`left:${left}px;width:calc(100% - ${left+right}px)`:""}" src="/digital-dash#${tab}"></iframe>
       ${s.bot||land?'<div class="homebar"></div>':""}
     </div>${s.se?'<div class="homebtn" aria-hidden="true"></div>':""}</div>`;
   el._w=outW;el._h=outH;
@@ -152,7 +152,7 @@ const $$=s=>[...document.querySelectorAll(s)];
 $("#dev-seg").addEventListener("click",e=>{const b=e.target.closest("button[data-d]");if(!b)return;dev=b.dataset.d;rot=false;ls.set("dev",dev);render();});
 $("#zoom-seg").addEventListener("click",e=>{const b=e.target.closest("button[data-z]");if(!b)return;zoom=b.dataset.z;ls.set("zoom",zoom);render();});
 $("#tab").addEventListener("change",e=>{tab=e.target.value;ls.set("tab",tab);
-  $$("#stage iframe").forEach(f=>{try{f.contentWindow.location.hash=tab;}catch(err){f.src="/digital-dash.html#"+tab;}});});
+  $$("#stage iframe").forEach(f=>{try{f.contentWindow.location.hash=tab;}catch(err){f.src="/digital-dash#"+tab;}});});
 $("#rotate").addEventListener("click",()=>{rot=!rot;render();});
 $("#fold").addEventListener("click",()=>{unf=!unf;ls.set("unf",unf?"1":"0");render();});
 $("#reload").addEventListener("click",()=>render());

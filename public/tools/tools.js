@@ -78,7 +78,7 @@ function plans(r){const u=r.us?"lb":"kg",step=r.us?[0.5,1,2]:[0.25,0.5,1],cal=[2
 
 /* "Save this in Digital Dash": hand the numbers to the app on this site, which adds them (never replaces
    anything without Undo) the next time it opens. */
-function saveToApp(kind,data,hash){ls.set("dd.import",JSON.stringify({kind,data,t:Date.now()}));location.href="/digital-dash.html"+(hash?"#"+hash:"");}
+function saveToApp(kind,data,hash){ls.set("dd.import",JSON.stringify({kind,data,t:Date.now()}));location.href="/digital-dash"+(hash?"#"+hash:"");}
 
 /* small helpers */
 const $=s=>document.querySelector(s),esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
