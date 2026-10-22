@@ -1133,3 +1133,11 @@
 1171|Tên người dùng của bạn
 1172|Bạn bè chỉ thấy tên, tên người dùng, ảnh và thời gian tập trung hằng tuần của bạn. Bạn chọn thêm ai và có thể tắt chia sẻ.
 1173|muốn kết bạn
+1174|Mở đầu
+1175|Phòng học
+1176|Kế hoạch
+1177|Tổng kết
+1178|Thiết bị
+1179|Và nhiều hơn
+1180|Vị trí video
+1181|Chương video

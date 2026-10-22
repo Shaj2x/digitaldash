@@ -1133,3 +1133,11 @@
 1171|Dein Benutzername
 1172|Freunde sehen nur deinen Namen, Benutzernamen, dein Foto und deine wöchentliche Fokuszeit. Du entscheidest, wen du hinzufügst, und kannst das Teilen ausschalten.
 1173|möchte mit dir befreundet sein
+1174|Intro
+1175|Räume
+1176|Plan
+1177|Rückblick
+1178|Geräte
+1179|Und mehr
+1180|Videoposition
+1181|Videokapitel

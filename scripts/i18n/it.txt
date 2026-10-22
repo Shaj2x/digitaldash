@@ -1133,3 +1133,11 @@
 1171|Il tuo nome utente
 1172|Gli amici vedono solo il tuo nome, nome utente, foto e il tempo di concentrazione settimanale. Scegli tu chi aggiungere e puoi disattivare la condivisione.
 1173|vuole essere tuo amico
+1174|Intro
+1175|Stanze
+1176|Piano
+1177|Riepilogo
+1178|Dispositivi
+1179|E altro
+1180|Posizione del video
+1181|Capitoli del video
