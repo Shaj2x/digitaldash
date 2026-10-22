@@ -1154,9 +1154,9 @@
 1192|Sieh es
 1193|in Aktion.
 1194|Warum ich es gebaut habe
-1195|Eine Notiz vom Macher
+1195|Eine Notiz vom Gründer
 1196|Ich habe diese App gebaut, weil ich einen geordneten Ort für all meine wichtigen Infos wollte, der mir hilft, mich voll zu konzentrieren und nicht den Fokus zu verlieren. Dafür ist sie perfekt, und ich hoffe, sie hilft auch dir.
-1197|Macher von Digital Dash
+1197|Gründer von Digital Dash
 1198|Bald verfügbar
 1199|Auf iPhone
 1200|und Android.

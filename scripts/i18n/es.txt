@@ -1154,9 +1154,9 @@
 1192|Míralo
 1193|en acción.
 1194|Por qué lo hice
-1195|Una nota del creador
+1195|Una nota del fundador
 1196|Creé esta app porque quería un solo lugar organizado donde guardar todos mis datos importantes y que me ayudara a concentrarme sin perder el foco. Es perfecta para eso, y espero que también te ayude a ti.
-1197|Creador de Digital Dash
+1197|Fundador de Digital Dash
 1198|Muy pronto
 1199|En iPhone
 1200|y Android.

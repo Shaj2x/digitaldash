@@ -1154,9 +1154,9 @@
 1192|Xem
 1193|thực tế.
 1194|Vì sao mình làm ra nó
-1195|Lời nhắn từ người làm
+1195|Lời nhắn từ nhà sáng lập
 1196|Mình làm ứng dụng này vì muốn có một nơi gọn gàng để lưu mọi thông tin quan trọng, giúp mình tập trung cao độ và không bị xao nhãng. Nó hoàn hảo cho việc đó, và mình mong nó cũng giúp được bạn.
-1197|Người làm Digital Dash
+1197|Nhà sáng lập Digital Dash
 1198|Sắp ra mắt
 1199|Trên iPhone
 1200|và Android.
