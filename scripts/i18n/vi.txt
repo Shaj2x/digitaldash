@@ -1338,3 +1338,15 @@
 1376|{n} giờ trước
 1377|{n} ngày trước
 1378|Trực tiếp từ Last.fm · {0}
+1379|Đăng nhập Spotify
+1380|Tôi đã đăng nhập, tải lại trình phát
+1381|Trên Safari, trình phát chỉ nhận đăng nhập Spotify nếu bạn tắt Cài đặt > Quyền riêng tư > Ngăn theo dõi chéo trang. Hoặc dùng Chrome.
+1382|Playlist của bạn
+1383|Dán liên kết playlist, album hoặc bài hát của bạn
+1384|Trong Spotify, mở playlist, chạm ⋯ rồi Chia sẻ > Sao chép liên kết và dán vào đây. Lần sau vẫn được lưu.
+1385|Mở playlist của tôi
+1386|Gợi ý để học
+1387|Playlist để học
+1388|Nhạc phát từ tài khoản Spotify bạn đang đăng nhập trên trình duyệt này. Premium phát trọn bài; tài khoản miễn phí có thể chỉ nghe thử hoặc phát ngẫu nhiên.
+1389|Nghe playlist Spotify của riêng bạn ngay tại đây và hiển thị bài đang nghe trên mọi thiết bị.
+1390|Đã tải lại trình phát. Nếu vẫn hiện Preview, hãy kiểm tra bạn đã đăng nhập open.spotify.com trên trình duyệt này.

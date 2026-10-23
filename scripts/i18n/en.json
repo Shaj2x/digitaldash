@@ -1381,6 +1381,18 @@
 "{n} min ago",
 "{n} h ago",
 "{n} d ago",
-"Live from Last.fm · {0}"
+"Live from Last.fm · {0}",
+"Log in to Spotify",
+"I'm logged in, refresh player",
+"On Safari, the player can only see your Spotify login if you turn off Settings > Privacy > Prevent cross-site tracking. Or use Chrome.",
+"Your playlists",
+"Paste a link to your playlist, album or song",
+"In Spotify, open a playlist, tap ⋯ then Share > Copy link, and paste it here. It's saved for next time.",
+"Open my playlists",
+"Study picks",
+"Study playlists",
+"It plays from the Spotify account you're logged in to in this browser. Premium plays full songs; free accounts may get previews or shuffle.",
+"Play your own Spotify playlists right here, and show what you're listening to on any device.",
+"Player refreshed. If it still says Preview, check you're logged in at open.spotify.com in this browser."
 ]
 }

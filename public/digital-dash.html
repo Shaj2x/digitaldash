@@ -969,6 +969,11 @@ html.lg .kpi{background:color-mix(in srgb,var(--panel) 40%,transparent);-webkit-
 .spx-grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:18px;margin-top:14px;align-items:start}
 @media (max-width:860px){.spx-grid{grid-template-columns:1fr}}
 .spx-lists{margin-bottom:10px}
+.spx-acct{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+.spx-acct a.btn{text-decoration:none}
+.spx-lab{margin:14px 0 8px;font-size:12.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.spx-how{margin:-4px 0 4px}
+.spx-safari{margin:0 0 6px}
 .spx-lists button{display:inline-flex;align-items:center;gap:6px}
 .spx-lists .hv-x{margin-left:2px;opacity:.7}
 .spx-paste{display:flex;gap:8px;margin-bottom:12px}
@@ -1863,14 +1868,23 @@ html.lg .eye{background:var(--glass-tint);box-shadow:inset 0 1px 0 color-mix(in 
         <label class="jb-auto"><input type="checkbox" id="jb-auto"> Play during focus timers and pause for breaks</label>
       </section>
       <section class="panel spx" id="spx" aria-labelledby="spx-h">
-        <div class="jb-head"><div><h3 id="spx-h" aria-level="2">Spotify</h3><p class="muted">Play study playlists right here, and show what you're listening to on any device.</p></div></div>
+        <div class="jb-head"><div><h3 id="spx-h" aria-level="2">Spotify</h3><p class="muted">Play your own Spotify playlists right here, and show what you're listening to on any device.</p></div></div>
         <div class="spx-grid">
           <div class="spx-player">
-            <div class="chips spx-lists" id="spx-lists" role="group" aria-label="Playlists"></div>
-            <form class="spx-paste" id="spx-paste" autocomplete="off"><input type="text" inputmode="url" id="spx-url" placeholder="Paste a Spotify link: playlist, album, song or podcast" aria-label="Spotify link"><button class="btn ghost small" type="submit">Play</button></form>
+            <div class="spx-acct" id="spx-acct">
+              <a class="btn small" id="spx-login" href="https://accounts.spotify.com/login?continue=https%3A%2F%2Fopen.spotify.com%2F" target="_blank" rel="noopener">Log in to Spotify</a>
+              <button type="button" class="btn ghost small" id="spx-refresh">I'm logged in, refresh player</button>
+            </div>
+            <p class="hint spx-safari" id="spx-safari" hidden>On Safari, the player can only see your Spotify login if you turn off Settings &gt; Privacy &gt; Prevent cross-site tracking. Or use Chrome.</p>
+            <h4 class="spx-lab" id="spx-mine-h" hidden>Your playlists</h4>
+            <div class="chips spx-lists" id="spx-mine" role="group" aria-label="Your playlists" hidden></div>
+            <form class="spx-paste" id="spx-paste" autocomplete="off"><input type="text" inputmode="url" id="spx-url" placeholder="Paste a link to your playlist, album or song" aria-label="Spotify link"><button class="btn small" type="submit">Add</button></form>
+            <p class="hint spx-how">In Spotify, open a playlist, tap ⋯ then Share &gt; Copy link, and paste it here. It's saved for next time. <a href="https://open.spotify.com/collection/playlists" target="_blank" rel="noopener">Open my playlists</a></p>
+            <h4 class="spx-lab">Study picks</h4>
+            <div class="chips spx-lists" id="spx-lists" role="group" aria-label="Study playlists"></div>
             <div class="spx-embed" id="spx-embed"><div class="spx-ph">Pick a playlist to start listening.</div></div>
             <label class="jb-auto" style="margin-top:10px"><input type="checkbox" id="spx-auto"> Play during focus timers and pause for breaks</label>
-            <p class="hint" style="margin:6px 0 0">Log in to Spotify in this browser to hear full songs. Free accounts may get previews or shuffle.</p>
+            <p class="hint" style="margin:6px 0 0">It plays from the Spotify account you're logged in to in this browser. Premium plays full songs; free accounts may get previews or shuffle.</p>
           </div>
           <div class="spx-live" id="spx-live" aria-live="polite"></div>
         </div>
@@ -6510,19 +6524,26 @@ function spOpen(uri,play){
 }
 function spRenderLists(){
   const st=spS(),cur=st.uri;
-  $("#spx-lists").innerHTML=SP_LISTS.map(([n,u])=>`<button type="button" data-spu="${u}" aria-pressed="${cur===u}">${n}</button>`).join("")+
-    st.saved.map((x,i)=>`<button type="button" data-spu="${esc(x.uri)}" aria-pressed="${cur===x.uri}">${esc(x.name)}<span class="hv-x" data-spdel="${i}" role="button" aria-label="Remove ${esc(x.name)}" title="Remove">×</span></button>`).join("");
+  $("#spx-lists").innerHTML=SP_LISTS.map(([n,u])=>`<button type="button" data-spu="${u}" aria-pressed="${cur===u}">${n}</button>`).join("");
+  $("#spx-mine").innerHTML=st.saved.map((x,i)=>`<button type="button" data-spu="${esc(x.uri)}" aria-pressed="${cur===x.uri}">${esc(x.name)}<span class="hv-x" data-spdel="${i}" role="button" aria-label="Remove ${esc(x.name)}" title="Remove">×</span></button>`).join("");
+  $("#spx-mine").hidden=$("#spx-mine-h").hidden=!st.saved.length;
   $("#spx-auto").checked=st.auto;
 }
-$("#spx-lists").addEventListener("click",e=>{
+function spRefresh(){const st=spS();if(SPD.ctl){try{SPD.ctl.destroy();}catch(e){}SPD.ctl=null;}$("#spx-embed").innerHTML="";spOpen(st.uri||SP_LISTS[0][1]);}
+$("#spx-refresh").addEventListener("click",()=>{spRefresh();toast("Player refreshed. If it still says Preview, check you're logged in at open.spotify.com in this browser.");});
+$("#spx-login").addEventListener("click",()=>{SPD.loginAt=Date.now();});
+document.addEventListener("visibilitychange",()=>{if(!document.hidden&&SPD.loginAt&&Date.now()-SPD.loginAt<15*60e3){SPD.loginAt=0;spRefresh();}});
+$("#spx-safari").hidden=!/^((?!chrome|chromium|android|crios|fxios|edg).)*safari/i.test(navigator.userAgent);
+const spListClick=e=>{
   const d=e.target.closest("[data-spdel]");if(d){e.stopPropagation();const st=spS(),i=+d.dataset.spdel,[x]=st.saved.splice(i,1);save();spRenderLists();toast(`Removed ${x.name}`,{run(){st.saved.splice(i,0,x);save();spRenderLists();}});return;}
-  const b=e.target.closest("[data-spu]");if(b)spOpen(b.dataset.spu,true);});
+  const b=e.target.closest("[data-spu]");if(b)spOpen(b.dataset.spu,true);};
+$("#spx-lists").addEventListener("click",spListClick);$("#spx-mine").addEventListener("click",spListClick);
 $("#spx-paste").addEventListener("submit",async e=>{e.preventDefault();const inp=$("#spx-url"),uri=spParse(inp.value);
   if(!uri){toast("That isn't a Spotify link. Copy one from Share > Copy link in Spotify.");inp.focus();return;}
   inp.value="";const st=spS();spOpen(uri,true);
   if(!st.saved.some(x=>x.uri===uri)&&!SP_LISTS.some(x=>x[1]===uri)){
     let name=spKind(uri);try{const [,k,id]=uri.split(":"),r=await fetch(`https://open.spotify.com/oembed?url=${encodeURIComponent(`https://open.spotify.com/${k}/${id}`)}`);if(r.ok){const j=await r.json();if(j&&j.title)name=String(j.title).slice(0,40);}}catch(err){}
-    st.saved.unshift({uri,name});st.saved=st.saved.slice(0,8);save();spRenderLists();}});
+    st.saved.unshift({uri,name});st.saved=st.saved.slice(0,20);save();spRenderLists();}});
 $("#spx-auto").addEventListener("change",e=>{spS().auto=e.target.checked;save();spTimerSync();});
 function spTimerSync(){
   const st=spS();if(!st.auto)return;

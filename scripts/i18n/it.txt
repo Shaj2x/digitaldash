@@ -1338,3 +1338,15 @@
 1376|{n} h fa
 1377|{n} g fa
 1378|Dal vivo da Last.fm · {0}
+1379|Accedi a Spotify
+1380|Ho fatto l'accesso, ricarica il player
+1381|Su Safari il player vede il tuo accesso a Spotify solo se disattivi Impostazioni > Privacy > Impedisci tracciamento tra siti. Oppure usa Chrome.
+1382|Le tue playlist
+1383|Incolla il link della tua playlist, album o brano
+1384|In Spotify apri una playlist, tocca ⋯ poi Condividi > Copia link e incollalo qui. Resta salvato per la prossima volta.
+1385|Apri le mie playlist
+1386|Per studiare
+1387|Playlist per studiare
+1388|Suona dall'account Spotify con cui hai fatto l'accesso in questo browser. Premium riproduce i brani interi; gli account gratuiti possono avere anteprime o riproduzione casuale.
+1389|Ascolta le tue playlist Spotify qui e mostra cosa stai ascoltando su qualsiasi dispositivo.
+1390|Player ricaricato. Se dice ancora Preview, controlla di aver fatto l'accesso su open.spotify.com in questo browser.

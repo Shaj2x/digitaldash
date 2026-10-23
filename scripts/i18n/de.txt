@@ -1338,3 +1338,15 @@
 1376|vor {n} Std.
 1377|vor {n} T.
 1378|Live von Last.fm · {0}
+1379|Bei Spotify anmelden
+1380|Ich bin angemeldet, Player neu laden
+1381|In Safari sieht der Player deine Spotify-Anmeldung nur, wenn du Einstellungen > Datenschutz > Websiteübergreifendes Tracking verhindern ausschaltest. Oder nutze Chrome.
+1382|Deine Playlists
+1383|Link zu deiner Playlist, deinem Album oder Song einfügen
+1384|Öffne in Spotify eine Playlist, tippe auf ⋯, dann Teilen > Link kopieren, und füge ihn hier ein. Er bleibt für nächstes Mal gespeichert.
+1385|Meine Playlists öffnen
+1386|Zum Lernen
+1387|Playlists zum Lernen
+1388|Es spielt über das Spotify-Konto, mit dem du in diesem Browser angemeldet bist. Premium spielt ganze Songs; kostenlose Konten bekommen evtl. Vorschauen oder Zufallswiedergabe.
+1389|Hör deine eigenen Spotify-Playlists direkt hier und zeig, was du gerade auf jedem Gerät hörst.
+1390|Player neu geladen. Steht dort noch Preview, prüf, ob du in diesem Browser bei open.spotify.com angemeldet bist.

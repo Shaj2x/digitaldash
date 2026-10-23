@@ -1338,3 +1338,15 @@
 1376|hace {n} h
 1377|hace {n} d
 1378|En vivo desde Last.fm · {0}
+1379|Iniciar sesión en Spotify
+1380|Ya inicié sesión, recargar reproductor
+1381|En Safari, el reproductor solo ve tu sesión de Spotify si desactivas Ajustes > Privacidad > Evitar seguimiento entre sitios. O usa Chrome.
+1382|Tus playlists
+1383|Pega el enlace de tu playlist, álbum o canción
+1384|En Spotify, abre una playlist, toca ⋯ y luego Compartir > Copiar enlace, y pégalo aquí. Se guarda para la próxima vez.
+1385|Abrir mis playlists
+1386|Para estudiar
+1387|Playlists para estudiar
+1388|Suena desde la cuenta de Spotify con la que iniciaste sesión en este navegador. Premium reproduce canciones completas; las cuentas gratis pueden tener avances o modo aleatorio.
+1389|Escucha tus propias playlists de Spotify aquí y muestra lo que suena en cualquier dispositivo.
+1390|Reproductor recargado. Si aún dice Preview, comprueba que iniciaste sesión en open.spotify.com en este navegador.

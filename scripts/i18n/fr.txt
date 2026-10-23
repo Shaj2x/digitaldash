@@ -1338,3 +1338,15 @@
 1376|il y a {n} h
 1377|il y a {n} j
 1378|En direct de Last.fm · {0}
+1379|Se connecter à Spotify
+1380|Je suis connecté, recharger le lecteur
+1381|Sur Safari, le lecteur ne voit votre connexion Spotify que si vous désactivez Réglages > Confidentialité > Empêcher le suivi intersite. Ou utilisez Chrome.
+1382|Vos playlists
+1383|Collez le lien de votre playlist, album ou titre
+1384|Dans Spotify, ouvrez une playlist, touchez ⋯ puis Partager > Copier le lien, et collez-le ici. Il est gardé pour la prochaine fois.
+1385|Ouvrir mes playlists
+1386|Pour étudier
+1387|Playlists pour étudier
+1388|La lecture se fait depuis le compte Spotify connecté dans ce navigateur. Premium lit les titres en entier ; les comptes gratuits peuvent avoir des extraits ou la lecture aléatoire.
+1389|Écoutez vos propres playlists Spotify ici et affichez ce que vous écoutez sur n'importe quel appareil.
+1390|Lecteur rechargé. S'il indique encore Preview, vérifiez que vous êtes connecté sur open.spotify.com dans ce navigateur.
