@@ -1370,3 +1370,7 @@
 1408|Sorpréndeme
 1409|Ideas
 1410|Hecho a partir de tus palabras. Prueba colores, lugares o estados de ánimo en inglés como ocean, cozy o neon para acercarte más.
+1411|Vista previa
+1412|En vista previa
+1413|Quedármelo
+1414|Vista previa de "{0}"

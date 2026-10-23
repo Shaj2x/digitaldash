@@ -1370,3 +1370,7 @@
 1408|Surpreenda-me
 1409|Ideias
 1410|Feito a partir das suas palavras. Tente cores, lugares ou climas em inglês como ocean, cozy ou neon para resultados mais próximos.
+1411|Pré-visualizar
+1412|Visualizando
+1413|Manter
+1414|Visualizando "{0}"

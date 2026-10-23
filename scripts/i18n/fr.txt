@@ -1370,3 +1370,7 @@
 1408|Surprends-moi
 1409|Idées
 1410|Créé à partir de vos mots. Essayez des couleurs, lieux ou ambiances en anglais comme ocean, cozy ou neon pour un résultat plus proche.
+1411|Aperçu
+1412|Aperçu actif
+1413|Garder
+1414|Aperçu de « {0} »

@@ -1370,3 +1370,7 @@
 1408|Sorprendimi
 1409|Idee
 1410|Creato dalle tue parole. Prova colori, luoghi o atmosfere in inglese come ocean, cozy o neon per risultati più vicini.
+1411|Anteprima
+1412|In anteprima
+1413|Tienilo
+1414|Anteprima di "{0}"

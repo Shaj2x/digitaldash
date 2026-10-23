@@ -1370,3 +1370,7 @@
 1408|Gây bất ngờ
 1409|Gợi ý
 1410|Tạo từ các từ của bạn. Thử màu, địa điểm hoặc tâm trạng bằng tiếng Anh như ocean, cozy hoặc neon để sát hơn.
+1411|Xem trước
+1412|Đang xem trước
+1413|Giữ lại
+1414|Đang xem trước "{0}"
