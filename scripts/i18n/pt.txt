@@ -1240,3 +1240,12 @@
 1278|Reconectar
 1279|O Spotify não respondeu. Tente de novo.
 1280|Não foi possível acessar o Spotify agora
+1281|Restaurar original
+1282|Enter para salvar · Esc para cancelar
+1283|Título restaurado
+1284|Título salvo
+1285|Títulos e subtítulos
+1286|Toque em qualquer título ou subtítulo para escrever o seu. Restaurar traz de volta os originais, incluindo a saudação que muda ao longo do dia.
+1287|Restaurar todos os títulos e subtítulos
+1288|Já são os originais
+1289|Títulos e subtítulos restaurados

@@ -1240,3 +1240,12 @@
 1278|Neu verbinden
 1279|Spotify hat nicht reagiert. Versuch es nochmal.
 1280|Spotify ist gerade nicht erreichbar
+1281|Original wiederherstellen
+1282|Enter zum Speichern · Esc zum Abbrechen
+1283|Titel zurückgesetzt
+1284|Titel gespeichert
+1285|Titel und Untertitel
+1286|Tippe auf einen Titel oder Untertitel, um deinen eigenen zu schreiben. Zurücksetzen holt die Originale zurück, auch die Begrüßung, die sich im Tagesverlauf ändert.
+1287|Alle Titel und Untertitel zurücksetzen
+1288|Das sind schon die Originale
+1289|Titel und Untertitel zurückgesetzt

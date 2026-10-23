@@ -1240,3 +1240,12 @@
 1278|Reconnecter
 1279|Spotify n'a pas répondu. Réessaie.
 1280|Impossible de joindre Spotify pour le moment
+1281|Rétablir l'original
+1282|Entrée pour enregistrer · Échap pour annuler
+1283|Titre rétabli
+1284|Titre enregistré
+1285|Titres et sous-titres
+1286|Touche n'importe quel titre ou sous-titre pour écrire le tien. Rétablir remet les originaux, y compris le message d'accueil qui change dans la journée.
+1287|Rétablir tous les titres et sous-titres
+1288|Ce sont déjà les originaux
+1289|Titres et sous-titres rétablis

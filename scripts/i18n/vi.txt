@@ -1240,3 +1240,12 @@
 1278|Kết nối lại
 1279|Spotify không phản hồi. Thử lại nhé.
 1280|Không kết nối được Spotify lúc này
+1281|Khôi phục bản gốc
+1282|Enter để lưu · Esc để hủy
+1283|Đã khôi phục tiêu đề
+1284|Đã lưu tiêu đề
+1285|Tiêu đề và phụ đề
+1286|Chạm vào bất kỳ tiêu đề hoặc phụ đề nào để tự viết. Khôi phục sẽ đưa bản gốc trở lại, kể cả lời chào thay đổi trong ngày.
+1287|Khôi phục tất cả tiêu đề và phụ đề
+1288|Đây đã là bản gốc
+1289|Đã khôi phục tiêu đề và phụ đề

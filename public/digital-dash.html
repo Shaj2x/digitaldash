@@ -552,6 +552,14 @@ html.has-bg .day{background:color-mix(in srgb,var(--panel2) 70%,transparent)}
 .fontopt b{display:block;font-size:24px;line-height:1.2;white-space:nowrap;overflow:hidden}
 .fontopt small{color:var(--muted);font-size:12px}
 .bgopt{display:none;margin-top:14px}.bgopt.on{display:block}
+.sub-bar{position:absolute;z-index:80;display:flex;align-items:center;gap:10px;padding:6px 8px 6px 6px;border-radius:12px;background:var(--panel);border:1px solid var(--line);box-shadow:0 12px 30px -12px rgba(0,0,0,.5);font-size:12.5px;color:var(--muted);animation:sb-in .16s cubic-bezier(.23,1,.32,1)}
+.sub-bar[hidden]{display:none}
+.sub-bar .btn[hidden]{display:none}
+@keyframes sb-in{from{opacity:0;transform:translateY(-4px)}}
+@media (prefers-reduced-motion:reduce){.sub-bar{animation:none}}
+.subs-all{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:18px;padding:14px 16px;border-radius:14px;border:1px solid var(--line)}
+.subs-all div{display:grid;gap:4px;flex:1 1 260px}
+.subs-all span{color:var(--muted);font-size:13.5px}
 .dropz{display:grid;justify-items:center;gap:6px;padding:26px 18px;border:2px dashed var(--line);border-radius:16px;text-align:center;color:var(--muted);cursor:pointer;transition:border-color .15s ease,background-color .15s ease,transform .15s cubic-bezier(.23,1,.32,1)}
 .dropz svg{color:var(--accent)}
 .dropz b{color:var(--ink);font-size:15px}
@@ -1759,7 +1767,7 @@ html.lg .eye{background:var(--glass-tint);box-shadow:inset 0 1px 0 color-mix(in 
     </header>
     <!-- FOCUS -->
     <section class="view on" id="v-focus">
-      <h1 id="greet">Let's get to work</h1>
+      <h1 id="greet" data-sub="t-focus">Let's get to work</h1>
       <p class="sub" id="greet-sub" data-sub="focus">Pick a clock, put your phone down, go.</p>
       <div class="stage" id="stage">
         <div class="stage-top">
@@ -1995,6 +2003,7 @@ html.lg .eye{background:var(--glass-tint);box-shadow:inset 0 1px 0 color-mix(in 
         <div class="fonts" id="clock-fonts"></div>
       </div>
 
+      <div class="subs-all"><div><b>Titles and subtitles</b><span>Tap any page title or subtitle to write your own. Reset brings back the originals, including the greeting that changes through the day.</span></div><button type="button" class="btn ghost small" id="subs-reset">Reset all titles and subtitles</button></div>
       <h2 class="sec">Hover animations</h2>
       <div class="panel hv-panel" id="hv-panel">
         <p class="hint" style="margin:0 0 12px">How cards and buttons react when your mouse moves over them. Pick a preset or tune your own, then save it.</p>
@@ -3217,9 +3226,10 @@ const GREETS=[
 const GREET={part:-1,last:""};
 function renderGreeting(d){
   const h=d.getHours();
-  /* the greeting isn't editable: it picks a line for the time of day, a new one each time the part of the day changes */
-  const part=h<5?0:h<12?1:h<17?2:3;
-  if(GREET.part!==part){GREET.part=part;const L=GREETS[part];let i=Math.floor(Math.random()*L.length);if(L[i]===GREET.last)i=(i+1)%L.length;GREET.last=L[i];$("#greet").textContent=L[i];}
+  /* the greeting picks a line for the time of day, a new one each time the part of the day changes,
+     unless you've written your own (reset it to get the changing greeting back) */
+  const part=h<5?0:h<12?1:h<17?2:3,g=$("#greet");
+  if(!(S.settings.subs||{})["t-focus"]&&document.activeElement!==g&&GREET.part!==part){GREET.part=part;const L=GREETS[part];let i=Math.floor(Math.random()*L.length);if(L[i]===GREET.last)i=(i+1)%L.length;GREET.last=L[i];$("#greet").textContent=L[i];}
   const f=fractions(d).d, left=24-(h+d.getMinutes()/60), gs=$("#greet-sub");
   if((S.settings.subs||{}).focus||document.activeElement===gs)return;
   gs.textContent=`${Math.floor(f*100)}% of today is gone. ${Math.floor(left)}h ${Math.round((left%1)*60)}m left to make it count.`;
@@ -4826,9 +4836,20 @@ function renderSubs(){
   $$("[data-sub]").forEach(p=>{
     if(document.activeElement===p)return;
     const k=p.dataset.sub, v=S.settings.subs[k];
-    if(v)p.textContent=v; else if(k==="focus"||k==="t-focus")renderGreeting(new Date()); else p.textContent=SUB_DEF[k];
+    p.classList.toggle("sub-own",!!v);
+    if(v)p.textContent=v; else if(k==="focus"||k==="t-focus"){if(k==="t-focus")GREET.part=-1;renderGreeting(new Date());} else p.textContent=SUB_DEF[k];
   });
 }
+/* while editing a title or subtitle: a hint, and "Reset to original" when it's been customised */
+const subBar=document.createElement("div");subBar.className="sub-bar";subBar.hidden=true;
+subBar.innerHTML=`<button type="button" class="btn ghost small" data-subreset>Reset to original</button><span>Enter to save · Esc to cancel</span>`;
+document.body.appendChild(subBar);
+function subBarAt(p){if(!p){subBar.hidden=true;subBar._p=null;return;}const k=p.dataset.sub,own=!!(S.settings.subs||{})[k];
+  subBar._p=p;subBar.querySelector("[data-subreset]").hidden=!own;subBar.hidden=false;
+  const r=p.getBoundingClientRect();subBar.style.left=Math.max(8,Math.min(r.left+scrollX,scrollX+innerWidth-subBar.offsetWidth-8))+"px";subBar.style.top=(r.bottom+scrollY+6)+"px";}
+function subReset(k,quiet){S.settings.subs=S.settings.subs||{};if(!S.settings.subs[k])return false;delete S.settings.subs[k];save();renderSubs();if(!quiet)toast(k.startsWith("t-")?"Title reset":"Subtitle reset");return true;}
+subBar.addEventListener("pointerdown",e=>e.preventDefault()); /* keep focus in the text so blur runs after */
+subBar.addEventListener("click",e=>{if(!e.target.closest("[data-subreset]")||!subBar._p)return;const p=subBar._p,k=p.dataset.sub;p._skip=true;subBarAt(null);p.blur();subReset(k);});
 $$("[data-sub]").forEach(p=>{
   const k=p.dataset.sub; SUB_DEF[k]=p.textContent;
   p.contentEditable="true"; p.spellcheck=false;
@@ -4836,22 +4857,27 @@ $$("[data-sub]").forEach(p=>{
   if(!/^H[1-6]$/.test(p.tagName)){p.setAttribute("role","textbox");p.setAttribute("aria-label","Subtitle, editable");}
   p.title="Tap to edit. Clear it to reset.";
   let before="";
-  p.addEventListener("focus",()=>{before=p.textContent;});
+  p.addEventListener("focus",()=>{before=p.textContent;subBarAt(p);});
   p.addEventListener("keydown",e=>{
     if(e.key==="Enter"){e.preventDefault();p.blur();}
     if(e.key==="Escape"){e.stopPropagation();p.textContent=before;p.blur();}
   });
   p.addEventListener("paste",e=>{e.preventDefault();const t=(e.clipboardData||window.clipboardData).getData("text").replace(/\s+/g," ");document.execCommand("insertText",false,t);});
   p.addEventListener("blur",()=>{
+    subBarAt(null);if(p._skip){p._skip=false;return;}
     if(p.textContent===before){renderSubs();return;} /* nothing typed: keep it as it was (also keeps a translated default from being saved) */
     const v=p.textContent.replace(/\s+/g," ").trim().slice(0,200);
     S.settings.subs=S.settings.subs||{};
     const def=(k==="focus"||k==="t-focus")?"":SUB_DEF[k];
-    if(!v||v===def){if(S.settings.subs[k]){delete S.settings.subs[k];toast("Subtitle reset");}}
-    else if(v!==S.settings.subs[k]){S.settings.subs[k]=v;toast("Subtitle saved");}
+    const what=k.startsWith("t-")?"Title":"Subtitle";
+    if(!v||v===def){if(S.settings.subs[k]){delete S.settings.subs[k];toast(what+" reset");}}
+    else if(v!==S.settings.subs[k]){S.settings.subs[k]=v;toast(what+" saved");}
     save();renderSubs();
   });
 });
+
+$("#subs-reset").addEventListener("click",()=>{const old=Object.assign({},S.settings.subs||{});if(!Object.keys(old).length){toast("They're already the originals");return;}
+  S.settings.subs={};save();renderSubs();toast("Titles and subtitles reset",{run(){S.settings.subs=old;save();renderSubs();}});});
 
 /* ---------- liquid glass engine ----------
    Ported from the Liquid Glass Room. Three parts share one rAF loop that sleeps when everything

@@ -1240,3 +1240,12 @@
 1278|Reconectar
 1279|Spotify no respondió. Inténtalo de nuevo.
 1280|No se puede conectar con Spotify ahora
+1281|Restablecer original
+1282|Enter para guardar · Esc para cancelar
+1283|Título restablecido
+1284|Título guardado
+1285|Títulos y subtítulos
+1286|Toca cualquier título o subtítulo para escribir el tuyo. Restablecer recupera los originales, incluido el saludo que cambia durante el día.
+1287|Restablecer todos los títulos y subtítulos
+1288|Ya son los originales
+1289|Títulos y subtítulos restablecidos

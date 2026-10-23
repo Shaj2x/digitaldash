@@ -1283,6 +1283,15 @@
 "Connect Spotify again to turn on the controls",
 "Reconnect",
 "Spotify didn't respond. Try again.",
-"Can't reach Spotify right now"
+"Can't reach Spotify right now",
+"Reset to original",
+"Enter to save · Esc to cancel",
+"Title reset",
+"Title saved",
+"Titles and subtitles",
+"Tap any page title or subtitle to write your own. Reset brings back the originals, including the greeting that changes through the day.",
+"Reset all titles and subtitles",
+"They're already the originals",
+"Titles and subtitles reset"
 ]
 }

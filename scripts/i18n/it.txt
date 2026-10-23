@@ -1240,3 +1240,12 @@
 1278|Ricollega
 1279|Spotify non ha risposto. Riprova.
 1280|Impossibile raggiungere Spotify ora
+1281|Ripristina originale
+1282|Invio per salvare · Esc per annullare
+1283|Titolo ripristinato
+1284|Titolo salvato
+1285|Titoli e sottotitoli
+1286|Tocca un titolo o sottotitolo per scrivere il tuo. Ripristina riporta gli originali, incluso il saluto che cambia durante il giorno.
+1287|Ripristina tutti i titoli e sottotitoli
+1288|Sono già gli originali
+1289|Titoli e sottotitoli ripristinati
