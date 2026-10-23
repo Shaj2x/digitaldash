@@ -76,7 +76,7 @@ h1,h2,h3{text-wrap:balance}
 .sync{font-size:12px;color:var(--muted);padding:8px 12px}
 main{overflow-y:auto;height:100%;overscroll-behavior:contain;scrollbar-gutter:stable}
 main:focus{outline:none}
-.view{display:none;padding:32px clamp(16px,4vw,48px) 48px;max-width:1180px;margin:0 auto}
+.view{display:none;padding:32px clamp(16px,4vw,48px) 48px;max-width:1320px;margin:0 auto}
 .view.on{display:block;animation:view-in var(--t-ui) var(--ease-out)}
 @keyframes view-in{from{opacity:0;transform:translateY(8px)}}
 h1{font-size:28px;font-weight:700;margin:0 0 4px;letter-spacing:-.01em}
@@ -836,12 +836,16 @@ html.lg .preset.on{border-color:var(--accent)}
    command bar button sit in a slim top bar. */
 .app{display:block;height:100%}
 main{height:100%;padding-bottom:calc(104px + env(safe-area-inset-bottom,0px))}
-.topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;max-width:1180px;margin:0 auto;padding:18px clamp(16px,4vw,48px) 0}
+.topbar{display:grid;grid-template-columns:minmax(max-content,1fr) minmax(0,max-content) minmax(max-content,1fr);align-items:center;gap:12px;max-width:1320px;margin:0 auto;padding:18px clamp(16px,4vw,48px) 0}
 .topbar .brand{padding:0;font-size:calc(17px*var(--hs,1))}
 .topbar .brand .mark{width:34px;height:34px;border-radius:10px}
 .topbar .brand .mark svg{width:22px;height:22px}
 .topbar .brand .mark .mk{width:24px;height:21px}
-.tb-right{display:flex;align-items:center;gap:10px;min-width:0}
+.tb-right{display:flex;align-items:center;gap:10px;min-width:0;justify-self:end}
+.topbar .brand{justify-self:start;grid-column:1}
+.topbar .isle{grid-column:2}
+.topbar .tb-right{grid-column:3}
+@media (max-width:1180px){.topbar:has(.isle:not([hidden])) .sync{display:none}}
 .sync{padding:0;font-size:12px;white-space:nowrap}
 .cmdk{display:inline-flex;align-items:center;gap:10px;min-height:40px;padding:0 8px 0 12px;border:1px solid var(--line);border-radius:12px;background:var(--panel);color:var(--muted);font-size:14px;transition:border-color var(--t-fast) ease,color var(--t-fast) ease,transform var(--t-press) var(--ease-out)}
 .cmdk svg{width:17px;height:17px;flex:none}
@@ -968,7 +972,7 @@ html.lg .kpi{background:color-mix(in srgb,var(--panel) 40%,transparent);-webkit-
 .jb-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap}
 .spx-live{background:var(--panel2);border-radius:12px;padding:16px;min-height:120px;margin-top:14px}
 .lf-opt{display:flex;align-items:center;gap:10px;font-size:14px;margin-top:12px;cursor:pointer}
-.isle{position:relative;z-index:60;flex:1 1 0;min-width:0;display:flex;justify-content:center;pointer-events:none}
+.isle{position:relative;z-index:60;min-width:0;display:flex;justify-content:center;pointer-events:none}
 .isle.float{position:fixed;top:10px;left:50%;translate:-50% 0;flex:none;width:max-content;max-width:calc(100vw - 32px)}
 .isle>*{pointer-events:auto}
 .isle[hidden],.isle-card[hidden]{display:none}
