@@ -1262,3 +1262,36 @@
 1300|Macchina da scrivere
 1301|Bolla
 1302|Cremoso
+1303|Spesa
+1304|Aggiungi un articolo, es. 2 latte
+1305|Aggiungi un articolo alla spesa
+1306|stimato
+1307|Copia lista
+1308|Togli spuntati
+1309|Nel carrello
+1310|Ricompra
+1311|La lista della spesa è vuota. Aggiungi ciò che ti serve, come "2 latte $4.50". Si ordina per reparto man mano.
+1312|Frutta e verdura
+1313|Latticini e uova
+1314|Panetteria
+1315|Carne e pesce
+1316|Surgelati
+1317|Dispensa
+1318|Bevande
+1319|Snack
+1320|Casa
+1321|Cura personale
+1322|Materiale scolastico
+1323|Lista della spesa
+1324|Lista della spesa copiata
+1325|Attività, piano settimanale, corsi o spesa
+1326|articolo da comprare
+1327|articoli da comprare
+1328|Impossibile copiare qui. Riprova dall'app.
+1329|Nel carrello: {n}
+1330|Nel carrello: {n} · {0}
+1331|{n} articoli tolti
+1332|Preso {0}
+1333|Rimetti {0} nella lista
+1334|Aggiungi alla spesa: {0}
+1335|1 articolo tolto

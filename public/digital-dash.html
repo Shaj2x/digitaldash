@@ -1197,6 +1197,26 @@ html.lg .ac-stats div,html.lg .ac-list li,html.lg .acp-opt{background:var(--glas
 .crs-goal{display:flex;align-items:center;gap:6px;font-size:13px}
 .crs-goal input{width:64px;padding:5px 8px}
 .crs-add{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.shop-add{display:flex;gap:10px;align-items:center}
+@media (max-width:560px){.seg.task-mode{display:grid;grid-template-columns:1fr 1fr;width:100%}.seg.task-mode button{text-align:center;justify-content:center}}
+.shop-add input{flex:1;min-width:0}
+.shop-sum{display:flex;flex-wrap:wrap;align-items:center;gap:8px 18px;margin:16px 2px 4px}
+.shop-sum b{font-size:20px;font-variant-numeric:tabular-nums}
+.shop-sum .muted{font-size:14px}
+.shop-acts{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
+.shop-cat{margin:18px 2px 8px;font-size:12.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.shop-list{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.shop-it{--uc:var(--accent);display:flex;align-items:center;gap:12px;background:var(--panel);border:1px solid var(--line);border-radius:var(--r,12px);padding:10px 12px;min-height:48px}
+.shop-it .check{flex:none}
+.shop-it .si-name{flex:1;min-width:0;background:none;border:0;padding:4px 0;color:inherit;font:inherit;text-align:left;cursor:text;overflow-wrap:anywhere}
+.shop-it .si-q{flex:none;font-size:13px;font-weight:700;padding:2px 8px;border-radius:999px;background:var(--panel2);font-variant-numeric:tabular-nums}
+.shop-it .si-p{flex:none;color:var(--muted);font-variant-numeric:tabular-nums;font-size:14px}
+.shop-it .si-x{flex:none}
+.shop-it.done .si-name{text-decoration:line-through;color:var(--muted)}
+.shop-it.done{opacity:.75}
+.shop-it .si-edit{flex:1;min-width:0}
+.shop-again{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.shop-again button{display:inline-flex;align-items:center;gap:6px}
 .crs-add input[type=text]{flex:1 1 200px;min-width:0}
 .plan[hidden]{display:none}
 .wp-head{display:flex;align-items:center;gap:8px 16px;flex-wrap:wrap;margin-bottom:14px}
@@ -1816,7 +1836,11 @@ html.lg .eye{background:var(--glass-tint);box-shadow:inset 0 1px 0 color-mix(in 
     <section class="view" id="v-tasks">
       <h1 data-sub="t-tasks">Tasks</h1>
       <p class="sub" data-sub="tasks">Sorted by urgency, then due date. The top one shows up on your clock.</p>
-      <div class="seg task-mode" id="task-mode" role="group" aria-label="Tasks, week plan or courses"><button type="button" data-m="tasks" aria-pressed="true">Tasks</button><button type="button" data-m="plan" aria-pressed="false">Week plan</button><button type="button" data-m="courses" aria-pressed="false">Courses and grades</button></div>
+      <div class="seg task-mode" id="task-mode" role="group" aria-label="Tasks, week plan, courses or shopping"><button type="button" data-m="tasks" aria-pressed="true">Tasks</button><button type="button" data-m="plan" aria-pressed="false">Week plan</button><button type="button" data-m="courses" aria-pressed="false">Courses and grades</button><button type="button" data-m="shop" aria-pressed="false">Shopping</button></div>
+      <div class="shop" id="shop-pane" hidden>
+        <form class="panel shop-add" id="shop-form" autocomplete="off"><input type="text" id="shop-new" maxlength="80" placeholder="Add an item, e.g. 2 milk" aria-label="Add a shopping item" required><button class="btn" type="submit">Add</button></form>
+        <div id="shop-body" aria-live="polite"></div>
+      </div>
       <div class="courses" id="courses-pane" hidden>
         <div class="seg crs-mode" id="crs-mode" role="group" aria-label="Courses or grade calculator"><button type="button" data-cm="courses" aria-pressed="true">My courses</button><button type="button" data-cm="calc" aria-pressed="false">Grade calculator</button></div>
         <div id="crs-body"></div>
@@ -2280,7 +2304,7 @@ const SKINS=[
 ];
 const CLOCKS=[["flip","Flip"],["digital","Digital"],["analog","Analog"],["words","Words"],["rings","Progress"],["timer","Focus timer"]];
 
-const DEFAULT={tasks:[],events:[],accounts:[],history:[],sessions:{},
+const DEFAULT={tasks:[],events:[],shop:[],accounts:[],history:[],sessions:{},
   settings:{v2:true,skin:"brand",accent:"",font:"sans",clock:"flip",h24:false,secs:true,currency:"CAD",hideNw:false,subs:{},uiFont:"bricolage",clockFont:"shoulders",radius:14,clockScale:100,surface:"solid",refract:true,bg:{type:"none",color:"#2a2440",grad:0,image:"",dim:35,blur:0,match:true,pal:null,live:"aurora",speed:100,grain:false},stage:{type:"theme",color:"#101020",grad:0,image:"",dim:30,ink:""}},
   schemes:[],
   presets:[],
@@ -2943,6 +2967,7 @@ function shortcutLink(v){
   if(v==="gym-progress"){show("health");setHealthTab("progress");return true;}
   if(v==="bmi"||v==="calories"){show("health");setHealthTab("body");return true;}
   if(v==="grades"){show("tasks");if(typeof setTaskMode==="function")setTaskMode("courses");crsMode="calc";gcShow();return true;}
+  if(v==="shopping"){show("tasks");if(typeof setTaskMode==="function"&&taskMode!=="shop")setTaskMode("shop");return true;}
   if(v==="plan"){show("tasks");if(typeof setTaskMode==="function"&&taskMode!=="plan")setTaskMode("plan");return true;}
   if(v==="start-focus"){show("focus");if(clockKind!=="timer")setClock("timer");setTimeout(()=>{if(!T.running){const g=$("#tm-go");if(g)g.click();}},80);return true;}
   return false;
@@ -4374,7 +4399,7 @@ function parseTask(q){
   return {title,urg:urg??2,due,time:w.time,rep,course:pr.course,dateGiven:w.dateGiven};
 }
 const fuzzy=(q,t)=>{q=q.toLowerCase();t=t.toLowerCase();if(!q)return 0;if(t.includes(q))return 100-t.indexOf(q);let i=0;for(const c of t)if(c===q[i])i++;return i===q.length?40:-1;};
-const IC={task:'<path d="M9 6h11M9 12h11M9 18h11"/><path d="m3 6 1.5 1.5L7 5M3 12l1.5 1.5L7 11M3 18l1.5 1.5L7 17"/>',timer:'<circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2M9 2h6"/>',go:'<path d="M5 12h14M13 6l6 6-6 6"/>',sound:'<path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/>',theme:'<circle cx="12" cy="12" r="9"/><circle cx="8" cy="10" r="1.3" fill="currentColor"/><circle cx="12" cy="7.5" r="1.3" fill="currentColor"/><circle cx="16" cy="10" r="1.3" fill="currentColor"/>',done:'<path d="m5 12 5 5 9-10"/>',ev:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>',money:'<path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/>',misc:'<circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/>'};
+const IC={shop:'<circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2 3h3l2.6 12.2a1.8 1.8 0 0 0 1.8 1.4h8.3a1.8 1.8 0 0 0 1.8-1.4L21 8H6.2"/>',task:'<path d="M9 6h11M9 12h11M9 18h11"/><path d="m3 6 1.5 1.5L7 5M3 12l1.5 1.5L7 11M3 18l1.5 1.5L7 17"/>',timer:'<circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2M9 2h6"/>',go:'<path d="M5 12h14M13 6l6 6-6 6"/>',sound:'<path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/>',theme:'<circle cx="12" cy="12" r="9"/><circle cx="8" cy="10" r="1.3" fill="currentColor"/><circle cx="12" cy="7.5" r="1.3" fill="currentColor"/><circle cx="16" cy="10" r="1.3" fill="currentColor"/>',done:'<path d="m5 12 5 5 9-10"/>',ev:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>',money:'<path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/>',misc:'<circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/>'};
 function whenText(due,time){if(!due&&!time)return "";const l=dueLabel(due,time).t;return l;}
 function cmdResults(q){
   const R=[],raw=q.trim(),lq=raw.toLowerCase();
@@ -4448,6 +4473,9 @@ function cmdResults(q){
   // search existing things
   S.tasks.filter(t=>!t.done).map(t=>[t,fuzzy(raw,t.title)]).filter(x=>x[1]>=40).sort((a,b)=>b[1]-a[1]).slice(0,3)
     .forEach(([t])=>R.push({ic:"task",label:t.title,hint:"Open task",run:()=>{show("tasks");try{history.pushState(null,"","#tasks");}catch(e){}setTimeout(()=>{const el=document.querySelector(`.task[data-id="${t.id}"]`);if(el){el.scrollIntoView({block:"center",behavior:reduced?"auto":"smooth"});anim(el,[{boxShadow:"0 0 0 2px var(--accent)"},{boxShadow:"0 0 0 2px transparent"}],{duration:1200,easing:"ease"});}},60);}}));
+  {const m=raw.match(/^(?:buy|shop(?:ping)?:?|grocer(?:y|ies):?)\s+(.+)$/i)||raw.match(/^add\s+(.+?)\s+to\s+(?:my\s+|the\s+)?(?:shopping|grocery)(?:\s+list)?$/i);
+    if(m&&!/^lists?$/i.test(m[1].trim())){const it=shopParse(m[1]);if(it.name)R.unshift({ic:"shop",label:`Add to shopping: ${it.name}${it.qty>1?" ×"+it.qty:""}`,hint:[SHOP_CATS[it.cat],it.price!=null&&fmt(it.price*it.qty)].filter(Boolean).join(" · "),run:()=>{shopAdd(it);shortcutLink("shopping");}});}}
+  if(/^(?:go(?: to)?|open|show)?\s*(?:my |the )?(?:shopping|grocery|groceries)(?: list)?$/.test(lq))R.push({ic:"go",label:"Shopping list",hint:"Go",run:()=>shortcutLink("shopping")});
   // default: add it as a task (first unless a command matched exactly)
   const pt=parseTask(raw);
   if(pt.title){const addRow={ic:"task",label:`Add task: ${pt.title}`,hint:[URG[pt.urg],whenText(pt.due,pt.time),pt.rep&&repLabel(pt.rep),pt.course].filter(Boolean).join(" · "),run:()=>addParsedTask(pt)};
@@ -4840,7 +4868,7 @@ function renderAll(){
   $$("#clock-seg button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.c===S.settings.clock));
   $("#def-clock").value=S.settings.clock;
   buildClock(S.settings.clock);
-  archSweep(true);if(typeof renderHealth==="function")renderHealth();renderTasks();renderNowTask();renderMini();renderCal();renderMoney();renderSubs();renderCoursesPane();
+  archSweep(true);if(typeof renderHealth==="function")renderHealth();renderTasks();renderNowTask();renderMini();renderCal();renderMoney();renderSubs();renderCoursesPane();if(typeof renderShop==="function")renderShop();
   labelFields();appBadge();
 }
 
@@ -6368,7 +6396,7 @@ function gradeCalc(c){
 }
 function setTaskMode(m){
   taskMode=m;$$("#task-mode button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.m===m));glide($("#task-mode"));
-  $("#tasks-pane").hidden=m!=="tasks";$("#courses-pane").hidden=m!=="courses";$("#plan-pane").hidden=m!=="plan";if(m==="courses"){renderCoursesPane();gcShow();}if(m==="plan")renderPlan();
+  $("#tasks-pane").hidden=m!=="tasks";$("#courses-pane").hidden=m!=="courses";$("#plan-pane").hidden=m!=="plan";$("#shop-pane").hidden=m!=="shop";if(m==="courses"){renderCoursesPane();gcShow();}if(m==="plan")renderPlan();if(m==="shop")renderShop();
 }
 function renderCoursesPane(){
   if($("#courses-pane").hidden)return;const el=$("#crs-body");S.courses=S.courses||[];
@@ -6402,7 +6430,78 @@ function renderCoursesPane(){
   if(fsel){const n=el.querySelector(fsel);if(n){n.focus();try{n.setSelectionRange(n.value.length,n.value.length);}catch(e){}}}
 }
 $("#task-mode").addEventListener("click",e=>{const b=e.target.closest("button[data-m]");if(!b||b.dataset.m===taskMode)return;setTaskMode(b.dataset.m);
-  try{if(b.dataset.m==="plan")history.pushState(null,"","#plan");else if(location.hash==="#plan")history.replaceState(null,"","#tasks");}catch(e){}});
+  try{if(b.dataset.m==="plan"||b.dataset.m==="shop")history.pushState(null,"",b.dataset.m==="plan"?"#plan":"#shopping");else if(location.hash==="#plan"||location.hash==="#shopping")history.replaceState(null,"","#tasks");}catch(e){}});
+/* ---------- shopping list ----------
+   S.shop = [{id, name, qty, price, cat, done}], a tab under Tasks (#shopping). Type "2 milk $4.50": a leading number
+   (or "x2") is the quantity, an amount with a currency sign or cents is the price per item, and the aisle is guessed
+   from the name. Adding something already on the list raises its quantity. Clearing what's in the cart keeps those
+   items under "Buy again" (S.shopRecent, newest first, up to 16). */
+const SHOP_CATS={produce:"Produce",dairy:"Dairy and eggs",bakery:"Bakery",meat:"Meat and fish",frozen:"Frozen",pantry:"Pantry",drinks:"Drinks",snacks:"Snacks",home:"Household",care:"Personal care",school:"School supplies",other:"Other"};
+const SHOP_RULES=[["frozen",/\b(frozen|ice ?cream|popsicles?)\b/],["pantry",/\bpeanut butter\b|\b(rice|pasta|spaghetti|noodles?|ramen|flour|sugar|salt|oil|olive oil|sauce|ketchup|mayo|mustard|cereal|oats|oatmeal|beans|lentils|soup|spices?|honey|jam|coffee|tea|vinegar|canned|tuna can)\b/],
+  ["dairy",/\b(milk|cheese|yogh?urt|butter|cream|eggs?)\b/],["produce",/\b(apples?|bananas?|oranges?|lemons?|limes?|grapes|berries|strawberr\w*|blueberr\w*|avocados?|tomato(e?s)?|potato(e?s)?|onions?|garlic|lettuce|spinach|kale|carrots?|broccoli|peppers?|cucumbers?|mushrooms?|fruits?|veg\w*|salad|celery|corn|ginger|herbs?|cilantro)\b/],
+  ["bakery",/\b(bread|bagels?|buns?|tortillas?|wraps?|croissants?|muffins?|pita|naan)\b/],["meat",/\b(chicken|beef|pork|turkey|bacon|ham|sausages?|fish|salmon|tuna|shrimp|steak|mince|tofu)\b/],
+  ["drinks",/\b(water|juice|soda|pop|coke|sprite|energy drinks?|sparkling|kombucha|gatorade)\b/],["snacks",/\b(chips|crisps|crackers|cookies|chocolate|candy|granola|popcorn|nuts|almonds|protein bars?|bars?)\b/],
+  ["home",/\b(paper towels?|toilet paper|tissues?|detergent|laundry|dish ?soap|dishwasher|sponges?|trash bags?|garbage bags?|foil|plastic wrap|batteries|cleaner|bleach|light ?bulbs?)\b/],
+  ["care",/\b(shampoo|conditioner|toothpaste|toothbrush|deodorant|lotion|razors?|sunscreen|vitamins|floss|soap|body ?wash|face ?wash|pads|tampons|band-?aids?|medicine|advil|tylenol)\b/],
+  ["school",/\b(notebooks?|pens?|pencils?|highlighters?|binders?|folders?|sticky notes|post-?its?|erasers?|calculator|stapler|printer paper|index cards|markers?)\b/]];
+function shopCat(name){const n=name.toLowerCase();for(const [c,re] of SHOP_RULES)if(re.test(n))return c;return "other";}
+function shopParse(txt){
+  let t=String(txt||"").replace(/\s+/g," ").trim(),qty=1,price=null;
+  const sym="[$€£¥₹]|"+curSymbol().replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
+  let m=t.match(new RegExp(`(?:^|\\s)(?:@\\s*)?(?:${sym})\\s?(\\d+(?:[.,]\\d{1,2})?)\\s*$|(?:^|\\s)(\\d+[.,]\\d{2})\\s?(?:${sym})?\\s*$|(?:^|\\s)(\\d+(?:[.,]\\d{1,2})?)\\s?(?:${sym})\\s*$`));
+  if(m){price=+(m[1]||m[2]||m[3]).replace(",",".");t=t.slice(0,m.index).trim();}
+  if((m=t.match(/^(\d{1,3})\s*(?:x\s+|×\s*)?(?=\D)/i))){qty=+m[1];t=t.slice(m[0].length).trim();}
+  else if((m=t.match(/\s*(?:x|×)\s*(\d{1,3})$/i))){qty=+m[1];t=t.slice(0,m.index).trim();}
+  qty=Math.max(1,Math.min(999,qty||1));const name=t.slice(0,60);
+  return {name:name?name[0].toUpperCase()+name.slice(1):"",qty,price,cat:name?shopCat(name):"other"};
+}
+function shopAdd(it,quiet){S.shop=S.shop||[];if(!it.name)return null;
+  const same=S.shop.find(x=>!x.done&&x.name.toLowerCase()===it.name.toLowerCase());
+  if(same){same.qty=Math.min(999,(same.qty||1)+(it.qty||1));if(it.price!=null)same.price=it.price;save();renderShop();if(!quiet)toast(`${same.name} ×${same.qty}`);return same;}
+  const x={id:uid(),name:it.name,qty:it.qty||1,price:it.price,cat:it.cat||shopCat(it.name),done:false};S.shop.push(x);save();renderShop();return x;}
+let shopEdit=null;
+function renderShop(){
+  const pane=$("#shop-pane");if(!pane||pane.hidden)return;S.shop=S.shop||[];
+  const el=$("#shop-body"),list=S.shop,todo=list.filter(x=>!x.done),cart=list.filter(x=>x.done);
+  const cost=a=>a.reduce((n,x)=>n+(x.price!=null?x.price*(x.qty||1):0),0),priced=a=>a.some(x=>x.price!=null);
+  const x='<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6 6 18"/></svg>';
+  const row=i=>`<li class="shop-it${i.done?" done":""}" data-sid="${i.id}">
+      <button class="check${i.done?" on":""}" type="button" data-sh="tog" aria-label="${i.done?`Put ${esc(i.name)} back on the list`:`Got ${esc(i.name)}`}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4"><path pathLength="1" d="m5 12 5 5 9-10"/></svg></button>
+      ${shopEdit===i.id?`<input class="si-edit" type="text" maxlength="80" data-sh="edit" value="${esc((i.qty>1?i.qty+" ":"")+i.name+(i.price!=null?" "+curSymbol()+i.price.toFixed(2):""))}" aria-label="Edit ${esc(i.name)}">`
+        :`<button type="button" class="si-name" data-sh="ed" title="Edit">${esc(i.name)}</button>${i.qty>1?`<span class="si-q">×${i.qty}</span>`:""}${i.price!=null?`<span class="si-p">${fmt(i.price*(i.qty||1))}</span>`:""}`}
+      <button type="button" class="icon-btn si-x" data-sh="del" aria-label="Remove ${esc(i.name)}">${x}</button></li>`;
+  const groups=Object.keys(SHOP_CATS).map(c=>[c,todo.filter(i=>i.cat===c)]).filter(g=>g[1].length);
+  const have=new Set(list.filter(i=>!i.done).map(i=>i.name.toLowerCase()));
+  const again=(S.shopRecent||[]).filter(r=>!have.has(r.name.toLowerCase())).slice(0,10);
+  el.innerHTML=(list.length?`<div class="shop-sum"><span><b>${todo.length}</b> <span class="muted">${todo.length===1?"item to buy":"items to buy"}</span></span>
+      ${priced(todo)?`<span><b>${fmt(cost(todo))}</b> <span class="muted">estimated</span></span>`:""}
+      ${cart.length?`<span class="muted">In cart: ${cart.length}${priced(cart)?" · "+fmt(cost(cart)):""}</span>`:""}
+      <span class="shop-acts"><button type="button" class="btn ghost small" data-sh="copy">Copy list</button>${cart.length?`<button type="button" class="btn ghost small" data-sh="clear">Clear checked</button>`:""}</span></div>`
+    :`<div class="empty">Your shopping list is empty. Add what you need, like "2 milk $4.50". It's sorted by aisle as you go.</div>`)
+    +groups.map(([c,a])=>`<h3 class="shop-cat">${SHOP_CATS[c]}</h3><ul class="shop-list">${a.map(row).join("")}</ul>`).join("")
+    +(cart.length?`<h3 class="shop-cat">In cart</h3><ul class="shop-list">${cart.map(row).join("")}</ul>`:"")
+    +(again.length?`<h3 class="shop-cat">Buy again</h3><div class="chips shop-again">${again.map((r,k)=>`<button type="button" data-sh="again" data-k="${k}">+ ${esc(r.name)}</button>`).join("")}</div>`:"");
+  el._again=again;
+  const ed=el.querySelector(".si-edit");if(ed){ed.focus();ed.select();}
+}
+$("#shop-form").addEventListener("submit",e=>{e.preventDefault();const inp=$("#shop-new"),it=shopParse(inp.value);if(!it.name){inp.focus();return;}shopAdd(it);inp.value="";inp.focus();});
+function shopSaveEdit(inp){const i=(S.shop||[]).find(x=>x.id===inp.closest("[data-sid]").dataset.sid);shopEdit=null;if(!i){renderShop();return;}
+  const it=shopParse(inp.value);if(it.name){i.name=it.name;i.qty=it.qty;i.price=it.price;if(it.cat!=="other"||i.cat==="other")i.cat=it.cat;save();}renderShop();}
+$("#shop-body").addEventListener("keydown",e=>{const inp=e.target.closest(".si-edit");if(!inp)return;if(e.key==="Enter"){e.preventDefault();shopSaveEdit(inp);}if(e.key==="Escape"){shopEdit=null;renderShop();}});
+$("#shop-body").addEventListener("focusout",e=>{const inp=e.target.closest(".si-edit");if(inp&&shopEdit)shopSaveEdit(inp);});
+$("#shop-body").addEventListener("click",e=>{
+  const b=e.target.closest("[data-sh]");if(!b)return;const a=b.dataset.sh,li=b.closest("[data-sid]"),list=S.shop||[],i=li&&list.find(x=>x.id===li.dataset.sid);
+  if(a==="tog"&&i){i.done=!i.done;if(i.done)sfxPlay("tick");save();renderShop();return;}
+  if(a==="ed"&&i){shopEdit=i.id;renderShop();return;}
+  if(a==="del"&&i){const k=list.indexOf(i);list.splice(k,1);save();renderShop();toast(`Removed ${i.name}`,{run(){list.splice(k,0,i);save();renderShop();}});return;}
+  if(a==="again"){const r=$("#shop-body")._again[+b.dataset.k];if(r)shopAdd({name:r.name,qty:1,price:r.price,cat:r.cat},true);return;}
+  if(a==="clear"){const before=list.slice(),rec=(S.shopRecent||[]).slice(),got=list.filter(x=>x.done);
+    S.shop=list.filter(x=>!x.done);const seen=new Set(got.map(x=>x.name.toLowerCase()));
+    S.shopRecent=[...got.map(x=>({name:x.name,cat:x.cat,price:x.price})),...rec.filter(r=>!seen.has(r.name.toLowerCase()))].slice(0,16);
+    save();renderShop();toast(`Cleared ${got.length} ${got.length===1?"item":"items"}`,{run(){S.shop=before;S.shopRecent=rec;save();renderShop();}});return;}
+  if(a==="copy"){const todo=list.filter(x=>!x.done),txt=Object.keys(SHOP_CATS).map(c=>{const g=todo.filter(x=>x.cat===c);return g.length?SHOP_CATS[c]+"\n"+g.map(x=>`- ${x.name}${x.qty>1?" ×"+x.qty:""}`).join("\n"):"";}).filter(Boolean).join("\n\n");
+    (navigator.clipboard?navigator.clipboard.writeText(txt||"(empty)"):Promise.reject()).then(()=>toast("Shopping list copied"),()=>toast("Couldn't copy here. Try again from the app."));return;}
+});
 /* ---------- week plan ----------
    Plan by week or by month (S.settings.planMode). A task sits on the day you plan to work on it
    (t.plan, "YYYY-MM-DD"), or on its due day until you plan it. Events show on each day so you can see how

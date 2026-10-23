@@ -1262,3 +1262,36 @@
 1300|Máquina de escrever
 1301|Bolha
 1302|Cremoso
+1303|Compras
+1304|Adicione um item, ex. 2 leite
+1305|Adicionar item às compras
+1306|estimado
+1307|Copiar lista
+1308|Limpar marcados
+1309|No carrinho
+1310|Comprar de novo
+1311|Sua lista de compras está vazia. Adicione o que precisa, como "2 leite $4.50". Ela é organizada por corredor.
+1312|Hortifruti
+1313|Laticínios e ovos
+1314|Padaria
+1315|Carnes e peixes
+1316|Congelados
+1317|Mercearia
+1318|Bebidas
+1319|Lanches
+1320|Casa
+1321|Cuidados pessoais
+1322|Material escolar
+1323|Lista de compras
+1324|Lista de compras copiada
+1325|Tarefas, plano da semana, cursos ou compras
+1326|item para comprar
+1327|itens para comprar
+1328|Não foi possível copiar aqui. Tente pelo app.
+1329|No carrinho: {n}
+1330|No carrinho: {n} · {0}
+1331|{n} itens removidos
+1332|Peguei {0}
+1333|Voltar {0} para a lista
+1334|Adicionar às compras: {0}
+1335|1 item removido

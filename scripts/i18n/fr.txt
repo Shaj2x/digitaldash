@@ -1262,3 +1262,36 @@
 1300|Machine à écrire
 1301|Bulle
 1302|Crémeux
+1303|Courses
+1304|Ajoutez un article, ex. 2 lait
+1305|Ajouter un article aux courses
+1306|estimé
+1307|Copier la liste
+1308|Retirer les cochés
+1309|Dans le panier
+1310|Racheter
+1311|Votre liste de courses est vide. Ajoutez ce qu'il vous faut, comme « 2 lait $4.50 ». Elle se range par rayon au fur et à mesure.
+1312|Fruits et légumes
+1313|Produits laitiers et œufs
+1314|Boulangerie
+1315|Viande et poisson
+1316|Surgelés
+1317|Épicerie
+1318|Boissons
+1319|Snacks
+1320|Maison
+1321|Soins personnels
+1322|Fournitures scolaires
+1323|Liste de courses
+1324|Liste de courses copiée
+1325|Tâches, plan de la semaine, cours ou courses
+1326|article à acheter
+1327|articles à acheter
+1328|Copie impossible ici. Réessayez depuis l'app.
+1329|Dans le panier : {n}
+1330|Dans le panier : {n} · {0}
+1331|{n} articles retirés
+1332|{0} pris
+1333|Remettre {0} sur la liste
+1334|Ajouter aux courses : {0}
+1335|1 article retiré

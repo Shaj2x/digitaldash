@@ -1262,3 +1262,36 @@
 1300|Máy đánh chữ
 1301|Bong bóng
 1302|Êm mượt
+1303|Mua sắm
+1304|Thêm món, vd. 2 sữa
+1305|Thêm món cần mua
+1306|ước tính
+1307|Sao chép danh sách
+1308|Xóa món đã chọn
+1309|Trong giỏ
+1310|Mua lại
+1311|Danh sách mua sắm trống. Thêm thứ bạn cần, như "2 sữa $4.50". Danh sách tự xếp theo quầy.
+1312|Rau củ quả
+1313|Sữa và trứng
+1314|Bánh mì
+1315|Thịt và cá
+1316|Đồ đông lạnh
+1317|Đồ khô
+1318|Đồ uống
+1319|Đồ ăn vặt
+1320|Đồ gia dụng
+1321|Chăm sóc cá nhân
+1322|Đồ dùng học tập
+1323|Danh sách mua sắm
+1324|Đã sao chép danh sách mua sắm
+1325|Việc cần làm, kế hoạch tuần, môn học hoặc mua sắm
+1326|món cần mua
+1327|món cần mua
+1328|Không sao chép được ở đây. Hãy thử trong ứng dụng.
+1329|Trong giỏ: {n}
+1330|Trong giỏ: {n} · {0}
+1331|Đã xóa {n} món
+1332|Đã lấy {0}
+1333|Đưa {0} lại vào danh sách
+1334|Thêm vào mua sắm: {0}
+1335|Đã xóa 1 món

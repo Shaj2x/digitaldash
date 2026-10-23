@@ -1262,3 +1262,36 @@
 1300|Schreibmaschine
 1301|Blase
 1302|Cremig
+1303|Einkauf
+1304|Artikel hinzufügen, z. B. 2 Milch
+1305|Einkaufsartikel hinzufügen
+1306|geschätzt
+1307|Liste kopieren
+1308|Abgehakte entfernen
+1309|Im Wagen
+1310|Wieder kaufen
+1311|Deine Einkaufsliste ist leer. Füg hinzu, was du brauchst, z. B. „2 Milch $4.50“. Sie wird nach Gang sortiert.
+1312|Obst und Gemüse
+1313|Milchprodukte und Eier
+1314|Bäckerei
+1315|Fleisch und Fisch
+1316|Tiefkühl
+1317|Vorrat
+1318|Getränke
+1319|Snacks
+1320|Haushalt
+1321|Körperpflege
+1322|Schulbedarf
+1323|Einkaufsliste
+1324|Einkaufsliste kopiert
+1325|Aufgaben, Wochenplan, Kurse oder Einkauf
+1326|Artikel zu kaufen
+1327|Artikel zu kaufen
+1328|Kopieren geht hier nicht. Versuch es in der App.
+1329|Im Wagen: {n}
+1330|Im Wagen: {n} · {0}
+1331|{n} Artikel entfernt
+1332|{0} habe ich
+1333|{0} wieder auf die Liste
+1334|Zum Einkauf: {0}
+1335|1 Artikel entfernt
