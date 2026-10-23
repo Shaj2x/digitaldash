@@ -1393,6 +1393,12 @@
 "Study playlists",
 "It plays from the Spotify account you're logged in to in this browser. Premium plays full songs; free accounts may get previews or shuffle.",
 "Play your own Spotify playlists right here, and show what you're listening to on any device.",
-"Player refreshed. If it still says Preview, check you're logged in at open.spotify.com in this browser."
+"Player refreshed. If it still says Preview, check you're logged in at open.spotify.com in this browser.",
+"See what you're listening to on Spotify, live, on any device.",
+"Show the song at the top of the screen",
+"Hide the island",
+"Island hidden. Turn it back on in the Spotify panel on Focus.",
+"The island shows up while a song is playing.",
+"Now playing: {0} by {1}"
 ]
 }

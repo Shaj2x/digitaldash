@@ -966,22 +966,30 @@ html.lg .kpi{background:color-mix(in srgb,var(--panel) 40%,transparent);-webkit-
 /* ---------- Jukebox ---------- */
 .jukebox{margin-top:18px;display:grid;gap:14px}
 .jb-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap}
-.spx-grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:18px;margin-top:14px;align-items:start}
-@media (max-width:860px){.spx-grid{grid-template-columns:1fr}}
-.spx-lists{margin-bottom:10px}
-.spx-acct{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}
-.spx-acct a.btn{text-decoration:none}
-.spx-lab{margin:14px 0 8px;font-size:12.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
-.spx-how{margin:-4px 0 4px}
-.spx-safari{margin:0 0 6px}
-.spx-lists button{display:inline-flex;align-items:center;gap:6px}
-.spx-lists .hv-x{margin-left:2px;opacity:.7}
-.spx-paste{display:flex;gap:8px;margin-bottom:12px}
-.spx-paste input{flex:1;min-width:0}
-.spx-embed{border-radius:12px;overflow:hidden;min-height:152px;background:var(--panel2)}
-.spx-embed iframe{display:block;width:100%;border:0}
-.spx-ph{display:grid;place-items:center;height:352px;color:var(--muted);text-align:center;padding:20px}
-.spx-live{background:var(--panel2);border-radius:12px;padding:16px;min-height:120px}
+.spx-live{background:var(--panel2);border-radius:12px;padding:16px;min-height:120px;margin-top:14px}
+.lf-opt{display:flex;align-items:center;gap:10px;font-size:14px;margin-top:12px;cursor:pointer}
+.isle{position:fixed;top:10px;left:50%;transform:translateX(-50%);z-index:60;display:flex;flex-direction:column;align-items:center;pointer-events:none}
+.isle>*{pointer-events:auto}
+.isle[hidden],.isle-card[hidden]{display:none}
+.isle-pill{display:flex;align-items:center;gap:10px;height:40px;max-width:min(380px,calc(100vw - 250px));padding:5px 14px 5px 5px;border:0;border-radius:999px;background:#000;color:#fff;font:inherit;font-size:13.5px;box-shadow:0 10px 30px -10px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.08);cursor:pointer;
+  animation:isleIn .45s var(--ease-out,cubic-bezier(.23,1,.32,1)) both;transition:transform .16s var(--ease-out,ease)}
+.isle-pill:active{transform:scale(.96)}
+.isle-pill img,.isle-pill .isle-noart{width:30px;height:30px;border-radius:50%;object-fit:cover;flex:none;background:#222}
+.isle-pill .isle-t{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.isle-pill .isle-t span{opacity:.6}
+.isle-pill .lf-eq{color:#4ade80;flex:none}
+@media (max-width:520px){.isle-pill{max-width:calc(100vw - 236px);padding-right:12px}.isle-pill .isle-t{display:none}}
+@keyframes isleIn{from{opacity:0;transform:scale(.6,.8)}to{opacity:1;transform:none}}
+.isle-card{margin-top:8px;width:min(340px,calc(100vw - 32px));background:#000;color:#fff;border-radius:26px;padding:14px;box-shadow:0 24px 60px -16px rgba(0,0,0,.7),0 0 0 1px rgba(255,255,255,.08);transform-origin:top center;animation:isleCard .32s var(--ease-out,cubic-bezier(.23,1,.32,1)) both}
+@keyframes isleCard{from{opacity:0;transform:scale(.85) translateY(-10px)}to{opacity:1;transform:none}}
+.isle-card .lf-now{grid-template-columns:72px minmax(0,1fr)}
+.isle-card .lf-art{width:72px;height:72px}
+.isle-card .lf-a{color:rgba(255,255,255,.65)}
+.isle-card .lf-tag,.isle-card .lf-tag.on{color:#4ade80}
+.isle-card .btn.ghost{color:#fff;border-color:rgba(255,255,255,.25)}
+.isle-card .isle-x{margin-top:10px;display:flex;justify-content:flex-end}
+@media (prefers-reduced-motion:reduce){.isle-pill,.isle-card{animation:fadeIn .2s ease both}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
 .spx-live h4{margin:0 0 6px;font-size:15px}
 .spx-live ol{margin:8px 0 12px;padding-left:20px;display:grid;gap:4px;font-size:14px}
 .spx-live form{display:flex;gap:8px}
@@ -1819,6 +1827,7 @@ html.lg .eye{background:var(--glass-tint);box-shadow:inset 0 1px 0 color-mix(in 
   </nav>
 
   <main id="main-content" tabindex="-1">
+    <div class="isle" id="isle" hidden><button type="button" class="isle-pill" id="isle-pill" aria-expanded="false" aria-controls="isle-card"></button><div class="isle-card" id="isle-card" hidden></div></div>
     <header class="topbar">
       <div class="brand"><span class="mark" aria-hidden="true"><i class="mk"></i></span><span>Digital<br>Dash</span></div>
       <div class="tb-right">
@@ -1868,26 +1877,8 @@ html.lg .eye{background:var(--glass-tint);box-shadow:inset 0 1px 0 color-mix(in 
         <label class="jb-auto"><input type="checkbox" id="jb-auto"> Play during focus timers and pause for breaks</label>
       </section>
       <section class="panel spx" id="spx" aria-labelledby="spx-h">
-        <div class="jb-head"><div><h3 id="spx-h" aria-level="2">Spotify</h3><p class="muted">Play your own Spotify playlists right here, and show what you're listening to on any device.</p></div></div>
-        <div class="spx-grid">
-          <div class="spx-player">
-            <div class="spx-acct" id="spx-acct">
-              <a class="btn small" id="spx-login" href="https://accounts.spotify.com/login?continue=https%3A%2F%2Fopen.spotify.com%2F" target="_blank" rel="noopener">Log in to Spotify</a>
-              <button type="button" class="btn ghost small" id="spx-refresh">I'm logged in, refresh player</button>
-            </div>
-            <p class="hint spx-safari" id="spx-safari" hidden>On Safari, the player can only see your Spotify login if you turn off Settings &gt; Privacy &gt; Prevent cross-site tracking. Or use Chrome.</p>
-            <h4 class="spx-lab" id="spx-mine-h" hidden>Your playlists</h4>
-            <div class="chips spx-lists" id="spx-mine" role="group" aria-label="Your playlists" hidden></div>
-            <form class="spx-paste" id="spx-paste" autocomplete="off"><input type="text" inputmode="url" id="spx-url" placeholder="Paste a link to your playlist, album or song" aria-label="Spotify link"><button class="btn small" type="submit">Add</button></form>
-            <p class="hint spx-how">In Spotify, open a playlist, tap ⋯ then Share &gt; Copy link, and paste it here. It's saved for next time. <a href="https://open.spotify.com/collection/playlists" target="_blank" rel="noopener">Open my playlists</a></p>
-            <h4 class="spx-lab">Study picks</h4>
-            <div class="chips spx-lists" id="spx-lists" role="group" aria-label="Study playlists"></div>
-            <div class="spx-embed" id="spx-embed"><div class="spx-ph">Pick a playlist to start listening.</div></div>
-            <label class="jb-auto" style="margin-top:10px"><input type="checkbox" id="spx-auto"> Play during focus timers and pause for breaks</label>
-            <p class="hint" style="margin:6px 0 0">It plays from the Spotify account you're logged in to in this browser. Premium plays full songs; free accounts may get previews or shuffle.</p>
-          </div>
-          <div class="spx-live" id="spx-live" aria-live="polite"></div>
-        </div>
+        <div class="jb-head"><div><h3 id="spx-h" aria-level="2">Spotify</h3><p class="muted">See what you're listening to on Spotify, live, on any device.</p></div></div>
+        <div class="spx-live" id="spx-live" aria-live="polite"></div>
       </section>
       <div class="wbar"><button class="btn ghost small" id="w-add" hidden>Add widget</button><button class="btn ghost small" id="w-edit">Customize widgets</button></div>
       <div class="wmenu panel" id="w-menu" hidden></div>
@@ -4246,7 +4237,7 @@ function jbToggle(id){
   if(JB.playing&&!st.on.length)jbPause();
   save();jbRender();
 }
-function jbTimerSync(){if(typeof spTimerSync==="function")spTimerSync(); // auto mode: play while a focus timer runs, pause for breaks and when it stops
+function jbTimerSync(){ // auto mode: play while a focus timer runs, pause for breaks and when it stops
   const st=jbS();if(!st.auto)return;
   if(T.running&&T.kind==="focus"){if(!JB.playing){jbPlay();JB.auto=true;}}
   else if(JB.playing&&JB.auto)jbPause();
@@ -6494,65 +6485,12 @@ function renderCoursesPane(){
 }
 $("#task-mode").addEventListener("click",e=>{const b=e.target.closest("button[data-m]");if(!b||b.dataset.m===taskMode)return;setTaskMode(b.dataset.m);
   try{if(b.dataset.m==="plan"||b.dataset.m==="shop")history.pushState(null,"",b.dataset.m==="plan"?"#plan":"#shopping");else if(location.hash==="#plan"||location.hash==="#shopping")history.replaceState(null,"","#tasks");}catch(e){}});
-/* ---------- Spotify dashboard ----------
-   Free for every user, with no Spotify approval: (1) Spotify's embedded player (iFrame API) plays study playlists or
-   any pasted link inside the app, and can follow the focus timer; (2) live listening from any device through Last.fm,
-   for people who link Spotify to a free Last.fm account and enter their username. Reading Last.fm needs only the
-   site's public API key (LASTFM_API_KEY at build time). Settings live in S.settings.sp = {uri, saved, auto, lfm}. */
-const SP_LISTS=[["Lo-fi beats","spotify:playlist:37i9dQZF1DWWQRwui0ExPn"],["Deep Focus","spotify:playlist:37i9dQZF1DWZeKCadgRdKQ"],["Peaceful Piano","spotify:playlist:37i9dQZF1DX4sWSpwq3LiO"],
-  ["Brain Food","spotify:playlist:37i9dQZF1DWXLeA8Omikj7"],["Instrumental Study","spotify:playlist:37i9dQZF1DX9sIqqvKsjG8"],["Jazz in the Background","spotify:playlist:37i9dQZF1DWV7EzJMK2FUI"]];
-const spS=()=>{S.settings.sp=Object.assign({uri:"",saved:[],auto:false,lfm:""},S.settings.sp||{});return S.settings.sp;};
-const SPD={api:null,ctl:null,loading:false,paused:true,pos:0,autoOn:false,pending:null};
-function spParse(v){const m=String(v||"").trim().match(/(?:open\.spotify\.com\/(?:intl-[a-z-]+\/)?(?:embed\/)?|spotify:)(playlist|album|track|episode|show|artist)[/:]([A-Za-z0-9]{22})/);return m?`spotify:${m[1]}:${m[2]}`:"";}
-const spKind=u=>({playlist:"Playlist",album:"Album",track:"Song",episode:"Episode",show:"Podcast",artist:"Artist"})[u.split(":")[1]]||"Spotify";
-function spLoadApi(){
-  if(SPD.api||SPD.loading)return;SPD.loading=true;
-  window.onSpotifyIframeApiReady=api=>{SPD.api=api;SPD.loading=false;if(SPD.pending){const u=SPD.pending;SPD.pending=null;spOpen(u);}};
-  const sc=document.createElement("script");sc.src="https://open.spotify.com/embed/iframe-api/v1";sc.async=true;
-  sc.onerror=()=>{SPD.loading=false;SPD.api=false;if(SPD.pending){const u=SPD.pending;SPD.pending=null;spOpen(u);}};document.head.appendChild(sc);
-}
-function spOpen(uri,play){
-  const st=spS();st.uri=uri;save();spRenderLists();
-  if(SPD.ctl){SPD.ctl.loadUri(uri);if(play)setTimeout(()=>SPD.ctl&&SPD.ctl.play(),400);return;}
-  if(SPD.api===null){SPD.pending=uri;spLoadApi();return;}
-  const box=$("#spx-embed");box.innerHTML="";const h=matchMedia("(max-width:560px)").matches&&!/playlist|album|show/.test(uri)?152:352;
-  if(SPD.api===false){const [,k,id]=uri.split(":");box.innerHTML=`<iframe title="Spotify player" src="https://open.spotify.com/embed/${k}/${id}?utm_source=generator" height="${h}" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>`;return;}
-  const el=document.createElement("div");box.appendChild(el);
-  SPD.api.createController(el,{uri,width:"100%",height:h},c=>{SPD.ctl=c;
-    c.addListener("playback_update",e=>{const d=e&&e.data||{};SPD.paused=!!d.isPaused;SPD.pos=d.position||0;});
-    if(play)c.addListener("ready",()=>c.play());});
-}
-function spRenderLists(){
-  const st=spS(),cur=st.uri;
-  $("#spx-lists").innerHTML=SP_LISTS.map(([n,u])=>`<button type="button" data-spu="${u}" aria-pressed="${cur===u}">${n}</button>`).join("");
-  $("#spx-mine").innerHTML=st.saved.map((x,i)=>`<button type="button" data-spu="${esc(x.uri)}" aria-pressed="${cur===x.uri}">${esc(x.name)}<span class="hv-x" data-spdel="${i}" role="button" aria-label="Remove ${esc(x.name)}" title="Remove">×</span></button>`).join("");
-  $("#spx-mine").hidden=$("#spx-mine-h").hidden=!st.saved.length;
-  $("#spx-auto").checked=st.auto;
-}
-function spRefresh(){const st=spS();if(SPD.ctl){try{SPD.ctl.destroy();}catch(e){}SPD.ctl=null;}$("#spx-embed").innerHTML="";spOpen(st.uri||SP_LISTS[0][1]);}
-$("#spx-refresh").addEventListener("click",()=>{spRefresh();toast("Player refreshed. If it still says Preview, check you're logged in at open.spotify.com in this browser.");});
-$("#spx-login").addEventListener("click",()=>{SPD.loginAt=Date.now();});
-document.addEventListener("visibilitychange",()=>{if(!document.hidden&&SPD.loginAt&&Date.now()-SPD.loginAt<15*60e3){SPD.loginAt=0;spRefresh();}});
-$("#spx-safari").hidden=!/^((?!chrome|chromium|android|crios|fxios|edg).)*safari/i.test(navigator.userAgent);
-const spListClick=e=>{
-  const d=e.target.closest("[data-spdel]");if(d){e.stopPropagation();const st=spS(),i=+d.dataset.spdel,[x]=st.saved.splice(i,1);save();spRenderLists();toast(`Removed ${x.name}`,{run(){st.saved.splice(i,0,x);save();spRenderLists();}});return;}
-  const b=e.target.closest("[data-spu]");if(b)spOpen(b.dataset.spu,true);};
-$("#spx-lists").addEventListener("click",spListClick);$("#spx-mine").addEventListener("click",spListClick);
-$("#spx-paste").addEventListener("submit",async e=>{e.preventDefault();const inp=$("#spx-url"),uri=spParse(inp.value);
-  if(!uri){toast("That isn't a Spotify link. Copy one from Share > Copy link in Spotify.");inp.focus();return;}
-  inp.value="";const st=spS();spOpen(uri,true);
-  if(!st.saved.some(x=>x.uri===uri)&&!SP_LISTS.some(x=>x[1]===uri)){
-    let name=spKind(uri);try{const [,k,id]=uri.split(":"),r=await fetch(`https://open.spotify.com/oembed?url=${encodeURIComponent(`https://open.spotify.com/${k}/${id}`)}`);if(r.ok){const j=await r.json();if(j&&j.title)name=String(j.title).slice(0,40);}}catch(err){}
-    st.saved.unshift({uri,name});st.saved=st.saved.slice(0,20);save();spRenderLists();}});
-$("#spx-auto").addEventListener("change",e=>{spS().auto=e.target.checked;save();spTimerSync();});
-function spTimerSync(){
-  const st=spS();if(!st.auto)return;
-  if(T.running&&T.kind==="focus"){if(!SPD.ctl){spOpen(st.uri||SP_LISTS[0][1],true);SPD.autoOn=true;return;}if(SPD.paused){SPD.pos>0?SPD.ctl.resume():SPD.ctl.play();SPD.autoOn=true;}}
-  else if(SPD.ctl&&SPD.autoOn&&!SPD.paused){SPD.ctl.pause();SPD.autoOn=false;}
-}
-/* Load the player once the section comes near the screen, so the page stays light. */
-{const st=spS(),io=new IntersectionObserver(es=>{if(es.some(x=>x.isIntersecting)){io.disconnect();spOpen(st.uri||SP_LISTS[0][1]);}},{rootMargin:"300px"});io.observe($("#spx"));}
-spRenderLists();
+/* ---------- Spotify: live listening ----------
+   Free for every user, with no Spotify approval: people who link Spotify to a free Last.fm account enter their
+   Last.fm username and see what they're playing on any device, polled from Last.fm (needs the site's public
+   LASTFM_API_KEY at build time). Optionally the current song also shows as a "Dynamic Island" pill at the top of
+   the screen. Settings live in S.settings.sp = {lfm, island}. */
+const spS=()=>{S.settings.sp=Object.assign({lfm:"",island:false},S.settings.sp||{});return S.settings.sp;};
 /* Live listening through Last.fm */
 const lfKey=()=>{const k=window.DASH_CONFIG&&window.DASH_CONFIG.lastfmKey;return /^[0-9a-f]{32}$/i.test(k||"")?k:"";};
 const LF={data:null,err:"",timer:0,busy:false,edit:false};
@@ -6583,17 +6521,42 @@ function lfRender(){
     :`<p class="muted" style="margin:0">${LF.err?esc(LF.err):LF.data?"Nothing played yet. Play something on Spotify and it shows up here.":"Loading your listening…"}</p>`)
     +(tr.length>1?`<h4 style="margin-top:16px">Recently played</h4><ul class="lf-recent">${tr.slice(1,6).map(t=>`<li>${lfImg(t)?`<img src="${esc(lfImg(t))}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.visibility='hidden'">`:`<span class="lf-noart"></span>`}<a class="lf-rt" href="${open(t)}" target="_blank" rel="noopener">${name(t)} <span class="muted">· ${art(t)}</span></a><small>${t.date?lfAgo(+t.date.uts):""}</small></li>`).join("")}</ul>`:"")
     +(LF.err&&top?`<p class="hint" style="margin:10px 0 0">${esc(LF.err)}</p>`:"")
+    +`<label class="lf-opt"><input type="checkbox" data-lf="isle"${st.island?" checked":""}> Show the song at the top of the screen</label>`
     +`<div class="lf-foot"><span>Live from Last.fm · ${esc(st.lfm)}</span><button type="button" class="btn ghost small" data-lf="change">Change</button><button type="button" class="btn ghost small" data-lf="off">Stop showing</button></div>`;
+  isleRender();
 }
+/* The island: a black pill at the top centre while a song is playing; tap it for the details. */
+let isleKey="";
+function isleRender(){
+  const box=$("#isle"),st=spS(),tr=LF.data||[],top=tr[0],now=!!(top&&top["@attr"]&&top["@attr"].nowplaying==="true");
+  const on=st.island&&st.lfm&&lfKey()&&now;
+  if(!on){box.hidden=true;isleKey="";$("#isle-card").hidden=true;$("#isle-pill").setAttribute("aria-expanded","false");return;}
+  const name=top.name||"",art=(top.artist&&(top.artist["#text"]||top.artist.name))||"",img=lfImg(top),key=name+"|"+art;
+  if(key===isleKey&&!box.hidden)return;isleKey=key;box.hidden=false;
+  $("#isle-pill").setAttribute("aria-label",`Now playing: ${name} by ${art}`);
+  $("#isle-pill").innerHTML=`${img?`<img src="${esc(img)}" alt="" referrerpolicy="no-referrer" onerror="this.style.visibility='hidden'">`:`<span class="isle-noart"></span>`}<span class="isle-t">${esc(name)} <span>· ${esc(art)}</span></span><span class="lf-eq" aria-hidden="true"><i></i><i></i><i></i></span>`;
+  const open=`https://open.spotify.com/search/${encodeURIComponent(art+" "+name)}`;
+  $("#isle-card").innerHTML=`<div class="lf-now">${img?`<img class="lf-art" src="${esc(img)}" alt="" referrerpolicy="no-referrer" onerror="this.style.visibility='hidden'">`:`<div class="lf-art"></div>`}
+    <div><span class="lf-tag on"><span class="lf-eq" aria-hidden="true"><i></i><i></i><i></i></span>Listening now</span><div class="lf-t">${esc(name)}</div><div class="lf-a">${esc(art)}${top.album&&top.album["#text"]?" · "+esc(top.album["#text"]):""}</div>
+    <div class="lf-acts"><a class="btn ghost small" href="${open}" target="_blank" rel="noopener">Open in Spotify</a></div></div></div>
+    <div class="isle-x"><button type="button" class="btn ghost small" data-isle="hide">Hide the island</button></div>`;
+}
+function isleToggle(force){const c=$("#isle-card"),open=force!=null?force:c.hidden;c.hidden=!open;$("#isle-pill").setAttribute("aria-expanded",String(open));}
+$("#isle-pill").addEventListener("click",()=>isleToggle());
+$("#isle-card").addEventListener("click",e=>{if(e.target.closest("[data-isle=hide]")){spS().island=false;save();isleToggle(false);lfRender();toast("Island hidden. Turn it back on in the Spotify panel on Focus.",{run(){spS().island=true;save();lfRender();}});}});
+document.addEventListener("click",e=>{if(!$("#isle-card").hidden&&!e.target.closest("#isle"))isleToggle(false);});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!$("#isle-card").hidden){isleToggle(false);$("#isle-pill").focus();}});
 $("#spx-live").addEventListener("submit",e=>{if(e.target.id!=="lf-form")return;e.preventDefault();const u=$("#lf-user").value.trim().replace(/^@/,"");
   if(!/^[A-Za-z][\w-]{1,14}$/.test(u)){toast("Last.fm usernames are 2 to 15 letters, numbers, - or _.");return;}
   spS().lfm=u;LF.edit=false;LF.data=null;LF.err="";save();lfRender();lfFetch();});
 $("#spx-live").addEventListener("click",e=>{const b=e.target.closest("[data-lf]");if(!b)return;const a=b.dataset.lf;
+  if(a==="isle"){spS().island=b.checked;save();lfRender();if(b.checked&&!(LF.data&&LF.data[0]&&LF.data[0]["@attr"]))toast("The island shows up while a song is playing.");return;}
   if(a==="change"){LF.edit=true;lfRender();const i=$("#lf-user");if(i){i.focus();i.select();}}
   if(a==="cancel"){LF.edit=false;lfRender();}
   if(a==="off"){const was=spS().lfm;spS().lfm="";LF.data=null;save();lfRender();toast("Stopped showing your listening",{run(){spS().lfm=was;save();lfRender();lfFetch();}});}});
-setInterval(()=>{if(!document.hidden&&curView==="focus"&&spS().lfm)lfFetch();},15000);
-document.addEventListener("visibilitychange",()=>{if(!document.hidden&&curView==="focus"&&spS().lfm)lfFetch();});
+const lfWant=()=>!document.hidden&&spS().lfm&&(curView==="focus"||spS().island);
+setInterval(()=>{if(lfWant())lfFetch();},15000);
+document.addEventListener("visibilitychange",()=>{if(lfWant())lfFetch();});
 lfRender();if(lfKey()&&spS().lfm)lfFetch();
 /* ---------- shopping list ----------
    S.shop = [{id, name, qty, price, cat, done}], a tab under Tasks (#shopping). Type "2 milk $4.50": a leading number

@@ -1350,3 +1350,9 @@
 1388|Toca pela conta do Spotify em que você entrou neste navegador. O Premium toca músicas completas; contas grátis podem ter prévias ou modo aleatório.
 1389|Ouça suas próprias playlists do Spotify aqui e mostre o que está tocando em qualquer aparelho.
 1390|Player recarregado. Se ainda aparecer Preview, confira se você entrou em open.spotify.com neste navegador.
+1391|Veja o que você está ouvindo no Spotify, ao vivo, em qualquer aparelho.
+1392|Mostrar a música no topo da tela
+1393|Ocultar a ilha
+1394|Ilha oculta. Ative de novo no painel do Spotify em Foco.
+1395|A ilha aparece enquanto uma música toca.
+1396|Tocando: {0} de {1}

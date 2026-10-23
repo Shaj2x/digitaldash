@@ -1350,3 +1350,9 @@
 1388|Nhạc phát từ tài khoản Spotify bạn đang đăng nhập trên trình duyệt này. Premium phát trọn bài; tài khoản miễn phí có thể chỉ nghe thử hoặc phát ngẫu nhiên.
 1389|Nghe playlist Spotify của riêng bạn ngay tại đây và hiển thị bài đang nghe trên mọi thiết bị.
 1390|Đã tải lại trình phát. Nếu vẫn hiện Preview, hãy kiểm tra bạn đã đăng nhập open.spotify.com trên trình duyệt này.
+1391|Xem bài bạn đang nghe trên Spotify, trực tiếp, trên mọi thiết bị.
+1392|Hiện bài hát ở đầu màn hình
+1393|Ẩn đảo
+1394|Đã ẩn đảo. Bật lại trong bảng Spotify ở trang Tập trung.
+1395|Đảo hiện lên khi đang phát một bài.
+1396|Đang phát: {0} của {1}

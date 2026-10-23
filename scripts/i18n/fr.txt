@@ -1350,3 +1350,9 @@
 1388|La lecture se fait depuis le compte Spotify connecté dans ce navigateur. Premium lit les titres en entier ; les comptes gratuits peuvent avoir des extraits ou la lecture aléatoire.
 1389|Écoutez vos propres playlists Spotify ici et affichez ce que vous écoutez sur n'importe quel appareil.
 1390|Lecteur rechargé. S'il indique encore Preview, vérifiez que vous êtes connecté sur open.spotify.com dans ce navigateur.
+1391|Voyez ce que vous écoutez sur Spotify, en direct, sur n'importe quel appareil.
+1392|Afficher le titre en haut de l'écran
+1393|Masquer l'île
+1394|Île masquée. Réactivez-la dans le panneau Spotify de Focus.
+1395|L'île apparaît pendant la lecture d'un titre.
+1396|En écoute : {0} de {1}

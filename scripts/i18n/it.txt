@@ -1350,3 +1350,9 @@
 1388|Suona dall'account Spotify con cui hai fatto l'accesso in questo browser. Premium riproduce i brani interi; gli account gratuiti possono avere anteprime o riproduzione casuale.
 1389|Ascolta le tue playlist Spotify qui e mostra cosa stai ascoltando su qualsiasi dispositivo.
 1390|Player ricaricato. Se dice ancora Preview, controlla di aver fatto l'accesso su open.spotify.com in questo browser.
+1391|Guarda cosa stai ascoltando su Spotify, dal vivo, su qualsiasi dispositivo.
+1392|Mostra il brano in cima allo schermo
+1393|Nascondi l'isola
+1394|Isola nascosta. Riattivala nel pannello Spotify in Focus.
+1395|L'isola compare mentre suona un brano.
+1396|In ascolto: {0} di {1}

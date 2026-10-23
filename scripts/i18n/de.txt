@@ -1350,3 +1350,9 @@
 1388|Es spielt über das Spotify-Konto, mit dem du in diesem Browser angemeldet bist. Premium spielt ganze Songs; kostenlose Konten bekommen evtl. Vorschauen oder Zufallswiedergabe.
 1389|Hör deine eigenen Spotify-Playlists direkt hier und zeig, was du gerade auf jedem Gerät hörst.
 1390|Player neu geladen. Steht dort noch Preview, prüf, ob du in diesem Browser bei open.spotify.com angemeldet bist.
+1391|Sieh live, was du auf Spotify hörst, auf jedem Gerät.
+1392|Song oben auf dem Bildschirm zeigen
+1393|Insel ausblenden
+1394|Insel ausgeblendet. Im Spotify-Bereich unter Fokus wieder einschalten.
+1395|Die Insel erscheint, während ein Song läuft.
+1396|Läuft: {0} von {1}
