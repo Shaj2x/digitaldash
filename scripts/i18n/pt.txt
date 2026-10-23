@@ -1363,3 +1363,10 @@
 1401|O ouvindo ao vivo ainda não está ativado neste site.
 1402|Veja a música que toca no Spotify, em qualquer aparelho, ao vivo. Conecte o Spotify a uma conta grátis do Last.fm e digite seu usuário do Last.fm:
 1403|A música que toca no Spotify, ao vivo pelo Last.fm
+1404|Descreva um tema
+1405|Digite um clima, lugar ou estilo e receba cores, fontes e fundo combinando. Funciona offline e nada é enviado.
+1406|ex. cozy autumn café at night
+1407|Gerar
+1408|Surpreenda-me
+1409|Ideias
+1410|Feito a partir das suas palavras. Tente cores, lugares ou climas em inglês como ocean, cozy ou neon para resultados mais próximos.

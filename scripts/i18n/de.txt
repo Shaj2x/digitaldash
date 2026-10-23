@@ -1363,3 +1363,10 @@
 1401|Live-Hören ist auf dieser Seite noch nicht eingeschaltet.
 1402|Sieh live den Song, den du auf Spotify hörst, auf jedem Gerät. Verbinde Spotify mit einem kostenlosen Last.fm-Konto und gib deinen Last.fm-Namen ein:
 1403|Der Song, den du auf Spotify hörst, live über Last.fm
+1404|Beschreib ein Theme
+1405|Gib eine Stimmung, einen Ort oder einen Stil ein und bekomm passende Farben, Schriften und Hintergrund. Funktioniert offline, nichts wird gesendet.
+1406|z. B. cozy autumn café at night
+1407|Erstellen
+1408|Überrasch mich
+1409|Ideen
+1410|Aus deinen Worten erstellt. Probier englische Farben, Orte oder Stimmungen wie ocean, cozy oder neon für genauere Treffer.

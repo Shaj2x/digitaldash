@@ -369,6 +369,20 @@ html.lg .addbar .addmore input[type=text]{background:var(--glass-tint);border-co
 .skins{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
 .skin{border:2px solid var(--line);border-radius:14px;padding:0;overflow:hidden;background:none;text-align:left}
 .skin[aria-pressed="true"]{border-color:var(--accent)}
+.vibe-form{display:flex;gap:8px;flex-wrap:wrap}
+.vibe-form input{flex:1;min-width:200px}
+.vibe-ex{margin-top:10px}
+.vibe-out{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;margin-top:14px}
+.vibe-out:empty{display:none}
+.vcard{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--panel2);display:flex;flex-direction:column}
+.vcard .vprev{padding:14px;display:grid;gap:8px}
+.vcard .vclock{border-radius:10px;padding:12px 14px;font-size:34px;font-weight:800;line-height:1;letter-spacing:.01em}
+.vcard .vrow{display:flex;gap:6px;align-items:center}
+.vcard .vpanel{flex:1;border-radius:8px;padding:8px 10px;font-size:13px}
+.vcard .vacc{border-radius:999px;padding:6px 12px;font-size:12px;font-weight:700}
+.vcard .vmeta{padding:10px 14px;display:flex;justify-content:space-between;align-items:center;gap:8px;border-top:1px solid var(--line)}
+.vcard .vmeta b{font-size:14px}
+.vcard .vmeta small{display:block;color:var(--muted);font-size:12.5px}
 .skin .sw{height:74px;display:flex;align-items:flex-end;padding:10px;gap:6px;font-family:var(--clock);font-weight:800;font-size:30px}
 .skin .lb{padding:8px 10px;font-size:14px;font-weight:500}
 .settings{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-top:18px}
@@ -2039,6 +2053,13 @@ html.lg .eye{background:var(--glass-tint);box-shadow:inset 0 1px 0 color-mix(in 
     <section class="view" id="v-themes">
       <h1 data-sub="t-themes">Themes</h1>
       <p class="sub" data-sub="themes">Colours, backgrounds, fonts and more. Changes apply everywhere instantly.</p>
+      <h2 class="sec">Describe a theme</h2>
+      <div class="panel vibe" id="vibe">
+        <p class="hint" style="margin:0 0 12px">Type a mood, place or style and get matching colours, fonts and a background. Works offline, nothing is sent anywhere.</p>
+        <form class="vibe-form" id="vibe-form" autocomplete="off"><input type="text" id="vibe-q" maxlength="80" placeholder="e.g. cozy autumn café at night" aria-label="Describe a theme"><button class="btn" type="submit">Generate</button><button class="btn ghost" type="button" id="vibe-rand">Surprise me</button></form>
+        <div class="chips vibe-ex" id="vibe-ex" role="group" aria-label="Ideas"></div>
+        <div class="vibe-out" id="vibe-out" aria-live="polite"></div>
+      </div>
       <h2 class="sec">Presets</h2>
       <p class="hint" style="margin:0 0 12px">Save the whole look under a name: colour scheme, fonts, background, clock and glass. Apply it any time.</p>
       <div class="presets" id="presets"></div>
@@ -5283,6 +5304,101 @@ $("#sfx-vol").addEventListener("input",e=>sfxSet({vol:+e.target.value}));
 $("#sfx-vol").addEventListener("change",sfxDemo);
 $("#sfx-kind").addEventListener("click",e=>{const b=e.target.closest("[data-sfk]");if(!b)return;sfxSet({kind:b.dataset.sfk});sfxDemo();});
 renderSfx();
+/* ---------- describe a theme ----------
+   A prompt-based theme generator that runs entirely in the browser (no API, nothing sent). Words in the prompt are
+   matched against a small dictionary of colours, places, moods and styles (VIBE_LEX); each hit nudges hue, light or
+   dark, saturation, fonts and a live background. Unknown words still count: they're hashed to a hue so any prompt
+   gives a stable result. Three variations come back; applying one saves it as a colour scheme (with Undo). */
+const VIBE_LEX={
+  red:{h:[0]},crimson:{h:[350]},scarlet:{h:[5]},orange:{h:[25]},amber:{h:[38]},gold:{h:[44],m:"lux"},golden:{h:[44],m:"lux"},yellow:{h:[52]},lemon:{h:[55],light:1},
+  lime:{h:[85]},green:{h:[135]},mint:{h:[155],light:1,soft:1},emerald:{h:[150]},sage:{h:[110],soft:1,m:"nature"},olive:{h:[70],soft:1},teal:{h:[178]},turquoise:{h:[172]},cyan:{h:[188]},
+  blue:{h:[215]},navy:{h:[225],dark:1},cobalt:{h:[220]},sky:{h:[200],light:1},indigo:{h:[245]},purple:{h:[275]},violet:{h:[265]},lavender:{h:[262],light:1,soft:1},lilac:{h:[280],light:1,soft:1},
+  pink:{h:[330]},rose:{h:[345]},magenta:{h:[310]},peach:{h:[22],light:1,soft:1},coral:{h:[12]},brown:{h:[28],soft:1},beige:{h:[38],light:1,soft:1},cream:{h:[42],light:1,soft:1},
+  black:{dark:1,mono:1},white:{light:1,mono:1},grey:{mono:1,soft:1},gray:{mono:1,soft:1},silver:{mono:1,light:1},monochrome:{mono:1},
+  sunset:{h:[18,330],live:"sunset",m:"warm"},sunrise:{h:[30,340],light:1},dawn:{h:[20,280],light:1,soft:1},dusk:{h:[270,20],dark:1},
+  ocean:{h:[205,180],live:"waves"},sea:{h:[200,175],live:"waves"},beach:{h:[190,40],light:1},wave:{h:[205],live:"waves"},waves:{h:[205],live:"waves"},lake:{h:[195,150],soft:1},
+  forest:{h:[140,95],dark:1,m:"nature",live:"fireflies"},jungle:{h:[130,50],m:"nature"},woods:{h:[120,30],dark:1,m:"nature"},cabin:{h:[25,120],m:"cozy",dark:1},mountain:{h:[210,140],soft:1,m:"nature"},
+  matcha:{h:[95],light:1,soft:1,m:"cozy"},coffee:{h:[25],soft:1,m:"cozy",dark:1},latte:{h:[32],light:1,soft:1,m:"cozy"},cafe:{h:[28,40],m:"cozy",soft:1},café:{h:[28,40],m:"cozy",soft:1},tea:{h:[60,30],soft:1,m:"cozy"},chocolate:{h:[20],dark:1,soft:1},
+  autumn:{h:[24,40],m:"cozy",warm:1},fall:{h:[24,40],m:"cozy"},winter:{h:[205],light:1,soft:1},snow:{h:[205],light:1,soft:1},ice:{h:[192],light:1},icy:{h:[192],light:1},spring:{h:[110,335],light:1,soft:1},summer:{h:[48,190],vivid:1},
+  night:{dark:1},midnight:{h:[230],dark:1},moon:{h:[230,48],dark:1,live:"stars"},moonlight:{h:[220],dark:1,live:"stars"},stars:{h:[240],dark:1,live:"stars"},space:{h:[255,200],dark:1,live:"stars"},galaxy:{h:[275,320],dark:1,live:"stars",vivid:1},cosmic:{h:[270,190],dark:1,live:"stars"},
+  aurora:{h:[160,275],dark:1,live:"aurora",vivid:1},rain:{h:[210],soft:1,m:"calm"},rainy:{h:[210],soft:1,m:"calm"},storm:{h:[220],dark:1,soft:1},cloud:{h:[210],light:1,soft:1},cloudy:{h:[210],soft:1},fog:{h:[210],soft:1,light:1},
+  fire:{h:[12,40],vivid:1,dark:1},ember:{h:[18],dark:1},lava:{h:[8,30],dark:1,vivid:1},volcano:{h:[8],dark:1},desert:{h:[32,20],light:1,soft:1},sand:{h:[40],light:1,soft:1},
+  sakura:{h:[340],light:1,soft:1},cherry:{h:[345]},blossom:{h:[335],light:1,soft:1},flower:{h:[320,110],light:1},garden:{h:[120,330],light:1,m:"nature"},candy:{h:[320,190],vivid:1,m:"play"},bubblegum:{h:[325],light:1,m:"play"},
+  tokyo:{h:[320,190],dark:1,vivid:1,m:"tech"},neon:{h:[315,185],dark:1,vivid:1,m:"tech"},cyberpunk:{h:[310,55],dark:1,vivid:1,m:"tech"},synthwave:{h:[300,190],dark:1,vivid:1,m:"retro"},vaporwave:{h:[290,175],vivid:1,m:"retro"},
+  retro:{m:"retro"},vintage:{h:[35],soft:1,m:"retro"},"80s":{h:[305,190],vivid:1,m:"retro"},"90s":{h:[180,320],m:"retro"},y2k:{h:[320,200],light:1,vivid:1,m:"play"},arcade:{h:[280,60],dark:1,vivid:1,m:"pixel"},pixel:{m:"pixel"},game:{m:"pixel",vivid:1},gaming:{h:[280,140],dark:1,vivid:1,m:"pixel"},
+  matrix:{h:[130],dark:1,vivid:1,m:"mono"},hacker:{h:[130],dark:1,m:"mono"},terminal:{h:[130],dark:1,m:"mono"},code:{h:[200],dark:1,m:"mono"},coding:{h:[200],dark:1,m:"mono"},tech:{h:[200],m:"tech"},futuristic:{h:[190,280],dark:1,m:"tech"},
+  academia:{h:[28,0],dark:1,soft:1,m:"classic"},library:{h:[30],dark:1,soft:1,m:"classic"},paper:{h:[42],light:1,soft:1,m:"classic"},notebook:{h:[45,220],light:1,soft:1,m:"classic"},book:{h:[35],soft:1,m:"classic"},classic:{m:"classic"},elegant:{m:"lux"},luxury:{h:[44],dark:1,m:"lux"},royal:{h:[260,45],dark:1,m:"lux"},
+  minimal:{mono:1,soft:1,m:"min"},clean:{light:1,soft:1,m:"min"},simple:{soft:1,m:"min"},calm:{soft:1,m:"calm"},chill:{soft:1,m:"calm",live:"aurora"},cozy:{soft:1,m:"cozy",warm:1},cosy:{soft:1,m:"cozy",warm:1},warm:{warm:1},cool:{cool:1},cold:{cool:1},
+  zen:{h:[100],soft:1,m:"calm"},focus:{m:"min"},study:{m:"min"},lofi:{h:[275,25],soft:1,m:"cozy"},"lo-fi":{h:[275,25],soft:1,m:"cozy"},dreamy:{h:[270,330],light:1,soft:1},pastel:{light:1,soft:1},soft:{soft:1},muted:{soft:1},
+  bold:{vivid:1},bright:{vivid:1,light:1},vivid:{vivid:1},vibrant:{vivid:1},electric:{vivid:1,h:[200]},energetic:{vivid:1,m:"play"},fun:{vivid:1,m:"play"},playful:{m:"play",vivid:1},dark:{dark:1},light:{light:1},day:{light:1},
+  firefly:{h:[60,130],dark:1,live:"fireflies"},fireflies:{h:[60,130],dark:1,live:"fireflies"},halloween:{h:[28,270],dark:1,vivid:1},christmas:{h:[0,140],dark:1},valentine:{h:[345,330],light:1}
+};
+const VIBE_FONTS={min:[["dmsans","shoulders"],["manrope","oswald"],["outfit","bebas"]],cozy:[["nunito","righteous"],["lora","playfair"],["fraunces","oswald"]],calm:[["manrope","oswald"],["outfit","syne"],["lora","bebas"]],
+  tech:[["spacegrotesk","orbitron"],["sora","syne"],["plexmono","spacemono"]],retro:[["poppins","righteous"],["spacegrotesk","rubikmono"],["outfit","bebas"]],pixel:[["plexmono","pixel"],["spacegrotesk","majormono"],["sora","orbitron"]],
+  mono:[["plexmono","spacemono"],["plexmono","majormono"],["spacegrotesk","rubikmono"]],classic:[["lora","playfair"],["fraunces","playfair"],["lora","oswald"]],lux:[["fraunces","playfair"],["manrope","anton"],["lora","bebas"]],
+  nature:[["nunito","oswald"],["lora","shoulders"],["manrope","syne"]],play:[["poppins","righteous"],["nunito","rubikmono"],["outfit","anton"]],warm:[["bricolage","shoulders"],["nunito","righteous"],["fraunces","oswald"]],
+  def:[["bricolage","shoulders"],["outfit","bebas"],["sora","syne"]]};
+const VIBE_IDEAS=["cozy autumn café at night","rainy Tokyo neon","matcha latte morning","dark academia library","ocean waves","sakura spring","synthwave 80s","midnight galaxy","minimal paper","forest cabin fireflies","sunset beach","matrix hacker"];
+function vibeHash(w){let h=2166136261;for(const c of w)h=Math.imul(h^c.charCodeAt(0),16777619);return (h>>>0);}
+function vibeParse(q){
+  const words=String(q).toLowerCase().normalize("NFC").replace(/[^\p{L}\p{N}\s'-]/gu," ").split(/\s+/).filter(Boolean);
+  const f={hues:[],dark:0,light:0,soft:0,vivid:0,mono:0,warm:0,cool:0,moods:[],live:"",hits:0};
+  for(let i=0;i<words.length;i++){let w=words[i],e=VIBE_LEX[w]||VIBE_LEX[w.replace(/s$/,"")]||VIBE_LEX[w.replace(/'s$/,"")];
+    if(!e&&words[i+1]&&VIBE_LEX[w+words[i+1]]){e=VIBE_LEX[w+words[i+1]];i++;}
+    if(!e){if(w.length>2&&!/^(the|and|with|for|at|in|on|of|a|an|my|vibe|vibes|theme|mood|style|feel|aesthetic|like|very|really|some)$/.test(w))f.hues.push({h:vibeHash(w)%360,weak:1});continue;}
+    f.hits++;(e.h||[]).forEach(h=>f.hues.push({h}));["dark","light","soft","vivid","mono","warm","cool"].forEach(k=>{if(e[k])f[k]++;});if(e.m)f.moods.push(e.m);if(e.live&&!f.live)f.live=e.live;}
+  return f;
+}
+function vibeBuild(q,v){ /* v = variation 0..2 */
+  const f=vibeParse(q),strong=f.hues.filter(x=>!x.weak),H=(strong.length?strong:f.hues).map(x=>x.h);
+  let base=H.length?H[0]:220,acc=H.length>1?H[1]:(base+(f.warm?-30:f.cool?30:150))%360;
+  if(f.warm&&!strong.length){base=28;acc=12;}if(f.cool&&!strong.length){base=210;acc=185;}
+  if(v===1){[base,acc]=[acc,base];}if(v===2){acc=(acc+40)%360;}
+  const dark=f.dark>f.light?true:f.light>f.dark?false:v!==2; /* not said: two dark, one light */
+  const soft=f.soft>f.vivid,vivid=f.vivid>f.soft,mono=f.mono&&!strong.length;
+  const bs=mono?0:soft?.22:vivid?.5:.35,as=mono?0:soft?.5:vivid?.95:.75,F=x=>((x%360)+360)%360/360;
+  let c;
+  if(dark)c={bg:hsl2hex(F(base),bs*.9,.075),panel:hsl2hex(F(base),bs*.75,.125),ink:hsl2hex(F(base),Math.min(bs,.2),.93),accent:mono?"#FFFFFF":hsl2hex(F(acc),as,vivid?.6:.66),card:hsl2hex(F(base),bs*.9,.045),cardInk:mono?"#FFFFFF":hsl2hex(F(acc),Math.min(1,as+.05),.82)};
+  else c={bg:hsl2hex(F(base),bs*.85,.94),panel:hsl2hex(F(base),bs*.55,.985),ink:hsl2hex(F(base),Math.min(bs,.3),.12),accent:mono?"#141414":hsl2hex(F(acc),as,vivid?.46:.4),card:hsl2hex(F(base),bs*.8,.12),cardInk:mono?"#FFFFFF":hsl2hex(F(acc),Math.min(1,as+.05),.84)};
+  if(!mono)c.accent=vibeFixAcc(c.accent,c.bg,dark);
+  const mood=f.moods[0]||(f.warm?"warm":"def"),pairs=VIBE_FONTS[mood]||VIBE_FONTS.def,[ui,clock]=pairs[v%pairs.length];
+  let live=f.live;if(!live&&v===0&&dark&&f.hits)live=vivid?"aurora":"";
+  const name=String(q).trim().replace(/\s+/g," ").slice(0,40).replace(/(^|\s)\S/g,m=>m.toUpperCase());
+  return {name:name+(v?` ${["","II","III"][v]}`:""),c,ui,clock,live,dark,known:f.hits};
+}
+/* Keep the accent usable: its button text (black or white, see readable) needs 4.5:1, and the accent itself
+   needs 3:1 against the background. Walk its lightness until both hold. */
+function vibeFixAcc(hex,bg,dark){
+  const cr=(a,b)=>{const x=lum(a),y=lum(b);return (Math.max(x,y)+.05)/(Math.min(x,y)+.05);},[h,sa,l0]=rgb2hsl(hex2rgb(hex));
+  const ok=c=>cr(c,readable(c))>=4.5&&cr(c,bg)>=3;
+  for(let i=0;i<=40;i++){for(const d of dark?[1,-1]:[-1,1]){const l=Math.min(.97,Math.max(.03,l0+d*i*.015)),c=hsl2hex(h,sa,l);if(ok(c))return c;}}
+  return hex;
+}
+let vibeRes=[];
+function vibeRender(q){
+  const out=$("#vibe-out");vibeRes=[0,1,2].map(v=>vibeBuild(q,v));
+  loadFonts(vibeRes.flatMap(r=>[(UIF.find(f=>f[0]===r.ui)||UIF[0])[4],(CLF.find(f=>f[0]===r.clock)||CLF[0])[4]]));
+  const fam=(L,id)=>{const f=L.find(x=>x[0]===id)||L[0];return [f[1],f[0]==="system"?"system-ui":`"${f[2]}",${f[3]}`];};
+  out.innerHTML=vibeRes.map((r,i)=>{const [un,uf]=fam(UIF,r.ui),[cn,cf]=fam(CLF,r.clock),c=r.c,p2=mixc(c.panel,c.ink,.07);
+    return `<div class="vcard"><div class="vprev" style="background:${c.bg};color:${c.ink};font-family:${uf}">
+      <div class="vclock" style="background:${c.card};color:${c.cardInk};font-family:${cf}">12:45</div>
+      <div class="vrow"><div class="vpanel" style="background:${c.panel};border:1px solid ${p2}">Chem lab report</div><span class="vacc" style="background:${c.accent};color:${readable(c.accent)}">Add</span></div></div>
+      <div class="vmeta"><div><b>${esc(r.name)}</b><small>${esc(un)} · ${esc(cn)}${r.live?" · "+esc((LIVE.find(l=>l.id===r.live)||{}).name||""):""}</small></div><button type="button" class="btn small" data-vibe="${i}">Apply</button></div></div>`;}).join("");
+  if(!vibeRes[0].known)toast("Made from your words. Try colours, places or moods like ocean, cozy or neon for closer matches.");
+}
+function vibeApply(r){
+  const before={settings:structuredClone(S.settings),schemes:S.schemes.length};
+  const sc={id:uid(),name:r.name,c:Object.assign({},r.c)};S.schemes.push(sc);
+  Object.assign(S.settings,{skin:"custom:"+sc.id,accent:"",uiFont:r.ui,clockFont:r.clock});
+  S.settings.bg=Object.assign({},S.settings.bg,{match:false},r.live?{type:"live",live:r.live}:(S.settings.bg.type==="live"?{type:"none"}:{}));
+  vt(()=>{previewScheme=null;editingScheme=null;buildSkins();renderAll();buildSchemeEditor(currentColors());});save();
+  toast(`Applied "${r.name}"`,{run(){S.settings=before.settings;S.schemes=S.schemes.slice(0,before.schemes);vt(()=>{buildSkins();renderAll();buildSchemeEditor(currentColors());});save();}});
+}
+$("#vibe-ex").innerHTML=VIBE_IDEAS.slice(0,8).map(x=>`<button type="button" data-vq="${esc(x)}">${esc(x)}</button>`).join("");
+$("#vibe-form").addEventListener("submit",e=>{e.preventDefault();const q=$("#vibe-q").value.trim();if(!q){$("#vibe-q").focus();return;}vibeRender(q);});
+$("#vibe-ex").addEventListener("click",e=>{const b=e.target.closest("[data-vq]");if(!b)return;$("#vibe-q").value=b.dataset.vq;vibeRender(b.dataset.vq);});
+$("#vibe-rand").addEventListener("click",()=>{const q=VIBE_IDEAS[Math.floor(Math.random()*VIBE_IDEAS.length)];$("#vibe-q").value=q;vibeRender(q);});
+$("#vibe-out").addEventListener("click",e=>{const b=e.target.closest("[data-vibe]");if(b&&vibeRes[+b.dataset.vibe])vibeApply(vibeRes[+b.dataset.vibe]);});
 /* ---------- presets ----------
    A preset is a named copy of every look-related setting. Photos are copied under their own
    image key so replacing the live background later doesn't change a saved preset, and a custom

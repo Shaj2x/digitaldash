@@ -1363,3 +1363,10 @@
 1401|La escucha en vivo aún no está activada en este sitio.
 1402|Ve la canción que suena en Spotify, en cualquier dispositivo, en vivo. Vincula Spotify a una cuenta gratis de Last.fm y escribe tu usuario de Last.fm:
 1403|La canción que suena en Spotify, en vivo vía Last.fm
+1404|Describe un tema
+1405|Escribe un estado de ánimo, un lugar o un estilo y obtén colores, fuentes y fondo a juego. Funciona sin conexión y no se envía nada.
+1406|p. ej. cozy autumn café at night
+1407|Generar
+1408|Sorpréndeme
+1409|Ideas
+1410|Hecho a partir de tus palabras. Prueba colores, lugares o estados de ánimo en inglés como ocean, cozy o neon para acercarte más.

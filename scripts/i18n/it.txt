@@ -1363,3 +1363,10 @@
 1401|L'ascolto dal vivo non è ancora attivo su questo sito.
 1402|Vedi dal vivo il brano che ascolti su Spotify, su qualsiasi dispositivo. Collega Spotify a un account Last.fm gratuito e inserisci il tuo nome utente Last.fm:
 1403|Il brano che ascolti su Spotify, dal vivo tramite Last.fm
+1404|Descrivi un tema
+1405|Scrivi un'atmosfera, un luogo o uno stile e ottieni colori, font e sfondo abbinati. Funziona offline, non viene inviato nulla.
+1406|es. cozy autumn café at night
+1407|Genera
+1408|Sorprendimi
+1409|Idee
+1410|Creato dalle tue parole. Prova colori, luoghi o atmosfere in inglese come ocean, cozy o neon per risultati più vicini.

@@ -1363,3 +1363,10 @@
 1401|Tính năng nghe trực tiếp chưa được bật trên trang này.
 1402|Xem bài bạn đang nghe trên Spotify, trên mọi thiết bị, trực tiếp. Liên kết Spotify với tài khoản Last.fm miễn phí, rồi nhập tên người dùng Last.fm:
 1403|Bài bạn đang nghe trên Spotify, trực tiếp qua Last.fm
+1404|Mô tả một giao diện
+1405|Nhập tâm trạng, địa điểm hoặc phong cách để có màu, phông chữ và nền phù hợp. Hoạt động ngoại tuyến, không gửi gì đi.
+1406|vd. cozy autumn café at night
+1407|Tạo
+1408|Gây bất ngờ
+1409|Gợi ý
+1410|Tạo từ các từ của bạn. Thử màu, địa điểm hoặc tâm trạng bằng tiếng Anh như ocean, cozy hoặc neon để sát hơn.

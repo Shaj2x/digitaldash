@@ -1363,3 +1363,10 @@
 1401|L'écoute en direct n'est pas encore activée sur ce site.
 1402|Voyez le titre que vous écoutez sur Spotify, sur n'importe quel appareil, en direct. Liez Spotify à un compte Last.fm gratuit, puis saisissez votre nom Last.fm :
 1403|Le titre que vous écoutez sur Spotify, en direct via Last.fm
+1404|Décrivez un thème
+1405|Saisissez une ambiance, un lieu ou un style pour obtenir couleurs, polices et fond assortis. Fonctionne hors ligne, rien n'est envoyé.
+1406|ex. cozy autumn café at night
+1407|Générer
+1408|Surprends-moi
+1409|Idées
+1410|Créé à partir de vos mots. Essayez des couleurs, lieux ou ambiances en anglais comme ocean, cozy ou neon pour un résultat plus proche.
