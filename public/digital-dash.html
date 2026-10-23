@@ -342,6 +342,9 @@ html.lg .addbar .addmore input[type=text]{background:var(--glass-tint);border-co
 .ditem .x{margin-left:auto}
 .evform{display:grid;gap:8px}
 .evform .row>input[type=text]{flex:1}
+.ev-times{align-items:flex-end}
+.ev-times label{display:grid;gap:4px;flex:1 1 110px;font-size:12px;font-weight:600;color:var(--muted)}
+.ev-times input{width:100%}
 
 /* Net worth */
 .nwtop{display:grid;grid-template-columns:1.3fr 1fr;gap:18px}
@@ -510,6 +513,13 @@ html.has-bg .day{background:color-mix(in srgb,var(--panel2) 70%,transparent)}
 .np-bar{height:4px;border-radius:4px;background:color-mix(in srgb,var(--ink) 14%,transparent);overflow:hidden;margin-top:8px}
 .np-bar i{display:block;height:100%;background:var(--accent);transform-origin:0 50%;transition:transform 1s linear}
 .np-time{display:flex;justify-content:space-between;font-size:11.5px;color:var(--muted);font-variant-numeric:tabular-nums}
+.np-ctl{display:flex;justify-content:center;align-items:center;gap:6px;margin-top:4px}
+.np-ctl .icon-btn svg{width:18px;height:18px}
+.np-ctl .np-pp{width:42px;height:42px;border-radius:50%;background:var(--ink);color:var(--bg)}
+.np-ctl .np-pp svg{width:20px;height:20px}
+@media (hover:hover) and (pointer:fine){.np-ctl .np-pp:hover{transform:scale(1.06)}}
+.np-ctl .np-pp{transition:transform .15s cubic-bezier(.23,1,.32,1)}
+.np-ctl .np-pp:active{transform:scale(.94)}
 .np-empty{display:flex;align-items:center;gap:12px;color:var(--muted);font-size:14px}
 .np-empty p{margin:0}
 .np-setup{display:grid;gap:8px;font-size:13.5px}
@@ -542,6 +552,16 @@ html.has-bg .day{background:color-mix(in srgb,var(--panel2) 70%,transparent)}
 .fontopt b{display:block;font-size:24px;line-height:1.2;white-space:nowrap;overflow:hidden}
 .fontopt small{color:var(--muted);font-size:12px}
 .bgopt{display:none;margin-top:14px}.bgopt.on{display:block}
+.dropz{display:grid;justify-items:center;gap:6px;padding:26px 18px;border:2px dashed var(--line);border-radius:16px;text-align:center;color:var(--muted);cursor:pointer;transition:border-color .15s ease,background-color .15s ease,transform .15s cubic-bezier(.23,1,.32,1)}
+.dropz svg{color:var(--accent)}
+.dropz b{color:var(--ink);font-size:15px}
+.dropz span{font-size:13px}
+.dropz u{color:var(--ink);text-underline-offset:3px}
+.dropz kbd{font:inherit;font-size:12px;padding:1px 6px;border-radius:5px;border:1px solid var(--line);background:var(--panel2)}
+@media (hover:hover) and (pointer:fine){.dropz:hover{border-color:var(--muted);background:var(--panel2)}}
+.dropz:focus-visible{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 30%,transparent)}
+.dropz.over{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 10%,transparent);transform:scale(1.01)}
+@media (pointer:coarse){.dropz span{display:none}.dropz b::after{content:" (tap to choose)";font-weight:500;color:var(--muted)}}
 .grads.on{display:grid;grid-template-columns:repeat(auto-fill,minmax(84px,1fr));gap:8px}
 .grads button{height:58px;border-radius:10px;border:2px solid transparent;padding:0}
 .grads button[aria-pressed="true"]{border-color:var(--ink)}
@@ -1739,7 +1759,7 @@ html.lg .eye{background:var(--glass-tint);box-shadow:inset 0 1px 0 color-mix(in 
     </header>
     <!-- FOCUS -->
     <section class="view on" id="v-focus">
-      <h1 id="greet" data-sub="t-focus">Let's get to work</h1>
+      <h1 id="greet">Let's get to work</h1>
       <p class="sub" id="greet-sub" data-sub="focus">Pick a clock, put your phone down, go.</p>
       <div class="stage" id="stage">
         <div class="stage-top">
@@ -1814,7 +1834,7 @@ html.lg .eye{background:var(--glass-tint);box-shadow:inset 0 1px 0 color-mix(in 
         <div class="seg" id="task-filter" role="group" aria-label="Filter">
           <button data-f="open" aria-pressed="true">Open</button><button data-f="today" aria-pressed="false">Today</button><button data-f="done" aria-pressed="false">Done</button><button data-f="all" aria-pressed="false">All</button>
         </div>
-        <button class="btn ghost small ai-plan" type="button" id="ai-plan"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5l1.8 4.7 4.7 1.8-4.7 1.8L12 16.5l-1.8-4.7L5.5 10l4.7-1.8z"/><path d="M18.5 15.5l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"/></svg>Plan my week</button>
+        <button class="btn ghost small ai-plan" type="button" id="ai-plan" hidden><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5l1.8 4.7 4.7 1.8-4.7 1.8L12 16.5l-1.8-4.7L5.5 10l4.7-1.8z"/><path d="M18.5 15.5l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"/></svg>Plan my week</button>
         <div class="legend">
           <span style="--c:var(--u0)">Critical</span><span style="--c:var(--u1)">High</span><span style="--c:var(--u2)">Medium</span><span style="--c:var(--u3)">Low</span>
         </div>
@@ -1828,8 +1848,9 @@ html.lg .eye{background:var(--glass-tint);box-shadow:inset 0 1px 0 color-mix(in 
     <section class="view" id="v-calendar">
       <h1 data-sub="t-calendar">Calendar</h1>
       <p class="sub" data-sub="calendar">Events you add plus any task with a due date.</p>
-      <div class="seg cal-mode" id="cal-mode" role="group" aria-label="Calendar view"><button type="button" data-m="month" aria-pressed="true">Month</button><button type="button" data-m="week" aria-pressed="false">Week review</button></div>
+      <div class="seg cal-mode" id="cal-mode" role="group" aria-label="Calendar view"><button type="button" data-m="month" aria-pressed="true">Month</button><button type="button" data-m="week" aria-pressed="false">Week review</button><button type="button" data-m="mrev" aria-pressed="false">Month review</button></div>
       <div class="week" id="week" hidden></div>
+      <div class="week" id="mrev" hidden></div>
       <div class="cal" id="cal-month">
         <div class="panel">
           <div class="calhead">
@@ -1849,7 +1870,7 @@ html.lg .eye{background:var(--glass-tint);box-shadow:inset 0 1px 0 color-mix(in 
           <div class="dlist" id="day-list"></div>
           <form class="evform" id="ev-form" autocomplete="off">
             <input type="text" id="ev-title" placeholder="Add an event" required aria-label="Event title">
-            <div class="row"><input type="time" id="ev-time" aria-label="Time" style="flex:1"><button class="btn" type="submit">Add event</button></div>
+            <div class="row ev-times"><label><span>Start</span><input type="time" id="ev-time"></label><label><span>End</span><input type="time" id="ev-end"></label><button class="btn" type="submit">Add event</button></div>
           </form>
           <div class="cals">
             <h3>Calendars</h3>
@@ -1946,7 +1967,7 @@ html.lg .eye{background:var(--glass-tint);box-shadow:inset 0 1px 0 color-mix(in 
         <div class="bgopt" data-for="live"><div class="lives" id="bg-lives" role="radiogroup" aria-label="Live background"></div>
           <div class="field" style="margin-top:12px"><span>Motion speed</span><input type="range" id="bg-speed" min="20" max="200" step="10"></div>
           <p class="hint" id="bg-live-hint" style="margin:6px 0 0">Live backgrounds pause when the tab is hidden. With reduced motion on, they hold still.</p></div>
-        <div class="bgopt" data-for="image"><div class="row"><label class="btn ghost" for="bg-file" id="bg-up">Upload a photo</label><input type="file" id="bg-file" accept="image/*" hidden><button class="btn ghost" id="bg-remove" style="color:var(--bad)" hidden>Remove photo</button><span class="muted" style="font-size:13px">JPG or PNG. Only you can see it.</span></div><p class="hint" id="bg-hint"></p></div>
+        <div class="bgopt" data-for="image"><div class="dropz" id="bg-drop" data-file="bg-file" role="button" tabindex="0" aria-label="Background photo: click to choose a photo, paste one, or drop it here"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="9" cy="9" r="2"/><path d="m21 15-4.5-4.5L6 21"/></svg><b id="bg-up">Drop a photo here</b><span>or <u>click to choose</u> · paste with <kbd>Ctrl</kbd>/<kbd>⌘</kbd>+<kbd>V</kbd></span></div><div class="row" style="margin-top:10px"><input type="file" id="bg-file" accept="image/*" hidden><button class="btn ghost" id="bg-remove" style="color:var(--bad)" hidden>Remove photo</button><span class="muted" style="font-size:13px">JPG or PNG. Only you can see it.</span></div><p class="hint" id="bg-hint"></p></div>
         <div class="bgopt" data-for="any" style="margin-top:14px">
           <div class="field"><span>Dim</span><input type="range" id="bg-dimr" min="0" max="90"></div>
           <div class="field"><span>Blur</span><input type="range" id="bg-blur" min="0" max="30"></div>
@@ -1959,7 +1980,7 @@ html.lg .eye{background:var(--glass-tint);box-shadow:inset 0 1px 0 color-mix(in 
         <div class="seg" id="st-type" role="group" aria-label="Clock background type"><button data-t="theme">Theme</button><button data-t="color">Colour</button><button data-t="gradient">Gradient</button><button data-t="image">Photo</button><button data-t="glass">Glass</button></div>
         <div class="stopt" data-for="color"><div class="field"><span>Clock background colour</span><input type="color" id="st-color"></div></div>
         <div class="stopt grads" data-for="gradient" id="st-grads"></div>
-        <div class="stopt" data-for="image"><div class="row"><label class="btn ghost" for="st-file" id="st-up">Upload a photo</label><input type="file" id="st-file" accept="image/*" hidden><button class="btn ghost" id="st-remove" style="color:var(--bad)" hidden>Remove photo</button><span class="muted" style="font-size:13px">It fills the clock area and gets cropped to fit.</span></div><p class="hint" id="st-hint"></p></div>
+        <div class="stopt" data-for="image"><div class="dropz" id="st-drop" data-file="st-file" role="button" tabindex="0" aria-label="Clock photo: click to choose a photo, paste one, or drop it here"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="9" cy="9" r="2"/><path d="m21 15-4.5-4.5L6 21"/></svg><b id="st-up">Drop a photo here</b><span>or <u>click to choose</u> · paste with <kbd>Ctrl</kbd>/<kbd>⌘</kbd>+<kbd>V</kbd></span></div><div class="row" style="margin-top:10px"><input type="file" id="st-file" accept="image/*" hidden><button class="btn ghost" id="st-remove" style="color:var(--bad)" hidden>Remove photo</button><span class="muted" style="font-size:13px">It fills the clock area and gets cropped to fit.</span></div><p class="hint" id="st-hint"></p></div>
         <div class="stopt" data-for="glass"><p class="hint" style="margin:0">Glass lets your page background show through behind the clock. Use the Dim slider to control how see-through it is.</p></div>
         <div class="stopt" data-for="dim"><div class="field"><span>Dim</span><input type="range" id="st-dim" min="0" max="95"></div></div>
         <div class="field" style="margin-top:12px"><span>Clock digit colour</span><span class="row"><input type="color" id="st-ink"><button class="btn ghost small" id="st-ink-reset">Reset</button></span></div>
@@ -2608,9 +2629,9 @@ function applyTheme(){
   $("#bg-color").value=isHex(s.bg.color)?s.bg.color:"#2a2440";
   $("#bg-dimr").value=s.bg.dim;$("#bg-blur").value=s.bg.blur;
   applyStage();
-  $("#bg-remove").hidden=!s.bg.image;$("#bg-up").textContent=s.bg.image?"Replace photo":"Upload a photo";
+  $("#bg-remove").hidden=!s.bg.image;$("#bg-up").textContent=s.bg.image?"Drop a new photo to replace it":"Drop a photo here";
   const st=s.stage;
-  $("#st-remove").hidden=!st.image;$("#st-up").textContent=st.image?"Replace photo":"Upload a photo";
+  $("#st-remove").hidden=!st.image;$("#st-up").textContent=st.image?"Drop a new photo to replace it":"Drop a photo here";
   $$("#st-type button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.t===st.type));
   $$(".stopt").forEach(o=>o.classList.toggle("on",o.dataset.for===st.type||(o.dataset.for==="dim"&&/gradient|image|glass/.test(st.type))));
   $$("#st-grads button").forEach((b,i)=>b.setAttribute("aria-pressed",st.type==="gradient"&&i===st.grad));
@@ -2651,7 +2672,7 @@ function buildThemes(){
   });
   // background
   $("#bg-grads").innerHTML=GRADS.map((g,i)=>`<button style="background:${g}" data-g="${i}" aria-label="Gradient ${i+1}"></button>`).join("");
-  $("#bg-type").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;S.settings.bg.type=b.dataset.t;save();applyTheme();computePal();if(b.dataset.t==="image"&&!(S.settings.bg.image))$("#bg-file").click();});
+  $("#bg-type").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;S.settings.bg.type=b.dataset.t;save();applyTheme();computePal();if(b.dataset.t==="image"&&!(S.settings.bg.image))setTimeout(()=>{const z=$("#bg-drop");if(z)z.focus({preventScroll:true});},60);});
   $("#bg-grads").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;S.settings.bg.grad=+b.dataset.g;save();applyTheme();computePal();});
   $("#bg-lives").innerHTML=LIVE.map(l=>`<button type="button" role="radio" data-l="${l.id}" aria-checked="false"><i style="background-color:${l.base};background-image:${(l.kind==="stars"?[l.cols[3],l.cols[4],l.cols[1]]:l.cols.slice(0,3)).map((c,i)=>`radial-gradient(at ${[20,80,50][i]}% ${[25,30,90][i]}%,${c} 0,transparent 60%)`).join(",")}"></i><span>${l.name}</span></button>`).join("");
   $("#bg-lives").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;S.settings.bg.live=b.dataset.l;save();applyTheme();computePal();});
@@ -2676,7 +2697,7 @@ function buildThemes(){
   $("#st-remove").addEventListener("click",()=>{const old=S.settings.stage.image;Object.assign(S.settings.stage,{image:"",iw:0,ih:0,type:"theme"});save();applyTheme();removeImage(old);toast("Clock photo removed");});
   // clock background
   $("#st-grads").innerHTML=GRADS.map((g,i)=>`<button style="background:${g}" data-g="${i}" aria-label="Gradient ${i+1}"></button>`).join("");
-  $("#st-type").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;S.settings.stage.type=b.dataset.t;save();applyTheme();if(b.dataset.t==="image"&&!S.settings.stage.image)$("#st-file").click();});
+  $("#st-type").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;S.settings.stage.type=b.dataset.t;save();applyTheme();if(b.dataset.t==="image"&&!S.settings.stage.image)setTimeout(()=>{const z=$("#st-drop");if(z)z.focus({preventScroll:true});},60);});
   $("#st-grads").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;S.settings.stage.grad=+b.dataset.g;save();applyTheme();});
   $("#st-color").addEventListener("input",e=>{S.settings.stage.color=e.target.value;save();applyStage();});
   $("#st-dim").addEventListener("input",e=>{S.settings.stage.dim=+e.target.value;save();applyStage();});
@@ -2692,6 +2713,23 @@ function buildThemes(){
       Object.assign(S.settings.stage,{image:res.src,iw:res.w,ih:res.h,type:"image"});save();applyTheme();toast("Clock background set");
     }catch(err){toast("Couldn't use that image. Try a different JPG or PNG.");}
   });
+  /* photo drop zones: click or Enter to choose, drag a file in, or paste an image (Ctrl/Cmd+V) while the zone
+     is focused or visible. The file goes through the same input handler as choosing one. */
+  const dzUse=(z,f)=>{if(!f)return;const inp=$("#"+z.dataset.file);try{const dt=new DataTransfer();dt.items.add(f);inp.files=dt.files;inp.dispatchEvent(new Event("change"));}catch(e){toast("Couldn't use that image. Try choosing the file instead.");}};
+  const dzFile=list=>[...(list||[])].map(x=>x.kind==="file"?x.getAsFile():x).find(f=>f&&/^image\//.test(f.type));
+  $$(".dropz").forEach(z=>{
+    z.addEventListener("click",()=>$("#"+z.dataset.file).click());
+    z.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();$("#"+z.dataset.file).click();}});
+    ["dragenter","dragover"].forEach(t=>z.addEventListener(t,e=>{e.preventDefault();e.dataTransfer.dropEffect="copy";z.classList.add("over");}));
+    ["dragleave","dragend"].forEach(t=>z.addEventListener(t,e=>{if(!z.contains(e.relatedTarget))z.classList.remove("over");}));
+    z.addEventListener("drop",e=>{e.preventDefault();z.classList.remove("over");const f=dzFile(e.dataTransfer.files);if(f)dzUse(z,f);else toast("Drop an image file, like a JPG or PNG");});
+  });
+  document.addEventListener("paste",e=>{
+    const a=document.activeElement;if(a&&(a.isContentEditable||/^(INPUT|TEXTAREA|SELECT)$/.test(a.tagName)))return;
+    const vis=z=>z.offsetParent!==null&&$("#v-themes").classList.contains("on");
+    const z=(a&&a.closest&&a.closest(".dropz"))||[...$$(".dropz")].find(vis);if(!z||!vis(z))return;
+    const f=dzFile(e.clipboardData&&e.clipboardData.items);if(!f){toast("Copy an image first, then paste it here");return;}
+    e.preventDefault();dzUse(z,f);});
   // fonts
   $("#ui-fonts").innerHTML=UIF.map(f=>`<button class="fontopt" data-f="${f[0]}" style="font-family:${f[0]==="system"?"system-ui":`'${f[2]}',${f[3]}`}"><b>Aa Bb</b><small>${f[1]}</small></button>`).join("");
   $("#clock-fonts").innerHTML=CLF.map(f=>`<button class="fontopt" data-f="${f[0]}"><b style="font-family:'${f[2]}',${f[3]}">12:45</b><small>${f[1]}</small></button>`).join("");
@@ -2863,7 +2901,7 @@ function show(v){
   $$(".nav").forEach(b=>b.setAttribute("aria-current",b.dataset.view===v));
   moveInd();
   if(v==="themes"){loadFonts(UIF.map(f=>f[4]).concat(CLF.map(f=>f[4])));fitFontPreviews();}
-  if(v==="calendar"){renderCal();renderWeek();} if(v==="money"){renderMoney();if(!same)drawChart();} if(v==="tasks")renderTasks();if(v==="health")renderHealth();
+  if(v==="calendar"){renderCal();renderWeek();renderMonthRev();} if(v==="money"){renderMoney();if(!same)drawChart();} if(v==="tasks")renderTasks();if(v==="health")renderHealth();
   $("main").scrollTop=0;
 }
 const VIEWS=["focus","tasks","calendar","money","health","themes"];
@@ -3171,9 +3209,17 @@ function tick(force){
 let tickT=0;
 function loop(){clearTimeout(tickT);tick(false);tickT=setTimeout(loop,1000-(Date.now()%1000)+4);}
 
+const GREETS=[
+  ["Burning the midnight oil","Late night grind","Still up? Make it count","Night owl mode","Quiet hours, big focus","The world's asleep. Lock in."],
+  ["Good morning","Rise and grind","Fresh start","Morning. Let's lock in.","New day, new wins","Coffee first, then focus"],
+  ["Good afternoon","Keep the momentum","Afternoon push","Stay locked in","Halfway there","Power through"],
+  ["Good evening","Evening session","Finish strong","One more push","Close out the day","Evening. Lock in."]];
+const GREET={part:-1,last:""};
 function renderGreeting(d){
   const h=d.getHours();
-  const g=$("#greet");if(!(S.settings.subs||{})["t-focus"]&&document.activeElement!==g)g.textContent=h<5?"Burning the midnight oil":h<12?"Good morning":h<17?"Good afternoon":"Good evening";
+  /* the greeting isn't editable: it picks a line for the time of day, a new one each time the part of the day changes */
+  const part=h<5?0:h<12?1:h<17?2:3;
+  if(GREET.part!==part){GREET.part=part;const L=GREETS[part];let i=Math.floor(Math.random()*L.length);if(L[i]===GREET.last)i=(i+1)%L.length;GREET.last=L[i];$("#greet").textContent=L[i];}
   const f=fractions(d).d, left=24-(h+d.getMinutes()/60), gs=$("#greet-sub");
   if((S.settings.subs||{}).focus||document.activeElement===gs)return;
   gs.textContent=`${Math.floor(f*100)}% of today is gone. ${Math.floor(left)}h ${Math.round((left%1)*60)}m left to make it count.`;
@@ -3380,7 +3426,7 @@ let calY,calM,selDay=dkey(new Date());
 (()=>{const d=new Date();calY=d.getFullYear();calM=d.getMonth();})();
 function itemsFor(k){
   const calOf=id=>(S.calendars||[]).find(x=>x.id===id);
-  const ev=S.events.filter(e=>e.date===k).sort((a,b)=>(a.time||"").localeCompare(b.time||"")).map(e=>{const c=e.src&&calOf(e.src);return {kind:"ev",id:e.id,title:e.title,time:e.time,cal:c?c.name:(e.src==="ai"?"AI plan":""),c:c?calColor(c):"var(--accent)"};});
+  const ev=S.events.filter(e=>e.date===k).sort((a,b)=>(a.time||"").localeCompare(b.time||"")).map(e=>{const c=e.src&&calOf(e.src);return {kind:"ev",id:e.id,title:e.title,time:e.time,dur:e.dur||0,cal:c?c.name:(e.src==="ai"?"AI plan":""),c:c?calColor(c):"var(--accent)"};});
   const tk=S.tasks.filter(t=>t.due===k&&!t.archived).map(t=>({kind:"task",id:t.id,title:t.title,done:t.done,time:t.dueTime,c:`var(--u${t.urg})`}));
   return ev.concat(gymCalItems(k),tk);
 }
@@ -3417,7 +3463,7 @@ function renderDay(mode){
   $("#day-title").textContent=new Date(y,m-1,d).toLocaleDateString(undefined,{weekday:"long",month:"long",day:"numeric"});
   const it=itemsFor(selDay),dl=$("#day-list");
   if(dl._day!==selDay){mode="plain";dl._day=selDay;}
-  flipRender(dl,()=>{dl.innerHTML=it.length?it.map(x=>`<div class="ditem" style="--c:${x.c}" data-kind="${x.kind}" data-id="${x.id}"><span class="tm">${x.kind==="gym"?x.tag:x.kind==="ev"?(x.time?fmtTime(x.time):"All day"):(x.time?"Due "+fmtTime(x.time):"Task")}</span><span style="${x.done?"text-decoration:line-through;opacity:.6":""}">${esc(x.title)}${x.cal?`<small class="calname">${esc(x.cal)}</small>`:""}</span>${x.kind==="ev"?`<button class="icon-btn x" aria-label="Delete event"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6 6 18"/></svg></button>`:""}</div>`).join(""):`<div class="empty">Free day. Add something below.</div>`;},mode);
+  flipRender(dl,()=>{dl.innerHTML=it.length?it.map(x=>`<div class="ditem" style="--c:${x.c}" data-kind="${x.kind}" data-id="${x.id}"><span class="tm">${x.kind==="gym"?x.tag:x.kind==="ev"?(x.time?fmtSpan(x.time,x.dur):"All day"):(x.time?"Due "+fmtTime(x.time):"Task")}</span><span style="${x.done?"text-decoration:line-through;opacity:.6":""}">${esc(x.title)}${x.cal?`<small class="calname">${esc(x.cal)}</small>`:""}</span>${x.kind==="ev"?`<button class="icon-btn x" aria-label="Delete event"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6 6 18"/></svg></button>`:""}</div>`).join(""):`<div class="empty">Free day. Add something below.</div>`;},mode);
 }
 function fmtTime(t){const [h,m]=t.split(":").map(Number);return S.settings.h24?t:`${h%12||12}:${pad(m)} ${h<12?"AM":"PM"}`;}
 const monthDir=(y,m)=>Math.sign((y*12+m)-(calY*12+calM));
@@ -3429,7 +3475,16 @@ $("#cal-grid").addEventListener("click",e=>{const b=e.target.closest(".day");if(
 $("#cal-prev").addEventListener("click",()=>{calM--;if(calM<0){calM=11;calY--;}renderCal(-1);});
 $("#cal-next").addEventListener("click",()=>{calM++;if(calM>11){calM=0;calY++;}renderCal(1);});
 $("#cal-today").addEventListener("click",()=>{const d=new Date(),dir=monthDir(d.getFullYear(),d.getMonth());calY=d.getFullYear();calM=d.getMonth();selDay=dkey(d);renderCal(dir);});
-$("#ev-form").addEventListener("submit",e=>{e.preventDefault();const title=$("#ev-title").value.trim();if(!title)return;S.events.push({id:uid(),date:selDay,time:$("#ev-time").value,title});$("#ev-title").value="";$("#ev-time").value="";save();renderCal();});
+const tMin=t=>{const [h,m]=t.split(":").map(Number);return h*60+m;},tAdd=(t,n)=>{const v=((tMin(t)+n)%1440+1440)%1440;return pad(Math.floor(v/60))+":"+pad(v%60);};
+const fmtSpan=(t,dur)=>fmtTime(t)+(dur?"–"+fmtTime(tAdd(t,dur)):"");
+/* events get a start and an optional end; the length is stored as dur (minutes), like AI plan blocks */
+$("#ev-time").addEventListener("change",()=>{const s0=$("#ev-time").value,en=$("#ev-end");if(s0&&(!en.value||tMin(en.value)<=tMin(s0)))en.value=tAdd(s0,60);});
+$("#ev-form").addEventListener("submit",e=>{e.preventDefault();const title=$("#ev-title").value.trim();if(!title)return;
+  const st=$("#ev-time").value,en=$("#ev-end").value;
+  if(en&&!st){toast("Add a start time too, or clear the end time");$("#ev-time").focus();return;}
+  if(st&&en&&tMin(en)<=tMin(st)){toast("The end time is before the start");$("#ev-end").focus();return;}
+  const ev={id:uid(),date:selDay,time:st,title};if(st&&en)ev.dur=tMin(en)-tMin(st);
+  S.events.push(ev);$("#ev-title").value="";$("#ev-time").value="";$("#ev-end").value="";save();renderCal();});
 $("#day-list").addEventListener("click",e=>{const gi=e.target.closest('.ditem[data-kind="gym"]');if(gi&&Date.now()-DR.justDropped>300){shortcutLink("gym");try{history.pushState(null,"","#gym");}catch(err){}return;}const b=e.target.closest(".x");if(!b)return;const id=b.closest(".ditem").dataset.id,at=S.events.findIndex(x=>x.id===id);if(at<0)return;const ev=S.events.splice(at,1)[0];save();renderCal();
   toast("Event deleted",{run(){S.events.splice(Math.min(at,S.events.length),0,ev);save();renderCal();}});});
 
@@ -3460,20 +3515,20 @@ function deltaHtml(cur,prev,fmt,goodUp=true){
   const up=diff>0,good=up===goodUp;
   return `<span class="dl ${good?"good":"bad"}"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="${up?"M6 2 10 8H2z":"M6 10 2 4h8z"}"/></svg>${up?"Up":"Down"} ${fmt(Math.abs(diff))} ${dlVs}</span>`;
 }
-function barChart(days,val,fmt,label){
-  const W=320,H=150,P=22,bw=26,gap=(W-bw*7)/8,max=Math.max(1,...days.map(val)),today=dkey(new Date());
+function barChart(days,val,fmt,label,o={}){
+  const n=days.length,W=320,H=150,P=22,bw=Math.min(26,(W-6*(n+1))/n),gap=(W-bw*n)/(n+1),max=Math.max(1,...days.map(val)),today=dkey(new Date());
   const maxI=days.findIndex(d=>val(d)===max&&max>0);
   const bars=days.map((d,i)=>{const v=val(d),h=v?Math.max(4,(H-P-18)*v/max):0,x=gap+i*(bw+gap),y=H-P-h,fut=d.k>today;
-    const tip=`${d.d.toLocaleDateString(undefined,{weekday:"long"})}: ${fmt(v)}`;
+    const tip=`${o.tip?o.tip(d):d.d.toLocaleDateString(undefined,{weekday:"long"})}: ${fmt(v)}`;
     return `<g class="bar${fut?" fut":""}${d.k===today?" now":""}" tabindex="0" role="img" aria-label="${esc(tip)}" data-tip="${esc(tip)}">
       <rect class="hit" x="${x-gap/2}" y="0" width="${bw+gap}" height="${H-P}"/>
       ${h?`<path d="M${x},${H-P}V${y+4}q0,-4 4,-4h${bw-8}q4,0 4,4V${H-P}z"/>`:`<rect class="zero" x="${x}" y="${H-P-2}" width="${bw}" height="2" rx="1"/>`}
       ${i===maxI?`<text class="vl" x="${x+bw/2}" y="${y-6}" text-anchor="middle">${esc(fmt(v))}</text>`:""}
-      <text class="ax" x="${x+bw/2}" y="${H-6}" text-anchor="middle">${d.d.toLocaleDateString(undefined,{weekday:"narrow"})}</text></g>`;}).join("");
+      <text class="ax" x="${x+bw/2}" y="${H-6}" text-anchor="middle">${o.ax?o.ax(d,i):d.d.toLocaleDateString(undefined,{weekday:"narrow"})}</text></g>`;}).join("");
   return `<svg viewBox="0 0 ${W} ${H}" class="wk-chart" aria-label="${esc(label)}"><line class="base" x1="${gap/2}" x2="${W-gap/2}" y1="${H-P}" y2="${H-P}"/>${bars}</svg>`;
 }
 function courseBreakdown(cur){ /* one measure across categories: a sorted bar list in a single hue, labels on every row */
-  const keys=new Set(cur.keys.slice(0,7)),tags=(S.focusTags||[]).filter(x=>keys.has(x.d));
+  const keys=new Set(cur.keys),tags=(S.focusTags||[]).filter(x=>keys.has(x.d));
   const by=new Map(),tasks=new Map();
   tags.forEach(x=>{const t=x.task&&S.tasks.find(y=>y.id===x.task),c=x.course||(t&&t.course)||(x.task?"No course":"");if(!c)return;
     const o=by.get(c)||{sec:0,n:0};o.sec+=x.sec;o.n++;by.set(c,o);
@@ -3528,11 +3583,69 @@ function renderWeek(){
       <div class="panel"><h3>Coming up next week <span class="muted">${next.length}</span></h3>${next.length?`<ul class="wl">${next.slice(0,8).map(t=>li(t,niceDate(t.due))).join("")}</ul>`:`<p class="empty">Nothing due next week yet.</p>`}</div>
     </div>`;
 }
+/* ---------- month review ----------
+   Calendar > Month review: the week review's layout for a whole month, compared with last month
+   (the same number of days while the month is still running). Focus is charted per week. */
+let mrY=null,mrM=null;
+function monthStats(y,m,upTo){
+  const n=new Date(y,m+1,0).getDate();upTo=Math.min(upTo||n,n);
+  const days=[...Array(n)].map((_,i)=>new Date(y,m,i+1)),keys=days.map(dkey),s0=days[0].getTime(),e0=new Date(y,m,upTo+1).getTime();
+  const done=S.tasks.filter(t=>t.done&&t.doneAt>=s0&&t.doneAt<e0);
+  const perDay=keys.map((k,i)=>i<upTo?{k,d:days[i],min:dayFocusMin(k),ses:S.sessions[k]||0,done:done.filter(t=>dkey(new Date(t.doneAt))===k).length}:{k,d:days[i],min:0,ses:0,done:0});
+  const a=nwAt(dkey(new Date(y,m,0))),b=nwAt(keys[upTo-1]);
+  const weeks=[];perDay.forEach(d=>{const wk=dkey(weekStart(d.d));let w=weeks[weeks.length-1];if(!w||w.wk!==wk){w={wk,d:d.d,k:d.k,last:d.d,min:0,done:0,ses:0};weeks.push(w);}w.last=d.d;w.min+=d.min;w.done+=d.done;w.ses+=d.ses;});
+  const best=perDay.reduce((b,d)=>d.min>(b?b.min:0)?d:b,null);
+  return {keys,perDay,weeks,best,done:done.length,doneList:done,sessions:perDay.reduce((x,d)=>x+d.ses,0),focusMin:perDay.reduce((x,d)=>x+d.min,0),nw:a!=null&&b!=null?{from:a,to:b}:null};
+}
+function renderMonthRev(){
+  const el=$("#mrev");if(!el||calMode!=="mrev")return;
+  const now=new Date();if(mrY==null){mrY=now.getFullYear();mrM=now.getMonth();}
+  const isThis=mrY===now.getFullYear()&&mrM===now.getMonth(),soFar=isThis?now.getDate():new Date(mrY,mrM+1,0).getDate();
+  const cur=monthStats(mrY,mrM),py=mrM?mrY:mrY-1,pm=mrM?mrM-1:11,prev=monthStats(py,pm,soFar);
+  dlVs=isThis?"vs this point last month":"vs last month";
+  const title=new Date(mrY,mrM,1).toLocaleDateString(undefined,{month:"long",year:"numeric"}),hid=S.settings.hideNw;
+  const nwTile=cur.nw?(()=>{const ch=cur.nw.to-cur.nw.from,pct=cur.nw.from?ch/Math.abs(cur.nw.from)*100:null;
+      return `<div class="kpi"><small>Net worth</small><b>${hid?(pct==null?"—":fmtPct(pct)):(ch>=0?"+":"")+fmt(ch,1)}</b>${!hid&&pct!=null?`<span class="dl ${ch>=0?"good":"bad"}">${fmtPct(pct)} this month</span>`:`<span class="dl same">Change this month</span>`}</div>`;})()
+    :`<div class="kpi"><small>Net worth</small><b>—</b><span class="dl same">Update a balance to track it</span></div>`;
+  const today=dkey(now),k0=cur.keys[0],k1=cur.keys[cur.keys.length-1];
+  const slipped=S.tasks.filter(t=>!t.done&&t.due&&t.due>=k0&&t.due<=k1&&dueAt(t)<now);
+  const nk0=dkey(new Date(mrY,mrM+1,1)),nk1=dkey(new Date(mrY,mrM+2,0)),next=S.tasks.filter(t=>!t.done&&t.due&&t.due>=nk0&&t.due<=nk1).sort((a,b)=>a.due<b.due?-1:1);
+  const li=(t,extra)=>`<li><i class="pip" style="--c:var(--u${t.urg})"></i><span>${esc(t.title)}</span>${extra?`<small>${extra}</small>`:""}</li>`;
+  const wkTip=w=>`${w.d.toLocaleDateString(undefined,{month:"short",day:"numeric"})} – ${w.last.toLocaleDateString(undefined,{month:"short",day:"numeric"})}`;
+  el.innerHTML=`
+    <div class="wk-head">
+      <button class="icon-btn" data-mr="-1" aria-label="Previous month"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 6-6 6 6 6"/></svg></button>
+      <h2>${isThis?`This month<small>${esc(title)}</small>`:esc(title)}</h2>
+      <button class="btn ghost small" data-mr="0"${isThis?" hidden":""}>This month</button>
+      ${isThis?`<button class="btn small wk-recap" type="button" data-recap aria-haspopup="dialog"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7M16 6l-4-4-4 4M12 2v13"/></svg>Share recap</button>`:""}
+      <button class="icon-btn" data-mr="1" aria-label="Next month"${isThis?" disabled":""}><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 6 6 6-6 6"/></svg></button>
+    </div>
+    <div class="wk-kpis">
+      <div class="kpi"><small>Focus time</small><b>${fmtMins(cur.focusMin)}</b>${deltaHtml(cur.focusMin,prev.focusMin,fmtMins)}</div>
+      <div class="kpi"><small>Focus sessions</small><b>${cur.sessions}</b>${deltaHtml(cur.sessions,prev.sessions,n=>String(n))}</div>
+      <div class="kpi"><small>Tasks finished</small><b>${cur.done}</b>${deltaHtml(cur.done,prev.done,n=>String(n))}</div>
+      ${nwTile}
+      <div class="kpi"><small>Best day</small><b>${cur.best?cur.best.d.toLocaleDateString(undefined,{month:"short",day:"numeric"}):"—"}</b><span class="dl same">${cur.best?fmtMins(cur.best.min)+" of focus":"No focus logged yet"}</span></div>
+    </div>
+    <div class="wk-charts">
+      <div class="panel"><h3>Focus per week</h3>${barChart(cur.weeks,w=>w.min,v=>fmtMins(v),"Focus minutes per week",{ax:(w,i)=>"W"+(i+1),tip:wkTip})}</div>
+      <div class="panel"><h3>Tasks finished per week</h3>${barChart(cur.weeks,w=>w.done,v=>`${v} task${v===1?"":"s"}`,"Tasks finished per week",{ax:(w,i)=>"W"+(i+1),tip:wkTip})}</div>
+    </div>
+    ${courseBreakdown(cur)}
+    <table class="sr-only"><caption>${esc(title)}</caption><thead><tr><th>Week</th><th>Focus minutes</th><th>Sessions</th><th>Tasks finished</th></tr></thead><tbody>${cur.weeks.map(w=>`<tr><th>${esc(wkTip(w))}</th><td>${Math.round(w.min)}</td><td>${w.ses}</td><td>${w.done}</td></tr>`).join("")}</tbody></table>
+    <div class="wk-lists">
+      <div class="panel"><h3>Finished <span class="muted">${cur.done}</span></h3>${cur.done?`<ul class="wl">${cur.doneList.sort((a,b)=>b.doneAt-a.doneAt).slice(0,10).map(t=>li(t,new Date(t.doneAt).toLocaleDateString(undefined,{month:"short",day:"numeric"}))).join("")}</ul>`:`<p class="empty">Nothing finished${isThis?" yet this month. Tick something off.":" that month."}</p>`}</div>
+      <div class="panel"><h3>Slipped <span class="muted">${slipped.length}</span></h3>${slipped.length?`<ul class="wl">${slipped.map(t=>li(t,"was due "+niceDate(t.due))).join("")}</ul>`:`<p class="empty">Nothing slipped. Nice.</p>`}</div>
+      <div class="panel"><h3>Coming up next month <span class="muted">${next.length}</span></h3>${next.length?`<ul class="wl">${next.slice(0,10).map(t=>li(t,niceDate(t.due))).join("")}</ul>`:`<p class="empty">Nothing due next month yet.</p>`}</div>
+    </div>`;
+}
+$("#mrev").addEventListener("click",e=>{if(e.target.closest("[data-recap]")){recapOpen("month");return;}const b=e.target.closest("[data-mr]");if(!b)return;const n=+b.dataset.mr,now=new Date();
+  if(!n){mrY=now.getFullYear();mrM=now.getMonth();}else{const d=new Date(mrY,mrM+n,1);mrY=d.getFullYear();mrM=d.getMonth();}renderMonthRev();});
 function setCalMode(m,quiet){
   calMode=m;$$("#cal-mode button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.m===m));
-  $("#cal-month").hidden=m!=="month";$("#week").hidden=m!=="week";
-  if(m==="week"){wkStart=wkStart||weekStart(new Date());renderWeek();}else renderCal();
-  if(!quiet){const h=m==="week"?"#week":"#calendar";if(location.hash!==h){try{history.pushState(null,"",h);}catch(e){}}}
+  $("#cal-month").hidden=m!=="month";$("#week").hidden=m!=="week";$("#mrev").hidden=m!=="mrev";
+  if(m==="week"){wkStart=wkStart||weekStart(new Date());renderWeek();}else if(m==="mrev")renderMonthRev();else renderCal();
+  if(!quiet){const h=m==="week"?"#week":m==="mrev"?"#month-review":"#calendar";if(location.hash!==h){try{history.pushState(null,"",h);}catch(e){}}}
 }
 $("#cal-mode").addEventListener("click",e=>{const b=e.target.closest("button[data-m]");if(b&&b.dataset.m!==calMode)setCalMode(b.dataset.m);});
 $("#week").addEventListener("click",e=>{if(e.target.closest("[data-recap]")){recapOpen(dkey(wkStart)===dkey(weekStart(new Date()))?"week":"last");return;}const b=e.target.closest("[data-wk]");if(!b)return;const n=+b.dataset.wk;wkStart=n?addDays(wkStart,7*n):weekStart(new Date());renderWeek();});
@@ -4264,7 +4377,7 @@ function cmdResults(q){
   if(/^(room|study room|study with|create room|join room)/.test(lq)){const c=rmClean(lq.replace(/^(join )?(study )?room/,""));R.push({ic:"go",label:c.length===6?`Join room ${rmFmt(c)}`:"Study room",hint:"Go",run:()=>{show("focus");if(c.length===6)rmJoin(c);setTimeout(()=>$("#room").scrollIntoView({behavior:reduced?"auto":"smooth",block:"center"}),60);}});}
   if(/^(grades?|courses?|marks?|gpa)$/.test(lq))R.push({ic:"go",label:"Courses and grades",hint:"Go",run:()=>{show("tasks");setTaskMode("courses");}});
   if(/^(goals?|savings?)$/.test(lq))R.push({ic:"go",label:"Money goals",hint:"Go",run:()=>{show("money");setTimeout(()=>$("#goals").scrollIntoView({behavior:reduced?"auto":"smooth",block:"center"}),60);}});
-  if(/^(plan( my)?( week| day)?|ai plan|schedule( my)? week)$/.test(lq))R.push({ic:"misc",label:"Plan my week with AI",hint:"AI",run:()=>aiPlan()});
+  if(AI_ON&&/^(plan( my)?( week| day)?|ai plan|schedule( my)? week)$/.test(lq))R.push({ic:"misc",label:"Plan my week with AI",hint:"AI",run:()=>aiPlan()});
   if(AI_BREAKDOWN&&(m=lq.match(/^(?:break ?down|split|steps for|ai)\s+(.+)$/))){S.tasks.filter(t=>!t.done).map(t=>[t,fuzzy(m[1],t.title)]).filter(([,sc])=>sc>=40).sort((a,b)=>b[1]-a[1]).slice(0,3).forEach(([t])=>R.push({ic:"misc",label:`Break down: ${t.title}`,hint:"AI",run:()=>aiBreakdown(t)}));}
   if(/^(account|sign ?in|log ?in|sign ?out|profile|sync|cloud)/.test(lq))R.push({ic:"go",label:"Account",hint:"Go",run:()=>acOpen()});
   // timers
@@ -4424,7 +4537,8 @@ function drawChart(){
 const TZS=["America/Toronto","America/Vancouver","America/New_York","America/Chicago","America/Los_Angeles","America/Sao_Paulo","Europe/London","Europe/Paris","Europe/Berlin","Africa/Lagos","Asia/Dubai","Asia/Kolkata","Asia/Colombo","Asia/Singapore","Asia/Shanghai","Asia/Tokyo","Australia/Sydney","Pacific/Auckland"];
 /* ---------- Spotify: now playing ----------
    Signs in with Spotify (Authorization Code + PKCE, so no secret and no server) and reads only what is
-   playing. You register your own free Spotify app and paste its Client ID once. Tokens live in their own
+   playing, and with Premium can play, pause and skip. The site's own Client ID (SPOTIFY_CLIENT_ID at build time, in
+   /digital-dash-config.js) makes it one tap; without it you register your own free Spotify app and paste its Client ID once. Tokens live in their own
    localStorage key, never in S, so they are not saved into presets or exports. Polls every 5 seconds
    while the page is visible and a Now playing widget is on screen; the progress bar runs locally between polls. */
 const SPK="digitaldash.spotify",SP_TOKEN="https://accounts.spotify.com/api/token";
@@ -4432,6 +4546,8 @@ const NP={tok:null,data:null,at:0,err:"",busy:false,backoff:0,sig:""};
 const npRedirect=()=>location.origin+location.pathname;
 const npEmbedded=()=>{try{return window.top!==window||!/^https?:$/.test(location.protocol);}catch(e){return true;}};
 const npHas=()=>S.widgets.some(w=>w.type==="spotify");
+const npSiteCid=()=>{const c=window.DASH_CONFIG&&window.DASH_CONFIG.spotifyClientId;return /^[0-9a-f]{32}$/i.test(c||"")?c:"";};
+const SP_SCOPE="user-read-currently-playing user-read-playback-state user-modify-playback-state";
 const b64url=buf=>btoa(String.fromCharCode(...new Uint8Array(buf))).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/,"");
 const lsGet=k=>{try{return JSON.parse(localStorage.getItem(k)||"null");}catch(e){return null;}};
 const lsSet=(k,v)=>{try{v==null?localStorage.removeItem(k):localStorage.setItem(k,JSON.stringify(v));}catch(e){}};
@@ -4444,7 +4560,7 @@ async function npConnect(cid){
   const ver=b64url(crypto.getRandomValues(new Uint8Array(48))),state=b64url(crypto.getRandomValues(new Uint8Array(12)));
   const ch=b64url(await crypto.subtle.digest("SHA-256",new TextEncoder().encode(ver)));
   lsSet(SPK+".cid",cid);lsSet(SPK+".pkce",{ver,state,cid,at:Date.now()});
-  location.assign("https://accounts.spotify.com/authorize?"+new URLSearchParams({response_type:"code",client_id:cid,scope:"user-read-currently-playing user-read-playback-state",redirect_uri:npRedirect(),code_challenge_method:"S256",code_challenge:ch,state}));
+  location.assign("https://accounts.spotify.com/authorize?"+new URLSearchParams({response_type:"code",client_id:cid,scope:SP_SCOPE,redirect_uri:npRedirect(),code_challenge_method:"S256",code_challenge:ch,state}));
 }
 async function npTokenReq(body){
   const r=await fetch(SP_TOKEN,{method:"POST",headers:{"Content-Type":"application/x-www-form-urlencoded"},body:new URLSearchParams(body)});
@@ -4491,6 +4607,8 @@ const NP_ICON='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
 function npHtml(){
   if(!NP.tok){
     if(npEmbedded())return `<div class="np-empty">${NP_ICON}<p>Connect Spotify from your own site to see what you're playing here. This preview can't sign in to Spotify.</p></div>`;
+    if(npSiteCid())return `<div class="np-setup">${NP.err?`<p class="np-err">${esc(NP.err)}</p>`:""}<p class="np-lead">${NP_ICON}<span>See what you're playing on Spotify, live, and play, pause or skip without leaving your dashboard.</span></p>
+      <div class="row"><button type="button" class="btn" data-npgo>Connect Spotify</button></div><p class="hint" style="margin:0">You sign in on Spotify's own page. Digital Dash only sees what's playing. Controls need Spotify Premium.</p></div>`;
     const cid=lsGet(SPK+".cid")||"";
     return `<div class="np-setup">${NP.err?`<p class="np-err">${esc(NP.err)}</p>`:""}<p class="np-lead">${NP_ICON}<span>Show the song you're playing on Spotify while you work. One-time setup, about 2 minutes:</span></p>
       <ol><li>Open the <a href="https://developer.spotify.com/dashboard" target="_blank" rel="noopener">Spotify developer dashboard</a>, log in, and press <b>Create app</b>. Any name works. Tick <b>Web API</b>.</li>
@@ -4505,22 +4623,39 @@ function npHtml(){
     <div class="np-meta"><span class="np-state${d.playing?" on":""}">${d.playing?`<span class="eq" aria-hidden="true"><i></i><i></i><i></i></span>Playing`:"Paused"}</span>
       <b class="np-t" title="${esc(d.title)}">${esc(d.title)}</b><span class="np-a" title="${esc(d.artist)}">${esc(d.artist)}</span>
       <div class="np-bar" role="progressbar" aria-label="Song progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${Math.round(pr*100)}"><i style="transform:scaleX(${pr.toFixed(4)})"></i></div>
-      <div class="np-time"><span data-npcur>${mmss(npProg())}</span><span>${mmss(d.dur)}</span></div></div></div>${disc}`;
+      <div class="np-time"><span data-npcur>${mmss(npProg())}</span><span>${mmss(d.dur)}</span></div>
+      <div class="np-ctl" role="group" aria-label="Spotify controls"><button type="button" class="icon-btn" data-npc="previous" aria-label="Previous"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 5h2v14H6zM20 5v14L9 12z"/></svg></button><button type="button" class="icon-btn np-pp" data-npc="${d.playing?"pause":"play"}" aria-label="${d.playing?"Pause":"Play"}"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">${d.playing?'<path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/>':'<path d="M8 5.5v13l11-6.5z"/>'}</svg></button><button type="button" class="icon-btn" data-npc="next" aria-label="Next"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16 5h2v14h-2zM4 5v14l11-7z"/></svg></button></div></div></div>${disc}`;
 }
-function npPaint(){ /* rebuild only when the song or state changes; otherwise just move the bar */
-  const d=NP.data,sig=[!!NP.tok,NP.err,wEdit,d&&d.id,d&&d.playing,d&&d.art,!!NP.at].join("|");
+function npPaint(force){ /* rebuild only when the song or state changes; otherwise just move the bar */
+  const d=NP.data,sig=[force?Math.random():"",!!NP.tok,NP.err,wEdit,d&&d.id,d&&d.playing,d&&d.art,!!NP.at].join("|");
   $$("[data-np]").forEach(el=>{
     if(el._sig!==sig){el._sig=sig;const was=el.firstElementChild;el.innerHTML=npHtml();if(was&&d&&!rmq.matches)anim(el.firstElementChild,[{opacity:0,transform:"translateY(4px)"},{opacity:1,transform:"none"}],{duration:280,easing:EASE_OUT});return;}
     if(!d||!d.dur)return;const p=npProg(),bar=el.querySelector(".np-bar i"),cur=el.querySelector("[data-npcur]");
     if(bar)bar.style.transform=`scaleX(${(p/d.dur).toFixed(4)})`;if(cur)cur.textContent=mmss(p);
   });
 }
-function npDisconnect(){const old=NP.tok;NP.tok=null;NP.data=null;NP.at=0;lsSet(SPK,null);renderWidgets(true);toast("Spotify disconnected",{run(){NP.tok=old;lsSet(SPK,old);renderWidgets(true);npFetch();}});}
+/* play, pause and skip (Spotify Premium): optimistic, then re-read the player */
+async function npControl(a){
+  if(NP.ctl)return;NP.ctl=true;const d=NP.data;
+  try{const t=await npAccess();if(!t)return;
+    if(d&&(a==="play"||a==="pause")){d.prog=npProg();NP.at=Date.now();d.playing=a==="play";npPaint();}
+    const r=await fetch("https://api.spotify.com/v1/me/player/"+a,{method:a==="play"||a==="pause"?"PUT":"POST",headers:{Authorization:"Bearer "+t}});
+    if(!r.ok&&r.status!==204){const j=await r.json().catch(()=>({})),why=(j.error&&(j.error.reason||j.error.message))||"";
+      if(r.status===403&&/PREMIUM/i.test(why))toast("Play, pause and skip need Spotify Premium");
+      else if(r.status===404||/NO_ACTIVE_DEVICE/i.test(why))toast("Start playing on one of your devices first");
+      else if(r.status===401||/scope|permission/i.test(why))toast("Connect Spotify again to turn on the controls",{label:"Reconnect",run(){npDisconnect(true);npConnect(npSiteCid()||NP.tok&&NP.tok.cid);}});
+      else toast("Spotify didn't respond. Try again.");
+      if(d&&(a==="play"||a==="pause"))d.playing=a!=="play";}
+    setTimeout(()=>npFetch(),a==="next"||a==="previous"?350:600);
+  }catch(e){toast("Can't reach Spotify right now");}
+  finally{NP.ctl=false;npPaint();}
+}
+function npDisconnect(quiet){if(quiet===true){NP.tok=null;NP.data=null;NP.at=0;lsSet(SPK,null);return;}const old=NP.tok;NP.tok=null;NP.data=null;NP.at=0;lsSet(SPK,null);renderWidgets(true);toast("Spotify disconnected",{run(){NP.tok=old;lsSet(SPK,old);renderWidgets(true);npFetch();}});}
 function npInit(){
   NP.tok=lsGet(SPK);npCallback();
   setInterval(()=>{
     if(!NP.tok||document.hidden||!npHas())return;
-    const d=NP.data,due=Date.now()-NP.at>5000||(d&&d.playing&&d.dur&&npProg()>=d.dur-300);
+    const d=NP.data,due=Date.now()-NP.at>3000||(d&&d.playing&&d.dur&&npProg()>=d.dur-300);
     if(due)npFetch();else npPaint();
   },1000);
   document.addEventListener("visibilitychange",()=>{if(!document.hidden&&NP.tok&&npHas())npFetch();});
@@ -4612,6 +4747,8 @@ $("#widgets").addEventListener("submit",e=>{const f=e.target.closest("[data-npfo
 $("#widgets").addEventListener("click",e=>{
   if(e.target.closest("[data-npcopy]")){const v=npRedirect();(navigator.clipboard?navigator.clipboard.writeText(v):Promise.reject()).then(()=>toast("Copied"),()=>toast("Select the address and copy it"));return;}
   if(e.target.closest("[data-npdisc]")){npDisconnect();return;}
+  if(e.target.closest("[data-npgo]")){npConnect(npSiteCid());return;}
+  {const c=e.target.closest("[data-npc]");if(c){npControl(c.dataset.npc);return;}}
   const tk=e.target.closest("[data-wtask]");
   if(tk){const t=S.tasks.find(x=>x.id===tk.dataset.wtask);if(t&&!t.done){const msg=setTaskDone(t,true);tk.classList.add("on");save();toast(msg,{run(){undoDone(t);}});afterTaskChange(reduced?0:420);}return;}
   const b=e.target.closest("[data-w]");if(!b)return;
@@ -5186,6 +5323,7 @@ async function acInit(){
   if(!window.DASH_CONFIG){ /* fetched and parsed rather than run: hosts that answer unknown paths with index.html would otherwise throw */
     try{const r=await fetch("/digital-dash-config.js",{cache:"no-store"});const t=r.ok?await r.text():"";const m=t.match(/^window\.DASH_CONFIG=(\{.*\});?\s*$/s);if(m)window.DASH_CONFIG=JSON.parse(m[1]);}catch(e){}}
   const cf=window.DASH_CONFIG;
+  if(npSiteCid()&&npHas()&&!NP.tok)npPaint(true);
   if(!cf||!cf.supabaseUrl||!cf.supabaseKey){AC.state="unavailable";AC.why="config";acRenderBtn();rmRender();remRender();return;}
   /* The sign-in library is ~50 KB. Someone who has never signed in and isn't opening a room or a sign-in
      link doesn't need it for the first paint, so fetch it once the browser is idle. */
@@ -5422,7 +5560,7 @@ function acRenderDlg(){
     ${acProfHTML()}
     ${AC.state==="error"?"":acItems()}
     <div class="ac-actions"><button type="button" class="btn ghost small" data-ac="backup">Download backup</button><button type="button" class="btn ghost small" data-ac="signout">Sign out</button><label class="ac-clear"><input type="checkbox" id="ac-clear"> Also remove my data from this device</label></div>
-    <p class="ac-priv">Only you can read your saved data. The AI helper sends task titles, due dates and upcoming event titles to Anthropic's AI only when you use it. Reminders go through your browser's push service. <a href="/digital-dash-privacy" target="_blank" rel="noopener">Privacy policy</a></p>
+    <p class="ac-priv">Only you can read your saved data. ${AI_ON?"The AI helper sends task titles, due dates and upcoming event titles to Anthropic's AI only when you use it. ":""}Reminders go through your browser's push service. <a href="/digital-dash-privacy" target="_blank" rel="noopener">Privacy policy</a></p>
     <div class="ac-danger">${AC.confirmDel?`<p><b>Delete your account?</b> This removes your saved data and photos from the cloud for good. What's on this device stays until you erase it.</p><div class="ac-row"><button type="button" class="btn danger" id="ac-del-go" data-ac="del-go">Delete my account</button><button type="button" class="btn ghost small" data-ac="del-no">Cancel</button></div>`:`<button type="button" class="linkish" data-ac="del">Delete account</button>`}</div>`;
   const ph=body.querySelector("#ac-pfw");
   if(keep&&ph&&keep.dataset.sig===ph.dataset.sig){ph.replaceWith(keep);const f=fid&&document.getElementById(fid);if(f){f.focus();if(sel)try{f.setSelectionRange(sel[0],sel[1]);}catch(e){}}}
@@ -7196,7 +7334,9 @@ async function aiCall(body){
   }catch(e){AI.err=e.message||"Something went wrong. Try again.";}
   finally{AI.busy=false;aiRender();}
 }
-var AI_BREAKDOWN=false; /* the "Break down with AI" button and command come back when the AI helper is set up */
+var AI_ON=false; /* the whole AI helper (Plan my week, Break it down) is off until its API key is set up; flip to true to bring it back */
+var AI_BREAKDOWN=AI_ON;
+if(AI_ON)$("#ai-plan").hidden=false;
 function aiBreakdown(t){
   AI.mode="breakdown";AI.task=t;AI.res=null;AI.err="";AI.note="";aiOpenDlg();
   if(aiGate()){aiRender();return;}
@@ -7304,7 +7444,7 @@ if(S.accounts.length)snapshot();
 renderAll();jbRender();renderCals();renderCourses();
 npInit();
 acBoot();
-{const v=location.hash.slice(1);if(!shortcutLink(v)){if(v==="week"){show("calendar");setCalMode("week",true);}else if(VIEWS.includes(v)&&v!=="focus")show(v);}} // deep link, e.g. digital-dash.html#tasks
+{const v=location.hash.slice(1);if(!shortcutLink(v)){if(v==="week"||v==="month-review"){show("calendar");setCalMode(v==="week"?"week":"mrev",true);}else if(VIEWS.includes(v)&&v!=="focus")show(v);}} // deep link, e.g. digital-dash.html#tasks
 moveInd(true);
 if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>{moveInd(true);$$(".seg").forEach(x=>glide(x,true));});
 if(S.settings.bg.type!=="none"&&!S.settings.bg.pal)computePal();

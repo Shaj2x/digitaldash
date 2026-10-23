@@ -1177,3 +1177,66 @@
 1215|Eintragen hat gerade nicht geklappt. Prüfe deine Verbindung.
 1216|Du kannst sie schon heute zum Home-Bildschirm hinzufügen, dann öffnet sie sich wie eine App. Versionen für App Store und Google Play sind unterwegs:
 1217|zum Start benachrichtigt werden
+1218|Nachtschicht
+1219|Noch wach? Mach was draus
+1220|Nachteulen-Modus
+1221|Ruhige Stunden, voller Fokus
+1222|Die Welt schläft. Konzentrier dich.
+1223|Auf geht's
+1224|Neuer Start
+1225|Guten Morgen. Fokus an.
+1226|Neuer Tag, neue Erfolge
+1227|Erst Kaffee, dann Fokus
+1228|Bleib im Flow
+1229|Nachmittags-Schub
+1230|Bleib konzentriert
+1231|Halbzeit
+1232|Zieh durch
+1233|Abendsession
+1234|Stark abschließen
+1235|Noch ein Schub
+1236|Schließ den Tag ab
+1237|Guten Abend. Fokus an.
+1238|Foto hier ablegen
+1239|Neues Foto ablegen, um es zu ersetzen
+1240|oder
+1241|klicken zum Auswählen
+1242|einfügen mit
+1243|Leg eine Bilddatei ab, z. B. JPG oder PNG
+1244|Kopier zuerst ein Bild und füge es hier ein
+1245|Dieses Bild ging nicht. Wähl die Datei lieber aus.
+1246|Hintergrundfoto: klicken zum Auswählen, einfügen oder hier ablegen
+1247|Uhrfoto: klicken zum Auswählen, einfügen oder hier ablegen
+1248|Ende
+1249|Füg auch eine Startzeit hinzu oder lösch die Endzeit
+1250|Die Endzeit liegt vor dem Start
+1251|Monatsrückblick
+1252|Dieser Monat
+1253|Fokus pro Woche
+1254|Erledigte Aufgaben pro Woche
+1255|Nächsten Monat fällig
+1256|{0} Fokus
+1257|Noch kein Fokus erfasst
+1258|Gleich wie letzten Monat
+1259|Gleich wie zu diesem Zeitpunkt letzten Monat
+1260|{0} mehr als letzten Monat
+1261|{0} weniger als letzten Monat
+1262|{0} mehr als zu diesem Zeitpunkt letzten Monat
+1263|{0} weniger als zu diesem Zeitpunkt letzten Monat
+1264|Veränderung diesen Monat
+1265|{0} diesen Monat
+1266|Diesen Monat noch nichts erledigt. Hak was ab.
+1267|In dem Monat nichts erledigt.
+1268|Nächsten Monat ist noch nichts fällig.
+1269|Fokusminuten pro Woche
+1270|Sieh live, was auf Spotify läuft, und pausiere oder überspringe, ohne dein Dashboard zu verlassen.
+1271|Spotify verbinden
+1272|Du meldest dich auf der Seite von Spotify an. Digital Dash sieht nur, was läuft. Steuerung braucht Spotify Premium.
+1273|Spotify-Steuerung
+1274|Zurück
+1275|Abspielen, Pause und Überspringen brauchen Spotify Premium
+1276|Starte zuerst die Wiedergabe auf einem deiner Geräte
+1277|Verbinde Spotify neu, um die Steuerung einzuschalten
+1278|Neu verbinden
+1279|Spotify hat nicht reagiert. Versuch es nochmal.
+1280|Spotify ist gerade nicht erreichbar

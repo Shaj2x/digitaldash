@@ -1177,3 +1177,66 @@
 1215|No pudimos apuntarte ahora. Revisa tu conexión.
 1216|Ya puedes añadirla a tu pantalla de inicio y se abre como una app. Las versiones para App Store y Google Play están en camino:
 1217|avísame cuando salgan
+1218|Maratón nocturno
+1219|¿Sigues despierto? Que cuente
+1220|Modo búho
+1221|Horas tranquilas, foco total
+1222|El mundo duerme. Concéntrate.
+1223|Arriba y a darle
+1224|Nuevo comienzo
+1225|Buenos días. A concentrarse.
+1226|Nuevo día, nuevos logros
+1227|Primero café, luego foco
+1228|Mantén el ritmo
+1229|Empujón de la tarde
+1230|Sigue concentrado
+1231|Ya vas por la mitad
+1232|Dale con todo
+1233|Sesión de la tarde
+1234|Termina fuerte
+1235|Un empujón más
+1236|Cierra el día
+1237|Buenas tardes. A concentrarse.
+1238|Suelta una foto aquí
+1239|Suelta otra foto para cambiarla
+1240|o
+1241|haz clic para elegir
+1242|pega con
+1243|Suelta un archivo de imagen, como JPG o PNG
+1244|Copia primero una imagen y pégala aquí
+1245|No se pudo usar esa imagen. Prueba a elegir el archivo.
+1246|Foto de fondo: haz clic para elegir una, pégala o suéltala aquí
+1247|Foto del reloj: haz clic para elegir una, pégala o suéltala aquí
+1248|Fin
+1249|Añade también una hora de inicio, o borra la de fin
+1250|La hora de fin es anterior al inicio
+1251|Resumen del mes
+1252|Este mes
+1253|Foco por semana
+1254|Tareas terminadas por semana
+1255|Para el mes que viene
+1256|{0} de foco
+1257|Aún no hay foco registrado
+1258|Igual que el mes pasado
+1259|Igual que a estas alturas el mes pasado
+1260|{0} más que el mes pasado
+1261|{0} menos que el mes pasado
+1262|{0} más que a estas alturas el mes pasado
+1263|{0} menos que a estas alturas el mes pasado
+1264|Cambio este mes
+1265|{0} este mes
+1266|Aún no has terminado nada este mes. Tacha algo.
+1267|No terminaste nada ese mes.
+1268|Aún no hay nada para el mes que viene.
+1269|Minutos de foco por semana
+1270|Mira lo que suena en Spotify en directo, y pausa o salta canciones sin salir de tu panel.
+1271|Conectar Spotify
+1272|Inicias sesión en la página de Spotify. Digital Dash solo ve lo que suena. Los controles requieren Spotify Premium.
+1273|Controles de Spotify
+1274|Anterior
+1275|Reproducir, pausar y saltar requieren Spotify Premium
+1276|Empieza a reproducir en uno de tus dispositivos
+1277|Vuelve a conectar Spotify para activar los controles
+1278|Reconectar
+1279|Spotify no respondió. Inténtalo de nuevo.
+1280|No se puede conectar con Spotify ahora

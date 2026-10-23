@@ -1177,3 +1177,66 @@
 1215|Impossibile iscriverti ora. Controlla la connessione.
 1216|Puoi già aggiungerla alla schermata Home e si apre come un'app. Le versioni per App Store e Google Play stanno arrivando:
 1217|ricevi un avviso all'uscita
+1218|Notte di studio
+1219|Ancora sveglio? Fallo contare
+1220|Modalità gufo
+1221|Ore tranquille, tanta concentrazione
+1222|Il mondo dorme. Concentrati.
+1223|Sveglia e via
+1224|Nuovo inizio
+1225|Buongiorno. Concentriamoci.
+1226|Nuovo giorno, nuovi traguardi
+1227|Prima il caffè, poi la concentrazione
+1228|Mantieni il ritmo
+1229|Spinta pomeridiana
+1230|Resta concentrato
+1231|A metà strada
+1232|Tieni duro
+1233|Sessione serale
+1234|Chiudi in bellezza
+1235|Un'ultima spinta
+1236|Chiudi la giornata
+1237|Buonasera. Concentriamoci.
+1238|Trascina qui una foto
+1239|Trascina un'altra foto per sostituirla
+1240|o
+1241|clicca per scegliere
+1242|incolla con
+1243|Trascina un file immagine, come JPG o PNG
+1244|Copia prima un'immagine, poi incollala qui
+1245|Impossibile usare quell'immagine. Prova a scegliere il file.
+1246|Foto di sfondo: clicca per sceglierne una, incollala o trascinala qui
+1247|Foto dell'orologio: clicca per sceglierne una, incollala o trascinala qui
+1248|Fine
+1249|Aggiungi anche un orario d'inizio, o cancella quello di fine
+1250|L'orario di fine è prima dell'inizio
+1251|Riepilogo del mese
+1252|Questo mese
+1253|Concentrazione per settimana
+1254|Attività completate per settimana
+1255|In arrivo il mese prossimo
+1256|{0} di concentrazione
+1257|Nessuna concentrazione registrata
+1258|Come il mese scorso
+1259|Come a questo punto il mese scorso
+1260|{0} in più del mese scorso
+1261|{0} in meno del mese scorso
+1262|{0} in più di questo punto il mese scorso
+1263|{0} in meno di questo punto il mese scorso
+1264|Variazione questo mese
+1265|{0} questo mese
+1266|Ancora niente completato questo mese. Spunta qualcosa.
+1267|Niente completato quel mese.
+1268|Niente in scadenza il mese prossimo.
+1269|Minuti di concentrazione per settimana
+1270|Guarda cosa ascolti su Spotify in tempo reale e metti in pausa o salta senza lasciare la dashboard.
+1271|Collega Spotify
+1272|Accedi dalla pagina di Spotify. Digital Dash vede solo cosa stai ascoltando. I controlli richiedono Spotify Premium.
+1273|Controlli di Spotify
+1274|Precedente
+1275|Riproduci, pausa e salta richiedono Spotify Premium
+1276|Avvia prima la riproduzione su uno dei tuoi dispositivi
+1277|Ricollega Spotify per attivare i controlli
+1278|Ricollega
+1279|Spotify non ha risposto. Riprova.
+1280|Impossibile raggiungere Spotify ora

@@ -1177,3 +1177,66 @@
 1215|Chưa đăng ký được lúc này. Kiểm tra kết nối của bạn.
 1216|Bạn có thể thêm nó vào màn hình chính ngay hôm nay và mở như một ứng dụng. Phiên bản App Store và Google Play đang đến:
 1217|nhận thông báo khi ra mắt
+1218|Cày đêm
+1219|Vẫn còn thức? Tận dụng nhé
+1220|Chế độ cú đêm
+1221|Giờ yên tĩnh, tập trung cao
+1222|Cả thế giới đang ngủ. Tập trung thôi.
+1223|Dậy và làm thôi
+1224|Khởi đầu mới
+1225|Chào buổi sáng. Tập trung nào.
+1226|Ngày mới, thành công mới
+1227|Cà phê trước, tập trung sau
+1228|Giữ vững nhịp
+1229|Bứt tốc buổi chiều
+1230|Tiếp tục tập trung
+1231|Đã được nửa chặng
+1232|Cố lên nào
+1233|Phiên buổi tối
+1234|Về đích mạnh mẽ
+1235|Thêm chút nữa thôi
+1236|Khép lại ngày
+1237|Chào buổi tối. Tập trung nào.
+1238|Thả ảnh vào đây
+1239|Thả ảnh mới để thay
+1240|hoặc
+1241|nhấn để chọn
+1242|dán bằng
+1243|Thả một tệp ảnh, như JPG hoặc PNG
+1244|Hãy sao chép một ảnh trước, rồi dán vào đây
+1245|Không dùng được ảnh đó. Thử chọn tệp nhé.
+1246|Ảnh nền: nhấn để chọn, dán hoặc thả ảnh vào đây
+1247|Ảnh đồng hồ: nhấn để chọn, dán hoặc thả ảnh vào đây
+1248|Kết thúc
+1249|Thêm giờ bắt đầu, hoặc xóa giờ kết thúc
+1250|Giờ kết thúc sớm hơn giờ bắt đầu
+1251|Tổng kết tháng
+1252|Tháng này
+1253|Tập trung theo tuần
+1254|Việc đã xong theo tuần
+1255|Sắp tới tháng sau
+1256|{0} tập trung
+1257|Chưa ghi nhận thời gian tập trung
+1258|Bằng tháng trước
+1259|Bằng cùng thời điểm tháng trước
+1260|Tăng {0} so với tháng trước
+1261|Giảm {0} so với tháng trước
+1262|Tăng {0} so với cùng thời điểm tháng trước
+1263|Giảm {0} so với cùng thời điểm tháng trước
+1264|Thay đổi tháng này
+1265|{0} tháng này
+1266|Tháng này chưa xong việc nào. Đánh dấu một việc đi.
+1267|Tháng đó không xong việc nào.
+1268|Tháng sau chưa có hạn nào.
+1269|Phút tập trung theo tuần
+1270|Xem bài đang phát trên Spotify theo thời gian thực, tạm dừng hoặc chuyển bài ngay trên bảng điều khiển.
+1271|Kết nối Spotify
+1272|Bạn đăng nhập trên trang của Spotify. Digital Dash chỉ thấy bài đang phát. Nút điều khiển cần Spotify Premium.
+1273|Điều khiển Spotify
+1274|Trước
+1275|Phát, tạm dừng và chuyển bài cần Spotify Premium
+1276|Hãy phát nhạc trên một thiết bị của bạn trước
+1277|Kết nối lại Spotify để bật nút điều khiển
+1278|Kết nối lại
+1279|Spotify không phản hồi. Thử lại nhé.
+1280|Không kết nối được Spotify lúc này

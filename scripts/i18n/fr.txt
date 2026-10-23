@@ -1177,3 +1177,66 @@
 1215|Impossible de t'inscrire pour le moment. Vérifie ta connexion.
 1216|Tu peux déjà l'ajouter à ton écran d'accueil, elle s'ouvre comme une app. Les versions App Store et Google Play arrivent :
 1217|être prévenu à la sortie
+1218|Session de nuit
+1219|Encore debout ? Fais que ça compte
+1220|Mode oiseau de nuit
+1221|Heures calmes, gros focus
+1222|Le monde dort. Concentre-toi.
+1223|Debout et au boulot
+1224|Nouveau départ
+1225|Bonjour. On se concentre.
+1226|Nouveau jour, nouvelles victoires
+1227|Café d'abord, focus ensuite
+1228|Garde le rythme
+1229|Coup de boost de l'après-midi
+1230|Reste concentré
+1231|À mi-chemin
+1232|Tiens bon
+1233|Session du soir
+1234|Finis en beauté
+1235|Encore un effort
+1236|Boucle ta journée
+1237|Bonsoir. On se concentre.
+1238|Dépose une photo ici
+1239|Dépose une autre photo pour la remplacer
+1240|ou
+1241|clique pour choisir
+1242|colle avec
+1243|Dépose un fichier image, comme JPG ou PNG
+1244|Copie d'abord une image, puis colle-la ici
+1245|Impossible d'utiliser cette image. Essaie de choisir le fichier.
+1246|Photo de fond : clique pour en choisir une, colle-la ou dépose-la ici
+1247|Photo de l'horloge : clique pour en choisir une, colle-la ou dépose-la ici
+1248|Fin
+1249|Ajoute aussi une heure de début, ou efface l'heure de fin
+1250|L'heure de fin est avant le début
+1251|Bilan du mois
+1252|Ce mois-ci
+1253|Focus par semaine
+1254|Tâches terminées par semaine
+1255|À venir le mois prochain
+1256|{0} de focus
+1257|Pas encore de focus enregistré
+1258|Comme le mois dernier
+1259|Comme à ce stade le mois dernier
+1260|{0} de plus que le mois dernier
+1261|{0} de moins que le mois dernier
+1262|{0} de plus qu'à ce stade le mois dernier
+1263|{0} de moins qu'à ce stade le mois dernier
+1264|Évolution ce mois-ci
+1265|{0} ce mois-ci
+1266|Rien de terminé ce mois-ci. Coche quelque chose.
+1267|Rien de terminé ce mois-là.
+1268|Rien de prévu le mois prochain.
+1269|Minutes de focus par semaine
+1270|Vois ce que tu écoutes sur Spotify en direct, et mets en pause ou passe un titre sans quitter ton tableau de bord.
+1271|Connecter Spotify
+1272|Tu te connectes sur la page de Spotify. Digital Dash ne voit que ce qui joue. Les commandes nécessitent Spotify Premium.
+1273|Commandes Spotify
+1274|Précédent
+1275|Lecture, pause et saut nécessitent Spotify Premium
+1276|Lance d'abord la lecture sur un de tes appareils
+1277|Reconnecte Spotify pour activer les commandes
+1278|Reconnecter
+1279|Spotify n'a pas répondu. Réessaie.
+1280|Impossible de joindre Spotify pour le moment

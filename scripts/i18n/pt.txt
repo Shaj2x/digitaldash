@@ -1177,3 +1177,66 @@
 1215|Não foi possível inscrever você agora. Verifique sua conexão.
 1216|Você já pode adicioná-lo à tela inicial e ele abre como um app. As versões para App Store e Google Play estão a caminho:
 1217|receba um aviso no lançamento
+1218|Madrugada produtiva
+1219|Ainda acordado? Faça valer
+1220|Modo coruja
+1221|Horas calmas, foco total
+1222|O mundo dorme. Foco.
+1223|Bora pra cima
+1224|Novo começo
+1225|Bom dia. Hora de focar.
+1226|Novo dia, novas conquistas
+1227|Café primeiro, depois foco
+1228|Mantenha o ritmo
+1229|Gás da tarde
+1230|Continue focado
+1231|Metade do caminho
+1232|Vai com tudo
+1233|Sessão da noite
+1234|Termine com força
+1235|Só mais um empurrão
+1236|Feche o dia
+1237|Boa noite. Hora de focar.
+1238|Solte uma foto aqui
+1239|Solte outra foto para trocar
+1240|ou
+1241|clique para escolher
+1242|cole com
+1243|Solte um arquivo de imagem, como JPG ou PNG
+1244|Copie uma imagem primeiro e cole aqui
+1245|Não foi possível usar essa imagem. Tente escolher o arquivo.
+1246|Foto de fundo: clique para escolher, cole ou solte aqui
+1247|Foto do relógio: clique para escolher, cole ou solte aqui
+1248|Fim
+1249|Adicione também um horário de início, ou apague o de fim
+1250|O horário de fim é antes do início
+1251|Resumo do mês
+1252|Este mês
+1253|Foco por semana
+1254|Tarefas concluídas por semana
+1255|Para o próximo mês
+1256|{0} de foco
+1257|Nenhum foco registrado ainda
+1258|Igual ao mês passado
+1259|Igual a este ponto no mês passado
+1260|{0} a mais que o mês passado
+1261|{0} a menos que o mês passado
+1262|{0} a mais que neste ponto no mês passado
+1263|{0} a menos que neste ponto no mês passado
+1264|Mudança este mês
+1265|{0} este mês
+1266|Nada concluído ainda este mês. Risque algo.
+1267|Nada concluído naquele mês.
+1268|Nada para o próximo mês ainda.
+1269|Minutos de foco por semana
+1270|Veja o que está tocando no Spotify ao vivo e pause ou pule sem sair do seu painel.
+1271|Conectar Spotify
+1272|Você entra pela página do Spotify. O Digital Dash só vê o que está tocando. Os controles precisam do Spotify Premium.
+1273|Controles do Spotify
+1274|Anterior
+1275|Tocar, pausar e pular precisam do Spotify Premium
+1276|Comece a tocar em um dos seus dispositivos primeiro
+1277|Conecte o Spotify de novo para ativar os controles
+1278|Reconectar
+1279|O Spotify não respondeu. Tente de novo.
+1280|Não foi possível acessar o Spotify agora
