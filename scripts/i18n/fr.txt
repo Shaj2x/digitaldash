@@ -1356,3 +1356,7 @@
 1394|Île masquée. Réactivez-la dans le panneau Spotify de Focus.
 1395|L'île apparaît pendant la lecture d'un titre.
 1396|En écoute : {0} de {1}
+1397|Votre titre, en direct en haut de chaque page
+1398|Masquer Dash Island
+1399|Dash Island masquée. Réactivez-la dans le panneau Spotify de Focus.
+1400|Dash Island apparaît pendant la lecture d'un titre.

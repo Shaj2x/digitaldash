@@ -1399,6 +1399,10 @@
 "Hide the island",
 "Island hidden. Turn it back on in the Spotify panel on Focus.",
 "The island shows up while a song is playing.",
-"Now playing: {0} by {1}"
+"Now playing: {0} by {1}",
+"Your song, live at the top of every page",
+"Hide Dash Island",
+"Dash Island hidden. Turn it back on in the Spotify panel on Focus.",
+"Dash Island shows up while a song is playing."
 ]
 }

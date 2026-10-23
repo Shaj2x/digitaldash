@@ -1356,3 +1356,7 @@
 1394|Ilha oculta. Ative de novo no painel do Spotify em Foco.
 1395|A ilha aparece enquanto uma música toca.
 1396|Tocando: {0} de {1}
+1397|Sua música, ao vivo no topo de cada página
+1398|Ocultar Dash Island
+1399|Dash Island oculta. Ative de novo no painel do Spotify em Foco.
+1400|A Dash Island aparece enquanto uma música toca.

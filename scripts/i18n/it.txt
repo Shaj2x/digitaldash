@@ -1356,3 +1356,7 @@
 1394|Isola nascosta. Riattivala nel pannello Spotify in Focus.
 1395|L'isola compare mentre suona un brano.
 1396|In ascolto: {0} di {1}
+1397|Il tuo brano, dal vivo in cima a ogni pagina
+1398|Nascondi Dash Island
+1399|Dash Island nascosta. Riattivala nel pannello Spotify in Focus.
+1400|Dash Island compare mentre suona un brano.

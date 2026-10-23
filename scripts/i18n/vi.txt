@@ -1356,3 +1356,7 @@
 1394|Đã ẩn đảo. Bật lại trong bảng Spotify ở trang Tập trung.
 1395|Đảo hiện lên khi đang phát một bài.
 1396|Đang phát: {0} của {1}
+1397|Bài hát của bạn, trực tiếp ở đầu mọi trang
+1398|Ẩn Dash Island
+1399|Đã ẩn Dash Island. Bật lại trong bảng Spotify ở trang Tập trung.
+1400|Dash Island hiện lên khi đang phát một bài.

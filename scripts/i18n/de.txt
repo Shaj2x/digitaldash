@@ -1356,3 +1356,7 @@
 1394|Insel ausgeblendet. Im Spotify-Bereich unter Fokus wieder einschalten.
 1395|Die Insel erscheint, während ein Song läuft.
 1396|Läuft: {0} von {1}
+1397|Dein Song, live oben auf jeder Seite
+1398|Dash Island ausblenden
+1399|Dash Island ausgeblendet. Im Spotify-Bereich unter Fokus wieder einschalten.
+1400|Dash Island erscheint, während ein Song läuft.

@@ -1356,3 +1356,7 @@
 1394|Isla oculta. Vuelve a activarla en el panel de Spotify en Enfoque.
 1395|La isla aparece mientras suena una canción.
 1396|Sonando: {0} de {1}
+1397|Tu canción, en vivo arriba de cada página
+1398|Ocultar Dash Island
+1399|Dash Island oculta. Vuelve a activarla en el panel de Spotify en Enfoque.
+1400|Dash Island aparece mientras suena una canción.
