@@ -1295,3 +1295,46 @@
 1333|Rimetti {0} nella lista
 1334|Aggiungi alla spesa: {0}
 1335|1 articolo tolto
+1336|Ascolta playlist per studiare qui e mostra cosa stai ascoltando su qualsiasi dispositivo.
+1337|Incolla un link Spotify: playlist, album, brano o podcast
+1338|Link Spotify
+1339|Scegli una playlist per iniziare.
+1340|Accedi a Spotify in questo browser per ascoltare i brani interi. Gli account gratuiti possono avere anteprime o riproduzione casuale.
+1341|Playlist
+1342|Questo non è un link Spotify. Copialo da Condividi > Copia link in Spotify.
+1343|Ascolto dal vivo
+1344|Mostrare cosa ascolti su Spotify, su qualsiasi dispositivo, non è ancora attivo su questo sito.
+1345|Mostra cosa stai ascoltando
+1346|Vedi dal vivo il brano che suona sul telefono, sul portatile o sulla cassa. È gratis e ci vuole un minuto:
+1347|Crea un account Last.fm gratuito
+1348|Collega Spotify nelle impostazioni di Last.fm
+1349|Inserisci qui il tuo nome utente Last.fm.
+1350|Nome utente Last.fm
+1351|Mostra
+1352|Non troviamo questo nome utente Last.fm.
+1353|Questo profilo Last.fm è privato. Disattiva "Nascondi ascolti recenti" nella privacy di Last.fm.
+1354|Last.fm non ha risposto. Riprovo a breve.
+1355|Impossibile raggiungere Last.fm. Riprovo a breve.
+1356|In ascolto ora
+1357|Ultimo ascolto
+1358|Apri in Spotify
+1359|Ascoltati di recente
+1360|Ancora niente. Fai partire qualcosa su Spotify e comparirà qui.
+1361|Caricamento dei tuoi ascolti…
+1362|Cambia
+1363|Non mostrare più
+1364|I tuoi ascolti non sono più mostrati
+1365|I nomi Last.fm hanno da 2 a 15 lettere, numeri, - o _.
+1366|proprio ora
+1367|Player Spotify
+1368|Playlist
+1369|Album
+1370|Brano
+1371|Episodio
+1372|Podcast
+1373|Artista
+1374|Ultimo ascolto · {0}
+1375|{n} min fa
+1376|{n} h fa
+1377|{n} g fa
+1378|Dal vivo da Last.fm · {0}

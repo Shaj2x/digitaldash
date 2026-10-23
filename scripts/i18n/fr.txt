@@ -1295,3 +1295,46 @@
 1333|Remettre {0} sur la liste
 1334|Ajouter aux courses : {0}
 1335|1 article retiré
+1336|Écoutez des playlists d'étude ici et affichez ce que vous écoutez sur n'importe quel appareil.
+1337|Collez un lien Spotify : playlist, album, titre ou podcast
+1338|Lien Spotify
+1339|Choisissez une playlist pour commencer.
+1340|Connectez-vous à Spotify dans ce navigateur pour écouter les titres en entier. Les comptes gratuits peuvent avoir des extraits ou la lecture aléatoire.
+1341|Playlists
+1342|Ce n'est pas un lien Spotify. Copiez-en un via Partager > Copier le lien dans Spotify.
+1343|Écoute en direct
+1344|L'affichage de ce que vous écoutez sur Spotify, sur tous vos appareils, n'est pas encore activé sur ce site.
+1345|Affichez ce que vous écoutez
+1346|Voyez le titre qui joue sur votre téléphone, ordinateur ou enceinte, en direct. C'est gratuit et ça prend une minute :
+1347|Créez un compte Last.fm gratuit
+1348|Connectez Spotify dans vos réglages Last.fm
+1349|Saisissez votre nom d'utilisateur Last.fm ici.
+1350|Nom d'utilisateur Last.fm
+1351|Afficher
+1352|Nom d'utilisateur Last.fm introuvable.
+1353|Ce profil Last.fm est privé. Désactivez « Masquer les écoutes récentes » dans la confidentialité de Last.fm.
+1354|Last.fm n'a pas répondu. Nouvel essai bientôt.
+1355|Impossible de joindre Last.fm. Nouvel essai bientôt.
+1356|En écoute
+1357|Dernière écoute
+1358|Ouvrir dans Spotify
+1359|Écouté récemment
+1360|Rien pour l'instant. Lancez quelque chose sur Spotify et ça s'affichera ici.
+1361|Chargement de vos écoutes…
+1362|Modifier
+1363|Ne plus afficher
+1364|Vos écoutes ne sont plus affichées
+1365|Les noms Last.fm font 2 à 15 lettres, chiffres, - ou _.
+1366|à l'instant
+1367|Lecteur Spotify
+1368|Playlist
+1369|Album
+1370|Titre
+1371|Épisode
+1372|Podcast
+1373|Artiste
+1374|Dernière écoute · {0}
+1375|il y a {n} min
+1376|il y a {n} h
+1377|il y a {n} j
+1378|En direct de Last.fm · {0}

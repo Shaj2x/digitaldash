@@ -1295,3 +1295,46 @@
 1333|Đưa {0} lại vào danh sách
 1334|Thêm vào mua sắm: {0}
 1335|Đã xóa 1 món
+1336|Nghe playlist học tập ngay tại đây và hiển thị bài bạn đang nghe trên mọi thiết bị.
+1337|Dán liên kết Spotify: playlist, album, bài hát hoặc podcast
+1338|Liên kết Spotify
+1339|Chọn một playlist để bắt đầu nghe.
+1340|Đăng nhập Spotify trên trình duyệt này để nghe trọn bài. Tài khoản miễn phí có thể chỉ nghe thử hoặc phát ngẫu nhiên.
+1341|Playlist
+1342|Đây không phải liên kết Spotify. Hãy sao chép bằng Chia sẻ > Sao chép liên kết trong Spotify.
+1343|Đang nghe trực tiếp
+1344|Tính năng hiển thị bài bạn nghe trên Spotify chưa được bật trên trang này.
+1345|Hiển thị bài bạn đang nghe
+1346|Xem bài đang phát trên điện thoại, laptop hoặc loa của bạn, trực tiếp. Miễn phí và chỉ mất một phút:
+1347|Tạo tài khoản Last.fm miễn phí
+1348|Kết nối Spotify trong cài đặt Last.fm
+1349|Nhập tên người dùng Last.fm của bạn tại đây.
+1350|Tên người dùng Last.fm
+1351|Hiển thị
+1352|Không tìm thấy tên người dùng Last.fm đó.
+1353|Hồ sơ Last.fm đó đang riêng tư. Hãy tắt "Ẩn bài nghe gần đây" trong cài đặt quyền riêng tư của Last.fm.
+1354|Last.fm không phản hồi. Sẽ thử lại sớm.
+1355|Không kết nối được Last.fm. Sẽ thử lại sớm.
+1356|Đang nghe
+1357|Nghe lần cuối
+1358|Mở trong Spotify
+1359|Nghe gần đây
+1360|Chưa có gì. Hãy phát một bài trên Spotify, nó sẽ hiện ở đây.
+1361|Đang tải bài bạn nghe…
+1362|Đổi
+1363|Ngừng hiển thị
+1364|Đã ngừng hiển thị bài bạn nghe
+1365|Tên Last.fm dài 2 đến 15 ký tự gồm chữ, số, - hoặc _.
+1366|vừa xong
+1367|Trình phát Spotify
+1368|Playlist
+1369|Album
+1370|Bài hát
+1371|Tập
+1372|Podcast
+1373|Nghệ sĩ
+1374|Nghe lần cuối · {0}
+1375|{n} phút trước
+1376|{n} giờ trước
+1377|{n} ngày trước
+1378|Trực tiếp từ Last.fm · {0}

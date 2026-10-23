@@ -1295,3 +1295,46 @@
 1333|Voltar {0} para a lista
 1334|Adicionar às compras: {0}
 1335|1 item removido
+1336|Ouça playlists de estudo aqui mesmo e mostre o que está tocando em qualquer aparelho.
+1337|Cole um link do Spotify: playlist, álbum, música ou podcast
+1338|Link do Spotify
+1339|Escolha uma playlist para começar.
+1340|Entre no Spotify neste navegador para ouvir as músicas completas. Contas grátis podem ter prévias ou modo aleatório.
+1341|Playlists
+1342|Isso não é um link do Spotify. Copie um em Compartilhar > Copiar link no Spotify.
+1343|Ouvindo ao vivo
+1344|Mostrar o que você ouve no Spotify, em qualquer aparelho, ainda não está ativado neste site.
+1345|Mostre o que você está ouvindo
+1346|Veja a música tocando no celular, notebook ou caixa de som, ao vivo. É grátis e leva um minuto:
+1347|Crie uma conta grátis no Last.fm
+1348|Conecte o Spotify nas configurações do Last.fm
+1349|Digite aqui seu usuário do Last.fm.
+1350|Usuário do Last.fm
+1351|Mostrar
+1352|Não encontramos esse usuário do Last.fm.
+1353|Esse perfil do Last.fm é privado. Desative "Ocultar audições recentes" na privacidade do Last.fm.
+1354|O Last.fm não respondeu. Tentando de novo em breve.
+1355|Não foi possível acessar o Last.fm. Tentando de novo em breve.
+1356|Ouvindo agora
+1357|Última música
+1358|Abrir no Spotify
+1359|Ouvidas recentemente
+1360|Nada ainda. Toque algo no Spotify e aparece aqui.
+1361|Carregando o que você ouve…
+1362|Trocar
+1363|Parar de mostrar
+1364|Parou de mostrar o que você ouve
+1365|Usuários do Last.fm têm de 2 a 15 letras, números, - ou _.
+1366|agora mesmo
+1367|Player do Spotify
+1368|Playlist
+1369|Álbum
+1370|Música
+1371|Episódio
+1372|Podcast
+1373|Artista
+1374|Última música · {0}
+1375|há {n} min
+1376|há {n} h
+1377|há {n} d
+1378|Ao vivo do Last.fm · {0}

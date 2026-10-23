@@ -1295,3 +1295,46 @@
 1333|{0} wieder auf die Liste
 1334|Zum Einkauf: {0}
 1335|1 Artikel entfernt
+1336|Hör Lern-Playlists direkt hier und zeig, was du gerade auf jedem Gerät hörst.
+1337|Spotify-Link einfügen: Playlist, Album, Song oder Podcast
+1338|Spotify-Link
+1339|Wähl eine Playlist, um loszulegen.
+1340|Melde dich in diesem Browser bei Spotify an, um ganze Songs zu hören. Kostenlose Konten bekommen evtl. Vorschauen oder Zufallswiedergabe.
+1341|Playlists
+1342|Das ist kein Spotify-Link. Kopier einen über Teilen > Link kopieren in Spotify.
+1343|Live hören
+1344|Anzeigen, was du auf Spotify hörst, ist auf dieser Seite noch nicht eingeschaltet.
+1345|Zeig, was du hörst
+1346|Sieh live den Song, der auf deinem Handy, Laptop oder Lautsprecher läuft. Kostenlos, dauert eine Minute:
+1347|Kostenloses Last.fm-Konto erstellen
+1348|Spotify in den Last.fm-Einstellungen verbinden
+1349|Gib hier deinen Last.fm-Benutzernamen ein.
+1350|Last.fm-Benutzername
+1351|Anzeigen
+1352|Diesen Last.fm-Benutzernamen gibt es nicht.
+1353|Dieses Last.fm-Profil ist privat. Schalte „Kürzlich gehörte Titel verbergen“ in den Last.fm-Privatsphäre-Einstellungen aus.
+1354|Last.fm hat nicht geantwortet. Gleich neuer Versuch.
+1355|Last.fm nicht erreichbar. Gleich neuer Versuch.
+1356|Läuft gerade
+1357|Zuletzt gehört
+1358|In Spotify öffnen
+1359|Zuletzt gehört
+1360|Noch nichts. Spiel etwas auf Spotify ab, dann erscheint es hier.
+1361|Lade, was du hörst…
+1362|Ändern
+1363|Nicht mehr anzeigen
+1364|Wird nicht mehr angezeigt
+1365|Last.fm-Namen haben 2 bis 15 Buchstaben, Zahlen, - oder _.
+1366|gerade eben
+1367|Spotify-Player
+1368|Playlist
+1369|Album
+1370|Song
+1371|Folge
+1372|Podcast
+1373|Künstler
+1374|Zuletzt gehört · {0}
+1375|vor {n} Min.
+1376|vor {n} Std.
+1377|vor {n} T.
+1378|Live von Last.fm · {0}

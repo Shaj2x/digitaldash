@@ -6,6 +6,8 @@ const url = process.env.VITE_SUPABASE_URL || "";
 const key = process.env.VITE_SUPABASE_PUBLISHABLE_KEY || "";
 // Optional: the site's Spotify app (Client ID only, never a secret) for one-tap "Connect Spotify"
 const spotify = /^[0-9a-f]{32}$/i.test(process.env.SPOTIFY_CLIENT_ID || "") ? process.env.SPOTIFY_CLIENT_ID : "";
+// Optional: the site's Last.fm API key (public, read-only) for live "what you're listening to"
+const lastfm = /^[0-9a-f]{32}$/i.test(process.env.LASTFM_API_KEY || "") ? process.env.LASTFM_API_KEY : "";
 if (/^sb_secret_/.test(key)) {
   console.error("VITE_SUPABASE_PUBLISHABLE_KEY is a secret key. Use the publishable (or anon) key instead.");
   process.exit(1);
@@ -13,5 +15,5 @@ if (/^sb_secret_/.test(key)) {
 
 rmSync("dist", { recursive: true, force: true });
 cpSync("public", "dist", { recursive: true });
-writeFileSync("dist/digital-dash-config.js", `window.DASH_CONFIG=${JSON.stringify({ supabaseUrl: url, supabaseKey: key, spotifyClientId: spotify })};`);
+writeFileSync("dist/digital-dash-config.js", `window.DASH_CONFIG=${JSON.stringify({ supabaseUrl: url, supabaseKey: key, spotifyClientId: spotify, lastfmKey: lastfm })};`);
 console.log(url ? `Built dist/ for ${url}` : "Built dist/ without Supabase settings (accounts stay off)");
