@@ -5151,10 +5151,20 @@ const SFX_DEF={on:false,kind:"soft",tap:true,tick:true,vol:60},SFX_KINDS=[["soft
 function sfxGet(){const s=S.settings.sfx;return Object.assign({},SFX_DEF,(s&&typeof s==="object")?s:{});}
 let sfxBus=null,sfxLast=0,sfxNoise=null;
 function sfxOut(){ensureAudio();if(!actx)return null;if(!sfxBus||sfxBus.context!==actx){sfxBus=actx.createGain();sfxBus.connect(actx.destination);sfxNoise=null;}sfxBus.gain.value=Math.pow(sfxGet().vol/100,1.6)*.9;return sfxBus;}
+function sfxNz(){if(!sfxNoise){const n=actx.sampleRate*.25|0;sfxNoise=actx.createBuffer(1,n,actx.sampleRate);const c=sfxNoise.getChannelData(0);for(let i=0;i<n;i++)c[i]=Math.random()*2-1;}return sfxNoise;}
 function sfxBurst(out,t,{f,q=1.5,type="bandpass",v,d}){
-  if(!sfxNoise){const n=actx.sampleRate*.25|0;sfxNoise=actx.createBuffer(1,n,actx.sampleRate);const c=sfxNoise.getChannelData(0);for(let i=0;i<n;i++)c[i]=Math.random()*2-1;}
-  const s=actx.createBufferSource(),fl=actx.createBiquadFilter(),g=actx.createGain();s.buffer=sfxNoise;fl.type=type;fl.frequency.value=f;fl.Q.value=q;
+  const s=actx.createBufferSource(),fl=actx.createBiquadFilter(),g=actx.createGain();s.buffer=sfxNz();fl.type=type;fl.frequency.value=f;fl.Q.value=q;
   g.gain.setValueAtTime(v,t);g.gain.exponentialRampToValueAtTime(.0001,t+d);s.connect(fl).connect(g).connect(out);s.start(t,Math.random()*.2);s.stop(t+d+.02);}
+/* A creamy keyboard (lubed linear switches): a short tap rings a few keycap and case resonances, mostly low and
+   rounded with a little pop and no click, and a softer, higher return as the key comes back up. */
+function sfxCreamy(c,out,t,{v=1,ps=1,up=false,big=false,noise}){
+  const src=c.createBufferSource(),ex=c.createGain();src.buffer=noise;ex.gain.setValueAtTime(v,t);ex.gain.exponentialRampToValueAtTime(.001,t+(up?.004:.007));src.connect(ex);
+  const modes=up?[[430,10,.5],[1000,9,.32],[2050,7,.1]]:[[185,14,1],[330,15,.85],[690,12,.55],[1220,9,.22],[2500,6,.03]];
+  if(big)modes.push([140,14,.7]);
+  for(const [f,q,g] of modes){const bp=c.createBiquadFilter(),gg=c.createGain();bp.type="bandpass";bp.frequency.value=f*ps*(1+(Math.random()-.5)*.06);bp.Q.value=q;gg.gain.value=g*q*1.3;ex.connect(bp).connect(gg).connect(out);}
+  const lp=c.createBiquadFilter(),lg=c.createGain();lp.type="lowpass";lp.frequency.value=(up?1500:950)*ps;lp.Q.value=.7;lg.gain.value=up?.5:1.2;ex.connect(lp).connect(lg).connect(out);
+  src.start(t,Math.random()*.2);src.stop(t+.05);
+}
 function sfxPlay(what,key){
   const o=sfxGet();if(!o.on||(what==="tap"&&!o.tap)||(what==="tick"&&!o.tick))return;
   const now=performance.now();if(what!=="tick"&&now-sfxLast<28)return;sfxLast=now;
@@ -5162,8 +5172,7 @@ function sfxPlay(what,key){
   const t=actx.currentTime+.005,r=1+(Math.random()-.5)*.16,low=key==="Enter"||key===" "?.72:key==="Backspace"?.86:1;
   if(what==="tick"){tone({f:1318,t,dur:.18,peak:.2,out});tone({f:1976,t:t+.07,dur:.34,peak:.16,out});return;}
   if(what==="tap"){sfxBurst(out,t,{f:3200*r,q:2,v:.3,d:.018});tone({f:900*r,fEnd:600,t,dur:.03,peak:.1,out});return;}
-  if(o.kind==="creamy"){sfxBurst(out,t,{f:750*r*low,type:"lowpass",q:.9,v:.9,d:.055});sfxBurst(out,t+.004,{f:1700*r,q:1.2,v:.16,d:.035});
-    tone({f:105*r*low,fEnd:72*low,glide:.05,t,dur:.08,peak:.42,out});sfxBurst(out,t+.048,{f:520*r*low,type:"lowpass",q:.8,v:.32,d:.04});}
+  if(o.kind==="creamy"){const big=low<.8;sfxCreamy(actx,out,t,{v:big?1.15:1,ps:low*r,noise:sfxNz(),big});sfxCreamy(actx,out,t+.075+Math.random()*.03,{v:.42,ps:low*r,noise:sfxNz(),up:true});}
   else if(o.kind==="mech"){sfxBurst(out,t,{f:5200*r,type:"highpass",q:.7,v:.4,d:.012});sfxBurst(out,t+.012,{f:950*r*low,q:2.5,v:.7,d:.05});tone({f:120*low,t:t+.01,dur:.06,peak:.28,out});}
   else if(o.kind==="type"){sfxBurst(out,t,{f:4200*r,q:3,v:.55,d:.022});sfxBurst(out,t+.006,{f:1500*r,q:4,v:.38,d:.03});if(key==="Enter")tone({f:2093,t:t+.06,dur:.6,peak:.14,out});}
   else if(o.kind==="bubble"){tone({f:520*r*low,fEnd:1100*r*low,glide:.04,t,dur:.07,peak:.3,out});}
