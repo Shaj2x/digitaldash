@@ -1261,3 +1261,4 @@
 1299|Meccanico
 1300|Macchina da scrivere
 1301|Bolla
+1302|Cremoso

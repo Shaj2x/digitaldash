@@ -1261,3 +1261,4 @@
 1299|Mechanisch
 1300|Schreibmaschine
 1301|Blase
+1302|Cremig

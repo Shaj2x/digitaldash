@@ -5147,7 +5147,7 @@ renderHover();
    S.settings.sfx = {on, kind, tap, tick, vol}; off until turned on in Themes. Typing sounds follow input events,
    so phone keyboards work too (never password fields), taps play on pointerdown for instant feedback, and ticking
    off a task chimes. Everything is synthesized on the shared actx, so nothing downloads. */
-const SFX_DEF={on:false,kind:"soft",tap:true,tick:true,vol:60},SFX_KINDS=[["soft","Soft"],["mech","Mechanical"],["type","Typewriter"],["bubble","Bubble"]];
+const SFX_DEF={on:false,kind:"soft",tap:true,tick:true,vol:60},SFX_KINDS=[["soft","Soft"],["creamy","Creamy"],["mech","Mechanical"],["type","Typewriter"],["bubble","Bubble"]];
 function sfxGet(){const s=S.settings.sfx;return Object.assign({},SFX_DEF,(s&&typeof s==="object")?s:{});}
 let sfxBus=null,sfxLast=0,sfxNoise=null;
 function sfxOut(){ensureAudio();if(!actx)return null;if(!sfxBus||sfxBus.context!==actx){sfxBus=actx.createGain();sfxBus.connect(actx.destination);sfxNoise=null;}sfxBus.gain.value=Math.pow(sfxGet().vol/100,1.6)*.9;return sfxBus;}
@@ -5162,7 +5162,9 @@ function sfxPlay(what,key){
   const t=actx.currentTime+.005,r=1+(Math.random()-.5)*.16,low=key==="Enter"||key===" "?.72:key==="Backspace"?.86:1;
   if(what==="tick"){tone({f:1318,t,dur:.18,peak:.2,out});tone({f:1976,t:t+.07,dur:.34,peak:.16,out});return;}
   if(what==="tap"){sfxBurst(out,t,{f:3200*r,q:2,v:.3,d:.018});tone({f:900*r,fEnd:600,t,dur:.03,peak:.1,out});return;}
-  if(o.kind==="mech"){sfxBurst(out,t,{f:5200*r,type:"highpass",q:.7,v:.4,d:.012});sfxBurst(out,t+.012,{f:950*r*low,q:2.5,v:.7,d:.05});tone({f:120*low,t:t+.01,dur:.06,peak:.28,out});}
+  if(o.kind==="creamy"){sfxBurst(out,t,{f:750*r*low,type:"lowpass",q:.9,v:.9,d:.055});sfxBurst(out,t+.004,{f:1700*r,q:1.2,v:.16,d:.035});
+    tone({f:105*r*low,fEnd:72*low,glide:.05,t,dur:.08,peak:.42,out});sfxBurst(out,t+.048,{f:520*r*low,type:"lowpass",q:.8,v:.32,d:.04});}
+  else if(o.kind==="mech"){sfxBurst(out,t,{f:5200*r,type:"highpass",q:.7,v:.4,d:.012});sfxBurst(out,t+.012,{f:950*r*low,q:2.5,v:.7,d:.05});tone({f:120*low,t:t+.01,dur:.06,peak:.28,out});}
   else if(o.kind==="type"){sfxBurst(out,t,{f:4200*r,q:3,v:.55,d:.022});sfxBurst(out,t+.006,{f:1500*r,q:4,v:.38,d:.03});if(key==="Enter")tone({f:2093,t:t+.06,dur:.6,peak:.14,out});}
   else if(o.kind==="bubble"){tone({f:520*r*low,fEnd:1100*r*low,glide:.04,t,dur:.07,peak:.3,out});}
   else{sfxBurst(out,t,{f:2600*r*low,q:1.2,v:.45,d:.03});tone({f:170*r*low,t,dur:.045,peak:.22,out});}

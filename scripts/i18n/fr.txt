@@ -1261,3 +1261,4 @@
 1299|Mécanique
 1300|Machine à écrire
 1301|Bulle
+1302|Crémeux
