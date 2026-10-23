@@ -1360,3 +1360,6 @@
 1398|Masquer Dash Island
 1399|Dash Island masquée. Réactivez-la dans le panneau Spotify de Focus.
 1400|Dash Island apparaît pendant la lecture d'un titre.
+1401|L'écoute en direct n'est pas encore activée sur ce site.
+1402|Voyez le titre que vous écoutez sur Spotify, sur n'importe quel appareil, en direct. Liez Spotify à un compte Last.fm gratuit, puis saisissez votre nom Last.fm :
+1403|Le titre que vous écoutez sur Spotify, en direct via Last.fm

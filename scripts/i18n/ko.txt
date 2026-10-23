@@ -1360,3 +1360,6 @@
 1398|Dash Island 숨기기
 1399|Dash Island를 숨겼어요. 집중 페이지의 Spotify 패널에서 다시 켤 수 있어요.
 1400|곡이 재생 중일 때 Dash Island가 나타나요.
+1401|이 사이트에서는 실시간 감상이 아직 켜져 있지 않아요.
+1402|어떤 기기에서든 Spotify로 듣는 곡을 실시간으로 보세요. Spotify를 무료 Last.fm 계정에 연결한 뒤 Last.fm 사용자 이름을 입력하세요:
+1403|Spotify에서 듣는 곡을 Last.fm으로 실시간 표시

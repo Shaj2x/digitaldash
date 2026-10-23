@@ -1360,3 +1360,6 @@
 1398|Ocultar Dash Island
 1399|Dash Island oculta. Vuelve a activarla en el panel de Spotify en Enfoque.
 1400|Dash Island aparece mientras suena una canción.
+1401|La escucha en vivo aún no está activada en este sitio.
+1402|Ve la canción que suena en Spotify, en cualquier dispositivo, en vivo. Vincula Spotify a una cuenta gratis de Last.fm y escribe tu usuario de Last.fm:
+1403|La canción que suena en Spotify, en vivo vía Last.fm

@@ -505,6 +505,7 @@ html.has-bg .day{background:color-mix(in srgb,var(--panel2) 70%,transparent)}
 .np-art img{width:100%;height:100%;object-fit:cover;display:block}
 .np-art svg,.np-empty svg,.np-lead svg{width:26px;height:26px}
 .np-meta{flex:1;min-width:0;display:grid;gap:2px}
+.np-meta .np-open{justify-self:start;margin-top:8px;text-decoration:none}
 .np-state{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--muted)}
 .np-state.on{color:var(--accent)}
 .np-state:not(.on) .eq i{animation:none}
@@ -4717,6 +4718,7 @@ async function npFetch(){
 function npProg(){const d=NP.data;if(!d)return 0;return Math.min(d.dur,d.prog+(d.playing?Date.now()-NP.at:0));}
 const NP_ICON='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>';
 function npHtml(){
+  if(!NP.tok&&typeof lfWidgetHtml==="function")return lfWidgetHtml();
   if(!NP.tok){
     if(npEmbedded())return `<div class="np-empty">${NP_ICON}<p>Connect Spotify from your own site to see what you're playing here. This preview can't sign in to Spotify.</p></div>`;
     if(npSiteCid())return `<div class="np-setup">${NP.err?`<p class="np-err">${esc(NP.err)}</p>`:""}<p class="np-lead">${NP_ICON}<span>See what you're playing on Spotify, live, and play, pause or skip without leaving your dashboard.</span></p>
@@ -4788,7 +4790,7 @@ const WT={
  image:{name:"Image",title:"Image",desc:"Your own photo or graphic",cfg:{src:"",fit:"cover",height:"m",caption:"",showTitle:false}},
  donewk:{name:"Done this week",title:"Done this week",desc:"Tasks you finished since Monday"},
  week:{name:"Week so far",title:"This week",desc:"Focus time, sessions and tasks done"},
- spotify:{name:"Now playing",title:"Now playing",desc:"The song you're playing on Spotify"}
+ spotify:{name:"Now playing",title:"Now playing",desc:"The song you're playing on Spotify, live via Last.fm"}
 };
 let wEdit=false, wCfg=null, noteT;
 const ICON={left:'<path d="m15 6-6 6 6 6"/>',right:'<path d="m9 6 6 6-6 6"/>',size:'<path d="M4 9V4h5M20 15v5h-5M4 4l6 6M20 20l-6-6"/>',cfg:'<circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1"/>',del:'<path d="M6 6l12 12M18 6 6 18"/>'};
@@ -6529,8 +6531,26 @@ function lfRender(){
     +(LF.err&&top?`<p class="hint" style="margin:10px 0 0">${esc(LF.err)}</p>`:"")
     +`<label class="lf-opt"><input type="checkbox" data-lf="isle"${st.island?" checked":""}><span><b>Dash Island</b><small class="muted" style="display:block;font-size:12.5px">Your song, live at the top of every page</small></span></label>`
     +`<div class="lf-foot"><span>Live from Last.fm · ${esc(st.lfm)}</span><button type="button" class="btn ghost small" data-lf="change">Change</button><button type="button" class="btn ghost small" data-lf="off">Stop showing</button></div>`;
-  isleRender();
+  isleRender();if(typeof npPaint==="function"&&npHas())npPaint(true);
 }
+/* The Now playing widget shows the same live listening (unless someone already connected Spotify directly). */
+function lfWidgetHtml(){
+  const st=spS();
+  if(!lfKey())return `<div class="np-empty">${NP_ICON}<p>Live listening isn't switched on for this site yet.</p></div>`;
+  if(!st.lfm)return `<div class="np-setup"><p class="np-lead">${NP_ICON}<span>See the song you're playing on Spotify, on any device, live. Link Spotify to a free Last.fm account, then enter your Last.fm username:</span></p>
+    <form class="np-form" data-lfwform autocomplete="off"><input type="text" maxlength="40" placeholder="Last.fm username" aria-label="Last.fm username" spellcheck="false"><button class="btn" type="submit">Show it</button></form>
+    <p class="hint" style="margin:0"><a href="https://www.last.fm/join" target="_blank" rel="noopener">Make a free Last.fm account</a> · <a href="https://www.last.fm/settings/applications" target="_blank" rel="noopener">Connect Spotify in your Last.fm settings</a></p></div>`;
+  const tr=LF.data||[],t=tr[0];
+  if(!t)return `<div class="np-empty">${NP_ICON}<p>${esc(LF.err||(LF.data?"Nothing played yet. Play something on Spotify and it shows up here.":"Loading your listening…"))}</p></div>`;
+  const now=!!(t["@attr"]&&t["@attr"].nowplaying==="true"),art=(t.artist&&(t.artist["#text"]||t.artist.name))||"",img=lfImg(t);
+  return `<div class="np-row"><div class="np-art">${img?`<img src="${esc(img)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.visibility='hidden'">`:NP_ICON}</div>
+    <div class="np-meta"><span class="np-state${now?" on":""}">${now?`<span class="eq" aria-hidden="true"><i></i><i></i><i></i></span>Listening now`:`Last played${t.date?" · "+lfAgo(+t.date.uts):""}`}</span>
+      <b class="np-t" title="${esc(t.name||"")}">${esc(t.name||"")}</b><span class="np-a" title="${esc(art)}">${esc(art)}</span>
+      <a class="btn ghost small np-open" href="https://open.spotify.com/search/${encodeURIComponent(art+" "+(t.name||""))}" target="_blank" rel="noopener">Open in Spotify</a></div></div>`;
+}
+document.addEventListener("submit",e=>{const f=e.target.closest("[data-lfwform]");if(!f)return;e.preventDefault();const u=f.querySelector("input").value.trim().replace(/^@/,"");
+  if(!/^[A-Za-z][\w-]{1,14}$/.test(u)){toast("Last.fm usernames are 2 to 15 letters, numbers, - or _.");return;}
+  spS().lfm=u;LF.data=null;LF.err="";save();lfRender();lfFetch();});
 /* Dash Island: a black pill at the top centre while a song is playing; tap it for the details. */
 let isleKey="";
 function isleRender(){

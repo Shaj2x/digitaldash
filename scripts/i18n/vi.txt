@@ -1360,3 +1360,6 @@
 1398|Ẩn Dash Island
 1399|Đã ẩn Dash Island. Bật lại trong bảng Spotify ở trang Tập trung.
 1400|Dash Island hiện lên khi đang phát một bài.
+1401|Tính năng nghe trực tiếp chưa được bật trên trang này.
+1402|Xem bài bạn đang nghe trên Spotify, trên mọi thiết bị, trực tiếp. Liên kết Spotify với tài khoản Last.fm miễn phí, rồi nhập tên người dùng Last.fm:
+1403|Bài bạn đang nghe trên Spotify, trực tiếp qua Last.fm

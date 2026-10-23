@@ -1360,3 +1360,6 @@
 1398|隐藏 Dash Island
 1399|已隐藏 Dash Island。可在专注页的 Spotify 面板重新开启。
 1400|播放歌曲时会显示 Dash Island。
+1401|本网站尚未开启实时收听。
+1402|实时查看你在任何设备上用 Spotify 播放的歌曲。将 Spotify 连接到免费的 Last.fm 账户，然后输入你的 Last.fm 用户名：
+1403|你在 Spotify 上播放的歌曲，通过 Last.fm 实时显示
