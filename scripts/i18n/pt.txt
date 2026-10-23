@@ -1249,3 +1249,15 @@
 1287|Restaurar todos os títulos e subtítulos
 1288|Já são os originais
 1289|Títulos e subtítulos restaurados
+1290|Efeitos sonoros
+1291|Sons suaves e satisfatórios ao digitar, tocar em botões e concluir tarefas.
+1292|Som ao digitar
+1293|Toques e cliques
+1294|Ao concluir uma tarefa
+1295|Volume dos efeitos sonoros
+1296|Digite aqui para ouvir
+1297|Testar o som ao digitar
+1298|Suave
+1299|Mecânico
+1300|Máquina de escrever
+1301|Bolha

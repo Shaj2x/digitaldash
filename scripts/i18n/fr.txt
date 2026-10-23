@@ -1249,3 +1249,15 @@
 1287|Rétablir tous les titres et sous-titres
 1288|Ce sont déjà les originaux
 1289|Titres et sous-titres rétablis
+1290|Effets sonores
+1291|Des sons doux et satisfaisants quand vous tapez, touchez un bouton ou cochez une tâche.
+1292|Son de frappe
+1293|Touches et clics
+1294|Cocher une tâche
+1295|Volume des effets sonores
+1296|Tapez ici pour l'entendre
+1297|Essayer le son de frappe
+1298|Doux
+1299|Mécanique
+1300|Machine à écrire
+1301|Bulle

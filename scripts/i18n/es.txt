@@ -1249,3 +1249,15 @@
 1287|Restablecer todos los títulos y subtítulos
 1288|Ya son los originales
 1289|Títulos y subtítulos restablecidos
+1290|Efectos de sonido
+1291|Sonidos suaves y satisfactorios al escribir, tocar botones y marcar tareas.
+1292|Sonido al escribir
+1293|Toques y clics
+1294|Al marcar una tarea
+1295|Volumen de los efectos de sonido
+1296|Escribe aquí para oírlo
+1297|Prueba el sonido al escribir
+1298|Suave
+1299|Mecánico
+1300|Máquina de escribir
+1301|Burbuja

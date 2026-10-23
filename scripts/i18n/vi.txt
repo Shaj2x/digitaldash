@@ -1249,3 +1249,15 @@
 1287|Khôi phục tất cả tiêu đề và phụ đề
 1288|Đây đã là bản gốc
 1289|Đã khôi phục tiêu đề và phụ đề
+1290|Hiệu ứng âm thanh
+1291|Âm thanh nhẹ nhàng, dễ chịu khi bạn gõ, chạm nút và đánh dấu xong việc.
+1292|Âm gõ phím
+1293|Chạm và nhấp
+1294|Khi đánh dấu xong việc
+1295|Âm lượng hiệu ứng
+1296|Gõ vào đây để nghe thử
+1297|Thử âm gõ phím
+1298|Nhẹ
+1299|Cơ học
+1300|Máy đánh chữ
+1301|Bong bóng

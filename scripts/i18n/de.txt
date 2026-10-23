@@ -1249,3 +1249,15 @@
 1287|Alle Titel und Untertitel zurücksetzen
 1288|Das sind schon die Originale
 1289|Titel und Untertitel zurückgesetzt
+1290|Soundeffekte
+1291|Sanfte, angenehme Klänge beim Tippen, Antippen von Buttons und Abhaken von Aufgaben.
+1292|Tippgeräusch
+1293|Antippen und Klicks
+1294|Aufgabe abhaken
+1295|Lautstärke der Soundeffekte
+1296|Hier tippen zum Anhören
+1297|Tippgeräusch ausprobieren
+1298|Sanft
+1299|Mechanisch
+1300|Schreibmaschine
+1301|Blase

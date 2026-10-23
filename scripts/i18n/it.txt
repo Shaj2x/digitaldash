@@ -1249,3 +1249,15 @@
 1287|Ripristina tutti i titoli e sottotitoli
 1288|Sono già gli originali
 1289|Titoli e sottotitoli ripristinati
+1290|Effetti sonori
+1291|Suoni morbidi e appaganti mentre scrivi, tocchi i pulsanti e completi le attività.
+1292|Suono di digitazione
+1293|Tocchi e clic
+1294|Completare un'attività
+1295|Volume degli effetti sonori
+1296|Scrivi qui per sentirlo
+1297|Prova il suono di digitazione
+1298|Morbido
+1299|Meccanico
+1300|Macchina da scrivere
+1301|Bolla
