@@ -1374,3 +1374,15 @@
 1412|En vista previa
 1413|Quedármelo
 1414|Vista previa de "{0}"
+1415|Consigue la app de Digital Dash
+1416|Añádela a tu pantalla de inicio. Se abre a pantalla completa y funciona sin conexión.
+1417|Ahora no
+1418|Instalar
+1419|Muéstrame cómo
+1420|Ocultar pasos
+1421|Consigue la app
+1422|Oculto. Busca "install" cuando quieras para conseguir la app.
+1423|Inicia sesión para añadir amigos
+1424|Aún no está configurado. Es gratis y lleva un minuto.
+1425|Configurar
+1426|Horas

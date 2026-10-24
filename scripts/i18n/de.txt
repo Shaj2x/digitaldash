@@ -1374,3 +1374,15 @@
 1412|Vorschau aktiv
 1413|Behalten
 1414|Vorschau: „{0}“
+1415|Hol dir die Digital Dash App
+1416|Füg sie zum Startbildschirm hinzu. Sie öffnet im Vollbild und funktioniert offline.
+1417|Nicht jetzt
+1418|Installieren
+1419|Zeig mir wie
+1420|Schritte ausblenden
+1421|App holen
+1422|Ausgeblendet. Such jederzeit nach „install“, um die App zu holen.
+1423|Melde dich an, um Freunde hinzuzufügen
+1424|Noch nicht eingerichtet. Kostenlos, dauert eine Minute.
+1425|Einrichten
+1426|Stunden

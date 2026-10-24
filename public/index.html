@@ -240,6 +240,9 @@ details p{margin:8px 0 0;color:var(--muted);max-width:60em}
 /* app store waitlist */
 .apps{padding-top:clamp(64px,9vw,110px);display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:20px 56px;align-items:end}
 .apps .sec-h{margin-bottom:0}
+.getapp-how{margin:14px 0 0;padding:14px 16px 14px 34px;border-radius:14px;background:color-mix(in srgb,currentColor 7%,transparent);display:grid;gap:8px;font-size:15px;line-height:1.45;max-width:440px}
+.getapp-how[hidden]{display:none}
+.getapp-b[hidden]{display:none}
 .wl{display:grid;gap:12px}
 .wl-pf{display:flex;gap:8px;flex-wrap:wrap}
 .wl-pf label{position:relative}
@@ -425,7 +428,8 @@ html.cur,html.cur *{cursor:none!important}
       <span class="eyebrow rv" style="--i:1">Free · Extremely customizable · Works offline</span>
       <h1><span class="rv hl1" style="--i:2">Plan it. Focus.</span><br><span class="o rv" style="--i:3" id="fillt">Make it yours.<span class="fill" aria-hidden="true">Make it yours.</span></span></h1>
       <p class="lead rv" style="--i:4">Your focus timer, to-do list, week planner, grades and gym log in one app, styled exactly the way you want, down to the font on your clock.</p>
-      <div class="ctas rv" style="--i:5"><a class="btn pri big mag" href="/digital-dash">Open Digital Dash</a><button type="button" class="btn big" id="shuffle"><svg class="dice" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="8.5" cy="8.5" r="1.4" fill="currentColor"/><circle cx="15.5" cy="15.5" r="1.4" fill="currentColor"/><circle cx="12" cy="12" r="1.4" fill="currentColor"/></svg>Try a new look</button></div>
+      <div class="ctas rv" style="--i:5"><a class="btn pri big mag" href="/digital-dash">Open Digital Dash</a><button type="button" class="btn big" id="shuffle"><svg class="dice" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="8.5" cy="8.5" r="1.4" fill="currentColor"/><circle cx="15.5" cy="15.5" r="1.4" fill="currentColor"/><circle cx="12" cy="12" r="1.4" fill="currentColor"/></svg>Try a new look</button><button type="button" class="btn big getapp-b" id="getapp-b" hidden><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5"/><path d="M5 21h14"/></svg>Get the app</button></div>
+      <ol class="getapp-how" id="getapp-how" hidden></ol>
       <p class="shuf" id="shuf" aria-live="polite"></p>
       <div class="trust rv" style="--i:6"><span>No account needed</span><span>Syncs if you sign in</span><span>Phone, tablet and computer</span></div>
     </div>
@@ -746,6 +750,15 @@ html.cur,html.cur *{cursor:none!important}
       remember();applyPage();draw();
       $("#shuf").innerHTML=`Now: <b>${SK[st.skin][0]}</b> theme, ${CK.find(c=>c[0]===st.clock)[1].toLowerCase()} clock, ${FN[st.font][0]} font. <a href="#yours">Fine-tune it</a>`;});
     applyPhone();if(!reduce)dice.style.transform=`rotate(${++rolls*180}deg)`;});
+  /* Get the app (phones only): the real install prompt where the browser offers one, otherwise Add to Home Screen steps */
+  {const b=$("#getapp-b"),how=$("#getapp-how"),standalone=matchMedia("(display-mode: standalone)").matches||navigator.standalone===true,
+     phone=matchMedia("(pointer:coarse)").matches&&matchMedia("(max-width:1024px)").matches,iOS=/iPhone|iPad|iPod/.test(navigator.userAgent)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1);
+   let pr=null;addEventListener("beforeinstallprompt",e=>{e.preventDefault();pr=e;});
+   if(b&&phone&&!standalone){b.hidden=false;
+     b.addEventListener("click",async()=>{if(pr){pr.prompt();try{await pr.userChoice;}catch(e){}pr=null;return;}
+       how.innerHTML=iOS?'<li>Tap the <b>Share</b> button in Safari (in Chrome it\'s next to the address bar).</li><li>Scroll down and tap <b>Add to Home Screen</b>.</li><li>Tap <b>Add</b>, then open Digital Dash from your home screen.</li>'
+         :'<li>Tap the <b>⋮</b> menu in your browser.</li><li>Tap <b>Install app</b> or <b>Add to Home screen</b>.</li><li>Tap <b>Install</b>, then open Digital Dash from your home screen.</li>';
+       how.hidden=!how.hidden;});}}
   /* install help */
   let deferred=null;addEventListener("beforeinstallprompt",e=>{e.preventDefault();deferred=e;});
   const ios=/iPhone|iPad|iPod/.test(navigator.userAgent)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1);

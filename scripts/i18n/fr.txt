@@ -1374,3 +1374,15 @@
 1412|Aperçu actif
 1413|Garder
 1414|Aperçu de « {0} »
+1415|Obtenez l'app Digital Dash
+1416|Ajoutez-la à votre écran d'accueil. Elle s'ouvre en plein écran et fonctionne hors ligne.
+1417|Pas maintenant
+1418|Installer
+1419|Montrez-moi comment
+1420|Masquer les étapes
+1421|Obtenir l'app
+1422|Masqué. Recherchez « install » à tout moment pour obtenir l'app.
+1423|Connectez-vous pour ajouter des amis
+1424|Pas encore configuré. C'est gratuit et ça prend une minute.
+1425|Configurer
+1426|Heures

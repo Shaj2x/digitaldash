@@ -1374,3 +1374,15 @@
 1412|Đang xem trước
 1413|Giữ lại
 1414|Đang xem trước "{0}"
+1415|Tải ứng dụng Digital Dash
+1416|Thêm vào màn hình chính. Mở toàn màn hình và dùng được ngoại tuyến.
+1417|Để sau
+1418|Cài đặt
+1419|Chỉ tôi cách làm
+1420|Ẩn các bước
+1421|Tải ứng dụng
+1422|Đã ẩn. Tìm "install" bất cứ lúc nào để tải ứng dụng.
+1423|Đăng nhập để thêm bạn
+1424|Chưa thiết lập. Miễn phí và chỉ mất một phút.
+1425|Thiết lập
+1426|Giờ
