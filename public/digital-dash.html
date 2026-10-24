@@ -3545,14 +3545,18 @@ function setTaskDone(t,done){
 }
 function undoDone(t){if(!t.done)return;setTaskDone(t,false);save();renderTasks();renderNowTask();renderMini();renderTimerTag();updatePressure();toast("Back on your list");}
 function afterTaskChange(delay){clearTimeout(taskHold);taskHold=setTimeout(()=>{renderTasks();renderNowTask();renderMini();renderTimerTag();},delay);}
-$("#task-form").addEventListener("submit",e=>{e.preventDefault();const title=$("#t-title").value.trim();if(!title)return;
-  let due=$("#t-due").value;const dueTime=$("#t-time").value;if(dueTime&&!due)due=dkey(new Date()); // a time alone means today
-  const rep=formRep(),course=$("#t-course").value.trim().slice(0,32);
+$("#task-form").addEventListener("submit",e=>{e.preventDefault();let title=$("#t-title").value.trim();if(!title)return;
+  let due=$("#t-due").value,dueTime=$("#t-time").value,rep=formRep(),course=$("#t-course").value.trim().slice(0,32),urg=+$("#t-urg").value;
+  /* typed details ("essay friday 5pm high") fill only the fields left empty; anything picked in the form wins */
+  const pt=!due&&!dueTime&&!rep?parseTask(title):null;
+  if(pt&&pt.title&&pt.title!==title){title=pt.title;if(pt.due)due=pt.due;if(pt.time)dueTime=pt.time;if(pt.rep)rep=pt.rep;
+    if(urg===2&&pt.urg!==2)urg=pt.urg;if(!course&&pt.course)course=pt.course;}
+  if(dueTime&&!due)due=dkey(new Date()); // a time alone means today
   if(rep&&!due)due=firstDue(rep);
-  const t={id:uid(),title,urg:+$("#t-urg").value,due,dueTime,done:false,created:Date.now()};if(rep)t.rep=rep;if(course)t.course=course;
+  const t={id:uid(),title,urg,due,dueTime,done:false,created:Date.now()};if(rep)t.rep=rep;if(course)t.course=course;
   const pj=$("#t-proj").value||projFilter;if(pj&&projOf(pj))t.proj=pj;
   S.tasks.push(t);
-  $("#t-title").value="";$("#t-due").value="";$("#t-time").value="";$("#t-rep").value="";$("#t-days").hidden=true;save();renderTasks();renderNowTask();renderMini();renderCourses();});
+  $("#t-title").value="";$("#t-due").value="";$("#t-time").value="";$("#t-rep").value="";$("#t-days").hidden=true;save();renderTasks();updatePressure();renderCal();renderNowTask();renderMini();renderCourses();});
 $("#t-rep").addEventListener("change",()=>{const v=$("#t-rep").value,box=$("#t-days");box.hidden=!/^w2?$/.test(v);
   if(!box.hidden&&!box.children.length){const dd=$("#t-due").value?new Date($("#t-due").value+"T12:00").getDay():new Date().getDay();box.innerHTML=[1,2,3,4,5,6,0].map(d=>`<button type="button" data-d="${d}" aria-pressed="${d===dd}" aria-label="${WDAYS_LONG[d]}">${WDAYS_LONG[d].slice(0,2)}</button>`).join("");}});
 $("#t-days").addEventListener("click",e=>{const b=e.target.closest("button[data-d]");if(!b)return;const on=b.getAttribute("aria-pressed")!=="true";if(!on&&$$("#t-days [aria-pressed=true]").length===1)return;b.setAttribute("aria-pressed",on);});

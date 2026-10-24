@@ -1419,3 +1419,6 @@
 1456|Hẹn giờ tùy chỉnh giờ nhận giờ, phút và giây.
 1457|Thêm Digital Dash vào màn hình chính điện thoại. Ứng dụng mở toàn màn hình và dùng được khi ngoại tuyến.
 1458|Trên điện thoại, mở digitaldashdaily.com và nhấn Tải ứng dụng. Trên máy tính, dùng nút Cài đặt của trình duyệt trên thanh địa chỉ.
+1459|Nhóm việc vào dự án
+1460|Gõ một phong cách, nhận giao diện
+1461|Xem bài đang phát, trực tiếp

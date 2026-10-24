@@ -1419,3 +1419,6 @@
 1456|Los temporizadores personalizados ahora aceptan horas, minutos y segundos.
 1457|Añade Digital Dash a la pantalla de inicio de tu teléfono. Se abre a pantalla completa y funciona sin conexión.
 1458|En tu teléfono, abre digitaldashdaily.com y toca Obtener la app. En un ordenador, usa el botón Instalar del navegador en la barra de direcciones.
+1459|Agrupa tareas en proyectos
+1460|Escribe un ambiente, obtén un estilo
+1461|Mira lo que suena, en vivo

@@ -1419,3 +1419,6 @@
 1456|Temporizadores personalizados agora aceitam horas, minutos e segundos.
 1457|Adicione o Digital Dash à tela inicial do seu celular. Ele abre em tela cheia e funciona offline.
 1458|No celular, abra digitaldashdaily.com e toque em Baixar o app. No computador, use o botão Instalar do navegador na barra de endereço.
+1459|Agrupe tarefas em projetos
+1460|Descreva um clima, ganhe um visual
+1461|Veja o que está tocando, ao vivo

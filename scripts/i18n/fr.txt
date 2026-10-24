@@ -1419,3 +1419,6 @@
 1456|Les minuteurs personnalisés acceptent maintenant les heures, minutes et secondes.
 1457|Ajoutez Digital Dash à l'écran d'accueil de votre téléphone. Il s'ouvre en plein écran et fonctionne hors ligne.
 1458|Sur votre téléphone, ouvrez digitaldashdaily.com et touchez Obtenir l'app. Sur un ordinateur, utilisez le bouton Installer du navigateur dans la barre d'adresse.
+1459|Regroupez vos tâches en projets
+1460|Décrivez une ambiance, obtenez un style
+1461|Voyez ce qui joue, en direct

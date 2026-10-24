@@ -1419,3 +1419,6 @@
 1456|I timer personalizzati ora accettano ore, minuti e secondi.
 1457|Aggiungi Digital Dash alla schermata Home del telefono. Si apre a schermo intero e funziona offline.
 1458|Sul telefono apri digitaldashdaily.com e tocca Scarica l'app. Sul computer usa il pulsante Installa del browser nella barra degli indirizzi.
+1459|Raggruppa le attività in progetti
+1460|Scrivi un'atmosfera, ottieni uno stile
+1461|Guarda cosa suona, dal vivo

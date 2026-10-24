@@ -1419,3 +1419,6 @@
 1456|Eigene Timer nehmen jetzt Stunden, Minuten und Sekunden.
 1457|Füge Digital Dash zum Startbildschirm deines Handys hinzu. Es öffnet sich im Vollbild und funktioniert offline.
 1458|Öffne auf dem Handy digitaldashdaily.com und tippe auf App holen. Am Computer nutze die Installieren-Schaltfläche des Browsers in der Adressleiste.
+1459|Aufgaben in Projekte gruppieren
+1460|Stimmung eingeben, Look bekommen
+1461|Sieh live, was läuft

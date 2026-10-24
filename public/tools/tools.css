@@ -38,7 +38,7 @@ h1,h2{overflow-wrap:anywhere;hyphens:auto;font-family:var(--display);text-transf
 .hero p{margin:0;color:var(--muted);font-size:clamp(16px,1.8vw,19px);max-width:40em}
 /* the calculator card */
 .tool{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:20px;align-items:start;padding-bottom:clamp(40px,6vw,64px)}
-@media (max-width:860px){.tool{grid-template-columns:1fr}}
+@media (max-width:860px){.tool{grid-template-columns:minmax(0,1fr)}}
 .card{background:var(--panel);border:1.5px solid var(--ink);border-radius:6px;padding:20px;box-shadow:5px 5px 0 var(--ink)}
 .card h2{font-size:28px;margin:0 0 14px}
 .out{position:sticky;top:80px}
@@ -132,11 +132,11 @@ footer a:hover{color:var(--ink)}
 .tdemo .c-bars .on i{opacity:1}
 .tdemo .c-out{display:flex;align-items:baseline;gap:8px}
 .tdemo .c-out strong{font-size:32px}
-.go{justify-self:end;transition:transform .2s var(--ease-out)}
+.tr .go{justify-self:end;transition:transform .2s var(--ease-out)}
 @media (hover:hover) and (pointer:fine){.tr a:hover .tn{color:var(--ink)}.tr a:hover .tdemo{transform:translate(-2px,-2px);box-shadow:7px 7px 0 var(--ink)}.tr a:hover .go{transform:translateX(4px)}}
 .tr a:active .tdemo{transform:translate(3px,3px);box-shadow:2px 2px 0 var(--ink);transition-duration:.1s}
 .tr a:focus-visible{outline-offset:-2px}
-@media (max-width:860px){.tr a{grid-template-columns:52px minmax(0,1fr) 28px;grid-template-areas:"n x g" "d d d"}.tn{grid-area:n;font-size:40px;align-self:start}.tx{grid-area:x}.go{grid-area:g;align-self:start}.tdemo{grid-area:d;margin-top:6px}}
+@media (max-width:860px){.tr a{grid-template-columns:52px minmax(0,1fr) 28px;grid-template-areas:"n x g" "d d d"}.tn{grid-area:n;font-size:40px;align-self:start}.tx{grid-area:x}.tr .go{grid-area:g;align-self:start}.tdemo{grid-area:d;margin-top:6px}}
 .hub-cta{margin:clamp(40px,6vw,72px) auto}
 .hub-cta>div{display:flex;align-items:center;justify-content:space-between;gap:24px 40px;flex-wrap:wrap;padding:clamp(28px,4vw,40px) 0;border-top:3px solid var(--ink);border-bottom:1.5px solid var(--ink)}
 .hub-cta>div>div{flex:1 1 420px}
