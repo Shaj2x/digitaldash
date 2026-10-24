@@ -1386,3 +1386,36 @@
 1424|Chưa thiết lập. Miễn phí và chỉ mất một phút.
 1425|Thiết lập
 1426|Giờ
+
+1427|Tất cả việc
+1428|+ Dự án mới
+1429|Tên dự án
+1430|Đổi tên
+1431|Đổi màu
+1432|Xóa
+1433|Dự án
+1434|Không có dự án
+1435|Dự án này
+1436|Dự án này chưa có việc nào. Thêm một việc ở trên và nó sẽ vào thẳng đây.
+1437|Bạn có thể có 30 dự án. Hãy xóa một dự án trước.
+1438|Bạn đã có dự án với tên đó
+1439|Đã tạo {0}
+1440|Đã xóa {0}. {n} việc của nó vẫn ở Tất cả việc
+1441|Đã xóa {0}. {n} việc của nó vẫn ở Tất cả việc
+1442|Đã xóa {0}
+1443|Đã đổi tên thành {0}
+1444|Dự án
+1445|Tháng 10 năm 2026
+1446|Xem
+1447|Đã hiểu
+1448|Thư mục dự án
+1449|Nhóm các việc vào dự án và chuyển giữa chúng ngay trên danh sách.
+1450|Gõ một phong cách như "Tokyo mưa neon", xem trước ba giao diện và giữ cái bạn thích.
+1451|Spotify trực tiếp và Dash Island
+1452|Xem bài bạn đang nghe trên mọi thiết bị và ghim nó lên đầu màn hình.
+1453|Thẻ Mua sắm trong Việc cần làm, sắp xếp danh sách theo quầy hàng.
+1454|Âm thanh gõ phím, chạm và đánh dấu, có cả bàn phím creamy. Bật trong Giao diện.
+1455|Giờ trong hẹn giờ
+1456|Hẹn giờ tùy chỉnh giờ nhận giờ, phút và giây.
+1457|Thêm Digital Dash vào màn hình chính điện thoại. Ứng dụng mở toàn màn hình và dùng được khi ngoại tuyến.
+1458|Trên điện thoại, mở digitaldashdaily.com và nhấn Tải ứng dụng. Trên máy tính, dùng nút Cài đặt của trình duyệt trên thanh địa chỉ.

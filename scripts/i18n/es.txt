@@ -1386,3 +1386,36 @@
 1424|Aún no está configurado. Es gratis y lleva un minuto.
 1425|Configurar
 1426|Horas
+
+1427|Todas las tareas
+1428|+ Nuevo proyecto
+1429|Nombre del proyecto
+1430|Renombrar
+1431|Cambiar color
+1432|Eliminar
+1433|Proyecto
+1434|Sin proyecto
+1435|Este proyecto
+1436|Aún no hay tareas en este proyecto. Añade una arriba y entrará directamente aquí.
+1437|Puedes tener 30 proyectos. Elimina uno primero.
+1438|Ya tienes un proyecto con ese nombre
+1439|Creado {0}
+1440|Eliminado {0}. Su {n} tarea queda en Todas las tareas
+1441|Eliminado {0}. Sus {n} tareas quedan en Todas las tareas
+1442|Eliminado {0}
+1443|Renombrado a {0}
+1444|Proyectos
+1445|Octubre de 2026
+1446|Muéstramelo
+1447|Entendido
+1448|Carpetas de proyectos
+1449|Agrupa tareas en proyectos y cambia entre ellos encima de tu lista.
+1450|Escribe un ambiente como "Tokio lluvioso neón", previsualiza tres estilos y quédate con el que te guste.
+1451|Spotify en vivo y Dash Island
+1452|Mira lo que suena en cualquier dispositivo y fíjalo en la parte superior de la pantalla.
+1453|Una pestaña de Compras en Tareas que ordena tu lista por pasillo.
+1454|Sonidos de teclado, toque y marca, incluido un teclado cremoso. Actívalos en Temas.
+1455|Horas en los temporizadores
+1456|Los temporizadores personalizados ahora aceptan horas, minutos y segundos.
+1457|Añade Digital Dash a la pantalla de inicio de tu teléfono. Se abre a pantalla completa y funciona sin conexión.
+1458|En tu teléfono, abre digitaldashdaily.com y toca Obtener la app. En un ordenador, usa el botón Instalar del navegador en la barra de direcciones.

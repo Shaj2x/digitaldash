@@ -297,6 +297,28 @@ html.lg .addbar .addmore input[type=text]{background:var(--glass-tint);border-co
 .steps form{display:flex;gap:8px}
 .steps form input{flex:1;min-width:0;font-size:14px;padding:7px 10px}
 @media (prefers-reduced-motion:reduce){.tprog i b{transition:none}.am-days button:active{transform:none}}
+.proj-bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:18px 0 0}
+.proj-bar>button,.proj-bar .pj-new{display:inline-flex;align-items:center;gap:8px;min-height:36px;padding:6px 14px;border-radius:999px;border:1px solid var(--line);background:var(--panel);color:var(--ink);font:inherit;font-size:14px;cursor:pointer}
+.proj-bar>button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.proj-bar>button small{opacity:.65;font-variant-numeric:tabular-nums}
+.proj-bar .pj-add{border-style:dashed;color:var(--muted)}
+.pdot{width:9px;height:9px;border-radius:50%;flex:none;background:var(--pc,var(--accent))}
+.pj-new{cursor:default!important;padding:4px 4px 4px 12px!important}
+.pj-new input{border:0;background:none;padding:4px;min-width:0;width:150px;font-size:14px;color:var(--ink)}
+.pj-new input:focus{outline:none}
+.proj-head[hidden]{display:none}
+.news-l{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.news-l li{display:grid;grid-template-columns:34px minmax(0,1fr) auto;gap:12px;align-items:center;padding:10px 12px;border-radius:12px;background:var(--panel2)}
+.news-l .ni{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:color-mix(in srgb,var(--accent) 18%,transparent);color:var(--accent);font-size:17px}
+.news-l b{display:block;font-size:15px}
+.news-l span{display:block;font-size:13.5px;color:var(--muted);line-height:1.4}
+.news-when{margin:0 0 10px;font-size:12.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.proj-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:14px 0 0}
+.proj-head h2{margin:0;font-size:20px;display:flex;align-items:center;gap:10px}
+.proj-head h2 .pdot{width:12px;height:12px}
+.proj-head .ph-acts{margin-left:auto;display:flex;gap:6px}
+.proj-head input{font-size:17px;max-width:260px}
+.tchip.pchip{display:inline-flex;align-items:center;gap:5px}
 .filters{margin:20px 0 10px;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
 .counts{color:var(--muted);font-size:14px}
 .tasks{position:relative;display:flex;flex-direction:column;gap:8px}
@@ -1962,11 +1984,14 @@ html.lg .eye{background:var(--glass-tint);box-shadow:inset 0 1px 0 color-mix(in 
         <button class="btn" type="submit">Add task</button>
         <div class="addmore">
           <label class="am-f"><span>Course</span><input type="text" id="t-course" list="courses" placeholder="e.g. ES 1050" maxlength="32"></label>
+          <label class="am-f" id="t-proj-f" hidden><span>Project</span><select id="t-proj" aria-label="Project"></select></label>
           <label class="am-f"><span>Repeat</span><select id="t-rep"><option value="">Doesn't repeat</option><option value="d">Every day</option><option value="wd">Every weekday</option><option value="w">Every week</option><option value="w2">Every 2 weeks</option><option value="m">Every month</option></select></label>
           <div class="am-days" id="t-days" role="group" aria-label="Repeat on" hidden></div>
         </div>
       </form>
       <datalist id="courses"></datalist>
+      <div class="proj-bar" id="proj-bar" role="group" aria-label="Projects"></div>
+      <div class="proj-head" id="proj-head" hidden></div>
       <div class="filters">
         <div class="seg" id="task-filter" role="group" aria-label="Filter">
           <button data-f="open" aria-pressed="true">Open</button><button data-f="today" aria-pressed="false">Today</button><button data-f="done" aria-pressed="false">Done</button><button data-f="all" aria-pressed="false">All</button>
@@ -2201,6 +2226,7 @@ html.lg .eye{background:var(--glass-tint);box-shadow:inset 0 1px 0 color-mix(in 
           <p class="hint" style="margin:0 0 10px">Sign in to keep everything in your account and use it on any device. <button class="btn ghost small" type="button" id="acct-open2">Account</button></p>
           <div class="row" style="margin-bottom:10px"><button class="btn ghost small" id="export">Show backup</button><button class="btn ghost small" id="import">Restore from backup</button><button class="btn ghost small" id="wipe">Erase everything</button><button class="btn ghost small" id="demo-rm" hidden>Remove example data</button><button class="btn ghost small" id="tour-again">Show the tour</button></div>
           <p class="hint" id="install-hint" style="margin:0 0 10px"></p>
+          <p class="hint" style="margin:0 0 10px"><button class="btn ghost small" type="button" id="news-open">What's new</button></p>
           <textarea id="backup" placeholder="Your backup JSON appears here. Paste one in and press Restore to load it." aria-label="Backup data"></textarea>
         </div>
       </div>
@@ -2241,6 +2267,7 @@ html.lg .eye{background:var(--glass-tint);box-shadow:inset 0 1px 0 color-mix(in 
       <div class="te-2"><label class="te-f">Urgency<select id="te-urg"><option value="0">Critical</option><option value="1">High</option><option value="2">Medium</option><option value="3">Low</option></select></label>
         <label class="te-f">Course<input type="text" id="te-course" list="courses" maxlength="32" placeholder="None"></label></div>
       <div class="te-2"><label class="te-f">Due date<input type="date" id="te-due"></label><label class="te-f">Due time<input type="time" id="te-time"></label></div>
+      <label class="te-f" id="te-proj-f" hidden>Project<select id="te-proj"></select></label>
       <label class="te-f">Planned for (week plan)<input type="date" id="te-plan"></label>
       <p class="muted te-note" id="te-note" hidden></p>
       <div class="ac-row"><button class="btn" type="submit">Save changes</button><button class="btn ghost" type="button" data-te="close">Cancel</button></div>
@@ -2252,6 +2279,10 @@ html.lg .eye{background:var(--glass-tint);box-shadow:inset 0 1px 0 color-mix(in 
     <div class="acd-top"><h2 id="arch-h">Archive</h2><button class="icon-btn" type="button" data-ar="close" aria-label="Close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
     <div class="acd-body" id="arch-body"></div>
   </div>
+</dialog>
+<dialog class="acd acd-sm" id="news" aria-labelledby="news-h">
+  <div class="acd-in"><div class="acd-top"><h2 id="news-h">What's new</h2><button class="icon-btn" type="button" data-news="close" aria-label="Close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
+  <div class="acd-body" id="news-body"></div></div>
 </dialog>
 <dialog class="acd acd-sm" id="tour" aria-labelledby="tour-h">
   <div class="acd-in"><div class="acd-body" id="tour-body"></div></div>
@@ -2412,7 +2443,7 @@ const SKINS=[
 ];
 const CLOCKS=[["flip","Flip"],["digital","Digital"],["analog","Analog"],["words","Words"],["rings","Progress"],["timer","Focus timer"]];
 
-const DEFAULT={tasks:[],events:[],shop:[],accounts:[],history:[],sessions:{},
+const DEFAULT={tasks:[],events:[],shop:[],projects:[],accounts:[],history:[],sessions:{},
   settings:{v2:true,skin:"brand",accent:"",font:"sans",clock:"flip",h24:false,secs:true,currency:"CAD",hideNw:false,subs:{},uiFont:"bricolage",clockFont:"shoulders",radius:14,clockScale:100,surface:"solid",refract:true,bg:{type:"none",color:"#2a2440",grad:0,image:"",dim:35,blur:0,match:true,pal:null,live:"aurora",speed:100,grain:false},stage:{type:"theme",color:"#101020",grad:0,image:"",dim:30,ink:""}},
   schemes:[],
   presets:[],
@@ -3429,7 +3460,7 @@ function spawnNext(t){
   const today=dkey(new Date());let due=nextDate(t.rep,t.due||today),guard=0;
   while(due<today&&guard++<400)due=nextDate(t.rep,due); /* finished late: jump to the next one still ahead */
   const nx={id:uid(),title:t.title,urg:t.urg,due,dueTime:t.dueTime||"",done:false,created:Date.now(),rep:structuredClone(t.rep)};
-  if(t.course)nx.course=t.course;if(t.steps&&t.steps.length)nx.steps=t.steps.map(st=>({id:uid(),t:st.t,done:false}));
+  if(t.course)nx.course=t.course;if(t.proj)nx.proj=t.proj;if(t.steps&&t.steps.length)nx.steps=t.steps.map(st=>({id:uid(),t:st.t,done:false}));
   if(t.remind&&t.remind.lead>=0)nx.remind={lead:t.remind.lead,ch:t.remind.ch.slice()};
   S.tasks.push(nx);t.spawned=nx.id;return nx;
 }
@@ -3478,13 +3509,15 @@ function dueLabel(due,time){
 function niceDate(k){const [y,m,d]=k.split("-").map(Number);return new Date(y,m-1,d).toLocaleDateString(undefined,{month:"short",day:"numeric"});}
 function renderTasks(mode){
   const today=dkey(new Date()),open=t=>!t.done||graceDone.has(t.id);
-  const list=sortedTasks().filter(t=>taskFilter==="all"||(taskFilter==="done"?t.done:taskFilter==="today"?open(t)&&(t.due&&t.due<=today||t.plan===today):open(t)));
+  if(projFilter&&!projOf(projFilter))projFilter="";
+  const list=sortedTasks().filter(t=>(!projFilter||t.proj===projFilter)&&(taskFilter==="all"||(taskFilter==="done"?t.done:taskFilter==="today"?open(t)&&(t.due&&t.due<=today||t.plan===today):open(t))));
+  renderProjects();
   const el=$("#task-list");
   flipRender(el,()=>{
-  if(!list.length){el.innerHTML=`<div class="empty">${taskFilter==="done"?"Nothing finished yet. Check one off.":taskFilter==="today"?"Nothing due or planned for today. Nice.":"No open tasks. Add one above."}</div>`;return;}
+  if(!list.length){el.innerHTML=`<div class="empty">${projFilter&&taskFilter!=="done"&&!S.tasks.some(t=>t.proj===projFilter)?"No tasks in this project yet. Add one above and it goes straight in here.":taskFilter==="done"?"Nothing finished yet. Check one off.":taskFilter==="today"?"Nothing due or planned for today. Nice.":"No open tasks. Add one above."}</div>`;return;}
   el.innerHTML=list.map(t=>{const dl=t.due?dueLabel(t.due,t.dueTime):{t:t.plan?"Planned "+(t.plan===today?"today":t.plan===dkey(addDays(new Date(),1))?"tomorrow":niceDate(t.plan)):"",late:false};return `<div class="task${t.done?" done":""}${t.done&&graceDone.has(t.id)?" grace":""}" data-id="${t.id}" style="--uc:var(--u${t.urg})">
     <button class="check" data-act="toggle" aria-label="${t.done?"Mark as not done":"Mark as done"}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4"><path pathLength="1" d="m5 12 5 5 9-10"/></svg></button>
-    <div class="tt"><span>${esc(t.title)}</span>${t.course?`<span class="tchip">${esc(t.course)}</span>`:""}${t.rep?`<span class="tchip" title="Repeats">${REP_ICON}${esc(repLabel(t.rep))}</span>`:""}${t.remind&&!t.done?`<span class="tchip rchip" title="Reminder">${BELL_ICON}${esc(trLabel(t))}</span>`:""}<div class="tmeta">${taskMeta(t)}</div></div>
+    <div class="tt"><span>${esc(t.title)}</span>${t.proj&&!projFilter&&projOf(t.proj)?`<span class="tchip pchip"><i class="pdot" style="--pc:${projOf(t.proj).color}"></i>${esc(projOf(t.proj).name)}</span>`:""}${t.course?`<span class="tchip">${esc(t.course)}</span>`:""}${t.rep?`<span class="tchip" title="Repeats">${REP_ICON}${esc(repLabel(t.rep))}</span>`:""}${t.remind&&!t.done?`<span class="tchip rchip" title="Reminder">${BELL_ICON}${esc(trLabel(t))}</span>`:""}<div class="tmeta">${taskMeta(t)}</div></div>
     <span class="due${dl.late&&!t.done?" late":""}">${dl.t}</span>
     <select class="urg" data-act="urg" aria-label="Urgency">${URG.map((u,i)=>`<option value="${i}"${i===t.urg?" selected":""}>${u}</option>`).join("")}</select>
     <div class="tact">${t.done?graceUndo(t):`<button class="icon-btn ai-btn" data-act="edit" aria-label="Edit ${esc(t.title)}" title="Edit"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="m14 6 4 4"/></svg></button><button class="icon-btn ai-btn rem-btn" data-act="remind" aria-pressed="${!!t.remind}" aria-label="${t.remind?"Change reminder":"Remind me"}" title="${t.remind?"Change reminder":"Remind me by email or text"}">${BELL_ICON}</button><button class="icon-btn ai-btn" data-act="steps" aria-expanded="${openSteps.has(t.id)}" aria-label="Checklist" title="Checklist"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 6h10M10 12h10M10 18h10"/><path d="m3 6 1.5 1.5L7 5M3 12l1.5 1.5L7 11M3 18l1.5 1.5L7 17"/></svg></button>`}<button class="icon-btn" data-act="del" aria-label="Delete task"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
@@ -3517,6 +3550,7 @@ $("#task-form").addEventListener("submit",e=>{e.preventDefault();const title=$("
   const rep=formRep(),course=$("#t-course").value.trim().slice(0,32);
   if(rep&&!due)due=firstDue(rep);
   const t={id:uid(),title,urg:+$("#t-urg").value,due,dueTime,done:false,created:Date.now()};if(rep)t.rep=rep;if(course)t.course=course;
+  const pj=$("#t-proj").value||projFilter;if(pj&&projOf(pj))t.proj=pj;
   S.tasks.push(t);
   $("#t-title").value="";$("#t-due").value="";$("#t-time").value="";$("#t-rep").value="";$("#t-days").hidden=true;save();renderTasks();renderNowTask();renderMini();renderCourses();});
 $("#t-rep").addEventListener("change",()=>{const v=$("#t-rep").value,box=$("#t-days");box.hidden=!/^w2?$/.test(v);
@@ -4608,6 +4642,7 @@ function cmdResults(q){
     .forEach(([t])=>R.push({ic:"task",label:t.title,hint:"Open task",run:()=>{show("tasks");try{history.pushState(null,"","#tasks");}catch(e){}setTimeout(()=>{const el=document.querySelector(`.task[data-id="${t.id}"]`);if(el){el.scrollIntoView({block:"center",behavior:reduced?"auto":"smooth"});anim(el,[{boxShadow:"0 0 0 2px var(--accent)"},{boxShadow:"0 0 0 2px transparent"}],{duration:1200,easing:"ease"});}},60);}}));
   {const m=raw.match(/^(?:buy|shop(?:ping)?:?|grocer(?:y|ies):?)\s+(.+)$/i)||raw.match(/^add\s+(.+?)\s+to\s+(?:my\s+|the\s+)?(?:shopping|grocery)(?:\s+list)?$/i);
     if(m&&!/^lists?$/i.test(m[1].trim())){const it=shopParse(m[1]);if(it.name)R.unshift({ic:"shop",label:`Add to shopping: ${it.name}${it.qty>1?" ×"+it.qty:""}`,hint:[SHOP_CATS[it.cat],it.price!=null&&fmt(it.price*it.qty)].filter(Boolean).join(" · "),run:()=>{shopAdd(it);shortcutLink("shopping");}});}}
+  if(/^(?:what'?s new|whats new|new features?|updates?|changelog|release notes)$/.test(lq))R.push({ic:"go",label:"What's new",hint:"Open",run:()=>newsOpen(true)});
   if(/^(?:install|download|get)(?: the)?(?: app| digital dash)?$|^(?:add to )?home ?screen$|^(?:mobile|phone|iphone|android) app$/.test(lq))R.push({ic:"go",label:"Get the app",hint:"Install",run:()=>{show("focus");lsSet("dd.getapp",null);const c=$("#getapp");c.hidden=false;$("#getapp-go").textContent=installEvt?"Install":"Show me how";if(!installEvt){$("#getapp-steps").innerHTML=gaSteps();$("#getapp-steps").hidden=false;$("#getapp-go").textContent="Hide steps";}c.scrollIntoView({block:"center"});}});
   if(/^(?:go(?: to)?|open|show)?\s*(?:my |the )?(?:shopping|grocery|groceries)(?: list)?$/.test(lq))R.push({ic:"go",label:"Shopping list",hint:"Go",run:()=>shortcutLink("shopping")});
   // default: add it as a task (first unless a command matched exactly)
@@ -6782,6 +6817,80 @@ const lfWant=()=>!document.hidden&&spS().lfm&&(curView==="focus"||spS().island);
 setInterval(()=>{if(lfWant())lfFetch();},15000);
 document.addEventListener("visibilitychange",()=>{if(lfWant())lfFetch();});
 lfRender();if(lfKey()&&spS().lfm)lfFetch();
+/* ---------- what's new ----------
+   NEWS lists releases, newest first. Each update, add an entry at the top with a new id (a date works). People who
+   used the app before see the new entries once in a dialog (the last one seen is S.settings.news, so it syncs across
+   devices); new people get the welcome tour instead and start caught up. Also in the command bar and Themes. */
+var NEWS=[{id:"2026-10-24",when:"October 2026",items:[
+  ["📁","Project folders","Group tasks into projects and switch between them above your list.","tasks"],
+  ["🎨","Describe a theme","Type a vibe like \"rainy Tokyo neon\", preview three looks and keep the one you like.","themes"],
+  ["🎧","Live Spotify and Dash Island","See what you're playing on any device, and pin it to the top of the screen.","spotify"],
+  ["🛒","Shopping list","A Shopping tab under Tasks that sorts your list by aisle.","shopping"],
+  ["⌨️","Sound effects","Typing, tap and tick sounds, including a creamy keyboard. Turn them on in Themes.","sfx"],
+  ["⏱️","Hours on timers","Custom timers now take hours, minutes and seconds.","timer"],
+  ["📱","Get the app","Add Digital Dash to your phone's home screen. It opens full screen and works offline.","install"]]}];
+function newsOpen(all){
+  const seen=S.settings.news||"",rel=all||!seen?NEWS.slice(0,1):NEWS.filter(r=>r.id>seen);if(!rel.length)return;
+  $("#news-body").innerHTML=rel.map(r=>`<p class="news-when">${esc(r.when)}</p><ul class="news-l">${r.items.map(([ic,t,d,go])=>`<li><span class="ni" aria-hidden="true">${ic}</span><span><b>${esc(t)}</b><span>${esc(d)}</span></span><button type="button" class="btn ghost small" data-newsgo="${go}">Show me</button></li>`).join("")}</ul>`).join("")+
+    `<div class="ac-row" style="margin-top:14px"><button type="button" class="btn" data-news="close">Got it</button></div>`;
+  S.settings.news=NEWS[0].id;save();const d=$("#news");try{d.showModal();}catch(e){d.setAttribute("open","");}
+}
+function newsGo(go){
+  try{$("#news").close();}catch(e){}
+  const at=(v,sel)=>{show(v);try{history.pushState(null,"","#"+v);}catch(e){}if(sel)setTimeout(()=>{const el=$(sel);if(el)el.scrollIntoView({behavior:"smooth",block:"center"});},120);};
+  if(go==="tasks"){at("tasks");if(typeof setTaskMode==="function")setTaskMode("tasks");setTimeout(()=>{const b=$("[data-pjadd]");if(b)b.scrollIntoView({block:"center"});},120);}
+  else if(go==="themes")at("themes","#vibe");
+  else if(go==="sfx")at("themes","#sfx-panel");
+  else if(go==="spotify")at("focus","#spx");
+  else if(go==="shopping"){shortcutLink("shopping");try{history.pushState(null,"","#shopping");}catch(e){}}
+  else if(go==="timer"){at("focus");if(clockKind!=="timer")setClock("timer");setTimeout(()=>{const b=$("#tm-editbtn");if(b&&$("#tm-edit").hidden)b.click();},200);}
+  else if(go==="install"){at("focus");if(typeof gaPhone==="function"&&gaPhone()){lsSet("dd.getapp",null);gaRender();setTimeout(()=>{const c=$("#getapp");if(c)c.scrollIntoView({block:"center"});},120);}
+    else if(installEvt){$("#install-app").click();}else toast("On your phone, open digitaldashdaily.com and tap Get the app. On a computer, use your browser's Install button in the address bar.");}
+}
+$("#news").addEventListener("click",e=>{const g=e.target.closest("[data-newsgo]");if(g){newsGo(g.dataset.newsgo);return;}if(e.target.closest("[data-news=close]"))try{$("#news").close();}catch(err){}});
+$("#news-open").addEventListener("click",()=>newsOpen(true));
+/* ---------- projects ----------
+   Folders for tasks: S.projects = [{id, name, color}], a task's project is t.proj. The bar above the list filters
+   by project (projFilter, remembered on this device) and new tasks go into the open project. Deleting a project
+   keeps its tasks (they just lose the project), with Undo. */
+var PJ_COLORS=["#7C9CFF","#FF7A3D","#2FBF71","#E5484D","#B276F5","#F5B83D","#2BB5C9","#F06EAA"];
+var projFilter=lsGet("dd.proj")||"",projNew=false,projRen=false;
+function projOf(id){return (S.projects||[]).find(p=>p.id===id);}
+function setProj(id){projFilter=id||"";lsSet("dd.proj",projFilter||null);projNew=false;projRen=false;renderTasks();}
+function renderProjects(){
+  const bar=$("#proj-bar"),head=$("#proj-head");if(!bar)return;S.projects=S.projects||[];
+  const openN=id=>S.tasks.filter(t=>!t.done&&(id==null||t.proj===id)).length;
+  bar.innerHTML=`<button type="button" data-pj="" aria-pressed="${!projFilter}">All tasks <small>${openN()}</small></button>`+
+    S.projects.map(p=>`<button type="button" data-pj="${p.id}" aria-pressed="${projFilter===p.id}"><i class="pdot" style="--pc:${p.color}"></i>${esc(p.name)} <small>${openN(p.id)}</small></button>`).join("")+
+    (projNew?`<form class="pj-new" id="pj-new" autocomplete="off"><i class="pdot" style="--pc:${PJ_COLORS[S.projects.length%PJ_COLORS.length]}"></i><input type="text" id="pj-name" maxlength="32" placeholder="Project name" aria-label="Project name"><button class="btn small" type="submit">Add</button><button class="btn ghost small" type="button" data-pjx>Cancel</button></form>`
+      :`<button type="button" class="pj-add" data-pjadd>+ New project</button>`);
+  const p=projOf(projFilter);head.hidden=!p;
+  if(p)head.innerHTML=projRen?`<form class="row" id="pj-ren" autocomplete="off" style="gap:8px;flex-wrap:wrap"><input type="text" id="pj-rename" maxlength="32" value="${esc(p.name)}" aria-label="Project name"><button class="btn small" type="submit">Save</button><button class="btn ghost small" type="button" data-pjrx>Cancel</button></form>`
+    :`<h2><i class="pdot" style="--pc:${p.color}"></i>${esc(p.name)}</h2><span class="ph-acts"><button type="button" class="btn ghost small" data-pjren>Rename</button><button type="button" class="btn ghost small" data-pjcol title="Change colour">Colour</button><button type="button" class="btn ghost small" data-pjdel>Delete</button></span>`;
+  const sel=$("#t-proj"),f=$("#t-proj-f");f.hidden=!S.projects.length;const keep=sel.value;
+  sel.innerHTML=`<option value="">${projFilter?"This project":"No project"}</option>`+S.projects.filter(x=>x.id!==projFilter).map(x=>`<option value="${x.id}">${esc(x.name)}</option>`).join("");
+  sel.value=[...sel.options].some(o=>o.value===keep)?keep:"";
+  const fi=$("#pj-name")||$("#pj-rename");if(fi&&document.activeElement!==fi){fi.focus();fi.select&&fi.select();}
+}
+$("#proj-bar").addEventListener("click",e=>{
+  if(e.target.closest("[data-pjadd]")){projNew=true;renderProjects();return;}
+  if(e.target.closest("[data-pjx]")){projNew=false;renderProjects();return;}
+  const b=e.target.closest("button[data-pj]");if(b)setProj(b.dataset.pj);});
+$("#proj-bar").addEventListener("submit",e=>{e.preventDefault();const n=$("#pj-name").value.trim().slice(0,32);if(!n){$("#pj-name").focus();return;}
+  if(S.projects.length>=30){toast("You can have 30 projects. Delete one first.");return;}
+  if(S.projects.some(p=>p.name.toLowerCase()===n.toLowerCase())){toast("You already have a project with that name");return;}
+  const p={id:uid(),name:n,color:PJ_COLORS[S.projects.length%PJ_COLORS.length]};S.projects.push(p);save();toast(`Created ${n}`);setProj(p.id);});
+$("#proj-bar").addEventListener("keydown",e=>{if(e.key==="Escape"&&projNew){projNew=false;renderProjects();}});
+$("#proj-head").addEventListener("click",e=>{const p=projOf(projFilter);if(!p)return;
+  if(e.target.closest("[data-pjren]")){projRen=true;renderProjects();return;}
+  if(e.target.closest("[data-pjrx]")){projRen=false;renderProjects();return;}
+  if(e.target.closest("[data-pjcol]")){const i=PJ_COLORS.indexOf(p.color);p.color=PJ_COLORS[(i+1)%PJ_COLORS.length];save();renderTasks();return;}
+  if(e.target.closest("[data-pjdel]")){const i=S.projects.indexOf(p),had=S.tasks.filter(t=>t.proj===p.id).map(t=>t.id);
+    S.projects.splice(i,1);S.tasks.forEach(t=>{if(t.proj===p.id)delete t.proj;});save();setProj("");
+    toast(`Deleted ${p.name}${had.length?`. Its ${had.length} task${had.length===1?"":"s"} stay in All tasks`:""}`,{run(){S.projects.splice(i,0,p);S.tasks.forEach(t=>{if(had.includes(t.id))t.proj=p.id;});save();setProj(p.id);}});}});
+$("#proj-head").addEventListener("submit",e=>{e.preventDefault();const p=projOf(projFilter),n=$("#pj-rename").value.trim().slice(0,32);if(!p||!n)return;
+  const old=p.name;p.name=n;projRen=false;save();renderTasks();if(old!==n)toast(`Renamed to ${n}`,{run(){p.name=old;save();renderTasks();}});});
+$("#proj-head").addEventListener("keydown",e=>{if(e.key==="Escape"&&projRen){projRen=false;renderProjects();}});
 /* ---------- shopping list ----------
    S.shop = [{id, name, qty, price, cat, done}], a tab under Tasks (#shopping). Type "2 milk $4.50": a leading number
    (or "x2") is the quantity, an amount with a currency sign or cents is the price per item, and the aisle is guessed
@@ -7047,7 +7156,7 @@ $("#arch").addEventListener("click",e=>{
    history) is kept. Saving offers Undo with the old values. */
 var teTask=null;
 function teOpen(t){
-  teTask=t;$("#te-title").value=t.title;$("#te-urg").value=String(t.urg);$("#te-course").value=t.course||"";
+  teTask=t;$("#te-title").value=t.title;$("#te-urg").value=String(t.urg);$("#te-course").value=t.course||"";$("#te-proj-f").hidden=!(S.projects||[]).length;$("#te-proj").innerHTML=`<option value="">No project</option>`+(S.projects||[]).map(p=>`<option value="${p.id}">${esc(p.name)}</option>`).join("");$("#te-proj").value=t.proj&&projOf(t.proj)?t.proj:"";
   $("#te-due").value=t.due||"";$("#te-time").value=t.dueTime||"";$("#te-plan").value=t.plan||"";
   const n=$("#te-note");n.hidden=!t.rep;n.textContent=t.rep?`Repeats ${repLabel(t.rep).toLowerCase()}. Changes apply to this one; the next one copies them when it's added.`:"";
   const d=$("#ted");if(!d.open){try{d.showModal();}catch(e){d.setAttribute("open","");}}
@@ -7061,6 +7170,7 @@ $("#te-form").addEventListener("submit",e=>{
   const before={title:t.title,urg:t.urg,course:t.course,due:t.due,dueTime:t.dueTime,plan:t.plan};
   t.title=title.slice(0,140);t.urg=+$("#te-urg").value;
   const c=$("#te-course").value.trim().slice(0,32);if(c)t.course=c;else delete t.course;
+  const pj=$("#te-proj").value;if(pj&&projOf(pj))t.proj=pj;else delete t.proj;
   t.due=due;t.dueTime=due?dueTime:"";
   const pl=$("#te-plan").value;if(pl)t.plan=pl;else delete t.plan;
   $("#ted").close();teRefresh();
@@ -8006,6 +8116,8 @@ if(window.DASH_DEMO)window.dashDemo={
   glass(on){S.settings.surface=on?"glass":"solid";applyTheme();}
 };
 $("#demo-rm").hidden=!S.tasks.some(t=>t.demo);
+if(!window.DASH_DEMO){if(firstRun)S.settings.news=NEWS[0].id; /* new here: the tour covers it, start caught up */
+  else if((S.settings.news||"")<NEWS[0].id&&!acAuthHash)setTimeout(()=>{if(!document.querySelector("dialog[open]"))newsOpen();},1400);}
 if(firstRun&&!S.settings.welcomed&&!imported&&!acAuthHash&&!/[?&]room=/.test(location.href)&&!(lsGet(RMK)||{}).code)setTimeout(()=>{if(!$("#acct-pick").open&&!$("#acct").open&&!$("#look").open)tourOpen();},600); /* not over a sign-in or room link */
 })();
 </script>

@@ -604,7 +604,7 @@ html.cur,html.cur *{cursor:none!important}
     chips("#c-font",Object.entries(FN).map(([k,v])=>[k,v[0]]),k=>st.font===k);chips("#c-bg",BG,k=>k==="glass"?st.glass:st.bg===k);}
   const act={"#c-skin":k=>{st.skin=k;},"#c-clock":k=>{st.clock=k;},"#c-font":k=>{st.font=k;},"#c-bg":k=>{if(k==="glass")st.glass=!st.glass;else st.bg=k;}};
   Object.keys(act).forEach(sel=>$(sel).addEventListener("click",e=>{const b=e.target.closest("button[data-k]");if(!b)return;const k=b.dataset.k;
-    morph(b,()=>{act[sel](k);remember();applyPage();draw();const nb=$(`${sel} [data-k="${k}"]`);if(nb)nb.focus();});applyPhone();}));
+    morph(b,()=>{act[sel](k);remember();applyPage();draw();applyPhone();const nb=$(`${sel} [data-k="${k}"]`);if(nb)nb.focus();});})); /* phone updates after the choice is stored: morph's callback can run a frame later */
   $("#apply-go").addEventListener("click",()=>{let pk={};try{pk=JSON.parse(ls.get("dd.pick")||"{}");}catch(e){}pk.apply=true;ls.set("dd.pick",JSON.stringify(pk));
     $("#apply-t").innerHTML='Done. Your dashboard will use this look when you open it. <a href="/digital-dash">Open it now</a>';$("#apply-go").hidden=true;});
   /* "Share this look": a link that opens the app with this look (the app asks first if they already have a dashboard) */
@@ -747,9 +747,9 @@ html.cur,html.cur *{cursor:none!important}
   shBtn.addEventListener("click",()=>{
     const pickOf=(arr,cur)=>{const o=arr.filter(k=>k!==cur);return o[Math.floor(Math.random()*o.length)];};
     morph(shBtn,()=>{st.skin=pickOf(Object.keys(SK),st.skin);st.clock=pickOf(CK.map(c=>c[0]),st.clock);st.font=pickOf(Object.keys(FN),st.font);
-      remember();applyPage();draw();
+      remember();applyPage();draw();applyPhone();
       $("#shuf").innerHTML=`Now: <b>${SK[st.skin][0]}</b> theme, ${CK.find(c=>c[0]===st.clock)[1].toLowerCase()} clock, ${FN[st.font][0]} font. <a href="#yours">Fine-tune it</a>`;});
-    applyPhone();if(!reduce)dice.style.transform=`rotate(${++rolls*180}deg)`;});
+    if(!reduce)dice.style.transform=`rotate(${++rolls*180}deg)`;});
   /* Get the app (phones only): the real install prompt where the browser offers one, otherwise Add to Home Screen steps */
   {const b=$("#getapp-b"),how=$("#getapp-how"),standalone=matchMedia("(display-mode: standalone)").matches||navigator.standalone===true,
      phone=matchMedia("(pointer:coarse)").matches&&matchMedia("(max-width:1024px)").matches,iOS=/iPhone|iPad|iPod/.test(navigator.userAgent)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1);

@@ -1386,3 +1386,36 @@
 1424|Pas encore configuré. C'est gratuit et ça prend une minute.
 1425|Configurer
 1426|Heures
+
+1427|Toutes les tâches
+1428|+ Nouveau projet
+1429|Nom du projet
+1430|Renommer
+1431|Changer la couleur
+1432|Supprimer
+1433|Projet
+1434|Aucun projet
+1435|Ce projet
+1436|Aucune tâche dans ce projet pour l'instant. Ajoutez-en une ci-dessus et elle arrivera directement ici.
+1437|Vous pouvez avoir 30 projets. Supprimez-en un d'abord.
+1438|Vous avez déjà un projet de ce nom
+1439|{0} créé
+1440|{0} supprimé. Sa {n} tâche reste dans Toutes les tâches
+1441|{0} supprimé. Ses {n} tâches restent dans Toutes les tâches
+1442|{0} supprimé
+1443|Renommé en {0}
+1444|Projets
+1445|Octobre 2026
+1446|Voir
+1447|Compris
+1448|Dossiers de projets
+1449|Regroupez vos tâches en projets et passez de l'un à l'autre au-dessus de votre liste.
+1450|Décrivez une ambiance comme « Tokyo néon sous la pluie », prévisualisez trois styles et gardez celui qui vous plaît.
+1451|Spotify en direct et Dash Island
+1452|Voyez ce que vous écoutez sur n'importe quel appareil et épinglez-le en haut de l'écran.
+1453|Un onglet Courses sous Tâches qui trie votre liste par rayon.
+1454|Sons de frappe, de toucher et de coche, dont un clavier crémeux. Activez-les dans Thèmes.
+1455|Des heures sur les minuteurs
+1456|Les minuteurs personnalisés acceptent maintenant les heures, minutes et secondes.
+1457|Ajoutez Digital Dash à l'écran d'accueil de votre téléphone. Il s'ouvre en plein écran et fonctionne hors ligne.
+1458|Sur votre téléphone, ouvrez digitaldashdaily.com et touchez Obtenir l'app. Sur un ordinateur, utilisez le bouton Installer du navigateur dans la barre d'adresse.

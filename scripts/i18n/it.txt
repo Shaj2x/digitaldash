@@ -1386,3 +1386,36 @@
 1424|Non ancora configurato. È gratis e ci vuole un minuto.
 1425|Configura
 1426|Ore
+
+1427|Tutte le attività
+1428|+ Nuovo progetto
+1429|Nome del progetto
+1430|Rinomina
+1431|Cambia colore
+1432|Elimina
+1433|Progetto
+1434|Nessun progetto
+1435|Questo progetto
+1436|Ancora nessuna attività in questo progetto. Aggiungine una sopra e finirà direttamente qui.
+1437|Puoi avere 30 progetti. Eliminane uno prima.
+1438|Hai già un progetto con questo nome
+1439|{0} creato
+1440|{0} eliminato. La sua {n} attività resta in Tutte le attività
+1441|{0} eliminato. Le sue {n} attività restano in Tutte le attività
+1442|{0} eliminato
+1443|Rinominato in {0}
+1444|Progetti
+1445|Ottobre 2026
+1446|Mostrami
+1447|Ho capito
+1448|Cartelle di progetto
+1449|Raggruppa le attività in progetti e passa dall'uno all'altro sopra la tua lista.
+1450|Scrivi un'atmosfera come "Tokyo al neon sotto la pioggia", guarda tre stili e tieni quello che preferisci.
+1451|Spotify dal vivo e Dash Island
+1452|Guarda cosa stai ascoltando su qualsiasi dispositivo e fissalo in cima allo schermo.
+1453|Una scheda Spesa sotto Attività che ordina la lista per reparto.
+1454|Suoni di digitazione, tocco e spunta, inclusa una tastiera cremosa. Attivali in Temi.
+1455|Ore nei timer
+1456|I timer personalizzati ora accettano ore, minuti e secondi.
+1457|Aggiungi Digital Dash alla schermata Home del telefono. Si apre a schermo intero e funziona offline.
+1458|Sul telefono apri digitaldashdaily.com e tocca Scarica l'app. Sul computer usa il pulsante Installa del browser nella barra degli indirizzi.

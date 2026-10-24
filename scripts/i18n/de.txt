@@ -1386,3 +1386,36 @@
 1424|Noch nicht eingerichtet. Kostenlos, dauert eine Minute.
 1425|Einrichten
 1426|Stunden
+
+1427|Alle Aufgaben
+1428|+ Neues Projekt
+1429|Projektname
+1430|Umbenennen
+1431|Farbe ändern
+1432|Löschen
+1433|Projekt
+1434|Kein Projekt
+1435|Dieses Projekt
+1436|Noch keine Aufgaben in diesem Projekt. Füge oben eine hinzu, dann landet sie direkt hier.
+1437|Du kannst 30 Projekte haben. Lösche zuerst eins.
+1438|Du hast schon ein Projekt mit diesem Namen
+1439|{0} erstellt
+1440|{0} gelöscht. Seine {n} Aufgabe bleibt in Alle Aufgaben
+1441|{0} gelöscht. Seine {n} Aufgaben bleiben in Alle Aufgaben
+1442|{0} gelöscht
+1443|Umbenannt in {0}
+1444|Projekte
+1445|Oktober 2026
+1446|Zeigen
+1447|Verstanden
+1448|Projektordner
+1449|Gruppiere Aufgaben in Projekte und wechsle über deiner Liste zwischen ihnen.
+1450|Beschreibe eine Stimmung wie „verregnetes Tokio Neon“, sieh dir drei Looks an und behalte den, der dir gefällt.
+1451|Live-Spotify und Dash Island
+1452|Sieh, was du auf jedem Gerät hörst, und hefte es oben an den Bildschirm.
+1453|Ein Einkaufen-Tab unter Aufgaben, der deine Liste nach Gang sortiert.
+1454|Tipp-, Tipp- und Häkchengeräusche, auch eine cremige Tastatur. Schalte sie unter Themen ein.
+1455|Stunden bei Timern
+1456|Eigene Timer nehmen jetzt Stunden, Minuten und Sekunden.
+1457|Füge Digital Dash zum Startbildschirm deines Handys hinzu. Es öffnet sich im Vollbild und funktioniert offline.
+1458|Öffne auf dem Handy digitaldashdaily.com und tippe auf App holen. Am Computer nutze die Installieren-Schaltfläche des Browsers in der Adressleiste.
