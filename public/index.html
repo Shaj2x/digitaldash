@@ -16,12 +16,17 @@
 <link rel="manifest" href="/digital-dash.webmanifest">
 <script>document.documentElement.classList.add("js")</script>
 <script src="/i18n/i18n.js"></script>
+<link rel="preload" href="/fonts/dd-display-900.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/dd-display-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/brand/phone-poster.webp" as="image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#1B1B1B;--bg2:#151515;--panel:#232323;--panel2:#2D2D2C;--ink:#EFEEE8;--muted:#A6A59E;--line:#3A3A38;--accent:#EFEEE8;--accent-ink:#1B1B1B;--display:"Big Shoulders Display",Impact,"Arial Narrow",sans-serif;color-scheme:dark}
-@media (prefers-color-scheme:light){:root{--bg:#EFEEE8;--bg2:#E5E4DD;--panel:#F8F7F3;--panel2:#E6E5DE;--ink:#1B1B1B;--muted:#55544F;--line:#D3D2CA;--accent:#1B1B1B;--accent-ink:#EFEEE8;color-scheme:light}}
+/* the headline face, served from this site (Latin) so the hero never waits on Google; other scripts fall through to Big Shoulders */
+@font-face{font-family:"DD Display";font-weight:900;font-display:swap;src:url(/fonts/dd-display-900.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2212}
+@font-face{font-family:"DD Display";font-weight:500 800;font-display:swap;src:url(/fonts/dd-display-800.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2212}
+:root{--bg:#1B1B1B;--bg2:#151515;--panel:#232323;--panel2:#2D2D2C;--ink:#EFEEE8;--muted:#A6A59E;--line:#3A3A38;--accent:#EFEEE8;--accent-ink:#1B1B1B;--display:"DD Display","Big Shoulders Display",Impact,"Arial Narrow",sans-serif;color-scheme:dark}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*:not(.rv),*::before{animation:none!important;transition:none!important}}
@@ -86,7 +91,10 @@ h1 .o{color:transparent;-webkit-text-stroke:2px var(--ink)}
 .phone .scr{position:relative;width:100%;height:100%;border-radius:44px;overflow:hidden;background:#1B1B1B}
 .phone .isl{position:absolute;left:50%;top:9px;transform:translateX(-50%);width:31%;height:27px;border-radius:16px;background:#000;z-index:2}
 .phone .sb{position:absolute;inset:0 0 auto;height:46px;z-index:1;background:var(--abg,#1B1B1B);transition:background-color .3s}
-.phone iframe{position:absolute;border:0;left:0;top:46px;width:402px;transform-origin:0 0;background:var(--abg,#1B1B1B)}
+.phone iframe{position:absolute;border:0;left:0;top:46px;width:402px;transform-origin:0 0;background:var(--abg,#1B1B1B);opacity:0;transition:opacity .6s var(--ease-out,ease)}
+.phone.live iframe{opacity:1}
+.phone .ppost{position:absolute;left:0;top:46px;width:402px;transform-origin:0 0;pointer-events:none}
+.phone.custom .ppost{visibility:hidden}
 .phone .hb{position:absolute;left:50%;bottom:7px;transform:translateX(-50%);width:34%;height:4px;border-radius:2px;background:var(--hbc,#fff);opacity:.85;z-index:2}
 .phone .hbar{position:absolute;inset:auto 0 0;height:24px;background:var(--abg,#1B1B1B);z-index:1}
 @media (max-width:900px){.hero .lockup{width:min(300px,80%)}}
@@ -435,7 +443,7 @@ html.cur,html.cur *{cursor:none!important}
     <div class="phone-col">
       <div class="phone rv" style="--i:3" id="ph" role="img" aria-label="Digital Dash running on an iPhone, styled with the choices below">
         <div class="scr"><div class="sb" aria-hidden="true"></div><div class="isl" aria-hidden="true"></div>
-          <div class="glr" aria-hidden="true"></div><iframe title="Live Digital Dash preview" tabindex="-1" aria-hidden="true" src="/digital-dash?demo=1#focus"></iframe>
+          <div class="glr" aria-hidden="true"></div><img class="ppost" src="/brand/phone-poster.webp" alt="" aria-hidden="true" decoding="async"><iframe title="Live Digital Dash preview" tabindex="-1" aria-hidden="true" data-src="/digital-dash?demo=1#focus"></iframe>
           <div class="hbar" aria-hidden="true"></div><div class="hb" aria-hidden="true"></div></div>
       </div>
     </div>
@@ -561,7 +569,11 @@ html.cur,html.cur *{cursor:none!important}
   try{if(localStorage.getItem("grindboard.v1"))$("#back").classList.add("on");}catch(e){}
   /* one phone, running the app in demo mode (?demo=1): sample data, nothing read or saved */
   const ph=$("#ph"),fr=ph.querySelector("iframe");
-  function fit(){const scr=ph.querySelector(".scr"),w=scr.clientWidth,h=scr.clientHeight,s=w/402;fr.style.transform=`scale(${s})`;fr.style.height=((h-46-24)/s)+"px";}
+  const pp=ph.querySelector(".ppost");
+  function fit(){const scr=ph.querySelector(".scr"),w=scr.clientWidth,h=scr.clientHeight,s=w/402;fr.style.transform=pp.style.transform=`scale(${s})`;fr.style.height=((h-46-24)/s)+"px";}
+  /* the live app is a whole second page: start it only once this one has loaded and gone quiet, so the hero animates smoothly */
+  let phoneOn=false;function loadPhone(){if(phoneOn)return;phoneOn=true;fr.addEventListener("load",()=>{applyPhone(()=>setTimeout(()=>ph.classList.add("live"),250));},{once:true});fr.src=fr.dataset.src;}
+  addEventListener("load",()=>setTimeout(()=>("requestIdleCallback" in window?requestIdleCallback(loadPhone,{timeout:2500}):loadPhone()),1700));
   function tint(){try{const d=fr.contentDocument,bg=getComputedStyle(d.documentElement).backgroundColor,m=bg.match(/\d+(\.\d+)?/g);if(!m)return;const [r,g,b]=m.map(Number),lum=(.299*r+.587*g+.114*b)/255;ph.style.setProperty("--abg",bg);ph.style.setProperty("--hbc",lum>.6?"#111":"#fff");}catch(e){}}
   addEventListener("resize",fit);fit();
   /* The look: page colours match the app's themes exactly, so the whole site and the phone change together */
@@ -570,7 +582,7 @@ html.cur,html.cur *{cursor:none!important}
     ledger:["Ledger","#12241F","#18302A","#1F3A33","#EDE9DC","#9DB0A6","#2C4A41","#D2A94B","#14241F"],mono:["Mono","#000000","#0E0E0E","#1A1A1A","#FFFFFF","#9A9A9A","#2B2B2B","#FFFFFF","#000000"],
     chalk:["Chalk","#E7EAE3","#F5F6F1","#DCE0D6","#1E241C","#535D4F","#C6CCBE","#3E6B2E","#F5F6F1"],sakura:["Sakura","#F6EEF1","#FFFFFF","#EEDFE5","#2B1D24","#6A5460","#E2CDD6","#C2416F","#FFFFFF"]};
   const CK=[["flip","Flip"],["digital","Digital"],["analog","Analog"],["words","Words"],["rings","Progress"]];
-  const FN={shoulders:["Big Shoulders","'Big Shoulders Display',Impact,sans-serif","Big+Shoulders+Display:wght@700;800;900"],orbitron:["Orbitron","Orbitron,sans-serif","Orbitron:wght@700;900"],playfair:["Playfair","'Playfair Display',Georgia,serif","Playfair+Display:wght@700;900"],
+  const FN={shoulders:["Big Shoulders","'DD Display','Big Shoulders Display',Impact,sans-serif","Big+Shoulders+Display:wght@700;800;900"],orbitron:["Orbitron","Orbitron,sans-serif","Orbitron:wght@700;900"],playfair:["Playfair","'Playfair Display',Georgia,serif","Playfair+Display:wght@700;900"],
     spacemono:["Space Mono","'Space Mono',monospace","Space+Mono:wght@700"],pixel:["Pixel","'Press Start 2P',monospace","Press+Start+2P"],righteous:["Righteous","Righteous,sans-serif","Righteous"]};
   const BG=[["none","Plain"],["live","Live aurora"],["glass","Liquid glass"]];
   const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches,fine=matchMedia("(hover: hover) and (pointer: fine)").matches;
@@ -594,8 +606,8 @@ html.cur,html.cur *{cursor:none!important}
     loadFont(st.font);h.style.setProperty("--display",FN[st.font][1]);
     h.classList.toggle("aurora",st.bg==="live");h.classList.toggle("glass",st.glass);
   }
-  function applyPhone(){let tries=0;(function go(){let d=null;try{d=fr.contentWindow.dashDemo;}catch(e){}if(!d){if(tries++<40)setTimeout(go,150);return;}
-    d.skin(st.skin);d.clock(st.clock);d.font(st.font);d.bg(st.bg);d.glass(st.glass);setTimeout(tint,300);})();}
+  function applyPhone(done){if(!phoneOn){loadPhone();return;}let tries=0;(function go(){let d=null;try{d=fr.contentWindow.dashDemo;}catch(e){}if(!d){if(tries++<60)setTimeout(go,150);return;}
+    d.skin(st.skin);d.clock(st.clock);d.font(st.font);d.bg(st.bg);d.glass(st.glass);setTimeout(tint,300);if(done)done();})();}
   function remember(){touched=true;ls.set("dd.pick",JSON.stringify({skin:st.skin,clock:st.clock,font:st.font,bg:st.bg,glass:st.glass,t:Date.now()}));
     if(returning){$("#apply").classList.add("on");$("#apply-t").textContent="Like this look? Use it in your dashboard too.";$("#apply-go").hidden=false;}}
   function chips(el,list,cur,swatch){$(el).innerHTML=list.map(([k,l,a,b])=>`<button type="button" class="chip${swatch?"":" np"}" data-k="${k}" aria-pressed="${cur(k)}">${swatch?`<span class="sw" style="background:${a}" aria-hidden="true"><b style="background:${b}"></b></span>`:""}${l}</button>`).join("");}
@@ -616,6 +628,8 @@ html.cur,html.cur *{cursor:none!important}
     setTimeout(()=>{t.textContent="";},5000);});
   fr.addEventListener("load",()=>{try{fr.contentDocument.documentElement.style.pointerEvents="none";}catch(e){}applyPhone();});
   draw();applyPage();
+  /* the still shows the default look; anyone with their own look sees the screen colour until the live app arrives */
+  ph.classList.toggle("custom",!(st.skin==="brand"&&st.clock==="flip"&&st.font==="shoulders"&&st.bg==="none"&&!st.glass));
   /* ledger demos run on their own and can be played with: tap the timer to pause, a task to tick it, the balance to hide it.
      Once someone taps a demo it stops running itself. Reduced motion: nothing runs, taps still work */
   {const dt=$("#d-time"),db=$("#d-bar"),tm=$(".d-timer");let t=1499,run=!reduce;
@@ -640,7 +654,8 @@ html.cur,html.cur *{cursor:none!important}
 
   /* ---------- motion ---------- */
   /* reveals: the hero rises in on load (after the intro split on a first visit); everything else as it scrolls in, staggered */
-  requestAnimationFrame(()=>requestAnimationFrame(()=>document.querySelectorAll(".top .rv").forEach(el=>el.classList.add("in"))));
+  const fontsIn=document.fonts?Promise.race([Promise.all([document.fonts.load('900 1em "DD Display"'),document.fonts.load('400 1em "Bricolage Grotesque"')]),new Promise(r=>setTimeout(r,800))]).catch(()=>{}):Promise.resolve();
+  fontsIn.then(()=>requestAnimationFrame(()=>requestAnimationFrame(()=>document.querySelectorAll(".top .rv").forEach(el=>el.classList.add("in")))));
   const countUp=el=>{const n=+el.dataset.n,t0=performance.now();(function f(now){const p=Math.min(1,(now-t0)/900),e=1-Math.pow(1-p,4);el.textContent=Math.round(n*e);if(p<1)requestAnimationFrame(f);})(t0);};
   if("IntersectionObserver" in window){
     const io=new IntersectionObserver(es=>{es.filter(e=>e.isIntersecting).forEach((e,k)=>{const el=e.target;io.unobserve(el);
