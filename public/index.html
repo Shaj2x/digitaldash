@@ -49,6 +49,10 @@ a{color:inherit}
 .nav nav{margin-left:auto}
 .nav ul{display:flex;gap:2px;list-style:none;margin:0;padding:0}
 .nav ul a{display:block;padding:8px 12px;border-radius:9px;text-decoration:none;color:var(--muted);font-weight:600;font-size:15px}
+/* narrower windows: nothing in the bar wraps; the least-needed links step away first, then the list hides as on phones */
+.brand{flex:none}.brand .bt,.nav ul a{white-space:nowrap}
+@media (max-width:1180px){.nav ul li:nth-child(3),.nav ul li:nth-child(4){display:none}}
+@media (max-width:1000px){.nav nav{display:none}.nav .lang{margin-left:auto}.nav .lang+.btn{margin-left:0}}
 .nav ul a:hover{color:var(--ink);background:var(--panel2)}
 .lang select{font:600 14px/1 inherit;font-family:inherit;color:var(--ink);background:var(--panel);border:1.5px solid var(--line);border-radius:10px;min-height:38px;padding:0 8px;cursor:pointer}
 .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
