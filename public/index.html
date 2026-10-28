@@ -52,7 +52,7 @@ a{color:inherit}
 .mk{--m:url(/brand/dd-mark-256.png)}
 .lockup{--m:url(/brand/dd-lockup-640.png);aspect-ratio:1338/456}
 /* nav */
-.nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(16px) saturate(140%);-webkit-backdrop-filter:blur(16px) saturate(140%);background:color-mix(in srgb,var(--bg) 82%,transparent);border-bottom:1px solid color-mix(in srgb,var(--line) 80%,transparent);padding-top:env(safe-area-inset-top,0px)}
+.nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);background:color-mix(in srgb,var(--bg) 90%,transparent);border-bottom:1px solid color-mix(in srgb,var(--line) 80%,transparent);padding-top:env(safe-area-inset-top,0px)}
 .nav .wrap{display:flex;align-items:center;gap:20px;height:66px}
 .brand{display:flex;align-items:center;gap:12px;min-width:0;text-decoration:none;font:800 22px/1 var(--display);letter-spacing:.08em;text-transform:uppercase}
 .brand .mk{width:34px;height:29px}
@@ -588,6 +588,8 @@ html.cur,html.cur *{cursor:none!important}
   /* the live app is a whole second page: start it only once this one has loaded and gone quiet, so the hero animates smoothly */
   let phoneOn=false;function loadPhone(){if(phoneOn)return;phoneOn=true;fr.addEventListener("load",()=>{applyPhone(()=>setTimeout(()=>ph.classList.add("live"),250));},{once:true});fr.src=fr.dataset.src;}
   addEventListener("load",()=>setTimeout(()=>("requestIdleCallback" in window?requestIdleCallback(loadPhone,{timeout:2500}):loadPhone()),1700));
+  /* the live app shares this page's main thread: stop it drawing whenever the phone is scrolled out of view */
+  if("IntersectionObserver" in window)new IntersectionObserver(es=>es.forEach(e=>{fr.style.display=e.isIntersecting?"":"none";}),{rootMargin:"120px 0px"}).observe(ph);
   function tint(){try{const d=fr.contentDocument,bg=getComputedStyle(d.documentElement).backgroundColor,m=bg.match(/\d+(\.\d+)?/g);if(!m)return;const [r,g,b]=m.map(Number),lum=(.299*r+.587*g+.114*b)/255;ph.style.setProperty("--abg",bg);ph.style.setProperty("--hbc",lum>.6?"#111":"#fff");}catch(e){}}
   addEventListener("resize",fit);fit();
   /* The look: page colours match the app's themes exactly, so the whole site and the phone change together */
@@ -677,7 +679,8 @@ html.cur,html.cur *{cursor:none!important}
     document.querySelectorAll("main > section .rv,.cta-end.rv,#track,#rcpt,#stats").forEach(el=>io.observe(el));
     document.querySelectorAll("#track .tk").forEach((el,i)=>el.style.setProperty("--i",i));
     /* a jump (nav link, fast fling) can skip past things; anything already above the fold shows at once */
-    let sc=0;addEventListener("scroll",()=>{if(sc)return;sc=requestAnimationFrame(()=>{sc=0;document.querySelectorAll("main .rv:not(.in),#track:not(.in),#rcpt:not(.in)").forEach(el=>{if(el.getBoundingClientRect().bottom<0){el.classList.add("in");io.unobserve(el);}});});},{passive:true});
+    /* checked once scrolling settles, not every frame: measuring every unrevealed block per frame forced style and layout work mid-scroll */
+    let sc=0;addEventListener("scroll",()=>{clearTimeout(sc);sc=setTimeout(()=>document.querySelectorAll("main .rv:not(.in),#track:not(.in),#rcpt:not(.in)").forEach(el=>{if(el.getBoundingClientRect().bottom<0){el.classList.add("in");io.unobserve(el);}}),140);},{passive:true});
   }else document.querySelectorAll(".rv,#track,#rcpt").forEach(el=>el.classList.add("in"));
 
   /* springs (Apple-style: response in seconds, damping 1 = no overshoot), one rAF loop that sleeps at rest */
@@ -749,7 +752,8 @@ html.cur,html.cur *{cursor:none!important}
     addEventListener("pointermove",e=>{if(e.pointerType!=="mouse")return;px=e.clientX;py=e.clientY;
       if(!seen){seen=true;X.v=X.t=px;Y.v=Y.t=py;}cur.classList.remove("out");
       cd.style.translate=cm.style.translate=`${px}px ${py}px`;TL.t=Math.max(-14,Math.min(14,TL.t+e.movementX*.6));wake(tiltF);shake(e.movementX,e.timeStamp);look(e.target);},{passive:true});
-    addEventListener("scroll",()=>{if(seen)look(document.elementFromPoint(px,py));},{passive:true});
+    /* scrolling moves the page under a still cursor: re-check what it's over once scrolling settles (a per-frame hit test forced layout mid-scroll) */
+    let scrf=0,lastEl=null;addEventListener("scroll",()=>{if(!seen)return;clearTimeout(scrf);scrf=setTimeout(()=>{const el=document.elementFromPoint(px,py);if(el!==lastEl){lastEl=el;look(el);}},90);},{passive:true});
     html.addEventListener("pointerleave",()=>cur.classList.add("out"));
     addEventListener("blur",()=>cur.classList.add("out"));
     addEventListener("pointerdown",e=>{if(e.pointerType!=="mouse")return;cur.classList.add("down");
@@ -845,7 +849,8 @@ html.cur,html.cur *{cursor:none!important}
     seek.style.setProperty("--p",(t/d*100).toFixed(3)+"%");tl.textContent=`${fmt(t)} / ${fmt(d)}`;seek.setAttribute("aria-valuetext",`${fmt(t)} of ${fmt(d)}`);
     let ci=0;CH.forEach((c,i)=>{if(t>=c[1]-.05)ci=i;});
     if(ci!==cur){cur=ci;[...chb.children].forEach((b,i)=>b.setAttribute("aria-current",String(i===ci)));const b=chb.children[ci];chb.scrollTo({left:b.offsetLeft-chb.clientWidth/2+b.offsetWidth/2,behavior:"smooth"});}};
-  const loop=()=>{ui();raf=v.paused?0:requestAnimationFrame(loop);};
+  /* progress redraws ~8x a second while playing (every frame only while dragging): a per-frame redraw restyled the controls 60x a second */
+  let lastUi=0;const loop=now=>{if(drag||now-lastUi>120){lastUi=now;ui();}raf=v.paused?0:requestAnimationFrame(loop);};
   v.addEventListener("play",()=>{if(!raf)raf=requestAnimationFrame(loop);});v.addEventListener("timeupdate",ui);v.addEventListener("loadedmetadata",ui);v.addEventListener("seeked",ui);
   const jump=t=>{user=true;const set=()=>{v.currentTime=Math.min(t,(v.duration||82.8)-.05);ui();};if(v.readyState>=1)set();else v.addEventListener("loadedmetadata",set,{once:true});if(v.paused)go();};
   seek.addEventListener("input",()=>{drag=true;user=true;if(v.readyState>=1)v.currentTime=+seek.value;ui();});
