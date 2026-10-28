@@ -9,8 +9,10 @@
 //   {action: "test-email"} / {action: "test-sms"}
 // GET ?action=unsub&u=<user id>&t=<token> (or the one-click POST) turns email reminders off.
 // Secrets: VAPID_PUBLIC_KEY, VAPID_PRIVATE_KEY, VAPID_SUBJECT, CRON_SECRET; for email RESEND_API_KEY and
-// REMIND_FROM ("Digital Dash <reminders@yourdomain.com>"); for texts TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN and
-// TWILIO_FROM (a phone number, or a Messaging Service SID starting with MG). Optional: SITE_URL, REMIND_SECRET,
+// REMIND_FROM ("Digital Dash <reminders@yourdomain.com>"); for texts either Telnyx (TELNYX_API_KEY plus TELNYX_FROM,
+// a phone number like +15551234567, and/or TELNYX_PROFILE_ID, a messaging profile id) or Twilio (TWILIO_ACCOUNT_SID,
+// TWILIO_AUTH_TOKEN and TWILIO_FROM, a phone number or a Messaging Service SID starting with MG). Telnyx is used
+// when both are set. Optional: SITE_URL, REMIND_SECRET,
 // SMS_DAILY_LIMIT (default 20), EMAIL_DAILY_LIMIT (default 50).
 import webpush from "npm:web-push@3.6.7";
 import { createClient, type SupabaseClient } from "npm:@supabase/supabase-js@2";
@@ -35,7 +37,9 @@ const APP = SITE + "/digital-dash";
 const SMS_DAILY = Number(env("SMS_DAILY_LIMIT")) || 20;
 const EMAIL_DAILY = Number(env("EMAIL_DAILY_LIMIT")) || 50;
 const emailReady = () => !!env("RESEND_API_KEY");
-const smsReady = () => !!(env("TWILIO_ACCOUNT_SID") && env("TWILIO_AUTH_TOKEN") && env("TWILIO_FROM"));
+const telnyxReady = () => !!(env("TELNYX_API_KEY") && (env("TELNYX_FROM") || env("TELNYX_PROFILE_ID")));
+const twilioReady = () => !!(env("TWILIO_ACCOUNT_SID") && env("TWILIO_AUTH_TOKEN") && env("TWILIO_FROM"));
+const smsReady = () => telnyxReady() || twilioReady();
 
 type Sub = { endpoint: string; p256dh: string; auth: string };
 type Note = { title: string; body: string; tag?: string | null; url?: string | null; at?: number };
@@ -110,6 +114,28 @@ async function sendEmail(to: string, subject: string, title: string, body: strin
 
 // Returns "ok", "stopped" (the person replied STOP, so texts must stop) or "error".
 async function sendSms(to: string, body: string): Promise<"ok" | "stopped" | "error"> {
+  return telnyxReady() ? sendTelnyx(to, body) : sendTwilio(to, body);
+}
+async function sendTelnyx(to: string, text: string): Promise<"ok" | "stopped" | "error"> {
+  const msg: Record<string, string> = { to, text };
+  if (env("TELNYX_FROM")) msg.from = env("TELNYX_FROM");
+  if (env("TELNYX_PROFILE_ID")) msg.messaging_profile_id = env("TELNYX_PROFILE_ID");
+  try {
+    const res = await fetch("https://api.telnyx.com/v2/messages", {
+      method: "POST",
+      headers: { Authorization: `Bearer ${env("TELNYX_API_KEY")}`, "Content-Type": "application/json" },
+      body: JSON.stringify(msg),
+    });
+    if (res.ok) { await res.body?.cancel(); return "ok"; }
+    const err = await res.json().catch(() => ({}));
+    // 40300: the number replied STOP, so texts to it are blocked until they reply START
+    const codes = (err?.errors ?? []).map((e: { code?: string }) => String(e.code));
+    return codes.includes("40300") ? "stopped" : "error";
+  } catch {
+    return "error";
+  }
+}
+async function sendTwilio(to: string, body: string): Promise<"ok" | "stopped" | "error"> {
   const sid = env("TWILIO_ACCOUNT_SID"), from = env("TWILIO_FROM");
   const form = new URLSearchParams({ To: to, Body: body });
   form.set(from.startsWith("MG") ? "MessagingServiceSid" : "From", from);
