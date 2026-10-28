@@ -1475,3 +1475,21 @@
 1512|{0} eingetragen
 1513|+{0} hinzugefügt
 1514|Tipp: Tippe "spent 12 coffee" in die Befehlsleiste (Strg/Cmd+K), um es schnell einzutragen.
+1515|Wähle, woran wir dich erinnern und wie: als Mitteilung auf Handy oder Computer, per E-Mail oder SMS.
+1516|Was senden, und wie
+1517|Mitteilung
+1518|Wochenrückblick
+1519|Sonntag 19 Uhr: Fokuszeit, erledigte Aufgaben und Ausgaben
+1520|Budget-Hinweise
+1521|Wenn du 80 % und 100 % deines Wochenbudgets erreichst
+1522|(lege auf Finanzen ein Budget fest)
+1523|Mitteilungen auf diesem Gerät einschalten
+1524|Mitteilungen auf diesem Gerät an
+1525|Mitteilungen sind auf einem anderen deiner Geräte an.
+1526|Test-Mitteilung senden
+1527|E-Mail und SMS
+1528|Einmal einrichten, dann oben E-Mail oder SMS wählen oder pro Aufgabe mit der Glocke unter Aufgaben.
+1529|Melde dich an, um Erinnerungen per Mitteilung, E-Mail oder SMS zu bekommen.
+1530|Dieser Browser kann keine Mitteilungen anzeigen. E-Mail und SMS funktionieren trotzdem.
+1531|Füge unten deine Nummer hinzu und bestätige sie, um SMS zu bekommen
+1532|Schalte unten E-Mail-Erinnerungen ein

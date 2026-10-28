@@ -1754,6 +1754,14 @@ html.lg .tray-chip{background:var(--glass-tint)}
 .rem-on{display:flex;align-items:center;gap:8px;margin:0 0 6px;font-weight:600;font-size:14px}
 .rem-on i{width:8px;height:8px;border-radius:50%;background:var(--good,#0ca30c)}
 .rem-pair{display:flex;align-items:center;gap:8px}
+.rem-nt{border-top:1px solid var(--line);padding:2px 0 10px}
+.rem-nt .field{border-top:0;padding-bottom:4px}
+.rem-nt.off .rem-ch{opacity:.45}
+.rem-ch{display:flex;gap:6px;flex-wrap:wrap}
+.rem-ch button{border:1px solid var(--line);background:var(--panel2);color:var(--muted);border-radius:999px;padding:5px 12px;font-size:12.5px;min-height:30px}
+.rem-ch button[aria-pressed="true"]{color:var(--ink);border-color:var(--accent);background:color-mix(in srgb,var(--accent) 16%,var(--panel2))}
+.rem-ch button.warn::after,.warn-dot{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--warn,#e0a100);margin-left:6px;vertical-align:middle}
+.rem-warn{margin:8px 0 0;font-size:12.5px}
 .rem-pair input[type=time]{width:auto}
 .room{position:relative;margin-top:18px;display:grid;gap:14px;overflow:hidden}
 .room[hidden]{display:none}
@@ -2294,7 +2302,7 @@ html.lg .eye{background:var(--glass-tint);box-shadow:inset 0 1px 0 color-mix(in 
         </div>
         <div class="panel rem" id="rem-panel">
           <h3>Reminders</h3>
-          <p class="hint" style="margin:0 0 10px">Notifications on your phone or computer, even when Digital Dash is closed.</p>
+          <p class="hint" style="margin:0 0 10px">Choose what you hear about and how: a notification on your phone or computer, an email or a text.</p>
           <div id="rem-body"></div>
           <div id="ct-body"></div>
         </div>
@@ -2542,7 +2550,7 @@ function setSync(t){$("#sync").textContent=t;}
 function save(){
   try{localStorage.setItem(LSK,JSON.stringify(S));}catch(e){}
   if(typeof appBadge==="function")try{appBadge();}catch(e){}
-  acDirty();if(typeof REM!=="undefined"&&(REM.sub||S.tasks.some(t=>t.remind)))remQueue();
+  acDirty();if(typeof REM!=="undefined"&&(REM.sub||remWanted()||REM.hadTask))remQueue();
   clearTimeout(saveTimer);
   saveTimer=setTimeout(async()=>{
     if(!dbRef)return;
@@ -4895,7 +4903,11 @@ function renderSpend(){
     if(x.d!==last){last=x.d;const dayOut=xs.filter(y=>y.d===x.d&&!y.inc).reduce((a,y)=>a+y.amt,0);h=`<div class="sp-day"><span>${x.d===dkey(new Date())?"Today":new Date(x.d+"T12:00").toLocaleDateString(undefined,{weekday:"long",month:"short",day:"numeric"})}</span><span>${dayOut?spMask(dayOut):""}</span></div>`;}
     return h+`<div class="sp-it" data-id="${x.id}" style="--c:${c}"><span class="dot"></span><div class="nm">${x.note?`<span translate="no">${esc(x.note)}</span>`:n}<small>${n}</small></div><span class="amt${x.inc?" in":""}">${x.inc?"+":"−"}${spMask(x.amt)}</span><button class="icon-btn" aria-label="Delete" title="Delete"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>`;}).join(""):`<div class="empty">${isThis?"Nothing yet. Log a purchase above and watch your week add up.":"Nothing logged that week."}</div>`;
 }
-function spAdd(o){(S.spend=S.spend||[]).push(Object.assign({id:uid(),t:Date.now()},o));if(S.spend.length>5000)S.spend.splice(0,S.spend.length-5000);
+function spAlertCheck(){const B=+S.settings.wkBudget||0;if(!B)return;const ws=weekStart(new Date()),W=spWeek(ws),A=S.spAlerts=S.spAlerts||{},wk=dkey(ws);
+  for(const k of Object.keys(A))if(!k.startsWith(wk))delete A[k]; /* only this week's alerts are kept */
+  [[1,"Over your weekly budget",`${fmt(W.out)} spent of ${fmt(B)} this week`],[.8,"80% of your weekly budget",`${fmt(W.out)} of ${fmt(B)} spent · ${fmt(B-W.out)} left`]].some(([p,title,body])=>{
+    if(W.out<B*p)return false;const key=wk+"-"+Math.round(p*100);if(!A[key])A[key]={at:Date.now()+45000,title,body};return true;});}
+function spAdd(o){(S.spend=S.spend||[]).push(Object.assign({id:uid(),t:Date.now()},o));if(S.spend.length>5000)S.spend.splice(0,S.spend.length-5000);if(!o.inc)spAlertCheck();
   const [y,m,d]=o.d.split("-").map(Number);spWk=weekStart(new Date(y,m-1,d));save();renderSpend();renderMini();}
 $("#sp-date").value=dkey(new Date());spCats();
 $("#sp-kind").addEventListener("click",e=>{const b=e.target.closest("button[data-k]");if(!b)return;spKind=b.dataset.k;spCatTouched=false;
@@ -4910,7 +4922,7 @@ $("#sp-next").addEventListener("click",()=>{spWk=addDays(spWk||weekStart(new Dat
 $("#sp-list").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;const id=b.closest(".sp-it").dataset.id,at=S.spend.findIndex(x=>x.id===id);if(at<0)return;
   const x=S.spend.splice(at,1)[0];save();renderSpend();renderMini();toast(`Deleted ${x.note||(x.inc?SPI:SPC)[x.cat]?.[0]||"entry"}`,{run(){S.spend.splice(Math.min(at,S.spend.length),0,x);save();renderSpend();renderMini();}});});
 $("#sp-bud").addEventListener("click",e=>{if(!e.target.closest("#sp-setb"))return;const v=prompt("Weekly spending budget (leave empty for none)",S.settings.wkBudget||"");if(v===null)return;
-  S.settings.wkBudget=Math.max(0,parseFloat(v)||0);save();renderSpend();renderMini();});
+  S.settings.wkBudget=Math.max(0,parseFloat(v)||0);spAlertCheck();save();renderSpend();renderMini();});
 
 /* ---------- mini stats ---------- */
 const TZS=["America/Toronto","America/Vancouver","America/New_York","America/Chicago","America/Los_Angeles","America/Sao_Paulo","Europe/London","Europe/Paris","Europe/Berlin","Africa/Lagos","Asia/Dubai","Asia/Kolkata","Asia/Colombo","Asia/Singapore","Asia/Shanghai","Asia/Tokyo","Australia/Sydney","Pacific/Auckland"];
@@ -6494,7 +6506,13 @@ $("#room").addEventListener("input",e=>{if(e.target.id==="rm-code"){const v=rmCl
    Settings sync in S.settings.rem; whether this particular device receives them is the browser's
    own push subscription. iPhone and iPad only allow push for apps added to the Home Screen. */
 const REM={sub:null,checked:false,busy:false,sig:"",timer:0,tsig:"",hadTask:true,perm:typeof Notification!=="undefined"?Notification.permission:"unsupported"};
-const remS=()=>{const d={on:false,due:60,morning:"08:00",events:true,timer:true};return S.settings.rem=Object.assign(d,S.settings.rem||{});};
+const remS=()=>{const d={on:false,due:60,morning:"08:00",events:true,timer:true,weekly:true,budget:true};const r=S.settings.rem=Object.assign(d,S.settings.rem||{});
+  r.ch=Object.assign({due:["push"],morning:["push"],event:["push"],timer:["push"],weekly:["push"],budget:["push"]},r.ch||{});return r;};
+/* Which ways each kind of notification goes out: "push" (devices with reminders on), "email", "sms".
+   Email and texts only actually send once they're set up below (dash_contacts); the server checks again. */
+const NT_KINDS=["due","morning","event","timer","weekly","budget"];
+const remCh=k=>{const r=remS();return (r.ch[k]||[]).filter(c=>c==="push"?r.on:c==="email"||c==="sms");};
+const remWanted=()=>NT_KINDS.some(k=>remCh(k).length)||S.tasks.some(t=>t.remind&&!t.done);
 const isIOS=/iP(hone|ad|od)/.test(navigator.userAgent)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1);
 const pushOK=()=>"serviceWorker" in navigator&&"PushManager" in window&&typeof Notification!=="undefined"&&window.isSecureContext;
 const b64u8=s=>{const p="=".repeat((4-s.length%4)%4),b=atob((s+p).replace(/-/g,"+").replace(/_/g,"/"));return Uint8Array.from(b,c=>c.charCodeAt(0));};
@@ -6530,56 +6548,76 @@ function remBuild(){
   /* reminders you set on a task: up to 30 days ahead, on the channels you picked */
   S.tasks.forEach(t=>{if(t.done||!t.remind)return;const at=trAt(t),ch=trChannels(t);if(!at||!ch.length||at<=now||at>now+30*864e5)return;
     out.push({kind:"task",tag:`tr-${t.id}-${ch.join("")}`,at,ch,title:t.title,body:t.due?`Due ${dueLabel(t.due,t.dueTime).t}${t.course?" · "+t.course:""}`:"Your reminder",url:U+"#tasks"});});
-  if(!r.on)return out.sort((a,b)=>a.at-b.at).slice(0,150);
-  if(r.due>0)S.tasks.forEach(t=>{if(t.done||!t.due||!t.dueTime)return;const at=dueAt(t).getTime()-r.due*60000;
-    if(at>now&&at<end)out.push({kind:"due",tag:"due-"+t.id,at,title:t.title,body:`Due ${leadText(r.due)}, at ${fmtTime(t.dueTime)}${t.course?" · "+t.course:""}`,url:U+"#tasks"});});
-  if(r.events)S.events.forEach(e=>{if(!e.time)return;const [y,m,d]=e.date.split("-").map(Number),[hh,mm]=e.time.split(":").map(Number),at=new Date(y,m-1,d,hh,mm).getTime()-15*60000;
-    if(at>now&&at<end)out.push({kind:"event",tag:"ev-"+e.id,at,title:e.title,body:`Starts at ${fmtTime(e.time)}`,url:U+"#calendar"});});
-  if(r.morning)for(let i=0;i<7;i++){
+  const H=x=>{let h=0;for(const c of x)h=(h*31+c.charCodeAt(0))|0;return (h>>>0).toString(36);}; /* content in the tag, so a changed summary replaces the queued one */
+  let ch;
+  if(r.due>0&&(ch=remCh("due")).length)S.tasks.forEach(t=>{if(t.done||!t.due||!t.dueTime)return;const at=dueAt(t).getTime()-r.due*60000;
+    if(at>now&&at<end)out.push({kind:"due",tag:"due-"+t.id,at,ch,title:t.title,body:`Due ${leadText(r.due)}, at ${fmtTime(t.dueTime)}${t.course?" · "+t.course:""}`,url:U+"#tasks"});});
+  if(r.events&&(ch=remCh("event")).length)S.events.forEach(e=>{if(!e.time)return;const [y,m,d]=e.date.split("-").map(Number),[hh,mm]=e.time.split(":").map(Number),at=new Date(y,m-1,d,hh,mm).getTime()-15*60000;
+    if(at>now&&at<end)out.push({kind:"event",tag:"ev-"+e.id,at,ch,title:e.title,body:`Starts at ${fmtTime(e.time)}`,url:U+"#calendar"});});
+  if(r.morning&&(ch=remCh("morning")).length)for(let i=0;i<7;i++){
     const day=addDays(new Date(),i),k=dkey(day),[h,mi]=r.morning.split(":").map(Number),at=new Date(day.getFullYear(),day.getMonth(),day.getDate(),h,mi).getTime();if(at<=now)continue;
     const due=S.tasks.filter(t=>!t.done&&t.due===k).sort((a,b)=>a.urg-b.urg),evs=S.events.filter(e=>e.date===k),late=S.tasks.filter(t=>!t.done&&t.due&&t.due<k).length;
     if(!due.length&&!evs.length&&!(i===0&&late))continue; /* an overdue-only summary goes out today, not every day this week */
     const parts=[];if(due.length)parts.push(due.slice(0,3).map(t=>t.title).join(", ")+(due.length>3?` and ${due.length-3} more`:""));
     if(evs.length)parts.push(`${evs.length} event${evs.length===1?"":"s"} on your calendar`);if(late)parts.push(`${late} overdue`);
-    out.push({kind:"morning",tag:"morning-"+k,at,title:due.length?`${due.length} thing${due.length===1?"":"s"} due today`:"Your day",body:parts.join(" · "),url:U+"#tasks"});
+    const title=due.length?`${due.length} thing${due.length===1?"":"s"} due today`:"Your day",body=parts.join(" · ");
+    out.push({kind:"morning",tag:"morning-"+k+"-"+H(title+body),at,ch,title,body,url:U+"#tasks"});
   }
+  /* weekly recap: Sunday 7 PM, this week's focus, tasks done and spending */
+  if(r.weekly&&(ch=remCh("weekly")).length){const ws=weekStart(new Date()),sun=addDays(ws,6),at=new Date(sun.getFullYear(),sun.getMonth(),sun.getDate(),19,0).getTime();
+    if(at>now){const w=weekStats(ws),sp=spWeek(ws),bits=[`${fmtMins(w.focusMin)} focused`,`${w.done} task${w.done===1?"":"s"} done`];if(sp.out)bits.push(`${fmt(sp.out)} spent`);
+      const body=bits.join(" · ");out.push({kind:"weekly",tag:"weekly-"+dkey(ws)+"-"+H(body),at,ch,title:"Your week",body,url:U+"#calendar"});}}
+  /* budget alerts, fired once when this week's spending passes 80% and 100% of the budget (spAlerts) */
+  if(r.budget&&(ch=remCh("budget")).length)Object.entries(S.spAlerts||{}).forEach(([key,v])=>{if(v.at>now)out.push({kind:"budget",tag:"budget-"+key,at:v.at,ch,title:v.title,body:v.body,url:U+"#money"});});
   return out.sort((a,b)=>a.at-b.at).slice(0,150);
 }
 async function remSync(force){ /* write the next 7 days of reminders; only when something changed */
-  if(!AC.user||!AC.sb||(!remS().on&&!S.tasks.some(t=>t.remind&&!t.done)&&!REM.hadTask))return;
+  if(!AC.user||!AC.sb||(!remWanted()&&!REM.hadTask))return;
   const uid=AC.user.id,list=remBuild(),rows=list.map(x=>({id:`${uid}:${x.tag}:${x.at}`,user_id:uid,at:new Date(x.at).toISOString(),kind:x.kind,title:x.title.slice(0,120),body:x.body.slice(0,240),tag:x.tag,url:x.url,channels:x.ch||["push"]}));
-  REM.hadTask=list.some(x=>x.kind==="task");
+  REM.hadTask=list.length>0;
   const sig=stableStr(rows);if(!force&&sig===REM.sig)return;REM.sig=sig;
   try{
     if(rows.length){const {error}=await AC.sb.from("dash_reminders").upsert(rows,{onConflict:"user_id,id",ignoreDuplicates:true});if(error)throw error;}
-    let q=AC.sb.from("dash_reminders").delete().eq("user_id",uid).is("sent_at",null).in("kind",["due","event","morning","task"]);
+    let q=AC.sb.from("dash_reminders").delete().eq("user_id",uid).is("sent_at",null).in("kind",["due","event","morning","task","weekly","budget"]);
     if(rows.length)q=q.not("id","in",`(${rows.map(r=>`"${r.id}"`).join(",")})`);
     await q;
   }catch(e){REM.sig="";}
 }
 function remQueue(){clearTimeout(REM.timer);REM.timer=setTimeout(()=>remSync(),4000);}
 function remTick(){ /* the focus timer: schedule "session done" while it runs, cancel when paused */
-  if(!AC||!AC.user||!AC.sb||!remS().on||!remS().timer)return;
+  if(!AC||!AC.user||!AC.sb||!remS().timer||!remCh("timer").length)return;
   const sig=T.running?T.kind+":"+T.end:"";if(sig===REM.tsig)return;REM.tsig=sig;const id=AC.user.id+":timer";
-  if(T.running&&T.end-Date.now()>20000)AC.sb.from("dash_reminders").upsert({id,user_id:AC.user.id,at:new Date(T.end).toISOString(),kind:"timer",title:T.kind==="focus"?"Focus session done":"Break's over",body:T.kind==="focus"?"Nice work. Take a short break.":"Time to get back to it.",tag:"timer",url:"/digital-dash",sent_at:null},{onConflict:"user_id,id"}).then(()=>{},()=>{});
+  if(T.running&&T.end-Date.now()>20000)AC.sb.from("dash_reminders").upsert({id,user_id:AC.user.id,at:new Date(T.end).toISOString(),kind:"timer",title:T.kind==="focus"?"Focus session done":"Break's over",body:T.kind==="focus"?"Nice work. Take a short break.":"Time to get back to it.",tag:"timer",url:"/digital-dash",channels:remCh("timer"),sent_at:null},{onConflict:"user_id,id"}).then(()=>{},()=>{});
   else AC.sb.from("dash_reminders").delete().eq("user_id",AC.user.id).eq("id",id).is("sent_at",null).then(()=>{},()=>{});
 }
+const NT_ROWS=[["due","Task due"],["morning","Morning summary","What's due today, on days something is"],["event","Calendar events","15 minutes before"],["timer","Focus timer done"],["weekly","Weekly recap","Sunday 7 PM: focus time, tasks done and spending"],["budget","Budget alerts","When you pass 80% and 100% of your weekly budget"]];
 function remRender(){
   const el=$("#rem-body");if(!el)return;const r=remS(),on=!!REM.sub;
-  if(!pushOK()){
-    el.innerHTML=isIOS&&!standalone()?`<p class="rem-note">On iPhone and iPad, reminders work once Digital Dash is on your Home Screen: tap <b>Share</b>, then <b>Add to Home Screen</b>, open it from there and turn reminders on.</p>`:`<p class="rem-note">This browser can't show notifications. Try Chrome, Edge, Firefox or Safari.</p>`;return;}
   if(AC.state==="unavailable"){el.innerHTML=`<p class="rem-note">${AC.why==="preview"?"Reminders work on your own site, not in this preview.":"Reminders need the account service, which isn't connected on this site yet."}</p>`;return;}
-  if(!AC.user){el.innerHTML=`<p class="rem-note">Sign in to get reminders on this device.</p><button type="button" class="btn ghost small" data-rem="signin">Sign in</button>`;return;}
-  if(!REM.checked){el.innerHTML=`<p class="rem-note">Checking this device…</p>`;return;}
-  if(!on){el.innerHTML=`${REM.perm==="denied"?`<p class="rem-note">Notifications are blocked for this site. Allow them in your browser or phone settings, then come back.</p>`:""}<button type="button" class="btn" data-rem="on" ${REM.busy?"disabled":""}>${REM.busy?"Turning on…":"Turn on reminders for this device"}</button>${r.on?`<p class="hint" style="margin:8px 0 0">Reminders are on for another of your devices.</p>`:""}`;return;}
-  el.innerHTML=`<p class="rem-on"><i></i>On for this device</p>
-    <div class="field"><span>Task due</span><select data-rem="due">${[[0,"Off"],[15,"15 min before"],[30,"30 min before"],[60,"1 hour before"],[180,"3 hours before"],[1440,"1 day before"]].map(([v,l])=>`<option value="${v}"${r.due===v?" selected":""}>${l}</option>`).join("")}</select></div>
-    <div class="field"><span>Morning summary<small class="muted" style="display:block;font-size:12.5px">What's due today, on days something is</small></span><span class="rem-pair"><input type="checkbox" data-rem="morning-on" ${r.morning?"checked":""} aria-label="Morning summary"><input type="time" data-rem="morning" value="${r.morning||"08:00"}" ${r.morning?"":"disabled"} aria-label="Summary time"></span></div>
-    <div class="field"><span>Calendar events<small class="muted" style="display:block;font-size:12.5px">15 minutes before</small></span><input type="checkbox" data-rem="events" ${r.events?"checked":""}></div>
-    <div class="field"><span>Focus timer done</span><input type="checkbox" data-rem="timer" ${r.timer?"checked":""}></div>
-    <div class="row" style="margin-top:10px"><button type="button" class="btn ghost small" data-rem="test">Send a test</button><button type="button" class="btn ghost small" data-rem="off">Turn off on this device</button></div>`;
+  if(!AC.user){el.innerHTML=`<p class="rem-note">Sign in to get reminders by notification, email or text.</p><button type="button" class="btn ghost small" data-rem="signin">Sign in</button>`;return;}
+  /* this device's notifications */
+  let dev;
+  if(!pushOK())dev=isIOS&&!standalone()?`<p class="rem-note">For notifications on iPhone and iPad, add Digital Dash to your Home Screen (<b>Share</b>, then <b>Add to Home Screen</b>) and open it from there. Email and texts work anywhere.</p>`:`<p class="rem-note">This browser can't show notifications. Email and texts still work.</p>`;
+  else if(!REM.checked)dev=`<p class="rem-note">Checking this device…</p>`;
+  else if(!on)dev=`${REM.perm==="denied"?`<p class="rem-note">Notifications are blocked for this site. Allow them in your browser or phone settings, then come back.</p>`:""}<button type="button" class="btn" data-rem="on" ${REM.busy?"disabled":""}>${REM.busy?"Turning on…":"Turn on notifications for this device"}</button>${r.on?`<p class="hint" style="margin:8px 0 0">Notifications are on for another of your devices.</p>`:""}`;
+  else dev=`<p class="rem-on"><i></i>Notifications on for this device</p>`;
+  const c=CT.data,ready={push:r.on,email:!!(c&&c.email_on),sms:!!(c&&c.sms_on&&c.phone_verified)};
+  const chips=k=>`<span class="rem-ch" role="group" aria-label="How to send">${[["push","Notification"],["email","Email"],["sms","Text"]].map(([x,l])=>{const p=(r.ch[k]||[]).includes(x);
+    return `<button type="button" data-rch="${k}:${x}" aria-pressed="${p}" class="${p&&!ready[x]?"warn":""}" title="${p&&!ready[x]?(x==="push"?"Turn on notifications on a device":x==="email"?"Turn on email reminders below":"Add and confirm your number below"):l}">${l}</button>`;}).join("")}</span>`;
+  const ctl={due:`<select data-rem="due" aria-label="When">${[[0,"Off"],[15,"15 min before"],[30,"30 min before"],[60,"1 hour before"],[180,"3 hours before"],[1440,"1 day before"]].map(([v,l])=>`<option value="${v}"${r.due===v?" selected":""}>${l}</option>`).join("")}</select>`,
+    morning:`<span class="rem-pair"><input type="checkbox" data-rem="morning-on" ${r.morning?"checked":""} aria-label="Morning summary"><input type="time" data-rem="morning" value="${r.morning||"08:00"}" ${r.morning?"":"disabled"} aria-label="Summary time"></span>`,
+    event:`<input type="checkbox" data-rem="events" ${r.events?"checked":""} aria-label="Calendar events">`,timer:`<input type="checkbox" data-rem="timer" ${r.timer?"checked":""} aria-label="Focus timer done">`,
+    weekly:`<input type="checkbox" data-rem="weekly" ${r.weekly?"checked":""} aria-label="Weekly recap">`,budget:`<input type="checkbox" data-rem="budget" ${r.budget?"checked":""} aria-label="Budget alerts">`};
+  const isOn={due:r.due>0,morning:!!r.morning,event:r.events,timer:r.timer,weekly:r.weekly,budget:r.budget};
+  const warn=NT_ROWS.some(([k])=>isOn[k]&&(r.ch[k]||[]).some(x=>!ready[x]));
+  el.innerHTML=dev+`<h4 class="ct-h" style="margin-top:14px">What to send, and how</h4>`+NT_ROWS.map(([k,l,sub])=>`<div class="rem-nt${isOn[k]?"":" off"}"><div class="field"><span>${l}${sub?`<small class="muted" style="display:block;font-size:12.5px">${sub}${k==="budget"&&!S.settings.wkBudget?` <span>(set a budget on Net)</span>`:""}</small>`:""}</span>${ctl[k]}</div>${chips(k)}</div>`).join("")+
+    (warn?`<p class="hint rem-warn">Choices marked <span class="warn-dot"></span> won't send until that way is set up${c?" below":""}.</p>`:"")+
+    `<div class="row" style="margin-top:10px">${on?`<button type="button" class="btn ghost small" data-rem="test">Send a test notification</button><button type="button" class="btn ghost small" data-rem="off">Turn off on this device</button>`:""}</div>`;
 }
 $("#rem-panel").addEventListener("click",async e=>{
+  const cb=e.target.closest("[data-rch]");if(cb){const [k,x]=cb.dataset.rch.split(":"),r=remS(),l=r.ch[k]=(r.ch[k]||[]).slice(),i=l.indexOf(x);
+    if(i>=0)l.splice(i,1);else{l.push(x);if(x==="sms"&&!(CT.data&&CT.data.sms_on&&CT.data.phone_verified))toast("Add and confirm your number below to get texts");else if(x==="email"&&!(CT.data&&CT.data.email_on))toast("Turn on email reminders below");}
+    if(k==="timer"){REM.tsig="x";remTick();}save();remRender();remSync();return;}
   const b=e.target.closest("[data-rem]");if(!b||b.tagName==="INPUT"||b.tagName==="SELECT")return;const a=b.dataset.rem;
   if(a==="signin")acOpen();
   else if(a==="on")remEnable();
@@ -6588,8 +6626,8 @@ $("#rem-panel").addEventListener("click",async e=>{
 });
 $("#rem-panel").addEventListener("change",e=>{
   const a=e.target.dataset.rem;if(!a)return;const r=remS();
-  if(a==="due")r.due=+e.target.value;
-  else if(a==="events"||a==="timer")r[a]=e.target.checked;
+  if(a==="due"){r.due=+e.target.value;remRender();}
+  else if(a==="events"||a==="timer"||a==="weekly"||a==="budget"){r[a]=e.target.checked;remRender();}
   else if(a==="morning-on"){r.morning=e.target.checked?($('#rem-panel [data-rem="morning"]').value||"08:00"):"";remRender();}
   else if(a==="morning")r.morning=e.target.value||"08:00";
   if(a==="timer"){REM.tsig="x";remTick();}
@@ -6616,13 +6654,13 @@ async function ctLoad(force){
   if(!AC.user||!AC.sb||CT.loading||(CT.data&&!force)){ctRender();return;}
   CT.loading=true;CT.err="";ctRender();
   try{CT.data=await remFn({action:"contact"});}catch(e){CT.err=e.message;}
-  finally{CT.loading=false;ctRender();if($("#trd").open)trRender();}
+  finally{CT.loading=false;ctRender();remRender();if($("#trd").open)trRender();}
 }
 async function ctCall(body,okMsg){
   CT.busy=body.action;ctRender();if($("#trd").open)trRender();
   try{const d=await remFn(body);if(d&&d.email!==undefined)CT.data=d;if(body.action==="phone-start"){CT.pending=d.pending;}if(body.action==="phone-verify"||body.action==="phone-remove")CT.pending=false;if(okMsg)toast(okMsg);return d;}
   catch(e){toast(e.message);return null;}
-  finally{CT.busy="";ctRender();if($("#trd").open)trRender();}
+  finally{CT.busy="";ctRender();remRender();if($("#trd").open)trRender();}
 }
 function ctRender(){
   const el=$("#ct-body");if(!el)return;
@@ -6641,7 +6679,7 @@ function ctRender(){
      <form class="ct-row" data-ctf="verify"><input inputmode="numeric" autocomplete="one-time-code" maxlength="6" id="ct-code" placeholder="6-digit code" aria-label="Verification code" required><button class="btn small" type="submit" ${b?"disabled":""}>${b==="phone-verify"?"Checking…":"Verify"}</button><button type="button" class="btn ghost small" data-ct="change">Use another number</button></form>`;
   else sms=`<p class="rem-note" style="margin-bottom:4px">Add your mobile number to get tasks by text. We'll text you a code to confirm it's yours.</p>
      <form class="ct-row" data-ctf="start"><input type="tel" id="ct-phone" autocomplete="tel" placeholder="e.g. 519 555 1234" aria-label="Mobile number" required><button class="btn small" type="submit" ${b?"disabled":""}>${b==="phone-start"?"Sending…":"Send code"}</button></form>`;
-  el.innerHTML=`<h4 class="ct-h">Email and text reminders</h4><p class="hint" style="margin:0 0 8px">Pick these per task with the bell button on the Tasks page.</p>${email}${sms}
+  el.innerHTML=`<h4 class="ct-h" style="margin-top:16px">Email and texts</h4><p class="hint" style="margin:0 0 8px">Set these up once, then pick Email or Text above, or per task with the bell on the Tasks page.</p>${email}${sms}
     <p class="ct-fine">Up to ${d.limits.sms} texts and ${d.limits.email} emails a day. Message and data rates may apply. Reply STOP to any text to stop texts, and every email has a link to stop emails.</p>`;
 }
 $("#ct-body").addEventListener("click",e=>{

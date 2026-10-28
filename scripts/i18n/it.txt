@@ -1475,3 +1475,21 @@
 1512|Registrato {0}
 1513|Aggiunto +{0}
 1514|Suggerimento: scrivi "spent 12 coffee" nella barra dei comandi (Ctrl/Cmd+K) per registrarlo al volo.
+1515|Scegli di cosa ricevere avvisi e come: una notifica sul telefono o computer, un'email o un SMS.
+1516|Cosa inviare, e come
+1517|Notifica
+1518|Riepilogo settimanale
+1519|Domenica alle 19: tempo di concentrazione, attività fatte e spese
+1520|Avvisi di budget
+1521|Quando superi l'80% e il 100% del budget settimanale
+1522|(imposta un budget in Finanze)
+1523|Attiva le notifiche su questo dispositivo
+1524|Notifiche attive su questo dispositivo
+1525|Le notifiche sono attive su un altro tuo dispositivo.
+1526|Invia una notifica di prova
+1527|Email e SMS
+1528|Configurali una volta, poi scegli Email o SMS qui sopra, o per attività con la campanella in Attività.
+1529|Accedi per ricevere promemoria via notifica, email o SMS.
+1530|Questo browser non può mostrare notifiche. Email e SMS funzionano comunque.
+1531|Aggiungi e conferma il tuo numero qui sotto per ricevere SMS
+1532|Attiva i promemoria via email qui sotto

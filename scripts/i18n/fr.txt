@@ -1475,3 +1475,21 @@
 1512|{0} enregistré
 1513|Ajouté +{0}
 1514|Astuce : tape "spent 12 coffee" dans la barre de commande (Ctrl/Cmd+K) pour l'ajouter vite.
+1515|Choisis ce qu'on te rappelle et comment : une notification sur ton téléphone ou ordinateur, un e-mail ou un SMS.
+1516|Quoi envoyer, et comment
+1517|Notification
+1518|Bilan de la semaine
+1519|Dimanche 19 h : temps de concentration, tâches faites et dépenses
+1520|Alertes de budget
+1521|Quand tu dépasses 80 % et 100 % de ton budget hebdo
+1522|(définis un budget dans Finances)
+1523|Activer les notifications sur cet appareil
+1524|Notifications activées sur cet appareil
+1525|Les notifications sont activées sur un autre de tes appareils.
+1526|Envoyer une notification test
+1527|E-mails et SMS
+1528|Configure-les une fois, puis choisis E-mail ou SMS ci-dessus, ou par tâche avec la cloche dans Tâches.
+1529|Connecte-toi pour recevoir des rappels par notification, e-mail ou SMS.
+1530|Ce navigateur ne peut pas afficher de notifications. Les e-mails et SMS fonctionnent quand même.
+1531|Ajoute et confirme ton numéro ci-dessous pour recevoir des SMS
+1532|Active les rappels par e-mail ci-dessous

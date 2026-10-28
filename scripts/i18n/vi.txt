@@ -1475,3 +1475,21 @@
 1512|Đã ghi {0}
 1513|Đã thêm +{0}
 1514|Mẹo: gõ "spent 12 coffee" vào thanh lệnh (Ctrl/Cmd+K) để ghi nhanh.
+1515|Chọn nhận nhắc về điều gì và bằng cách nào: thông báo trên điện thoại hoặc máy tính, email hoặc tin nhắn.
+1516|Gửi gì, và gửi thế nào
+1517|Thông báo
+1518|Tổng kết tuần
+1519|Chủ nhật 7 giờ tối: thời gian tập trung, việc đã xong và chi tiêu
+1520|Cảnh báo ngân sách
+1521|Khi bạn vượt 80% và 100% ngân sách tuần
+1522|(đặt ngân sách ở mục Tài chính)
+1523|Bật thông báo trên thiết bị này
+1524|Đã bật thông báo trên thiết bị này
+1525|Thông báo đang bật trên một thiết bị khác của bạn.
+1526|Gửi thông báo thử
+1527|Email và tin nhắn
+1528|Thiết lập một lần, rồi chọn Email hoặc Tin nhắn ở trên, hoặc cho từng việc bằng nút chuông ở mục Việc cần làm.
+1529|Đăng nhập để nhận nhắc nhở qua thông báo, email hoặc tin nhắn.
+1530|Trình duyệt này không hiển thị được thông báo. Email và tin nhắn vẫn hoạt động.
+1531|Thêm và xác nhận số điện thoại bên dưới để nhận tin nhắn
+1532|Bật nhắc nhở qua email bên dưới

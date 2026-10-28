@@ -1475,3 +1475,21 @@
 1512|Registrado {0}
 1513|Añadido +{0}
 1514|Consejo: escribe "spent 12 coffee" en la barra de comandos (Ctrl/Cmd+K) para registrarlo rápido.
+1515|Elige de qué te avisamos y cómo: una notificación en tu teléfono o computadora, un correo o un mensaje de texto.
+1516|Qué enviar y cómo
+1517|Notificación
+1518|Resumen semanal
+1519|Domingo 7 PM: tiempo de enfoque, tareas hechas y gastos
+1520|Alertas de presupuesto
+1521|Cuando pases el 80% y el 100% de tu presupuesto semanal
+1522|(fija un presupuesto en Finanzas)
+1523|Activar notificaciones en este dispositivo
+1524|Notificaciones activadas en este dispositivo
+1525|Las notificaciones están activadas en otro de tus dispositivos.
+1526|Enviar una notificación de prueba
+1527|Correo y mensajes
+1528|Configúralos una vez y luego elige Correo o Texto arriba, o por tarea con la campana en Tareas.
+1529|Inicia sesión para recibir recordatorios por notificación, correo o texto.
+1530|Este navegador no puede mostrar notificaciones. El correo y los mensajes siguen funcionando.
+1531|Añade y confirma tu número abajo para recibir mensajes
+1532|Activa los recordatorios por correo abajo

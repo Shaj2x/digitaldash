@@ -152,10 +152,17 @@ async function sendTwilio(to: string, body: string): Promise<"ok" | "stopped" | 
     return "error";
   }
 }
+// One SMS segment is 160 GSM-7 characters; anything outside that set (emoji, curly quotes, "·") makes the
+// whole text UCS-2, 70 characters per segment, and each extra segment is billed as another text.
+const GSM = /^[A-Za-z0-9 @£$¥èéùìòÇ\nØø\rÅåΔ_ΦΓΛΩΠΨΣΘΞÆæßÉ!"#¤%&'()*+,\-./:;<=>?¡ÄÖÑÜ§¿äöñüà^{}\\\[~\]|€]*$/;
+const gsmSafe = (t: string) => {
+  const s = t.replace(/[‘’]/g, "'").replace(/[“”]/g, '"').replace(/[–—]/g, "-").replace(/·/g, "-").replace(/…/g, "...");
+  return [...s].filter((ch) => GSM.test(ch)).join("").replace(/ {2,}/g, " ").replace(/ ([).,])/g, "$1").trim();
+};
 const smsText = (title: string, body: string) => {
   const tail = " Reply STOP to opt out.";
-  let msg = `Digital Dash: ${title}${body ? ` (${body})` : ""}.`;
-  if (msg.length + tail.length > 300) msg = msg.slice(0, 296 - tail.length) + "…";
+  let msg = gsmSafe(`Digital Dash: ${title}${body ? ` (${body})` : ""}.`);
+  if (msg.length + tail.length > 160) msg = msg.slice(0, 157 - tail.length).trimEnd() + "...";
   return msg + tail;
 };
 
