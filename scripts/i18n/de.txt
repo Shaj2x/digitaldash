@@ -1422,3 +1422,56 @@
 1459|Aufgaben in Projekte gruppieren
 1460|Stimmung eingeben, Look bekommen
 1461|Sieh live, was läuft
+1462|Ausgaben
+1463|Diese Woche ausgegeben
+1464|In der Woche ausgegeben
+1465|Eingenommen
+1466|Saldo der Woche
+1467|Tagesdurchschnitt
+1468|Pro Tag
+1469|Ausgegeben
+1470|Bekommen
+1471|Betrag
+1472|Wofür? z. B. Kaffee
+1473|Datum
+1474|Wofür es ausging
+1475|Ausgaben dieser Woche
+1476|Ausgaben der Woche
+1477|Sieh, wie viel du jede Woche ausgibst und wofür. Dein Nettovermögen steht weiter unten.
+1478|Wochenbudget festlegen
+1479|Wochenbudget ändern
+1480|Essen
+1481|Kaffee & Snacks
+1482|Verkehr
+1483|Ausgehen
+1484|Rechnungen
+1485|Schule
+1486|Abos
+1487|Lohn
+1488|Geschenk
+1489|Erstattung
+1490|Was du seit Montag ausgegeben hast
+1491|Deine Kategorien erscheinen hier, sobald du Ausgaben einträgst.
+1492|Noch nichts. Trag oben einen Kauf ein und sieh zu, wie sich deine Woche summiert.
+1493|In der Woche nichts eingetragen.
+1494|Diese Woche noch nichts eingetragen. Trag unten ein, was du ausgibst.
+1495|Über dem Budget
+1496|seit Montag
+1497|Erste Woche mit eingetragenen Ausgaben
+1498|Im Plus
+1499|Im Minus
+1500|Ausgeglichen
+1501|Wöchentliches Ausgabenbudget (leer lassen für keins)
+1502|mehr als zu diesem Zeitpunkt letzte Woche
+1503|weniger als zu diesem Zeitpunkt letzte Woche
+1504|mehr als letzte Woche
+1505|weniger als letzte Woche
+1506|{0} im Minus
+1507|{0} im Plus
+1508|{0} übrig
+1509|{0} drüber
+1510|{0} von {1} Budget
+1511|{0} % des Budgets
+1512|{0} eingetragen
+1513|+{0} hinzugefügt
+1514|Tipp: Tippe "spent 12 coffee" in die Befehlsleiste (Strg/Cmd+K), um es schnell einzutragen.

@@ -386,6 +386,54 @@ html.lg .addbar .addmore input[type=text]{background:var(--glass-tint);border-co
 .acct input{width:130px;text-align:right}
 .addacct{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}
 .addacct .btn{grid-column:1/-1}
+/* Spending */
+.sp-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:10px}
+.sp-head .sec{margin:0}
+.sp-nav{display:flex;align-items:center;gap:6px;font-size:14px;color:var(--muted);font-variant-numeric:tabular-nums}
+.sp-nav span{min-width:120px;text-align:center}
+.sp-nav button:disabled{opacity:.35;cursor:default}
+.sp-top,.sp-mid{display:grid;grid-template-columns:1.3fr 1fr;gap:18px}
+.sp-mid{margin-top:18px;grid-template-columns:1fr 1fr}
+.sp-top h3,.sp-mid h3,.sp-listp h3{margin:0 0 12px;font-size:16px}
+.sp-sum .total{font-size:clamp(44px,7vw,84px)}
+.sp-sum .split strong.up{color:var(--good)} .sp-sum .split strong.down{color:var(--bad)}
+.sp-bud{margin-top:16px}
+.sp-bud:empty{display:none}
+.sp-bud .bar{height:10px;border-radius:5px;background:color-mix(in srgb,var(--ink) 10%,transparent);overflow:hidden;margin:6px 0}
+.sp-bud .bar i{display:block;height:100%;background:var(--accent);transform-origin:0 50%;transition:transform var(--t-ui) var(--ease-out)}
+.sp-bud.over .bar i{background:var(--bad)}
+.sp-bud .row{display:flex;justify-content:space-between;gap:10px;font-size:13px;color:var(--muted);flex-wrap:wrap}
+.sp-bud button{font-size:13px;padding:0;border:0;background:none;color:var(--accent);text-decoration:underline;text-underline-offset:3px}
+.sp-bars{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;align-items:end;height:200px}
+.sp-bar{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:6px;height:100%;min-width:0}
+.sp-bar i{display:block;width:100%;max-width:40px;border-radius:7px 7px 3px 3px;background:color-mix(in srgb,var(--accent) 55%,transparent);min-height:3px;transform-origin:50% 100%;transition:transform var(--t-ui) var(--ease-out)}
+.sp-bar.today i{background:var(--accent)}
+.sp-bar small{font-size:12px;color:var(--muted)}
+.sp-bar b{font-size:11.5px;font-weight:600;font-variant-numeric:tabular-nums;color:var(--muted);white-space:nowrap}
+.sp-add{display:grid;gap:12px;align-content:start}
+.sp-add h3{margin:0}
+.spf-row{display:grid;grid-template-columns:minmax(120px,1fr) minmax(0,2fr);gap:8px}
+.spf-row>*{min-width:0;width:100%;box-sizing:border-box;margin:0}
+.spf-row.dt{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.sp-cats{display:flex;flex-wrap:wrap;gap:6px}
+.sp-cats button{border:1px solid var(--line);background:var(--panel2);color:var(--ink);border-radius:999px;padding:6px 12px;font-size:13px;display:inline-flex;align-items:center;gap:6px}
+.sp-cats button::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--c)}
+.sp-cats button[aria-pressed="true"]{border-color:var(--c);background:color-mix(in srgb,var(--c) 20%,var(--panel2))}
+.sp-cat{display:grid;grid-template-columns:auto 1fr auto;gap:4px 10px;align-items:center;padding:7px 0;font-size:14px}
+.sp-cat .dot{width:10px;height:10px;border-radius:50%;background:var(--c)}
+.sp-cat .amt{font-variant-numeric:tabular-nums;font-weight:600}
+.sp-cat .amt small{font-weight:400;color:var(--muted);margin-left:6px}
+.sp-cat .bar{grid-column:2/-1;height:6px;border-radius:3px;background:color-mix(in srgb,var(--ink) 8%,transparent);overflow:hidden}
+.sp-cat .bar i{display:block;height:100%;background:var(--c);transform-origin:0 50%}
+.sp-listp{margin-top:18px}
+.sp-day{font-size:12.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin:12px 0 2px;display:flex;justify-content:space-between}
+.sp-day:first-child{margin-top:0}
+.sp-it{display:grid;grid-template-columns:auto 1fr auto auto;gap:10px;align-items:center;padding:8px 0;border-top:1px solid var(--line)}
+.sp-it .dot{width:10px;height:10px;border-radius:50%;background:var(--c)}
+.sp-it .nm small{display:block;color:var(--muted);font-size:12px}
+.sp-it .amt{font-variant-numeric:tabular-nums;font-weight:600}
+.sp-it .amt.in{color:var(--good)}
+@media (max-width:760px){.sp-top,.sp-mid{grid-template-columns:1fr}.sp-bars{height:150px;gap:5px}.sp-bar b{display:none}}
 
 /* Themes */
 .skins{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
@@ -2054,7 +2102,36 @@ html.lg .eye{background:var(--glass-tint);box-shadow:inset 0 1px 0 color-mix(in 
     <!-- NET WORTH -->
     <section class="view" id="v-money">
       <h1 data-sub="t-money">Net</h1>
-      <p class="sub" data-sub="money">Update balances whenever they change. Your history builds a day at a time.</p>
+      <p class="sub" data-sub="money">See what you spend each week and where it goes. Your net worth is further down.</p>
+      <div class="sp-head"><h2 class="sec">Spending</h2>
+        <div class="sp-nav" role="group" aria-label="Week"><button class="icon-btn" id="sp-prev" aria-label="Previous week" title="Previous week"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m15 6-6 6 6 6"/></svg></button><span id="sp-range">This week</span><button class="icon-btn" id="sp-next" aria-label="Next week" title="Next week"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg></button></div></div>
+      <div class="sp-top">
+        <div class="panel sp-sum">
+          <div style="color:var(--muted);font-size:14px" id="sp-lab">Spent this week</div>
+          <div class="total" id="sp-out">$0</div>
+          <div class="delta" id="sp-vs"></div>
+          <div class="split">
+            <div><small>Came in</small><strong id="sp-in">$0</strong></div>
+            <div><small>Net this week</small><strong id="sp-net">$0</strong></div>
+            <div><small>Daily average</small><strong id="sp-avg">$0</strong></div>
+          </div>
+          <div class="sp-bud" id="sp-bud"></div>
+        </div>
+        <div class="panel sp-days"><h3>By day</h3><div class="sp-bars" id="sp-bars" role="img"></div></div>
+      </div>
+      <div class="sp-mid">
+        <form class="panel sp-add" id="sp-form" autocomplete="off">
+          <h3>Add</h3>
+          <div class="seg" id="sp-kind" role="group" aria-label="Money out or in"><button type="button" data-k="out" aria-pressed="true">Spent</button><button type="button" data-k="in" aria-pressed="false">Got</button></div>
+          <div class="spf-row"><input type="number" id="sp-amt" placeholder="Amount" min="0.01" step="0.01" inputmode="decimal" required aria-label="Amount"><input type="text" id="sp-note" placeholder="What for? e.g. coffee" maxlength="60" aria-label="What for"></div>
+          <div class="sp-cats" id="sp-cats" role="group" aria-label="Category"></div>
+          <div class="spf-row dt"><input type="date" id="sp-date" aria-label="Date" required><button class="btn" type="submit">Add</button></div>
+          <p class="hint" style="margin:0">Tip: type "spent 12 coffee" in the command bar (Ctrl/Cmd+K) to log it fast.</p>
+        </form>
+        <div class="panel sp-catp"><h3>Where it went</h3><div id="sp-catlist"></div></div>
+      </div>
+      <div class="panel sp-listp"><h3>This week's spending</h3><div id="sp-list"></div></div>
+      <h2 class="sec" style="margin-top:28px">Net worth</h2>
       <div class="nwtop">
         <div class="panel">
           <div style="color:var(--muted);font-size:14px" data-sub="l-total">Total net worth</div>
@@ -2443,8 +2520,8 @@ const SKINS=[
 ];
 const CLOCKS=[["flip","Flip"],["digital","Digital"],["analog","Analog"],["words","Words"],["rings","Progress"],["timer","Focus timer"]];
 
-const DEFAULT={tasks:[],events:[],shop:[],projects:[],accounts:[],history:[],sessions:{},
-  settings:{v2:true,skin:"brand",accent:"",font:"sans",clock:"flip",h24:false,secs:true,currency:"CAD",hideNw:false,subs:{},uiFont:"bricolage",clockFont:"shoulders",radius:14,clockScale:100,surface:"solid",refract:true,bg:{type:"none",color:"#2a2440",grad:0,image:"",dim:35,blur:0,match:true,pal:null,live:"aurora",speed:100,grain:false},stage:{type:"theme",color:"#101020",grad:0,image:"",dim:30,ink:""}},
+const DEFAULT={tasks:[],events:[],shop:[],projects:[],accounts:[],history:[],spend:[],sessions:{},
+  settings:{v2:true,skin:"brand",accent:"",font:"sans",clock:"flip",h24:false,secs:true,currency:"CAD",hideNw:false,wkBudget:0,subs:{},uiFont:"bricolage",clockFont:"shoulders",radius:14,clockScale:100,surface:"solid",refract:true,bg:{type:"none",color:"#2a2440",grad:0,image:"",dim:35,blur:0,match:true,pal:null,live:"aurora",speed:100,grain:false},stage:{type:"theme",color:"#101020",grad:0,image:"",dim:30,ink:""}},
   schemes:[],
   presets:[],
   calendars:[],
@@ -4632,6 +4709,12 @@ function cmdResults(q){
     const w=parseWhen(m[1]);const d=w.due||dkey(new Date());
     if(w.rest)R.push({ic:"ev",label:`Add event: ${w.rest}`,hint:[whenText(d,w.time)||niceDate(d)].join(""),run:()=>{S.events.push({id:uid(),date:d,time:w.time,title:w.rest});save();renderCal();renderMini();toast(`Added ${w.rest}`);}});
   }
+  // spending: "spent 12 coffee", "paid $8.50 for lunch", "got 200 pay"
+  if((m=raw.match(/^(spent|spend|paid|bought|got|earned|received)\s+\$?([\d,]*\.?\d+)\s*(?:on|for|from)?\s*(.*)$/i))){
+    const inc=/^(got|earned|received)/i.test(m[1]),amt=Math.round(parseFloat(m[2].replace(/,/g,""))*100)/100,note=m[3].trim();
+    if(amt>0){const cat=inc?(/pay|work|job|shift|paycheck/i.test(note)?"pay":/gift|birthday/i.test(note)?"gift":/refund|return/i.test(note)?"refund":"other"):(spGuess(note)||"other");
+      const cn=(inc?SPI:SPC)[cat][0];R.push({ic:"money",label:`${inc?"Add money in":"Log spending"}: ${S.settings.hideNw?"":fmt(amt)+" "}${note?"· "+note:""}`,hint:cn,run:()=>{spAdd({d:dkey(new Date()),amt,cat,note,inc});toast(inc?`Added +${spMask(amt)}`:`Logged ${spMask(amt)} · ${cn}`);}});}
+  }
   // account balance: "<account> <amount>"
   if((m=raw.match(/^(?:balance\s+)?(.+?)\s+\$?(-?[\d,]+(?:\.\d+)?)$/i))){
     const amt=parseFloat(m[2].replace(/,/g,""));
@@ -4718,7 +4801,7 @@ function setPrivacy(on){
 $("#nw-eye").addEventListener("click",()=>setPrivacy(!S.settings.hideNw));
 let lastNw=null;
 function renderMoney(){
-  renderGoals();
+  renderSpend();renderGoals();
   const {a,d,t}=totals(),T0=$("#nw-total"),hid=S.settings.hideNw;
   const vis=!!T0.offsetParent;
   const eye=$("#nw-eye");eye.setAttribute("aria-pressed",hid);eye.setAttribute("aria-label",hid?"Show amounts":"Hide amounts");
@@ -4758,6 +4841,76 @@ function drawChart(){
   anim(el.querySelector(".area"),[{opacity:0},{opacity:1}],{duration:500,delay:reduced?0:250,easing:"ease"});
   const e=el.querySelector(".end");if(e){e.style.transformBox="fill-box";e.style.transformOrigin="center";anim(e,[{opacity:0,transform:"scale(.4)"},{opacity:1,transform:"none"}],{duration:260,delay:760,easing:EASE_OUT});}
 }
+
+/* ---------- SPENDING ----------
+   S.spend = [{id, d:"YYYY-MM-DD", amt (>0), cat, note, inc (money in)}]. Weeks start Monday (weekStart).
+   S.settings.wkBudget: optional weekly spending budget (0 = none). Amounts follow the Net "hide amounts" eye. */
+const SPC={food:["Food","#F2545B"],coffee:["Coffee & snacks","#D2A94B"],transport:["Transport","#6FD3FF"],shopping:["Shopping","#E86FA8"],fun:["Going out","#B276F5"],bills:["Bills","#7C9CFF"],school:["School","#2FBF71"],subs:["Subscriptions","#FF7A3D"],health:["Health","#5EC2A0"],other:["Other","#9C97B3"]};
+const SPI={pay:["Pay","#2FBF71"],gift:["Gift","#E86FA8"],refund:["Refund","#6FD3FF"],other:["Other","#9C97B3"]};
+const SP_GUESS=[[/coffee|caf[eé]|starbucks|tim ?hortons|latte|tea|boba|snack|chips|candy|vending/,"coffee"],[/lunch|dinner|breakfast|food|groceries|grocery|pizza|burger|sushi|mcdonald|uber ?eats|doordash|skip|meal|restaurant|chipotle|subway|kfc/,"food"],
+  [/bus|uber|lyft|taxi|train|gas|fuel|parking|presto|transit|metro|subway pass/,"transport"],[/movie|concert|club|bar|party|game|cinema|bowling|tickets?/,"fun"],[/rent|phone|hydro|internet|wifi|bill|insurance/,"bills"],
+  [/book|textbook|tuition|course|printing|supplies|calculator|stationery/,"school"],[/netflix|spotify|apple|icloud|youtube|disney|prime|subscription|chatgpt|gym membership/,"subs"],[/pharmacy|medicine|doctor|dentist|gym|vitamin/,"health"],
+  [/clothes|shoes|amazon|shein|zara|h&m|mall|hoodie|shirt|jeans|makeup|skincare/,"shopping"]];
+const spGuess=n=>{n=String(n||"").toLowerCase();const g=SP_GUESS.find(([r])=>r.test(n));return g?g[1]:"";};
+let spWk=null,spKind="out",spCat="food",spCatTouched=false;
+const spMask=v=>S.settings.hideNw?MASK_SHORT:fmt(v);
+function spWeek(start){const a=dkey(start),b=dkey(addDays(start,6));const xs=(S.spend||[]).filter(x=>x.d>=a&&x.d<=b);
+  let out=0,inc=0;const byCat={},byDay=Array(7).fill(0);
+  xs.forEach(x=>{if(x.inc){inc+=x.amt;return;}out+=x.amt;byCat[x.cat]=(byCat[x.cat]||0)+x.amt;const [y,m,d]=x.d.split("-").map(Number);byDay[Math.round((new Date(y,m-1,d)-start)/864e5)]+=x.amt;});
+  return {xs,out,inc,byCat,byDay};}
+function spCats(){const C=spKind==="in"?SPI:SPC;if(!C[spCat])spCat=Object.keys(C)[0];
+  $("#sp-cats").innerHTML=Object.entries(C).map(([k,[n,c]])=>`<button type="button" data-c="${k}" style="--c:${c}" aria-pressed="${k===spCat}">${n}</button>`).join("");}
+function renderSpend(){
+  if(!$("#sp-out"))return;
+  const now=weekStart(new Date());spWk=spWk||now;const isThis=dkey(spWk)===dkey(now);
+  const end=addDays(spWk,6);$("#sp-range").textContent=isThis?"This week":`${spWk.toLocaleDateString(undefined,{month:"short",day:"numeric"})} – ${end.toLocaleDateString(undefined,{month:spWk.getMonth()===end.getMonth()?undefined:"short",day:"numeric"})}`;
+  $("#sp-next").disabled=isThis;
+  const W=spWeek(spWk),soFar=isThis?((new Date().getDay()+6)%7)+1:7,P=spWeek(addDays(spWk,-7));
+  const prevSame=isThis?P.byDay.slice(0,soFar).reduce((a,b)=>a+b,0):P.out;
+  $("#sp-lab").textContent=isThis?"Spent this week":"Spent that week";
+  $("#sp-out").textContent=spMask(W.out);
+  const diff=W.out-prevSame,vs=isThis&&soFar<7?"this point last week":"last week";
+  $("#sp-vs").innerHTML=!W.xs.length&&!prevSame?(isThis?"Nothing logged yet this week. Add what you spend below.":"Nothing logged that week."):
+    prevSame?`<b class="${diff>0?"down":"up"}">${S.settings.hideNw?(diff>0?"+":"")+Math.round(diff/prevSame*100)+"%":(diff>0?"+":"−")+fmt(Math.abs(diff))}</b> ${diff>0?"more":"less"} than ${vs}`:`First week with spending logged`;
+  $("#sp-in").textContent=spMask(W.inc);
+  const net=W.inc-W.out,ne=$("#sp-net");ne.className=net<0?"down":net>0?"up":"";
+  ne.textContent=S.settings.hideNw?(net<0?"Down":net>0?"Up":"Even"):net<0?`Down ${fmt(-net)}`:net>0?`Up ${fmt(net)}`:fmt(0);
+  $("#sp-avg").textContent=spMask(W.out/soFar);
+  /* budget */
+  const B=+S.settings.wkBudget||0,bud=$("#sp-bud");
+  if(B){const p=W.out/B,left=B-W.out;bud.className="sp-bud"+(p>1?" over":"");
+    bud.innerHTML=`<div class="row"><span>${S.settings.hideNw?Math.round(p*100)+"% of budget":`${fmt(W.out)} of ${fmt(B)} budget`}</span><span>${left>=0?(S.settings.hideNw?"":fmt(left)+" left"):(S.settings.hideNw?"Over budget":fmt(-left)+" over")}</span></div><div class="bar"><i style="transform:scaleX(${Math.min(1,p)})"></i></div><div class="row"><button type="button" id="sp-setb">Change weekly budget</button></div>`;}
+  else{bud.className="sp-bud";bud.innerHTML=`<div class="row"><button type="button" id="sp-setb">Set a weekly budget</button></div>`;}
+  /* by day */
+  const mx=Math.max(...W.byDay,1),td=isThis?((new Date().getDay()+6)%7):-1,DN=["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
+  $("#sp-bars").setAttribute("aria-label","Spending by day: "+W.byDay.map((v,i)=>`${DN[i]} ${spMask(v)}`).join(", "));
+  $("#sp-bars").innerHTML=W.byDay.map((v,i)=>`<div class="sp-bar${i===td?" today":""}" title="${DN[i]}: ${spMask(v)}"><b>${v&&!S.settings.hideNw?fmt(v,1):""}</b><i style="height:${Math.max(2,v/mx*100)}%;${i>td&&isThis?"opacity:.35":""}"></i><small>${addDays(spWk,i).toLocaleDateString(undefined,{weekday:"narrow"})}</small></div>`).join("");
+  /* by category */
+  const cats=Object.entries(W.byCat).sort((a,b)=>b[1]-a[1]);
+  $("#sp-catlist").innerHTML=cats.length?cats.map(([k,v])=>{const [n,c]=SPC[k]||SPC.other;return `<div class="sp-cat" style="--c:${c}"><span class="dot"></span><span>${n}</span><span class="amt">${spMask(v)}<small>${Math.round(v/W.out*100)}%</small></span><div class="bar"><i style="transform:scaleX(${v/cats[0][1]})"></i></div></div>`;}).join(""):`<div class="empty">Your categories show up here once you add spending.</div>`;
+  /* list */
+  const xs=W.xs.slice().sort((a,b)=>b.d.localeCompare(a.d)||(b.t||0)-(a.t||0));let last="";
+  $(".sp-listp h3").textContent=isThis?"This week's spending":"That week's spending";
+  $("#sp-list").innerHTML=xs.length?xs.map(x=>{const C=x.inc?SPI:SPC,[n,c]=C[x.cat]||C.other;let h="";
+    if(x.d!==last){last=x.d;const dayOut=xs.filter(y=>y.d===x.d&&!y.inc).reduce((a,y)=>a+y.amt,0);h=`<div class="sp-day"><span>${x.d===dkey(new Date())?"Today":new Date(x.d+"T12:00").toLocaleDateString(undefined,{weekday:"long",month:"short",day:"numeric"})}</span><span>${dayOut?spMask(dayOut):""}</span></div>`;}
+    return h+`<div class="sp-it" data-id="${x.id}" style="--c:${c}"><span class="dot"></span><div class="nm">${x.note?`<span translate="no">${esc(x.note)}</span>`:n}<small>${n}</small></div><span class="amt${x.inc?" in":""}">${x.inc?"+":"−"}${spMask(x.amt)}</span><button class="icon-btn" aria-label="Delete" title="Delete"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>`;}).join(""):`<div class="empty">${isThis?"Nothing yet. Log a purchase above and watch your week add up.":"Nothing logged that week."}</div>`;
+}
+function spAdd(o){(S.spend=S.spend||[]).push(Object.assign({id:uid(),t:Date.now()},o));if(S.spend.length>5000)S.spend.splice(0,S.spend.length-5000);
+  const [y,m,d]=o.d.split("-").map(Number);spWk=weekStart(new Date(y,m-1,d));save();renderSpend();renderMini();}
+$("#sp-date").value=dkey(new Date());spCats();
+$("#sp-kind").addEventListener("click",e=>{const b=e.target.closest("button[data-k]");if(!b)return;spKind=b.dataset.k;spCatTouched=false;
+  $("#sp-kind").querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed",x===b));spCat=spKind==="in"?"pay":"food";spCats();});
+$("#sp-cats").addEventListener("click",e=>{const b=e.target.closest("button[data-c]");if(!b)return;spCat=b.dataset.c;spCatTouched=true;spCats();});
+$("#sp-note").addEventListener("input",e=>{if(spKind!=="out"||spCatTouched)return;const g=spGuess(e.target.value);if(g&&g!==spCat){spCat=g;spCats();}});
+$("#sp-form").addEventListener("submit",e=>{e.preventDefault();const amt=Math.round(parseFloat($("#sp-amt").value)*100)/100,d=$("#sp-date").value||dkey(new Date());if(!(amt>0))return;
+  spAdd({d,amt,cat:spCat,note:$("#sp-note").value.trim(),inc:spKind==="in"});$("#sp-amt").value="";$("#sp-note").value="";spCatTouched=false;$("#sp-amt").focus();
+  toast(spKind==="in"?`Added +${spMask(amt)}`:`Logged ${spMask(amt)}${d===dkey(new Date())?"":" on "+niceDate(d)}`);});
+$("#sp-prev").addEventListener("click",()=>{spWk=addDays(spWk||weekStart(new Date()),-7);renderSpend();});
+$("#sp-next").addEventListener("click",()=>{spWk=addDays(spWk||weekStart(new Date()),7);renderSpend();});
+$("#sp-list").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;const id=b.closest(".sp-it").dataset.id,at=S.spend.findIndex(x=>x.id===id);if(at<0)return;
+  const x=S.spend.splice(at,1)[0];save();renderSpend();renderMini();toast(`Deleted ${x.note||(x.inc?SPI:SPC)[x.cat]?.[0]||"entry"}`,{run(){S.spend.splice(Math.min(at,S.spend.length),0,x);save();renderSpend();renderMini();}});});
+$("#sp-bud").addEventListener("click",e=>{if(!e.target.closest("#sp-setb"))return;const v=prompt("Weekly spending budget (leave empty for none)",S.settings.wkBudget||"");if(v===null)return;
+  S.settings.wkBudget=Math.max(0,parseFloat(v)||0);save();renderSpend();renderMini();});
 
 /* ---------- mini stats ---------- */
 const TZS=["America/Toronto","America/Vancouver","America/New_York","America/Chicago","America/Los_Angeles","America/Sao_Paulo","Europe/London","Europe/Paris","Europe/Berlin","Africa/Lagos","Asia/Dubai","Asia/Kolkata","Asia/Colombo","Asia/Singapore","Asia/Shanghai","Asia/Tokyo","Australia/Sydney","Pacific/Auckland"];
@@ -4893,6 +5046,7 @@ const WT={
  today:{name:"Due today",title:"Due today",desc:"Tasks due today or overdue"},
  sessions:{name:"Focus sessions",title:"Focus sessions today",desc:"Timer blocks finished today"},
  networth:{name:"Net worth",title:"Net worth",desc:"Your current total"},
+ spentwk:{name:"Spent this week",title:"Spent this week",desc:"What you've spent since Monday"},
  toptasks:{name:"Top priorities",title:"Top priorities",desc:"Your 3 most urgent tasks"},
  upcoming:{name:"Coming up",title:"Coming up",desc:"Next events and due dates"},
  countdown:{name:"Countdown",title:"Countdown",desc:"Days until something big",cfg:{label:"the big day",date:""}},
@@ -4906,7 +5060,7 @@ const WT={
  spotify:{name:"Now playing",title:"Now playing",desc:"The song you're playing on Spotify, live via Last.fm"}
 };
 let wEdit=false, wCfg=null, noteT;
-const W_STAT=new Set(["open","today","sessions","networth","donewk","countdown"]); /* short number widgets that sit two per row on phones */
+const W_STAT=new Set(["open","today","sessions","networth","spentwk","donewk","countdown"]); /* short number widgets that sit two per row on phones */
 const ICON={left:'<path d="m15 6-6 6 6 6"/>',right:'<path d="m9 6 6 6-6 6"/>',size:'<path d="M4 9V4h5M20 15v5h-5M4 4l6 6M20 20l-6-6"/>',cfg:'<circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1"/>',del:'<path d="M6 6l12 12M18 6 6 18"/>'};
 const ib=(a,l)=>`<button class="icon-btn" data-w="${a}" aria-label="${l}" title="${l}"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">${ICON[a]}</svg></button>`;
 function wBody(w){
@@ -4917,6 +5071,7 @@ function wBody(w){
     case"sessions":return `<div class="big">${S.sessions[today]||0}</div>`;
     case"networth":{if(!S.settings.hideNw)return `<div class="big">${fmt(totals().t,1)}</div>`;const g=growth();
       return `<div class="big">${curSymbol()}${MASK_SHORT}</div><small>${g&&g.pct!=null?`<b class="${g.up?"up":"down"}" style="color:var(--${g.up?"good":"bad"})">${fmtPct(g.pct)}</b> since ${niceDate(g.since)}`:"Amounts hidden"}</small>`;}
+    case"spentwk":{const W=spWeek(weekStart(new Date())),B=+S.settings.wkBudget||0;return `<div class="big">${spMask(W.out)}</div><small>${B?(W.out>B?"Over budget":S.settings.hideNw?Math.round(W.out/B*100)+"% of budget":fmt(B-W.out)+" left"):W.inc?(W.inc-W.out<0?"Down "+spMask(W.out-W.inc):"Up "+spMask(W.inc-W.out)):"since Monday"}</small>`;}
     case"week":{const w=weekStats(weekStart(new Date()));return `<div class="big">${fmtMins(w.focusMin)}</div><small>${w.sessions} session${w.sessions===1?"":"s"} · ${w.done} task${w.done===1?"":"s"} done</small>`;}
     case"donewk":{const d=new Date(),mon=new Date(d.getFullYear(),d.getMonth(),d.getDate()-((d.getDay()+6)%7)).getTime();return `<div class="big">${S.tasks.filter(t=>t.done&&t.doneAt>=mon).length}</div><small>Keep the streak going</small>`;}
     case"countdown":{if(!c.date)return `<small>Set a date in this widget's settings.</small>`;const [y,m,dd]=c.date.split("-").map(Number),t=new Date(y,m-1,dd),n=new Date(),base=new Date(n.getFullYear(),n.getMonth(),n.getDate());const days=Math.round((t-base)/864e5);return `<div class="big">${Math.abs(days)}</div><small>${days>0?`day${days===1?"":"s"} until ${esc(c.label)}`:days===0?`${esc(c.label)} is today`:`day${days===-1?"":"s"} since ${esc(c.label)}`}</small>`;}

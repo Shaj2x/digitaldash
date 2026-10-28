@@ -1422,3 +1422,56 @@
 1459|Agrupa tareas en proyectos
 1460|Escribe un ambiente, obtén un estilo
 1461|Mira lo que suena, en vivo
+1462|Gastos
+1463|Gastado esta semana
+1464|Gastado esa semana
+1465|Entró
+1466|Balance de la semana
+1467|Promedio diario
+1468|Por día
+1469|Gasté
+1470|Recibí
+1471|Cantidad
+1472|¿En qué? p. ej. café
+1473|Fecha
+1474|En qué se fue
+1475|Gastos de esta semana
+1476|Gastos de esa semana
+1477|Mira cuánto gastas cada semana y en qué. Tu patrimonio neto está más abajo.
+1478|Fijar un presupuesto semanal
+1479|Cambiar presupuesto semanal
+1480|Comida
+1481|Café y snacks
+1482|Transporte
+1483|Salidas
+1484|Facturas
+1485|Escuela
+1486|Suscripciones
+1487|Sueldo
+1488|Regalo
+1489|Reembolso
+1490|Lo que has gastado desde el lunes
+1491|Tus categorías aparecen aquí cuando añades gastos.
+1492|Nada todavía. Registra una compra arriba y mira cómo suma tu semana.
+1493|No se registró nada esa semana.
+1494|Aún no hay nada esta semana. Añade lo que gastas abajo.
+1495|Presupuesto superado
+1496|desde el lunes
+1497|Primera semana con gastos registrados
+1498|A favor
+1499|En contra
+1500|Parejo
+1501|Presupuesto semanal de gastos (déjalo vacío para no usar)
+1502|más que a esta altura la semana pasada
+1503|menos que a esta altura la semana pasada
+1504|más que la semana pasada
+1505|menos que la semana pasada
+1506|Pierdes {0}
+1507|Ganas {0}
+1508|Quedan {0}
+1509|{0} de más
+1510|{0} de {1} de presupuesto
+1511|{0}% del presupuesto
+1512|Registrado {0}
+1513|Añadido +{0}
+1514|Consejo: escribe "spent 12 coffee" en la barra de comandos (Ctrl/Cmd+K) para registrarlo rápido.

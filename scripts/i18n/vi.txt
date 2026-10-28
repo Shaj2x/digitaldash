@@ -1422,3 +1422,56 @@
 1459|Nhóm việc vào dự án
 1460|Gõ một phong cách, nhận giao diện
 1461|Xem bài đang phát, trực tiếp
+1462|Chi tiêu
+1463|Đã chi tuần này
+1464|Đã chi tuần đó
+1465|Thu vào
+1466|Cân đối tuần này
+1467|Trung bình mỗi ngày
+1468|Theo ngày
+1469|Đã chi
+1470|Nhận được
+1471|Số tiền
+1472|Chi cho gì? vd. cà phê
+1473|Ngày
+1474|Tiền đi đâu
+1475|Chi tiêu tuần này
+1476|Chi tiêu tuần đó
+1477|Xem mỗi tuần bạn chi bao nhiêu và chi vào đâu. Tài sản ròng ở bên dưới.
+1478|Đặt ngân sách tuần
+1479|Đổi ngân sách tuần
+1480|Ăn uống
+1481|Cà phê và đồ ăn vặt
+1482|Đi lại
+1483|Đi chơi
+1484|Hóa đơn
+1485|Học tập
+1486|Đăng ký dịch vụ
+1487|Lương
+1488|Quà tặng
+1489|Hoàn tiền
+1490|Số tiền bạn đã chi từ thứ Hai
+1491|Các danh mục sẽ hiện ở đây khi bạn thêm khoản chi.
+1492|Chưa có gì. Ghi một khoản mua ở trên và xem tuần của bạn cộng dồn.
+1493|Tuần đó chưa ghi gì.
+1494|Tuần này chưa ghi gì. Thêm khoản chi ở bên dưới.
+1495|Vượt ngân sách
+1496|từ thứ Hai
+1497|Tuần đầu tiên ghi chi tiêu
+1498|Dư
+1499|Hụt
+1500|Hòa
+1501|Ngân sách chi tiêu hằng tuần (để trống nếu không dùng)
+1502|nhiều hơn cùng thời điểm tuần trước
+1503|ít hơn cùng thời điểm tuần trước
+1504|nhiều hơn tuần trước
+1505|ít hơn tuần trước
+1506|Hụt {0}
+1507|Dư {0}
+1508|Còn {0}
+1509|Vượt {0}
+1510|{0} trên {1} ngân sách
+1511|{0}% ngân sách
+1512|Đã ghi {0}
+1513|Đã thêm +{0}
+1514|Mẹo: gõ "spent 12 coffee" vào thanh lệnh (Ctrl/Cmd+K) để ghi nhanh.

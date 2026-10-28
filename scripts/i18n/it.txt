@@ -1422,3 +1422,56 @@
 1459|Raggruppa le attività in progetti
 1460|Scrivi un'atmosfera, ottieni uno stile
 1461|Guarda cosa suona, dal vivo
+1462|Spese
+1463|Speso questa settimana
+1464|Speso quella settimana
+1465|Entrate
+1466|Saldo della settimana
+1467|Media giornaliera
+1468|Per giorno
+1469|Speso
+1470|Ricevuto
+1471|Importo
+1472|Per cosa? es. caffè
+1473|Data
+1474|Dove sono finiti
+1475|Spese di questa settimana
+1476|Spese di quella settimana
+1477|Vedi quanto spendi ogni settimana e per cosa. Il tuo patrimonio netto è più in basso.
+1478|Imposta un budget settimanale
+1479|Cambia budget settimanale
+1480|Cibo
+1481|Caffè e snack
+1482|Trasporti
+1483|Uscite
+1484|Bollette
+1485|Scuola
+1486|Abbonamenti
+1487|Stipendio
+1488|Regalo
+1489|Rimborso
+1490|Quanto hai speso da lunedì
+1491|Le tue categorie compaiono qui quando aggiungi delle spese.
+1492|Ancora niente. Registra un acquisto qui sopra e guarda la tua settimana sommarsi.
+1493|Niente registrato quella settimana.
+1494|Niente registrato questa settimana. Aggiungi qui sotto quello che spendi.
+1495|Oltre il budget
+1496|da lunedì
+1497|Prima settimana con spese registrate
+1498|In attivo
+1499|In passivo
+1500|In pari
+1501|Budget settimanale di spesa (lascia vuoto per nessuno)
+1502|in più rispetto a questo punto la settimana scorsa
+1503|in meno rispetto a questo punto la settimana scorsa
+1504|in più della settimana scorsa
+1505|in meno della settimana scorsa
+1506|Sotto di {0}
+1507|Sopra di {0}
+1508|Restano {0}
+1509|{0} in più
+1510|{0} su {1} di budget
+1511|{0}% del budget
+1512|Registrato {0}
+1513|Aggiunto +{0}
+1514|Suggerimento: scrivi "spent 12 coffee" nella barra dei comandi (Ctrl/Cmd+K) per registrarlo al volo.
