@@ -2,6 +2,16 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<script>
+/* Signed in on this device? Opening the site goes straight to your dashboard.
+   Home links inside the site (same-origin referrer) and /?home still show this page. */
+(()=>{try{
+  if(/[?&]home\b/.test(location.search))return;
+  if(document.referrer&&new URL(document.referrer).origin===location.origin)return;
+  const s=JSON.parse(localStorage.getItem("digitaldash.auth")||"null"),t=s&&(s.refresh_token||(s.currentSession&&s.currentSession.refresh_token));
+  if(t)location.replace("/digital-dash"+location.hash);
+}catch(e){}})();
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Digital Dash · Plan it. Focus. Make it yours.</title>
 <meta name="description" content="A free, extremely customizable dashboard for students: focus timers, tasks and reminders, a week planner, grades and a gym tracker. Works offline and syncs across devices.">
