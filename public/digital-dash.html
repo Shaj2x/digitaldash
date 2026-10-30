@@ -4660,7 +4660,7 @@ function addParsedTask(pt,undo){
 function parseTask(q){
   const pr=parseRepeat(q);q=pr.rest;
   let urg=null,s=" "+q+" ";
-  const U=[[/\s(!!!|critical|crit|urgent|asap)\s/i,0],[/\s(!!|high|important)\s/i,1],[/\s(medium|med)\s/i,2],[/\s(low|someday)\s/i,3]];
+  const U=[[/\s(!!!|!?(?:critical|crit|urgent|asap))\s/i,0],[/\s(!!|!?(?:high|important))\s/i,1],[/\s(!?(?:medium|med))\s/i,2],[/\s(!?(?:low|someday))\s/i,3]];
   for(const [re,u] of U){const m=s.match(re);if(m&&urg==null){const t=s.replace(m[0]," ").trim();if(t){urg=u;s=" "+t+" ";}}}
   const w=parseWhen(s.trim());let title=w.rest.replace(/^(add|task|todo|remind me to|i need to|i have to|need to)\s+/i,"").replace(/\s+(on|by|at|due)$/i,"").trim();
   if(w.due||w.time)title=title.replace(/\s+(is\s+)?due(\s+(on|by|at))?(?=\s|$)/i,"").replace(/\s+(on|by|at|due)$/i,"").trim();
