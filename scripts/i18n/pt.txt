@@ -1493,3 +1493,10 @@
 1530|Este navegador não mostra notificações. E-mail e mensagens continuam funcionando.
 1531|Adicione e confirme seu número abaixo para receber mensagens
 1532|Ative os lembretes por e-mail abaixo
+1533|Lembretes por e-mail
+1534|Configure uma vez e depois escolha E-mail acima, ou em cada tarefa com o sino em Tarefas.
+1535|Entre para receber lembretes por notificação ou e-mail.
+1536|Este navegador não mostra notificações. O e-mail continua funcionando.
+1537|Todo e-mail tem um link para parar de receber.
+1538|Entre para receber lembretes por e-mail ou notificação.
+1539|Escolha sobre o que você quer ser avisado e como: uma notificação no celular ou computador, ou um e-mail.

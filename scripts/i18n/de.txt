@@ -1493,3 +1493,10 @@
 1530|Dieser Browser kann keine Mitteilungen anzeigen. E-Mail und SMS funktionieren trotzdem.
 1531|Füge unten deine Nummer hinzu und bestätige sie, um SMS zu bekommen
 1532|Schalte unten E-Mail-Erinnerungen ein
+1533|E-Mail-Erinnerungen
+1534|Einmal einrichten, dann oben E-Mail wählen oder pro Aufgabe über die Glocke in Aufgaben.
+1535|Melde dich an, um Erinnerungen per Mitteilung oder E-Mail zu bekommen.
+1536|Dieser Browser kann keine Mitteilungen anzeigen. E-Mail funktioniert weiterhin.
+1537|Jede E-Mail enthält einen Link zum Abbestellen.
+1538|Melde dich an, um Erinnerungen per E-Mail oder Mitteilung zu bekommen.
+1539|Wähle, worüber du informiert wirst und wie: eine Mitteilung auf Handy oder Computer oder eine E-Mail.

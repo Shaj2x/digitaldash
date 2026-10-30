@@ -1493,3 +1493,10 @@
 1530|Este navegador no puede mostrar notificaciones. El correo y los mensajes siguen funcionando.
 1531|Añade y confirma tu número abajo para recibir mensajes
 1532|Activa los recordatorios por correo abajo
+1533|Recordatorios por correo
+1534|Configúralo una vez y luego elige Correo arriba, o en cada tarea con la campana en Tareas.
+1535|Inicia sesión para recibir recordatorios por notificación o correo.
+1536|Este navegador no puede mostrar notificaciones. El correo sigue funcionando.
+1537|Cada correo tiene un enlace para dejar de recibirlos.
+1538|Inicia sesión para recibir recordatorios por correo o notificación.
+1539|Elige de qué te avisamos y cómo: una notificación en tu teléfono o computadora, o un correo.

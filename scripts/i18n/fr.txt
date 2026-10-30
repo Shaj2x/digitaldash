@@ -1493,3 +1493,10 @@
 1530|Ce navigateur ne peut pas afficher de notifications. Les e-mails et SMS fonctionnent quand même.
 1531|Ajoute et confirme ton numéro ci-dessous pour recevoir des SMS
 1532|Active les rappels par e-mail ci-dessous
+1533|Rappels par e-mail
+1534|Configure-le une fois, puis choisis E-mail ci-dessus, ou par tâche avec la cloche dans Tâches.
+1535|Connecte-toi pour recevoir des rappels par notification ou e-mail.
+1536|Ce navigateur ne peut pas afficher de notifications. Les e-mails fonctionnent toujours.
+1537|Chaque e-mail contient un lien pour ne plus en recevoir.
+1538|Connecte-toi pour recevoir des rappels par e-mail ou notification.
+1539|Choisis ce dont on te prévient et comment : une notification sur ton téléphone ou ordinateur, ou un e-mail.

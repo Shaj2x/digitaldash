@@ -1493,3 +1493,10 @@
 1530|Trình duyệt này không hiển thị được thông báo. Email và tin nhắn vẫn hoạt động.
 1531|Thêm và xác nhận số điện thoại bên dưới để nhận tin nhắn
 1532|Bật nhắc nhở qua email bên dưới
+1533|Nhắc việc qua email
+1534|Thiết lập một lần, rồi chọn Email ở trên, hoặc cho từng việc bằng chuông ở trang Việc cần làm.
+1535|Đăng nhập để nhận nhắc việc qua thông báo hoặc email.
+1536|Trình duyệt này không hiển thị được thông báo. Email vẫn hoạt động.
+1537|Mỗi email đều có liên kết để ngừng nhận.
+1538|Đăng nhập để nhận nhắc việc qua email hoặc thông báo.
+1539|Chọn điều bạn muốn được báo và cách báo: thông báo trên điện thoại hoặc máy tính, hoặc email.

@@ -1493,3 +1493,10 @@
 1530|Questo browser non può mostrare notifiche. Email e SMS funzionano comunque.
 1531|Aggiungi e conferma il tuo numero qui sotto per ricevere SMS
 1532|Attiva i promemoria via email qui sotto
+1533|Promemoria via email
+1534|Configuralo una volta, poi scegli Email qui sopra, o per ogni attività con la campanella in Attività.
+1535|Accedi per ricevere promemoria tramite notifica o email.
+1536|Questo browser non può mostrare notifiche. L'email funziona comunque.
+1537|Ogni email ha un link per non riceverne più.
+1538|Accedi per ricevere promemoria tramite email o notifica.
+1539|Scegli di cosa essere avvisato e come: una notifica su telefono o computer, oppure un’email.

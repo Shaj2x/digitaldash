@@ -265,6 +265,8 @@ How it works:
 
 ## Email and text reminders for tasks
 
+**Texts are switched off for now.** `const SMS_ON=false` in `public/digital-dash.html` hides every text option (the Text chips, the phone number form, the per-task Text choice) and ignores any saved "sms" choices without deleting them. Once Telnyx is set up, set it to `true`, put the text-message paragraph back in the privacy policy, and redeploy.
+
 - The bell on a task opens **Remind me**: when (at the due time, 15 min to 1 day before, or a date and time you pick; tasks with only a date use 9:00 AM) and how (email, text message, notification). Stored as `t.remind = {lead, ch, at?}`; repeats carry relative reminders to the next one.
 - Where they go is set in Themes, Reminders, **Email and text reminders**: agree to emails at the account email, and add a mobile number, which is confirmed with a 6-digit code (`phone-start`, `phone-verify`). That lives in `dash_contacts`, which only the `dash-push` function can read; the browser only ever sees a masked number.
 - `remBuild()` writes task reminders (`kind: "task"`, up to 30 days ahead) to `dash_reminders` with a `channels` array. `dash-push`, run every minute, sends push to devices, email through Resend and texts through Twilio, with daily caps per account (`dash_msg_usage`, 20 texts and 50 emails by default).

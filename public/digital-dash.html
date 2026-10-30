@@ -2318,7 +2318,7 @@ html.lg .eye{background:var(--glass-tint);box-shadow:inset 0 1px 0 color-mix(in 
         </div>
         <div class="panel rem" id="rem-panel">
           <h3>Reminders</h3>
-          <p class="hint" style="margin:0 0 10px">Choose what you hear about and how: a notification on your phone or computer, an email or a text.</p>
+          <p class="hint" style="margin:0 0 10px">Choose what you hear about and how: a notification on your phone or computer, or an email.</p>
           <div id="rem-body"></div>
           <div id="ct-body"></div>
         </div>
@@ -6528,8 +6528,11 @@ const remS=()=>{const d={on:false,due:60,morning:"08:00",events:true,timer:true,
   r.ch=Object.assign({due:["push"],morning:["push"],event:["push"],timer:["push"],weekly:["push"],budget:["push"]},r.ch||{});return r;};
 /* Which ways each kind of notification goes out: "push" (devices with reminders on), "email", "sms".
    Email and texts only actually send once they're set up below (dash_contacts); the server checks again. */
+/* Text messages are switched off until the site's SMS provider is set up; flip to true to bring them back.
+   Saved choices that include "sms" are kept as they are and simply ignored while this is off. */
+const SMS_ON=false;
 const NT_KINDS=["due","morning","event","timer","weekly","budget"];
-const remCh=k=>{const r=remS();return (r.ch[k]||[]).filter(c=>c==="push"?r.on:c==="email"||c==="sms");};
+const remCh=k=>{const r=remS();return (r.ch[k]||[]).filter(c=>c==="push"?r.on:c==="email"||(SMS_ON&&c==="sms"));};
 const remWanted=()=>NT_KINDS.some(k=>remCh(k).length)||S.tasks.some(t=>t.remind&&!t.done);
 const isIOS=/iP(hone|ad|od)/.test(navigator.userAgent)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1);
 const pushOK=()=>"serviceWorker" in navigator&&"PushManager" in window&&typeof Notification!=="undefined"&&window.isSecureContext;
@@ -6612,22 +6615,22 @@ const NT_ROWS=[["due","Task due"],["morning","Morning summary","What's due today
 function remRender(){
   const el=$("#rem-body");if(!el)return;const r=remS(),on=!!REM.sub;
   if(AC.state==="unavailable"){el.innerHTML=`<p class="rem-note">${AC.why==="preview"?"Reminders work on your own site, not in this preview.":"Reminders need the account service, which isn't connected on this site yet."}</p>`;return;}
-  if(!AC.user){el.innerHTML=`<p class="rem-note">Sign in to get reminders by notification, email or text.</p><button type="button" class="btn ghost small" data-rem="signin">Sign in</button>`;return;}
+  if(!AC.user){el.innerHTML=`<p class="rem-note">${SMS_ON?"Sign in to get reminders by notification, email or text.":"Sign in to get reminders by notification or email."}</p><button type="button" class="btn ghost small" data-rem="signin">Sign in</button>`;return;}
   /* this device's notifications */
   let dev;
-  if(!pushOK())dev=isIOS&&!standalone()?`<p class="rem-note">For notifications on iPhone and iPad, add Digital Dash to your Home Screen (<b>Share</b>, then <b>Add to Home Screen</b>) and open it from there. Email and texts work anywhere.</p>`:`<p class="rem-note">This browser can't show notifications. Email and texts still work.</p>`;
+  if(!pushOK())dev=isIOS&&!standalone()?`<p class="rem-note">For notifications on iPhone and iPad, add Digital Dash to your Home Screen (<b>Share</b>, then <b>Add to Home Screen</b>) and open it from there. Email and texts work anywhere.</p>`:`<p class="rem-note">${SMS_ON?"This browser can't show notifications. Email and texts still work.":"This browser can't show notifications. Email still works."}</p>`;
   else if(!REM.checked)dev=`<p class="rem-note">Checking this device…</p>`;
   else if(!on)dev=`${REM.perm==="denied"?`<p class="rem-note">Notifications are blocked for this site. Allow them in your browser or phone settings, then come back.</p>`:""}<button type="button" class="btn" data-rem="on" ${REM.busy?"disabled":""}>${REM.busy?"Turning on…":"Turn on notifications for this device"}</button>${r.on?`<p class="hint" style="margin:8px 0 0">Notifications are on for another of your devices.</p>`:""}`;
   else dev=`<p class="rem-on"><i></i>Notifications on for this device</p>`;
   const c=CT.data,ready={push:r.on,email:!!(c&&c.email_on),sms:!!(c&&c.sms_on&&c.phone_verified)};
-  const chips=k=>`<span class="rem-ch" role="group" aria-label="How to send">${[["push","Notification"],["email","Email"],["sms","Text"]].map(([x,l])=>{const p=(r.ch[k]||[]).includes(x);
+  const chips=k=>`<span class="rem-ch" role="group" aria-label="How to send">${[["push","Notification"],["email","Email"],["sms","Text"]].filter(([x])=>SMS_ON||x!=="sms").map(([x,l])=>{const p=(r.ch[k]||[]).includes(x);
     return `<button type="button" data-rch="${k}:${x}" aria-pressed="${p}" class="${p&&!ready[x]?"warn":""}" title="${p&&!ready[x]?(x==="push"?"Turn on notifications on a device":x==="email"?"Turn on email reminders below":"Add and confirm your number below"):l}">${l}</button>`;}).join("")}</span>`;
   const ctl={due:`<select data-rem="due" aria-label="When">${[[0,"Off"],[15,"15 min before"],[30,"30 min before"],[60,"1 hour before"],[180,"3 hours before"],[1440,"1 day before"]].map(([v,l])=>`<option value="${v}"${r.due===v?" selected":""}>${l}</option>`).join("")}</select>`,
     morning:`<span class="rem-pair"><input type="checkbox" data-rem="morning-on" ${r.morning?"checked":""} aria-label="Morning summary"><input type="time" data-rem="morning" value="${r.morning||"08:00"}" ${r.morning?"":"disabled"} aria-label="Summary time"></span>`,
     event:`<input type="checkbox" data-rem="events" ${r.events?"checked":""} aria-label="Calendar events">`,timer:`<input type="checkbox" data-rem="timer" ${r.timer?"checked":""} aria-label="Focus timer done">`,
     weekly:`<input type="checkbox" data-rem="weekly" ${r.weekly?"checked":""} aria-label="Weekly recap">`,budget:`<input type="checkbox" data-rem="budget" ${r.budget?"checked":""} aria-label="Budget alerts">`};
   const isOn={due:r.due>0,morning:!!r.morning,event:r.events,timer:r.timer,weekly:r.weekly,budget:r.budget};
-  const warn=NT_ROWS.some(([k])=>isOn[k]&&(r.ch[k]||[]).some(x=>!ready[x]));
+  const warn=NT_ROWS.some(([k])=>isOn[k]&&(r.ch[k]||[]).some(x=>!ready[x]&&(SMS_ON||x!=="sms")));
   el.innerHTML=dev+`<h4 class="ct-h" style="margin-top:14px">What to send, and how</h4>`+NT_ROWS.map(([k,l,sub])=>`<div class="rem-nt${isOn[k]?"":" off"}"><div class="field"><span>${l}${sub?`<small class="muted" style="display:block;font-size:12.5px">${sub}${k==="budget"&&!S.settings.wkBudget?` <span>(set a budget on Net)</span>`:""}</small>`:""}</span>${ctl[k]}</div>${chips(k)}</div>`).join("")+
     (warn?`<p class="hint rem-warn">Choices marked <span class="warn-dot"></span> won't send until that way is set up${c?" below":""}.</p>`:"")+
     `<div class="row" style="margin-top:10px">${on?`<button type="button" class="btn ghost small" data-rem="test">Send a test notification</button><button type="button" class="btn ghost small" data-rem="off">Turn off on this device</button>`:""}</div>`;
@@ -6662,7 +6665,7 @@ const TR_LEADS=[[0,"At the due time"],[15,"15 min before"],[30,"30 min before"],
 function trAt(t){const r=t.remind;if(!r)return null;
   if(r.lead<0){const d=r.at?new Date(r.at):null;return d&&!isNaN(d)?d.getTime():null;}
   if(!t.due)return null;const base=t.dueTime?dueAt(t):new Date(t.due+"T09:00");return base.getTime()-r.lead*60000;}
-const trChannels=t=>((t.remind&&t.remind.ch)||[]).filter(c=>c==="email"||c==="sms"||c==="push");
+const trChannels=t=>((t.remind&&t.remind.ch)||[]).filter(c=>c==="email"||(SMS_ON&&c==="sms")||c==="push");
 const CH_NAME={email:"Email",sms:"Text",push:"Notification"};
 function trLabel(t){const r=t.remind,ch=trChannels(t).map(c=>CH_NAME[c]).join(" + ")||"Reminder";
   if(r.lead<0){const at=trAt(t);return at?`${ch} · ${new Date(at).toLocaleString(undefined,{weekday:"short",month:"short",day:"numeric",hour:"numeric",minute:"2-digit"})}`:ch;}
@@ -6684,21 +6687,24 @@ function ctRender(){
   const el=$("#ct-body");if(!el)return;
   if(AC.state==="unavailable"||!AC.user){el.innerHTML="";return;}
   const d=CT.data,b=CT.busy;
-  if(!d){el.innerHTML=`<h4 class="ct-h">Email and text reminders</h4><p class="rem-note">${CT.loading?"Loading…":esc(CT.err||"")}</p>${CT.err?`<button type="button" class="btn ghost small" data-ct="reload">Try again</button>`:""}`;return;}
+  if(!d){el.innerHTML=`<h4 class="ct-h">${SMS_ON?"Email and text reminders":"Email reminders"}</h4><p class="rem-note">${CT.loading?"Loading…":esc(CT.err||"")}</p>${CT.err?`<button type="button" class="btn ghost small" data-ct="reload">Try again</button>`:""}`;return;}
   const pend=CT.pending||d.pending;
   const email=!d.can.email?`<p class="rem-note">Email reminders aren't set up on this site yet.</p>`:
     `<div class="field"><span>Email reminders<small class="muted" style="display:block;font-size:12.5px">To ${esc(d.email||"your account email")}</small></span><input type="checkbox" data-ct="email" ${d.email_on?"checked":""} ${b?"disabled":""} aria-label="Email reminders"></div>
      ${d.email_on?`<div class="ct-row"><button type="button" class="btn ghost small" data-ct="test-email" ${b?"disabled":""}>Send a test email</button></div>`:""}`;
   let sms;
-  if(!d.can.sms)sms=`<p class="rem-note">Text reminders aren't set up on this site yet.</p>`;
+  if(!SMS_ON)sms="";
+  else if(!d.can.sms)sms=`<p class="rem-note">Text reminders aren't set up on this site yet.</p>`;
   else if(d.phone_verified)sms=`<div class="field"><span>Text reminders<small class="muted" style="display:block;font-size:12.5px">To <span class="ct-who">${esc(d.phone)}</span></small></span><input type="checkbox" data-ct="sms" ${d.sms_on?"checked":""} ${b?"disabled":""} aria-label="Text reminders"></div>
      <div class="ct-row">${d.sms_on?`<button type="button" class="btn ghost small" data-ct="test-sms" ${b?"disabled":""}>Send a test text</button>`:""}<button type="button" class="btn ghost small" data-ct="phone-remove" ${b?"disabled":""}>Remove number</button></div>`;
   else if(pend)sms=`<p class="rem-note">We texted a 6-digit code to ${esc(pend)}.</p>
      <form class="ct-row" data-ctf="verify"><input inputmode="numeric" autocomplete="one-time-code" maxlength="6" id="ct-code" placeholder="6-digit code" aria-label="Verification code" required><button class="btn small" type="submit" ${b?"disabled":""}>${b==="phone-verify"?"Checking…":"Verify"}</button><button type="button" class="btn ghost small" data-ct="change">Use another number</button></form>`;
   else sms=`<p class="rem-note" style="margin-bottom:4px">Add your mobile number to get tasks by text. We'll text you a code to confirm it's yours.</p>
      <form class="ct-row" data-ctf="start"><input type="tel" id="ct-phone" autocomplete="tel" placeholder="e.g. 519 555 1234" aria-label="Mobile number" required><button class="btn small" type="submit" ${b?"disabled":""}>${b==="phone-start"?"Sending…":"Send code"}</button></form>`;
-  el.innerHTML=`<h4 class="ct-h" style="margin-top:16px">Email and texts</h4><p class="hint" style="margin:0 0 8px">Set these up once, then pick Email or Text above, or per task with the bell on the Tasks page.</p>${email}${sms}
-    <p class="ct-fine">Up to ${d.limits.sms} texts and ${d.limits.email} emails a day. Message and data rates may apply. Reply STOP to any text to stop texts, and every email has a link to stop emails.</p>`;
+  el.innerHTML=SMS_ON?`<h4 class="ct-h" style="margin-top:16px">Email and texts</h4><p class="hint" style="margin:0 0 8px">Set these up once, then pick Email or Text above, or per task with the bell on the Tasks page.</p>${email}${sms}
+    <p class="ct-fine">Up to ${d.limits.sms} texts and ${d.limits.email} emails a day. Message and data rates may apply. Reply STOP to any text to stop texts, and every email has a link to stop emails.</p>`:
+   `<h4 class="ct-h" style="margin-top:16px">Email reminders</h4><p class="hint" style="margin:0 0 8px">Set this up once, then pick Email above, or per task with the bell on the Tasks page.</p>${email}
+    <p class="ct-fine">Every email has a link to stop emails.</p>`;
 }
 $("#ct-body").addEventListener("click",e=>{
   const b=e.target.closest("[data-ct]");if(!b||b.tagName==="INPUT")return;const a=b.dataset.ct;
@@ -6740,13 +6746,13 @@ function trRender(){
   const signedIn=!!AC.user&&AC.state!=="unavailable";
   const opt=(k,title,desc,ok,fix)=>`<label><input type="checkbox" data-trch="${k}" ${d.ch.includes(k)?"checked":""} ${ok?"":"disabled"}><span><b>${title}</b><small>${desc}</small>${fix||""}</span></label>`;
   let chs;
-  if(!signedIn)chs=`<p class="rem-note">Sign in to get reminders by email, text or notification.</p><button type="button" class="btn" data-tr="signin">Sign in</button>`;
+  if(!signedIn)chs=`<p class="rem-note">${SMS_ON?"Sign in to get reminders by email, text or notification.":"Sign in to get reminders by email or notification."}</p><button type="button" class="btn" data-tr="signin">Sign in</button>`;
   else if(!c)chs=`<p class="rem-note">${CT.loading?"Loading your reminder settings…":esc(CT.err||"Loading…")}</p>`;
   else{
     const eOk=c.can.email&&c.email_on,sOk=c.can.sms&&c.phone_verified&&c.sms_on,pOk=!!(REM.sub||remS().on);
     chs=`<div class="tr-ch" role="group" aria-label="Send it by">
       ${opt("email","Email",c.can.email?(c.email_on?`To ${esc(c.email||"your email")}`:"Turn on email reminders first"):"Not set up on this site yet",eOk,c.can.email&&!c.email_on?`<button type="button" class="btn ghost small" data-tr="email-on">Turn on email reminders</button>`:"")}
-      ${opt("sms","Text message",c.can.sms?(sOk?`To ${esc(c.phone)}`:c.phone_verified?"Texts are turned off":"Add and confirm your mobile number first"):"Not set up on this site yet",sOk,c.can.sms&&!sOk?`<button type="button" class="btn ghost small" data-tr="setup">${c.phone_verified?"Turn texts on":"Add my number"}</button>`:"")}
+      ${!SMS_ON?"":opt("sms","Text message",c.can.sms?(sOk?`To ${esc(c.phone)}`:c.phone_verified?"Texts are turned off":"Add and confirm your mobile number first"):"Not set up on this site yet",sOk,c.can.sms&&!sOk?`<button type="button" class="btn ghost small" data-tr="setup">${c.phone_verified?"Turn texts on":"Add my number"}</button>`:"")}
       ${opt("push","Notification",pOk?"On your devices with reminders turned on":"Turn on reminders for a device first",pOk,!pOk?`<button type="button" class="btn ghost small" data-tr="setup">Set up notifications</button>`:"")}
     </div>`;
   }
@@ -6768,7 +6774,7 @@ $("#trd").addEventListener("click",async e=>{
   if(!t)return;
   if(a==="remove"){const old=t.remind;delete t.remind;save();renderTasks("plain");trClose();toast("Reminder removed",{run(){t.remind=old;save();renderTasks("plain");}});return;}
   if(a==="save"){
-    const ch=["email","sms","push"].filter(k=>trDraft.ch.includes(k));
+    const ch=["email","sms","push"].filter(k=>trDraft.ch.includes(k)&&(SMS_ON||k!=="sms"));
     if(!ch.length){toast("Pick at least one way to remind you");return;}
     const tmp={lead:trDraft.lead,ch};if(trDraft.lead<0)tmp.at=trDraft.at;
     const at=trAt(Object.assign({},t,{remind:tmp}));if(!at||at<=Date.now()){toast("Pick a time that's still ahead");return;}
