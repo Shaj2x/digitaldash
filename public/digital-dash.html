@@ -389,6 +389,15 @@ html.lg .addbar .addmore input[type=text]{background:var(--glass-tint);border-co
 /* Spending */
 .sp-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:10px}
 .sp-head .sec{margin:0}
+.sp-head{min-height:40px}
+/* Net tab: spending and net worth side by side; one at a time (tabs) on narrower screens */
+.msplit{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px;align-items:start}
+.mtabs{display:none}
+.msplit .sp-top,.msplit .sp-mid,.msplit .nwtop{grid-template-columns:minmax(0,1fr)}
+.msplit .sp-sum .total,.msplit .nwtop .total{font-size:clamp(40px,4.2vw,76px)}
+.msplit .sp-bars{height:160px}
+@media (max-width:1100px){.msplit{grid-template-columns:minmax(0,1fr)}.mtabs{display:inline-flex;margin:0 0 16px}
+  .msplit[data-tab="spend"] .mcol-nw,.msplit[data-tab="nw"] .mcol-sp{display:none}}
 .sp-nav{display:flex;align-items:center;gap:6px;font-size:14px;color:var(--muted);font-variant-numeric:tabular-nums}
 .sp-nav span{min-width:120px;text-align:center}
 .sp-nav button:disabled{opacity:.35;cursor:default}
@@ -2110,7 +2119,10 @@ html.lg .eye{background:var(--glass-tint);box-shadow:inset 0 1px 0 color-mix(in 
     <!-- NET WORTH -->
     <section class="view" id="v-money">
       <h1 data-sub="t-money">Net</h1>
-      <p class="sub" data-sub="money">See what you spend each week and where it goes. Your net worth is further down.</p>
+      <p class="sub" data-sub="money">Track what you spend each week and where it goes, next to your net worth.</p>
+      <div class="seg mtabs" id="m-tabs" role="group" aria-label="Show"><button type="button" data-mt="spend" aria-pressed="true">Spending</button><button type="button" data-mt="nw" aria-pressed="false">Net worth</button></div>
+      <div class="msplit" id="msplit" data-tab="spend">
+      <div class="mcol mcol-sp">
       <div class="sp-head"><h2 class="sec">Spending</h2>
         <div class="sp-nav" role="group" aria-label="Week"><button class="icon-btn" id="sp-prev" aria-label="Previous week" title="Previous week"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m15 6-6 6 6 6"/></svg></button><span id="sp-range">This week</span><button class="icon-btn" id="sp-next" aria-label="Next week" title="Next week"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg></button></div></div>
       <div class="sp-top">
@@ -2139,7 +2151,9 @@ html.lg .eye{background:var(--glass-tint);box-shadow:inset 0 1px 0 color-mix(in 
         <div class="panel sp-catp"><h3>Where it went</h3><div id="sp-catlist"></div></div>
       </div>
       <div class="panel sp-listp"><h3>This week's spending</h3><div id="sp-list"></div></div>
-      <h2 class="sec" style="margin-top:28px">Net worth</h2>
+      </div>
+      <div class="mcol mcol-nw">
+      <div class="sp-head"><h2 class="sec">Net worth</h2></div>
       <div class="nwtop">
         <div class="panel">
           <div style="color:var(--muted);font-size:14px" data-sub="l-total">Total net worth</div>
@@ -2174,6 +2188,8 @@ html.lg .eye{background:var(--glass-tint);box-shadow:inset 0 1px 0 color-mix(in 
         <select id="a-cat" aria-label="Category"></select>
         <button class="btn" type="submit">Add account</button>
       </form>
+      </div>
+      </div>
     </section>
 
     <!-- HEALTH -->
@@ -4809,6 +4825,7 @@ function setPrivacy(on){
 $("#nw-eye").addEventListener("click",()=>setPrivacy(!S.settings.hideNw));
 let lastNw=null;
 function renderMoney(){
+  const mt=S.settings.moneyTab==="nw"?"nw":"spend";$("#msplit").dataset.tab=mt;$("#m-tabs").querySelectorAll("button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.mt===mt));
   renderSpend();renderGoals();
   const {a,d,t}=totals(),T0=$("#nw-total"),hid=S.settings.hideNw;
   const vis=!!T0.offsetParent;
@@ -4917,6 +4934,7 @@ $("#sp-note").addEventListener("input",e=>{if(spKind!=="out"||spCatTouched)retur
 $("#sp-form").addEventListener("submit",e=>{e.preventDefault();const amt=Math.round(parseFloat($("#sp-amt").value)*100)/100,d=$("#sp-date").value||dkey(new Date());if(!(amt>0))return;
   spAdd({d,amt,cat:spCat,note:$("#sp-note").value.trim(),inc:spKind==="in"});$("#sp-amt").value="";$("#sp-note").value="";spCatTouched=false;$("#sp-amt").focus();
   toast(spKind==="in"?`Added +${spMask(amt)}`:`Logged ${spMask(amt)}${d===dkey(new Date())?"":" on "+niceDate(d)}`);});
+$("#m-tabs").addEventListener("click",e=>{const b=e.target.closest("button[data-mt]");if(!b||S.settings.moneyTab===b.dataset.mt)return;S.settings.moneyTab=b.dataset.mt;save();renderMoney();if(b.dataset.mt==="nw")drawChart();});
 $("#sp-prev").addEventListener("click",()=>{spWk=addDays(spWk||weekStart(new Date()),-7);renderSpend();});
 $("#sp-next").addEventListener("click",()=>{spWk=addDays(spWk||weekStart(new Date()),7);renderSpend();});
 $("#sp-list").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;const id=b.closest(".sp-it").dataset.id,at=S.spend.findIndex(x=>x.id===id);if(at<0)return;

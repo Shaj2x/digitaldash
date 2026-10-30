@@ -1437,7 +1437,7 @@
 1474|Wofür es ausging
 1475|Ausgaben dieser Woche
 1476|Ausgaben der Woche
-1477|Sieh, wie viel du jede Woche ausgibst und wofür. Dein Nettovermögen steht weiter unten.
+1477|Behalte im Blick, was du jede Woche ausgibst und wofür, neben deinem Nettovermögen.
 1478|Wochenbudget festlegen
 1479|Wochenbudget ändern
 1480|Essen

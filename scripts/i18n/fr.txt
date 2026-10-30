@@ -1437,7 +1437,7 @@
 1474|Où c'est passé
 1475|Dépenses de cette semaine
 1476|Dépenses de cette semaine-là
-1477|Vois combien tu dépenses chaque semaine et pour quoi. Ton patrimoine net est plus bas.
+1477|Suis ce que tu dépenses chaque semaine et pour quoi, à côté de ton patrimoine net.
 1478|Définir un budget hebdo
 1479|Modifier le budget hebdo
 1480|Nourriture

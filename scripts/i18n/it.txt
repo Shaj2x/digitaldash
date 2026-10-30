@@ -1437,7 +1437,7 @@
 1474|Dove sono finiti
 1475|Spese di questa settimana
 1476|Spese di quella settimana
-1477|Vedi quanto spendi ogni settimana e per cosa. Il tuo patrimonio netto è più in basso.
+1477|Tieni traccia di quanto spendi ogni settimana e per cosa, accanto al tuo patrimonio netto.
 1478|Imposta un budget settimanale
 1479|Cambia budget settimanale
 1480|Cibo

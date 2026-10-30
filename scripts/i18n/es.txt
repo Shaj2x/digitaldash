@@ -1437,7 +1437,7 @@
 1474|En qué se fue
 1475|Gastos de esta semana
 1476|Gastos de esa semana
-1477|Mira cuánto gastas cada semana y en qué. Tu patrimonio neto está más abajo.
+1477|Controla lo que gastas cada semana y en qué, junto a tu patrimonio neto.
 1478|Fijar un presupuesto semanal
 1479|Cambiar presupuesto semanal
 1480|Comida

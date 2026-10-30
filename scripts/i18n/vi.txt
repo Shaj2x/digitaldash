@@ -1437,7 +1437,7 @@
 1474|Tiền đi đâu
 1475|Chi tiêu tuần này
 1476|Chi tiêu tuần đó
-1477|Xem mỗi tuần bạn chi bao nhiêu và chi vào đâu. Tài sản ròng ở bên dưới.
+1477|Theo dõi mỗi tuần bạn chi bao nhiêu và chi vào đâu, bên cạnh tài sản ròng.
 1478|Đặt ngân sách tuần
 1479|Đổi ngân sách tuần
 1480|Ăn uống

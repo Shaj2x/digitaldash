@@ -1437,7 +1437,7 @@
 1474|Para onde foi
 1475|Gastos desta semana
 1476|Gastos daquela semana
-1477|Veja quanto você gasta por semana e com o quê. Seu patrimônio líquido fica mais abaixo.
+1477|Acompanhe quanto você gasta por semana e com o quê, ao lado do seu patrimônio líquido.
 1478|Definir orçamento semanal
 1479|Mudar orçamento semanal
 1480|Comida
