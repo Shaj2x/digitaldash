@@ -1505,3 +1505,9 @@
 1542|Conditions d'utilisation
 1543|Looks à la une
 1544|Des designs prêts à l'emploi : couleurs, polices, style d'horloge et fond ensemble. Touche-en un pour l'essayer ; Annuler remet ton look.
+1545|Change la forme de tout : bordures, ombres, coins et boutons. Fonctionne avec n'importe quel thème. En choisir un désactive le verre liquide.
+1546|Contour
+1547|Argile
+1548|Cahier
+1549|Minimaliste
+1550|Plan

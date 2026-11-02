@@ -1505,3 +1505,9 @@
 1542|Termini d'uso
 1543|Look in evidenza
 1544|Design pronti: colori, font, stile dell'orologio e sfondo insieme. Toccane uno per provarlo; Annulla ripristina il tuo look.
+1545|Cambia la forma di tutto: bordi, ombre, angoli e pulsanti. Funziona con qualsiasi tema. Sceglierne uno disattiva il vetro liquido.
+1546|Contorno
+1547|Argilla
+1548|Quaderno
+1549|Minimal
+1550|Progetto

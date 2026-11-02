@@ -1505,3 +1505,9 @@
 1542|Termos de uso
 1543|Visuais em destaque
 1544|Designs prontos: cores, fontes, estilo de relógio e fundo juntos. Toque em um para testar; Desfazer volta ao seu visual.
+1545|Mude a forma de tudo: bordas, sombras, cantos e botões. Funciona com qualquer tema de cor. Escolher um desliga o vidro líquido.
+1546|Contorno
+1547|Argila
+1548|Caderno
+1549|Minimalista
+1550|Planta

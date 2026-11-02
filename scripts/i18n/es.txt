@@ -1505,3 +1505,9 @@
 1542|Términos de uso
 1543|Estilos destacados
 1544|Diseños listos: colores, fuentes, estilo de reloj y fondo juntos. Toca uno para probarlo; Deshacer recupera tu estilo.
+1545|Cambia la forma de todo: bordes, sombras, esquinas y botones. Funciona con cualquier tema de color. Elegir uno desactiva el cristal líquido.
+1546|Contorno
+1547|Arcilla
+1548|Cuaderno
+1549|Minimalista
+1550|Plano técnico

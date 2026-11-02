@@ -1505,3 +1505,9 @@
 1542|Nutzungsbedingungen
 1543|Empfohlene Looks
 1544|Fertige Designs: Farben, Schriften, Uhrstil und Hintergrund zusammen. Tippe auf einen zum Ausprobieren; Rückgängig stellt deinen Look wieder her.
+1545|Ändere die Form von allem: Rahmen, Schatten, Ecken und Buttons. Passt zu jedem Farbdesign. Eine Wahl schaltet Flüssigglas aus.
+1546|Umriss
+1547|Ton
+1548|Notizbuch
+1549|Minimal
+1550|Bauplan

@@ -1505,3 +1505,9 @@
 1542|Điều khoản sử dụng
 1543|Giao diện nổi bật
 1544|Thiết kế có sẵn: màu, phông chữ, kiểu đồng hồ và hình nền cùng lúc. Chạm để thử; Hoàn tác sẽ trả lại giao diện của bạn.
+1545|Thay đổi hình dáng mọi thứ: viền, đổ bóng, góc và nút. Dùng được với mọi chủ đề màu. Chọn một kiểu sẽ tắt kính lỏng.
+1546|Viền
+1547|Đất sét
+1548|Sổ tay
+1549|Tối giản
+1550|Bản vẽ

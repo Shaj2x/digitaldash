@@ -467,6 +467,7 @@ html.cur,html.cur *{cursor:none!important}
       <div class="ctrl" role="group" aria-label="Customize">
         <div><h3 id="c-look">Look</h3><div class="chips" role="group" aria-labelledby="c-look" id="c-skin"></div></div>
         <div><h3 id="c-clk">Clock</h3><div class="chips" role="group" aria-labelledby="c-clk" id="c-clock"></div></div>
+        <div><h3 id="c-sty">Style</h3><div class="chips" role="group" aria-labelledby="c-sty" id="c-style"></div></div>
         <div><h3 id="c-fnt">Display font</h3><div class="chips" role="group" aria-labelledby="c-fnt" id="c-font"></div></div>
         <div><h3 id="c-bgh">Background and glass</h3><div class="chips" role="group" aria-labelledby="c-bgh" id="c-bg"></div></div>
         <div class="share-row"><button type="button" class="btn" id="share-look"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7M16 6l-4-4-4 4M12 2v13"/></svg>Share this look</button><span id="share-t" aria-live="polite"></span></div>
@@ -611,6 +612,7 @@ html.cur,html.cur *{cursor:none!important}
   const CK=[["flip","Flip"],["digital","Digital"],["analog","Analog"],["words","Words"],["rings","Progress"]];
   const FN={shoulders:["Big Shoulders","'DD Display','Big Shoulders Display',Impact,sans-serif","Big+Shoulders+Display:wght@700;800;900"],orbitron:["Orbitron","Orbitron,sans-serif","Orbitron:wght@700;900"],playfair:["Playfair","'Playfair Display',Georgia,serif","Playfair+Display:wght@700;900"],
     spacemono:["Space Mono","'Space Mono',monospace","Space+Mono:wght@700"],pixel:["Pixel","'Press Start 2P',monospace","Press+Start+2P"],righteous:["Righteous","Righteous,sans-serif","Righteous"]};
+  const STY=[["soft","Soft"],["bold","Bold"],["outline","Outline"],["clay","Clay"],["neon","Neon"],["notebook","Notebook"],["retro","Retro"],["pixel","Pixel"],["minimal","Minimal"],["blueprint","Blueprint"]];
   const BG=[["none","Plain"],["live","Live aurora"],["glass","Liquid glass"]];
   const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches,fine=matchMedia("(hover: hover) and (pointer: fine)").matches;
   const ls={get(k){try{return localStorage.getItem(k);}catch(e){return null;}},set(k,v){try{localStorage.setItem(k,v);}catch(e){}}};
@@ -618,10 +620,10 @@ html.cur,html.cur *{cursor:none!important}
   const returning=!!saved,ss=(saved&&saved.settings)||{};
   let pick=null;try{pick=JSON.parse(ls.get("dd.pick")||"null");}catch(e){}
   /* start from: a look already picked here, else the visitor's own dashboard, else the default */
-  const st=Object.assign({skin:"brand",clock:"flip",font:"shoulders",bg:"none",glass:false},
-    returning?{skin:SK[ss.skin]?ss.skin:"brand",clock:CK.some(c=>c[0]===ss.clock)?ss.clock:"flip",font:FN[ss.clockFont]?ss.clockFont:"shoulders",bg:ss.bg&&ss.bg.type==="live"?"live":"none",glass:ss.surface==="glass"}:{},
-    pick?{skin:SK[pick.skin]?pick.skin:undefined,clock:pick.clock,font:FN[pick.font]?pick.font:undefined,bg:pick.bg,glass:pick.glass}:{});
-  Object.keys(st).forEach(k=>{if(st[k]===undefined)st[k]={skin:"brand",clock:"flip",font:"shoulders",bg:"none",glass:false}[k];});
+  const st=Object.assign({skin:"brand",clock:"flip",font:"shoulders",bg:"none",glass:false,style:"soft"},
+    returning?{skin:SK[ss.skin]?ss.skin:"brand",clock:CK.some(c=>c[0]===ss.clock)?ss.clock:"flip",font:FN[ss.clockFont]?ss.clockFont:"shoulders",bg:ss.bg&&ss.bg.type==="live"?"live":"none",glass:ss.surface==="glass",style:STY.some(x=>x[0]===ss.style)?ss.style:"soft"}:{},
+    pick?{skin:SK[pick.skin]?pick.skin:undefined,clock:pick.clock,font:FN[pick.font]?pick.font:undefined,bg:pick.bg,glass:pick.glass,style:STY.some(x=>x[0]===pick.style)?pick.style:undefined}:{});
+  Object.keys(st).forEach(k=>{if(st[k]===undefined)st[k]={skin:"brand",clock:"flip",font:"shoulders",bg:"none",glass:false,style:"soft"}[k];});
   let touched=!!pick;
   const fontsLoaded=new Set(["shoulders"]);
   function loadFont(k){if(fontsLoaded.has(k))return;fontsLoaded.add(k);const l=document.createElement("link");l.rel="stylesheet";l.href=`https://fonts.googleapis.com/css2?family=${FN[k][2]}&display=swap`;document.head.appendChild(l);}
@@ -634,13 +636,13 @@ html.cur,html.cur *{cursor:none!important}
     h.classList.toggle("aurora",st.bg==="live");h.classList.toggle("glass",st.glass);
   }
   function applyPhone(done){if(!phoneOn){loadPhone();return;}let tries=0;(function go(){let d=null;try{d=fr.contentWindow.dashDemo;}catch(e){}if(!d){if(tries++<60)setTimeout(go,150);return;}
-    d.skin(st.skin);d.clock(st.clock);d.font(st.font);d.bg(st.bg);d.glass(st.glass);setTimeout(tint,300);if(done)done();})();}
-  function remember(){touched=true;ls.set("dd.pick",JSON.stringify({skin:st.skin,clock:st.clock,font:st.font,bg:st.bg,glass:st.glass,t:Date.now()}));
+    d.skin(st.skin);d.clock(st.clock);d.font(st.font);d.bg(st.bg);d.glass(st.glass);if(d.style)d.style(st.style);setTimeout(tint,300);if(done)done();})();}
+  function remember(){touched=true;ls.set("dd.pick",JSON.stringify({skin:st.skin,clock:st.clock,font:st.font,bg:st.bg,glass:st.glass,style:st.style,t:Date.now()}));
     if(returning){$("#apply").classList.add("on");$("#apply-t").textContent="Like this look? Use it in your dashboard too.";$("#apply-go").hidden=false;}}
   function chips(el,list,cur,swatch){$(el).innerHTML=list.map(([k,l,a,b])=>`<button type="button" class="chip${swatch?"":" np"}" data-k="${k}" aria-pressed="${cur(k)}">${swatch?`<span class="sw" style="background:${a}" aria-hidden="true"><b style="background:${b}"></b></span>`:""}${l}</button>`).join("");}
-  function draw(){chips("#c-skin",Object.entries(SK).map(([k,v])=>[k,v[0],v[1],v[7]]),k=>st.skin===k,true);chips("#c-clock",CK,k=>st.clock===k);
+  function draw(){chips("#c-skin",Object.entries(SK).map(([k,v])=>[k,v[0],v[1],v[7]]),k=>st.skin===k,true);chips("#c-clock",CK,k=>st.clock===k);chips("#c-style",STY,k=>st.style===k);
     chips("#c-font",Object.entries(FN).map(([k,v])=>[k,v[0]]),k=>st.font===k);chips("#c-bg",BG,k=>k==="glass"?st.glass:st.bg===k);}
-  const act={"#c-skin":k=>{st.skin=k;},"#c-clock":k=>{st.clock=k;},"#c-font":k=>{st.font=k;},"#c-bg":k=>{if(k==="glass")st.glass=!st.glass;else st.bg=k;}};
+  const act={"#c-skin":k=>{st.skin=k;},"#c-clock":k=>{st.clock=k;},"#c-style":k=>{st.style=k;if(k!=="soft")st.glass=false;},"#c-font":k=>{st.font=k;},"#c-bg":k=>{if(k==="glass")st.glass=!st.glass;else st.bg=k;}};
   Object.keys(act).forEach(sel=>$(sel).addEventListener("click",e=>{const b=e.target.closest("button[data-k]");if(!b)return;const k=b.dataset.k;
     morph(b,()=>{act[sel](k);remember();applyPage();draw();applyPhone();const nb=$(`${sel} [data-k="${k}"]`);if(nb)nb.focus();});})); /* phone updates after the choice is stored: morph's callback can run a frame later */
   $("#apply-go").addEventListener("click",()=>{let pk={};try{pk=JSON.parse(ls.get("dd.pick")||"{}");}catch(e){}pk.apply=true;ls.set("dd.pick",JSON.stringify(pk));
@@ -648,7 +650,7 @@ html.cur,html.cur *{cursor:none!important}
   /* "Share this look": a link that opens the app with this look (the app asks first if they already have a dashboard) */
   const b64u=x=>btoa(unescape(encodeURIComponent(x))).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/,"");
   $("#share-look").addEventListener("click",async()=>{
-    const look={v:1,n:"",s:{skin:st.skin,accent:"",clock:st.clock,clockFont:st.font,surface:st.glass?"glass":"solid",bg:st.bg==="live"?{type:"live",live:"aurora"}:{type:"none"}}};
+    const look={v:1,n:"",s:{skin:st.skin,accent:"",clock:st.clock,clockFont:st.font,surface:st.glass?"glass":"solid",style:st.style,bg:st.bg==="live"?{type:"live",live:"aurora"}:{type:"none"}}};
     const url=location.origin+"/digital-dash?look="+b64u(JSON.stringify(look)),t=$("#share-t");
     if(navigator.share&&matchMedia("(pointer: coarse)").matches){try{await navigator.share({title:"My Digital Dash look",url});return;}catch(e){if(e&&e.name==="AbortError")return;}}
     try{await navigator.clipboard.writeText(url);t.textContent="Link copied. Send it to anyone.";}catch(e){t.innerHTML=`<a href="${url}">Here's your link</a>`;}
@@ -656,7 +658,7 @@ html.cur,html.cur *{cursor:none!important}
   fr.addEventListener("load",()=>{try{fr.contentDocument.documentElement.style.pointerEvents="none";}catch(e){}applyPhone();});
   draw();applyPage();
   /* the still shows the default look; anyone with their own look sees the screen colour until the live app arrives */
-  ph.classList.toggle("custom",!(st.skin==="brand"&&st.clock==="flip"&&st.font==="shoulders"&&st.bg==="none"&&!st.glass));
+  ph.classList.toggle("custom",!(st.skin==="brand"&&st.clock==="flip"&&st.font==="shoulders"&&st.bg==="none"&&!st.glass&&st.style==="soft"));
   /* ledger demos run on their own and can be played with: tap the timer to pause, a task to tick it, the balance to hide it.
      Once someone taps a demo it stops running itself. Reduced motion: nothing runs, taps still work */
   {const dt=$("#d-time"),db=$("#d-bar"),tm=$(".d-timer");let t=1499,run=!reduce;
@@ -789,7 +791,7 @@ html.cur,html.cur *{cursor:none!important}
   const shBtn=$("#shuffle"),dice=shBtn.querySelector(".dice");let rolls=0;
   shBtn.addEventListener("click",()=>{
     const pickOf=(arr,cur)=>{const o=arr.filter(k=>k!==cur);return o[Math.floor(Math.random()*o.length)];};
-    morph(shBtn,()=>{st.skin=pickOf(Object.keys(SK),st.skin);st.clock=pickOf(CK.map(c=>c[0]),st.clock);st.font=pickOf(Object.keys(FN),st.font);
+    morph(shBtn,()=>{st.skin=pickOf(Object.keys(SK),st.skin);st.clock=pickOf(CK.map(c=>c[0]),st.clock);st.font=pickOf(Object.keys(FN),st.font);st.style=Math.random()<.5?"soft":pickOf(STY.map(x=>x[0]),st.style);if(st.style!=="soft")st.glass=false;
       remember();applyPage();draw();applyPhone();
       $("#shuf").innerHTML=`Now: <b>${SK[st.skin][0]}</b> theme, ${CK.find(c=>c[0]===st.clock)[1].toLowerCase()} clock, ${FN[st.font][0]} font. <a href="#yours">Fine-tune it</a>`;});
     if(!reduce)dice.style.transform=`rotate(${++rolls*180}deg)`;});
