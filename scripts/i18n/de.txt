@@ -532,7 +532,7 @@
 562|Ja. Alles, was du siehst, ist kostenlos.
 563|Wie viel kann ich anpassen?
 564|Brauche ich ein Konto?
-565|Nein. Öffnen und loslegen. Ein Konto brauchst du nur zum Synchronisieren zwischen Handy und Computer und für Erinnerungen per E-Mail oder SMS.
+565|Nein. Öffnen und loslegen. Ein Konto brauchst du nur zum Synchronisieren zwischen Handy und Computer und für Erinnerungen per E-Mail.
 566|Funktioniert es offline?
 567|Ja. Einmal geöffnet, läuft es ohne Internet weiter und synchronisiert, sobald du wieder online bist.
 568|Gibt es eine iPhone-App?
@@ -1500,3 +1500,6 @@
 1537|Jede E-Mail enthält einen Link zum Abbestellen.
 1538|Melde dich an, um Erinnerungen per E-Mail oder Mitteilung zu bekommen.
 1539|Wähle, worüber du informiert wirst und wie: eine Mitteilung auf Handy oder Computer oder eine E-Mail.
+1540|Nutzungsbedingungen
+1541|Du musst mindestens 13 Jahre alt sein, um ein Konto zu erstellen.
+1542|Nutzungsbedingungen

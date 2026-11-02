@@ -6149,7 +6149,8 @@ function acRenderDlg(){
       <div class="ac-or"><span>or</span></div>
       <button type="button" class="btn ghost ac-google" data-ac="google">Continue with Google</button>
       <p class="hint">No password needed. Without an account, everything keeps saving on this device.</p>
-      <p class="ac-priv">Your account data is stored in this site's database and only you can read it. You can download it or delete the account at any time. <a href="/digital-dash-privacy" target="_blank" rel="noopener">Privacy policy</a></p>`;
+      <p class="ac-priv">Your account data is stored in this site's database and only you can read it. You can download it or delete the account at any time. <a href="/digital-dash-privacy" target="_blank" rel="noopener">Privacy policy</a></p>
+      <p class="ac-priv">You must be 13 or older to make an account. <a href="/terms" target="_blank" rel="noopener">Terms of use</a></p>`;
     return;
   }
   const name=(u.user_metadata&&(u.user_metadata.full_name||u.user_metadata.name))||"",st={synced:`All changes saved ${agoText(AC.last)}${AC.lastDevice?" · "+esc(AC.lastDevice):""}`,saving:"Saving…",offline:"Offline. Changes are saved on this device and will sync when you're back online.",error:esc(AC.err||"Not syncing right now")}[AC.state]||"";

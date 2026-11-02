@@ -532,7 +532,7 @@
 562|Có. Mọi thứ bạn thấy đều miễn phí.
 563|Tôi có thể tùy chỉnh đến mức nào?
 564|Tôi có cần tài khoản không?
-565|Không. Cứ mở và bắt đầu. Tài khoản chỉ để đồng bộ giữa điện thoại và máy tính, và cho lời nhắc qua email hoặc tin nhắn.
+565|Không. Cứ mở và bắt đầu. Tài khoản chỉ để đồng bộ giữa điện thoại và máy tính, và cho lời nhắc qua email.
 566|Có chạy ngoại tuyến không?
 567|Có. Sau khi mở, nó vẫn chạy khi không có internet và đồng bộ khi bạn có mạng trở lại.
 568|Có ứng dụng iPhone không?
@@ -1500,3 +1500,6 @@
 1537|Mỗi email đều có liên kết để ngừng nhận.
 1538|Đăng nhập để nhận nhắc việc qua email hoặc thông báo.
 1539|Chọn điều bạn muốn được báo và cách báo: thông báo trên điện thoại hoặc máy tính, hoặc email.
+1540|Điều khoản
+1541|Bạn phải từ 13 tuổi trở lên để tạo tài khoản.
+1542|Điều khoản sử dụng

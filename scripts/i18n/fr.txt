@@ -532,7 +532,7 @@
 562|Oui. Tout ce que vous voyez est gratuit.
 563|Jusqu'où puis-je personnaliser ?
 564|Ai-je besoin d'un compte ?
-565|Non. Ouvrez-le et commencez. Le compte sert seulement à synchroniser votre téléphone et votre ordinateur, et aux rappels par e-mail ou SMS.
+565|Non. Ouvrez-le et commencez. Le compte sert seulement à synchroniser votre téléphone et votre ordinateur, et aux rappels par e-mail.
 566|Ça fonctionne hors ligne ?
 567|Oui. Une fois ouvert, il continue sans internet et se synchronise quand vous êtes de nouveau en ligne.
 568|Y a-t-il une app iPhone ?
@@ -1500,3 +1500,6 @@
 1537|Chaque e-mail contient un lien pour ne plus en recevoir.
 1538|Connecte-toi pour recevoir des rappels par e-mail ou notification.
 1539|Choisis ce dont on te prévient et comment : une notification sur ton téléphone ou ordinateur, ou un e-mail.
+1540|Conditions
+1541|Tu dois avoir au moins 13 ans pour créer un compte.
+1542|Conditions d'utilisation

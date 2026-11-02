@@ -532,7 +532,7 @@
 562|Sim. Tudo o que você vê é grátis.
 563|Quanto posso personalizar?
 564|Preciso de uma conta?
-565|Não. Abra e comece. A conta serve só para sincronizar celular e computador, e para lembretes por e-mail ou SMS.
+565|Não. Abra e comece. A conta serve só para sincronizar celular e computador, e para lembretes por e-mail.
 566|Funciona offline?
 567|Sim. Depois de aberto, continua funcionando sem internet e sincroniza quando você voltar a ficar online.
 568|Existe app para iPhone?
@@ -1500,3 +1500,6 @@
 1537|Todo e-mail tem um link para parar de receber.
 1538|Entre para receber lembretes por e-mail ou notificação.
 1539|Escolha sobre o que você quer ser avisado e como: uma notificação no celular ou computador, ou um e-mail.
+1540|Termos
+1541|Você precisa ter 13 anos ou mais para criar uma conta.
+1542|Termos de uso

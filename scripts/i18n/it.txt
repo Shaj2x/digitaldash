@@ -532,7 +532,7 @@
 562|Sì. Tutto ciò che vedi è gratuito.
 563|Quanto posso personalizzare?
 564|Mi serve un account?
-565|No. Aprilo e inizia. L'account serve solo per sincronizzare telefono e computer e per i promemoria via email o SMS.
+565|No. Aprilo e inizia. L'account serve solo per sincronizzare telefono e computer e per i promemoria via email.
 566|Funziona offline?
 567|Sì. Una volta aperto, continua a funzionare senza internet e si sincronizza quando torni online.
 568|C'è un'app per iPhone?
@@ -1500,3 +1500,6 @@
 1537|Ogni email ha un link per non riceverne più.
 1538|Accedi per ricevere promemoria tramite email o notifica.
 1539|Scegli di cosa essere avvisato e come: una notifica su telefono o computer, oppure un’email.
+1540|Termini
+1541|Devi avere almeno 13 anni per creare un account.
+1542|Termini d'uso

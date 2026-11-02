@@ -564,7 +564,7 @@
 "Yes. Everything you see is free to use.",
 "How much can I customize?",
 "Do I need an account?",
-"No. Open it and start. An account is only for syncing between your phone and computer, and for reminders by email or text.",
+"No. Open it and start. An account is only for syncing between your phone and computer, and for reminders by email.",
 "Does it work offline?",
 "Yes. Once it's opened, it keeps working without internet and syncs when you're back online.",
 "Is there an iPhone app?",
@@ -1542,6 +1542,9 @@
 "This browser can't show notifications. Email still works.",
 "Every email has a link to stop emails.",
 "Sign in to get reminders by email or notification.",
-"Choose what you hear about and how: a notification on your phone or computer, or an email."
+"Choose what you hear about and how: a notification on your phone or computer, or an email.",
+"Terms",
+"You must be 13 or older to make an account.",
+"Terms of use"
 ]
 }

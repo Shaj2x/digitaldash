@@ -532,7 +532,7 @@
 562|Sí. Todo lo que ves es gratis.
 563|¿Cuánto puedo personalizar?
 564|¿Necesito una cuenta?
-565|No. Ábrelo y empieza. La cuenta solo sirve para sincronizar entre tu móvil y tu ordenador, y para recordatorios por correo o mensaje.
+565|No. Ábrelo y empieza. La cuenta solo sirve para sincronizar entre tu móvil y tu ordenador, y para recordatorios por correo.
 566|¿Funciona sin conexión?
 567|Sí. Una vez abierto, sigue funcionando sin internet y se sincroniza cuando vuelves a conectarte.
 568|¿Hay app para iPhone?
@@ -1500,3 +1500,6 @@
 1537|Cada correo tiene un enlace para dejar de recibirlos.
 1538|Inicia sesión para recibir recordatorios por correo o notificación.
 1539|Elige de qué te avisamos y cómo: una notificación en tu teléfono o computadora, o un correo.
+1540|Términos
+1541|Debes tener 13 años o más para crear una cuenta.
+1542|Términos de uso
