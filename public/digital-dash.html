@@ -6704,7 +6704,7 @@ function ctRender(){
      <form class="ct-row" data-ctf="start"><input type="tel" id="ct-phone" autocomplete="tel" placeholder="e.g. 519 555 1234" aria-label="Mobile number" required><button class="btn small" type="submit" ${b?"disabled":""}>${b==="phone-start"?"Sending…":"Send code"}</button></form>`;
   el.innerHTML=SMS_ON?`<h4 class="ct-h" style="margin-top:16px">Email and texts</h4><p class="hint" style="margin:0 0 8px">Set these up once, then pick Email or Text above, or per task with the bell on the Tasks page.</p>${email}${sms}
     <p class="ct-fine">Up to ${d.limits.sms} texts and ${d.limits.email} emails a day. Message and data rates may apply. Reply STOP to any text to stop texts, and every email has a link to stop emails.</p>`:
-   `<h4 class="ct-h" style="margin-top:16px">Email reminders</h4><p class="hint" style="margin:0 0 8px">Set this up once, then pick Email above, or per task with the bell on the Tasks page.</p>${email}
+   `<h4 class="ct-h" style="margin-top:16px">Email</h4><p class="hint" style="margin:0 0 8px">Set this up once, then pick Email above, or per task with the bell on the Tasks page.</p>${email}
     <p class="ct-fine">Every email has a link to stop emails.</p>`;
 }
 $("#ct-body").addEventListener("click",e=>{
