@@ -6619,7 +6619,7 @@ function remRender(){
   if(!AC.user){el.innerHTML=`<p class="rem-note">${SMS_ON?"Sign in to get reminders by notification, email or text.":"Sign in to get reminders by notification or email."}</p><button type="button" class="btn ghost small" data-rem="signin">Sign in</button>`;return;}
   /* this device's notifications */
   let dev;
-  if(!pushOK())dev=isIOS&&!standalone()?`<p class="rem-note">For notifications on iPhone and iPad, add Digital Dash to your Home Screen (<b>Share</b>, then <b>Add to Home Screen</b>) and open it from there. Email and texts work anywhere.</p>`:`<p class="rem-note">${SMS_ON?"This browser can't show notifications. Email and texts still work.":"This browser can't show notifications. Email still works."}</p>`;
+  if(!pushOK())dev=isIOS&&!standalone()?`<p class="rem-note">For notifications on iPhone and iPad, add Digital Dash to your Home Screen (<b>Share</b>, then <b>Add to Home Screen</b>) and open it from there. ${SMS_ON?"Email and texts work anywhere.":"Email works anywhere."}</p>`:`<p class="rem-note">${SMS_ON?"This browser can't show notifications. Email and texts still work.":"This browser can't show notifications. Email still works."}</p>`;
   else if(!REM.checked)dev=`<p class="rem-note">Checking this device…</p>`;
   else if(!on)dev=`${REM.perm==="denied"?`<p class="rem-note">Notifications are blocked for this site. Allow them in your browser or phone settings, then come back.</p>`:""}<button type="button" class="btn" data-rem="on" ${REM.busy?"disabled":""}>${REM.busy?"Turning on…":"Turn on notifications for this device"}</button>${r.on?`<p class="hint" style="margin:8px 0 0">Notifications are on for another of your devices.</p>`:""}`;
   else dev=`<p class="rem-on"><i></i>Notifications on for this device</p>`;
