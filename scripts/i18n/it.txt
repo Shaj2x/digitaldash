@@ -787,7 +787,7 @@
 825|da 18,5 a 25 normale
 826|Inserisci età (da 15 a 80), altezza e peso.
 827|Scrivi in modo naturale, come «palestra ogni lun mer ven 18» o «relazione lab venerdì alta». Aggiungi checklist, ripetizioni e promemoria, poi spunta le cose e guarda la giornata riempirsi.
-828|8 temi, o crea il tuo schema colori
+828|18 temi, o crea il tuo schema colori
 829|12 font per l'orologio e 12 per il testo
 830|1 giorno
 831|3 giorni
@@ -964,7 +964,7 @@
 1002|Sessione {n}
 1003|{n} sessioni di focus · {0}
 1004|{0}: {1}
-1005|Quasi tutto: 8 temi o il tuo schema colori, 12 font per l'orologio e 12 per il testo, 6 stili di orologio, sfondi con foto, sfumature e animati, vetro liquido, animazioni, arrotondamento degli angoli, i widget della tua home e persino i titoli delle pagine. Salva gli stili come preset e cambia con un tocco.
+1005|Quasi tutto: 18 temi o il tuo schema colori, 12 font per l'orologio e 12 per il testo, 6 stili di orologio, sfondi con foto, sfumature e animati, vetro liquido, animazioni, arrotondamento degli angoli, i widget della tua home e persino i titoli delle pagine. Salva gli stili come preset e cambia con un tocco.
 1006|Perdita di peso estrema
 1007|Perdita di peso
 1008|Perdita di peso lieve
@@ -1503,3 +1503,5 @@
 1540|Termini
 1541|Devi avere almeno 13 anni per creare un account.
 1542|Termini d'uso
+1543|Look in evidenza
+1544|Design pronti: colori, font, stile dell'orologio e sfondo insieme. Toccane uno per provarlo; Annulla ripristina il tuo look.

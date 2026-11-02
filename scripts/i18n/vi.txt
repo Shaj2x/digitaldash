@@ -787,7 +787,7 @@
 825|18,5 đến 25 bình thường
 826|Nhập tuổi (15 đến 80), chiều cao và cân nặng.
 827|Gõ tự nhiên, như "gym mỗi T2 T4 T6 6pm" hoặc "báo cáo thí nghiệm thứ sáu cao". Thêm danh sách bước, lặp lại và lời nhắc, rồi đánh dấu để thấy ngày của bạn đầy dần.
-828|8 chủ đề, hoặc tự tạo bảng màu
+828|18 chủ đề, hoặc tự tạo bảng màu
 829|12 phông đồng hồ và 12 phông văn bản
 830|1 ngày
 831|3 ngày
@@ -964,7 +964,7 @@
 1002|Phiên {n}
 1003|{n} phiên tập trung · {0}
 1004|{0}: {1}
-1005|Gần như mọi thứ: 8 chủ đề hoặc bảng màu riêng, 12 phông đồng hồ và 12 phông văn bản, 6 kiểu đồng hồ, hình nền ảnh, chuyển sắc và động, kính lỏng, hiệu ứng rê chuột, bo góc, các tiện ích trên trang chủ và cả tiêu đề trang. Lưu giao diện thành mẫu và đổi chỉ với một chạm.
+1005|Gần như mọi thứ: 18 chủ đề hoặc bảng màu riêng, 12 phông đồng hồ và 12 phông văn bản, 6 kiểu đồng hồ, hình nền ảnh, chuyển sắc và động, kính lỏng, hiệu ứng rê chuột, bo góc, các tiện ích trên trang chủ và cả tiêu đề trang. Lưu giao diện thành mẫu và đổi chỉ với một chạm.
 1006|Giảm cân cực nhanh
 1007|Giảm cân
 1008|Giảm cân nhẹ
@@ -1503,3 +1503,5 @@
 1540|Điều khoản
 1541|Bạn phải từ 13 tuổi trở lên để tạo tài khoản.
 1542|Điều khoản sử dụng
+1543|Giao diện nổi bật
+1544|Thiết kế có sẵn: màu, phông chữ, kiểu đồng hồ và hình nền cùng lúc. Chạm để thử; Hoàn tác sẽ trả lại giao diện của bạn.

@@ -471,7 +471,7 @@ html.cur,html.cur *{cursor:none!important}
         <div><h3 id="c-bgh">Background and glass</h3><div class="chips" role="group" aria-labelledby="c-bgh" id="c-bg"></div></div>
         <div class="share-row"><button type="button" class="btn" id="share-look"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7M16 6l-4-4-4 4M12 2v13"/></svg>Share this look</button><span id="share-t" aria-live="polite"></span></div>
         <div class="apply" id="apply" role="region" aria-label="Use this look"><p id="apply-t">Like this look? Use it in your dashboard too.</p><button type="button" class="btn pri" id="apply-go">Use this look in my dashboard</button></div>
-        <div class="stats" id="stats" aria-label="What you can change"><div><b data-n="8">8</b><span>themes, plus your own</span></div><div><b data-n="24">24</b><span>clock and text fonts</span></div><div><b data-n="6">6</b><span>clock styles</span></div><div><b>∞</b><span>presets to save</span></div></div>
+        <div class="stats" id="stats" aria-label="What you can change"><div><b data-n="18">18</b><span>themes, plus your own</span></div><div><b data-n="24">24</b><span>clock and text fonts</span></div><div><b data-n="6">6</b><span>clock styles</span></div><div><b>∞</b><span>presets to save</span></div></div>
       </div>
     </section>
   </div>
@@ -551,7 +551,7 @@ html.cur,html.cur *{cursor:none!important}
     <div class="wrap">
       <div class="sec-h rv"><span class="eyebrow">Questions</span><h2 id="q-h">Good to know</h2></div>
       <details><summary>Is it really free?</summary><p>Yes. Everything you see is free to use.</p></details>
-      <details><summary>How much can I customize?</summary><p>Nearly everything: 8 themes or your own colour scheme, 12 clock fonts and 12 text fonts, 6 clock styles, photo, gradient and live animated backgrounds, liquid glass, hover animations, corner roundness, the widgets on your home page and even the page titles. Save looks as presets and switch in one tap.</p></details>
+      <details><summary>How much can I customize?</summary><p>Nearly everything: 18 themes or your own colour scheme, 12 clock fonts and 12 text fonts, 6 clock styles, photo, gradient and live animated backgrounds, liquid glass, hover animations, corner roundness, the widgets on your home page and even the page titles. Save looks as presets and switch in one tap.</p></details>
       <details><summary>Do I need an account?</summary><p>No. Open it and start. An account is only for syncing between your phone and computer, and for reminders by email.</p></details>
       <details><summary>Does it work offline?</summary><p>Yes. Once it's opened, it keeps working without internet and syncs when you're back online.</p></details>
       <details><summary>Is there an iPhone app?</summary><p>You can add it to your home screen today and it opens like an app. App Store and Google Play versions are on the way: <a href="#apps">get notified when they launch</a>.</p></details>
@@ -597,7 +597,17 @@ html.cur,html.cur *{cursor:none!important}
   const SK={brand:["Digital","#1B1B1B","#232323","#2D2D2C","#EFEEE8","#A6A59E","#3A3A38","#EFEEE8","#1B1B1B"],dash:["Dash","#141220","#1C1A2B","#252236","#F1EEF8","#9C97B3","#2F2B45","#FFB547","#1A1405"],
     midnight:["Midnight","#0B1226","#111A33","#18233F","#E4ECFF","#8A98BD","#243054","#6FD3FF","#081020"],ember:["Ember","#1D1418","#281B21","#33232A","#F6E7E1","#B39A9F","#44303A","#FF7A3D","#1D1418"],
     ledger:["Ledger","#12241F","#18302A","#1F3A33","#EDE9DC","#9DB0A6","#2C4A41","#D2A94B","#14241F"],mono:["Mono","#000000","#0E0E0E","#1A1A1A","#FFFFFF","#9A9A9A","#2B2B2B","#FFFFFF","#000000"],
-    chalk:["Chalk","#E7EAE3","#F5F6F1","#DCE0D6","#1E241C","#535D4F","#C6CCBE","#3E6B2E","#F5F6F1"],sakura:["Sakura","#F6EEF1","#FFFFFF","#EEDFE5","#2B1D24","#6A5460","#E2CDD6","#C2416F","#FFFFFF"]};
+    chalk:["Chalk","#E7EAE3","#F5F6F1","#DCE0D6","#1E241C","#535D4F","#C6CCBE","#3E6B2E","#F5F6F1"],sakura:["Sakura","#F6EEF1","#FFFFFF","#EEDFE5","#2B1D24","#6A5460","#E2CDD6","#C2416F","#FFFFFF"],
+    paper:["Paper","#F3EDE2","#FBF8F2","#E9E1D3","#1E1A16","#5C5246","#DCD2C2","#C8321A","#FFFFFF"],
+    terminal:["Terminal","#050A06","#0B140D","#102016","#C8F7D2","#76AE83","#1B3322","#39FF6A","#031006"],
+    vapor:["Vapor","#1A0B2E","#241040","#2E1650","#F5E9FF","#BAA2D6","#3D2163","#FF4FD8","#1A0B2E"],
+    glacier:["Glacier","#EAF2F6","#F7FBFD","#DCE8EE","#10232E","#46606D","#C9D9E1","#0A6E95","#FFFFFF"],
+    butter:["Butter","#FFF6D6","#FFFBEA","#F7EBBF","#2A2111","#655433","#EADCA8","#2F55C8","#FFFFFF"],
+    lavender:["Lavender","#F0EDFA","#FBFAFF","#E4DFF5","#221C38","#5A5274","#D6CFEE","#6C42D6","#FFFFFF"],
+    espresso:["Espresso","#1C1512","#261C18","#30241F","#F2E6DA","#B8A493","#3D2E27","#D9A777","#1C1512"],
+    reef:["Reef","#0E2326","#143034","#1A3B40","#E6F4F1","#94B8B3","#24494E","#FF7F6B","#2A0E09"],
+    handheld:["Handheld","#C9D3A3","#D6DFB5","#BCC796","#1C2410","#3E4823","#A9B585","#2F4A12","#E3EBC4"],
+    velvet:["Velvet","#1F0D17","#2B1220","#36182A","#F7E9EF","#C3A2B1","#47213A","#E8C27A","#1F0D17"]};
   const CK=[["flip","Flip"],["digital","Digital"],["analog","Analog"],["words","Words"],["rings","Progress"]];
   const FN={shoulders:["Big Shoulders","'DD Display','Big Shoulders Display',Impact,sans-serif","Big+Shoulders+Display:wght@700;800;900"],orbitron:["Orbitron","Orbitron,sans-serif","Orbitron:wght@700;900"],playfair:["Playfair","'Playfair Display',Georgia,serif","Playfair+Display:wght@700;900"],
     spacemono:["Space Mono","'Space Mono',monospace","Space+Mono:wght@700"],pixel:["Pixel","'Press Start 2P',monospace","Press+Start+2P"],righteous:["Righteous","Righteous,sans-serif","Righteous"]};

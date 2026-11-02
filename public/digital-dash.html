@@ -54,6 +54,16 @@ html:root[data-skin="ember"]{--bg:#1D1418;--panel:#281B21;--panel2:#33232A;--ink
 html:root[data-skin="chalk"]{--bg:#E7EAE3;--panel:#F5F6F1;--panel2:#DCE0D6;--ink:#1E241C;--muted:#535D4F;--line:#C6CCBE;--accent:#3E6B2E;--accent-ink:#F5F6F1;--card:#232A21;--card-ink:#E9F2DE}
 html:root[data-skin="mono"]{--bg:#000000;--panel:#0E0E0E;--panel2:#1A1A1A;--ink:#FFFFFF;--muted:#9A9A9A;--line:#2B2B2B;--accent:#FFFFFF;--accent-ink:#000000;--card:#141414;--card-ink:#FFFFFF}
 html:root[data-skin="sakura"]{--bg:#F6EEF1;--panel:#FFFFFF;--panel2:#EEDFE5;--ink:#2B1D24;--muted:#6A5460;--line:#E2CDD6;--accent:#C2416F;--accent-ink:#FFFFFF;--card:#2B1D24;--card-ink:#FFD6E4}
+html:root[data-skin="paper"]{--bg:#F3EDE2;--panel:#FBF8F2;--panel2:#E9E1D3;--ink:#1E1A16;--muted:#5C5246;--line:#DCD2C2;--accent:#C8321A;--accent-ink:#FFFFFF;--card:#1E1A16;--card-ink:#F3EDE2}
+html:root[data-skin="terminal"]{--bg:#050A06;--panel:#0B140D;--panel2:#102016;--ink:#C8F7D2;--muted:#76AE83;--line:#1B3322;--accent:#39FF6A;--accent-ink:#031006;--card:#020503;--card-ink:#39FF6A}
+html:root[data-skin="vapor"]{--bg:#1A0B2E;--panel:#241040;--panel2:#2E1650;--ink:#F5E9FF;--muted:#BAA2D6;--line:#3D2163;--accent:#FF4FD8;--accent-ink:#1A0B2E;--card:#10061F;--card-ink:#5CF2FF}
+html:root[data-skin="glacier"]{--bg:#EAF2F6;--panel:#F7FBFD;--panel2:#DCE8EE;--ink:#10232E;--muted:#46606D;--line:#C9D9E1;--accent:#0A6E95;--accent-ink:#FFFFFF;--card:#10232E;--card-ink:#BDE9FF}
+html:root[data-skin="butter"]{--bg:#FFF6D6;--panel:#FFFBEA;--panel2:#F7EBBF;--ink:#2A2111;--muted:#655433;--line:#EADCA8;--accent:#2F55C8;--accent-ink:#FFFFFF;--card:#2A2111;--card-ink:#FFE48A}
+html:root[data-skin="lavender"]{--bg:#F0EDFA;--panel:#FBFAFF;--panel2:#E4DFF5;--ink:#221C38;--muted:#5A5274;--line:#D6CFEE;--accent:#6C42D6;--accent-ink:#FFFFFF;--card:#221C38;--card-ink:#D9CCFF}
+html:root[data-skin="espresso"]{--bg:#1C1512;--panel:#261C18;--panel2:#30241F;--ink:#F2E6DA;--muted:#B8A493;--line:#3D2E27;--accent:#D9A777;--accent-ink:#1C1512;--card:#120D0B;--card-ink:#F5D2AE}
+html:root[data-skin="reef"]{--bg:#0E2326;--panel:#143034;--panel2:#1A3B40;--ink:#E6F4F1;--muted:#94B8B3;--line:#24494E;--accent:#FF7F6B;--accent-ink:#2A0E09;--card:#091719;--card-ink:#FFC2B8}
+html:root[data-skin="handheld"]{--bg:#C9D3A3;--panel:#D6DFB5;--panel2:#BCC796;--ink:#1C2410;--muted:#3E4823;--line:#A9B585;--accent:#2F4A12;--accent-ink:#E3EBC4;--card:#1C2410;--card-ink:#C9D3A3}
+html:root[data-skin="velvet"]{--bg:#1F0D17;--panel:#2B1220;--panel2:#36182A;--ink:#F7E9EF;--muted:#C3A2B1;--line:#47213A;--accent:#E8C27A;--accent-ink:#1F0D17;--card:#14080F;--card-ink:#F2D7A6}
 html[data-font="serif"]{--ui:"Fraunces",Georgia,serif}
 
 *,*::before,*::after{box-sizing:inherit}
@@ -927,6 +937,7 @@ input[type=range]{height:24px;cursor:pointer}
 .preset input.pname{width:calc(100% + 6px);margin-left:-6px;background:transparent;border:1px solid transparent;padding:4px 6px;font-weight:600;font-size:15px}
 .preset input.pname:hover,.preset input.pname:focus{border-color:var(--line)}
 .pmeta small{display:block;color:var(--muted);font-size:12px;padding-top:2px}
+#feat .pmeta{padding:0 4px 2px}#feat .pmeta b{display:block;font-size:15px}
 .pact{display:flex;gap:6px;align-items:center}.pact .icon-btn{margin-left:auto}
 .pr-form{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;padding:12px}
 .pr-form input{flex:1;min-width:160px}
@@ -2216,6 +2227,9 @@ html.lg .eye{background:var(--glass-tint);box-shadow:inset 0 1px 0 color-mix(in 
         <div class="chips vibe-ex" id="vibe-ex" role="group" aria-label="Ideas"></div>
         <div class="vibe-out" id="vibe-out" aria-live="polite"></div>
       </div>
+      <h2 class="sec">Featured looks</h2>
+      <p class="hint" style="margin:0 0 12px">Ready-made designs: colours, fonts, clock style and background together. Tap one to try it; Undo puts your look back.</p>
+      <div class="presets feat" id="feat"></div>
       <h2 class="sec">Presets</h2>
       <p class="hint" style="margin:0 0 12px">Save the whole look under a name: colour scheme, fonts, background, clock and glass. Apply it any time.</p>
       <div class="presets" id="presets"></div>
@@ -2543,6 +2557,16 @@ const SKINS=[
  {id:"mono",name:"Mono",bg:"#000000",fg:"#FFFFFF"},
  {id:"chalk",name:"Chalk",bg:"#E7EAE3",fg:"#3E6B2E"},
  {id:"sakura",name:"Sakura",bg:"#F6EEF1",fg:"#C2416F"},
+ {id:"paper",name:"Paper",bg:"#F3EDE2",fg:"#C8321A"},
+ {id:"terminal",name:"Terminal",bg:"#050A06",fg:"#39FF6A"},
+ {id:"vapor",name:"Vapor",bg:"#1A0B2E",fg:"#FF4FD8"},
+ {id:"glacier",name:"Glacier",bg:"#EAF2F6",fg:"#0A6E95"},
+ {id:"butter",name:"Butter",bg:"#FFF6D6",fg:"#2F55C8"},
+ {id:"lavender",name:"Lavender",bg:"#F0EDFA",fg:"#6C42D6"},
+ {id:"espresso",name:"Espresso",bg:"#1C1512",fg:"#D9A777"},
+ {id:"reef",name:"Reef",bg:"#0E2326",fg:"#FF7F6B"},
+ {id:"handheld",name:"Handheld",bg:"#C9D3A3",fg:"#2F4A12"},
+ {id:"velvet",name:"Velvet",bg:"#1F0D17",fg:"#E8C27A"},
  {id:"auto",name:"Match device",bg:"linear-gradient(135deg,#EEF1F4 50%,#101418 50%)",fg:"#2F5BEA"}
 ];
 const CLOCKS=[["flip","Flip"],["digital","Digital"],["analog","Analog"],["words","Words"],["rings","Progress"],["timer","Focus timer"]];
@@ -2816,7 +2840,7 @@ async function fitFontPreviews(){
   // Previews: full size unless "12:45" is wider than the space it has, then just enough smaller to fit
   const fitTo=(el,base,room)=>{el.style.fontSize=base+"px";const w=el.scrollWidth;if(w>room)el.style.fontSize=Math.max(12,base*room/w).toFixed(1)+"px";};
   document.querySelectorAll("#clock-fonts .fontopt").forEach(async b=>{const f=CLF.find(x=>x[0]===b.dataset.f);if(!f||!fontCss.has(f[4]))return;await fontReady(f,800);const t=b.querySelector("b");t.style.display="inline-block";fitTo(t,24,b.clientWidth-28);});
-  document.querySelectorAll("#presets .pclock").forEach(async el=>{const f=CLF.find(x=>x[0]===el.dataset.f);if(!f)return;await fontReady(f,800);fitTo(el,26,el.parentElement.clientWidth*.62);});
+  document.querySelectorAll("#presets .pclock,#feat .pclock").forEach(async el=>{const f=CLF.find(x=>x[0]===el.dataset.f);if(!f)return;await fontReady(f,800);fitTo(el,26,el.parentElement.clientWidth*.62);});
 }
 function setScheme(c){
   const h=document.documentElement.style;
@@ -3043,6 +3067,7 @@ function buildThemes(){
   // presets
   $("#pr-form").addEventListener("submit",e=>{e.preventDefault();savePreset($("#pr-name").value);$("#pr-name").value="";});
   $("#look-share").addEventListener("click",()=>{const sk=S.settings.skin,sc=String(sk).startsWith("custom:")?S.schemes.find(x=>"custom:"+x.id===sk):null;lookShare(S.settings,$("#pr-name").value.trim(),sc);});
+  $("#feat").addEventListener("click",e=>{const b=e.target.closest("[data-feat]");if(b)applyFeat(FEAT[+b.dataset.feat]);});
   $("#presets").addEventListener("click",e=>{
     const b=e.target.closest("[data-pr]");if(!b||b.dataset.pr==="name")return;
     const p=S.presets.find(x=>x.id===b.closest(".preset").dataset.id);if(!p)return;
@@ -5741,6 +5766,35 @@ function markPresets(){
   if(!S.presets)return;const cur=presetSig(S.settings);
   document.querySelectorAll("#presets .preset").forEach(el=>{const p=S.presets.find(x=>x.id===el.dataset.id);el.classList.toggle("on",!!p&&presetSig(p.s)===cur);});
 }
+const FEAT=[
+ {"n":"Night shift","s":{"skin":"terminal","accent":"","uiFont":"plexmono","clockFont":"spacemono","clock":"digital","surface":"solid","radius":4,"bg":{"type":"none"}},"sw":{"bg":"#050A06","card":"#020503","cardInk":"#39FF6A","accent":"#39FF6A"}},
+ {"n":"Synthwave","s":{"skin":"vapor","accent":"","uiFont":"sora","clockFont":"orbitron","clock":"digital","surface":"glass","radius":18,"bg":{"type":"live","live":"sunset"}},"sw":{"bg":"#1A0B2E","card":"#10061F","cardInk":"#5CF2FF","accent":"#FF4FD8"}},
+ {"n":"Editorial","s":{"skin":"paper","accent":"","uiFont":"fraunces","clockFont":"playfair","clock":"words","surface":"solid","radius":6,"bg":{"type":"none"}},"sw":{"bg":"#F3EDE2","card":"#1E1A16","cardInk":"#F3EDE2","accent":"#C8321A"}},
+ {"n":"Pocket console","s":{"skin":"handheld","accent":"","uiFont":"plexmono","clockFont":"pixel","clock":"digital","surface":"solid","radius":2,"bg":{"type":"none"}},"sw":{"bg":"#C9D3A3","card":"#1C2410","cardInk":"#C9D3A3","accent":"#2F4A12"}},
+ {"n":"Coffee shop","s":{"skin":"espresso","accent":"","uiFont":"lora","clockFont":"oswald","clock":"analog","surface":"solid","radius":16,"bg":{"type":"none"}},"sw":{"bg":"#1C1512","card":"#120D0B","cardInk":"#F5D2AE","accent":"#D9A777"}},
+ {"n":"Deep dive","s":{"skin":"reef","accent":"","uiFont":"manrope","clockFont":"syne","clock":"flip","surface":"glass","radius":20,"bg":{"type":"live","live":"waves"}},"sw":{"bg":"#0E2326","card":"#091719","cardInk":"#FFC2B8","accent":"#FF7F6B"}},
+ {"n":"Snow day","s":{"skin":"glacier","accent":"","uiFont":"nunito","clockFont":"righteous","clock":"rings","surface":"glass","radius":22,"bg":{"type":"live","live":"lagoon"}},"sw":{"bg":"#EAF2F6","card":"#10232E","cardInk":"#BDE9FF","accent":"#0A6E95"}},
+ {"n":"After hours","s":{"skin":"velvet","accent":"","uiFont":"outfit","clockFont":"anton","clock":"flip","surface":"glass","radius":14,"bg":{"type":"live","live":"stars"}},"sw":{"bg":"#1F0D17","card":"#14080F","cardInk":"#F2D7A6","accent":"#E8C27A"}},
+ {"n":"Sunday morning","s":{"skin":"butter","accent":"","uiFont":"poppins","clockFont":"rubikmono","clock":"flip","surface":"solid","radius":12,"bg":{"type":"none"}},"sw":{"bg":"#FFF6D6","card":"#2A2111","cardInk":"#FFE48A","accent":"#2F55C8"}},
+ {"n":"Daydream","s":{"skin":"lavender","accent":"","uiFont":"dmsans","clockFont":"majormono","clock":"digital","surface":"solid","radius":20,"bg":{"type":"none"}},"sw":{"bg":"#F0EDFA","card":"#221C38","cardInk":"#D9CCFF","accent":"#6C42D6"}}
+];
+/* Featured looks: built-in designs that set the theme, fonts, clock, surface, corners and background
+   together. Undo restores exactly what was there before. */
+function renderFeat(){
+  const el=$("#feat");if(!el)return;
+  el.innerHTML=FEAT.map((L,i)=>{const s=L.s,sw=L.sw,cf=CLF.find(f=>f[0]===s.clockFont)||CLF[0],lv=s.bg.type==="live"&&LIVE.find(x=>x.id===s.bg.live);
+    const bg=lv?`linear-gradient(135deg,${lv.cols[0]},${lv.cols[1]} 55%,${lv.base})`:sw.bg;loadFonts([cf[4]]);
+    return `<div class="preset"><button class="pv" data-feat="${i}" aria-label="Try ${esc(L.n)}" style="background:${bg};border-radius:${Math.min(s.radius,18)}px"><span class="pclock" data-f="${cf[0]}" style="font-family:'${cf[2]}',${cf[3]};background:${sw.card};color:${sw.cardInk};border-radius:${Math.min(s.radius,12)}px">12:45</span><i style="background:${sw.accent}"></i></button>
+      <div class="pmeta"><b>${esc(L.n)}</b><small>${esc((SKINS.find(k=>k.id===s.skin)||{}).name||"")} · ${esc(cf[1])}${s.surface==="glass"?" · Liquid glass":""}${lv?" · "+esc(lv.name):""}</small></div></div>`;}).join("");
+  fitFontPreviews();
+}
+function applyFeat(L){
+  const prev={};PRESET_KEYS.forEach(k=>{prev[k]=structuredClone(S.settings[k]);});
+  const s=structuredClone(L.s);s.bg=Object.assign(structuredClone(S.settings.bg),s.bg,{match:false});s.stage=Object.assign(structuredClone(S.settings.stage),{type:"theme"});
+  PRESET_KEYS.forEach(k=>{if(k in s)S.settings[k]=s[k];});
+  const redo=()=>vt(()=>{previewScheme=null;editingScheme=null;buildSkins();renderAll();buildSchemeEditor(currentColors());});
+  redo();save();toast(`Trying "${L.n}"`,{run(){PRESET_KEYS.forEach(k=>{S.settings[k]=prev[k];});redo();save();}});
+}
 function renderPresets(){
   const el=$("#presets");if(!el)return;S.presets=S.presets||[];
   flipRender(el,()=>{
@@ -5756,7 +5810,7 @@ function renderPresets(){
         <div class="pact"><button class="btn small" data-pr="apply">Apply</button><button class="btn ghost small" data-pr="update" title="Replace this preset with the current look">Update</button><button class="icon-btn" data-pr="share" aria-label="Share ${esc(p.name)}" title="Share as a link"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7M16 6l-4-4-4 4M12 2v13"/></svg></button><button class="icon-btn" data-pr="del" aria-label="Delete ${esc(p.name)}"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
       </div>`;}).join("");
   });
-  markPresets();fitFontPreviews();
+  markPresets();fitFontPreviews();renderFeat();
 }
 
 /* ---------- look links ----------

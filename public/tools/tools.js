@@ -6,7 +6,17 @@ const ls={get(k){try{return localStorage.getItem(k);}catch(e){return null;}},set
 const SK={brand:["#1B1B1B","#232323","#2D2D2C","#EFEEE8","#A6A59E","#3A3A38","#EFEEE8","#1B1B1B"],dash:["#141220","#1C1A2B","#252236","#F1EEF8","#9C97B3","#2F2B45","#FFB547","#1A1405"],
   midnight:["#0B1226","#111A33","#18233F","#E4ECFF","#8A98BD","#243054","#6FD3FF","#081020"],ember:["#1D1418","#281B21","#33232A","#F6E7E1","#B39A9F","#44303A","#FF7A3D","#1D1418"],
   ledger:["#12241F","#18302A","#1F3A33","#EDE9DC","#9DB0A6","#2C4A41","#D2A94B","#14241F"],mono:["#000000","#0E0E0E","#1A1A1A","#FFFFFF","#9A9A9A","#2B2B2B","#FFFFFF","#000000"],
-  chalk:["#E7EAE3","#F5F6F1","#DCE0D6","#1E241C","#535D4F","#C6CCBE","#3E6B2E","#F5F6F1"],sakura:["#F6EEF1","#FFFFFF","#EEDFE5","#2B1D24","#6A5460","#E2CDD6","#C2416F","#FFFFFF"]};
+  chalk:["#E7EAE3","#F5F6F1","#DCE0D6","#1E241C","#535D4F","#C6CCBE","#3E6B2E","#F5F6F1"],sakura:["#F6EEF1","#FFFFFF","#EEDFE5","#2B1D24","#6A5460","#E2CDD6","#C2416F","#FFFFFF"],
+  paper:["#F3EDE2","#FBF8F2","#E9E1D3","#1E1A16","#5C5246","#DCD2C2","#C8321A","#FFFFFF"],
+  terminal:["#050A06","#0B140D","#102016","#C8F7D2","#76AE83","#1B3322","#39FF6A","#031006"],
+  vapor:["#1A0B2E","#241040","#2E1650","#F5E9FF","#BAA2D6","#3D2163","#FF4FD8","#1A0B2E"],
+  glacier:["#EAF2F6","#F7FBFD","#DCE8EE","#10232E","#46606D","#C9D9E1","#0A6E95","#FFFFFF"],
+  butter:["#FFF6D6","#FFFBEA","#F7EBBF","#2A2111","#655433","#EADCA8","#2F55C8","#FFFFFF"],
+  lavender:["#F0EDFA","#FBFAFF","#E4DFF5","#221C38","#5A5274","#D6CFEE","#6C42D6","#FFFFFF"],
+  espresso:["#1C1512","#261C18","#30241F","#F2E6DA","#B8A493","#3D2E27","#D9A777","#1C1512"],
+  reef:["#0E2326","#143034","#1A3B40","#E6F4F1","#94B8B3","#24494E","#FF7F6B","#2A0E09"],
+  handheld:["#C9D3A3","#D6DFB5","#BCC796","#1C2410","#3E4823","#A9B585","#2F4A12","#E3EBC4"],
+  velvet:["#1F0D17","#2B1220","#36182A","#F7E9EF","#C3A2B1","#47213A","#E8C27A","#1F0D17"]};
 let skin=null;
 try{const s=JSON.parse(ls.get("grindboard.v1")||"null");if(s&&s.settings&&SK[s.settings.skin])skin=s.settings.skin;}catch(e){}
 if(!skin)try{const p=JSON.parse(ls.get("dd.pick")||"null");if(p&&SK[p.skin])skin=p.skin;}catch(e){}

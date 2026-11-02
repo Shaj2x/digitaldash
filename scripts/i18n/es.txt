@@ -787,7 +787,7 @@
 825|18,5 a 25 normal
 826|Escribe tu edad (15 a 80), altura y peso.
 827|Escribe con naturalidad, como «gym cada lun mié vie 6pm» o «informe lab viernes alta». Añade listas, repeticiones y recordatorios, y marca cosas para ver cómo se llena tu día.
-828|8 temas, o crea tu propio esquema de colores
+828|18 temas, o crea tu propio esquema de colores
 829|12 fuentes de reloj y 12 de texto
 830|1 día
 831|3 días
@@ -964,7 +964,7 @@
 1002|Sesión {n}
 1003|{n} sesiones de enfoque · {0}
 1004|{0}: {1}
-1005|Casi todo: 8 temas o tu propio esquema de colores, 12 fuentes de reloj y 12 de texto, 6 estilos de reloj, fondos con foto, degradado y animados en vivo, cristal líquido, animaciones, redondez de esquinas, los widgets de tu inicio e incluso los títulos de las páginas. Guarda estilos como ajustes y cambia con un toque.
+1005|Casi todo: 18 temas o tu propio esquema de colores, 12 fuentes de reloj y 12 de texto, 6 estilos de reloj, fondos con foto, degradado y animados en vivo, cristal líquido, animaciones, redondez de esquinas, los widgets de tu inicio e incluso los títulos de las páginas. Guarda estilos como ajustes y cambia con un toque.
 1006|Pérdida de peso extrema
 1007|Pérdida de peso
 1008|Pérdida de peso ligera
@@ -1503,3 +1503,5 @@
 1540|Términos
 1541|Debes tener 13 años o más para crear una cuenta.
 1542|Términos de uso
+1543|Estilos destacados
+1544|Diseños listos: colores, fuentes, estilo de reloj y fondo juntos. Toca uno para probarlo; Deshacer recupera tu estilo.
