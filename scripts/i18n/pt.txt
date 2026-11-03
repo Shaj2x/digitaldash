@@ -1511,3 +1511,6 @@
 1548|Caderno
 1549|Minimalista
 1550|Planta
+1551|Ampliar gastos
+1552|Ampliar patrimônio líquido
+1553|Ver gastos e patrimônio lado a lado

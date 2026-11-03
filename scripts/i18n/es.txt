@@ -1511,3 +1511,6 @@
 1548|Cuaderno
 1549|Minimalista
 1550|Plano técnico
+1551|Ampliar gastos
+1552|Ampliar patrimonio neto
+1553|Ver gastos y patrimonio neto lado a lado

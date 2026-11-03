@@ -1511,3 +1511,6 @@
 1548|Sổ tay
 1549|Tối giản
 1550|Bản vẽ
+1551|Phóng to chi tiêu
+1552|Phóng to tài sản ròng
+1553|Xem chi tiêu và tài sản ròng cạnh nhau

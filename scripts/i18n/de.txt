@@ -1511,3 +1511,6 @@
 1548|Notizbuch
 1549|Minimal
 1550|Bauplan
+1551|Ausgaben vergrößern
+1552|Nettovermögen vergrößern
+1553|Ausgaben und Nettovermögen nebeneinander zeigen

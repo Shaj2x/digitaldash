@@ -1511,3 +1511,6 @@
 1548|Cahier
 1549|Minimaliste
 1550|Plan
+1551|Agrandir les dépenses
+1552|Agrandir le patrimoine net
+1553|Voir dépenses et patrimoine côte à côte

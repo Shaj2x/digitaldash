@@ -406,10 +406,17 @@ html.lg .addbar .addmore input[type=text]{background:var(--glass-tint);border-co
 /* Net tab: spending and net worth side by side; one at a time (tabs) on narrower screens */
 .msplit{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px;align-items:start}
 .mtabs{display:none}
-.msplit .sp-top,.msplit .sp-mid,.msplit .nwtop{grid-template-columns:minmax(0,1fr)}
-.msplit .sp-sum .total,.msplit .nwtop .total{font-size:clamp(40px,4.2vw,76px)}
-.msplit .sp-bars{height:160px}
-@media (max-width:1100px){.msplit{grid-template-columns:minmax(0,1fr)}.mtabs{display:inline-flex;margin:0 0 16px}
+.msplit:not([data-zoom]) .sp-top,.msplit:not([data-zoom]) .sp-mid,.msplit:not([data-zoom]) .nwtop{grid-template-columns:minmax(0,1fr)}
+.msplit:not([data-zoom]) .sp-sum .total,.msplit:not([data-zoom]) .nwtop .total{font-size:clamp(40px,4.2vw,76px)}
+.msplit:not([data-zoom]) .sp-bars{height:160px}
+/* Zoom: one half takes the full width (desktop only; narrower screens already show one at a time) */
+.sp-head .sp-nav{margin-left:auto}
+.mzoom .zi-in,.mzoom[aria-pressed="true"] .zi-out{display:none}
+.mzoom[aria-pressed="true"] .zi-in{display:block}
+.mzoom[aria-pressed="true"]{color:var(--accent)}
+.msplit[data-zoom]{grid-template-columns:minmax(0,1fr)}
+.msplit[data-zoom="spend"] .mcol-nw,.msplit[data-zoom="nw"] .mcol-sp{display:none}
+@media (max-width:1100px){.msplit{grid-template-columns:minmax(0,1fr)}.mtabs{display:inline-flex;margin:0 0 16px}.mzoom{display:none}
   .msplit[data-tab="spend"] .mcol-nw,.msplit[data-tab="nw"] .mcol-sp{display:none}}
 .sp-nav{display:flex;align-items:center;gap:6px;font-size:14px;color:var(--muted);font-variant-numeric:tabular-nums}
 .sp-nav span{min-width:120px;text-align:center}
@@ -2221,7 +2228,7 @@ html[data-style="blueprint"]:not(.lg) .rail:not(.sty-pv *),.sty-pv[data-sp="blue
       <div class="msplit" id="msplit" data-tab="spend">
       <div class="mcol mcol-sp">
       <div class="sp-head"><h2 class="sec">Spending</h2>
-        <div class="sp-nav" role="group" aria-label="Week"><button class="icon-btn" id="sp-prev" aria-label="Previous week" title="Previous week"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m15 6-6 6 6 6"/></svg></button><span id="sp-range">This week</span><button class="icon-btn" id="sp-next" aria-label="Next week" title="Next week"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg></button></div></div>
+        <div class="sp-nav" role="group" aria-label="Week"><button class="icon-btn" id="sp-prev" aria-label="Previous week" title="Previous week"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m15 6-6 6 6 6"/></svg></button><span id="sp-range">This week</span><button class="icon-btn" id="sp-next" aria-label="Next week" title="Next week"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg></button></div><button type="button" class="icon-btn mzoom" data-mz="spend" aria-pressed="false" aria-label="Zoom into spending" title="Zoom into spending"><svg class="zi-out" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg><svg class="zi-in" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 14h6v6M20 10h-6V4M14 10l7-7M3 21l7-7"/></svg></button></div>
       <div class="sp-top">
         <div class="panel sp-sum">
           <div style="color:var(--muted);font-size:14px" id="sp-lab">Spent this week</div>
@@ -2250,7 +2257,7 @@ html[data-style="blueprint"]:not(.lg) .rail:not(.sty-pv *),.sty-pv[data-sp="blue
       <div class="panel sp-listp"><h3>This week's spending</h3><div id="sp-list"></div></div>
       </div>
       <div class="mcol mcol-nw">
-      <div class="sp-head"><h2 class="sec">Net worth</h2></div>
+      <div class="sp-head"><h2 class="sec">Net worth</h2><button type="button" class="icon-btn mzoom" data-mz="nw" aria-pressed="false" aria-label="Zoom into net worth" title="Zoom into net worth"><svg class="zi-out" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg><svg class="zi-in" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 14h6v6M20 10h-6V4M14 10l7-7M3 21l7-7"/></svg></button></div>
       <div class="nwtop">
         <div class="panel">
           <div style="color:var(--muted);font-size:14px" data-sub="l-total">Total net worth</div>
@@ -4954,7 +4961,9 @@ function setPrivacy(on){
 $("#nw-eye").addEventListener("click",()=>setPrivacy(!S.settings.hideNw));
 let lastNw=null;
 function renderMoney(){
-  const mt=S.settings.moneyTab==="nw"?"nw":"spend";$("#msplit").dataset.tab=mt;$("#m-tabs").querySelectorAll("button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.mt===mt));
+  const mt=S.settings.moneyTab==="nw"?"nw":"spend";$("#msplit").dataset.tab=mt;
+  const mz=["spend","nw"].includes(S.settings.moneyZoom)?S.settings.moneyZoom:"",ms=$("#msplit");if(mz)ms.dataset.zoom=mz;else delete ms.dataset.zoom;
+  $$("#msplit .mzoom").forEach(b=>{const on=b.dataset.mz===mz,n=b.dataset.mz==="nw"?"net worth":"spending",l=on?"Show spending and net worth side by side":"Zoom into "+n;b.setAttribute("aria-pressed",on);b.setAttribute("aria-label",l);b.title=l;});$("#m-tabs").querySelectorAll("button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.mt===mt));
   renderSpend();renderGoals();
   const {a,d,t}=totals(),T0=$("#nw-total"),hid=S.settings.hideNw;
   const vis=!!T0.offsetParent;
@@ -5063,6 +5072,8 @@ $("#sp-note").addEventListener("input",e=>{if(spKind!=="out"||spCatTouched)retur
 $("#sp-form").addEventListener("submit",e=>{e.preventDefault();const amt=Math.round(parseFloat($("#sp-amt").value)*100)/100,d=$("#sp-date").value||dkey(new Date());if(!(amt>0))return;
   spAdd({d,amt,cat:spCat,note:$("#sp-note").value.trim(),inc:spKind==="in"});$("#sp-amt").value="";$("#sp-note").value="";spCatTouched=false;$("#sp-amt").focus();
   toast(spKind==="in"?`Added +${spMask(amt)}`:`Logged ${spMask(amt)}${d===dkey(new Date())?"":" on "+niceDate(d)}`);});
+$("#msplit").addEventListener("click",e=>{const b=e.target.closest(".mzoom");if(!b)return;const k=b.dataset.mz;
+  S.settings.moneyZoom=S.settings.moneyZoom===k?"":k;if(S.settings.moneyZoom)S.settings.moneyTab=k;save();vt(()=>{renderMoney();drawChart();});});
 $("#m-tabs").addEventListener("click",e=>{const b=e.target.closest("button[data-mt]");if(!b||S.settings.moneyTab===b.dataset.mt)return;S.settings.moneyTab=b.dataset.mt;save();renderMoney();if(b.dataset.mt==="nw")drawChart();});
 $("#sp-prev").addEventListener("click",()=>{spWk=addDays(spWk||weekStart(new Date()),-7);renderSpend();});
 $("#sp-next").addEventListener("click",()=>{spWk=addDays(spWk||weekStart(new Date()),7);renderSpend();});

@@ -1511,3 +1511,6 @@
 1548|Quaderno
 1549|Minimal
 1550|Progetto
+1551|Ingrandisci le spese
+1552|Ingrandisci il patrimonio netto
+1553|Mostra spese e patrimonio affiancati
