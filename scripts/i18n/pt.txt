@@ -787,7 +787,7 @@
 825|18,5 a 25 normal
 826|Informe idade (15 a 80), altura e peso.
 827|Escreva naturalmente, como "academia toda seg qua sex 18h" ou "relatório lab sexta alta". Adicione checklists, repetições e lembretes, e marque as coisas para ver seu dia se preencher.
-828|18 temas, ou crie seu próprio esquema de cores
+828|19 temas, ou crie seu próprio esquema de cores
 829|12 fontes de relógio e 12 de texto
 830|1 dia
 831|3 dias
@@ -964,7 +964,7 @@
 1002|Sessão {n}
 1003|{n} sessões de foco · {0}
 1004|{0}: {1}
-1005|Quase tudo: 18 temas ou seu próprio esquema de cores, 12 fontes de relógio e 12 de texto, 6 estilos de relógio, fundos com foto, gradiente e animados, vidro líquido, animações, arredondamento dos cantos, os widgets da sua tela inicial e até os títulos das páginas. Salve visuais como predefinições e troque com um toque.
+1005|Quase tudo: 19 temas ou seu próprio esquema de cores, 12 fontes de relógio e 12 de texto, 6 estilos de relógio, fundos com foto, gradiente e animados, vidro líquido, animações, arredondamento dos cantos, os widgets da sua tela inicial e até os títulos das páginas. Salve visuais como predefinições e troque com um toque.
 1006|Perda de peso extrema
 1007|Perda de peso
 1008|Perda de peso leve

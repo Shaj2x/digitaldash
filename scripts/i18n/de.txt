@@ -787,7 +787,7 @@
 825|18,5 bis 25 normal
 826|Gib Alter (15 bis 80), Größe und Gewicht ein.
 827|Schreib ganz natürlich, etwa „Gym jeden Mo Mi Fr 18 Uhr“ oder „Laborbericht Freitag hoch“. Füge Checklisten, Wiederholungen und Erinnerungen hinzu und hake Dinge ab, um deinen Tag sich füllen zu sehen.
-828|18 Designs oder dein eigenes Farbschema
+828|19 Designs oder dein eigenes Farbschema
 829|12 Uhr- und 12 Textschriften
 830|1 Tag
 831|3 Tage
@@ -964,7 +964,7 @@
 1002|Sitzung {n}
 1003|{n} Fokus-Sitzungen · {0}
 1004|{0}: {1}
-1005|Fast alles: 18 Designs oder dein eigenes Farbschema, 12 Uhr- und 12 Textschriften, 6 Uhrstile, Foto-, Verlaufs- und animierte Hintergründe, flüssiges Glas, Hover-Animationen, Eckenrundung, die Widgets auf deiner Startseite und sogar die Seitentitel. Speichere Looks als Vorlagen und wechsle mit einem Tipp.
+1005|Fast alles: 19 Designs oder dein eigenes Farbschema, 12 Uhr- und 12 Textschriften, 6 Uhrstile, Foto-, Verlaufs- und animierte Hintergründe, flüssiges Glas, Hover-Animationen, Eckenrundung, die Widgets auf deiner Startseite und sogar die Seitentitel. Speichere Looks als Vorlagen und wechsle mit einem Tipp.
 1006|Extremer Gewichtsverlust
 1007|Gewichtsverlust
 1008|Leichter Gewichtsverlust

@@ -16,6 +16,7 @@ const SK={brand:["#1B1B1B","#232323","#2D2D2C","#EFEEE8","#A6A59E","#3A3A38","#E
   espresso:["#1C1512","#261C18","#30241F","#F2E6DA","#B8A493","#3D2E27","#D9A777","#1C1512"],
   reef:["#0E2326","#143034","#1A3B40","#E6F4F1","#94B8B3","#24494E","#FF7F6B","#2A0E09"],
   handheld:["#C9D3A3","#D6DFB5","#BCC796","#1C2410","#3E4823","#A9B585","#2F4A12","#E3EBC4"],
+  blossom:["#FBEAF0","#FFF7FA","#F6E1E9","#3A2330","#74505F","#EED2DD","#B83A68","#FFFFFF"],
   velvet:["#1F0D17","#2B1220","#36182A","#F7E9EF","#C3A2B1","#47213A","#E8C27A","#1F0D17"]};
 let skin=null;
 try{const s=JSON.parse(ls.get("grindboard.v1")||"null");if(s&&s.settings&&SK[s.settings.skin])skin=s.settings.skin;}catch(e){}

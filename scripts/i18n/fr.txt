@@ -787,7 +787,7 @@
 825|18,5 à 25 normal
 826|Indiquez votre âge (15 à 80), votre taille et votre poids.
 827|Écrivez naturellement, comme « gym chaque lun mer ven 18h » ou « rapport labo vendredi haute ». Ajoutez listes, répétitions et rappels, puis cochez pour voir votre journée se remplir.
-828|18 thèmes, ou créez votre propre jeu de couleurs
+828|19 thèmes, ou créez votre propre jeu de couleurs
 829|12 polices d'horloge et 12 polices de texte
 830|1 jour
 831|3 jours
@@ -964,7 +964,7 @@
 1002|Session {n}
 1003|{n} sessions de concentration · {0}
 1004|{0} : {1}
-1005|Presque tout : 18 thèmes ou votre propre jeu de couleurs, 12 polices d'horloge et 12 de texte, 6 styles d'horloge, fonds photo, dégradés et animés, verre liquide, animations, arrondi des coins, les widgets de votre accueil et même les titres des pages. Enregistrez vos styles en préréglages et changez d'un geste.
+1005|Presque tout : 19 thèmes ou votre propre jeu de couleurs, 12 polices d'horloge et 12 de texte, 6 styles d'horloge, fonds photo, dégradés et animés, verre liquide, animations, arrondi des coins, les widgets de votre accueil et même les titres des pages. Enregistrez vos styles en préréglages et changez d'un geste.
 1006|Perte de poids extrême
 1007|Perte de poids
 1008|Perte de poids légère
