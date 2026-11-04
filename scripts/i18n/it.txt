@@ -1514,3 +1514,6 @@
 1551|Ingrandisci le spese
 1552|Ingrandisci il patrimonio netto
 1553|Mostra spese e patrimonio affiancati
+1554|Anteprima dal vivo
+1555|Nascondi
+1556|Mostra

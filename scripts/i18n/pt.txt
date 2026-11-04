@@ -1514,3 +1514,6 @@
 1551|Ampliar gastos
 1552|Ampliar patrimônio líquido
 1553|Ver gastos e patrimônio lado a lado
+1554|Prévia ao vivo
+1555|Ocultar
+1556|Mostrar

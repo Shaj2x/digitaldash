@@ -1514,3 +1514,6 @@
 1551|Ampliar gastos
 1552|Ampliar patrimonio neto
 1553|Ver gastos y patrimonio neto lado a lado
+1554|Vista previa en vivo
+1555|Ocultar
+1556|Mostrar

@@ -1514,3 +1514,6 @@
 1551|Ausgaben vergrößern
 1552|Nettovermögen vergrößern
 1553|Ausgaben und Nettovermögen nebeneinander zeigen
+1554|Live-Vorschau
+1555|Ausblenden
+1556|Einblenden

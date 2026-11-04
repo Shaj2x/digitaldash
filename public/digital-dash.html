@@ -570,6 +570,18 @@ h1{font-family:var(--clock);font-weight:800;font-size:clamp(34px,5vw,52px);line-
 .total,.split strong,.widget .big,.mini .big,.timer .t,.digital{font-variant-numeric:tabular-nums}
 /* Zen mode: the clock stage morphs to full screen via a view transition */
 .stage{view-transition-name:stage}
+/* Themes: the real clock stage is borrowed into a pinned preview so clock, font, colour and background changes show as you make them */
+.th-prev{position:sticky;top:0;z-index:6;margin:0 -4px 18px;padding:8px 4px 10px;background:var(--bg)}
+html.lg .th-prev,html.has-bg .th-prev{background:color-mix(in srgb,var(--bg) 55%,transparent);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px)}
+.th-prev-bar{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 0 8px;font-size:13px;font-weight:600;color:var(--muted)}
+.th-prev .stage{min-height:0;height:clamp(170px,30vh,280px);padding:34px 14px 18px;box-shadow:0 18px 40px -24px rgba(0,0,0,.6)}
+.th-prev .analog svg{width:min(190px,22vh)}
+.th-prev .rings{width:min(560px,100%);gap:10px;grid-template-columns:repeat(5,minmax(0,1fr))}.th-prev .ring svg{max-width:84px}
+.th-prev .timer>:not(.t){display:none}
+.th-prev .now-task{zoom:.85}
+.th-prev.off .th-prev-slot{display:none}
+.th-prev.off{background:none}
+@media (max-width:640px){.th-prev .stage{height:150px;padding-top:30px}.th-prev .analog svg{width:84px}.th-prev .rings{gap:6px}.th-prev .ring svg{max-width:46px}.th-prev .ring small{display:none}.th-prev .ring b{font-size:14px;margin-top:0}.th-prev .now-task{display:none}}
 ::view-transition-group(stage){animation-duration:380ms;animation-timing-function:var(--ease-drawer)}
 ::view-transition-old(root),::view-transition-new(root){animation-duration:240ms;animation-timing-function:ease}
 
@@ -2310,6 +2322,10 @@ html[data-style="blueprint"]:not(.lg) .rail:not(.sty-pv *),.sty-pv[data-sp="blue
     <section class="view" id="v-themes">
       <h1 data-sub="t-themes">Themes</h1>
       <p class="sub" data-sub="themes">Colours, backgrounds, fonts and more. Changes apply everywhere instantly.</p>
+      <div class="th-prev" id="th-prev" aria-label="Live preview">
+        <div class="th-prev-bar"><span>Live preview</span><button type="button" class="btn ghost small" id="th-prev-x" aria-expanded="true" aria-controls="th-prev-slot">Hide</button></div>
+        <div class="th-prev-slot" id="th-prev-slot"></div>
+      </div>
       <h2 class="sec">Describe a theme</h2>
       <div class="panel vibe" id="vibe">
         <p class="hint" style="margin:0 0 12px">Type a mood, place or style and get matching colours, fonts and a background. Works offline, nothing is sent anywhere.</p>
@@ -3320,10 +3336,22 @@ function show(v){
   $$(".nav").forEach(b=>b.setAttribute("aria-current",b.dataset.view===v));
   moveInd();
   if(v==="themes"){loadFonts(UIF.map(f=>f[4]).concat(CLF.map(f=>f[4])));fitFontPreviews();}
+  thPreview(v==="themes");
   if(v==="calendar"){renderCal();renderWeek();renderMonthRev();} if(v==="money"){renderMoney();if(!same)drawChart();} if(v==="tasks")renderTasks();if(v==="health")renderHealth();
   $("main").scrollTop=0;
 }
 const VIEWS=["focus","tasks","calendar","money","health","themes"];
+/* Live preview in Themes: move the real #stage (clock, date, Up next, clock background) into the pinned slot
+   while Themes is open, and back to its place on Focus otherwise. Moving keeps every listener and timer. */
+function thPreview(on){const st=$("#stage"),slot=$("#th-prev-slot");if(!st||!slot)return;
+  if(!thPreview.home){thPreview.home=document.createComment("stage");st.before(thPreview.home);} /* where the stage lives on Focus */
+  const stageHome=thPreview.home;
+  const off=S.settings.thPrev===false;$("#th-prev").classList.toggle("off",off);
+  const b=$("#th-prev-x");b.textContent=off?"Show":"Hide";b.setAttribute("aria-expanded",!off);
+  if(on&&!off){if(st.parentNode!==slot)slot.appendChild(st);}
+  else if(st.parentNode!==stageHome.parentNode||st.previousSibling!==stageHome)stageHome.after(st);
+  requestAnimationFrame(fitClock);}
+$("#th-prev-x").addEventListener("click",()=>{S.settings.thPrev=S.settings.thPrev===false;save();thPreview(curView==="themes");});
 if(!/Mac|iPhone|iPad/.test(navigator.platform||navigator.userAgent||""))document.documentElement.classList.add("pc"); // shortcut hint: Ctrl K vs ⌘K
 // Tabs live in the URL hash (#tasks): refresh keeps your place, Back returns to the previous tab, links can point at a tab
 // The URL update is best effort: sandboxed previews (srcdoc iframes) refuse pushState, and that must never block switching tabs
@@ -3419,6 +3447,9 @@ function fitClock(){
   const ah=innerHeight<560?Math.max(120,innerHeight-190):Infinity,ht=el.scrollHeight||1;
   /* full screen (zen): grow past the normal size to fill about 90% of the width, leaving room
      above and below for the date and "Up next" */
+  if(stg.closest(".th-prev")){
+    const pk=Math.min(1,(stg.clientWidth-40)/wd,Math.max(40,stg.clientHeight-(innerWidth<=640?44:104))/ht);
+    w.style.setProperty("--fk",Math.max(.12,pk).toFixed(3));return;}
   if(document.body.classList.contains("zen")){
     const zk=Math.min(stg.clientWidth*.9/wd,Math.max(80,stg.clientHeight-Math.min(260,stg.clientHeight*.38))/ht,4);
     if(zk>0)w.style.setProperty("--fk",Math.max(.3,zk).toFixed(3));return;}

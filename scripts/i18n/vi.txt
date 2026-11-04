@@ -1514,3 +1514,6 @@
 1551|Phóng to chi tiêu
 1552|Phóng to tài sản ròng
 1553|Xem chi tiêu và tài sản ròng cạnh nhau
+1554|Xem trước trực tiếp
+1555|Ẩn
+1556|Hiện

@@ -1514,3 +1514,6 @@
 1551|Agrandir les dépenses
 1552|Agrandir le patrimoine net
 1553|Voir dépenses et patrimoine côte à côte
+1554|Aperçu en direct
+1555|Masquer
+1556|Afficher
