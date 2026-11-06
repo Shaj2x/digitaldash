@@ -1517,3 +1517,16 @@
 1554|Aperçu en direct
 1555|Masquer
 1556|Afficher
+1557|Trier
+1558|Mon ordre
+1559|Trier par urgence, puis par échéance
+1560|Ton propre ordre : fais glisser les tâches par la poignée
+1561|Glisse pour déplacer ou mettre dans un projet
+1562|Maintenant dans ton propre ordre. Tu peux revenir à Urgence à tout moment.
+1563|Ton propre ordre : fais glisser les tâches par la poignée à gauche
+1564|Retirée de son projet
+1565|Dans aucun projet
+1566|Dans ton propre ordre. Fais glisser une tâche par sa poignée pour la déplacer ou la mettre dans un projet.
+1567|Déplacée dans {0}
+1568|Déjà dans {0}
+1569|Déplacer {0} : fais glisser ou utilise les flèches

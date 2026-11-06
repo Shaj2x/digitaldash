@@ -1517,3 +1517,16 @@
 1554|Xem trước trực tiếp
 1555|Ẩn
 1556|Hiện
+1557|Sắp xếp
+1558|Thứ tự của tôi
+1559|Sắp theo mức gấp, rồi theo hạn
+1560|Thứ tự của bạn: kéo việc bằng tay cầm
+1561|Kéo để di chuyển hoặc đưa vào dự án
+1562|Giờ theo thứ tự của bạn. Có thể quay lại Mức gấp bất cứ lúc nào.
+1563|Thứ tự của bạn: kéo việc bằng tay cầm bên trái
+1564|Đã đưa ra khỏi dự án
+1565|Không thuộc dự án nào
+1566|Theo thứ tự của bạn. Kéo tay cầm của một việc để di chuyển hoặc đưa vào dự án.
+1567|Đã chuyển vào {0}
+1568|Đã ở trong {0}
+1569|Di chuyển {0}: kéo hoặc dùng phím mũi tên

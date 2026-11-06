@@ -356,6 +356,18 @@ html.lg .addbar .addmore input[type=text]{background:var(--glass-tint);border-co
 .due.late{color:var(--u0);font-weight:600}
 .urg{background:none;border:1px solid var(--line);border-radius:8px;padding:4px 6px;font-size:13px;color:var(--uc)}
 .legend{display:flex;gap:14px;font-size:13px;color:var(--muted);flex-wrap:wrap}
+/* Drag to reorder or into a project: a grip on the left of each open task */
+#task-list .task.has-grip{padding-left:30px}
+.tgrip{position:absolute;left:3px;top:10px;width:24px;height:34px;display:flex;align-items:center;justify-content:center;border:0;padding:0;background:none;color:var(--muted);opacity:.45;cursor:grab;touch-action:none;border-radius:6px;z-index:2;transition:opacity var(--t-fast) ease,background-color var(--t-fast) ease}
+.tgrip:hover,.tgrip:focus-visible{opacity:1;background:var(--panel2)}
+@media (hover:hover) and (pointer:fine){.task .tgrip{opacity:0}.task:hover .tgrip,.task .tgrip:focus-visible{opacity:.8}}
+@media (pointer:coarse){#task-list .task.has-grip{padding-left:36px}.tgrip{width:32px;height:44px;top:6px;opacity:.6}}
+.task.dragging{opacity:.3}
+.drag-ghost{position:fixed;left:0;top:0;z-index:90;margin:0;pointer-events:none;box-shadow:0 22px 44px -14px rgba(0,0,0,.6);opacity:.96;will-change:transform}
+body.task-drag,body.task-drag *{cursor:grabbing!important;user-select:none;-webkit-user-select:none}
+.proj-bar>button.drop-on{outline:2px dashed var(--accent);outline-offset:2px;background:color-mix(in srgb,var(--accent) 18%,var(--panel));color:var(--ink)}
+.proj-bar.drag-hint>button:not([aria-pressed="true"]){border-style:dashed}
+#task-sort button{white-space:nowrap}
 .legend span::before{content:"";display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--c);margin-right:6px}
 
 /* Calendar */
@@ -2185,6 +2197,7 @@ html[data-style="blueprint"]:not(.lg) .rail:not(.sty-pv *),.sty-pv[data-sp="blue
         <div class="seg" id="task-filter" role="group" aria-label="Filter">
           <button data-f="open" aria-pressed="true">Open</button><button data-f="today" aria-pressed="false">Today</button><button data-f="done" aria-pressed="false">Done</button><button data-f="all" aria-pressed="false">All</button>
         </div>
+        <div class="seg" id="task-sort" role="group" aria-label="Sort"><button type="button" data-s="auto" aria-pressed="true" title="Sort by urgency, then due date">Urgency</button><button type="button" data-s="manual" aria-pressed="false" title="Your own order: drag tasks by the grip">My order</button></div>
         <button class="btn ghost small ai-plan" type="button" id="ai-plan" hidden><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5l1.8 4.7 4.7 1.8-4.7 1.8L12 16.5l-1.8-4.7L5.5 10l4.7-1.8z"/><path d="M18.5 15.5l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"/></svg>Plan my week</button>
         <div class="legend">
           <span style="--c:var(--u0)">Critical</span><span style="--c:var(--u1)">High</span><span style="--c:var(--u2)">Medium</span><span style="--c:var(--u3)">Low</span>
@@ -3824,7 +3837,10 @@ function logFocus(sec){ /* called when a focus session finishes */
 function sortedTasks(){
   const k=t=>(t.due||"9999")+" "+(t.dueTime||"99:99");
   const dn=t=>t.done&&!(graceDone&&graceDone.has(t.id)); /* a task you just ticked keeps its place until it leaves */
-  return S.tasks.filter(t=>!t.archived).sort((a,b)=>(dn(a)-dn(b))||(a.urg-b.urg)||(k(a)<k(b)?-1:k(a)>k(b)?1:0)||(a.created-b.created));
+  const auto=(a,b)=>(a.urg-b.urg)||(k(a)<k(b)?-1:k(a)>k(b)?1:0)||(a.created-b.created);
+  /* My order: tasks you placed keep their spot (t.ord); new ones show at the top until you move them */
+  const man=S.settings.taskSort==="manual",ho=t=>typeof t.ord==="number";
+  return S.tasks.filter(t=>!t.archived).sort((a,b)=>(dn(a)-dn(b))||(man?((ho(a)-ho(b))||(ho(a)?a.ord-b.ord:auto(a,b))):auto(a,b)));
 }
 // When a task is due, as a Date: its time if set, otherwise the end of that day
 function dueAt(t){if(!t.due)return null;const [y,m,d]=t.due.split("-").map(Number),[hh,mm]=(t.dueTime||"23:59").split(":").map(Number);return new Date(y,m-1,d,hh,mm);}
@@ -3845,7 +3861,7 @@ function renderTasks(mode){
   const el=$("#task-list");
   flipRender(el,()=>{
   if(!list.length){el.innerHTML=`<div class="empty">${projFilter&&taskFilter!=="done"&&!S.tasks.some(t=>t.proj===projFilter)?"No tasks in this project yet. Add one above and it goes straight in here.":taskFilter==="done"?"Nothing finished yet. Check one off.":taskFilter==="today"?"Nothing due or planned for today. Nice.":"No open tasks. Add one above."}</div>`;return;}
-  el.innerHTML=list.map(t=>{const dl=t.due?dueLabel(t.due,t.dueTime):{t:t.plan?"Planned "+(t.plan===today?"today":t.plan===dkey(addDays(new Date(),1))?"tomorrow":niceDate(t.plan)):"",late:false};return `<div class="task${t.done?" done":""}${t.done&&graceDone.has(t.id)?" grace":""}" data-id="${t.id}" style="--uc:var(--u${t.urg})">
+  el.innerHTML=list.map(t=>{const dl=t.due?dueLabel(t.due,t.dueTime):{t:t.plan?"Planned "+(t.plan===today?"today":t.plan===dkey(addDays(new Date(),1))?"tomorrow":niceDate(t.plan)):"",late:false};return `<div class="task${t.done?" done":" has-grip"}${t.done&&graceDone.has(t.id)?" grace":""}" data-id="${t.id}" style="--uc:var(--u${t.urg})">${t.done?"":`<button type="button" class="tgrip" aria-label="Move ${esc(t.title)}: drag, or use the arrow keys" title="Drag to move or into a project"><svg width="12" height="18" viewBox="0 0 12 18" fill="currentColor" aria-hidden="true"><circle cx="3.5" cy="3.5" r="1.6"/><circle cx="8.5" cy="3.5" r="1.6"/><circle cx="3.5" cy="9" r="1.6"/><circle cx="8.5" cy="9" r="1.6"/><circle cx="3.5" cy="14.5" r="1.6"/><circle cx="8.5" cy="14.5" r="1.6"/></svg></button>`}
     <button class="check" data-act="toggle" aria-label="${t.done?"Mark as not done":"Mark as done"}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4"><path pathLength="1" d="m5 12 5 5 9-10"/></svg></button>
     <div class="tt"><span>${esc(t.title)}</span>${t.proj&&!projFilter&&projOf(t.proj)?`<span class="tchip pchip"><i class="pdot" style="--pc:${projOf(t.proj).color}"></i>${esc(projOf(t.proj).name)}</span>`:""}${t.course?`<span class="tchip">${esc(t.course)}</span>`:""}${t.rep?`<span class="tchip" title="Repeats">${REP_ICON}${esc(repLabel(t.rep))}</span>`:""}${t.remind&&!t.done?`<span class="tchip rchip" title="Reminder">${BELL_ICON}${esc(trLabel(t))}</span>`:""}<div class="tmeta">${taskMeta(t)}</div></div>
     <span class="due${dl.late&&!t.done?" late":""}">${dl.t}</span>
@@ -3913,6 +3929,79 @@ $("#task-list").addEventListener("submit",e=>{
   t.steps=t.steps||[];if(t.steps.length>=30){toast("That's plenty of steps. Split it into tasks?");return;}
   t.steps.push({id:uid(),t:v.slice(0,120),done:false});save();renderTasks("plain");const ni=$(`.task[data-id="${t.id}"] .steps input[type=text]`);if(ni)ni.focus();
 });
+/* ---------- drag tasks ----------
+   Drag a task by its grip: drop it between other tasks to reorder (switches to My order), or on a
+   project chip above the list to move it there ("All tasks" takes it out of its project). Works with
+   mouse, touch and pen; Escape cancels; arrow keys on the grip move it one place. */
+function taskSortUI(init){const m=S.settings.taskSort==="manual"?"manual":"auto";$$("#task-sort button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.s===m));if(!init)renderSubs();}
+function ordSnap(){return S.tasks.map(t=>[t.id,t.ord]);}
+function ordRestore(snap,sort){const m=new Map(snap);S.tasks.forEach(t=>{const o=m.get(t.id);if(typeof o==="number")t.ord=o;else delete t.ord;});S.settings.taskSort=sort;save();taskSortUI();renderTasks();}
+/* Put the visible tasks in the given id order, keeping everything hidden by the filter where it was */
+function applyOrder(ids){
+  const before=ordSnap(),wasSort=S.settings.taskSort||"auto";
+  sortedTasks().forEach((t,i)=>t.ord=i); /* number everything as it shows right now */
+  const vis=ids.map(id=>S.tasks.find(t=>t.id===id)).filter(Boolean),slots=vis.map(t=>t.ord).sort((a,b)=>a-b);
+  vis.forEach((t,i)=>t.ord=slots[i]);
+  const switched=wasSort!=="manual";S.settings.taskSort="manual";save();taskSortUI();renderTasks();
+  if(switched)toast("Now in your own order. Switch back to Urgency any time.",{run(){ordRestore(before,wasSort);}});
+}
+function moveToProject(t,pj){
+  const was=t.proj||"";if(was===pj){toast(pj?`Already in ${projOf(pj).name}`:"Not in a project");return;}
+  if(pj)t.proj=pj;else delete t.proj;save();renderTasks();
+  toast(pj?`Moved to ${projOf(pj).name}`:"Taken out of its project",{run(){if(was)t.proj=was;else delete t.proj;save();renderTasks();}});
+}
+const TD={on:false};
+$("#task-list").addEventListener("pointerdown",e=>{
+  const g=e.target.closest(".tgrip");if(!g||e.button>0)return;e.preventDefault();
+  const row=g.closest(".task");TD.row=row;TD.id=row.dataset.id;TD.x0=e.clientX;TD.y0=e.clientY;TD.on=false;TD.pid=e.pointerId;TD.order=null;
+  try{g.setPointerCapture(e.pointerId);}catch(_){}TD.grip=g;
+});
+function tdStart(){
+  const r=TD.row.getBoundingClientRect();TD.dx=TD.x0-r.left;TD.dy=TD.y0-r.top;TD.on=true;
+  const gh=TD.row.cloneNode(true);gh.classList.add("drag-ghost");gh.style.width=r.width+"px";gh.removeAttribute("data-id");document.body.appendChild(gh);TD.ghost=gh;
+  TD.row.classList.add("dragging");document.body.classList.add("task-drag");$("#proj-bar").classList.add("drag-hint");
+  TD.start=[...$$("#task-list .task")].map(x=>x.dataset.id).join();
+}
+function tdScroll(){if(!TD.on)return;const m=$("main"),y=TD.y,h=innerHeight,edge=70;let v=0;
+  const u=document.elementFromPoint(TD.x,y);if(u&&u.closest("#proj-bar")){TD.raf=requestAnimationFrame(tdScroll);return;} /* hold still over the project chips so they stay under your finger */
+ if(y<edge)v=-(edge-y)/4;else if(y>h-edge)v=(y-(h-edge))/4;if(v){m.scrollTop+=v;tdOver();}TD.raf=requestAnimationFrame(tdScroll);}
+function tdOver(){
+  const x=TD.x,y=TD.y;$$("#proj-bar .drop-on").forEach(b=>b.classList.remove("drop-on"));TD.chip=null;
+  const under=document.elementFromPoint(x,y);if(!under)return;
+  const chip=under.closest("#proj-bar>button[data-pj]");if(chip){chip.classList.add("drop-on");TD.chip=chip;return;}
+  const over=under.closest("#task-list .task");if(!over||over===TD.row||over.classList.contains("done"))return;
+  const r=over.getBoundingClientRect(),list=$("#task-list");
+  if(y<r.top+r.height/2){if(over.previousElementSibling!==TD.row)list.insertBefore(TD.row,over);}
+  else if(over.nextElementSibling!==TD.row)list.insertBefore(TD.row,over.nextElementSibling);
+}
+document.addEventListener("pointermove",e=>{
+  if(!TD.row||e.pointerId!==TD.pid)return;TD.x=e.clientX;TD.y=e.clientY;
+  if(!TD.on){if(Math.hypot(e.clientX-TD.x0,e.clientY-TD.y0)<5)return;tdStart();TD.raf=requestAnimationFrame(tdScroll);}
+  TD.ghost.style.transform=`translate(${e.clientX-TD.dx}px,${e.clientY-TD.dy}px) rotate(1deg)`;tdOver();
+});
+function tdEnd(commit){
+  if(!TD.row)return;cancelAnimationFrame(TD.raf);const on=TD.on,id=TD.id,chip=TD.chip,row=TD.row;
+  if(TD.ghost)TD.ghost.remove();row.classList.remove("dragging");document.body.classList.remove("task-drag");$("#proj-bar").classList.remove("drag-hint");
+  $$("#proj-bar .drop-on").forEach(b=>b.classList.remove("drop-on"));
+  const ids=[...$$("#task-list .task")].map(x=>x.dataset.id);Object.assign(TD,{row:null,on:false,ghost:null,chip:null});
+  if(!on)return;const t=S.tasks.find(x=>x.id===id);if(!t)return;
+  if(!commit){renderTasks("plain");return;}
+  if(chip){moveToProject(t,chip.dataset.pj);return;}
+  if(ids.join()!==TD.start)applyOrder(ids);else renderTasks("plain");
+}
+document.addEventListener("pointerup",e=>{if(e.pointerId===TD.pid)tdEnd(true);});
+document.addEventListener("pointercancel",e=>{if(e.pointerId===TD.pid)tdEnd(false);});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&TD.on){e.preventDefault();e.stopPropagation();tdEnd(false);}},true);
+$("#task-list").addEventListener("keydown",e=>{
+  const g=e.target.closest(".tgrip");if(!g||(e.key!=="ArrowUp"&&e.key!=="ArrowDown"))return;e.preventDefault();
+  const row=g.closest(".task"),sib=e.key==="ArrowUp"?row.previousElementSibling:row.nextElementSibling;if(!sib||!sib.classList.contains("task")||sib.classList.contains("done"))return;
+  const list=$("#task-list");if(e.key==="ArrowUp")list.insertBefore(row,sib);else list.insertBefore(sib,row);
+  const id=row.dataset.id;applyOrder([...$$("#task-list .task")].map(x=>x.dataset.id));
+  const ng=$(`#task-list .task[data-id="${id}"] .tgrip`);if(ng)ng.focus();
+});
+$("#task-sort").addEventListener("click",e=>{const b=e.target.closest("button[data-s]");if(!b)return;const m=b.dataset.s;if((S.settings.taskSort||"auto")===m)return;
+  S.settings.taskSort=m;save();taskSortUI();renderTasks();if(m==="manual")toast("Your own order: drag tasks by the grip on the left");});
+taskSortUI(true); /* subtitles are set up later, by renderAll */
 $("#task-filter").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;if(taskFilter===b.dataset.f)return;taskFilter=b.dataset.f;$$("#task-filter button").forEach(x=>x.setAttribute("aria-pressed",x===b));renderTasks("plain");});
 /* ---------- deadline pressure ----------
    In the last 3 hours before a deadline the clock stage warms toward that task's urgency colour
@@ -5473,14 +5562,15 @@ function renderAll(){
 }
 
 /* ---------- editable subtitles ---------- */
-const SUB_DEF={};
+const SUB_DEF={},TASKS_SUB_MAN="In your own order. Drag a task by its grip to move it or put it in a project.";
+const subDef=k=>k==="tasks"&&S.settings.taskSort==="manual"?TASKS_SUB_MAN:SUB_DEF[k];
 function renderSubs(){
   S.settings.subs=S.settings.subs||{};
   $$("[data-sub]").forEach(p=>{
     if(document.activeElement===p)return;
     const k=p.dataset.sub, v=S.settings.subs[k];
     p.classList.toggle("sub-own",!!v);
-    if(v)p.textContent=v; else if(k==="focus"||k==="t-focus"){if(k==="t-focus")GREET.part=-1;renderGreeting(new Date());} else p.textContent=SUB_DEF[k];
+    if(v)p.textContent=v; else if(k==="focus"||k==="t-focus"){if(k==="t-focus")GREET.part=-1;renderGreeting(new Date());} else p.textContent=subDef(k);
   });
 }
 /* while editing a title or subtitle: a hint, and "Reset to original" when it's been customised */
@@ -5511,7 +5601,7 @@ $$("[data-sub]").forEach(p=>{
     if(p.textContent===before){renderSubs();return;} /* nothing typed: keep it as it was (also keeps a translated default from being saved) */
     const v=p.textContent.replace(/\s+/g," ").trim().slice(0,200);
     S.settings.subs=S.settings.subs||{};
-    const def=(k==="focus"||k==="t-focus")?"":SUB_DEF[k];
+    const def=(k==="focus"||k==="t-focus")?"":subDef(k);
     const what=k.startsWith("t-")?"Title":"Subtitle";
     if(!v||v===def){if(S.settings.subs[k]){delete S.settings.subs[k];toast(what+" reset");}}
     else if(v!==S.settings.subs[k]){S.settings.subs[k]=v;toast(what+" saved");}

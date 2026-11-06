@@ -1559,6 +1559,19 @@
 "Show spending and net worth side by side",
 "Live preview",
 "Hide",
-"Show"
+"Show",
+"Sort",
+"My order",
+"Sort by urgency, then due date",
+"Your own order: drag tasks by the grip",
+"Drag to move or into a project",
+"Now in your own order. Switch back to Urgency any time.",
+"Your own order: drag tasks by the grip on the left",
+"Taken out of its project",
+"Not in a project",
+"In your own order. Drag a task by its grip to move it or put it in a project.",
+"Moved to {0}",
+"Already in {0}",
+"Move {0}: drag, or use the arrow keys"
 ]
 }

@@ -1517,3 +1517,16 @@
 1554|Prévia ao vivo
 1555|Ocultar
 1556|Mostrar
+1557|Ordenar
+1558|Minha ordem
+1559|Ordenar por urgência e depois por prazo
+1560|Sua própria ordem: arraste as tarefas pela alça
+1561|Arraste para mover ou colocar em um projeto
+1562|Agora na sua própria ordem. Volte para Urgência quando quiser.
+1563|Sua própria ordem: arraste as tarefas pela alça à esquerda
+1564|Tirada do projeto
+1565|Não está em nenhum projeto
+1566|Na sua própria ordem. Arraste uma tarefa pela alça para movê-la ou colocá-la em um projeto.
+1567|Movida para {0}
+1568|Já está em {0}
+1569|Mover {0}: arraste ou use as setas

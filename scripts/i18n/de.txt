@@ -1517,3 +1517,16 @@
 1554|Live-Vorschau
 1555|Ausblenden
 1556|Einblenden
+1557|Sortieren
+1558|Meine Reihenfolge
+1559|Nach Dringlichkeit, dann Fälligkeit sortieren
+1560|Deine eigene Reihenfolge: Aufgaben am Griff ziehen
+1561|Ziehen zum Verschieben oder in ein Projekt
+1562|Jetzt in deiner eigenen Reihenfolge. Du kannst jederzeit zu Dringlichkeit zurück.
+1563|Deine eigene Reihenfolge: Aufgaben am Griff links ziehen
+1564|Aus dem Projekt genommen
+1565|In keinem Projekt
+1566|In deiner eigenen Reihenfolge. Zieh eine Aufgabe am Griff, um sie zu verschieben oder in ein Projekt zu legen.
+1567|In {0} verschoben
+1568|Schon in {0}
+1569|{0} verschieben: ziehen oder Pfeiltasten nutzen
