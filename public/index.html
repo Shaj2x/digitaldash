@@ -45,7 +45,7 @@ body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 "Bricolage Gro
 /* the logo's printed, worn texture as a faint film grain over the page */
 body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:100;opacity:.07;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 a{color:inherit}
-.wrap{max-width:1160px;margin:0 auto;padding:0 clamp(16px,4vw,32px)}
+.wrap{max-width:1160px;margin:0 auto;padding:0 clamp(16px,4vw,32px);padding-left:max(clamp(16px,4vw,32px),env(safe-area-inset-left,0px));padding-right:max(clamp(16px,4vw,32px),env(safe-area-inset-right,0px))}
 .skip{position:absolute;left:-9999px;top:8px;background:var(--accent);color:var(--accent-ink);padding:8px 12px;border-radius:8px;z-index:200}
 .skip:focus{left:12px}
 :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
@@ -295,6 +295,8 @@ footer .wrap{display:flex;gap:10px 24px;flex-wrap:wrap;align-items:center}
 footer .mk{width:22px;height:19px;color:var(--ink)}
 footer nav{display:flex;gap:18px;margin-left:auto;flex-wrap:wrap}
 footer a{text-decoration:none}
+/* Touch screens: footer links and the language menu big enough to tap, and no zoom on focus */
+@media (pointer:coarse){footer nav{gap:0 14px}footer nav a{display:inline-flex;align-items:center;min-height:44px}.lang select,select[data-lang]{font-size:16px!important}}
 footer a:hover{color:var(--ink)}
 
 /* ---------- motion: entrances, pointer play, theme ripple ---------- */

@@ -6,7 +6,7 @@
 html{-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 "Bricolage Grotesque",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
 a{color:inherit}
-.wrap{max-width:1080px;margin:0 auto;padding:0 clamp(16px,4vw,32px)}
+.wrap{max-width:1080px;margin:0 auto;padding:0 clamp(16px,4vw,32px);padding-left:max(clamp(16px,4vw,32px),env(safe-area-inset-left,0px));padding-right:max(clamp(16px,4vw,32px),env(safe-area-inset-right,0px))}
 .skip{position:absolute;left:-9999px;top:8px;background:var(--accent);color:var(--accent-ink);padding:8px 12px;border-radius:8px;z-index:200}
 .skip:focus{left:12px}
 :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
@@ -104,6 +104,8 @@ footer .mk{width:22px;height:19px;color:var(--ink)}
 footer nav{display:flex;gap:16px;margin-left:auto;flex-wrap:wrap}
 footer a{text-decoration:none}
 footer a:hover{color:var(--ink)}
+/* Touch screens: footer links and the language menu big enough to tap, and no zoom on focus */
+@media (pointer:coarse){footer nav{gap:0 14px}footer nav a{display:inline-flex;align-items:center;min-height:44px}.lang select,select[data-lang]{font-size:16px!important}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 /* related strip on tool pages: stays in the content column */
 .more-tools{padding-bottom:clamp(40px,6vw,64px)}

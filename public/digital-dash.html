@@ -21,6 +21,7 @@
 :root{
   box-sizing:border-box;
   padding-top:env(safe-area-inset-top,0px);
+  padding-left:env(safe-area-inset-left,0px);padding-right:env(safe-area-inset-right,0px); /* iPhone on its side: keep clear of the notch */
   padding-bottom:env(safe-area-inset-bottom,0px);
   --bg:#EEF1F4; --panel:#FFFFFF; --panel2:#E3E8ED; --ink:#15202B; --muted:#535F6B; --line:#CFD6DE;
   --accent:#2F5BEA; --accent-ink:#FFFFFF; --card:#1B2530; --card-ink:#F3F5F7;
@@ -512,7 +513,7 @@ input[type=color]{width:44px;height:32px;border:1px solid var(--line);border-rad
 textarea{width:100%;min-height:90px;font-size:12px}
 
 /* Toast rises from the bottom and leaves the same way. Transitions, so rapid toasts retarget instead of restarting. */
-.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));z-index:50;transform:translate(-50%,12px) scale(.97);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:10px;font-size:14px;opacity:0;pointer-events:none;box-shadow:0 10px 30px -10px rgba(0,0,0,.5);transition:opacity var(--t-fast) ease,transform var(--t-ui) var(--ease-out)}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));z-index:50;width:max-content;max-width:min(560px,calc(100vw - 32px));transform:translate(-50%,12px) scale(.97);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:10px;font-size:14px;opacity:0;pointer-events:none;box-shadow:0 10px 30px -10px rgba(0,0,0,.5);transition:opacity var(--t-fast) ease,transform var(--t-ui) var(--ease-out)}
 .toast.on{opacity:1;transform:translate(-50%,0) scale(1)}
 .toast.act{pointer-events:auto;display:flex;align-items:center;gap:14px;padding:6px 6px 6px 16px}
 .toast .undo{border:0;border-radius:8px;padding:0 12px;min-height:32px;font-weight:600;background:color-mix(in srgb,var(--bg) 16%,transparent);color:inherit;cursor:pointer}
@@ -753,7 +754,10 @@ html[data-live="sakura"] .stage.glass{-webkit-backdrop-filter:none;backdrop-filt
   .view{padding-top:20px}
   .addbar{grid-template-columns:1fr 1fr}
   .addbar input[type=text],.addbar .title-row{grid-column:1/-1}
-  .task{grid-template-columns:auto 1fr auto;grid-template-areas:"ck tt x" ". du ur";row-gap:6px}
+  /* phones: the title gets the full width; due date under it; urgency and the action buttons on their own row */
+  .task{grid-template-columns:auto 1fr auto;grid-template-areas:"ck tt tt" "ck du du" "ur ur x";row-gap:6px}
+  .task .urg{justify-self:start}.task .tact{justify-self:end}.task .due:empty{display:none}
+  @media (max-width:380px){.task{grid-template-areas:"ck tt tt" "ck du ur" "x x x"}.task .urg{justify-self:end}.task .due:empty{display:block}}
   .steps{padding-left:0}
   .am-f{flex:1 1 140px}.am-f input,.am-f select{flex:1;width:auto;min-width:0}
   .task .check{grid-area:ck}.task .tt{grid-area:tt}.task .due{grid-area:du;align-self:center}.task .urg{grid-area:ur}.task .tact{grid-area:x}
@@ -957,6 +961,9 @@ input[type=range]{height:24px;cursor:pointer}
   input[type=checkbox]{width:26px;height:26px}
   .field{min-height:52px}
 }
+/* Touch screens: 16px fields stop iPhone and iPad Safari zooming the page when one is tapped */
+@media (pointer:coarse){html body :is(input:not([type=checkbox]):not([type=radio]):not([type=range]):not([type=color]):not([type=button]):not([type=submit]),select,textarea){font-size:16px!important}}
+@media (pointer:coarse){#sp-setb{min-height:36px;padding:6px 2px}}
 @media (max-width:720px){
   /* 16px stops iOS zooming the page when a field is focused */
   input[type=text],input[type=number],input[type=date],input[type=time],select,textarea,.urg{font-size:16px}
@@ -1105,6 +1112,7 @@ body.zen main{padding-bottom:0}
   .rail .nav .lbl{display:none}
   .rail .nav{height:44px!important;padding:4px 10px!important}
   main{padding-bottom:calc(70px + env(safe-area-inset-bottom,0px))!important}
+  body.zen main{padding-bottom:0!important} /* full screen hides the dock, so no room for it */
 }
 /* Voice input */
 .mic{flex:none;display:inline-grid;place-items:center;width:44px;height:44px;border-radius:12px;border:1px solid var(--line);background:var(--panel2);color:var(--ink);cursor:pointer}
@@ -1222,7 +1230,7 @@ html.lg .jb-tile.on{border-color:color-mix(in srgb,var(--accent) 60%,transparent
 @media (max-width:720px){.jb-mini .jb-mini-lbl{display:none}.jb-grid{grid-template-columns:1fr 1fr}.jb-ctl{width:100%;justify-content:space-between}.jb-vol input{width:110px}}
 @media (pointer:coarse){.jb-mix{min-height:44px}.jb-mini{min-height:44px}}
 @media (prefers-reduced-motion:reduce){.eq i{animation:none;transform:scaleY(.7)}.jb-on:active,.jb-mix:active{transform:none}}
-body.zen .jukebox,body.zen #spx{display:none}
+body.zen .jukebox,body.zen #spx,body.zen #getapp{display:none}
 
 
 /* ---------- Calendars list ---------- */
