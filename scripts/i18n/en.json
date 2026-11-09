@@ -1572,6 +1572,7 @@
 "In your own order. Drag a task by its grip to move it or put it in a project.",
 "Moved to {0}",
 "Already in {0}",
-"Move {0}: drag, or use the arrow keys"
+"Move {0}: drag, or use the arrow keys",
+"Add a task"
 ]
 }

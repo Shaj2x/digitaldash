@@ -1530,3 +1530,4 @@
 1567|Déplacée dans {0}
 1568|Déjà dans {0}
 1569|Déplacer {0} : fais glisser ou utilise les flèches
+1570|Ajouter une tâche

@@ -90,6 +90,7 @@ main{overflow-y:auto;height:100%;overscroll-behavior:contain;scrollbar-gutter:st
 main:focus{outline:none}
 .view{display:none;padding:32px clamp(16px,4vw,48px) 48px;max-width:1320px;margin:0 auto}
 .view.on{display:block;animation:view-in var(--t-ui) var(--ease-out)}
+@keyframes addbar-in{from{opacity:0;transform:translateY(-4px)}}
 @keyframes view-in{from{opacity:0;transform:translateY(8px)}}
 h1{font-size:28px;font-weight:700;margin:0 0 4px;letter-spacing:-.01em}
 .sub{color:var(--muted);margin:0 0 24px}
@@ -560,7 +561,20 @@ h1{font-family:var(--clock);font-weight:800;font-size:clamp(34px,5vw,52px);line-
 .task:hover{background:var(--panel2)}
 .urg{border:0;border-radius:999px;padding:5px 10px;font-weight:600;background:color-mix(in srgb,var(--uc) 18%,transparent);color:var(--ink)}
 .addbar{padding:12px}
-.addbar input[type=text]{font-size:16px;background:transparent;border-color:transparent}
+.addbar #t-title{font-size:16px}
+/* The task field should look like a place to type: a tinted box with an accent edge and a + icon */
+.title-row{position:relative}
+.t-plus{position:absolute;left:12px;top:50%;transform:translateY(-50%);width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:var(--accent);color:var(--accent-ink);pointer-events:none}
+.addbar #t-title{min-height:48px;padding-left:48px;background:var(--panel2);border:1.5px solid color-mix(in srgb,var(--accent) 45%,var(--line));border-radius:calc(var(--r) - 2px);font-weight:500}
+.addbar #t-title::placeholder{color:color-mix(in srgb,var(--ink) 62%,transparent)}
+.addbar #t-title:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 28%,transparent)}
+/* Date and time: Safari on iPhone shows an empty box with no hint, so show our own until a value is picked */
+.dt-f{position:relative;display:grid;min-width:0}
+.dt-f input{width:100%;min-width:0}
+.dt-f.empty::after{content:attr(data-ph);position:absolute;left:13px;top:50%;transform:translateY(-50%);color:var(--muted);pointer-events:none;font-size:15px}
+.dt-f.empty input::-webkit-datetime-edit{color:transparent}
+.dt-f.empty:focus-within::after{display:none}
+.dt-f.empty input:focus::-webkit-datetime-edit{color:inherit}
 .day{border-radius:12px;transition:background-color var(--t-fast) ease,border-color var(--t-fast) ease}
 .day:hover{background:color-mix(in srgb,var(--panel2) 70%,var(--accent) 8%)}
 .total{background:linear-gradient(180deg,var(--ink),color-mix(in srgb,var(--ink) 55%,var(--accent)));-webkit-background-clip:text;background-clip:text;color:transparent}
@@ -753,7 +767,13 @@ html[data-live="sakura"] .stage.glass{-webkit-backdrop-filter:none;backdrop-filt
   .nav{flex:1 1 0;min-width:0;flex-direction:column;align-items:center;gap:3px;font-size:11px;padding:6px 4px;white-space:nowrap}
   .view{padding-top:20px}
   .addbar{grid-template-columns:1fr 1fr}
-  .addbar input[type=text],.addbar .title-row{grid-column:1/-1}
+  .addbar .title-row{grid-column:1/-1}
+  /* Phones: just the task field until it's tapped, then the rest of the options slide in */
+  .addbar:not(.open)>:not(.title-row){display:none}
+  .addbar.open>:not(.title-row){animation:addbar-in 220ms var(--ease-out) both}
+  .addbar:not(.open){padding:10px}
+  /* Safari keeps text fields at their built-in width inside a flex row unless told otherwise */
+  .am-f{min-width:0;max-width:100%}.am-f input,.am-f select{width:0!important;flex:1 1 0!important;min-width:0}
   /* phones: the title gets the full width; due date under it; urgency and the action buttons on their own row */
   .task{grid-template-columns:auto 1fr auto;grid-template-areas:"ck tt tt" "ck du du" "ur ur x";row-gap:6px}
   .task .urg{justify-self:start}.task .tact{justify-self:end}.task .due:empty{display:none}
@@ -1231,6 +1251,8 @@ html.lg .jb-tile.on{border-color:color-mix(in srgb,var(--accent) 60%,transparent
 @media (pointer:coarse){.jb-mix{min-height:44px}.jb-mini{min-height:44px}}
 @media (prefers-reduced-motion:reduce){.eq i{animation:none;transform:scaleY(.7)}.jb-on:active,.jb-mix:active{transform:none}}
 body.zen .jukebox,body.zen #spx,body.zen #getapp{display:none}
+/* Phones: content scrolling under the floating dock fades into the background instead of showing through */
+@media (max-width:720px){.app::after{content:"";position:fixed;left:0;right:0;bottom:0;height:calc(92px + env(safe-area-inset-bottom,0px));background:linear-gradient(to bottom,transparent,color-mix(in srgb,var(--bg) 92%,transparent) 62%);pointer-events:none;z-index:29}body.zen .app::after{display:none}}
 
 
 /* ---------- Calendars list ---------- */
@@ -2184,12 +2206,12 @@ html[data-style="blueprint"]:not(.lg) .rail:not(.sty-pv *),.sty-pv[data-sp="blue
       </div>
       <div id="tasks-pane">
       <form class="panel addbar" id="task-form" autocomplete="off">
-        <div class="title-row"><input type="text" id="t-title" placeholder="What needs doing?" required aria-label="Task"><button type="button" class="mic" id="t-mic" hidden aria-pressed="false" aria-label="Add a task by voice" title="Say it, e.g. essay due Friday at 5"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0 0 14 0M12 17v5"/></svg></button></div>
+        <div class="title-row"><span class="t-plus" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span><input type="text" id="t-title" placeholder="What needs doing?" required aria-label="Add a task"><button type="button" class="mic" id="t-mic" hidden aria-pressed="false" aria-label="Add a task by voice" title="Say it, e.g. essay due Friday at 5"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0 0 14 0M12 17v5"/></svg></button></div>
         <select id="t-urg" aria-label="Urgency">
           <option value="0">Critical</option><option value="1">High</option><option value="2" selected>Medium</option><option value="3">Low</option>
         </select>
-        <input type="date" id="t-due" aria-label="Due date">
-        <input type="time" id="t-time" aria-label="Due time (optional)" title="Due time (optional)">
+        <label class="dt-f empty" data-ph="Due date"><input type="date" id="t-due" aria-label="Due date"></label>
+        <label class="dt-f empty" data-ph="Time"><input type="time" id="t-time" aria-label="Due time (optional)" title="Due time (optional)"></label>
         <button class="btn" type="submit">Add task</button>
         <div class="addmore">
           <label class="am-f"><span>Course</span><input type="text" id="t-course" list="courses" placeholder="e.g. ES 1050" maxlength="32"></label>
@@ -3899,6 +3921,12 @@ function setTaskDone(t,done){
 }
 function undoDone(t){if(!t.done)return;setTaskDone(t,false);save();renderTasks();renderNowTask();renderMini();renderTimerTag();updatePressure();toast("Back on your list");}
 function afterTaskChange(delay){clearTimeout(taskHold);taskHold=setTimeout(()=>{renderTasks();renderNowTask();renderMini();renderTimerTag();},delay);}
+/* Add-task card: date/time hints, and on phones the extra options open when the task field is used */
+function dtSync(){$$(".dt-f").forEach(l=>l.classList.toggle("empty",!l.querySelector("input").value));}
+{const f=$("#task-form");
+  f.addEventListener("input",dtSync);f.addEventListener("change",dtSync);dtSync();
+  f.addEventListener("focusin",()=>f.classList.add("open"));
+  f.addEventListener("focusout",()=>setTimeout(()=>{if(!f.contains(document.activeElement)&&!$("#t-title").value.trim())f.classList.remove("open");},180));}
 $("#task-form").addEventListener("submit",e=>{e.preventDefault();let title=$("#t-title").value.trim();if(!title)return;
   let due=$("#t-due").value,dueTime=$("#t-time").value,rep=formRep(),course=$("#t-course").value.trim().slice(0,32),urg=+$("#t-urg").value;
   /* typed details ("essay friday 5pm high") fill only the fields left empty; anything picked in the form wins */
@@ -3910,7 +3938,7 @@ $("#task-form").addEventListener("submit",e=>{e.preventDefault();let title=$("#t
   const t={id:uid(),title,urg,due,dueTime,done:false,created:Date.now()};if(rep)t.rep=rep;if(course)t.course=course;
   const pj=$("#t-proj").value||projFilter;if(pj&&projOf(pj))t.proj=pj;
   S.tasks.push(t);
-  $("#t-title").value="";$("#t-due").value="";$("#t-time").value="";$("#t-rep").value="";$("#t-days").hidden=true;save();renderTasks();updatePressure();renderCal();renderNowTask();renderMini();renderCourses();});
+  $("#t-title").value="";$("#t-due").value="";$("#t-time").value="";dtSync();$("#t-rep").value="";$("#t-days").hidden=true;save();renderTasks();updatePressure();renderCal();renderNowTask();renderMini();renderCourses();});
 $("#t-rep").addEventListener("change",()=>{const v=$("#t-rep").value,box=$("#t-days");box.hidden=!/^w2?$/.test(v);
   if(!box.hidden&&!box.children.length){const dd=$("#t-due").value?new Date($("#t-due").value+"T12:00").getDay():new Date().getDay();box.innerHTML=[1,2,3,4,5,6,0].map(d=>`<button type="button" data-d="${d}" aria-pressed="${d===dd}" aria-label="${WDAYS_LONG[d]}">${WDAYS_LONG[d].slice(0,2)}</button>`).join("");}});
 $("#t-days").addEventListener("click",e=>{const b=e.target.closest("button[data-d]");if(!b)return;const on=b.getAttribute("aria-pressed")!=="true";if(!on&&$$("#t-days [aria-pressed=true]").length===1)return;b.setAttribute("aria-pressed",on);});

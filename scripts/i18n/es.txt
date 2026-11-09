@@ -1530,3 +1530,4 @@
 1567|Movida a {0}
 1568|Ya está en {0}
 1569|Mover {0}: arrastra o usa las flechas
+1570|Añadir una tarea

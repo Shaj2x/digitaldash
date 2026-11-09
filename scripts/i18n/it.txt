@@ -1530,3 +1530,4 @@
 1567|Spostata in {0}
 1568|Già in {0}
 1569|Sposta {0}: trascina o usa le frecce
+1570|Aggiungi un'attività

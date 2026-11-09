@@ -38,7 +38,7 @@ api.t=s=>tr(String(s))??s;
 
 /* the page: text nodes and a few attributes; each remembers its English so re-renders are caught */
 const SKIP="script,style,textarea,input,code,pre,[translate=no],.notranslate";
-const done=new WeakMap(),ATTR=["placeholder","aria-label","title","alt"];
+const done=new WeakMap(),ATTR=["placeholder","aria-label","title","alt","data-ph"];
 function txt(n){
   const v=n.nodeValue;if(!v||done.get(n)===v)return;const pe=n.parentElement;if(!pe||pe.closest(SKIP))return;
   if(pe.isContentEditable&&pe.contains(document.activeElement))return; /* never change text someone is typing in */
@@ -54,7 +54,7 @@ function attrs(el){
 function walk(root){
   if(root.nodeType===3){txt(root);return;}if(root.nodeType!==1)return;
   if(root.matches(SKIP)&&!root.matches("input,textarea"))return;
-  attrs(root);root.querySelectorAll&&root.querySelectorAll("[placeholder],[aria-label],[title],[alt]").forEach(attrs);
+  attrs(root);root.querySelectorAll&&root.querySelectorAll("[placeholder],[aria-label],[title],[alt],[data-ph]").forEach(attrs);
   const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);let n;while((n=w.nextNode()))txt(n);
 }
 const mo=new MutationObserver(ms=>{if(!S)return;for(const m of ms){

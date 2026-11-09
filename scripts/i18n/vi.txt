@@ -1530,3 +1530,4 @@
 1567|Đã chuyển vào {0}
 1568|Đã ở trong {0}
 1569|Di chuyển {0}: kéo hoặc dùng phím mũi tên
+1570|Thêm việc

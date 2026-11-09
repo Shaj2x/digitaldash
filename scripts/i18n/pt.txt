@@ -1530,3 +1530,4 @@
 1567|Movida para {0}
 1568|Já está em {0}
 1569|Mover {0}: arraste ou use as setas
+1570|Adicionar uma tarefa

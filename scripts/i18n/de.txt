@@ -1530,3 +1530,4 @@
 1567|In {0} verschoben
 1568|Schon in {0}
 1569|{0} verschieben: ziehen oder Pfeiltasten nutzen
+1570|Aufgabe hinzufügen
