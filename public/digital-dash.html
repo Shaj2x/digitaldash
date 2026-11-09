@@ -571,10 +571,15 @@ h1{font-family:var(--clock);font-weight:800;font-size:clamp(34px,5vw,52px);line-
 /* Date and time: Safari on iPhone shows an empty box with no hint, so show our own until a value is picked */
 .dt-f{position:relative;display:grid;min-width:0}
 .dt-f input{width:100%;min-width:0}
-.dt-f.empty::after{content:attr(data-ph);position:absolute;left:13px;top:50%;transform:translateY(-50%);color:var(--muted);pointer-events:none;font-size:15px}
-.dt-f.empty input::-webkit-datetime-edit{color:transparent}
-.dt-f.empty:focus-within::after{display:none}
-.dt-f.empty input:focus::-webkit-datetime-edit{color:inherit}
+.dt-f.dt-empty::after{content:attr(data-ph);position:absolute;left:13px;top:50%;transform:translateY(-50%);color:var(--muted);pointer-events:none;font-size:15px}
+.dt-f.dt-empty input::-webkit-datetime-edit{color:transparent}
+.dt-f.dt-empty:focus-within::after{display:none}
+.dt-f.dt-empty input:focus::-webkit-datetime-edit{color:inherit}
+/* Safari on iPhone and iPad draws date and time fields at a fixed built-in width that ignores the layout */
+@supports (-webkit-touch-callout:none){
+  .dt-f input{-webkit-appearance:none;appearance:none;display:block;width:100%;min-width:0;max-width:100%;text-align:left}
+  .dt-f input::-webkit-date-and-time-value{text-align:left;margin:0}
+}
 .day{border-radius:12px;transition:background-color var(--t-fast) ease,border-color var(--t-fast) ease}
 .day:hover{background:color-mix(in srgb,var(--panel2) 70%,var(--accent) 8%)}
 .total{background:linear-gradient(180deg,var(--ink),color-mix(in srgb,var(--ink) 55%,var(--accent)));-webkit-background-clip:text;background-clip:text;color:transparent}
@@ -774,12 +779,17 @@ html[data-live="sakura"] .stage.glass{-webkit-backdrop-filter:none;backdrop-filt
   .addbar:not(.open){padding:10px}
   /* Safari keeps text fields at their built-in width inside a flex row unless told otherwise */
   .am-f{min-width:0;max-width:100%}.am-f input,.am-f select{width:0!important;flex:1 1 0!important;min-width:0}
+  .am-f>span{flex:0 0 64px}
+  /* every control in the card the same height, laid out as two even columns */
+  .addbar{align-items:center;row-gap:10px}
+  .addbar>select,.addbar .dt-f input,.addbar>.btn,.am-f input,.am-f select{height:48px;min-height:48px;box-sizing:border-box}
+  .addmore{gap:10px}
   /* phones: the title gets the full width; due date under it; urgency and the action buttons on their own row */
   .task{grid-template-columns:auto 1fr auto;grid-template-areas:"ck tt tt" "ck du du" "ur ur x";row-gap:6px}
   .task .urg{justify-self:start}.task .tact{justify-self:end}.task .due:empty{display:none}
   @media (max-width:380px){.task{grid-template-areas:"ck tt tt" "ck du ur" "x x x"}.task .urg{justify-self:end}.task .due:empty{display:block}}
   .steps{padding-left:0}
-  .am-f{flex:1 1 140px}.am-f input,.am-f select{flex:1;width:auto;min-width:0}
+  .am-f{flex:1 1 100%}.am-f input,.am-f select{flex:1;width:auto;min-width:0}
   .task .check{grid-area:ck}.task .tt{grid-area:tt}.task .due{grid-area:du;align-self:center}.task .urg{grid-area:ur}.task .tact{grid-area:x}
   .day{min-height:58px}
   .chip{display:none}
@@ -2210,8 +2220,8 @@ html[data-style="blueprint"]:not(.lg) .rail:not(.sty-pv *),.sty-pv[data-sp="blue
         <select id="t-urg" aria-label="Urgency">
           <option value="0">Critical</option><option value="1">High</option><option value="2" selected>Medium</option><option value="3">Low</option>
         </select>
-        <label class="dt-f empty" data-ph="Due date"><input type="date" id="t-due" aria-label="Due date"></label>
-        <label class="dt-f empty" data-ph="Time"><input type="time" id="t-time" aria-label="Due time (optional)" title="Due time (optional)"></label>
+        <label class="dt-f dt-empty" data-ph="Due date"><input type="date" id="t-due" aria-label="Due date"></label>
+        <label class="dt-f dt-empty" data-ph="Time"><input type="time" id="t-time" aria-label="Due time (optional)" title="Due time (optional)"></label>
         <button class="btn" type="submit">Add task</button>
         <div class="addmore">
           <label class="am-f"><span>Course</span><input type="text" id="t-course" list="courses" placeholder="e.g. ES 1050" maxlength="32"></label>
@@ -3922,7 +3932,7 @@ function setTaskDone(t,done){
 function undoDone(t){if(!t.done)return;setTaskDone(t,false);save();renderTasks();renderNowTask();renderMini();renderTimerTag();updatePressure();toast("Back on your list");}
 function afterTaskChange(delay){clearTimeout(taskHold);taskHold=setTimeout(()=>{renderTasks();renderNowTask();renderMini();renderTimerTag();},delay);}
 /* Add-task card: date/time hints, and on phones the extra options open when the task field is used */
-function dtSync(){$$(".dt-f").forEach(l=>l.classList.toggle("empty",!l.querySelector("input").value));}
+function dtSync(){$$(".dt-f").forEach(l=>l.classList.toggle("dt-empty",!l.querySelector("input").value));}
 {const f=$("#task-form");
   f.addEventListener("input",dtSync);f.addEventListener("change",dtSync);dtSync();
   f.addEventListener("focusin",()=>f.classList.add("open"));
