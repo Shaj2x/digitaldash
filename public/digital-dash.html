@@ -6291,7 +6291,7 @@ function lgModeChanged(){
    Settings come from /digital-dash-config.js, which scripts/build.mjs writes from the
    VITE_SUPABASE_* env vars. Without it, the account button explains what's missing. */
 /* AC is a var so save() and resolveImg(), which can run before this section during start-up, see undefined instead of throwing */
-const ACK="digitaldash.acct",SB_JS="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.97.0/dist/umd/supabase.js";
+const ACK="digitaldash.acct",SB_JS="/vendor/supabase-js-2.97.0.js"; /* served from this site (MIT, see /vendor) so no third-party script runs here */
 var AC={sb:null,user:null,state:"loading",why:"",rev:0,busy:false,pending:false,timer:0,retry:0,last:0,lastDevice:"",err:"",applying:false,imgGet:new Set(),sent:"",confirmDel:false};
 const acMeta=()=>lsGet(ACK)||{};
 const acSetMeta=m=>lsSet(ACK,Object.assign(acMeta(),m));
