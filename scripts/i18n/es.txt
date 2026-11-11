@@ -1531,3 +1531,35 @@
 1568|Ya está en {0}
 1569|Mover {0}: arrastra o usa las flechas
 1570|Añadir una tarea
+1571|Notas rápidas
+1572|Apunta algo. Pega o suelta una imagen o un enlace.
+1573|Enter la añade · Mayús+Enter para una línea nueva
+1574|Añadir nota
+1575|Aún no hay nada. Apunta una idea, pega un enlace o suelta una imagen para crear tu primera nota.
+1576|Fijar arriba
+1577|Desfijar
+1578|Convertir en tarea
+1579|Eliminar nota
+1580|Editar nota
+1581|Quitar imagen
+1582|Añadida a Notas rápidas
+1583|Fijada arriba
+1584|Desfijada
+1585|Imagen añadida a la nota
+1586|Añadido a la nota
+1587|Nota eliminada
+1588|Imagen quitada
+1589|Escribe algo primero y luego conviértelo en tarea
+1590|Solo se pueden poner imágenes y enlaces
+1591|Esa imagen es demasiado grande (máx. 25 MB)
+1592|No se pudo leer esa imagen
+1593|Color de la nota
+1594|Nueva nota
+1595|Marcar como no hecha
+1596|ahora
+1597|Nota
+1598|Tareas, notas rápidas, plan semanal, cursos o compras
+1599|Añadida a Tareas: {0}
+1600|Añadir a Notas rápidas: {0}
+1601|Color {n}
+1602|Imagen {n}

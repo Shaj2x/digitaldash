@@ -1531,3 +1531,35 @@
 1568|Đã ở trong {0}
 1569|Di chuyển {0}: kéo hoặc dùng phím mũi tên
 1570|Thêm việc
+1571|Ghi chú nhanh
+1572|Ghi gì đó. Dán hoặc thả ảnh hay liên kết vào.
+1573|Enter để thêm · Shift+Enter để xuống dòng
+1574|Thêm ghi chú
+1575|Chưa có gì. Ghi một ý, dán liên kết hoặc thả ảnh để tạo ghi chú đầu tiên.
+1576|Ghim lên đầu
+1577|Bỏ ghim
+1578|Chuyển thành việc
+1579|Xóa ghi chú
+1580|Sửa ghi chú
+1581|Gỡ ảnh
+1582|Đã thêm vào Ghi chú nhanh
+1583|Đã ghim lên đầu
+1584|Đã bỏ ghim
+1585|Đã thêm ảnh vào ghi chú
+1586|Đã thêm vào ghi chú
+1587|Đã xóa ghi chú
+1588|Đã gỡ ảnh
+1589|Hãy viết gì đó trước rồi chuyển thành việc
+1590|Chỉ ảnh và liên kết mới thêm được vào đây
+1591|Ảnh quá lớn (tối đa 25 MB)
+1592|Không đọc được ảnh này
+1593|Màu ghi chú
+1594|Ghi chú mới
+1595|Đánh dấu chưa xong
+1596|vừa xong
+1597|Ghi chú
+1598|Việc, ghi chú nhanh, kế hoạch tuần, khóa học hoặc mua sắm
+1599|Đã thêm vào Việc: {0}
+1600|Thêm vào Ghi chú nhanh: {0}
+1601|Màu {n}
+1602|Ảnh {n}

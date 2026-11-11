@@ -1531,3 +1531,35 @@
 1568|Già in {0}
 1569|Sposta {0}: trascina o usa le frecce
 1570|Aggiungi un'attività
+1571|Blocco note
+1572|Annota qualcosa. Incolla o trascina un’immagine o un link.
+1573|Invio la aggiunge · Maiusc+Invio per andare a capo
+1574|Aggiungi nota
+1575|Ancora niente. Annota un’idea, incolla un link o trascina un’immagine per creare la prima nota.
+1576|Fissa in alto
+1577|Sblocca
+1578|Trasforma in attività
+1579|Elimina nota
+1580|Modifica nota
+1581|Rimuovi immagine
+1582|Aggiunta al blocco note
+1583|Fissata in alto
+1584|Sbloccata
+1585|Immagine aggiunta alla nota
+1586|Aggiunto alla nota
+1587|Nota eliminata
+1588|Immagine rimossa
+1589|Scrivi prima qualcosa, poi trasformalo in attività
+1590|Sul blocco note vanno solo immagini e link
+1591|Immagine troppo grande (max 25 MB)
+1592|Impossibile leggere l’immagine
+1593|Colore della nota
+1594|Nuova nota
+1595|Segna come non fatta
+1596|ora
+1597|Nota
+1598|Attività, blocco note, piano settimanale, corsi o spesa
+1599|Aggiunta alle attività: {0}
+1600|Aggiungi al blocco note: {0}
+1601|Colore {n}
+1602|Immagine {n}

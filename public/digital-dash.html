@@ -358,6 +358,42 @@ html.lg .addbar .addmore input[type=text]{background:var(--glass-tint);border-co
 .due.late{color:var(--u0);font-weight:600}
 .urg{background:none;border:1px solid var(--line);border-radius:8px;padding:4px 6px;font-size:13px;color:var(--uc)}
 .legend{display:flex;gap:14px;font-size:13px;color:var(--muted);flex-wrap:wrap}
+/* Quick pad: sticky notes for spontaneous tasks and thoughts, with pasted or dropped images and links */
+.pad-cap{display:grid;gap:10px;padding:12px}
+.pad-cap textarea{width:100%;min-height:58px;resize:vertical;font-size:16px;line-height:1.45;background:var(--panel2);border:1.5px solid color-mix(in srgb,var(--accent) 45%,var(--line));border-radius:calc(var(--r) - 2px);padding:12px 14px}
+.pad-cap textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 28%,transparent)}
+.pad-cap-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.pad-cap-row .pad-hint{flex:1;margin:0;font-size:12.5px}
+.pad-file{cursor:pointer;gap:6px}.pad-file input{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+.pad-pend{display:flex;gap:8px;flex-wrap:wrap}.pad-pend span{position:relative}.pad-pend img{width:64px;height:64px;object-fit:cover;border-radius:10px;display:block}
+.pad-pend button{position:absolute;top:-6px;right:-6px;width:22px;height:22px;border-radius:50%;border:0;background:var(--ink);color:var(--bg);font-size:14px;line-height:1;cursor:pointer}
+.pad-grid{margin-top:16px;columns:4 260px;column-gap:12px}
+.pad-empty{color:var(--muted);text-align:center;padding:28px 10px;border:2px dashed var(--line);border-radius:var(--r);column-span:all}
+.note{--nc:#f5c84c;break-inside:avoid;margin:0 0 12px;position:relative;border-radius:calc(var(--r) + 2px);padding:10px 12px 12px;background:color-mix(in srgb,var(--nc) 20%,var(--panel));border:1px solid color-mix(in srgb,var(--nc) 40%,var(--line));box-shadow:0 8px 20px -14px rgba(0,0,0,.55);transition:box-shadow var(--t-fast) ease,opacity var(--t-ui) ease}
+.note::before{content:"";position:absolute;left:12px;right:12px;top:0;height:3px;border-radius:0 0 3px 3px;background:var(--nc)}
+.note.c1{--nc:#f28ab2}.note.c2{--nc:#6fb3ff}.note.c3{--nc:#6fd39b}.note.c4{--nc:#b38bff}.note.c5{--nc:#ff9f5a}
+.note.drop-on{box-shadow:0 0 0 2px var(--accent),0 8px 20px -14px rgba(0,0,0,.55)}
+.note.done{opacity:.6}.note.done .note-text{text-decoration:line-through}
+.note-top{display:flex;align-items:center;gap:2px;margin:0 -4px 4px}
+.note-top .icon-btn{padding:5px;color:color-mix(in srgb,var(--ink) 60%,transparent)}.note-top .icon-btn[aria-pressed="true"]{color:var(--ink)}
+.note-top .sp{flex:1}.note-age{font-size:12px;color:var(--muted);padding-left:4px}
+.note-tick{width:22px;height:22px;border-radius:50%;border:2px solid var(--nc);background:none;display:grid;place-items:center;color:var(--bg);padding:0;margin:0 2px;cursor:pointer}
+.note.done .note-tick{background:var(--nc)}
+.note-text{white-space:pre-wrap;overflow-wrap:anywhere;font-size:15px;line-height:1.45;min-height:22px;cursor:text;border-radius:6px}
+.note-text:empty::before{content:"Empty note";color:var(--muted)}.note-text.cap:empty::before{content:"Add a caption"}
+.note-text a{color:inherit;text-decoration:underline;text-decoration-color:var(--nc);text-decoration-thickness:2px;text-underline-offset:2px}
+.note-ed{width:100%;min-height:80px;resize:vertical;font:inherit;font-size:16px;line-height:1.45;background:color-mix(in srgb,var(--panel) 70%,transparent);border:1.5px solid var(--nc);border-radius:8px;padding:6px 8px}
+.note-imgs{display:grid;grid-template-columns:repeat(auto-fill,minmax(80px,1fr));gap:6px;margin-top:8px}
+.note-imgs span{position:relative}.note-imgs img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:8px;display:block;cursor:zoom-in;background:var(--panel2)}
+.note-imgs span:only-child{grid-column:1/-1}.note-imgs span:only-child img{aspect-ratio:auto;max-height:260px}
+.note-imgs button{position:absolute;top:4px;right:4px;width:24px;height:24px;border-radius:50%;border:0;background:rgba(0,0,0,.6);color:#fff;cursor:pointer;opacity:0;transition:opacity var(--t-fast) ease}
+.note-imgs span:hover button,.note-imgs button:focus-visible{opacity:1}@media (pointer:coarse){.note-imgs button{opacity:.9}}
+.note-colors{display:flex;gap:6px;margin:4px 0 6px}.note-colors button{width:22px;height:22px;border-radius:50%;border:2px solid transparent;cursor:pointer;padding:0}
+.note-colors button[aria-pressed="true"]{border-color:var(--ink)}
+.pad.drag-over .pad-grid{outline:2px dashed var(--accent);outline-offset:6px;border-radius:var(--r)}
+.pad-view{padding:0;border:0;background:transparent;max-width:min(94vw,1100px);max-height:90vh}.pad-view::backdrop{background:rgba(0,0,0,.75)}
+.pad-view img{display:block;max-width:min(94vw,1100px);max-height:86vh;border-radius:12px}.pad-view .icon-btn{position:absolute;top:8px;right:8px;background:rgba(0,0,0,.6);color:#fff}
+@media (max-width:520px){.pad-grid{columns:1}}
+@media (max-width:720px){.pad-grid{column-gap:10px}.pad-cap-row .pad-hint{display:none}.note{margin-bottom:10px}}
 /* Drag to reorder or into a project: a grip on the left of each open task */
 #task-list .task.has-grip{padding-left:30px}
 .tgrip{position:absolute;left:3px;top:10px;width:24px;height:34px;display:flex;align-items:center;justify-content:center;border:0;padding:0;background:none;color:var(--muted);opacity:.45;cursor:grab;touch-action:none;border-radius:6px;z-index:2;transition:opacity var(--t-fast) ease,background-color var(--t-fast) ease}
@@ -2200,7 +2236,16 @@ html[data-style="blueprint"]:not(.lg) .rail:not(.sty-pv *),.sty-pv[data-sp="blue
     <section class="view" id="v-tasks">
       <h1 data-sub="t-tasks">Tasks</h1>
       <p class="sub" data-sub="tasks">Sorted by urgency, then due date. The top one shows up on your clock.</p>
-      <div class="seg task-mode" id="task-mode" role="group" aria-label="Tasks, week plan, courses or shopping"><button type="button" data-m="tasks" aria-pressed="true">Tasks</button><button type="button" data-m="plan" aria-pressed="false">Week plan</button><button type="button" data-m="courses" aria-pressed="false">Courses and grades</button><button type="button" data-m="shop" aria-pressed="false">Shopping</button></div>
+      <div class="seg task-mode" id="task-mode" role="group" aria-label="Tasks, quick pad, week plan, courses or shopping"><button type="button" data-m="tasks" aria-pressed="true">Tasks</button><button type="button" data-m="pad" aria-pressed="false">Quick pad</button><button type="button" data-m="plan" aria-pressed="false">Week plan</button><button type="button" data-m="courses" aria-pressed="false">Courses and grades</button><button type="button" data-m="shop" aria-pressed="false">Shopping</button></div>
+      <div class="pad" id="pad-pane" hidden>
+        <form class="panel pad-cap" id="pad-form" autocomplete="off">
+          <textarea id="pad-in" rows="2" maxlength="2000" placeholder="Jot something down. Paste or drop an image or link." aria-label="New note"></textarea>
+          <div class="pad-pend" id="pad-pend" hidden></div>
+          <div class="pad-cap-row"><label class="btn ghost small pad-file"><input type="file" accept="image/*" id="pad-file" multiple><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="m21 16-5-5-9 9"/></svg>Image</label><span class="hint pad-hint">Enter adds it · Shift+Enter for a new line</span><button class="btn small" type="submit">Add note</button></div>
+        </form>
+        <div class="pad-grid" id="pad-grid"></div>
+        <dialog class="pad-view" id="pad-view" aria-label="Image"><img alt=""><button type="button" class="icon-btn" data-pv="close" aria-label="Close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button></dialog>
+      </div>
       <div class="shop" id="shop-pane" hidden>
         <form class="panel shop-add" id="shop-form" autocomplete="off"><input type="text" id="shop-new" maxlength="80" placeholder="Add an item, e.g. 2 milk" aria-label="Add a shopping item" required><button class="btn" type="submit">Add</button></form>
         <div id="shop-body" aria-live="polite"></div>
@@ -5042,7 +5087,7 @@ function parseTask(q){
   return {title,urg:urg??2,due,time:w.time,rep,course:pr.course,dateGiven:w.dateGiven};
 }
 const fuzzy=(q,t)=>{q=q.toLowerCase();t=t.toLowerCase();if(!q)return 0;if(t.includes(q))return 100-t.indexOf(q);let i=0;for(const c of t)if(c===q[i])i++;return i===q.length?40:-1;};
-const IC={shop:'<circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2 3h3l2.6 12.2a1.8 1.8 0 0 0 1.8 1.4h8.3a1.8 1.8 0 0 0 1.8-1.4L21 8H6.2"/>',task:'<path d="M9 6h11M9 12h11M9 18h11"/><path d="m3 6 1.5 1.5L7 5M3 12l1.5 1.5L7 11M3 18l1.5 1.5L7 17"/>',timer:'<circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2M9 2h6"/>',go:'<path d="M5 12h14M13 6l6 6-6 6"/>',sound:'<path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/>',theme:'<circle cx="12" cy="12" r="9"/><circle cx="8" cy="10" r="1.3" fill="currentColor"/><circle cx="12" cy="7.5" r="1.3" fill="currentColor"/><circle cx="16" cy="10" r="1.3" fill="currentColor"/>',done:'<path d="m5 12 5 5 9-10"/>',ev:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>',money:'<path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/>',misc:'<circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/>'};
+const IC={note:'<path d="M5 4h11l3 3v13H5z"/><path d="M9 10h6M9 14h4"/>',shop:'<circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2 3h3l2.6 12.2a1.8 1.8 0 0 0 1.8 1.4h8.3a1.8 1.8 0 0 0 1.8-1.4L21 8H6.2"/>',task:'<path d="M9 6h11M9 12h11M9 18h11"/><path d="m3 6 1.5 1.5L7 5M3 12l1.5 1.5L7 11M3 18l1.5 1.5L7 17"/>',timer:'<circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2M9 2h6"/>',go:'<path d="M5 12h14M13 6l6 6-6 6"/>',sound:'<path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/>',theme:'<circle cx="12" cy="12" r="9"/><circle cx="8" cy="10" r="1.3" fill="currentColor"/><circle cx="12" cy="7.5" r="1.3" fill="currentColor"/><circle cx="16" cy="10" r="1.3" fill="currentColor"/>',done:'<path d="m5 12 5 5 9-10"/>',ev:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>',money:'<path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/>',misc:'<circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/>'};
 function whenText(due,time){if(!due&&!time)return "";const l=dueLabel(due,time).t;return l;}
 function cmdResults(q){
   const R=[],raw=q.trim(),lq=raw.toLowerCase();
@@ -5067,6 +5112,8 @@ function cmdResults(q){
     const k=m[1].replace(/\s+/g," ");if(k.startsWith("week"))R.push({ic:"go",label:"Week review",hint:"Go",run:()=>{show("calendar");setCalMode("week");}});
     else{const v=NAV[k]||NAV[k.replace(" ","")];go(v,({focus:"Focus",tasks:"Tasks",calendar:"Calendar",money:"Net",health:"Health",themes:"Themes"})[v]);}
   }
+  if((m=raw.match(/^(?:note|jot|memo|sticky)\s+(.+)/i))){const txt=m[1].trim();R.push({ic:"note",label:`Add to Quick pad: ${txt}`,hint:"Note",run:()=>padNew(txt)});}
+  if(/^(?:quick ?pad|notes?|sticky notes?|pad)$/.test(lq))R.push({ic:"go",label:"Quick pad",hint:"Go",run:()=>{show("tasks");setTaskMode("pad");}});
   if(/^(room|study room|study with|create room|join room)/.test(lq)){const c=rmClean(lq.replace(/^(join )?(study )?room/,""));R.push({ic:"go",label:c.length===6?`Join room ${rmFmt(c)}`:"Study room",hint:"Go",run:()=>{show("focus");if(c.length===6)rmJoin(c);setTimeout(()=>$("#room").scrollIntoView({behavior:reduced?"auto":"smooth",block:"center"}),60);}});}
   if(/^(grades?|courses?|marks?|gpa)$/.test(lq))R.push({ic:"go",label:"Courses and grades",hint:"Go",run:()=>{show("tasks");setTaskMode("courses");}});
   if(/^(goals?|savings?)$/.test(lq))R.push({ic:"go",label:"Money goals",hint:"Go",run:()=>{show("money");setTimeout(()=>$("#goals").scrollIntoView({behavior:reduced?"auto":"smooth",block:"center"}),60);}});
@@ -6475,7 +6522,7 @@ function cloudImgGet(k){
     fr.onload=()=>{const u=fr.result;
       if(k==="bg"){bgData=u;try{localStorage.setItem(BGK,u);}catch(e){}applyBg();}
       else{imgCache[k]=u;try{localStorage.setItem("digitaldash.img."+k,u);}catch(e){}}
-      applyStage();renderWidgets(true);renderPresets();};
+      applyStage();renderWidgets(true);renderPresets();if(typeof renderPad==="function")renderPad();};
     fr.readAsDataURL(data);
   }).catch(()=>{});
 }
@@ -7316,9 +7363,107 @@ function gradeCalc(c){
   const need=rem>0?(target*total-gs)/rem:null,best=(gs+rem*100)/total;
   return {tw,gw,gs,total,rem,avg,need,best,final:rem<=0?gs/total:null};
 }
+/* ---------- quick pad ----------
+   Sticky notes for spontaneous tasks and thoughts: S.notes = [{id, text, imgs:[src], color 0-5, pin, done, t, u}].
+   Type and press Enter, or paste/drop images and links: on the board for a new note, on a note to add to it.
+   Links are shown as links (http and https only); images go through storeImage, so they sync like other photos. */
+const PAD_COLORS=["#f5c84c","#f28ab2","#6fb3ff","#6fd39b","#b38bff","#ff9f5a"];
+let padPend=[],padEdit=null,padColorOpen=null;
+const padNotes=()=>(S.notes=S.notes||[]);
+function padLinkify(t){
+  const re=/\bhttps?:\/\/[^\s<>"']+[^\s<>"'.,;:!?)\]]/gi;let out="",last=0,m;
+  while((m=re.exec(t))){const u=m[0];let shown=u;try{const x=new URL(u);shown=(x.host.replace(/^www\./,"")+(x.pathname!=="/"?x.pathname:"")).slice(0,42);}catch(e){}
+    out+=esc(t.slice(last,m.index))+`<a href="${esc(u)}" target="_blank" rel="noopener noreferrer nofollow">${esc(shown)}</a>`;last=m.index+u.length;}
+  return out+esc(t.slice(last));
+}
+function padAge(ms){const m=Math.round((Date.now()-ms)/60000);return m<1?"now":m<60?m+"m":m<1440?Math.round(m/60)+"h":niceDate(dkey(new Date(ms)));}
+function renderPad(){
+  const el=$("#pad-grid");if(!el||$("#pad-pane").hidden)return;const N=padNotes();
+  if(!N.length){el.innerHTML=`<div class="pad-empty">Nothing here yet. Jot a thought, paste a link, or drop an image to make your first note.</div>`;return;}
+  const list=N.slice().sort((a,b)=>(a.done-b.done)||((b.pin?1:0)-(a.pin?1:0))||(b.u||b.t)-(a.u||a.t));
+  el.innerHTML=list.map(n=>`<article class="note c${n.color||0}${n.done?" done":""}" data-id="${n.id}">
+    <div class="note-top"><button type="button" class="note-tick" data-n="done" aria-pressed="${!!n.done}" aria-label="${n.done?"Mark as not done":"Mark as done"}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg></button><span class="note-age">${padAge(n.u||n.t)}</span><span class="sp"></span>
+      <button type="button" class="icon-btn" data-n="pin" aria-pressed="${!!n.pin}" aria-label="${n.pin?"Unpin":"Pin to the top"}" title="${n.pin?"Unpin":"Pin to the top"}"><svg width="15" height="15" viewBox="0 0 24 24" fill="${n.pin?"currentColor":"none"}" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M9 3h6l-1 6 4 4H6l4-4z"/><path d="M12 13v8"/></svg></button>
+      <button type="button" class="icon-btn" data-n="color" aria-label="Change colour" title="Change colour"><svg width="15" height="15" viewBox="0 0 24 24"><circle cx="12" cy="12" r="7" fill="var(--nc)"/></svg></button>
+      <button type="button" class="icon-btn" data-n="task" aria-label="Turn into a task" title="Turn into a task"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6h11M9 12h11M9 18h11"/><path d="m3 12 2 2 3-3"/></svg></button>
+      <button type="button" class="icon-btn" data-n="del" aria-label="Delete note" title="Delete"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
+    ${padColorOpen===n.id?`<div class="note-colors" role="group" aria-label="Note colour">${PAD_COLORS.map((c,i)=>`<button type="button" data-n="setc" data-c="${i}" style="background:${c}" aria-pressed="${(n.color||0)===i}" aria-label="Colour ${i+1}"></button>`).join("")}</div>`:""}
+    ${padEdit===n.id?`<textarea class="note-ed" maxlength="2000" aria-label="Edit note">${esc(n.text||"")}</textarea>`:`<div class="note-text${(n.imgs||[]).length?" cap":""}" data-n="edit" tabindex="0" role="button" aria-label="Edit note">${padLinkify(n.text||"")}</div>`}
+    ${(n.imgs||[]).length?`<div class="note-imgs">${n.imgs.map((src,i)=>{const u=resolveImg(src);return `<span><img src="${esc(u)}" alt="Image ${i+1}" data-n="view" data-i="${i}" loading="lazy"><button type="button" data-n="rmimg" data-i="${i}" aria-label="Remove image">×</button></span>`;}).join("")}</div>`:""}
+  </article>`).join("");
+  if(padEdit){const ta=el.querySelector(".note-ed");if(ta){ta.focus();ta.setSelectionRange(ta.value.length,ta.value.length);padGrow(ta);}}
+}
+const padGrow=ta=>{ta.style.height="auto";ta.style.height=Math.min(420,ta.scrollHeight+4)+"px";};
+async function padImages(files){
+  const out=[];for(const f of files){if(!/^image\//.test(f.type))continue;if(f.size>25e6){toast("That image is too big (25 MB max)");continue;}
+    try{const r=await storeImage(f,"n"+uid(),1400,pickMime(f));out.push(r.src);}catch(e){toast("Couldn't read that image");}}
+  return out;
+}
+function padNew(text,imgs){
+  text=String(text||"").replace(/\r/g,"").trim().slice(0,2000);imgs=imgs||[];if(!text&&!imgs.length)return null;
+  const N=padNotes(),n={id:uid(),text,imgs,color:N.length%PAD_COLORS.length,pin:false,done:false,t:Date.now(),u:Date.now()};
+  N.push(n);save();if(taskMode!=="pad")toast("Added to Quick pad");renderPad();return n;
+}
+function padPendRender(){const el=$("#pad-pend");el.hidden=!padPend.length;el.innerHTML=padPend.map((src,i)=>`<span><img src="${esc(resolveImg(src))}" alt="Image ${i+1}"><button type="button" data-pp="${i}" aria-label="Remove image">×</button></span>`).join("");}
+$("#pad-form").addEventListener("submit",e=>{e.preventDefault();const t=$("#pad-in");if(padNew(t.value,padPend)){t.value="";padPend=[];padPendRender();t.style.height="";}});
+$("#pad-in").addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.shiftKey&&!e.isComposing){e.preventDefault();$("#pad-form").requestSubmit();}});
+$("#pad-in").addEventListener("input",e=>padGrow(e.target));
+$("#pad-file").addEventListener("change",async e=>{const srcs=await padImages([...e.target.files]);e.target.value="";if(srcs.length){padPend.push(...srcs);padPendRender();$("#pad-in").focus();}});
+$("#pad-pend").addEventListener("click",e=>{const b=e.target.closest("[data-pp]");if(!b)return;const [src]=padPend.splice(+b.dataset.pp,1);removeImage(src);padPendRender();});
+/* paste: images into the capture box (or the note being edited); anywhere else on the pad an image or link makes a note */
+$("#pad-pane").addEventListener("paste",async e=>{
+  const files=[...(e.clipboardData&&e.clipboardData.files||[])].filter(f=>/^image\//.test(f.type));if(!files.length)return;
+  e.preventDefault();const srcs=await padImages(files);if(!srcs.length)return;
+  const ed=e.target.closest(".note");const n=ed&&padNotes().find(x=>x.id===ed.dataset.id);
+  if(n){n.imgs=(n.imgs||[]).concat(srcs);n.u=Date.now();save();renderPad();toast("Image added to the note");}
+  else{padPend.push(...srcs);padPendRender();}
+});
+document.addEventListener("paste",e=>{ /* paste on the pad when nothing is focused: straight into a new note */
+  if(taskMode!=="pad"||$("#pad-pane").hidden||curView!=="tasks")return;const a=document.activeElement;if(a&&(a.matches("input,textarea,select,[contenteditable]")||$("#pad-pane").contains(a)&&a.matches("textarea")))return;
+  const files=[...(e.clipboardData&&e.clipboardData.files||[])].filter(f=>/^image\//.test(f.type)),txt=e.clipboardData&&e.clipboardData.getData("text/plain")||"";
+  if(!files.length&&!txt.trim())return;e.preventDefault();padImages(files).then(srcs=>padNew(txt,srcs));
+});
+/* drag and drop from other apps or the desktop: onto a note adds to it, anywhere else makes a new note */
+{const pane=$("#pad-pane");let depth=0;
+  const isExt=e=>[...(e.dataTransfer&&e.dataTransfer.types||[])].some(t=>t==="Files"||t==="text/uri-list"||t==="text/plain");
+  pane.addEventListener("dragenter",e=>{if(!isExt(e))return;depth++;pane.classList.add("drag-over");});
+  pane.addEventListener("dragleave",()=>{if(--depth<=0){depth=0;pane.classList.remove("drag-over");$$(".note.drop-on").forEach(x=>x.classList.remove("drop-on"));}});
+  pane.addEventListener("dragover",e=>{if(!isExt(e))return;e.preventDefault();e.dataTransfer.dropEffect="copy";$$(".note.drop-on").forEach(x=>x.classList.remove("drop-on"));const n=e.target.closest(".note");if(n)n.classList.add("drop-on");});
+  pane.addEventListener("drop",async e=>{if(!isExt(e))return;e.preventDefault();depth=0;pane.classList.remove("drag-over");$$(".note.drop-on").forEach(x=>x.classList.remove("drop-on"));
+    const dt=e.dataTransfer,files=[...dt.files].filter(f=>/^image\//.test(f.type));let txt=(dt.getData("text/uri-list")||"").split(/\r?\n/).filter(l=>l&&!l.startsWith("#")).join("\n")||dt.getData("text/plain")||"";
+    const srcs=await padImages(files);if(!srcs.length&&!txt.trim()){if(dt.files.length)toast("Only images and links can go on the pad");return;}
+    const el=e.target.closest(".note"),n=el&&padNotes().find(x=>x.id===el.dataset.id);
+    if(n){if(txt.trim())n.text=((n.text||"")+(n.text?"\n":"")+txt.trim()).slice(0,2000);n.imgs=(n.imgs||[]).concat(srcs);n.u=Date.now();save();renderPad();toast("Added to the note");}
+    else padNew(txt,srcs);});}
+function padSaveEdit(){if(!padEdit)return;const n=padNotes().find(x=>x.id===padEdit),ta=$("#pad-grid .note-ed");padEdit=null;
+  if(n&&ta){const v=ta.value.replace(/\r/g,"").trim().slice(0,2000);if(v!==(n.text||"")){n.text=v;n.u=Date.now();save();}}renderPad();}
+$("#pad-grid").addEventListener("focusout",e=>{if(e.target.matches(".note-ed"))setTimeout(()=>{if(!$("#pad-grid").contains(document.activeElement)||!document.activeElement.matches(".note-ed"))padSaveEdit();},120);});
+$("#pad-grid").addEventListener("input",e=>{if(e.target.matches(".note-ed"))padGrow(e.target);});
+$("#pad-grid").addEventListener("keydown",e=>{
+  if(e.target.matches(".note-ed")&&(e.key==="Escape"||(e.key==="Enter"&&(e.metaKey||e.ctrlKey)))){e.preventDefault();padSaveEdit();return;}
+  if(e.target.matches(".note-text")&&(e.key==="Enter"||e.key===" ")){e.preventDefault();padEdit=e.target.closest(".note").dataset.id;renderPad();}
+});
+$("#pad-grid").addEventListener("click",e=>{
+  if(e.target.closest("a"))return; /* links open normally */
+  const b=e.target.closest("[data-n]");if(!b)return;const el=b.closest(".note"),N=padNotes(),n=N.find(x=>x.id===el.dataset.id);if(!n)return;const a=b.dataset.n;
+  if(a==="edit"){padSaveEdit();padEdit=n.id;renderPad();return;}
+  if(a==="done"){n.done=!n.done;n.u=Date.now();save();renderPad();return;}
+  if(a==="pin"){n.pin=!n.pin;save();renderPad();toast(n.pin?"Pinned to the top":"Unpinned");return;}
+  if(a==="color"){padColorOpen=padColorOpen===n.id?null:n.id;renderPad();return;}
+  if(a==="setc"){n.color=+b.dataset.c;padColorOpen=null;save();renderPad();return;}
+  if(a==="view"){const d=$("#pad-view");d.querySelector("img").src=resolveImg(n.imgs[+b.dataset.i]);d.showModal();return;}
+  if(a==="rmimg"){const i=+b.dataset.i,src=n.imgs[i];n.imgs.splice(i,1);save();renderPad();toast("Image removed",{run(){n.imgs.splice(i,0,src);save();renderPad();}});setTimeout(()=>{if(!(n.imgs||[]).includes(src))removeImage(src);},8000);return;}
+  if(a==="task"){const first=(n.text||"").split("\n").find(l=>l.trim())||"";if(!first){toast("Add some text first, then turn it into a task");return;}
+    const pt=parseTask(first.replace(/https?:\/\/\S+/g,"").trim()||first);if(!pt.title)pt.title=first.slice(0,200);
+    const t=addParsedTask(pt);n.done=true;n.u=Date.now();save();renderPad();
+    toast(`Added to Tasks: ${pt.title}`,{run(){const i=S.tasks.indexOf(t);if(i>=0)S.tasks.splice(i,1);n.done=false;save();renderTasks();renderPad();}});return;}
+  if(a==="del"){const i=N.indexOf(n);N.splice(i,1);save();renderPad();toast("Note deleted",{run(){N.splice(Math.min(i,N.length),0,n);save();renderPad();}});
+    setTimeout(()=>{if(!padNotes().includes(n))(n.imgs||[]).forEach(removeImage);},8000);return;}
+});
+$("#pad-view").addEventListener("click",e=>{if(e.target.closest('[data-pv="close"]')||e.target===e.currentTarget)e.currentTarget.close();});
 function setTaskMode(m){
   taskMode=m;$$("#task-mode button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.m===m));glide($("#task-mode"));
-  $("#tasks-pane").hidden=m!=="tasks";$("#courses-pane").hidden=m!=="courses";$("#plan-pane").hidden=m!=="plan";$("#shop-pane").hidden=m!=="shop";if(m==="courses"){renderCoursesPane();gcShow();}if(m==="plan")renderPlan();if(m==="shop")renderShop();
+  $("#tasks-pane").hidden=m!=="tasks";$("#courses-pane").hidden=m!=="courses";$("#plan-pane").hidden=m!=="plan";$("#shop-pane").hidden=m!=="shop";$("#pad-pane").hidden=m!=="pad";if(m==="pad")renderPad();if(m==="courses"){renderCoursesPane();gcShow();}if(m==="plan")renderPlan();if(m==="shop")renderShop();
 }
 function renderCoursesPane(){
   if($("#courses-pane").hidden)return;const el=$("#crs-body");S.courses=S.courses||[];

@@ -1531,3 +1531,35 @@
 1568|Schon in {0}
 1569|{0} verschieben: ziehen oder Pfeiltasten nutzen
 1570|Aufgabe hinzufügen
+1571|Notizblock
+1572|Schreib etwas auf. Füge ein Bild oder einen Link ein oder zieh es hierher.
+1573|Enter fügt hinzu · Umschalt+Enter für neue Zeile
+1574|Notiz hinzufügen
+1575|Noch nichts hier. Notier eine Idee, füge einen Link ein oder zieh ein Bild hierher für deine erste Notiz.
+1576|Oben anheften
+1577|Lösen
+1578|In Aufgabe umwandeln
+1579|Notiz löschen
+1580|Notiz bearbeiten
+1581|Bild entfernen
+1582|Zum Notizblock hinzugefügt
+1583|Oben angeheftet
+1584|Gelöst
+1585|Bild zur Notiz hinzugefügt
+1586|Zur Notiz hinzugefügt
+1587|Notiz gelöscht
+1588|Bild entfernt
+1589|Schreib zuerst etwas und mach dann eine Aufgabe daraus
+1590|Nur Bilder und Links passen auf den Notizblock
+1591|Das Bild ist zu groß (max. 25 MB)
+1592|Das Bild konnte nicht gelesen werden
+1593|Notizfarbe
+1594|Neue Notiz
+1595|Als nicht erledigt markieren
+1596|jetzt
+1597|Notiz
+1598|Aufgaben, Notizblock, Wochenplan, Kurse oder Einkauf
+1599|Zu Aufgaben hinzugefügt: {0}
+1600|Zum Notizblock: {0}
+1601|Farbe {n}
+1602|Bild {n}

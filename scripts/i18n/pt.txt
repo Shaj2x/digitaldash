@@ -1531,3 +1531,35 @@
 1568|Já está em {0}
 1569|Mover {0}: arraste ou use as setas
 1570|Adicionar uma tarefa
+1571|Notas rápidas
+1572|Anote algo. Cole ou solte uma imagem ou link.
+1573|Enter adiciona · Shift+Enter para nova linha
+1574|Adicionar nota
+1575|Nada aqui ainda. Anote uma ideia, cole um link ou solte uma imagem para criar sua primeira nota.
+1576|Fixar no topo
+1577|Desafixar
+1578|Transformar em tarefa
+1579|Excluir nota
+1580|Editar nota
+1581|Remover imagem
+1582|Adicionada às Notas rápidas
+1583|Fixada no topo
+1584|Desafixada
+1585|Imagem adicionada à nota
+1586|Adicionado à nota
+1587|Nota excluída
+1588|Imagem removida
+1589|Escreva algo primeiro e depois transforme em tarefa
+1590|Só imagens e links podem ir nas notas
+1591|Essa imagem é grande demais (máx. 25 MB)
+1592|Não foi possível ler essa imagem
+1593|Cor da nota
+1594|Nova nota
+1595|Marcar como não feita
+1596|agora
+1597|Nota
+1598|Tarefas, notas rápidas, plano da semana, cursos ou compras
+1599|Adicionada às tarefas: {0}
+1600|Adicionar às Notas rápidas: {0}
+1601|Cor {n}
+1602|Imagem {n}

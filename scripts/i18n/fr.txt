@@ -1531,3 +1531,35 @@
 1568|Déjà dans {0}
 1569|Déplacer {0} : fais glisser ou utilise les flèches
 1570|Ajouter une tâche
+1571|Bloc-notes
+1572|Note quelque chose. Colle ou dépose une image ou un lien.
+1573|Entrée l’ajoute · Maj+Entrée pour une nouvelle ligne
+1574|Ajouter la note
+1575|Rien pour l’instant. Note une idée, colle un lien ou dépose une image pour créer ta première note.
+1576|Épingler en haut
+1577|Désépingler
+1578|Transformer en tâche
+1579|Supprimer la note
+1580|Modifier la note
+1581|Retirer l’image
+1582|Ajoutée au bloc-notes
+1583|Épinglée en haut
+1584|Désépinglée
+1585|Image ajoutée à la note
+1586|Ajouté à la note
+1587|Note supprimée
+1588|Image retirée
+1589|Écris d’abord quelque chose, puis transforme-le en tâche
+1590|Seules les images et les liens vont sur le bloc-notes
+1591|Cette image est trop lourde (25 Mo max)
+1592|Impossible de lire cette image
+1593|Couleur de la note
+1594|Nouvelle note
+1595|Marquer comme non faite
+1596|maintenant
+1597|Note
+1598|Tâches, bloc-notes, planning, cours ou courses
+1599|Ajoutée aux tâches : {0}
+1600|Ajouter au bloc-notes : {0}
+1601|Couleur {n}
+1602|Image {n}
