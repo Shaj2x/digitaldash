@@ -1593,3 +1593,7 @@
 1630|Ghi chú nhanh không còn trên màn hình
 1631|Không có ghi chú nào đang mở. Thêm một ghi chú bên dưới.
 1632|Bật Giữ trên màn hình để ghi chú hiện trên đồng hồ
+1633|Ghi chú nhanh trên đồng hồ
+1634|Ghi chú nhanh đang ở trên đồng hồ
+1635|Ghi chú nhanh không còn trên đồng hồ
+1636|Hiện Ghi chú nhanh trên đồng hồ

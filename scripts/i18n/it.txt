@@ -1593,3 +1593,7 @@
 1630|Il blocco note non è più sullo schermo
 1631|Nessuna nota aperta. Aggiungine una qui sotto.
 1632|Attiva Tieni sullo schermo e le note appariranno sull’orologio
+1633|Blocco note sull’orologio
+1634|Il blocco note è sull’orologio
+1635|Il blocco note non è più sull’orologio
+1636|Mostra il blocco note sull’orologio

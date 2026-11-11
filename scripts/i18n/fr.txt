@@ -1593,3 +1593,7 @@
 1630|Le bloc-notes n’est plus à l’écran
 1631|Aucune note ouverte. Ajoutes-en une ci-dessous.
 1632|Active Garder à l’écran et tes notes s’afficheront sur l’horloge
+1633|Bloc-notes sur l’horloge
+1634|Le bloc-notes est sur l’horloge
+1635|Le bloc-notes n’est plus sur l’horloge
+1636|Afficher le bloc-notes sur l’horloge

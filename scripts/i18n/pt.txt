@@ -1593,3 +1593,7 @@
 1630|As Notas rápidas saíram da tela
 1631|Nenhuma nota aberta. Adicione uma abaixo.
 1632|Ative Manter na tela e suas notas aparecem no relógio
+1633|Notas rápidas no relógio
+1634|As Notas rápidas estão no relógio
+1635|As Notas rápidas saíram do relógio
+1636|Mostrar Notas rápidas no relógio

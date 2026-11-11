@@ -1635,6 +1635,10 @@
 "Quick pad stays on screen in every tab",
 "Quick pad is off your screen",
 "No open notes. Add one below.",
-"Turn on Keep on screen and your notes show on the clock"
+"Turn on Keep on screen and your notes show on the clock",
+"Quick pad on the clock",
+"Quick pad is on the clock",
+"Quick pad is off the clock",
+"Show Quick pad on the clock"
 ]
 }

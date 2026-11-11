@@ -1593,3 +1593,7 @@
 1630|Notas rápidas ya no está en pantalla
 1631|No hay notas abiertas. Añade una abajo.
 1632|Activa Mantener en pantalla y tus notas saldrán en el reloj
+1633|Notas rápidas en el reloj
+1634|Notas rápidas está en el reloj
+1635|Notas rápidas ya no está en el reloj
+1636|Mostrar Notas rápidas en el reloj

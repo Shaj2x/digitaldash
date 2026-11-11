@@ -1593,3 +1593,7 @@
 1630|Der Notizblock ist nicht mehr auf dem Bildschirm
 1631|Keine offenen Notizen. Füg unten eine hinzu.
 1632|Schalte „Auf dem Bildschirm halten“ ein, dann erscheinen deine Notizen auf der Uhr
+1633|Notizblock auf der Uhr
+1634|Der Notizblock ist auf der Uhr
+1635|Der Notizblock ist nicht mehr auf der Uhr
+1636|Notizblock auf der Uhr zeigen
