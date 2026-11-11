@@ -368,9 +368,9 @@ html.lg .addbar .addmore input[type=text]{background:var(--glass-tint);border-co
 .pad-pend button{position:absolute;top:-6px;right:-6px;width:22px;height:22px;border-radius:50%;border:0;background:var(--ink);color:var(--bg);font-size:14px;line-height:1;cursor:pointer}
 .pad-grid{margin-top:16px;columns:4 260px;column-gap:12px}
 .pad-empty{color:var(--muted);text-align:center;padding:28px 10px;border:2px dashed var(--line);border-radius:var(--r);column-span:all}
-.note{--nc:#f5c84c;break-inside:avoid;margin:0 0 12px;position:relative;border-radius:calc(var(--r) + 2px);padding:10px 12px 12px;background:color-mix(in srgb,var(--nc) 20%,var(--panel));border:1px solid color-mix(in srgb,var(--nc) 40%,var(--line));box-shadow:0 8px 20px -14px rgba(0,0,0,.55);transition:box-shadow var(--t-fast) ease,opacity var(--t-ui) ease}
+.note{--nc:#f6cf5f;break-inside:avoid;margin:0 0 12px;position:relative;border-radius:calc(var(--r) + 2px);padding:10px 12px 12px;background:color-mix(in srgb,var(--nc) 20%,var(--panel));border:1px solid color-mix(in srgb,var(--nc) 40%,var(--line));box-shadow:0 8px 20px -14px rgba(0,0,0,.55);transition:box-shadow var(--t-fast) ease,opacity var(--t-ui) ease}
 .note::before{content:"";position:absolute;left:12px;right:12px;top:0;height:3px;border-radius:0 0 3px 3px;background:var(--nc)}
-.note.c1{--nc:#f28ab2}.note.c2{--nc:#6fb3ff}.note.c3{--nc:#6fd39b}.note.c4{--nc:#b38bff}.note.c5{--nc:#ff9f5a}
+.note.c1{--nc:#f49ac1}.note.c2{--nc:#7cb8ff}.note.c3{--nc:#79d8a8}.note.c4{--nc:#b9a0ff}.note.c5{--nc:#ffab76}
 .note.drop-on{box-shadow:0 0 0 2px var(--accent),0 8px 20px -14px rgba(0,0,0,.55)}
 .note.done{opacity:.6}.note.done .note-text{text-decoration:line-through}
 .note-top{display:flex;align-items:center;gap:2px;margin:0 -4px 4px}
@@ -417,7 +417,7 @@ html.lg .addbar .addmore input[type=text]{background:var(--glass-tint);border-co
 .pad-float.min .pf-body,.pad-float.min .pf-add{display:none}.pad-float.min .pf-head{border-bottom:0}
 .pf-empty{margin:4px 2px;font-size:14px;color:var(--muted)}
 body.zen .pad-float:not(.on-clock){display:none}
-.pf-note{--nc:#f5c84c;border-radius:10px;padding:7px 10px;background:color-mix(in srgb,var(--nc) 20%,var(--panel));border:1px solid color-mix(in srgb,var(--nc) 45%,transparent)}
+.pf-note{--nc:#f6cf5f;border-radius:10px;padding:7px 10px;background:color-mix(in srgb,var(--nc) 20%,var(--panel));border:1px solid color-mix(in srgb,var(--nc) 45%,transparent)}
 .pf-note.done{opacity:.6}.pf-note.done .note-text{text-decoration:line-through}
 .pf-note{display:flex;align-items:flex-start;gap:9px}.pf-main{flex:1;min-width:0;display:grid;gap:4px;justify-items:start}.pf-main>*{justify-self:stretch}.pf-main>.note-prog{justify-self:start;margin:0}.pf-note>.note-tick{margin:0;flex:none}.pf-note>.icon-btn{padding:2px;margin:-2px -4px -2px 0;flex:none}
 .pf-note .note-text{cursor:default;font-size:14px;min-height:0}.pf-note .note-text:empty{display:none}
@@ -435,6 +435,80 @@ body.zen .pad-float:not(.on-clock){display:none}
 .pad.drag-over .pad-grid{outline:2px dashed var(--accent);outline-offset:6px;border-radius:var(--r)}
 .pad-view{padding:0;border:0;background:transparent;max-width:min(94vw,1100px);max-height:90vh}.pad-view::backdrop{background:rgba(0,0,0,.75)}
 .pad-view img{display:block;max-width:min(94vw,1100px);max-height:86vh;border-radius:12px}.pad-view .icon-btn{position:absolute;top:8px;right:8px;background:rgba(0,0,0,.6);color:#fff}
+/* ---- Quick pad look: paper sticky notes ---- */
+.pad-cap{position:relative;padding:14px 14px 12px;border-radius:20px;background:linear-gradient(180deg,color-mix(in srgb,var(--accent) 7%,var(--panel)),var(--panel));transition:box-shadow var(--t-fast,.12s) ease,border-color var(--t-fast,.12s) ease}
+.pad-cap:focus-within{border-color:color-mix(in srgb,var(--accent) 55%,var(--line));box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 16%,transparent),0 14px 34px -22px rgba(0,0,0,.6)}
+.pad-cap textarea,.pad-cap textarea:focus{background:transparent;border:0;box-shadow:none;padding:6px 4px;font-size:17px;min-height:64px;resize:none}
+.pad-cap textarea::placeholder{color:color-mix(in srgb,var(--muted) 85%,transparent)}
+.pad-cap-row{gap:8px;padding-top:10px;border-top:1px dashed color-mix(in srgb,var(--ink) 14%,transparent)}
+.pad-cap-row .btn.ghost{border-radius:999px;padding:6px 12px;gap:6px;background:color-mix(in srgb,var(--ink) 6%,transparent);border-color:transparent}
+.pad-cap-row .btn.ghost:hover{background:color-mix(in srgb,var(--ink) 11%,transparent)}
+.pad-cap-row .btn[type="submit"]{border-radius:999px;padding:7px 16px}
+.pad-tools .pad-q{border-radius:999px;padding-left:16px}
+.pad-grid{margin-top:12px;padding-top:8px;column-gap:16px}.pad-grid .note{display:inline-block;width:100%;vertical-align:top}
+.note{border:0;border-radius:6px 6px 16px 6px;padding:20px 16px 14px;margin:0 0 18px;
+  background:linear-gradient(172deg,color-mix(in srgb,var(--nc) 58%,#fffaf2) 0%,color-mix(in srgb,var(--nc) 44%,#fffaf2) 100%);
+  --ink:#221d17;--muted:rgba(34,29,23,.58);color:var(--ink);
+  box-shadow:0 1px 0 color-mix(in srgb,#fff 10%,transparent) inset,0 2px 4px -2px rgba(0,0,0,.25),0 14px 28px -20px rgba(0,0,0,.55);
+  transform:rotate(var(--tilt,0deg));transition:transform .22s cubic-bezier(.23,1,.32,1),box-shadow .22s ease,opacity var(--t-ui,.2s) ease}
+.note:nth-child(3n+1){--tilt:-.7deg}.note:nth-child(3n+2){--tilt:.5deg}.note:nth-child(5n){--tilt:-.3deg}
+.note::before{left:50%;right:auto;top:-3px;width:58px;height:15px;border-radius:3px;transform:translateX(-50%) rotate(-2deg);
+  background:rgba(255,255,255,.5);box-shadow:0 0 0 1px rgba(0,0,0,.05),0 1px 3px rgba(0,0,0,.14);-webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px)}
+.note.drop-on{box-shadow:0 0 0 2px var(--accent),0 14px 28px -20px rgba(0,0,0,.55)}
+@media (hover:hover) and (pointer:fine){
+  .note:hover,.note:focus-within{transform:rotate(0) translateY(-2px);box-shadow:0 1px 0 color-mix(in srgb,#fff 10%,transparent) inset,0 4px 8px -4px rgba(0,0,0,.25),0 22px 36px -22px rgba(0,0,0,.6)}
+  .note-top .icon-btn{opacity:0;transition:opacity .15s ease}
+  .note:hover .note-top .icon-btn,.note:focus-within .note-top .icon-btn,.note-top .icon-btn[aria-pressed="true"]{opacity:1}
+}
+.note.done{opacity:.55}
+.note-top{margin:-6px -6px 6px -2px}
+.note-top .icon-btn{color:color-mix(in srgb,var(--ink) 55%,transparent);border-radius:8px}
+.note-top .icon-btn:hover{background:color-mix(in srgb,var(--ink) 8%,transparent);color:var(--ink)}
+.note-tick{border-color:color-mix(in srgb,var(--nc) 85%,var(--ink));transition:background-color .15s ease,transform .15s ease}
+.note-tick:active{transform:scale(.9)}
+.note-age{font-size:11.5px;letter-spacing:.02em}
+.note-text{font-size:15.5px;line-height:1.5}
+.note-text.multi::first-line{font-weight:650;font-size:16.5px}
+.note-ck{gap:4px;margin-top:4px}.note-ck li{font-size:15px}
+.ck-b{border-radius:7px;border-color:color-mix(in srgb,var(--nc) 80%,var(--ink));transition:background-color .15s ease,transform .15s ease}
+.ck-b:active{transform:scale(.88)}
+.note-ck li.on>span{color:color-mix(in srgb,var(--ink) 45%,transparent)}
+.ck-add{border-radius:999px;padding:6px 12px;margin-top:10px;border-color:color-mix(in srgb,var(--nc) 55%,transparent)}
+.note-prog{background:color-mix(in srgb,var(--nc) 45%,transparent)}
+.note-imgs img{border-radius:10px}
+.pad-empty{border-radius:20px;padding:36px 16px;background:color-mix(in srgb,var(--ink) 3%,transparent)}
+/* floating panel: frosted glass */
+.pad-float{border-radius:22px;border:1px solid color-mix(in srgb,#fff 12%,var(--line));
+  background:color-mix(in srgb,var(--panel) 76%,transparent);-webkit-backdrop-filter:blur(20px) saturate(1.5);backdrop-filter:blur(20px) saturate(1.5);
+  box-shadow:0 1px 0 color-mix(in srgb,#fff 12%,transparent) inset,0 26px 50px -24px rgba(0,0,0,.6)}
+.pf-head{border-bottom:0;padding:10px 8px 6px 14px}
+.pf-head b{font-size:13.5px;display:flex;align-items:center;gap:8px}
+.pf-head b::before{content:"";width:10px;height:10px;border-radius:3px;transform:rotate(-8deg);background:linear-gradient(135deg,#f6cf5f,#f49ac1 55%,#b9a0ff);box-shadow:0 1px 3px rgba(0,0,0,.25)}
+.pf-head .pf-n{min-width:20px;height:20px;padding:0 6px;border-radius:999px;display:inline-grid;place-items:center;background:color-mix(in srgb,var(--ink) 9%,transparent);font-weight:700;font-size:11.5px}
+.pf-head .icon-btn{border-radius:10px}
+.pf-body{padding:4px 10px 10px;gap:6px}
+.pf-note{border:0;border-radius:12px;padding:8px 10px;--ink:#221d17;--muted:rgba(34,29,23,.6);color:var(--ink);background:color-mix(in srgb,var(--nc) 52%,#fffaf2);box-shadow:inset 3px 0 0 var(--nc)}
+.pf-note .note-tick{width:20px;height:20px}
+.pf-add{border-top:0;padding:0 10px 10px}
+.pf-add input{border-radius:999px;padding:9px 14px;border-color:transparent;background:color-mix(in srgb,var(--ink) 7%,transparent)}
+.pf-add input:focus{outline:none;border-color:color-mix(in srgb,var(--accent) 60%,transparent);background:color-mix(in srgb,var(--ink) 10%,transparent)}
+.pad-float.on-clock{background:color-mix(in srgb,var(--panel) 55%,transparent);border-color:color-mix(in srgb,#fff 10%,transparent)}
+.note .note-tick,.note .ck-b,.pf-note .note-tick,.pf-note .ck-b{color:#221d17}
+.note-tick,.ck-b{border-color:color-mix(in srgb,var(--nc) 45%,#221d17)}
+.note.done .note-tick,.pf-note.done .note-tick,.ck-b[aria-checked="true"]{background:color-mix(in srgb,var(--nc) 70%,#221d17);border-color:transparent;color:#fffaf2}
+.note .note-ed{background:rgba(255,255,255,.55);color:var(--ink);border-color:color-mix(in srgb,var(--nc) 60%,#221d17)}
+.note .ck-add,.pf-note .ck-add{color:var(--ink);border-color:rgba(34,29,23,.28)}.note .ck-add::placeholder,.pf-note .ck-add::placeholder{color:rgba(34,29,23,.5)}
+.note .ck-add:focus,.pf-note .ck-add:focus{background:rgba(255,255,255,.45)}
+.note-prog{background:rgba(34,29,23,.1);color:#221d17}.note-prog.full{background:#221d17;color:#fffaf2}
+.note-text a{text-decoration-color:color-mix(in srgb,var(--nc) 50%,#221d17)}
+.note-ck li.on>span{color:rgba(34,29,23,.5)}
+.note .note-colors button[aria-pressed="true"]{border-color:#221d17}
+.note-top .icon-btn:hover{background:rgba(34,29,23,.08)}
+.pad-cap-row .btn{display:inline-flex;align-items:center}
+.pf-note{box-shadow:0 1px 2px rgba(0,0,0,.18)}
+@media (prefers-reduced-motion:reduce){.note{transition:none}.note:hover{transform:rotate(var(--tilt,0deg))}}
+@media (prefers-reduced-transparency:reduce){.pad-float,.pad-float.on-clock{background:var(--panel);-webkit-backdrop-filter:none;backdrop-filter:none}}
+@media (max-width:720px){.note{padding:16px 14px 12px;margin-bottom:16px}.pad-grid{column-gap:12px}}
 @media (max-width:520px){.pad-grid{columns:1}}
 @media (max-width:720px){.pad-grid{column-gap:10px}.pad-cap-row .pad-hint{display:none}.note{margin-bottom:10px}}
 /* Drag to reorder or into a project: a grip on the left of each open task */
@@ -7417,7 +7491,7 @@ function gradeCalc(c){
    Sticky notes for spontaneous tasks and thoughts: S.notes = [{id, text, imgs:[src], color 0-5, pin, done, t, u}].
    Type and press Enter, or paste/drop images and links: on the board for a new note, on a note to add to it.
    Links are shown as links (http and https only); images go through storeImage, so they sync like other photos. */
-const PAD_COLORS=["#f5c84c","#f28ab2","#6fb3ff","#6fd39b","#b38bff","#ff9f5a"];
+const PAD_COLORS=["#f6cf5f","#f49ac1","#7cb8ff","#79d8a8","#b9a0ff","#ffab76"];
 let padPend=[],padEdit=null,padColorOpen=null;
 const padNotes=()=>(S.notes=S.notes||[]);
 function padLinkify(t){
@@ -7432,7 +7506,7 @@ const CK_RE=/^\s*(?:[-*]\s*)?\[([ xX]?)\]\s?(.*)$/;
 function padCk(n){let d=0,t=0;(n.text||"").split("\n").forEach(l=>{const m=CK_RE.exec(l);if(m){t++;if(/x/i.test(m[1]))d++;}});return {d,t};}
 function padBody(n,ed){
   const lines=(n.text||"").split("\n"),edA=ed?' data-n="edit" tabindex="0" role="button" aria-label="Edit note"':"";let out="",buf=[],ck=[];
-  const flushT=()=>{const t=buf.join("\n").replace(/^\n+|\n+$/g,"");if(t)out+=`<div class="note-text"${edA}>${padLinkify(t)}</div>`;buf=[];};
+  const flushT=()=>{const t=buf.join("\n").replace(/^\n+|\n+$/g,"");if(t)out+=`<div class="note-text${t.includes("\n")?" multi":""}"${edA}>${padLinkify(t)}</div>`;buf=[];};
   const flushC=()=>{if(ck.length)out+=`<ul class="note-ck">${ck.join("")}</ul>`;ck=[];};
   lines.forEach((l,i)=>{const m=CK_RE.exec(l);if(!m){flushC();buf.push(l);return;}flushT();const on=/x/i.test(m[1]);
     ck.push(`<li${on?' class="on"':""}><button type="button" class="ck-b" data-n="ck" data-l="${i}" role="checkbox" aria-checked="${on}" aria-label="${esc(m[2]||"Item")}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg></button><span${ed?' data-n="edit"':""}>${padLinkify(m[2])}</span></li>`);});
