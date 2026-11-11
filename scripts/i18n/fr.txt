@@ -1564,3 +1564,26 @@
 1601|Couleur {n}
 1602|Image {n}
 1603|Acheté : {0}
+1604|Entrée pour l’élément suivant · Ctrl+Entrée ajoute la note
+1605|Un élément par ligne
+1606|Rechercher dans les notes
+1607|Afficher les notes
+1608|Afficher les notes épinglées sur l’horloge
+1609|Effacer les faites
+1610|Aucune note ne correspond.
+1611|Ajouter un élément
+1612|Liste terminée
+1613|Coller à l’écran
+1614|Décoller de l’écran
+1615|Collée à ton écran
+1616|Décollée
+1617|Les notes collées s’afficheront sur l’horloge
+1618|Colle une note à ton écran et elle s’affichera sur l’horloge
+1619|Les notes collées ne sont plus sur l’horloge
+1620|Notes terminées effacées
+1621|Notes collées
+1622|Ouvrir le bloc-notes
+1623|Réduire
+1624|Agrandir
+1625|Ajouter au bloc-notes
+1626|Élément

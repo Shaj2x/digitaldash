@@ -1564,3 +1564,26 @@
 1601|Farbe {n}
 1602|Bild {n}
 1603|Gekauft: {0}
+1604|Enter für den nächsten Punkt · Strg+Enter fügt die Notiz hinzu
+1605|Ein Punkt pro Zeile
+1606|Notizen durchsuchen
+1607|Notizen zeigen
+1608|Angeheftete Notizen auf der Uhr zeigen
+1609|Erledigte löschen
+1610|Keine passenden Notizen.
+1611|Punkt hinzufügen
+1612|Liste erledigt
+1613|Am Bildschirm anheften
+1614|Vom Bildschirm lösen
+1615|Am Bildschirm angeheftet
+1616|Gelöst
+1617|Angeheftete Notizen erscheinen auf der Uhr
+1618|Hefte eine Notiz an den Bildschirm, dann erscheint sie auf der Uhr
+1619|Angeheftete Notizen sind nicht mehr auf der Uhr
+1620|Erledigte Notizen gelöscht
+1621|Angeheftete Notizen
+1622|Notizblock öffnen
+1623|Minimieren
+1624|Ausklappen
+1625|Zum Notizblock hinzufügen
+1626|Punkt

@@ -490,3 +490,10 @@ The goal is that nothing teleports and nothing waits on you. Rules the code foll
 ### Shopping: ticked items leave quickly
 
 Ticking a shopping item keeps it in its aisle for 2.5 seconds (`SHOP_GRACE`) with a shrinking bar; tapping it again in that time unticks it. Then `shopGot(id)` moves it to "Buy again" (`S.shopRecent`) and the toast offers Undo, which puts it back on the list. Items ticked before this change stay under "In cart" until Clear checked, so nothing saved is removed on its own.
+
+### Quick pad: checklists, search, stuck notes
+
+- **Checklists.** Lines written as `[ ] item` or `[x] item` (also `- [ ]`) show as tickable rows with a `2/4` count; ticking rewrites that line (`padTick`). The Checklist button in the capture box turns each line into an item (Enter for the next item, Ctrl/Cmd+Enter adds the note). Checklist notes get an "Add an item" field (`padAddItem`).
+- **Search and filter.** Search box plus All / Open / Done, and "Clear done" (with Undo).
+- **Stuck notes.** The screen button on a note sets `n.float`. Stuck notes sit in a small panel (`#pad-float`, `renderPadFloat`) that stays on screen as you switch tabs. You can tick items there, add new notes, minimise it (`S.settings.padFloatMin`) and drag it on desktop (`S.settings.padFloatPos`). It is hidden on the Quick pad itself.
+- **On the clock.** With "Show stuck notes on the clock" (`S.settings.padOnClock`, off by default), the panel sits under the clock on the Focus tab, including full screen. With it off, the panel stays off the Focus tab.

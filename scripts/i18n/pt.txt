@@ -1564,3 +1564,26 @@
 1601|Cor {n}
 1602|Imagem {n}
 1603|Comprado: {0}
+1604|Enter para o próximo · Ctrl+Enter adiciona a nota
+1605|Um item por linha
+1606|Buscar notas
+1607|Mostrar notas
+1608|Mostrar notas fixadas no relógio
+1609|Limpar feitas
+1610|Nenhuma nota encontrada.
+1611|Adicionar item
+1612|Lista concluída
+1613|Fixar na tela
+1614|Tirar da tela
+1615|Fixada na sua tela
+1616|Tirada da tela
+1617|As notas fixadas vão aparecer no relógio
+1618|Fixe uma nota na tela e ela aparece no relógio
+1619|As notas fixadas saíram do relógio
+1620|Notas feitas apagadas
+1621|Notas fixadas
+1622|Abrir Notas rápidas
+1623|Minimizar
+1624|Expandir
+1625|Adicionar às Notas rápidas
+1626|Item

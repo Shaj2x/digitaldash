@@ -1564,3 +1564,26 @@
 1601|Colore {n}
 1602|Immagine {n}
 1603|Preso: {0}
+1604|Invio per la voce successiva · Ctrl+Invio aggiunge la nota
+1605|Una voce per riga
+1606|Cerca nelle note
+1607|Mostra note
+1608|Mostra le note fissate sull’orologio
+1609|Cancella fatte
+1610|Nessuna nota corrisponde.
+1611|Aggiungi una voce
+1612|Lista completata
+1613|Fissa sullo schermo
+1614|Togli dallo schermo
+1615|Fissata sullo schermo
+1616|Tolta dallo schermo
+1617|Le note fissate appariranno sull’orologio
+1618|Fissa una nota sullo schermo e apparirà sull’orologio
+1619|Le note fissate non sono più sull’orologio
+1620|Note fatte cancellate
+1621|Note fissate
+1622|Apri il blocco note
+1623|Riduci
+1624|Espandi
+1625|Aggiungi al blocco note
+1626|Voce

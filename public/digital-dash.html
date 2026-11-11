@@ -387,6 +387,47 @@ html.lg .addbar .addmore input[type=text]{background:var(--glass-tint);border-co
 .note-imgs span:only-child{grid-column:1/-1}.note-imgs span:only-child img{aspect-ratio:auto;max-height:260px}
 .note-imgs button{position:absolute;top:4px;right:4px;width:24px;height:24px;border-radius:50%;border:0;background:rgba(0,0,0,.6);color:#fff;cursor:pointer;opacity:0;transition:opacity var(--t-fast) ease}
 .note-imgs span:hover button,.note-imgs button:focus-visible{opacity:1}@media (pointer:coarse){.note-imgs button{opacity:.9}}
+.note-ck{list-style:none;margin:2px 0 0;padding:0;display:grid;gap:2px}
+.note-ck li{display:flex;gap:9px;align-items:flex-start;font-size:15px;line-height:1.4;overflow-wrap:anywhere}
+.note-ck li>span{flex:1;min-width:0;cursor:text}
+.note-ck li.on>span{text-decoration:line-through;color:var(--muted)}
+.ck-b{position:relative;flex:none;width:20px;height:20px;margin-top:1px;border-radius:6px;border:2px solid color-mix(in srgb,var(--nc) 75%,var(--ink));background:none;display:grid;place-items:center;padding:0;cursor:pointer;color:var(--bg);transition:background-color var(--t-fast,.12s) ease}
+.ck-b::after{content:"";position:absolute;inset:-8px}
+.ck-b svg{opacity:0}.ck-b[aria-checked="true"]{background:var(--nc);border-color:var(--nc)}.ck-b[aria-checked="true"] svg{opacity:1}
+@media (pointer:coarse){.ck-b{width:24px;height:24px}.ck-b::after{inset:-10px}.note-ck li{min-height:40px;align-items:center}}
+.ck-add{width:100%;margin-top:6px;font:inherit;font-size:14px;padding:6px 8px;border-radius:8px;border:1px dashed color-mix(in srgb,var(--nc) 70%,transparent);background:transparent;color:inherit}
+.ck-add:focus{border-style:solid;outline:none;background:color-mix(in srgb,var(--panel) 70%,transparent)}
+@media (pointer:coarse){.ck-add{font-size:16px!important;min-height:40px}}
+.note-prog{font-size:12px;font-weight:700;padding:1px 7px;border-radius:999px;background:color-mix(in srgb,var(--nc) 38%,transparent);font-variant-numeric:tabular-nums;margin-left:4px}
+.note-prog.full{background:var(--nc);color:#1b1b1b}
+.pad-tools{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;margin:0 0 14px}
+.pad-tools .pad-q{flex:1 1 200px;min-width:0}
+.pad-tools .chk{font-size:14px}
+.pad-none{color:var(--muted);padding:18px 4px}
+#pad-ck[aria-pressed="true"]{background:color-mix(in srgb,var(--accent) 22%,transparent);color:var(--ink)}
+/* stuck notes: float over every tab, or sit on the clock */
+.pad-float{position:fixed;right:16px;bottom:calc(96px + env(safe-area-inset-bottom,0px));z-index:45;width:min(300px,calc(100vw - 32px));max-height:min(60vh,520px);display:flex;flex-direction:column;background:var(--panel);color:var(--ink);border:1px solid var(--line);border-radius:16px;box-shadow:0 18px 40px -18px rgba(0,0,0,.55);overflow:hidden;animation:pf-in .22s cubic-bezier(.23,1,.32,1)}
+@keyframes pf-in{from{opacity:0;transform:translateY(8px) scale(.97)}}
+.pad-float[hidden]{display:none}
+.pf-head{display:flex;align-items:center;gap:2px;padding:6px 6px 6px 12px;cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none;border-bottom:1px solid var(--line)}
+.pf-head b{font-size:13px;letter-spacing:.02em}.pf-head .sp{flex:1}.pf-head .pf-n{font-size:12px;color:var(--muted);margin-left:6px}
+.pf-head .icon-btn{padding:5px}.pf-head .icon-btn[aria-pressed="true"]{color:var(--accent)}
+.pad-float.dragging .pf-head{cursor:grabbing}
+.pf-body{overflow:auto;padding:8px;display:grid;gap:8px;overscroll-behavior:contain}
+.pad-float.min .pf-body,.pad-float.min .pf-add{display:none}.pad-float.min .pf-head{border-bottom:0}
+.pf-note{--nc:#f5c84c;border-radius:10px;padding:8px 10px;background:color-mix(in srgb,var(--nc) 20%,var(--panel));border:1px solid color-mix(in srgb,var(--nc) 45%,transparent)}
+.pf-note.done{opacity:.6}.pf-note.done .note-text{text-decoration:line-through}
+.pf-top{display:flex;align-items:center;gap:4px;margin:-2px -4px 4px 0}.pf-top .sp{flex:1}.pf-top .icon-btn{padding:4px}
+.pf-note .note-text{cursor:default;font-size:14px;min-height:0}.pf-note .note-text:empty{display:none}
+.pf-note .note-ck li{font-size:14px}
+.pf-add{display:flex;gap:6px;padding:8px;border-top:1px solid var(--line)}
+.pf-add input{flex:1;min-width:0;font:inherit;font-size:14px;padding:7px 10px;border-radius:8px;border:1px solid var(--line);background:var(--panel2);color:var(--ink)}
+@media (pointer:coarse){.pf-add input{font-size:16px!important;min-height:44px}.pf-head .icon-btn,.pf-top .icon-btn{min-width:40px;min-height:40px}}
+.pad-float.on-clock{position:relative;right:auto;left:auto;top:auto;bottom:auto;z-index:3;flex:none;margin-top:16px;width:min(460px,100%);max-height:200px;animation:none;background:color-mix(in srgb,var(--panel) 82%,transparent);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
+.pad-float.on-clock .pf-head{cursor:default}.pad-float.on-clock .pf-add,.pad-float.on-clock [data-pf="clock"]{display:none}
+.stage:has(>.pad-float.on-clock:not([hidden])){justify-content:safe center;height:auto;padding-top:56px}body.zen .stage:has(>.pad-float.on-clock:not([hidden])){height:100%}body.zen .pad-float.on-clock{max-height:26vh}
+@media (max-width:600px){.pad-float:not(.on-clock){right:16px;left:16px;width:auto;max-height:46vh;bottom:calc(84px + env(safe-area-inset-bottom,0px))}.pad-float.on-clock{max-height:180px}}
+@media (prefers-reduced-motion:reduce){.pad-float{animation:none}}
 .note-colors{display:flex;gap:6px;margin:4px 0 6px}.note-colors button{width:22px;height:22px;border-radius:50%;border:2px solid transparent;cursor:pointer;padding:0}
 .note-colors button[aria-pressed="true"]{border-color:var(--ink)}
 .pad.drag-over .pad-grid{outline:2px dashed var(--accent);outline-offset:6px;border-radius:var(--r)}
@@ -2241,8 +2282,14 @@ html[data-style="blueprint"]:not(.lg) .rail:not(.sty-pv *),.sty-pv[data-sp="blue
         <form class="panel pad-cap" id="pad-form" autocomplete="off">
           <textarea id="pad-in" rows="2" maxlength="2000" placeholder="Jot something down. Paste or drop an image or link." aria-label="New note"></textarea>
           <div class="pad-pend" id="pad-pend" hidden></div>
-          <div class="pad-cap-row"><label class="btn ghost small pad-file"><input type="file" accept="image/*" id="pad-file" multiple><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="m21 16-5-5-9 9"/></svg>Image</label><span class="hint pad-hint">Enter adds it · Shift+Enter for a new line</span><button class="btn small" type="submit">Add note</button></div>
+          <div class="pad-cap-row"><label class="btn ghost small pad-file"><input type="file" accept="image/*" id="pad-file" multiple><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="m21 16-5-5-9 9"/></svg>Image</label><button type="button" class="btn ghost small" id="pad-ck" aria-pressed="false"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="6" height="6" rx="1.5"/><path d="m4.5 7 1 1 2-2M13 7h8M3 16h6M13 17h8"/><rect x="3" y="14" width="6" height="6" rx="1.5"/></svg>Checklist</button><span class="hint pad-hint" id="pad-hint">Enter adds it · Shift+Enter for a new line</span><button class="btn small" type="submit">Add note</button></div>
         </form>
+        <div class="pad-tools" id="pad-tools" hidden>
+          <input type="text" inputmode="search" enterkeyhint="search" class="pad-q" id="pad-q" placeholder="Search notes" aria-label="Search notes">
+          <div class="seg" id="pad-filt" role="group" aria-label="Show notes"><button type="button" data-f="all" aria-pressed="true">All</button><button type="button" data-f="open" aria-pressed="false">Open</button><button type="button" data-f="done" aria-pressed="false">Done</button></div>
+          <label class="chk"><input type="checkbox" id="pad-onclock"> Show stuck notes on the clock</label>
+          <button type="button" class="btn ghost small" id="pad-clear" hidden>Clear done</button>
+        </div>
         <div class="pad-grid" id="pad-grid"></div>
         <dialog class="pad-view" id="pad-view" aria-label="Image"><img alt=""><button type="button" class="icon-btn" data-pv="close" aria-label="Close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button></dialog>
       </div>
@@ -3476,6 +3523,7 @@ function show(v){
   if(v==="themes"){loadFonts(UIF.map(f=>f[4]).concat(CLF.map(f=>f[4])));fitFontPreviews();}
   thPreview(v==="themes");
   if(v==="calendar"){renderCal();renderWeek();renderMonthRev();} if(v==="money"){renderMoney();if(!same)drawChart();} if(v==="tasks")renderTasks();if(v==="health")renderHealth();
+  if(typeof renderPadFloat==="function")renderPadFloat();
   $("main").scrollTop=0;
 }
 const VIEWS=["focus","tasks","calendar","money","health","themes"];
@@ -7376,19 +7424,45 @@ function padLinkify(t){
     out+=esc(t.slice(last,m.index))+`<a href="${esc(u)}" target="_blank" rel="noopener noreferrer nofollow">${esc(shown)}</a>`;last=m.index+u.length;}
   return out+esc(t.slice(last));
 }
+/* Checklist lines: "[ ] item" or "[x] item" (also "- [ ]"). They show as tickable rows on the board,
+   in stuck notes and on the clock; ticking rewrites that line of the note's text. */
+const CK_RE=/^\s*(?:[-*]\s*)?\[([ xX]?)\]\s?(.*)$/;
+function padCk(n){let d=0,t=0;(n.text||"").split("\n").forEach(l=>{const m=CK_RE.exec(l);if(m){t++;if(/x/i.test(m[1]))d++;}});return {d,t};}
+function padBody(n,ed){
+  const lines=(n.text||"").split("\n"),edA=ed?' data-n="edit" tabindex="0" role="button" aria-label="Edit note"':"";let out="",buf=[],ck=[];
+  const flushT=()=>{const t=buf.join("\n").replace(/^\n+|\n+$/g,"");if(t)out+=`<div class="note-text"${edA}>${padLinkify(t)}</div>`;buf=[];};
+  const flushC=()=>{if(ck.length)out+=`<ul class="note-ck">${ck.join("")}</ul>`;ck=[];};
+  lines.forEach((l,i)=>{const m=CK_RE.exec(l);if(!m){flushC();buf.push(l);return;}flushT();const on=/x/i.test(m[1]);
+    ck.push(`<li${on?' class="on"':""}><button type="button" class="ck-b" data-n="ck" data-l="${i}" role="checkbox" aria-checked="${on}" aria-label="${esc(m[2]||"Item")}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg></button><span${ed?' data-n="edit"':""}>${padLinkify(m[2])}</span></li>`);});
+  flushT();flushC();
+  if(!out)out=`<div class="note-text${(n.imgs||[]).length?" cap":""}"${edA}></div>`;
+  if(padCk(n).t)out+=`<input class="ck-add" data-n="ckadd" maxlength="300" placeholder="Add an item" aria-label="Add an item">`;
+  return out;
+}
+function padTick(n,i){const L=(n.text||"").split("\n"),m=CK_RE.exec(L[i]||"");if(!m)return;const on=!/x/i.test(m[1]);L[i]=`[${on?"x":" "}] ${m[2]}`;n.text=L.join("\n");
+  if(on)sfxPlay("tick");save();const c=padCk(n);if(on&&c.t>1&&c.d===c.t)toast("Checklist done");renderPad();}
+function padAddItem(n,v){v=String(v||"").replace(/[\r\n]+/g," ").trim().slice(0,300);if(!v)return;n.text=((n.text||"").replace(/\n+$/,"")+((n.text||"").trim()?"\n":"")+"[ ] "+v).slice(0,2000);n.u=Date.now();save();renderPad();}
 function padAge(ms){const m=Math.round((Date.now()-ms)/60000);return m<1?"now":m<60?m+"m":m<1440?Math.round(m/60)+"h":niceDate(dkey(new Date(ms)));}
+var padQ="",padFilt="all",padCkMode=false,padFloatOK=false;
 function renderPad(){
+  renderPadFloat();
   const el=$("#pad-grid");if(!el||$("#pad-pane").hidden)return;const N=padNotes();
+  const tools=$("#pad-tools");tools.hidden=!N.length;if(N.length){initSeg($("#pad-filt"));glide($("#pad-filt"));}
+  $("#pad-onclock").checked=!!S.settings.padOnClock;const nd=N.filter(n=>n.done).length;$("#pad-clear").hidden=!nd;
   if(!N.length){el.innerHTML=`<div class="pad-empty">Nothing here yet. Jot a thought, paste a link, or drop an image to make your first note.</div>`;return;}
-  const list=N.slice().sort((a,b)=>(a.done-b.done)||((b.pin?1:0)-(a.pin?1:0))||(b.u||b.t)-(a.u||a.t));
+  const q=padQ.trim().toLowerCase();
+  const list=N.filter(n=>(padFilt==="all"||(padFilt==="done")===!!n.done)&&(!q||(n.text||"").toLowerCase().includes(q)))
+    .sort((a,b)=>(a.done-b.done)||((b.pin?1:0)-(a.pin?1:0))||(b.u||b.t)-(a.u||a.t));
+  if(!list.length){el.innerHTML=`<div class="pad-none">No notes match.</div>`;return;}
   el.innerHTML=list.map(n=>`<article class="note c${n.color||0}${n.done?" done":""}" data-id="${n.id}">
-    <div class="note-top"><button type="button" class="note-tick" data-n="done" aria-pressed="${!!n.done}" aria-label="${n.done?"Mark as not done":"Mark as done"}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg></button><span class="note-age">${padAge(n.u||n.t)}</span><span class="sp"></span>
+    <div class="note-top"><button type="button" class="note-tick" data-n="done" aria-pressed="${!!n.done}" aria-label="${n.done?"Mark as not done":"Mark as done"}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg></button><span class="note-age">${padAge(n.u||n.t)}</span>${(c=>c.t?`<span class="note-prog${c.d===c.t?" full":""}">${c.d}/${c.t}</span>`:"")(padCk(n))}<span class="sp"></span>
+      <button type="button" class="icon-btn" data-n="float" aria-pressed="${!!n.float}" aria-label="${n.float?"Unstick from screen":"Stick to screen"}" title="${n.float?"Unstick from screen":"Stick to screen"}"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><rect x="12" y="11" width="6" height="6" rx="1" fill="currentColor"/></svg></button>
       <button type="button" class="icon-btn" data-n="pin" aria-pressed="${!!n.pin}" aria-label="${n.pin?"Unpin":"Pin to the top"}" title="${n.pin?"Unpin":"Pin to the top"}"><svg width="15" height="15" viewBox="0 0 24 24" fill="${n.pin?"currentColor":"none"}" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M9 3h6l-1 6 4 4H6l4-4z"/><path d="M12 13v8"/></svg></button>
       <button type="button" class="icon-btn" data-n="color" aria-label="Change colour" title="Change colour"><svg width="15" height="15" viewBox="0 0 24 24"><circle cx="12" cy="12" r="7" fill="var(--nc)"/></svg></button>
       <button type="button" class="icon-btn" data-n="task" aria-label="Turn into a task" title="Turn into a task"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6h11M9 12h11M9 18h11"/><path d="m3 12 2 2 3-3"/></svg></button>
       <button type="button" class="icon-btn" data-n="del" aria-label="Delete note" title="Delete"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
     ${padColorOpen===n.id?`<div class="note-colors" role="group" aria-label="Note colour">${PAD_COLORS.map((c,i)=>`<button type="button" data-n="setc" data-c="${i}" style="background:${c}" aria-pressed="${(n.color||0)===i}" aria-label="Colour ${i+1}"></button>`).join("")}</div>`:""}
-    ${padEdit===n.id?`<textarea class="note-ed" maxlength="2000" aria-label="Edit note">${esc(n.text||"")}</textarea>`:`<div class="note-text${(n.imgs||[]).length?" cap":""}" data-n="edit" tabindex="0" role="button" aria-label="Edit note">${padLinkify(n.text||"")}</div>`}
+    ${padEdit===n.id?`<textarea class="note-ed" maxlength="2000" aria-label="Edit note">${esc(n.text||"")}</textarea>`:padBody(n,true)}
     ${(n.imgs||[]).length?`<div class="note-imgs">${n.imgs.map((src,i)=>{const u=resolveImg(src);return `<span><img src="${esc(u)}" alt="Image ${i+1}" data-n="view" data-i="${i}" loading="lazy"><button type="button" data-n="rmimg" data-i="${i}" aria-label="Remove image">×</button></span>`;}).join("")}</div>`:""}
   </article>`).join("");
   if(padEdit){const ta=el.querySelector(".note-ed");if(ta){ta.focus();ta.setSelectionRange(ta.value.length,ta.value.length);padGrow(ta);}}
@@ -7399,14 +7473,28 @@ async function padImages(files){
     try{const r=await storeImage(f,"n"+uid(),1400,pickMime(f));out.push(r.src);}catch(e){toast("Couldn't read that image");}}
   return out;
 }
-function padNew(text,imgs){
-  text=String(text||"").replace(/\r/g,"").trim().slice(0,2000);imgs=imgs||[];if(!text&&!imgs.length)return null;
-  const N=padNotes(),n={id:uid(),text,imgs,color:N.length%PAD_COLORS.length,pin:false,done:false,t:Date.now(),u:Date.now()};
-  N.push(n);save();if(taskMode!=="pad")toast("Added to Quick pad");renderPad();return n;
+function padNew(text,imgs,o){
+  o=o||{};text=String(text||"").replace(/\r/g,"").trim();imgs=imgs||[];
+  if(o.ck)text=text.split("\n").map(l=>l.trim()).filter(Boolean).map(l=>CK_RE.test(l)||/^https?:\/\//.test(l)?l:"[ ] "+l).join("\n");
+  text=text.slice(0,2000);if(!text&&!imgs.length)return null;
+  const N=padNotes(),n={id:uid(),text,imgs,color:N.length%PAD_COLORS.length,pin:false,done:false,t:Date.now(),u:Date.now()};if(o.float)n.float=true;
+  N.push(n);save();if(taskMode!=="pad"&&!o.quiet)toast("Added to Quick pad");renderPad();return n;
 }
 function padPendRender(){const el=$("#pad-pend");el.hidden=!padPend.length;el.innerHTML=padPend.map((src,i)=>`<span><img src="${esc(resolveImg(src))}" alt="Image ${i+1}"><button type="button" data-pp="${i}" aria-label="Remove image">×</button></span>`).join("");}
-$("#pad-form").addEventListener("submit",e=>{e.preventDefault();const t=$("#pad-in");if(padNew(t.value,padPend)){t.value="";padPend=[];padPendRender();t.style.height="";}});
-$("#pad-in").addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.shiftKey&&!e.isComposing){e.preventDefault();$("#pad-form").requestSubmit();}});
+$("#pad-form").addEventListener("submit",e=>{e.preventDefault();const t=$("#pad-in");if(padNew(t.value,padPend,{ck:padCkMode})){t.value="";padPend=[];padPendRender();t.style.height="";}});
+$("#pad-in").addEventListener("keydown",e=>{if(e.key!=="Enter"||e.isComposing)return;
+  if(padCkMode?(e.metaKey||e.ctrlKey):!e.shiftKey){e.preventDefault();$("#pad-form").requestSubmit();}});
+function padCkSet(on){padCkMode=on;const b=$("#pad-ck");b.setAttribute("aria-pressed",on);
+  $("#pad-hint").textContent=on?"Enter for the next item · Ctrl+Enter adds the note":"Enter adds it · Shift+Enter for a new line";
+  $("#pad-in").placeholder=on?"One item per line":"Jot something down. Paste or drop an image or link.";$("#pad-in").focus();}
+$("#pad-ck").addEventListener("click",()=>padCkSet(!padCkMode));
+$("#pad-q").addEventListener("input",e=>{padQ=e.target.value;renderPad();});
+$("#pad-filt").addEventListener("click",e=>{const b=e.target.closest("[data-f]");if(!b)return;padFilt=b.dataset.f;$$("#pad-filt button").forEach(x=>x.setAttribute("aria-pressed",x===b));glide($("#pad-filt"));renderPad();});
+$("#pad-onclock").addEventListener("change",e=>{S.settings.padOnClock=e.target.checked;save();renderPadFloat();
+  toast(e.target.checked?(padNotes().some(n=>n.float)?"Stuck notes will show on the clock":"Stick a note to your screen and it shows on the clock"):"Stuck notes are off the clock");});
+$("#pad-clear").addEventListener("click",()=>{const N=padNotes(),gone=N.filter(n=>n.done);if(!gone.length)return;S.notes=N.filter(n=>!n.done);save();renderPad();
+  toast("Finished notes cleared",{run(){S.notes=padNotes().concat(gone);save();renderPad();}});
+  setTimeout(()=>{const cur=padNotes();gone.forEach(n=>{if(!cur.includes(n))(n.imgs||[]).forEach(removeImage);});},8000);});
 $("#pad-in").addEventListener("input",e=>padGrow(e.target));
 $("#pad-file").addEventListener("change",async e=>{const srcs=await padImages([...e.target.files]);e.target.value="";if(srcs.length){padPend.push(...srcs);padPendRender();$("#pad-in").focus();}});
 $("#pad-pend").addEventListener("click",e=>{const b=e.target.closest("[data-pp]");if(!b)return;const [src]=padPend.splice(+b.dataset.pp,1);removeImage(src);padPendRender();});
@@ -7442,12 +7530,64 @@ $("#pad-grid").addEventListener("input",e=>{if(e.target.matches(".note-ed"))padG
 $("#pad-grid").addEventListener("keydown",e=>{
   if(e.target.matches(".note-ed")&&(e.key==="Escape"||(e.key==="Enter"&&(e.metaKey||e.ctrlKey)))){e.preventDefault();padSaveEdit();return;}
   if(e.target.matches(".note-text")&&(e.key==="Enter"||e.key===" ")){e.preventDefault();padEdit=e.target.closest(".note").dataset.id;renderPad();}
+  if(e.target.matches(".ck-add")&&e.key==="Enter"&&!e.isComposing){e.preventDefault();const n=padNotes().find(x=>x.id===e.target.closest(".note").dataset.id);if(n){padAddItem(n,e.target.value);const i=$(`#pad-grid .note[data-id="${n.id}"] .ck-add`);i&&i.focus();}}
 });
+/* ---------- stuck notes ----------
+   A note with float:true sticks to the screen: a small panel that stays put as you switch tabs (drag it by its
+   header; position in S.settings.padFloatPos, collapsed in padFloatMin). On the Focus tab it sits on the clock
+   only when S.settings.padOnClock is on, and hides otherwise. Hidden on the Quick pad itself. */
+function padFloatToggle(n){n.float=!n.float;save();renderPad();
+  toast(n.float?"Stuck to your screen":"Unstuck",{run(){n.float=!n.float;save();renderPad();}});}
+function padFloatWhere(){if(!padNotes().some(n=>n.float))return null;
+  if(curView==="focus")return S.settings.padOnClock?"clock":null;
+  if(curView==="tasks"&&taskMode==="pad")return null;return "float";}
+function padFloatPlace(el){const p=S.settings.padFloatPos;if(!p||el.classList.contains("on-clock")||innerWidth<=600){el.style.left=el.style.top=el.style.right=el.style.bottom="";return;}
+  const r=el.getBoundingClientRect(),x=Math.max(8,Math.min(innerWidth-r.width-8,p.x)),y=Math.max(8,Math.min(innerHeight-Math.min(r.height,80)-8,p.y));
+  el.style.left=x+"px";el.style.top=y+"px";el.style.right="auto";el.style.bottom="auto";}
+function renderPadFloat(){
+  if(!padFloatOK)return;let el=$("#pad-float");const where=padFloatWhere();
+  if(!where){if(el)el.hidden=true;return;}
+  if(!el){el=document.createElement("aside");el.id="pad-float";el.className="pad-float";el.setAttribute("aria-label","Stuck notes");padFloatWire(el);}
+  const host=where==="clock"?$("#stage"):document.body;if(el.parentNode!==host)host.appendChild(el);
+  el.classList.toggle("on-clock",where==="clock");const min=!!S.settings.padFloatMin&&where!=="clock";el.classList.toggle("min",min);el.hidden=false;
+  const fl=padNotes().filter(n=>n.float).sort((a,b)=>(a.done-b.done)||(a.t-b.t));
+  const keep=el.contains(document.activeElement)&&document.activeElement.matches(".pf-add input,.ck-add")?{cls:document.activeElement.className,id:(document.activeElement.closest("[data-id]")||{}).dataset?.id,v:document.activeElement.value}:null;
+  el.innerHTML=`<div class="pf-head" data-pf="drag"><b>Quick pad</b><span class="pf-n">${fl.length}</span><span class="sp"></span>
+    <button type="button" class="icon-btn" data-pf="clock" aria-pressed="${!!S.settings.padOnClock}" aria-label="Show stuck notes on the clock" title="Show stuck notes on the clock"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg></button>
+    <button type="button" class="icon-btn" data-pf="open" aria-label="Open Quick pad" title="Open Quick pad"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6M20 4l-8 8M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg></button>
+    ${where==="clock"?"":`<button type="button" class="icon-btn" data-pf="min" aria-expanded="${!min}" aria-label="${min?"Expand":"Minimise"}" title="${min?"Expand":"Minimise"}"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="${min?"m6 15 6-6 6 6":"m6 9 6 6 6-6"}"/></svg></button>`}</div>
+  <div class="pf-body">${fl.map(n=>`<div class="pf-note${n.done?" done":""}" data-id="${n.id}" style="--nc:${PAD_COLORS[n.color||0]}"><div class="pf-top"><button type="button" class="note-tick" data-n="done" aria-pressed="${!!n.done}" aria-label="${n.done?"Mark as not done":"Mark as done"}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg></button>${(c=>c.t?`<span class="note-prog${c.d===c.t?" full":""}">${c.d}/${c.t}</span>`:"")(padCk(n))}<span class="sp"></span><button type="button" class="icon-btn" data-n="float" aria-label="Unstick from screen" title="Unstick from screen"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>${padBody(n,false)}${(n.imgs||[]).length?`<div class="note-imgs">${n.imgs.slice(0,3).map((src,i)=>`<span><img src="${esc(resolveImg(src))}" alt="Image ${i+1}" loading="lazy"></span>`).join("")}</div>`:""}</div>`).join("")}</div>
+  <form class="pf-add" data-pf="add" autocomplete="off"><input maxlength="2000" placeholder="Add to Quick pad" aria-label="Add to Quick pad"></form>`;
+  if(keep){const sel=keep.cls.includes("ck-add")&&keep.id?`.pf-note[data-id="${keep.id}"] .ck-add`:".pf-add input";const i=el.querySelector(sel);if(i){i.value=keep.v;i.focus();}}
+  padFloatPlace(el);
+}
+function padFloatWire(el){
+  el.addEventListener("click",e=>{if(e.target.closest("a"))return;
+    const f=e.target.closest("[data-pf]");if(f){const a=f.dataset.pf;
+      if(a==="open"){show("tasks");setTaskMode("pad");try{history.replaceState(null,"","#tasks");}catch(_){}return;}
+      if(a==="min"){S.settings.padFloatMin=!S.settings.padFloatMin;save();renderPadFloat();return;}
+      if(a==="clock"){S.settings.padOnClock=!S.settings.padOnClock;save();renderPad();toast(S.settings.padOnClock?"Stuck notes will show on the clock":"Stuck notes are off the clock");return;}}
+    const b=e.target.closest("[data-n]");if(!b)return;const card=b.closest("[data-id]"),n=card&&padNotes().find(x=>x.id===card.dataset.id);if(!n)return;
+    if(b.dataset.n==="ck")padTick(n,+b.dataset.l);else if(b.dataset.n==="done"){n.done=!n.done;n.u=Date.now();if(n.done)sfxPlay("tick");save();renderPad();}else if(b.dataset.n==="float")padFloatToggle(n);});
+  el.addEventListener("submit",e=>{e.preventDefault();const i=e.target.querySelector("input");if(padNew(i.value,[],{float:true,quiet:true}))i.value="";});
+  el.addEventListener("keydown",e=>{if(e.target.matches(".ck-add")&&e.key==="Enter"&&!e.isComposing){e.preventDefault();const n=padNotes().find(x=>x.id===e.target.closest("[data-id]").dataset.id);if(n)padAddItem(n,e.target.value);}});
+  let d=null;
+  el.addEventListener("pointerdown",e=>{const h=e.target.closest(".pf-head");if(!h||e.target.closest("button")||el.classList.contains("on-clock")||innerWidth<=600||e.button)return;
+    const r=el.getBoundingClientRect();d={dx:e.clientX-r.left,dy:e.clientY-r.top,id:e.pointerId};h.setPointerCapture(e.pointerId);el.classList.add("dragging");});
+  el.addEventListener("pointermove",e=>{if(!d||e.pointerId!==d.id)return;S.settings.padFloatPos={x:e.clientX-d.dx,y:e.clientY-d.dy};padFloatPlace(el);});
+  const end=e=>{if(!d||e.pointerId!==d.id)return;d=null;el.classList.remove("dragging");const r=el.getBoundingClientRect();S.settings.padFloatPos={x:Math.round(r.left),y:Math.round(r.top)};save();};
+  el.addEventListener("pointerup",end);el.addEventListener("pointercancel",end);
+  addEventListener("resize",()=>{if(!el.hidden)padFloatPlace(el);});
+}
+padFloatOK=true;renderPadFloat();
 $("#pad-grid").addEventListener("click",e=>{
   if(e.target.closest("a"))return; /* links open normally */
   const b=e.target.closest("[data-n]");if(!b)return;const el=b.closest(".note"),N=padNotes(),n=N.find(x=>x.id===el.dataset.id);if(!n)return;const a=b.dataset.n;
   if(a==="edit"){padSaveEdit();padEdit=n.id;renderPad();return;}
   if(a==="done"){n.done=!n.done;n.u=Date.now();save();renderPad();return;}
+  if(a==="ck"){padTick(n,+b.dataset.l);return;}
+  if(a==="ckadd")return;
+  if(a==="float"){padFloatToggle(n);return;}
   if(a==="pin"){n.pin=!n.pin;save();renderPad();toast(n.pin?"Pinned to the top":"Unpinned");return;}
   if(a==="color"){padColorOpen=padColorOpen===n.id?null:n.id;renderPad();return;}
   if(a==="setc"){n.color=+b.dataset.c;padColorOpen=null;save();renderPad();return;}
@@ -7463,7 +7603,7 @@ $("#pad-grid").addEventListener("click",e=>{
 $("#pad-view").addEventListener("click",e=>{if(e.target.closest('[data-pv="close"]')||e.target===e.currentTarget)e.currentTarget.close();});
 function setTaskMode(m){
   taskMode=m;$$("#task-mode button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.m===m));glide($("#task-mode"));
-  $("#tasks-pane").hidden=m!=="tasks";$("#courses-pane").hidden=m!=="courses";$("#plan-pane").hidden=m!=="plan";$("#shop-pane").hidden=m!=="shop";$("#pad-pane").hidden=m!=="pad";if(m==="pad")renderPad();if(m==="courses"){renderCoursesPane();gcShow();}if(m==="plan")renderPlan();if(m==="shop")renderShop();
+  $("#tasks-pane").hidden=m!=="tasks";$("#courses-pane").hidden=m!=="courses";$("#plan-pane").hidden=m!=="plan";$("#shop-pane").hidden=m!=="shop";$("#pad-pane").hidden=m!=="pad";if(m==="pad")renderPad();else renderPadFloat();if(m==="courses"){renderCoursesPane();gcShow();}if(m==="plan")renderPlan();if(m==="shop")renderShop();
 }
 function renderCoursesPane(){
   if($("#courses-pane").hidden)return;const el=$("#crs-body");S.courses=S.courses||[];

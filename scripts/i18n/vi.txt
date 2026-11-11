@@ -1564,3 +1564,26 @@
 1601|Màu {n}
 1602|Ảnh {n}
 1603|Đã mua: {0}
+1604|Enter để thêm mục tiếp · Ctrl+Enter để thêm ghi chú
+1605|Mỗi dòng một mục
+1606|Tìm ghi chú
+1607|Hiện ghi chú
+1608|Hiện ghi chú đã dán trên đồng hồ
+1609|Xóa mục đã xong
+1610|Không có ghi chú nào khớp.
+1611|Thêm một mục
+1612|Đã xong danh sách
+1613|Dán lên màn hình
+1614|Gỡ khỏi màn hình
+1615|Đã dán lên màn hình
+1616|Đã gỡ
+1617|Ghi chú đã dán sẽ hiện trên đồng hồ
+1618|Dán một ghi chú lên màn hình để nó hiện trên đồng hồ
+1619|Ghi chú đã dán không còn trên đồng hồ
+1620|Đã xóa ghi chú đã xong
+1621|Ghi chú đã dán
+1622|Mở Ghi chú nhanh
+1623|Thu nhỏ
+1624|Mở rộng
+1625|Thêm vào Ghi chú nhanh
+1626|Mục
