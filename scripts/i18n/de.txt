@@ -1563,3 +1563,4 @@
 1600|Zum Notizblock: {0}
 1601|Farbe {n}
 1602|Bild {n}
+1603|Gekauft: {0}

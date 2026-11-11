@@ -1563,3 +1563,4 @@
 1600|Ajouter au bloc-notes : {0}
 1601|Couleur {n}
 1602|Image {n}
+1603|Acheté : {0}

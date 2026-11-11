@@ -1563,3 +1563,4 @@
 1600|Aggiungi al blocco note: {0}
 1601|Colore {n}
 1602|Immagine {n}
+1603|Preso: {0}

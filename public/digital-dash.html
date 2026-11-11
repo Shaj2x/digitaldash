@@ -1503,7 +1503,7 @@ html.lg .ac-stats div,html.lg .ac-list li,html.lg .acp-opt{background:var(--glas
 .shop-acts{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
 .shop-cat{margin:18px 2px 8px;font-size:12.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
 .shop-list{list-style:none;margin:0;padding:0;display:grid;gap:6px}
-.shop-it{--uc:var(--accent);display:flex;align-items:center;gap:12px;background:var(--panel);border:1px solid var(--line);border-radius:var(--r,12px);padding:10px 12px;min-height:48px}
+.shop-it{--uc:var(--accent);position:relative;overflow:hidden;display:flex;align-items:center;gap:12px;background:var(--panel);border:1px solid var(--line);border-radius:var(--r,12px);padding:10px 12px;min-height:48px}
 .shop-it .check{flex:none}
 .shop-it .si-name{flex:1;min-width:0;background:none;border:0;padding:4px 0;color:inherit;font:inherit;text-align:left;cursor:text;overflow-wrap:anywhere}
 .shop-it .si-q{flex:none;font-size:13px;font-weight:700;padding:2px 8px;border-radius:999px;background:var(--panel2);font-variant-numeric:tabular-nums}
@@ -3962,7 +3962,7 @@ function renderTasks(mode){
 let taskHold=0;
 /* A ticked task stays where it is for DONE_GRACE ms with an Undo button and a shrinking bar,
    then leaves the open list. Unticking or Undo in that time puts it straight back. */
-const DONE_GRACE=6000;var graceDone=new Map(); /* task id -> {start, timer} */
+const DONE_GRACE=2500;var graceDone=new Map(); /* task id -> {start, timer} */
 function graceStart(t){graceEnd(t.id);const g={start:Date.now()};g.timer=setTimeout(()=>{graceDone.delete(t.id);renderTasks();renderTimerTag();},DONE_GRACE);graceDone.set(t.id,g);}
 function graceEnd(id){const g=graceDone.get(id);if(g){clearTimeout(g.timer);graceDone.delete(id);}}
 const graceLeft=id=>{const g=graceDone.get(id);return g?Math.max(0,DONE_GRACE-(Date.now()-g.start)):0;};
@@ -7699,10 +7699,10 @@ function shopAdd(it,quiet){S.shop=S.shop||[];if(!it.name)return null;
 let shopEdit=null;
 function renderShop(){
   const pane=$("#shop-pane");if(!pane||pane.hidden)return;S.shop=S.shop||[];
-  const el=$("#shop-body"),list=S.shop,todo=list.filter(x=>!x.done),cart=list.filter(x=>x.done);
+  const el=$("#shop-body"),list=S.shop,todo=list.filter(x=>!x.done||shopGrace.has(x.id)),cart=list.filter(x=>x.done&&!shopGrace.has(x.id));
   const cost=a=>a.reduce((n,x)=>n+(x.price!=null?x.price*(x.qty||1):0),0),priced=a=>a.some(x=>x.price!=null);
   const x='<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6 6 18"/></svg>';
-  const row=i=>`<li class="shop-it${i.done?" done":""}" data-sid="${i.id}">
+  const row=i=>`<li class="shop-it${i.done?" done":""}" data-sid="${i.id}">${shopGraceBar(i)}
       <button class="check${i.done?" on":""}" type="button" data-sh="tog" aria-label="${i.done?`Put ${esc(i.name)} back on the list`:`Got ${esc(i.name)}`}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4"><path pathLength="1" d="m5 12 5 5 9-10"/></svg></button>
       ${shopEdit===i.id?`<input class="si-edit" type="text" maxlength="80" data-sh="edit" value="${esc((i.qty>1?i.qty+" ":"")+i.name+(i.price!=null?" "+curSymbol()+i.price.toFixed(2):""))}" aria-label="Edit ${esc(i.name)}">`
         :`<button type="button" class="si-name" data-sh="ed" title="Edit">${esc(i.name)}</button>${i.qty>1?`<span class="si-q">×${i.qty}</span>`:""}${i.price!=null?`<span class="si-p">${fmt(i.price*(i.qty||1))}</span>`:""}`}
@@ -7726,9 +7726,20 @@ function shopSaveEdit(inp){const i=(S.shop||[]).find(x=>x.id===inp.closest("[dat
   const it=shopParse(inp.value);if(it.name){i.name=it.name;i.qty=it.qty;i.price=it.price;if(it.cat!=="other"||i.cat==="other")i.cat=it.cat;save();}renderShop();}
 $("#shop-body").addEventListener("keydown",e=>{const inp=e.target.closest(".si-edit");if(!inp)return;if(e.key==="Enter"){e.preventDefault();shopSaveEdit(inp);}if(e.key==="Escape"){shopEdit=null;renderShop();}});
 $("#shop-body").addEventListener("focusout",e=>{const inp=e.target.closest(".si-edit");if(inp&&shopEdit)shopSaveEdit(inp);});
+/* A ticked shopping item stays in its aisle for SHOP_GRACE ms with a shrinking bar (tap again to
+   untick), then leaves the list for "Buy again". The toast offers Undo. Items ticked before this
+   existed stay "In cart" until Clear checked. */
+const SHOP_GRACE=2500;var shopGrace=new Map(); /* item id -> {start, timer} */
+function shopGraceEnd(id){const g=shopGrace.get(id);if(g){clearTimeout(g.timer);shopGrace.delete(id);}}
+function shopGraceStart(i){shopGraceEnd(i.id);const g={start:Date.now()};g.timer=setTimeout(()=>{shopGrace.delete(i.id);shopGot(i.id);},SHOP_GRACE);shopGrace.set(i.id,g);}
+function shopGot(id){const list=S.shop||[],k=list.findIndex(x=>x.id===id);if(k<0||!list[k].done)return renderShop();
+  const it=list[k],rec=(S.shopRecent||[]).slice();list.splice(k,1);
+  S.shopRecent=[{name:it.name,cat:it.cat,price:it.price},...rec.filter(r=>r.name.toLowerCase()!==it.name.toLowerCase())].slice(0,16);
+  save();renderShop();toast(`Got ${it.name}`,{run(){const l=S.shop=S.shop||[];it.done=false;l.splice(Math.min(k,l.length),0,it);S.shopRecent=rec;save();renderShop();}});}
+function shopGraceBar(i){const g=i.done&&shopGrace.get(i.id);if(!g)return"";const left=Math.max(0,SHOP_GRACE-(Date.now()-g.start));return`<i class="grace-bar" style="--gd:${SHOP_GRACE}ms;animation-delay:-${SHOP_GRACE-left}ms" aria-hidden="true"></i>`;}
 $("#shop-body").addEventListener("click",e=>{
   const b=e.target.closest("[data-sh]");if(!b)return;const a=b.dataset.sh,li=b.closest("[data-sid]"),list=S.shop||[],i=li&&list.find(x=>x.id===li.dataset.sid);
-  if(a==="tog"&&i){i.done=!i.done;if(i.done)sfxPlay("tick");save();renderShop();return;}
+  if(a==="tog"&&i){i.done=!i.done;if(i.done){sfxPlay("tick");shopGraceStart(i);}else shopGraceEnd(i.id);save();renderShop();return;}
   if(a==="ed"&&i){shopEdit=i.id;renderShop();return;}
   if(a==="del"&&i){const k=list.indexOf(i);list.splice(k,1);save();renderShop();toast(`Removed ${i.name}`,{run(){list.splice(k,0,i);save();renderShop();}});return;}
   if(a==="again"){const r=$("#shop-body")._again[+b.dataset.k];if(r)shopAdd({name:r.name,qty:1,price:r.price,cat:r.cat},true);return;}

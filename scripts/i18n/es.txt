@@ -1563,3 +1563,4 @@
 1600|Añadir a Notas rápidas: {0}
 1601|Color {n}
 1602|Imagen {n}
+1603|Comprado: {0}
