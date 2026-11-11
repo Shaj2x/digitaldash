@@ -1587,3 +1587,9 @@
 1624|Expandir
 1625|Añadir a Notas rápidas
 1626|Elemento
+1627|Mantener en pantalla
+1628|Mantener Notas rápidas en pantalla en cada pestaña
+1629|Notas rápidas se queda en pantalla en cada pestaña
+1630|Notas rápidas ya no está en pantalla
+1631|No hay notas abiertas. Añade una abajo.
+1632|Activa Mantener en pantalla y tus notas saldrán en el reloj

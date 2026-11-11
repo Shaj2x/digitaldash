@@ -1587,3 +1587,9 @@
 1624|Ausklappen
 1625|Zum Notizblock hinzufügen
 1626|Punkt
+1627|Auf dem Bildschirm halten
+1628|Notizblock in jedem Tab auf dem Bildschirm halten
+1629|Der Notizblock bleibt in jedem Tab auf dem Bildschirm
+1630|Der Notizblock ist nicht mehr auf dem Bildschirm
+1631|Keine offenen Notizen. Füg unten eine hinzu.
+1632|Schalte „Auf dem Bildschirm halten“ ein, dann erscheinen deine Notizen auf der Uhr

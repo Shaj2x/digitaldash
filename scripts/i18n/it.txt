@@ -1587,3 +1587,9 @@
 1624|Espandi
 1625|Aggiungi al blocco note
 1626|Voce
+1627|Tieni sullo schermo
+1628|Tieni il blocco note sullo schermo in ogni scheda
+1629|Il blocco note resta sullo schermo in ogni scheda
+1630|Il blocco note non è più sullo schermo
+1631|Nessuna nota aperta. Aggiungine una qui sotto.
+1632|Attiva Tieni sullo schermo e le note appariranno sull’orologio

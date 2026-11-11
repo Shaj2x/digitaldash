@@ -1587,3 +1587,9 @@
 1624|Agrandir
 1625|Ajouter au bloc-notes
 1626|Élément
+1627|Garder à l’écran
+1628|Garder le bloc-notes à l’écran dans chaque onglet
+1629|Le bloc-notes reste à l’écran dans chaque onglet
+1630|Le bloc-notes n’est plus à l’écran
+1631|Aucune note ouverte. Ajoutes-en une ci-dessous.
+1632|Active Garder à l’écran et tes notes s’afficheront sur l’horloge

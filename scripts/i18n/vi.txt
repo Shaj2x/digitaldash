@@ -1587,3 +1587,9 @@
 1624|Mở rộng
 1625|Thêm vào Ghi chú nhanh
 1626|Mục
+1627|Giữ trên màn hình
+1628|Giữ Ghi chú nhanh trên màn hình ở mọi thẻ
+1629|Ghi chú nhanh ở trên màn hình ở mọi thẻ
+1630|Ghi chú nhanh không còn trên màn hình
+1631|Không có ghi chú nào đang mở. Thêm một ghi chú bên dưới.
+1632|Bật Giữ trên màn hình để ghi chú hiện trên đồng hồ

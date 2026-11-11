@@ -1587,3 +1587,9 @@
 1624|Expandir
 1625|Adicionar às Notas rápidas
 1626|Item
+1627|Manter na tela
+1628|Manter as Notas rápidas na tela em todas as abas
+1629|As Notas rápidas ficam na tela em todas as abas
+1630|As Notas rápidas saíram da tela
+1631|Nenhuma nota aberta. Adicione uma abaixo.
+1632|Ative Manter na tela e suas notas aparecem no relógio
