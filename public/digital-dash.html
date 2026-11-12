@@ -221,7 +221,7 @@ input::placeholder{color:var(--muted)}
 .timer .modes:not(.has-thumb) button[aria-pressed="true"]{background:var(--accent)}
 .timer .ctl{display:flex;gap:10px}
 .timer .ctl .btn.ghost{background:rgba(255,255,255,.1);color:var(--card-ink)}
-.timer .note{opacity:.7;font-size:14px}
+.timer .tm-note{opacity:.7;font-size:14px}
 .stage:has(.timer){padding-top:64px} /* keep the timer bar clear of the date row as timers are added */
 .timer .tm-top{display:flex;align-items:center;justify-content:center;gap:6px;max-width:100%;min-width:0}
 .timer .tm-top .tm-editbtn{flex:none}
@@ -3674,7 +3674,7 @@ function buildClock(k){
     const ring=(id,label)=>`<div class="ring"><svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="50" fill="none" stroke="currentColor" stroke-opacity=".12" stroke-width="10"/><circle id="rg-${id}" cx="60" cy="60" r="50" fill="none" stroke="var(--accent)" stroke-width="10" stroke-linecap="round" stroke-dasharray="314.16" stroke-dashoffset="314.16" transform="rotate(-90 60 60)" style="stroke-dashoffset:314.16"/></svg><b id="rp-${id}">0%</b><small>${label}</small></div>`;
     w.innerHTML=`<div class="rings">${ring("h","of this hour")}${ring("d","of today")}${ring("w","of this week")}${ring("mo","of this month")}${ring("y","of this year")}</div>`;
   }else if(k==="timer"){
-    w.innerHTML=`<div class="timer"><div class="tm-top"><div class="seg-scroll"><div class="seg modes" id="tm-modes" role="group" aria-label="Timer"></div></div><button class="icon-btn tm-editbtn" id="tm-editbtn" type="button" aria-expanded="false" aria-controls="tm-edit" aria-label="Timers and sounds" title="Timers and sounds"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button></div><div class="t" id="tm-t"></div><div class="ctl"><button class="btn" id="tm-go"></button><button class="btn ghost" id="tm-reset">Reset</button></div><div class="note" id="tm-note"></div><label class="tm-on"><span>Working on</span><select id="tm-tag" aria-label="What this session is for"></select></label><div class="tm-edit" id="tm-edit" hidden></div></div>`;
+    w.innerHTML=`<div class="timer"><div class="tm-top"><div class="seg-scroll"><div class="seg modes" id="tm-modes" role="group" aria-label="Timer"></div></div><button class="icon-btn tm-editbtn" id="tm-editbtn" type="button" aria-expanded="false" aria-controls="tm-edit" aria-label="Timers and sounds" title="Timers and sounds"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button></div><div class="t" id="tm-t"></div><div class="ctl"><button class="btn" id="tm-go"></button><button class="btn ghost" id="tm-reset">Reset</button></div><div class="tm-note" id="tm-note"></div><label class="tm-on"><span>Working on</span><select id="tm-tag" aria-label="What this session is for"></select></label><div class="tm-edit" id="tm-edit" hidden></div></div>`;
     if(!T.running){const t=timerById(S.settings.timerId)||timerById(T.id)||S.timers[0];if(t)useTimer(t,true);}
     initSeg($("#tm-modes"));renderTimerModes();renderTimerTag();
     $("#tm-tag").addEventListener("change",e=>{S.settings.tmTag=e.target.value;save();});
