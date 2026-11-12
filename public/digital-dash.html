@@ -221,7 +221,7 @@ input::placeholder{color:var(--muted)}
 .timer .modes:not(.has-thumb) button[aria-pressed="true"]{background:var(--accent)}
 .timer .ctl{display:flex;gap:10px}
 .timer .ctl .btn.ghost{background:rgba(255,255,255,.1);color:var(--card-ink)}
-.timer .tm-note{opacity:.7;font-size:14px}
+.timer .tm-note{opacity:.7;font-size:14px}.timer .tm-note:empty{display:none}
 .stage:has(.timer){padding-top:64px} /* keep the timer bar clear of the date row as timers are added */
 .timer .tm-top{display:flex;align-items:center;justify-content:center;gap:6px;max-width:100%;min-width:0}
 .timer .tm-top .tm-editbtn{flex:none}
@@ -3915,7 +3915,7 @@ function updTimer(){
   const hh=Math.floor(T.left/3600);t.textContent=(hh?hh+":"+pad(Math.floor(T.left%3600/60)):pad(Math.floor(T.left/60)))+":"+pad(T.left%60);
   $("#tm-go").textContent=T.running?"Pause":(T.left<T.len?"Resume":"Start");
   const n=S.sessions[dkey(new Date())]||0;
-  $("#tm-note").textContent=n?`${n} focus session${n>1?"s":""} done today`:"Finish a focus timer to log a session";
+  $("#tm-note").textContent=n?`${n} focus session${n>1?"s":""} done today`:"";
 }
 
 let lastSec=-1;
