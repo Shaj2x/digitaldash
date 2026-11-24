@@ -1597,3 +1597,5 @@
 1634|Le bloc-notes est sur l’horloge
 1635|Le bloc-notes n’est plus sur l’horloge
 1636|Afficher le bloc-notes sur l’horloge
+1637|Entrée l’ajoute · Maj+Entrée pour une nouvelle ligne · - crée une case
+1638|Un titre, puis - pour chaque élément (ou un élément par ligne)

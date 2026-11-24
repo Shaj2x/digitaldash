@@ -1639,6 +1639,8 @@
 "Quick pad on the clock",
 "Quick pad is on the clock",
 "Quick pad is off the clock",
-"Show Quick pad on the clock"
+"Show Quick pad on the clock",
+"Enter adds it · Shift+Enter for a new line · - makes a checkbox",
+"A title, then - for each item (or one item per line)"
 ]
 }

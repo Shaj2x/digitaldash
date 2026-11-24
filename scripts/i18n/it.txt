@@ -1597,3 +1597,5 @@
 1634|Il blocco note è sull’orologio
 1635|Il blocco note non è più sull’orologio
 1636|Mostra il blocco note sull’orologio
+1637|Invio la aggiunge · Maiusc+Invio per andare a capo · - crea una casella
+1638|Un titolo, poi - per ogni voce (o una voce per riga)

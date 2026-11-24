@@ -1597,3 +1597,5 @@
 1634|Ghi chú nhanh đang ở trên đồng hồ
 1635|Ghi chú nhanh không còn trên đồng hồ
 1636|Hiện Ghi chú nhanh trên đồng hồ
+1637|Enter để thêm · Shift+Enter để xuống dòng · - tạo ô đánh dấu
+1638|Một tiêu đề, rồi - cho mỗi mục (hoặc mỗi dòng một mục)

@@ -1597,3 +1597,5 @@
 1634|Notas rápidas está en el reloj
 1635|Notas rápidas ya no está en el reloj
 1636|Mostrar Notas rápidas en el reloj
+1637|Enter la añade · Mayús+Enter para una línea nueva · - crea una casilla
+1638|Un título y luego - para cada elemento (o uno por línea)

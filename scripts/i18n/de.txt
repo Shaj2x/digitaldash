@@ -1597,3 +1597,5 @@
 1634|Der Notizblock ist auf der Uhr
 1635|Der Notizblock ist nicht mehr auf der Uhr
 1636|Notizblock auf der Uhr zeigen
+1637|Enter fügt hinzu · Umschalt+Enter für neue Zeile · - macht ein Kästchen
+1638|Ein Titel, dann - für jeden Punkt (oder ein Punkt pro Zeile)
