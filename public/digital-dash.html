@@ -782,7 +782,9 @@ h1{font-family:var(--clock);font-weight:800;font-size:clamp(34px,5vw,52px);line-
 [data-sub]:hover::after,[data-sub]:focus::after{opacity:.7}
 [data-sub]:focus{background:var(--panel2);color:var(--ink);box-shadow:0 0 0 2px var(--accent)}
 /* ---- customization ---- */
-#bg-layer,#bg-dim,#bg-live{position:fixed;inset:0;z-index:0;pointer-events:none}
+#bg-layer,#bg-dim,#bg-live,#bg-silk{position:fixed;inset:0;z-index:0;pointer-events:none}
+#bg-silk{width:100%;height:100%;display:none}
+html.bg-silk #bg-silk{display:block}
 #bg-live{width:100%;height:100%;display:none}
 html.bg-live #bg-live{display:block}
 #bg-dim::after{content:"";position:absolute;inset:0;opacity:0;transition:opacity var(--t-ui) ease;mix-blend-mode:overlay;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .5 0 0 0 0 .5 0 0 0 0 .5 0 0 0 1.6 -.3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
@@ -792,6 +794,17 @@ html.grain #bg-dim::after{opacity:.5}
 .lives i{display:block;height:54px;border-radius:8px;background-size:170% 170%;background-position:50% 50%}
 .lives button[aria-checked="true"]{border-color:var(--ink)}
 .lives button:active{transform:scale(.97)}
+.silk-opts{display:grid;gap:12px;margin-top:14px;padding-top:14px;border-top:1px solid var(--line)}
+.silk-opts[hidden]{display:none}
+.silk-opts .lab{font-size:12.5px;font-weight:600;color:var(--muted);letter-spacing:.04em}
+.silk-row{display:flex;flex-wrap:wrap;gap:6px}
+.silk-row button{border:1.5px solid var(--line);background:var(--panel2);color:var(--ink);font:500 13px/1 var(--ui);padding:8px 12px;border-radius:999px;min-height:36px;cursor:pointer;display:inline-flex;align-items:center;gap:7px}
+.silk-row button[aria-pressed="true"]{border-color:var(--ink);background:color-mix(in srgb,var(--ink) 10%,var(--panel2))}
+.silk-row button i{width:16px;height:16px;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(255,255,255,.15)}
+.silk-cols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.silk-cols label{display:grid;gap:4px;font-size:12.5px;color:var(--muted)}
+.silk-cols input{width:100%;height:36px;padding:2px;border-radius:10px;border:1px solid var(--line);background:var(--panel2)}
+@media (pointer:coarse){.silk-row button{min-height:44px}.silk-cols input{height:44px}}
 @media (prefers-reduced-motion:reduce){.lives button:active{transform:none}}
 .app{position:relative;z-index:1}
 html.has-bg body{background:transparent}
@@ -2272,7 +2285,7 @@ html[data-style="blueprint"]:not(.lg) .rail:not(.sty-pv *),.sty-pv[data-sp="blue
 </style>
 </head>
 <body>
-<div id="bg-layer" aria-hidden="true"></div><canvas id="bg-live" aria-hidden="true"></canvas><div id="bg-dim" aria-hidden="true"></div>
+<div id="bg-layer" aria-hidden="true"></div><canvas id="bg-live" aria-hidden="true"></canvas><canvas id="bg-silk" aria-hidden="true"></canvas><div id="bg-dim" aria-hidden="true"></div>
 <div class="app">
   <nav class="rail" aria-label="Sections">
     <button class="nav" data-view="focus" aria-current="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span class="lbl">Focus</span></button>
@@ -2590,6 +2603,15 @@ html[data-style="blueprint"]:not(.lg) .rail:not(.sty-pv *),.sty-pv[data-sp="blue
         <div class="bgopt" data-for="color"><div class="field"><span>Background colour</span><input type="color" id="bg-color"></div></div>
         <div class="bgopt grads" data-for="gradient" id="bg-grads"></div>
         <div class="bgopt" data-for="live"><div class="lives" id="bg-lives" role="radiogroup" aria-label="Live background"></div>
+          <div class="silk-opts" id="silk-opts" hidden>
+            <span class="lab">Silk style</span><div class="silk-row" id="silk-styles" role="group" aria-label="Silk style"></div>
+            <span class="lab">Silk colours</span><div class="silk-row" id="silk-pals" role="group" aria-label="Silk colours"></div>
+            <div class="silk-cols"><label>Shadow<input type="color" id="silk-c0"></label><label>Silk<input type="color" id="silk-c1"></label><label>Sheen<input type="color" id="silk-c2"></label></div>
+            <div class="field"><span>Fold size</span><input type="range" id="silk-scale" min="40" max="220" step="5"></div>
+            <div class="field"><span>Sheen</span><input type="range" id="silk-sheen" min="0" max="150" step="5"></div>
+            <div class="field"><span>Hue</span><input type="range" id="silk-hue" min="-180" max="180" step="5"></div>
+            <div class="field"><span>Slowly shift colours</span><input type="checkbox" id="silk-cycle"></div>
+          </div>
           <div class="field" style="margin-top:12px"><span>Motion speed</span><input type="range" id="bg-speed" min="20" max="200" step="10"></div>
           <p class="hint" id="bg-live-hint" style="margin:6px 0 0">Live backgrounds pause when the tab is hidden. With reduced motion on, they hold still.</p></div>
         <div class="bgopt" data-for="image"><div class="dropz" id="bg-drop" data-file="bg-file" role="button" tabindex="0" aria-label="Background photo: click to choose a photo, paste one, or drop it here"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="9" cy="9" r="2"/><path d="m21 15-4.5-4.5L6 21"/></svg><b id="bg-up">Drop a photo here</b><span>or <u>click to choose</u> · paste with <kbd>Ctrl</kbd>/<kbd>⌘</kbd>+<kbd>V</kbd></span></div><div class="row" style="margin-top:10px"><input type="file" id="bg-file" accept="image/*" hidden><button class="btn ghost" id="bg-remove" style="color:var(--bad)" hidden>Remove photo</button><span class="muted" style="font-size:13px">JPG or PNG. Only you can see it.</span></div><p class="hint" id="bg-hint"></p></div>
@@ -3027,9 +3049,20 @@ const LIVE=[
   {id:"stars",name:"Starfield",base:"#04050c",cols:["#ffffff","#a9c1ff","#ffd9a0","#5b3fa8","#163a6b"],kind:"stars"},
   {id:"waves",name:"Waves",base:"#081226",cols:["#13325f","#1f4e8c","#2f7cff","#43c6db"],kind:"waves"},
   {id:"fireflies",name:"Fireflies",base:"#07110c",cols:["#ffe08a","#c6ff8a","#ffb547","#16301f"],kind:"flies"},
-  {id:"sakura",name:"Sakura",base:"#f9dce5",cols:["#ffffff","#f6b3c6","#e9a0b5","#fcebf0"],kind:"petals",light:true}
+  {id:"sakura",name:"Sakura",base:"#f9dce5",cols:["#ffffff","#f6b3c6","#e9a0b5","#fcebf0"],kind:"petals",light:true},
+  {id:"silk",name:"Silk",base:"#0a0b1e",cols:["#3b2d86","#c4b5ff","#3b2d86"],kind:"silk"}
 ];
-const liveScene=()=>LIVE.find(x=>x.id===S.settings.bg.live)||LIVE[0];
+/* ---------- silk ----------
+   A WebGL scene on its own canvas (#bg-silk): a folded-fabric height field, lit with a soft highlight.
+   Six styles, eight palettes or your own three colours, fold size, sheen, hue and an optional slow colour shift.
+   Settings live in S.settings.bg.silk; speed, dim, blur and grain are the shared background controls. */
+const SILK_STYLES=[["satin","Satin"],["ribbon","Ribbon"],["liquid","Liquid silk"],["curtain","Drape"],["chiffon","Chiffon"],["velvet","Velvet"]];
+const SILK_PALS=[["midnight","Midnight",["#0a0b1e","#3b2d86","#c4b5ff"]],["blossom","Blossom",["#2a0f1e","#d9779c","#ffe4ee"]],["champagne","Champagne",["#1a120a","#b48c55","#fff0d4"]],
+  ["ocean","Ocean",["#03111b","#1b6c8c","#c2f3ff"]],["emerald","Emerald",["#03130d","#1e7a54","#cbffe5"]],["ember","Ember",["#190705","#b03c27","#ffd3ac"]],
+  ["dusk","Dusk",["#120a24","#7a3f8f","#ffc2a8"]],["pearl","Pearl",["#0d0d10","#56575e","#f4f4f7"]]];
+function silkCfg(){const d={v:"satin",pal:"midnight",c:SILK_PALS[0][2].slice(),scale:1,sheen:.8,hue:0,cycle:false},b=S.settings.bg;
+  const x=Object.assign(d,b.silk||{});if(!Array.isArray(x.c)||x.c.length!==3||!x.c.every(isHex))x.c=d.c;return b.silk=x;}
+const liveScene=()=>{const sc=LIVE.find(x=>x.id===S.settings.bg.live)||LIVE[0];if(sc.kind!=="silk")return sc;const c=silkCfg().c;return Object.assign({},sc,{base:c[0],cols:[c[1],c[2],c[1]]});};
 const LV={raf:0,t:0,last:0,cv:null,cx:null,w:0,h:0,scene:null,parts:null,still:false};
 const rgba=(h,a)=>{const [r,g,b]=hex2rgb(h);return `rgba(${r},${g},${b},${a})`;};
 function liveSize(){
@@ -3126,7 +3159,81 @@ function liveFrame(now){
   const dt=Math.min(.1,(now-(LV.last||now))/1000)*(S.settings.bg.speed||100)/100;LV.last=now;LV.t+=dt;
   liveDraw(dt);LV.raf=requestAnimationFrame(liveFrame);
 }
+const SK={raf:0,t:0,last:0,gl:null,U:null,cv:null,on:false};
+const SILK_FS=`precision mediump float;
+uniform vec2 uRes;uniform float uT;uniform int uV;uniform vec3 uC0,uC1,uC2;uniform float uScale,uSheen,uGrain,uHue;
+vec3 hueRot(vec3 c,float a){const vec3 k=vec3(0.57735);float ca=cos(a);return c*ca+cross(k,c)*sin(a)+k*dot(k,c)*(1.-ca);}
+float hash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
+float field(vec2 p,float t,int v){
+  if(v==1){vec2 q=mat2(.8,-.6,.6,.8)*p;q.x+=.5*sin(q.y*.5+t*.5);return sin(q.x*2.2+1.4*sin(q.y*.35+t*.4)+t*.6)*.8+.2*sin(q.y*1.3-t*.3);}
+  if(v==2){vec2 q=p;for(int i=0;i<4;i++){float f=float(i);q+=.55*vec2(sin(q.y*1.1+t*.35+f*1.7),cos(q.x*.9-t*.3+f*2.3));}return sin(q.x*.8+q.y*.6)*.9;}
+  if(v==3){float x=p.x+.3*sin(p.y*.6+t*.4);return sin(x*2.6+.8*sin(x*.9+t*.5)+t*.2)*.8+.25*sin(p.y*.5+t*.3+x);}
+  p+=.6*vec2(sin(p.y*.7+t*.6),cos(p.x*.6-t*.5));
+  return sin(p.x*1.1+sin(p.y*.9+t*.4)*1.8+t*.3)*.6+sin(p.y*.6-p.x*.4+t*.25)*.4;
+}
+vec3 shade(vec2 p,float t,int v,float gloss){
+  float e=.015,h=field(p,t,v),hx=field(p+vec2(e,0.),t,v),hy=field(p+vec2(0.,e),t,v);
+  vec3 n=normalize(vec3(-(hx-h)/e*.38,-(hy-h)/e*.38,1.));
+  vec3 L=normalize(vec3(-.45,.6,.7)),H=normalize(L+vec3(0.,0.,1.));
+  float dif=clamp(dot(n,L),0.,1.),sp=pow(clamp(dot(n,H),0.,1.),gloss);
+  return mix(uC0,uC1,smoothstep(.05,1.,dif*.85+(h*.5+.5)*.25))+uC2*sp*uSheen;
+}
+void main(){
+  vec2 uv=gl_FragCoord.xy/uRes;vec2 p=(gl_FragCoord.xy-.5*uRes)/uRes.y*3.2/uScale;float t=uT;vec3 col;
+  if(uV==4){vec3 a=shade(p,t,0,26.);vec3 b=shade(mat2(.9,.44,-.44,.9)*p*1.35+vec2(1.7,.4),t*1.25+3.,1,40.);float m=.45+.25*sin(p.x*.7+p.y*.4+t*.3);col=mix(a,b,m*.55)+uC2*.04;}
+  else if(uV==5){float e=.015,h=field(p,t,0),hx=field(p+vec2(e,0.),t,0),hy=field(p+vec2(0.,e),t,0);vec3 n=normalize(vec3(-(hx-h)/e*.5,-(hy-h)/e*.5,1.));
+    float dif=clamp(dot(n,normalize(vec3(-.45,.6,.7))),0.,1.);col=mix(uC0*.7,uC1*.85,pow(dif,1.7))+uC2*pow(1.-n.z,1.6)*.9*uSheen;}
+  else col=shade(p,t,uV,uV==3?34.:uV==1?44.:24.);
+  col*=1.-.28*pow(length(uv-.5)*1.25,2.);col=hueRot(col,uHue);
+  col+=(hash(gl_FragCoord.xy+fract(t*.37)*91.)-.5)*uGrain*.12;
+  gl_FragColor=vec4(clamp(col,0.,1.),1.);
+}`;
+function silkInit(){
+  if(SK.gl)return true;const cv=SK.cv=$("#bg-silk");if(!cv)return false;
+  const gl=cv.getContext("webgl",{antialias:false,alpha:false,preserveDrawingBuffer:false,powerPreference:"low-power"});if(!gl)return false;
+  try{const sh=(t,src)=>{const o=gl.createShader(t);gl.shaderSource(o,src);gl.compileShader(o);if(!gl.getShaderParameter(o,gl.COMPILE_STATUS))throw new Error(gl.getShaderInfoLog(o));return o;};
+    const pr=gl.createProgram();gl.attachShader(pr,sh(gl.VERTEX_SHADER,"attribute vec2 a;void main(){gl_Position=vec4(a,0.,1.);}"));gl.attachShader(pr,sh(gl.FRAGMENT_SHADER,SILK_FS));gl.linkProgram(pr);gl.useProgram(pr);
+    const b=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,b);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,3,-1,-1,3]),gl.STATIC_DRAW);
+    const al=gl.getAttribLocation(pr,"a");gl.enableVertexAttribArray(al);gl.vertexAttribPointer(al,2,gl.FLOAT,false,0,0);
+    SK.U={};["uRes","uT","uV","uC0","uC1","uC2","uScale","uSheen","uGrain","uHue"].forEach(n=>SK.U[n]=gl.getUniformLocation(pr,n));SK.gl=gl;
+    cv.addEventListener("webglcontextlost",e=>{e.preventDefault();SK.gl=null;cancelAnimationFrame(SK.raf);SK.raf=0;});
+    cv.addEventListener("webglcontextrestored",()=>{if(SK.on)silkStart();});
+    return true;}catch(e){return false;}
+}
+function silkDraw(now){
+  const gl=SK.gl,cv=SK.cv;if(!gl)return;const k=Math.min(1.5,devicePixelRatio||1)*.55,w=Math.max(16,Math.round(innerWidth*k)),h=Math.max(16,Math.round(innerHeight*k));
+  if(cv.width!==w||cv.height!==h){cv.width=w;cv.height=h;}gl.viewport(0,0,w,h);
+  const c=silkCfg(),U=SK.U,rg=x=>hex2rgb(x).map(v=>v/255);
+  gl.uniform2f(U.uRes,w,h);gl.uniform1f(U.uT,SK.t);gl.uniform1i(U.uV,Math.max(0,SILK_STYLES.findIndex(x=>x[0]===c.v)));
+  gl.uniform3fv(U.uC0,rg(c.c[0]));gl.uniform3fv(U.uC1,rg(c.c[1]));gl.uniform3fv(U.uC2,rg(c.c[2]));
+  gl.uniform1f(U.uScale,c.scale);gl.uniform1f(U.uSheen,c.sheen);gl.uniform1f(U.uGrain,S.settings.bg.grain?.18:0);
+  gl.uniform1f(U.uHue,(c.hue+(c.cycle&&!rmq.matches?(now||0)/1000*6:0))*Math.PI/180);gl.drawArrays(gl.TRIANGLES,0,3);
+}
+function silkFrame(now){
+  SK.raf=0;if(document.hidden||!SK.on)return;
+  const fps=document.documentElement.classList.contains("lgr")?15:30;
+  if(now-SK.last<1000/fps-2){SK.raf=requestAnimationFrame(silkFrame);return;}
+  const dt=Math.min(.1,(now-(SK.last||now))/1000)*(S.settings.bg.speed||100)/100*.6;SK.last=now;SK.t+=dt;
+  silkDraw(now);SK.raf=requestAnimationFrame(silkFrame);
+}
+function silkStart(){
+  if(!silkInit()){document.documentElement.classList.remove("bg-silk");return false;}
+  SK.on=true;document.documentElement.classList.add("bg-silk");if(!SK.t)SK.t=20+Math.random()*120;
+  if(rmq.matches){cancelAnimationFrame(SK.raf);SK.raf=0;silkDraw(0);return true;}
+  SK.last=0;if(!SK.raf)SK.raf=requestAnimationFrame(silkFrame);return true;
+}
+function silkUI(){const c=silkCfg(),q=x=>document.querySelector(x);if(!q("#silk-opts"))return;
+  document.querySelectorAll("#silk-styles [data-sv]").forEach(b=>b.setAttribute("aria-pressed",b.dataset.sv===c.v));
+  document.querySelectorAll("#silk-pals [data-sp]").forEach(b=>b.setAttribute("aria-pressed",b.dataset.sp===c.pal));
+  [0,1,2].forEach(i=>{const el=q("#silk-c"+i);if(el.value!==c.c[i])el.value=c.c[i];});
+  q("#silk-scale").value=Math.round(c.scale*100);q("#silk-sheen").value=Math.round(c.sheen*100);q("#silk-hue").value=c.hue;q("#silk-cycle").checked=!!c.cycle;}
+function silkStop(){SK.on=false;cancelAnimationFrame(SK.raf);SK.raf=0;document.documentElement.classList.remove("bg-silk");}
+addEventListener("resize",()=>{if(SK.on&&rmq.matches)silkDraw(0);});
+document.addEventListener("visibilitychange",()=>{if(SK.on&&!document.hidden&&!rmq.matches){SK.last=0;if(!SK.raf)SK.raf=requestAnimationFrame(silkFrame);}});
 function liveStart(){
+  if(liveScene().kind==="silk"){cancelAnimationFrame(LV.raf);LV.raf=0;LV.scene=null;LV.parts=null;document.documentElement.classList.remove("bg-live");
+    document.documentElement.dataset.live="silk";silkStart();return;}
+  silkStop();
   const cv=LV.cv||(LV.cv=$("#bg-live"));if(!cv)return;LV.cx=LV.cx||cv.getContext("2d");
   const sc=liveScene();if(LV.scene!==sc){LV.scene=sc;LV.parts=null;}
   liveSize();document.documentElement.classList.add("bg-live");document.documentElement.dataset.live=sc.id;
@@ -3134,7 +3241,7 @@ function liveStart(){
   if(rmq.matches){cancelAnimationFrame(LV.raf);LV.raf=0;liveDraw(0);return;}
   LV.last=0;if(!LV.raf)LV.raf=requestAnimationFrame(liveFrame);
 }
-function liveStop(){cancelAnimationFrame(LV.raf);LV.raf=0;LV.scene=null;LV.parts=null;document.documentElement.classList.remove("bg-live");delete document.documentElement.dataset.live;}
+function liveStop(){silkStop();cancelAnimationFrame(LV.raf);LV.raf=0;LV.scene=null;LV.parts=null;document.documentElement.classList.remove("bg-live");delete document.documentElement.dataset.live;}
 addEventListener("resize",()=>{if(LV.scene){liveSize();if(rmq.matches)liveDraw(0);}});
 document.addEventListener("visibilitychange",()=>{if(LV.scene&&!document.hidden&&!rmq.matches){LV.last=0;if(!LV.raf)LV.raf=requestAnimationFrame(liveFrame);}});
 const SCHEME_FIELDS=[["bg","Background"],["panel","Panels"],["ink","Text"],["accent","Accent"],["card","Clock stage"],["cardInk","Clock digits"]];
@@ -3243,7 +3350,7 @@ function applyBg(){
   else if(b.type==="live")css=liveScene().base;
   L.style.background=css;
   const fl=css&&b.blur?`blur(${b.blur}px)`:"",ins=css&&b.blur?`-${b.blur*2}px`:"0";
-  L.style.filter=fl;L.style.inset=ins;const lc=$("#bg-live");if(lc){lc.style.filter=fl;lc.style.inset=ins;}
+  L.style.filter=fl;L.style.inset=ins;["#bg-live","#bg-silk"].forEach(q=>{const lc=$(q);if(lc){lc.style.filter=fl;lc.style.inset=ins;}});
   if(b.type==="live")liveStart();else liveStop();
   h.classList.toggle("grain",!!(css&&b.grain));
   D.style.background=css?`color-mix(in srgb,var(--bg) ${b.dim}%,transparent)`:"";
@@ -3317,6 +3424,7 @@ function applyTheme(){
   $$("#bg-grads button").forEach((b,i)=>b.setAttribute("aria-pressed",s.bg.type==="gradient"&&i===s.bg.grad));
   $$("#bg-lives button").forEach(b=>{const on=b.dataset.l===(s.bg.live||"aurora");b.setAttribute("aria-checked",on);b.tabIndex=on?0:-1;});
   $("#bg-speed").value=s.bg.speed||100;$("#bg-grain").checked=!!s.bg.grain;
+  {const so=$("#silk-opts");if(so){so.hidden=s.bg.live!=="silk";if(s.bg.live==="silk")silkUI();}}
   $("#bg-color").value=isHex(s.bg.color)?s.bg.color:"#2a2440";
   $("#bg-dimr").value=s.bg.dim;$("#bg-blur").value=s.bg.blur;
   applyStage();
@@ -3368,6 +3476,16 @@ function buildThemes(){
   $("#bg-lives").innerHTML=LIVE.map(l=>`<button type="button" role="radio" data-l="${l.id}" aria-checked="false"><i style="background-color:${l.base};background-image:${(l.kind==="stars"?[l.cols[3],l.cols[4],l.cols[1]]:l.kind==="petals"?["#ffffff","#f6b3c6","#e9a0b5"]:l.cols.slice(0,3)).map((c,i)=>`radial-gradient(at ${[20,80,50][i]}% ${[25,30,90][i]}%,${c} 0,transparent 60%)`).join(",")}"></i><span>${l.name}</span></button>`).join("");
   $("#bg-lives").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;S.settings.bg.live=b.dataset.l;save();applyTheme();computePal();});
   $("#bg-lives").addEventListener("keydown",e=>{if(!/^Arrow/.test(e.key))return;e.preventDefault();const all=[...e.currentTarget.children],i=all.indexOf(document.activeElement),n=all[(i+(/Right|Down/.test(e.key)?1:-1)+all.length)%all.length];n.focus();n.click();});
+  $("#silk-styles").innerHTML=SILK_STYLES.map(([id,n])=>`<button type="button" data-sv="${id}" aria-pressed="false">${n}</button>`).join("");
+  $("#silk-pals").innerHTML=SILK_PALS.map(([id,n,c])=>`<button type="button" data-sp="${id}" aria-pressed="false"><i style="background:linear-gradient(135deg,${c[0]},${c[1]} 55%,${c[2]})"></i>${n}</button>`).join("");
+  const silkSet=(fn,slow)=>{fn(silkCfg());if(SK.on&&rmq.matches)silkDraw(0);silkUI();clearTimeout(SK.sv);if(slow)SK.sv=setTimeout(()=>{save();computePal();},400);else{save();computePal();}};
+  $("#silk-styles").addEventListener("click",e=>{const b=e.target.closest("[data-sv]");if(b)silkSet(c=>c.v=b.dataset.sv);});
+  $("#silk-pals").addEventListener("click",e=>{const b=e.target.closest("[data-sp]");if(!b)return;const p=SILK_PALS.find(x=>x[0]===b.dataset.sp);silkSet(c=>{c.pal=p[0];c.c=p[2].slice();});applyBg();});
+  [0,1,2].forEach(i=>$("#silk-c"+i).addEventListener("input",e=>silkSet(c=>{c.c[i]=e.target.value;c.pal="custom";},true)));
+  $("#silk-scale").addEventListener("input",e=>silkSet(c=>c.scale=e.target.value/100,true));
+  $("#silk-sheen").addEventListener("input",e=>silkSet(c=>c.sheen=e.target.value/100,true));
+  $("#silk-hue").addEventListener("input",e=>silkSet(c=>c.hue=+e.target.value,true));
+  $("#silk-cycle").addEventListener("change",e=>silkSet(c=>c.cycle=e.target.checked));
   $("#bg-speed").addEventListener("input",e=>{S.settings.bg.speed=+e.target.value;clearTimeout(LV.sv);LV.sv=setTimeout(save,400);});
   $("#bg-grain").addEventListener("change",e=>{S.settings.bg.grain=e.target.checked;save();applyBg();});
   $("#bg-color").addEventListener("input",e=>{S.settings.bg.color=e.target.value;save();applyTheme();clearTimeout(palT);palT=setTimeout(computePal,150);});

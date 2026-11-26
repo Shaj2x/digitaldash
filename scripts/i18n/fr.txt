@@ -1599,3 +1599,24 @@
 1636|Afficher le bloc-notes sur l’horloge
 1637|Entrée l’ajoute · Maj+Entrée pour une nouvelle ligne · - crée une case
 1638|Un titre, puis - pour chaque élément (ou un élément par ligne)
+1639|Soie
+1640|Style de soie
+1641|Couleurs de la soie
+1642|Ombre
+1643|Reflet
+1644|Taille des plis
+1645|Teinte
+1646|Faire varier lentement les couleurs
+1647|Satin
+1648|Ruban
+1649|Soie liquide
+1650|Drapé
+1651|Mousseline
+1652|Velours
+1653|Minuit
+1654|Fleur
+1655|Champagne
+1656|Émeraude
+1657|Braise
+1658|Crépuscule
+1659|Perle

@@ -1599,3 +1599,24 @@
 1636|Notizblock auf der Uhr zeigen
 1637|Enter fügt hinzu · Umschalt+Enter für neue Zeile · - macht ein Kästchen
 1638|Ein Titel, dann - für jeden Punkt (oder ein Punkt pro Zeile)
+1639|Seide
+1640|Seidenstil
+1641|Seidenfarben
+1642|Schatten
+1643|Glanz
+1644|Faltengröße
+1645|Farbton
+1646|Farben langsam wechseln
+1647|Satin
+1648|Band
+1649|Flüssige Seide
+1650|Vorhang
+1651|Chiffon
+1652|Samt
+1653|Mitternacht
+1654|Blüte
+1655|Champagner
+1656|Smaragd
+1657|Glut
+1658|Dämmerung
+1659|Perle

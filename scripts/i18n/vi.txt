@@ -1599,3 +1599,24 @@
 1636|Hiện Ghi chú nhanh trên đồng hồ
 1637|Enter để thêm · Shift+Enter để xuống dòng · - tạo ô đánh dấu
 1638|Một tiêu đề, rồi - cho mỗi mục (hoặc mỗi dòng một mục)
+1639|Lụa
+1640|Kiểu lụa
+1641|Màu lụa
+1642|Bóng
+1643|Độ bóng
+1644|Độ lớn nếp gấp
+1645|Sắc độ
+1646|Đổi màu từ từ
+1647|Sa tanh
+1648|Dải ruy băng
+1649|Lụa lỏng
+1650|Rèm
+1651|Voan
+1652|Nhung
+1653|Nửa đêm
+1654|Hoa
+1655|Sâm panh
+1656|Ngọc lục bảo
+1657|Than hồng
+1658|Hoàng hôn
+1659|Ngọc trai

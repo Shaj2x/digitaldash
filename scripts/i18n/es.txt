@@ -1599,3 +1599,24 @@
 1636|Mostrar Notas rápidas en el reloj
 1637|Enter la añade · Mayús+Enter para una línea nueva · - crea una casilla
 1638|Un título y luego - para cada elemento (o uno por línea)
+1639|Seda
+1640|Estilo de seda
+1641|Colores de la seda
+1642|Sombra
+1643|Brillo
+1644|Tamaño de los pliegues
+1645|Tono
+1646|Cambiar colores poco a poco
+1647|Satén
+1648|Cinta
+1649|Seda líquida
+1650|Cortina
+1651|Gasa
+1652|Terciopelo
+1653|Medianoche
+1654|Flor
+1655|Champán
+1656|Esmeralda
+1657|Brasa
+1658|Atardecer
+1659|Perla

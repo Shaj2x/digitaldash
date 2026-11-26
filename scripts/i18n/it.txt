@@ -1599,3 +1599,24 @@
 1636|Mostra il blocco note sull’orologio
 1637|Invio la aggiunge · Maiusc+Invio per andare a capo · - crea una casella
 1638|Un titolo, poi - per ogni voce (o una voce per riga)
+1639|Seta
+1640|Stile seta
+1641|Colori della seta
+1642|Ombra
+1643|Lucentezza
+1644|Dimensione delle pieghe
+1645|Tonalità
+1646|Cambia lentamente i colori
+1647|Raso
+1648|Nastro
+1649|Seta liquida
+1650|Drappeggio
+1651|Chiffon
+1652|Velluto
+1653|Mezzanotte
+1654|Fiore
+1655|Champagne
+1656|Smeraldo
+1657|Brace
+1658|Crepuscolo
+1659|Perla

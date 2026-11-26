@@ -1641,6 +1641,27 @@
 "Quick pad is off the clock",
 "Show Quick pad on the clock",
 "Enter adds it · Shift+Enter for a new line · - makes a checkbox",
-"A title, then - for each item (or one item per line)"
+"A title, then - for each item (or one item per line)",
+"Silk",
+"Silk style",
+"Silk colours",
+"Shadow",
+"Sheen",
+"Fold size",
+"Hue",
+"Slowly shift colours",
+"Satin",
+"Ribbon",
+"Liquid silk",
+"Drape",
+"Chiffon",
+"Velvet",
+"Midnight",
+"Blossom",
+"Champagne",
+"Emerald",
+"Ember",
+"Dusk",
+"Pearl"
 ]
 }

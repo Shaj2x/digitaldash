@@ -501,3 +501,10 @@ Ticking a shopping item keeps it in its aisle for 2.5 seconds (`SHOP_GRACE`) wit
 - **Quick pad on the clock.** The note button in the clock's top bar (`#stage-pad`), the "Show Quick pad on the clock" checkbox and the clock button in the panel all toggle `S.settings.padOnClock`. When it's on, the clock (including full screen) shows your open notes plus stuck ones, with an add field. Notes added there are not stuck to other tabs, and the panel's × takes it off the clock with Undo.
 - **Look.** Notes are pastel paper (`PAD_COLORS` mixed with warm white) with dark ink in every theme, a strip of tape, a slight tilt that straightens on hover, and a bold first line on multi-line notes (`.note-text.multi`). On mouse devices a note's buttons appear on hover. The capture box reads like a blank card with pill buttons, and the floating panel is frosted glass.
 - **Title plus checklist.** A line starting with `- ` (or `* `, `•`) is a checklist item, as are `[ ]` and `[x]` (`ckm()`). Text above the items shows as a bold title. In the add box and the note editor, Enter on a dash line starts the next item, and Enter on an empty dash ends the list (`padListEnter`). The editor shows items as `- item` / `- [x] item` (`padEditText`). In Checklist mode, if any line starts with a dash, only dash lines become items, so the first line can be a title.
+
+### Silk live background
+
+Themes, Background, Live, Silk. A WebGL scene on its own canvas (`#bg-silk`, `silkStart`/`silkStop`/`silkDraw`). It renders at about half resolution and runs at 30fps (15 with refracting glass). It pauses when the tab is hidden and holds still with reduced motion. If WebGL isn't available, the base colour shows instead.
+
+- Settings live in `S.settings.bg.silk` (`silkCfg()` fills in defaults): `v` style (satin, ribbon, liquid, curtain, chiffon, velvet), `pal` (one of `SILK_PALS` or "custom"), `c` [shadow, silk, sheen], `scale` fold size, `sheen`, `hue` and `cycle` (slow colour shift).
+- Shared background controls still apply: motion speed, dim, blur, film grain and Match colours (the palette comes from the silk colours through `liveScene()`).

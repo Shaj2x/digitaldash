@@ -1599,3 +1599,24 @@
 1636|Mostrar Notas rápidas no relógio
 1637|Enter adiciona · Shift+Enter para nova linha · - cria uma caixa
 1638|Um título e depois - para cada item (ou um item por linha)
+1639|Seda
+1640|Estilo de seda
+1641|Cores da seda
+1642|Sombra
+1643|Brilho
+1644|Tamanho das dobras
+1645|Matiz
+1646|Mudar as cores aos poucos
+1647|Cetim
+1648|Fita
+1649|Seda líquida
+1650|Cortina
+1651|Chiffon
+1652|Veludo
+1653|Meia-noite
+1654|Flor
+1655|Champanhe
+1656|Esmeralda
+1657|Brasa
+1658|Entardecer
+1659|Pérola
