@@ -508,3 +508,4 @@ Themes, Background, Live, Silk. A WebGL scene on its own canvas (`#bg-silk`, `si
 
 - Settings live in `S.settings.bg.silk` (`silkCfg()` fills in defaults): `v` style (satin, ribbon, liquid, curtain, chiffon, velvet), `pal` (one of `SILK_PALS` or "custom"), `c` [shadow, silk, sheen], `scale` fold size, `sheen`, `hue` and `cycle` (slow colour shift).
 - Shared background controls still apply: motion speed, dim, blur, film grain and Match colours (the palette comes from the silk colours through `liveScene()`).
+- **Copy and edit gestures.** On a note's text, a double-click or double-tap copies the whole note (checklist items as `- item` / `- [x] item`), and a triple-click or triple-tap opens it for editing (`padTap`, `padCopy`). A single click does nothing, so links and selecting text work normally. Enter or Space on a focused note still edits. In the floating panel, a double-click copies.

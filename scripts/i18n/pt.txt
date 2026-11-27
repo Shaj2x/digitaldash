@@ -1620,3 +1620,7 @@
 1657|Brasa
 1658|Entardecer
 1659|Pérola
+1660|Nota copiada
+1661|Nada para copiar
+1662|Clique duas vezes para copiar · três vezes para editar
+1663|Clique duas vezes para copiar

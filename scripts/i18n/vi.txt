@@ -1620,3 +1620,7 @@
 1657|Than hồng
 1658|Hoàng hôn
 1659|Ngọc trai
+1660|Đã sao chép ghi chú
+1661|Không có gì để sao chép
+1662|Nhấp đúp để sao chép · Nhấp ba lần để sửa
+1663|Nhấp đúp để sao chép

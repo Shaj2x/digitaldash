@@ -7634,7 +7634,7 @@ function padListEnter(e){if(e.key!=="Enter"||e.shiftKey||e.metaKey||e.ctrlKey||e
   ta.dispatchEvent(new Event("input",{bubbles:true}));return true;}
 function padCk(n){let d=0,t=0;(n.text||"").split("\n").forEach(l=>{const m=CK_RE.exec(l);if(m){t++;if(/x/i.test(m[1]))d++;}});return {d,t};}
 function padBody(n,ed){
-  const lines=(n.text||"").split("\n"),edA=ed?' data-n="edit" tabindex="0" role="button" aria-label="Edit note"':"";let out="",buf=[],ck=[];
+  const lines=(n.text||"").split("\n"),edA=ed?' data-n="edit" tabindex="0" role="button" aria-label="Edit note" title="Double-click to copy · Triple-click to edit"':"";let out="",buf=[],ck=[];
   const flushT=ttl=>{const t=buf.join("\n").replace(/^\n+|\n+$/g,"");if(t)out+=`<div class="note-text${ttl&&!out?" ttl":t.includes("\n")?" multi":""}"${edA}>${padLinkify(t)}</div>`;buf=[];};
   const flushC=()=>{if(ck.length)out+=`<ul class="note-ck">${ck.join("")}</ul>`;ck=[];};
   lines.forEach((l,i)=>{const m=CK_RE.exec(l);if(!m){flushC();buf.push(l);return;}flushT(true);const on=/x/i.test(m[1]);
@@ -7644,6 +7644,16 @@ function padBody(n,ed){
   if(padCk(n).t)out+=`<input class="ck-add" data-n="ckadd" maxlength="300" placeholder="Add an item" aria-label="Add an item">`;
   return out;
 }
+/* Clicks on a note's text: double click copies the note, triple click opens it for editing.
+   Counted by hand (taps within 380ms on the same note) so it works the same with a mouse and on phones. */
+const PG={id:null,n:0,at:0,tm:0};
+function padCopyText(n){return padEditText(n).trim();}
+async function padCopy(n){const t=padCopyText(n);if(!t){toast("Nothing to copy");return;}
+  try{await navigator.clipboard.writeText(t);}catch(e){const ta=document.createElement("textarea");ta.value=t;ta.setAttribute("readonly","");ta.style.cssText="position:fixed;opacity:0;top:0;left:0";document.body.appendChild(ta);ta.select();try{document.execCommand("copy");}catch(_){}ta.remove();}
+  sfxPlay&&sfxPlay("tick");toast("Note copied");}
+function padTap(n,onEdit){const now=Date.now();if(PG.id===n.id&&now-PG.at<380)PG.n++;else PG.n=1;PG.id=n.id;PG.at=now;clearTimeout(PG.tm);
+  if(PG.n===2){PG.tm=setTimeout(()=>{PG.n=0;padCopy(n);},300);}
+  else if(PG.n>=3){PG.n=0;if(onEdit)onEdit();else padCopy(n);}}
 function padTick(n,i){const L=(n.text||"").split("\n"),m=CK_RE.exec(L[i]||"");if(!m)return;const on=!/x/i.test(m[1]);L[i]=`[${on?"x":" "}] ${m[2]}`;n.text=L.join("\n");
   if(on)sfxPlay("tick");save();const c=padCk(n);if(on&&c.t>1&&c.d===c.t)toast("Checklist done");renderPad();}
 function padAddItem(n,v){v=String(v||"").replace(/[\r\n]+/g," ").trim().slice(0,300);if(!v)return;n.text=((n.text||"").replace(/\n+$/,"")+((n.text||"").trim()?"\n":"")+"[ ] "+v).slice(0,2000);n.u=Date.now();save();renderPad();}
@@ -7736,6 +7746,7 @@ function padSaveEdit(){if(!padEdit)return;const n=padNotes().find(x=>x.id===padE
   if(n&&ta){const v=ta.value.replace(/\r/g,"").split("\n").filter(l=>!/^\s*[-*•]\s*$/.test(l)).join("\n").trim().slice(0,2000);if(v!==(n.text||"")){n.text=v;n.u=Date.now();save();}}renderPad();}
 $("#pad-grid").addEventListener("focusout",e=>{if(e.target.matches(".note-ed"))setTimeout(()=>{if(!$("#pad-grid").contains(document.activeElement)||!document.activeElement.matches(".note-ed"))padSaveEdit();},120);});
 $("#pad-grid").addEventListener("input",e=>{if(e.target.matches(".note-ed"))padGrow(e.target);});
+$("#pad-grid").addEventListener("mousedown",e=>{if(e.detail>1&&e.target.closest('[data-n="edit"]'))e.preventDefault();});
 $("#pad-grid").addEventListener("keydown",e=>{
   if(e.target.matches(".note-ed")&&padListEnter(e))return;
   if(e.target.matches(".note-ed")&&(e.key==="Escape"||(e.key==="Enter"&&(e.metaKey||e.ctrlKey)))){e.preventDefault();padSaveEdit();return;}
@@ -7768,7 +7779,7 @@ function renderPadFloat(){
     <button type="button" class="icon-btn" data-pf="clock" aria-pressed="${!!S.settings.padOnClock}" aria-label="Show Quick pad on the clock" title="Show Quick pad on the clock"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg></button>
     <button type="button" class="icon-btn" data-pf="open" aria-label="Open Quick pad" title="Open Quick pad"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6M20 4l-8 8M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg></button>
     ${where==="clock"?"":`<button type="button" class="icon-btn" data-pf="min" aria-expanded="${!min}" aria-label="${min?"Expand":"Minimise"}" title="${min?"Expand":"Minimise"}"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="${min?"m6 15 6-6 6 6":"m6 9 6 6 6-6"}"/></svg></button>`}<button type="button" class="icon-btn" data-pf="off" aria-label="Close" title="Close"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
-  <div class="pf-body">${fl.length?"":`<p class="pf-empty">No open notes. Add one below.</p>`}${fl.map(n=>`<div class="pf-note${n.done?" done":""}" data-id="${n.id}" style="--nc:${PAD_COLORS[n.color||0]}"><button type="button" class="note-tick" data-n="done" aria-pressed="${!!n.done}" aria-label="${n.done?"Mark as not done":"Mark as done"}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg></button><div class="pf-main">${(c=>c.t?`<span class="note-prog${c.d===c.t?" full":""}">${c.d}/${c.t}</span>`:"")(padCk(n))}${padBody(n,false)}${(n.imgs||[]).length?`<div class="note-imgs">${n.imgs.slice(0,3).map((src,i)=>`<span><img src="${esc(resolveImg(src))}" alt="Image ${i+1}" loading="lazy"></span>`).join("")}</div>`:""}</div>${n.float?"":"<!--"}<button type="button" class="icon-btn" data-n="float" aria-label="Unstick from screen" title="Unstick from screen"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>${n.float?"":"-->"}</div>`).join("")}</div>
+  <div class="pf-body">${fl.length?"":`<p class="pf-empty">No open notes. Add one below.</p>`}${fl.map(n=>`<div class="pf-note${n.done?" done":""}" data-id="${n.id}" style="--nc:${PAD_COLORS[n.color||0]}"><button type="button" class="note-tick" data-n="done" aria-pressed="${!!n.done}" aria-label="${n.done?"Mark as not done":"Mark as done"}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg></button><div class="pf-main" data-n="txt" title="Double-click to copy">${(c=>c.t?`<span class="note-prog${c.d===c.t?" full":""}">${c.d}/${c.t}</span>`:"")(padCk(n))}${padBody(n,false)}${(n.imgs||[]).length?`<div class="note-imgs">${n.imgs.slice(0,3).map((src,i)=>`<span><img src="${esc(resolveImg(src))}" alt="Image ${i+1}" loading="lazy"></span>`).join("")}</div>`:""}</div>${n.float?"":"<!--"}<button type="button" class="icon-btn" data-n="float" aria-label="Unstick from screen" title="Unstick from screen"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>${n.float?"":"-->"}</div>`).join("")}</div>
   <form class="pf-add" data-pf="add" autocomplete="off"><input maxlength="2000" placeholder="Add to Quick pad" aria-label="Add to Quick pad"></form>`;
   if(keep){const sel=keep.cls.includes("ck-add")&&keep.id?`.pf-note[data-id="${keep.id}"] .ck-add`:".pf-add input";const i=el.querySelector(sel);if(i){i.value=keep.v;i.focus();}}
   padFloatPlace(el);
@@ -7783,7 +7794,9 @@ function padFloatWire(el){
         toast("Quick pad is off your screen",{run(){S.settings.padStick=was;stuck.forEach(n=>n.float=true);save();renderPad();}});return;}
       if(a==="clock"){S.settings.padOnClock=!S.settings.padOnClock;save();renderPad();toast(S.settings.padOnClock?"Quick pad is on the clock":"Quick pad is off the clock");return;}}
     const b=e.target.closest("[data-n]");if(!b)return;const card=b.closest("[data-id]"),n=card&&padNotes().find(x=>x.id===card.dataset.id);if(!n)return;
+    if(b.dataset.n==="txt"){padTap(n,null);return;}
     if(b.dataset.n==="ck")padTick(n,+b.dataset.l);else if(b.dataset.n==="done"){n.done=!n.done;n.u=Date.now();if(n.done)sfxPlay("tick");save();renderPad();}else if(b.dataset.n==="float")padFloatToggle(n);});
+  el.addEventListener("mousedown",e=>{if(e.detail>1&&e.target.closest('[data-n="txt"]'))e.preventDefault();});
   el.addEventListener("submit",e=>{e.preventDefault();const i=e.target.querySelector("input"),v=i.value;i.value="";if(!padNew(v,[],{float:!el.classList.contains("on-clock"),quiet:true}))i.value=v;});
   el.addEventListener("keydown",e=>{if(e.target.matches(".ck-add")&&e.key==="Enter"&&!e.isComposing){e.preventDefault();const n=padNotes().find(x=>x.id===e.target.closest("[data-id]").dataset.id);if(n)padAddItem(n,e.target.value);}});
   let d=null;
@@ -7800,7 +7813,7 @@ $("#stage-pad").addEventListener("click",()=>{S.settings.padOnClock=!S.settings.
 $("#pad-grid").addEventListener("click",e=>{
   if(e.target.closest("a"))return; /* links open normally */
   const b=e.target.closest("[data-n]");if(!b)return;const el=b.closest(".note"),N=padNotes(),n=N.find(x=>x.id===el.dataset.id);if(!n)return;const a=b.dataset.n;
-  if(a==="edit"){padSaveEdit();padEdit=n.id;renderPad();return;}
+  if(a==="edit"){if(window.getSelection&&String(getSelection()).length>1&&PG.n===0)return;padTap(n,()=>{padSaveEdit();padEdit=n.id;renderPad();});return;}
   if(a==="done"){n.done=!n.done;n.u=Date.now();save();renderPad();return;}
   if(a==="ck"){padTick(n,+b.dataset.l);return;}
   if(a==="ckadd")return;

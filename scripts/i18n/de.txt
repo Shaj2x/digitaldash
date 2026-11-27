@@ -1620,3 +1620,7 @@
 1657|Glut
 1658|Dämmerung
 1659|Perle
+1660|Notiz kopiert
+1661|Nichts zum Kopieren
+1662|Doppelklick zum Kopieren · Dreifachklick zum Bearbeiten
+1663|Doppelklick zum Kopieren

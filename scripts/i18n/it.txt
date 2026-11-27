@@ -1620,3 +1620,7 @@
 1657|Brace
 1658|Crepuscolo
 1659|Perla
+1660|Nota copiata
+1661|Niente da copiare
+1662|Doppio clic per copiare · Triplo clic per modificare
+1663|Doppio clic per copiare

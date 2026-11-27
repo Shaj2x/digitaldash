@@ -1620,3 +1620,7 @@
 1657|Brasa
 1658|Atardecer
 1659|Perla
+1660|Nota copiada
+1661|No hay nada que copiar
+1662|Doble clic para copiar · Triple clic para editar
+1663|Doble clic para copiar
